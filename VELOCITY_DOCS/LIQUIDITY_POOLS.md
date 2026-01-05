@@ -419,7 +419,3 @@ npx hardhat console --network <your-network>
 │                                                             │
 └─────────────────────────────────────────────────────────────┘
 ```
-
----
-
-*Last updated: December 2024*

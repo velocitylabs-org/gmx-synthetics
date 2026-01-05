@@ -1298,18 +1298,3 @@ struct Props {
 | [`contracts/order/Order.sol`](../contracts/order/Order.sol) | Structs & libraries |
 | [`contracts/bank/Bank.sol`](../contracts/bank/Bank.sol) | Inheritance |
 | [`contracts/error/Errors.sol`](../contracts/error/Errors.sol) | Custom errors |
-
----
-
-## What's Next?
-
-**Suggested reading order:**
-
-1. **Data Structures:** [`Order.sol`](../contracts/order/Order.sol) → [`Position.sol`](../contracts/position/Position.sol) → [`Market.sol`](../contracts/market/Market.sol)
-2. **Storage:** [`DataStore.sol`](../contracts/data/DataStore.sol) → [`Keys.sol`](../contracts/data/Keys.sol)
-3. **Access Control:** [`Role.sol`](../contracts/role/Role.sol) → [`RoleStore.sol`](../contracts/role/RoleStore.sol) → [`RoleModule.sol`](../contracts/role/RoleModule.sol)
-4. **Execution:** [`OrderHandler.sol`](../contracts/exchange/OrderHandler.sol) → [`DepositHandler.sol`](../contracts/exchange/DepositHandler.sol)
-
----
-
-**Good luck! This guide should give you all the foundational knowledge to read and understand the GMX Synthetics contracts.**

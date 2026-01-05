@@ -1452,37 +1452,3 @@ function getPriceFeedPrice(DataStore dataStore, address token)
 │                                                             │
 └─────────────────────────────────────────────────────────────┘
 ```
-
----
-
-## Summary
-
-```
-┌─────────────────────────────────────────────────────────────┐
-│                                                             │
-│   BUILDING PYTH ORACLE PROVIDER                             │
-│                                                             │
-│   Difficulty: Easy (2/5)                                    │
-│   Time: 2-4 hours                                           │
-│   Lines of code: ~80                                        │
-│                                                             │
-│   What you implement:                                       │
-│   ├── getOraclePrice() - Fetch from Pyth, convert format   │
-│   ├── shouldAdjustTimestamp() - return true                │
-│   └── isChainlinkOnChainProvider() - return false          │
-│                                                             │
-│   Key challenge:                                            │
-│   └── Price format conversion (documented above)            │
-│                                                             │
-│   Steps:                                                    │
-│   1. Deploy contract                                        │
-│   2. Configure price feeds (token → Pyth ID)               │
-│   3. Register in GMX DataStore                             │
-│   4. Test!                                                  │
-│                                                             │
-└─────────────────────────────────────────────────────────────┘
-```
-
----
-
-*Last updated: December 2024*

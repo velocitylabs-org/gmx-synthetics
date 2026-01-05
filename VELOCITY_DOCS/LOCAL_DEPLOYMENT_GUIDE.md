@@ -496,19 +496,3 @@ gmx-synthetics/
     ├── tokens.ts                 # Token definitions
     └── markets.ts                # Market parameters
 ```
-
----
-
-## Next Steps
-
-After verifying local deployment works:
-
-1. **Study existing tests** in `test/exchange/` for more patterns
-2. **Add custom tokens** in `config/tokens.ts` for forex pairs
-3. **Add custom markets** in `config/markets.ts`
-4. **Integrate oracle provider** (Pyth for forex)
-5. **Build your insurance UI** on top
-
----
-
-*Last updated: December 2024*

@@ -817,7 +817,3 @@ Yes, but not recommended for production. For testing, you can configure tokens t
 ```
 
 **Remember**: The keeper provides prices. The oracle provider validates them.
-
----
-
-*Last updated: December 2024*
