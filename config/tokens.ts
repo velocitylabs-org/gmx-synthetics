@@ -1775,6 +1775,10 @@ const config: {
       synthetic: true,
       decimals: 18,
     },
+    BRL: {
+      synthetic: true,
+      decimals: 8,
+    },
   },
   localhost: {
     WETH: {
@@ -1806,6 +1810,10 @@ const config: {
     SOL: {
       synthetic: true,
       decimals: 18,
+    },
+    BRL: {
+      synthetic: true,
+      decimals: 8,
     },
   },
 };
