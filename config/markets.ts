@@ -5039,6 +5039,9 @@ const config: {
     {
       tokens: { indexToken: "WBTC", longToken: "USDC", shortToken: "USDC" },
     },
+    {
+      tokens: { indexToken: "BRL", longToken: "USDC", shortToken: "USDC" },
+    },
   ],
   localhost: [
     {
@@ -5053,6 +5056,9 @@ const config: {
     },
     {
       tokens: { indexToken: "SOL", longToken: "WETH", shortToken: "USDC" },
+    },
+    {
+      tokens: { indexToken: "BRL", longToken: "USDC", shortToken: "USDC" },
     },
   ],
 };

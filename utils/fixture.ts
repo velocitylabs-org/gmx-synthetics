@@ -43,6 +43,8 @@ async function setup() {
   const wbtc = await hre.ethers.getContract("WBTC");
   const sol = { address: getSyntheticTokenAddress(hre.network.config.chainId, "SOL") };
 
+  const brl = { address: getSyntheticTokenAddress(hre.network.config.chainId, "BRL") };
+
   const usdc = await hre.ethers.getContract("USDC");
   const usdt = await hre.ethers.getContract("USDT");
 
@@ -247,6 +249,17 @@ async function setup() {
   );
   const solUsdMarket = await reader.getMarket(dataStore.address, solUsdMarketAddress);
 
+  const brlUsdMarketAddress = getMarketTokenAddress(
+    brl.address,
+    usdc.address,
+    usdc.address,
+    DEFAULT_MARKET_TYPE,
+    marketFactory.address,
+    roleStore.address,
+    dataStore.address
+  );
+  const brlUsdMarket = await reader.getMarket(dataStore.address, brlUsdMarketAddress);
+
   const ethUsdGlvAddress = getGlvAddress(
     wnt.address,
     usdc.address,
@@ -359,6 +372,7 @@ async function setup() {
       esGmx,
       wbtc,
       sol,
+      brl,
       usdc,
       usdt,
       ethUsdMarket,
@@ -369,6 +383,7 @@ async function setup() {
       btcUsdMarket,
       btcUsdSingleTokenMarket,
       solUsdMarket,
+      brlUsdMarket,
       feeHandler,
       glvFactory,
       glvDepositHandler,
