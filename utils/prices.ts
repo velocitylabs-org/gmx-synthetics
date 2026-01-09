@@ -141,6 +141,35 @@ prices.sol = {
   max: expandDecimals(50, 5),
 };
 
+// BRL (Brazilian Real) - $0.16 USD per BRL
+// BRL has 8 decimals in tokens.ts
+// Price format: value * 10^(30-precision) where precision controls granularity
+// For $0.16 with precision 8: need final price = 0.16 * 10^22 = 1.6 * 10^21
+// Using expandDecimals(16, 13) = 1.6 * 10^14, with precision 8: 1.6 * 10^14 * 10^22 = 1.6 * 10^36 (too high)
+// Let's use same pattern as SOL: precision 16, expandDecimals(value, 5)
+// SOL at $50: expandDecimals(50, 5) = 5 * 10^6, with precision 16: 5 * 10^6 * 10^14 = 5 * 10^20
+// BRL at $0.16: expandDecimals(16, 4) = 1.6 * 10^5, with precision 16: 1.6 * 10^5 * 10^14 = 1.6 * 10^19
+prices.brl = {
+  contractName: "brl",
+  precision: 16,
+  min: expandDecimals(16, 4), // $0.16
+  max: expandDecimals(16, 4), // $0.16
+};
+
+prices.brl.decreased = {
+  contractName: "brl",
+  precision: 16,
+  min: expandDecimals(14, 4), // $0.14 (BRL devalued 12.5%)
+  max: expandDecimals(14, 4),
+};
+
+prices.brl.increased = {
+  contractName: "brl",
+  precision: 16,
+  min: expandDecimals(18, 4), // $0.18 (BRL strengthened)
+  max: expandDecimals(18, 4),
+};
+
 prices.ethUsdMarket = {
   indexTokenPrice: {
     min: expandDecimals(5000, 12),
