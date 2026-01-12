@@ -65,31 +65,31 @@ import hre from "hardhat";
 // Math utilities for handling big numbers (blockchain uses integers, not decimals)
 // - expandDecimals(100, 6) = 100 * 10^6 = 100000000 (how $100 USDC is stored)
 // - decimalToFloat(10000) = 10000 * 10^30 (GMX stores USD values with 30 decimals)
-import { expandDecimals, decimalToFloat } from "../utils/math";
+import { expandDecimals, decimalToFloat } from "../../utils/math";
 
 // Deploys ALL GMX contracts (~160 contracts) and returns them in a fixture object
 // This includes: DataStore, Oracle, Router, Markets, Tokens, etc.
-import { deployFixture } from "../utils/fixture";
+import { deployFixture } from "../../utils/fixture";
 
 // Utility to add liquidity to a market
 // Liquidity = money in the pool that traders can trade against
-import { handleDeposit } from "../utils/deposit";
+import { handleDeposit } from "../../utils/deposit";
 
 // Order utilities:
 // - createOrder: Creates a pending order (not executed yet)
 // - executeOrder: Simulates a keeper executing the order with prices
 // - OrderType: Enum of order types (MarketIncrease, MarketDecrease, etc.)
 // - getOrderCount: How many pending orders exist
-import { createOrder, executeOrder, OrderType, getOrderCount } from "../utils/order";
+import { createOrder, executeOrder, OrderType, getOrderCount } from "../../utils/order";
 
 // Position utilities:
 // - getPositionCount: Total positions in the system
 // - getAccountPositionCount: Positions for a specific user
-import { getPositionCount, getAccountPositionCount } from "../utils/position";
+import { getPositionCount, getAccountPositionCount } from "../../utils/position";
 
 // Pre-defined price objects for testing
 // Contains BRL, USDC, ETH, BTC prices in the format GMX expects
-import { prices } from "../utils/prices";
+import { prices } from "../../utils/prices";
 
 // ============================================================================
 // MAIN FUNCTION

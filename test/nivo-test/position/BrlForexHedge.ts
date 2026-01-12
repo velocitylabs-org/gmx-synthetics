@@ -19,12 +19,12 @@
  */
 
 import { expect } from "chai";
-import { deployFixture } from "../../utils/fixture";
-import { handleDeposit } from "../../utils/deposit";
-import { createOrder, executeOrder, OrderType, getOrderCount } from "../../utils/order";
-import { getPositionCount, getAccountPositionCount } from "../../utils/position";
-import { expandDecimals, decimalToFloat } from "../../utils/math";
-import { prices } from "../../utils/prices";
+import { deployFixture } from "../../../utils/fixture";
+import { handleDeposit } from "../../../utils/deposit";
+import { createOrder, executeOrder, OrderType, getOrderCount } from "../../../utils/order";
+import { getPositionCount, getAccountPositionCount } from "../../../utils/position";
+import { expandDecimals, decimalToFloat } from "../../../utils/math";
+import { prices } from "../../../utils/prices";
 import hre from "hardhat";
 
 describe("BRL/USD Forex Hedging", () => {

@@ -15,13 +15,12 @@
  */
 
 import hre from "hardhat";
-import { expandDecimals, decimalToFloat } from "../utils/math";
-import { deployFixture } from "../utils/fixture";
-import { handleDeposit } from "../utils/deposit";
-import { createOrder, executeOrder, OrderType, getOrderCount } from "../utils/order";
-import { getExecuteParams } from "../utils/exchange";
-import { getPositionCount, getAccountPositionCount } from "../utils/position";
-import { prices } from "../utils/prices";
+import { expandDecimals, decimalToFloat } from "../../utils/math";
+import { deployFixture } from "../../utils/fixture";
+import { handleDeposit } from "../../utils/deposit";
+import { createOrder, executeOrder, OrderType, getOrderCount } from "../../utils/order";
+import { getPositionCount, getAccountPositionCount } from "../../utils/position";
+import { prices } from "../../utils/prices";
 
 async function main() {
   console.log("╔═══════════════════════════════════════════════════════════════╗");
@@ -119,7 +118,10 @@ async function main() {
   // Execute the order (simulating keeper execution with oracle prices)
   console.log("   Executing order (keeper simulation)...");
   await executeOrder(fixture, {
-    ...getExecuteParams(fixture, { tokens: [wnt, usdc] }),
+    tokens: [wnt.address, usdc.address],
+    precisions: [prices.wnt.precision, prices.usdc.precision],
+    minPrices: [prices.wnt.min, prices.usdc.min],
+    maxPrices: [prices.wnt.max, prices.usdc.max],
   });
 
   const positionsAfterOpen = await getAccountPositionCount(dataStore, user0.address);
