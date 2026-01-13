@@ -14,15 +14,18 @@ This guide explains how to build a keeper service for GMX V2 Synthetics, broken 
 3. [Part 2: Fetching Prices](#part-2-fetching-prices)
 4. [Part 3: Executing Operations](#part-3-executing-operations)
 5. [Part 4: Monitoring Positions](#part-4-monitoring-positions)
-6. [Part 5: Notifications & Logging](#part-5-notifications--logging)
-7. [Error Reference](#error-reference)
-8. [Roles Required](#roles-required)
-9. [Gas Fees & Keeper Economics](#gas-fees--keeper-economics)
-10. [Role Architecture & Separation of Concerns](#role-architecture--separation-of-concerns)
-11. [Execution Queue (FIFO)](#execution-queue-fifo)
-12. [Retry Mechanisms & Failsafes](#retry-mechanisms--failsafes)
-13. [Security Considerations](#security-considerations)
-14. [Architecture: Microservices vs Monolith](#architecture-microservices-vs-monolith)
+6. [Part 4.5: How the Keeper Enforces Market Parameters](#part-45-how-the-keeper-enforces-market-parameters)
+7. [Part 4.6: ADL Deep Dive - Keeper Creates the Orders](#part-46-adl-deep-dive---keeper-creates-the-orders)
+8. [Part 4.7: Execution Failure Handling](#part-47-execution-failure-handling)
+9. [Part 5: Notifications & Logging](#part-5-notifications--logging)
+10. [Part 6: Health Checks & Monitoring](#part-6-health-checks--monitoring)
+11. [Roles Required](#roles-required)
+12. [Gas Fees & Keeper Economics](#gas-fees--keeper-economics)
+13. [Role Architecture & Separation of Concerns](#role-architecture--separation-of-concerns)
+14. [Execution Queue (FIFO)](#execution-queue-fifo)
+15. [Retry Mechanisms & Failsafes](#retry-mechanisms--failsafes)
+16. [Security Considerations](#security-considerations)
+17. [Architecture: Microservices vs Monolith](#architecture-microservices-vs-monolith)
 
 ---
 
@@ -691,7 +694,7 @@ console.log(`SHORT BRL executed! Tx: ${receipt.transactionHash}`);
 7. Deletes the order from DataStore
 ```
 
-**Events that DON'T need a handler call:**
+### Events that DON'T need a handler call
 
 These events are just **notifications** - the action already happened. The keeper just updates its local tracking.
 
@@ -999,6 +1002,423 @@ This protects:
 
 ---
 
+## Part 4.5: How the Keeper Enforces Market Parameters
+
+This section explains how the keeper interacts with market configuration parameters (maxOpenInterest, reserveFactor, etc.) and what happens in various scenarios.
+
+### The Two-Step Execution Model
+
+```
+USER ACTION                           KEEPER EXECUTION
+    │                                       │
+    ▼                                       ▼
+┌─────────────────┐                 ┌─────────────────────────────┐
+│ createOrder()   │                 │ executeOrder()              │
+│                 │                 │                             │
+│ - No validation │   ──────────>   │ - ALL validation happens    │
+│ - Just stores   │   (your keeper) │ - Can REVERT if invalid     │
+│   the request   │                 │ - Applies fees & impact     │
+└─────────────────┘                 └─────────────────────────────┘
+```
+
+**Key insight:** The keeper doesn't "decide" to reject orders - the **smart contracts** validate everything during execution. Your keeper just calls `executeOrder()` and the contract either succeeds or reverts.
+
+### What This Means for Your Keeper
+
+1. **Your keeper is NOT a gatekeeper** - it doesn't filter or validate orders
+2. **The contracts handle all validation** - parameters, balances, prices
+3. **Your keeper handles failures gracefully** - catch reverts, log them, move on
+4. **Failed orders stay in DataStore** - users can cancel after expiration
+
+---
+
+### Scenario: Position Too Large (Exceeds maxOpenInterest)
+
+```
+USER: "I want to open $5M LONG BRL position"
+MARKET CONFIG: maxOpenInterest = $2M
+
+┌─────────────────────────────────────────────────────────────────┐
+│ FLOW:                                                           │
+│                                                                 │
+│ 1. User calls createOrder(sizeDeltaUsd: $5M)                   │
+│    └── SUCCESS - order stored in DataStore                     │
+│                                                                 │
+│ 2. Keeper detects OrderCreated event                           │
+│                                                                 │
+│ 3. Keeper calls executeOrder(key, oracleParams)                │
+│    └── Contract checks: currentOI + $5M > maxOpenInterest?     │
+│    └── YES → REVERT with error                                 │
+│                                                                 │
+│ 4. Order is now "frozen" or can be cancelled                   │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+**What your keeper does:** Just tries to execute. The contract handles rejection.
+
+**Relevant code path:**
+```
+OrderHandler.executeOrder()
+  → IncreaseOrderUtils.processOrder()
+    → IncreasePositionUtils.increasePosition()
+      → MarketUtils.validateOpenInterest()  ← REVERTS HERE
+```
+
+**Error thrown:** `MaxOpenInterestExceeded(openInterest, maxOpenInterest)`
+
+---
+
+### Scenario: Pool Imbalance (Funding Rate)
+
+```
+MARKET STATE:
+  Long Open Interest:  $1.5M (75%)
+  Short Open Interest: $0.5M (25%)
+
+FUNDING RATE KICKS IN:
+  - Longs PAY shorts
+  - Rate increases over time if imbalance persists
+```
+
+**Your keeper's role: NONE for funding calculation**
+
+Funding is calculated **on-chain** when positions are modified:
+```
+contracts/position/PositionUtils.sol
+  → getFundingFees()  ← calculated at execution time
+```
+
+**However, your keeper DOES affect funding indirectly:**
+- Faster execution = more accurate funding calculations
+- Delayed execution = stale funding state
+
+---
+
+### Scenario: Price Impact on Large Orders
+
+```
+USER: Opens $500K position
+MARKET: Only $2M total liquidity
+
+PRICE IMPACT CALCULATION (happens in contract):
+  imbalanceDelta = $500K
+  impactFactor = negativePositionImpactFactor (e.g., 1e-9)
+  exponent = 2
+
+  impact = imbalanceDelta^2 * impactFactor
+         = ($500K)^2 * 1e-9
+         = ~$250 (0.05% impact)
+```
+
+**Your keeper's role:** Just execute. The contract calculates impact automatically.
+
+```
+OrderHandler.executeOrder()
+  → PositionPricingUtils.getPositionPricing()
+    → getPriceImpactUsd()  ← Calculates impact
+    → Adjusts execution price accordingly
+```
+
+**What the trader experiences:**
+- Wanted to buy at $5.00 (BRL/USD)
+- Actual execution: $5.0025 (0.05% worse due to impact)
+
+---
+
+### Summary: Keeper Responsibilities vs Contract Responsibilities
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                     KEEPER RESPONSIBILITIES                     │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                 │
+│ REACTIVE (Event-Driven):                                        │
+│ ├── OrderCreated      → executeOrder()                          │
+│ ├── DepositCreated    → executeDeposit()                        │
+│ ├── WithdrawalCreated → executeWithdrawal()                     │
+│ └── ShiftCreated      → executeShift() (GLV)                    │
+│                                                                 │
+│ PROACTIVE (Polling/Monitoring):                                 │
+│ ├── Check liquidatable positions → executeLiquidation()         │
+│ ├── Check ADL conditions → updateAdlState() + executeAdl()      │
+│ └── (Optional) Frozen order cleanup                             │
+│                                                                 │
+│ THE CONTRACT HANDLES (not keeper):                              │
+│ ├── Parameter validation (maxOpenInterest, etc.)                │
+│ ├── Price impact calculation                                    │
+│ ├── Fee calculation                                             │
+│ ├── Funding rate calculation                                    │
+│ └── Borrowing fee calculation                                   │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## Part 4.6: ADL Deep Dive - Keeper Creates the Orders
+
+This section provides detailed information about Auto-Deleveraging and clarifies that **the keeper must create ADL orders** - the protocol does NOT create them automatically.
+
+### Does GMX Create ADL Orders Automatically?
+
+**NO.** The keeper must:
+1. **Monitor** the PnL-to-pool ratio
+2. **Create** ADL orders by calling `executeAdl()`
+3. The **contract creates** the actual decrease order internally during the `executeAdl()` call
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│ ADL ORDER CREATION - WHO DOES WHAT?                             │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                 │
+│ KEEPER:                                                         │
+│ ├── Monitors: getPnlToPoolFactor() > maxPnlFactorForAdl?       │
+│ ├── Calls: updateAdlState(market, isLong, oracleParams)        │
+│ └── Calls: executeAdl(account, market, collateral, isLong,     │
+│            sizeDeltaUsd, oracleParams)                          │
+│                                                                 │
+│ CONTRACT (AdlUtils.createAdlOrder - called internally):         │
+│ ├── Creates a MarketDecrease order internally                  │
+│ ├── Sets acceptablePrice to 0 (long) or max (short)            │
+│ ├── No slippage protection (trader gets market price)          │
+│ └── Executes immediately in same transaction                   │
+│                                                                 │
+│ RESULT:                                                         │
+│ ├── Profitable position is reduced                             │
+│ ├── Trader receives their (capped) profits                     │
+│ └── Pool PnL ratio returns to safe level                       │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+### ADL Flow Diagram
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│ ADL FLOW (Keeper-Initiated):                                    │
+│                                                                 │
+│ 1. Keeper monitors: getPnlToPoolFactor() > maxPnlFactorForAdl? │
+│                                                                 │
+│ 2. If YES:                                                      │
+│    a. updateAdlState(market, isLong) - enables ADL             │
+│    b. Find most profitable positions                           │
+│    c. executeAdl() for each until PnL ratio is healthy         │
+│                                                                 │
+│ 3. Result: Profitable positions forcibly reduced               │
+│    - Traders get their profits (capped)                        │
+│    - Pool PnL ratio returns to safe level                      │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+### ADL Fees
+
+| Fee Type | Who Pays | Amount |
+|----------|----------|--------|
+| Position Fee | Trader (from profits) | Same as regular close (0.04-0.06%) |
+| Price Impact | Trader | Calculated normally |
+| Execution Fee | **Protocol** (not trader) | No execution fee charged |
+| Gas Cost | Keeper | Keeper pays gas, not reimbursed from trader |
+
+**Important:** ADL orders have `executionFee: 0` - the protocol absorbs the cost. Your keeper pays gas without direct reimbursement for ADL executions. This is by design - ADL protects the pool, so the protocol bears the cost.
+
+### ADL Errors
+
+| Error | Cause | Keeper Action |
+|-------|-------|---------------|
+| `AdlNotRequired` | PnL ratio is below threshold | Skip ADL, market is healthy |
+| `AdlNotEnabled` | `updateAdlState()` wasn't called first | Call `updateAdlState()` before `executeAdl()` |
+| `InvalidSizeDeltaForAdl` | Trying to close more than position size | Reduce `sizeDeltaUsd` |
+| `OracleTimestampsAreSmallerThanRequired` | Stale oracle prices | Refresh oracle prices |
+
+### ADL vs Liquidation - Summary Comparison
+
+| Aspect | Liquidation | ADL |
+|--------|-------------|-----|
+| Who gets affected | **Losing** positions | **Winning** positions |
+| Why it happens | Position is unhealthy (losses > collateral) | Pool is over-exposed (too many winners) |
+| Keeper initiates? | Yes | Yes |
+| Execution fee | Reimbursed from position | NOT reimbursed (keeper pays) |
+| How common? | Regular occurrence | Rare, extreme markets only |
+
+---
+
+## Part 4.7: Execution Failure Handling
+
+When your keeper tries to execute and it fails, you need to handle it gracefully.
+
+### Error Handling Code Pattern
+
+```typescript
+try {
+  await orderHandler.executeOrder(orderKey, oracleParams);
+} catch (error) {
+  // Parse the error to understand what happened
+  const errorName = parseRevertReason(error);
+
+  switch (errorName) {
+    // ORDER-RELATED ERRORS
+    case 'EmptyOrder':
+      // Order already executed or cancelled
+      // Action: Remove from queue, log, continue
+      break;
+
+    case 'OrderNotFulfillableAtAcceptablePrice':
+      // Limit order: price not reached
+      // Action: Keep in queue, retry later
+      break;
+
+    case 'OrderNotFound':
+      // Order was cancelled
+      // Action: Remove from queue
+      break;
+
+    // MARKET LIMIT ERRORS
+    case 'MaxOpenInterestExceeded':
+      // Position would exceed market's max OI
+      // Action: Order will stay frozen, user must cancel
+      break;
+
+    case 'MaxPoolAmountExceeded':
+      // Deposit exceeds pool limit
+      // Action: Order stays pending, may execute later if withdrawals happen
+      break;
+
+    case 'InsufficientReserve':
+      // Not enough liquidity
+      // Action: Order stays pending
+      break;
+
+    // ORACLE ERRORS
+    case 'InvalidOraclePrice':
+    case 'OracleTimestampsAreSmallerThanRequired':
+    case 'OracleTimestampsAreLargerThanRequestExpirationTime':
+      // Stale or invalid oracle prices
+      // Action: Refresh prices and retry immediately
+      break;
+
+    // POSITION ERRORS
+    case 'InsufficientCollateral':
+      // User doesn't have enough collateral
+      // Action: Order stays frozen
+      break;
+
+    default:
+      // Unknown error
+      // Action: Log for investigation
+      console.error('Unknown execution error:', error);
+  }
+}
+```
+
+### Order States After Failure
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│ WHAT HAPPENS TO FAILED ORDERS?                                  │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                 │
+│ RECOVERABLE FAILURES:                                           │
+│ ├── Limit order price not reached → Stays pending              │
+│ ├── Stale oracle prices → Retry with fresh prices              │
+│ └── Temporary liquidity issue → May succeed later              │
+│                                                                 │
+│ NON-RECOVERABLE FAILURES:                                       │
+│ ├── MaxOpenInterestExceeded → Order frozen                     │
+│ ├── InsufficientCollateral → Order frozen                      │
+│ └── Other validation failures → Order frozen                   │
+│                                                                 │
+│ USER OPTIONS FOR FROZEN ORDERS:                                 │
+│ ├── Wait for REQUEST_EXPIRATION_TIME (300s)                    │
+│ └── Call cancelOrder() to get collateral back                  │
+│                                                                 │
+│ FROZEN ORDER EXECUTION:                                         │
+│ └── Requires FROZEN_ORDER_KEEPER role (special permission)     │
+│                                                                 │
+└─────────────────────────────────────────────────────────────────┘
+```
+
+### Complete Error Reference Table
+
+**Order Execution Errors:**
+
+| Error | Description | Keeper Action |
+|-------|-------------|---------------|
+| `EmptyOrder` | Order doesn't exist or already executed | Remove from queue |
+| `OrderNotFound` | Order key not in DataStore | Remove from queue |
+| `OrderAlreadyFrozen` | Cannot freeze an already frozen order | Skip |
+| `OrderNotFulfillableAtAcceptablePrice` | Price moved beyond slippage | Retry later (limit orders) |
+| `OrderValidFromTimeNotReached` | Order not yet valid | Retry after validFromTime |
+| `UnsupportedOrderType` | Invalid order type | Log error, skip |
+| `EmptySizeDeltaInTokens` | Size calculation resulted in 0 | Log error |
+| `InvalidOrderPrices` | Trigger price conditions not met | Retry later |
+
+**Market Limit Errors:**
+
+| Error | Description | Keeper Action |
+|-------|-------------|---------------|
+| `MaxOpenInterestExceeded` | OI would exceed limit | Order frozen |
+| `MaxPoolAmountExceeded` | Pool at capacity | Order stays pending |
+| `MaxPoolUsdForDepositExceeded` | Deposit USD too high | Order stays pending |
+| `MaxCollateralSumExceeded` | Too much collateral on side | Order frozen |
+| `InsufficientReserve` | Not enough liquidity | Order stays pending |
+| `InsufficientReserveForOpenInterest` | Reserve check failed | Order frozen |
+
+**Oracle Errors:**
+
+| Error | Description | Keeper Action |
+|-------|-------------|---------------|
+| `OracleTimestampsAreSmallerThanRequired` | Prices too old | Refresh prices, retry |
+| `OracleTimestampsAreLargerThanRequestExpirationTime` | Prices newer than allowed | Wait for new prices |
+| `InvalidOraclePrice` | Price validation failed | Check oracle config |
+| `MaxOraclePriceAgeExceeded` | Prices expired | Fetch fresh prices |
+
+**Position Errors:**
+
+| Error | Description | Keeper Action |
+|-------|-------------|---------------|
+| `InsufficientCollateral` | Not enough margin | Order frozen |
+| `InvalidPositionMarket` | Wrong market for position type | Log error |
+| `InvalidCollateralTokenForMarket` | Collateral not supported | Log error |
+| `UnexpectedPositionState` | Position state inconsistent | Log error |
+
+**ADL Errors:**
+
+| Error | Description | Keeper Action |
+|-------|-------------|---------------|
+| `AdlNotRequired` | PnL below threshold | Skip, market healthy |
+| `AdlNotEnabled` | State not updated first | Call updateAdlState() |
+| `InvalidSizeDeltaForAdl` | Closing more than position | Reduce sizeDeltaUsd |
+
+**Liquidation Errors:**
+
+| Error | Description | Keeper Action |
+|-------|-------------|---------------|
+| `PositionNotLiquidatable` | Position is healthy | Remove from liquidation queue |
+| `InvalidLiquidationPrice` | Price calculation error | Check oracle prices |
+
+### Retry Logic
+
+```python
+RETRYABLE_ERRORS = [
+    'MaxOraclePriceAgeExceeded',
+    'OracleBlockNumbersAreSmallerThanRequired',
+    'nonce too low',
+    'replacement transaction underpriced'
+]
+
+NON_RETRYABLE_ERRORS = [
+    'EmptyOrder',
+    'EmptyDeposit',
+    'EmptyWithdrawal',
+    'InsufficientCollateral',
+    'OrderNotFulfillableAtAcceptablePrice'
+]
+```
+
+---
+
 ## Part 5: Notifications & Logging
 
 The keeper should notify users about important events and maintain logs for auditing.
@@ -1103,43 +1523,6 @@ Every keeper action should be logged:
 > 2. **End date reminders** - Users should know when their insurance expires
 > 3. **Basic logging** - At minimum, log all executions to a file or simple service
 > 4. Email notifications can be added later, start with in-app notifications
-
----
-
-## Error Reference
-
-### Common Errors and What to Do
-
-| Error | Meaning | Action |
-|-------|---------|--------|
-| `EmptyOrder` | Order already executed or cancelled | Remove from queue, ignore |
-| `EmptyDeposit` | Deposit already executed or cancelled | Remove from queue, ignore |
-| `InsufficientCollateral` | User doesn't have enough collateral | Skip order (user's problem) |
-| `OrderNotFulfillableAtAcceptablePrice` | Slippage too tight for current price | Skip (user can cancel and retry) |
-| `MaxOraclePriceAgeExceeded` | Price data is too old | Refetch prices and retry |
-| `OracleBlockNumbersAreSmallerThanRequired` | Stale prices | Refetch prices and retry |
-| `InsufficientPoolAmount` | Pool doesn't have enough liquidity | Skip, try again later |
-| `MaxOpenInterestExceeded` | Market at capacity | Skip |
-| `nonce too low` | Transaction already submitted | Increment nonce, retry |
-
-### Retry Logic
-
-```python
-RETRYABLE_ERRORS = [
-    'MaxOraclePriceAgeExceeded',
-    'OracleBlockNumbersAreSmallerThanRequired',
-    'nonce too low',
-    'replacement transaction underpriced'
-]
-
-NON_RETRYABLE_ERRORS = [
-    'EmptyOrder',
-    'EmptyDeposit',
-    'EmptyWithdrawal',
-    'InsufficientCollateral',
-    'OrderNotFulfillableAtAcceptablePrice'
-]
-```
 
 ---
 
