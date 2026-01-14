@@ -103,7 +103,7 @@ Reserve factors ensure LPs can always withdraw their funds, even when positions 
 
 | Parameter | Plain English | Default |
 |-----------|---------------|---------|
-| `reserveFactor` | % of pool that CAN'T be used to pay profits | 95% |
+| `reserveFactor` | % of pool that CAN be used to pay profits | 90% |
 | `openInterestReserveFactor` | Similar limit based on open interest | 90% |
 
 ### How It Works
@@ -119,12 +119,12 @@ reserveFactor: 95%
 │                                                                 │
 │   Total Pool:        $1,000,000                                │
 │                                                                 │
-│   Can be reserved    ┌─────────────────────────────┐           │
-│   for positions:     │     $950,000 (95%)          │           │
+│   CAN be reserved    ┌─────────────────────────────┐           │
+│   for positions:     │     $900,000 (90%)          │           │
 │                      └─────────────────────────────┘           │
 │                                                                 │
 │   Always available   ┌───────┐                                 │
-│   for LP withdrawal: │ $50K  │ (5% buffer)                     │
+│   for LP withdrawal: │ 100K  │ (10% buffer)                     │
 │                      └───────┘                                 │
 │                                                                 │
 └─────────────────────────────────────────────────────────────────┘
