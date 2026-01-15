@@ -33,15 +33,15 @@ type OracleEdge = {
 };
 
 type BaseTokenConfig = {
-  decimals: number;
-  transferGasLimit?: number;
-  oracleProvider?: OracleProvider;
-  oracleTimestampAdjustment?: number;
-  dataStreamFeedId?: string;
-  dataStreamFeedDecimals?: number;
-  dataStreamSpreadReductionFactor?: BigNumberish;
-  priceFeed?: OraclePriceFeed;
-  edge?: OracleEdge;
+  decimals: number; // Decimals of the currency used to normalize prices
+  transferGasLimit?: number; // Not used for synthetics, no transfer occurs on synthetics. Usually 200 * 1000 when set
+  oracleProvider?: OracleProvider; // "gmOracle" | "chainlinkDataStream" | "chainlinkPriceFeed" Only used for tests using "gmOracle"
+  oracleTimestampAdjustment?: number; // Set it to 1 for synthetics
+  dataStreamFeedId?: string; // DataStream Feed ID for the currency
+  dataStreamFeedDecimals?: number; // 18 (Default for each currency & token)
+  dataStreamSpreadReductionFactor?: BigNumberish; // Spread reduction factor for Bid & Ask prices (100% = no spread, Bid = Ask)
+  priceFeed?: OraclePriceFeed; // Chainlink price feed (not used anymore) - Not usable for Synthetics currencies
+  edge?: OracleEdge; // Chaos labs Edge Oracle (unused)
 };
 
 // synthetic token without corresponding token
@@ -49,19 +49,19 @@ type BaseTokenConfig = {
 // should not be deployed
 // should not be wrappedNative
 type SyntheticTokenConfig = BaseTokenConfig & {
-  address?: never;
-  synthetic: true;
-  wrappedNative?: never;
-  deploy?: never;
-  oracleType?: string;
+  address?: never; // Synthetic tokens don't have an address
+  synthetic: true; // Always true
+  wrappedNative?: never; // Synthetic can't be a WNT
+  deploy?: never; // Not deployed in live networks
+  oracleType?: string; // Set to TOKEN_ORACLE_TYPES.DEFAULT in getTokens()
 };
 
 type RealTokenConfig = BaseTokenConfig & {
-  address: string;
-  synthetic?: never;
-  wrappedNative?: true;
-  deploy?: never;
-  buybackMaxPriceImpactFactor?: BigNumberish;
+  address: string; // Address of the token
+  synthetic?: never; // Real tokens can't be synthetic
+  wrappedNative?: true; // If set, can only be true. Only one per Chain
+  deploy?: never; // Not deployed
+  buybackMaxPriceImpactFactor?: BigNumberish; // Set to either LOW_BUYBACK_IMPACT or MID_BUYBACK_IMPACT
 };
 
 // test token to deploy in local and test networks
@@ -77,13 +77,75 @@ export type TestTokenConfig = BaseTokenConfig & {
 export type TokenConfig = SyntheticTokenConfig | RealTokenConfig | TestTokenConfig;
 export type TokensConfig = { [tokenSymbol: string]: TokenConfig };
 
+// BuyBack Impact Factor only conserns:
+// - fee tokens: the collateral token used in a market (configured in the config/markets.ts)
+// - buyback tokens (configured in the config/buyback.ts)
 const LOW_BUYBACK_IMPACT = percentageToFloat("0.20%");
 const MID_BUYBACK_IMPACT = percentageToFloat("0.40%");
+
+const getCurrencyConfig = (dataStreamFeedId: string): SyntheticTokenConfig => {
+  return {
+    dataStreamFeedId,
+    synthetic: true,
+    decimals: 18,
+    dataStreamFeedDecimals: 18,
+    oracleTimestampAdjustment: 1,
+    dataStreamSpreadReductionFactor: percentageToFloat("100%"),
+  };
+};
+
+const getCurrencyTestnetConfig = (): SyntheticTokenConfig => {
+  return {
+    synthetic: true,
+    decimals: 18,
+  };
+};
 
 const config: {
   [network: string]: TokensConfig;
 } = {
   arbitrum: {
+    // NIVO CURRENCIES
+
+    // Brazilian Real
+    BRL: getCurrencyConfig("0x0000000000000000000000000000000000000000000000000000000000000000"), // TODO: Update with the real Chainlink Data Stream ID
+    // Mexican Peso
+    MXN: getCurrencyConfig("0x0000000000000000000000000000000000000000000000000000000000000000"), // TODO: Update with the real Chainlink Data Stream ID
+    // Colombian Peso
+    COP: getCurrencyConfig("0x0000000000000000000000000000000000000000000000000000000000000000"), // TODO: Update with the real Chainlink Data Stream ID
+    // Indonesian Rupiah
+    IDR: getCurrencyConfig("0x0000000000000000000000000000000000000000000000000000000000000000"), // TODO: Update with the real Chainlink Data Stream ID
+    // Philippine Peso
+    PHP: getCurrencyConfig("0x0000000000000000000000000000000000000000000000000000000000000000"), // TODO: Update with the real Chainlink Data Stream ID
+    // Peruvian Sol
+    PEN: getCurrencyConfig("0x0000000000000000000000000000000000000000000000000000000000000000"), // TODO: Update with the real Chainlink Data Stream ID
+    // Nigerian Naira
+    NGN: getCurrencyConfig("0x0000000000000000000000000000000000000000000000000000000000000000"), // TODO: Update with the real Chainlink Data Stream ID
+    // Kenyan Shilling
+    KES: getCurrencyConfig("0x0000000000000000000000000000000000000000000000000000000000000000"), // TODO: Update with the real Chainlink Data Stream ID
+    // South African Rand
+    ZAR: getCurrencyConfig("0x0000000000000000000000000000000000000000000000000000000000000000"), // TODO: Update with the real Chainlink Data Stream ID
+    // Thai Baht
+    THB: getCurrencyConfig("0x0000000000000000000000000000000000000000000000000000000000000000"), // TODO: Update with the real Chainlink Data Stream ID
+
+    // NIVO COLLATERAL
+    USDT: {
+      address: "0xFd086bC7CD5C481DCC9C85ebE478A1C0b69FCbb9",
+      decimals: 6,
+      transferGasLimit: 200 * 1000,
+      dataStreamFeedId: "0x0003a910a43485e0685ff5d6d366541f5c21150f0634c5b14254392d1a1c06db",
+      dataStreamFeedDecimals: 18,
+      oracleTimestampAdjustment: 1,
+      priceFeed: {
+        address: "0x3f3f5dF88dC9F13eac63DF89EC16ef6e7E25DdE7",
+        decimals: 8,
+        heartbeatDuration: (24 + 1) * 60 * 60,
+        stablePriceUsd: decimalToFloat(1),
+      },
+      buybackMaxPriceImpactFactor: LOW_BUYBACK_IMPACT,
+    },
+
+    // GMX TOKENS
     APE: {
       address: "0x7f9FBf9bDd3F4105C478b996B648FE6e828a1e98",
       decimals: 18,
@@ -1054,21 +1116,6 @@ const config: {
       },
       buybackMaxPriceImpactFactor: LOW_BUYBACK_IMPACT,
     },
-    USDT: {
-      address: "0xFd086bC7CD5C481DCC9C85ebE478A1C0b69FCbb9",
-      decimals: 6,
-      transferGasLimit: 200 * 1000,
-      dataStreamFeedId: "0x0003a910a43485e0685ff5d6d366541f5c21150f0634c5b14254392d1a1c06db",
-      dataStreamFeedDecimals: 18,
-      oracleTimestampAdjustment: 1,
-      priceFeed: {
-        address: "0x3f3f5dF88dC9F13eac63DF89EC16ef6e7E25DdE7",
-        decimals: 8,
-        heartbeatDuration: (24 + 1) * 60 * 60,
-        stablePriceUsd: decimalToFloat(1),
-      },
-      buybackMaxPriceImpactFactor: LOW_BUYBACK_IMPACT,
-    },
     DAI: {
       address: "0xDA10009cBd5D07dd0CeCc66161FC93D7c9000da1",
       decimals: 18,
@@ -1411,6 +1458,58 @@ const config: {
     },
   },
   arbitrumSepolia: {
+    // NIVO CURRENCIES
+
+    // Brazilian Real
+    BRL: getCurrencyConfig("0x0000000000000000000000000000000000000000000000000000000000000000"), // TODO: Update with the real Chainlink Data Stream ID
+    // Mexican Peso
+    MXN: getCurrencyConfig("0x0000000000000000000000000000000000000000000000000000000000000000"), // TODO: Update with the real Chainlink Data Stream ID
+    // Colombian Peso
+    COP: getCurrencyConfig("0x0000000000000000000000000000000000000000000000000000000000000000"), // TODO: Update with the real Chainlink Data Stream ID
+    // Indonesian Rupiah
+    IDR: getCurrencyConfig("0x0000000000000000000000000000000000000000000000000000000000000000"), // TODO: Update with the real Chainlink Data Stream ID
+    // Philippine Peso
+    PHP: getCurrencyConfig("0x0000000000000000000000000000000000000000000000000000000000000000"), // TODO: Update with the real Chainlink Data Stream ID
+    // Peruvian Sol
+    PEN: getCurrencyConfig("0x0000000000000000000000000000000000000000000000000000000000000000"), // TODO: Update with the real Chainlink Data Stream ID
+    // Nigerian Naira
+    NGN: getCurrencyConfig("0x0000000000000000000000000000000000000000000000000000000000000000"), // TODO: Update with the real Chainlink Data Stream ID
+    // Kenyan Shilling
+    KES: getCurrencyConfig("0x0000000000000000000000000000000000000000000000000000000000000000"), // TODO: Update with the real Chainlink Data Stream ID
+    // South African Rand
+    ZAR: getCurrencyConfig("0x0000000000000000000000000000000000000000000000000000000000000000"), // TODO: Update with the real Chainlink Data Stream ID
+    // Thai Baht
+    THB: getCurrencyConfig("0x0000000000000000000000000000000000000000000000000000000000000000"), // TODO: Update with the real Chainlink Data Stream ID
+
+    // NIVO COLLATERAL
+    // USDT0: {
+    //   address: "0x6c54BB7A9E203995Bd4577b3bd5200855b02E328", // USDT0 - https://testnet.layerzeroscan.com/application/usdt0
+    //   decimals: 6,
+    //   transferGasLimit: 200 * 1000,
+    //   dataStreamFeedId: "0x00032874077216155926e26c159c1c20a572921371d9de605fe9633e48d136f9", // USDT/USD Chainlink Data Stream
+    //   dataStreamFeedDecimals: 18,
+    //   priceFeed: {
+    //     address: "0x80EDee6f667eCc9f63a0a6f55578F870651f06A4", //  USDT/USD Chainlink price feed
+    //     decimals: 8,
+    //     heartbeatDuration: 144 * 60 * 60,
+    //     stablePriceUsd: decimalToFloat(1),
+    //   },
+    // },
+    "USDT.SG": {
+      address: "0x095f40616FA98Ff75D1a7D0c68685c5ef806f110", // Stargate USDT
+      decimals: 6,
+      transferGasLimit: 200 * 1000,
+      dataStreamFeedId: "0x00032874077216155926e26c159c1c20a572921371d9de605fe9633e48d136f9", //  USDT/USD Chainlink Data Stream
+      dataStreamFeedDecimals: 18,
+      priceFeed: {
+        address: "0x80EDee6f667eCc9f63a0a6f55578F870651f06A4", //  USDT/USD Chainlink price feed
+        decimals: 8,
+        heartbeatDuration: 144 * 60 * 60,
+        stablePriceUsd: decimalToFloat(1),
+      },
+    },
+
+    // GMX TOKENS
     WETH: {
       address: "0x980b62da83eff3d4576c647993b0c1d7faf17c73", // not verified
       decimals: 18,
@@ -1454,32 +1553,6 @@ const config: {
         decimals: 8,
         heartbeatDuration: 144 * 60 * 60,
         stablePriceUsd: decimalToFloat(1),
-      },
-    },
-    "USDT.SG": {
-      address: "0x095f40616FA98Ff75D1a7D0c68685c5ef806f110", // Stargate USDT
-      decimals: 6,
-      transferGasLimit: 200 * 1000,
-      dataStreamFeedId: "0x0003dc85e8b01946bf9dfd8b0db860129181eb6105a8c8981d9f28e00b6f60d9", // Circle USDC
-      dataStreamFeedDecimals: 18,
-      priceFeed: {
-        address: "0x0153002d20B96532C639313c2d54c3dA09109309", // Circle USDC
-        decimals: 8,
-        heartbeatDuration: 144 * 60 * 60,
-        stablePrice: decimalToFloat(1),
-      },
-    },
-    "USDT.SG": {
-      address: "0x095f40616FA98Ff75D1a7D0c68685c5ef806f110", // Stargate USDT
-      decimals: 6,
-      transferGasLimit: 200 * 1000,
-      dataStreamFeedId: "0x0003dc85e8b01946bf9dfd8b0db860129181eb6105a8c8981d9f28e00b6f60d9", // Circle USDC
-      dataStreamFeedDecimals: 18,
-      priceFeed: {
-        address: "0x0153002d20B96532C639313c2d54c3dA09109309", // Circle USDC
-        decimals: 8,
-        heartbeatDuration: 144 * 60 * 60,
-        stablePrice: decimalToFloat(1),
       },
     },
   },
@@ -1716,6 +1789,43 @@ const config: {
   },
   // token addresses are retrieved in runtime for hardhat and localhost networks
   hardhat: {
+    // NIVO CURRENCIES
+
+    // Brazilian Real
+    BRL: getCurrencyTestnetConfig(),
+    // Mexican Peso
+    MXN: getCurrencyTestnetConfig(),
+    // Colombian Peso
+    COP: getCurrencyTestnetConfig(),
+    // Indonesian Rupiah
+    IDR: getCurrencyTestnetConfig(),
+    // Philippine Peso
+    PHP: getCurrencyTestnetConfig(),
+    // Peruvian Sol
+    PEN: getCurrencyTestnetConfig(),
+    // Nigerian Naira
+    NGN: getCurrencyTestnetConfig(),
+    // Kenyan Shilling
+    KES: getCurrencyTestnetConfig(),
+    // South African Rand
+    ZAR: getCurrencyTestnetConfig(),
+    // Thai Baht
+    THB: getCurrencyTestnetConfig(),
+
+    // NIVO COLLATERAL
+    USDT: {
+      decimals: 6,
+      transferGasLimit: 200 * 1000,
+      deploy: true,
+      priceFeed: {
+        decimals: 8,
+        heartbeatDuration: 24 * 60 * 60,
+        deploy: true,
+        initPrice: "100000000",
+      },
+    },
+
+    // GMX TOKENS
     WETH: {
       wrappedNative: true,
       decimals: 18,
@@ -1760,27 +1870,43 @@ const config: {
         initPrice: "100000000",
       },
     },
-    USDT: {
-      decimals: 6,
-      transferGasLimit: 200 * 1000,
-      deploy: true,
-      priceFeed: {
-        decimals: 8,
-        heartbeatDuration: 24 * 60 * 60,
-        deploy: true,
-        initPrice: "100000000",
-      },
-    },
     SOL: {
       synthetic: true,
       decimals: 18,
     },
-    BRL: {
-      synthetic: true,
-      decimals: 8,
-    },
   },
   localhost: {
+    // NIVO CURRENCIES
+
+    // Brazilian Real
+    BRL: getCurrencyTestnetConfig(),
+    // Mexican Peso
+    MXN: getCurrencyTestnetConfig(),
+    // Colombian Peso
+    COP: getCurrencyTestnetConfig(),
+    // Indonesian Rupiah
+    IDR: getCurrencyTestnetConfig(),
+    // Philippine Peso
+    PHP: getCurrencyTestnetConfig(),
+    // Peruvian Sol
+    PEN: getCurrencyTestnetConfig(),
+    // Nigerian Naira
+    NGN: getCurrencyTestnetConfig(),
+    // Kenyan Shilling
+    KES: getCurrencyTestnetConfig(),
+    // South African Rand
+    ZAR: getCurrencyTestnetConfig(),
+    // Thai Baht
+    THB: getCurrencyTestnetConfig(),
+
+    // NIVO COLLATERAL
+    USDT: {
+      decimals: 6,
+      transferGasLimit: 200 * 1000,
+      deploy: true,
+    },
+
+    // GMX TOKENS
     WETH: {
       wrappedNative: true,
       decimals: 18,
@@ -1802,18 +1928,9 @@ const config: {
       transferGasLimit: 200 * 1000,
       deploy: true,
     },
-    USDT: {
-      decimals: 6,
-      transferGasLimit: 200 * 1000,
-      deploy: true,
-    },
     SOL: {
       synthetic: true,
       decimals: 18,
-    },
-    BRL: {
-      synthetic: true,
-      decimals: 8,
     },
   },
 };
@@ -1838,7 +1955,9 @@ function getTokens(hre: HardhatRuntimeEnvironment) {
     }
 
     if (token.priceFeed && token.priceFeed.stablePriceUsd) {
-      token.priceFeed.stablePrice = token.priceFeed.stablePriceUsd.div(expandDecimals(1, token.decimals));
+      token.priceFeed.stablePriceUsd = ethers.BigNumber.from(token.priceFeed.stablePriceUsd).div(
+        expandDecimals(1, token.decimals)
+      );
     }
 
     if (token.dataStreamSpreadReductionFactor === undefined) {
