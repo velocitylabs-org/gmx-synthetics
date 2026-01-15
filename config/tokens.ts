@@ -88,6 +88,8 @@ const config: {
 } = {
   arbitrum: {
     // NIVO CURRENCIES
+
+    // Brazilian Real
     BRL: {
       synthetic: true,
       decimals: 18,
@@ -96,6 +98,7 @@ const config: {
       oracleTimestampAdjustment: 1,
       dataStreamSpreadReductionFactor: percentageToFloat("100%"),
     },
+    // Mexican Peso
     MXN: {
       synthetic: true,
       decimals: 18,
@@ -104,6 +107,7 @@ const config: {
       oracleTimestampAdjustment: 1,
       dataStreamSpreadReductionFactor: percentageToFloat("100%"),
     },
+    // Colombian Peso
     COP: {
       synthetic: true,
       decimals: 18,
@@ -112,6 +116,7 @@ const config: {
       oracleTimestampAdjustment: 1,
       dataStreamSpreadReductionFactor: percentageToFloat("100%"),
     },
+    // Indonesian Rupiah
     IDR: {
       synthetic: true,
       decimals: 18,
@@ -120,6 +125,7 @@ const config: {
       oracleTimestampAdjustment: 1,
       dataStreamSpreadReductionFactor: percentageToFloat("100%"),
     },
+    // Philippine Peso
     PHP: {
       synthetic: true,
       decimals: 18,
@@ -128,6 +134,7 @@ const config: {
       oracleTimestampAdjustment: 1,
       dataStreamSpreadReductionFactor: percentageToFloat("100%"),
     },
+    // Peruvian Sol
     PEN: {
       synthetic: true,
       decimals: 18,
@@ -136,6 +143,7 @@ const config: {
       oracleTimestampAdjustment: 1,
       dataStreamSpreadReductionFactor: percentageToFloat("100%"),
     },
+    // Nigerian Naira
     NGN: {
       synthetic: true,
       decimals: 18,
@@ -144,6 +152,7 @@ const config: {
       oracleTimestampAdjustment: 1,
       dataStreamSpreadReductionFactor: percentageToFloat("100%"),
     },
+    // Kenyan Shilling
     KES: {
       synthetic: true,
       decimals: 18,
@@ -152,6 +161,7 @@ const config: {
       oracleTimestampAdjustment: 1,
       dataStreamSpreadReductionFactor: percentageToFloat("100%"),
     },
+    // South African Rand
     ZAR: {
       synthetic: true,
       decimals: 18,
@@ -160,6 +170,7 @@ const config: {
       oracleTimestampAdjustment: 1,
       dataStreamSpreadReductionFactor: percentageToFloat("100%"),
     },
+    // Thai Baht
     THB: {
       synthetic: true,
       decimals: 18,
@@ -2082,8 +2093,8 @@ async function getTokens(hre: HardhatRuntimeEnvironment) {
       if (hre.network.name === "localhost") {
         const { chainId } = await hre.ethers.provider.getNetwork();
         (token as any).address = getSyntheticTokenAddress(chainId, tokenSymbol); // ChainId => 31337
-      } else { 
-         (token as any).address = getSyntheticTokenAddress(hre.network.config.chainId, tokenSymbol);
+      } else {
+        (token as any).address = getSyntheticTokenAddress(hre.network.config.chainId, tokenSymbol);
       }
     }
     if (token.address) {
