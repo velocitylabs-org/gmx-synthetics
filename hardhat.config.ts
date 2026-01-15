@@ -201,6 +201,7 @@ const config: HardhatUserConfig = {
     },
     localhost: {
       saveDeployments: true,
+      chainId: 31337,
     },
     arbitrum: {
       url: getRpcUrl("arbitrum"),

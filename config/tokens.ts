@@ -83,6 +83,24 @@ export type TokensConfig = { [tokenSymbol: string]: TokenConfig };
 const LOW_BUYBACK_IMPACT = percentageToFloat("0.20%");
 const MID_BUYBACK_IMPACT = percentageToFloat("0.40%");
 
+const getCurrencyConfig = (dataStreamFeedId: string): SyntheticTokenConfig => {
+  return {
+    dataStreamFeedId,
+    synthetic: true,
+    decimals: 18,
+    dataStreamFeedDecimals: 18,
+    oracleTimestampAdjustment: 1,
+    dataStreamSpreadReductionFactor: percentageToFloat("100%"),
+  };
+};
+
+const getCurrencyTestnetConfig = (): SyntheticTokenConfig => {
+  return {
+    synthetic: true,
+    decimals: 18,
+  };
+};
+
 const config: {
   [network: string]: TokensConfig;
 } = {
@@ -90,95 +108,25 @@ const config: {
     // NIVO CURRENCIES
 
     // Brazilian Real
-    BRL: {
-      synthetic: true,
-      decimals: 18,
-      //dataStreamFeedId: "0x0000000000000000000000000000000000000000000000000000000000000000",// TODO: Update with the real Chainlink Data Stream ID
-      dataStreamFeedDecimals: 18,
-      oracleTimestampAdjustment: 1,
-      dataStreamSpreadReductionFactor: percentageToFloat("100%"),
-    },
+    BRL: getCurrencyConfig("0x0000000000000000000000000000000000000000000000000000000000000000"), // TODO: Update with the real Chainlink Data Stream ID
     // Mexican Peso
-    MXN: {
-      synthetic: true,
-      decimals: 18,
-      //dataStreamFeedId: "0x0000000000000000000000000000000000000000000000000000000000000000", TODO: Update with the real Chainlink Data Stream ID
-      dataStreamFeedDecimals: 18,
-      oracleTimestampAdjustment: 1,
-      dataStreamSpreadReductionFactor: percentageToFloat("100%"),
-    },
+    MXN: getCurrencyConfig("0x0000000000000000000000000000000000000000000000000000000000000000"), // TODO: Update with the real Chainlink Data Stream ID
     // Colombian Peso
-    COP: {
-      synthetic: true,
-      decimals: 18,
-      //dataStreamFeedId: "0x0000000000000000000000000000000000000000000000000000000000000000", TODO: Update with the real Chainlink Data Stream ID
-      dataStreamFeedDecimals: 18,
-      oracleTimestampAdjustment: 1,
-      dataStreamSpreadReductionFactor: percentageToFloat("100%"),
-    },
+    COP: getCurrencyConfig("0x0000000000000000000000000000000000000000000000000000000000000000"), // TODO: Update with the real Chainlink Data Stream ID
     // Indonesian Rupiah
-    IDR: {
-      synthetic: true,
-      decimals: 18,
-      //dataStreamFeedId: "0x0000000000000000000000000000000000000000000000000000000000000000", TODO: Update with the real Chainlink Data Stream ID
-      dataStreamFeedDecimals: 18,
-      oracleTimestampAdjustment: 1,
-      dataStreamSpreadReductionFactor: percentageToFloat("100%"),
-    },
+    IDR: getCurrencyConfig("0x0000000000000000000000000000000000000000000000000000000000000000"), // TODO: Update with the real Chainlink Data Stream ID
     // Philippine Peso
-    PHP: {
-      synthetic: true,
-      decimals: 18,
-      //dataStreamFeedId: "0x0000000000000000000000000000000000000000000000000000000000000000", TODO: Update with the real Chainlink Data Stream ID
-      dataStreamFeedDecimals: 18,
-      oracleTimestampAdjustment: 1,
-      dataStreamSpreadReductionFactor: percentageToFloat("100%"),
-    },
+    PHP: getCurrencyConfig("0x0000000000000000000000000000000000000000000000000000000000000000"), // TODO: Update with the real Chainlink Data Stream ID
     // Peruvian Sol
-    PEN: {
-      synthetic: true,
-      decimals: 18,
-      //dataStreamFeedId: "0x0000000000000000000000000000000000000000000000000000000000000000", TODO: Update with the real Chainlink Data Stream ID
-      dataStreamFeedDecimals: 18,
-      oracleTimestampAdjustment: 1,
-      dataStreamSpreadReductionFactor: percentageToFloat("100%"),
-    },
+    PEN: getCurrencyConfig("0x0000000000000000000000000000000000000000000000000000000000000000"), // TODO: Update with the real Chainlink Data Stream ID
     // Nigerian Naira
-    NGN: {
-      synthetic: true,
-      decimals: 18,
-      //dataStreamFeedId: "0x0000000000000000000000000000000000000000000000000000000000000000", TODO: Update with the real Chainlink Data Stream ID
-      dataStreamFeedDecimals: 18,
-      oracleTimestampAdjustment: 1,
-      dataStreamSpreadReductionFactor: percentageToFloat("100%"),
-    },
+    NGN: getCurrencyConfig("0x0000000000000000000000000000000000000000000000000000000000000000"), // TODO: Update with the real Chainlink Data Stream ID
     // Kenyan Shilling
-    KES: {
-      synthetic: true,
-      decimals: 18,
-      //dataStreamFeedId: "0x0000000000000000000000000000000000000000000000000000000000000000", TODO: Update with the real Chainlink Data Stream ID
-      dataStreamFeedDecimals: 18,
-      oracleTimestampAdjustment: 1,
-      dataStreamSpreadReductionFactor: percentageToFloat("100%"),
-    },
+    KES: getCurrencyConfig("0x0000000000000000000000000000000000000000000000000000000000000000"), // TODO: Update with the real Chainlink Data Stream ID
     // South African Rand
-    ZAR: {
-      synthetic: true,
-      decimals: 18,
-      //dataStreamFeedId: "0x0000000000000000000000000000000000000000000000000000000000000000", TODO: Update with the real Chainlink Data Stream ID
-      dataStreamFeedDecimals: 18,
-      oracleTimestampAdjustment: 1,
-      dataStreamSpreadReductionFactor: percentageToFloat("100%"),
-    },
+    ZAR: getCurrencyConfig("0x0000000000000000000000000000000000000000000000000000000000000000"), // TODO: Update with the real Chainlink Data Stream ID
     // Thai Baht
-    THB: {
-      synthetic: true,
-      decimals: 18,
-      //dataStreamFeedId: "0x0000000000000000000000000000000000000000000000000000000000000000", TODO: Update with the real Chainlink Data Stream ID
-      dataStreamFeedDecimals: 18,
-      oracleTimestampAdjustment: 1,
-      dataStreamSpreadReductionFactor: percentageToFloat("100%"),
-    },
+    THB: getCurrencyConfig("0x0000000000000000000000000000000000000000000000000000000000000000"), // TODO: Update with the real Chainlink Data Stream ID
 
     // NIVO COLLATERAL
     USDT: {
@@ -1511,86 +1459,27 @@ const config: {
   },
   arbitrumSepolia: {
     // NIVO CURRENCIES
-    BRL: {
-      synthetic: true,
-      decimals: 18,
-      //dataStreamFeedId: "0x0000000000000000000000000000000000000000000000000000000000000000", TODO: Update with the real Chainlink Data Stream ID
-      dataStreamFeedDecimals: 18,
-      oracleTimestampAdjustment: 1,
-      dataStreamSpreadReductionFactor: percentageToFloat("100%"),
-    },
-    MXN: {
-      synthetic: true,
-      decimals: 18,
-      //dataStreamFeedId: "0x0000000000000000000000000000000000000000000000000000000000000000", TODO: Update with the real Chainlink Data Stream ID
-      dataStreamFeedDecimals: 18,
-      oracleTimestampAdjustment: 1,
-      dataStreamSpreadReductionFactor: percentageToFloat("100%"),
-    },
-    COP: {
-      synthetic: true,
-      decimals: 18,
-      //dataStreamFeedId: "0x0000000000000000000000000000000000000000000000000000000000000000", TODO: Update with the real Chainlink Data Stream ID
-      dataStreamFeedDecimals: 18,
-      oracleTimestampAdjustment: 1,
-      dataStreamSpreadReductionFactor: percentageToFloat("100%"),
-    },
-    IDR: {
-      synthetic: true,
-      decimals: 18,
-      //dataStreamFeedId: "0x0000000000000000000000000000000000000000000000000000000000000000", TODO: Update with the real Chainlink Data Stream ID
-      dataStreamFeedDecimals: 18,
-      oracleTimestampAdjustment: 1,
-      dataStreamSpreadReductionFactor: percentageToFloat("100%"),
-    },
-    PHP: {
-      synthetic: true,
-      decimals: 18,
-      //dataStreamFeedId: "0x0000000000000000000000000000000000000000000000000000000000000000", TODO: Update with the real Chainlink Data Stream ID
-      dataStreamFeedDecimals: 18,
-      oracleTimestampAdjustment: 1,
-      dataStreamSpreadReductionFactor: percentageToFloat("100%"),
-    },
-    PEN: {
-      synthetic: true,
-      decimals: 18,
-      //dataStreamFeedId: "0x0000000000000000000000000000000000000000000000000000000000000000", TODO: Update with the real Chainlink Data Stream ID
-      dataStreamFeedDecimals: 18,
-      oracleTimestampAdjustment: 1,
-      dataStreamSpreadReductionFactor: percentageToFloat("100%"),
-    },
-    NGN: {
-      synthetic: true,
-      decimals: 18,
-      //dataStreamFeedId: "0x0000000000000000000000000000000000000000000000000000000000000000", TODO: Update with the real Chainlink Data Stream ID
-      dataStreamFeedDecimals: 18,
-      oracleTimestampAdjustment: 1,
-      dataStreamSpreadReductionFactor: percentageToFloat("100%"),
-    },
-    KES: {
-      synthetic: true,
-      decimals: 18,
-      //dataStreamFeedId: "0x0000000000000000000000000000000000000000000000000000000000000000", TODO: Update with the real Chainlink Data Stream ID
-      dataStreamFeedDecimals: 18,
-      oracleTimestampAdjustment: 1,
-      dataStreamSpreadReductionFactor: percentageToFloat("100%"),
-    },
-    ZAR: {
-      synthetic: true,
-      decimals: 18,
-      //dataStreamFeedId: "0x0000000000000000000000000000000000000000000000000000000000000000", TODO: Update with the real Chainlink Data Stream ID
-      dataStreamFeedDecimals: 18,
-      oracleTimestampAdjustment: 1,
-      dataStreamSpreadReductionFactor: percentageToFloat("100%"),
-    },
-    THB: {
-      synthetic: true,
-      decimals: 18,
-      //dataStreamFeedId: "0x0000000000000000000000000000000000000000000000000000000000000000", TODO: Update with the real Chainlink Data Stream ID
-      dataStreamFeedDecimals: 18,
-      oracleTimestampAdjustment: 1,
-      dataStreamSpreadReductionFactor: percentageToFloat("100%"),
-    },
+
+    // Brazilian Real
+    BRL: getCurrencyConfig("0x0000000000000000000000000000000000000000000000000000000000000000"), // TODO: Update with the real Chainlink Data Stream ID
+    // Mexican Peso
+    MXN: getCurrencyConfig("0x0000000000000000000000000000000000000000000000000000000000000000"), // TODO: Update with the real Chainlink Data Stream ID
+    // Colombian Peso
+    COP: getCurrencyConfig("0x0000000000000000000000000000000000000000000000000000000000000000"), // TODO: Update with the real Chainlink Data Stream ID
+    // Indonesian Rupiah
+    IDR: getCurrencyConfig("0x0000000000000000000000000000000000000000000000000000000000000000"), // TODO: Update with the real Chainlink Data Stream ID
+    // Philippine Peso
+    PHP: getCurrencyConfig("0x0000000000000000000000000000000000000000000000000000000000000000"), // TODO: Update with the real Chainlink Data Stream ID
+    // Peruvian Sol
+    PEN: getCurrencyConfig("0x0000000000000000000000000000000000000000000000000000000000000000"), // TODO: Update with the real Chainlink Data Stream ID
+    // Nigerian Naira
+    NGN: getCurrencyConfig("0x0000000000000000000000000000000000000000000000000000000000000000"), // TODO: Update with the real Chainlink Data Stream ID
+    // Kenyan Shilling
+    KES: getCurrencyConfig("0x0000000000000000000000000000000000000000000000000000000000000000"), // TODO: Update with the real Chainlink Data Stream ID
+    // South African Rand
+    ZAR: getCurrencyConfig("0x0000000000000000000000000000000000000000000000000000000000000000"), // TODO: Update with the real Chainlink Data Stream ID
+    // Thai Baht
+    THB: getCurrencyConfig("0x0000000000000000000000000000000000000000000000000000000000000000"), // TODO: Update with the real Chainlink Data Stream ID
 
     // NIVO COLLATERAL
     // USDT0: {
@@ -1901,46 +1790,27 @@ const config: {
   // token addresses are retrieved in runtime for hardhat and localhost networks
   hardhat: {
     // NIVO CURRENCIES
-    BRL: {
-      synthetic: true,
-      decimals: 18,
-    },
-    MXN: {
-      synthetic: true,
-      decimals: 18,
-    },
-    COP: {
-      synthetic: true,
-      decimals: 18,
-    },
-    IDR: {
-      synthetic: true,
-      decimals: 18,
-    },
-    PHP: {
-      synthetic: true,
-      decimals: 18,
-    },
-    PEN: {
-      synthetic: true,
-      decimals: 18,
-    },
-    NGN: {
-      synthetic: true,
-      decimals: 18,
-    },
-    KES: {
-      synthetic: true,
-      decimals: 18,
-    },
-    ZAR: {
-      synthetic: true,
-      decimals: 18,
-    },
-    THB: {
-      synthetic: true,
-      decimals: 18,
-    },
+
+    // Brazilian Real
+    BRL: getCurrencyTestnetConfig(),
+    // Mexican Peso
+    MXN: getCurrencyTestnetConfig(),
+    // Colombian Peso
+    COP: getCurrencyTestnetConfig(),
+    // Indonesian Rupiah
+    IDR: getCurrencyTestnetConfig(),
+    // Philippine Peso
+    PHP: getCurrencyTestnetConfig(),
+    // Peruvian Sol
+    PEN: getCurrencyTestnetConfig(),
+    // Nigerian Naira
+    NGN: getCurrencyTestnetConfig(),
+    // Kenyan Shilling
+    KES: getCurrencyTestnetConfig(),
+    // South African Rand
+    ZAR: getCurrencyTestnetConfig(),
+    // Thai Baht
+    THB: getCurrencyTestnetConfig(),
 
     // NIVO COLLATERAL
     USDT: {
@@ -2007,46 +1877,27 @@ const config: {
   },
   localhost: {
     // NIVO CURRENCIES
-    BRL: {
-      synthetic: true,
-      decimals: 18,
-    },
-    MXN: {
-      synthetic: true,
-      decimals: 18,
-    },
-    COP: {
-      synthetic: true,
-      decimals: 18,
-    },
-    IDR: {
-      synthetic: true,
-      decimals: 18,
-    },
-    PHP: {
-      synthetic: true,
-      decimals: 18,
-    },
-    PEN: {
-      synthetic: true,
-      decimals: 18,
-    },
-    NGN: {
-      synthetic: true,
-      decimals: 18,
-    },
-    KES: {
-      synthetic: true,
-      decimals: 18,
-    },
-    ZAR: {
-      synthetic: true,
-      decimals: 18,
-    },
-    THB: {
-      synthetic: true,
-      decimals: 18,
-    },
+
+    // Brazilian Real
+    BRL: getCurrencyTestnetConfig(),
+    // Mexican Peso
+    MXN: getCurrencyTestnetConfig(),
+    // Colombian Peso
+    COP: getCurrencyTestnetConfig(),
+    // Indonesian Rupiah
+    IDR: getCurrencyTestnetConfig(),
+    // Philippine Peso
+    PHP: getCurrencyTestnetConfig(),
+    // Peruvian Sol
+    PEN: getCurrencyTestnetConfig(),
+    // Nigerian Naira
+    NGN: getCurrencyTestnetConfig(),
+    // Kenyan Shilling
+    KES: getCurrencyTestnetConfig(),
+    // South African Rand
+    ZAR: getCurrencyTestnetConfig(),
+    // Thai Baht
+    THB: getCurrencyTestnetConfig(),
 
     // NIVO COLLATERAL
     USDT: {
@@ -2084,18 +1935,13 @@ const config: {
   },
 };
 
-async function getTokens(hre: HardhatRuntimeEnvironment) {
+function getTokens(hre: HardhatRuntimeEnvironment) {
   const tokens = config[hre.network.name];
 
   for (const [tokenSymbol, token] of Object.entries(tokens as TokensConfig)) {
     (token as any).symbol = tokenSymbol;
     if (token.synthetic) {
-      if (hre.network.name === "localhost") {
-        const { chainId } = await hre.ethers.provider.getNetwork();
-        (token as any).address = getSyntheticTokenAddress(chainId, tokenSymbol); // ChainId => 31337
-      } else {
-        (token as any).address = getSyntheticTokenAddress(hre.network.config.chainId, tokenSymbol);
-      }
+      (token as any).address = getSyntheticTokenAddress(hre.network.config.chainId, tokenSymbol);
     }
     if (token.address) {
       (token as any).address = ethers.utils.getAddress(token.address);
@@ -2124,7 +1970,7 @@ async function getTokens(hre: HardhatRuntimeEnvironment) {
 
 // note that this will not return tokens that are deployed at runtime
 export async function tokenByAddress(hre: HardhatRuntimeEnvironment) {
-  const tokens = await getTokens(hre);
+  const tokens = getTokens(hre);
   const map = {};
 
   for (const token of Object.values(tokens as TokensConfig)) {
@@ -2137,5 +1983,5 @@ export async function tokenByAddress(hre: HardhatRuntimeEnvironment) {
 }
 
 export default async function (hre: HardhatRuntimeEnvironment): Promise<TokensConfig> {
-  return await getTokens(hre);
+  return getTokens(hre);
 }
