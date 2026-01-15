@@ -2082,7 +2082,9 @@ async function getTokens(hre: HardhatRuntimeEnvironment) {
       if (hre.network.name === "localhost") {
         const { chainId } = await hre.ethers.provider.getNetwork();
         (token as any).address = getSyntheticTokenAddress(chainId, tokenSymbol); // ChainId => 31337
-      } else (token as any).address = getSyntheticTokenAddress(hre.network.config.chainId, tokenSymbol);
+      } else { 
+         (token as any).address = getSyntheticTokenAddress(hre.network.config.chainId, tokenSymbol);
+      }
     }
     if (token.address) {
       (token as any).address = ethers.utils.getAddress(token.address);
