@@ -436,10 +436,98 @@ const hardhatBaseMarketConfig: Partial<BaseMarketConfig> = {
   maxFundingFactorPerSecond: "100000000000000000000000",
 };
 
+const getNivoMarketsConfig = (indexToken: string, collateralToken = "USDT"): PerpMarketConfig => {
+  return {
+    tokens: { indexToken: indexToken, longToken: collateralToken, shortToken: collateralToken },
+    virtualTokenIdForIndexToken: hashString(`PERP:${indexToken}/USD`), // To be confirmed: Order FX/USD vs USD/FX
+
+    ...fundingRateConfig_SingleToken, //  (same funding rate config as fundingRateConfig_Default)
+    // Pick on of the BorrowingRateConfig
+    ...singleTokenMarketConfig,
+    ...syntheticMarketConfig, //extends baseMarketConfig - Do we need to use the syntheticMarketConfig_IncreasedCapacity?
+
+    // TO BE DEFINED: Full config
+  };
+};
+
+const getNivoMarketsTestnetConfig = (indexToken: string, collateralToken = "USDT.SG"): PerpMarketConfig => {
+  return {
+    tokens: { indexToken: indexToken, longToken: collateralToken, shortToken: collateralToken },
+    virtualTokenIdForIndexToken: hashString(`PERP:${indexToken}/USD`), // To be confirmed: Order FX/USD vs USD/FX
+
+    ...fundingRateConfig_SingleToken, //  (same funding rate config as fundingRateConfig_Default)
+    // Pick on of the BorrowingRateConfig
+    ...singleTokenMarketConfig,
+    ...syntheticMarketConfig, //extends baseMarketConfig - Do we need to use the syntheticMarketConfig_IncreasedCapacity?
+
+    // TO BE DEFINED: Full config
+  };
+};
+
+const getNivoMarketsLocalConfig = (indexToken: string, collateralToken = "USDT"): PerpMarketConfig => {
+  return {
+    tokens: { indexToken: indexToken, longToken: collateralToken, shortToken: collateralToken },
+  };
+};
+
+const nivoMarketsConfig: {
+  [network: string]: PerpMarketConfig[];
+} = {
+  arbitrum: [
+    getNivoMarketsConfig("BRL"),
+    getNivoMarketsConfig("MXN"),
+    getNivoMarketsConfig("COP"),
+    getNivoMarketsConfig("IDR"),
+    getNivoMarketsConfig("PHP"),
+    getNivoMarketsConfig("PEN"),
+    getNivoMarketsConfig("NGN"),
+    getNivoMarketsConfig("KES"),
+    getNivoMarketsConfig("ZAR"),
+    getNivoMarketsConfig("THB"),
+  ],
+  arbitrumSepolia: [
+    getNivoMarketsTestnetConfig("BRL"),
+    getNivoMarketsTestnetConfig("MXN"),
+    getNivoMarketsTestnetConfig("COP"),
+    getNivoMarketsTestnetConfig("IDR"),
+    getNivoMarketsTestnetConfig("PHP"),
+    getNivoMarketsTestnetConfig("PEN"),
+    getNivoMarketsTestnetConfig("NGN"),
+    getNivoMarketsTestnetConfig("KES"),
+    getNivoMarketsTestnetConfig("ZAR"),
+    getNivoMarketsTestnetConfig("THB"),
+  ],
+  hardhat: [
+    getNivoMarketsLocalConfig("BRL"),
+    getNivoMarketsLocalConfig("MXN"),
+    getNivoMarketsLocalConfig("COP"),
+    getNivoMarketsLocalConfig("IDR"),
+    getNivoMarketsLocalConfig("PHP"),
+    getNivoMarketsLocalConfig("PEN"),
+    getNivoMarketsLocalConfig("NGN"),
+    getNivoMarketsLocalConfig("KES"),
+    getNivoMarketsLocalConfig("ZAR"),
+    getNivoMarketsLocalConfig("THB"),
+  ],
+  localhost: [
+    getNivoMarketsLocalConfig("BRL"),
+    getNivoMarketsLocalConfig("MXN"),
+    getNivoMarketsLocalConfig("COP"),
+    getNivoMarketsLocalConfig("IDR"),
+    getNivoMarketsLocalConfig("PHP"),
+    getNivoMarketsLocalConfig("PEN"),
+    getNivoMarketsLocalConfig("NGN"),
+    getNivoMarketsLocalConfig("KES"),
+    getNivoMarketsLocalConfig("ZAR"),
+    getNivoMarketsLocalConfig("THB"),
+  ],
+};
+
 const config: {
   [network: string]: MarketConfig[];
 } = {
   arbitrum: [
+    ...nivoMarketsConfig.arbitrum,
     {
       tokens: { indexToken: "APE", longToken: "APE", shortToken: "USDC" },
       virtualTokenIdForIndexToken: hashString("PERP:APE/USD"),
@@ -4465,6 +4553,7 @@ const config: {
     },
   ],
   arbitrumSepolia: [
+    ...nivoMarketsConfig.arbitrumSepolia,
     {
       tokens: { indexToken: "WETH", longToken: "WETH", shortToken: "USDC.SG" },
       virtualTokenIdForIndexToken: hashString("PERP:ETH/USD"),
@@ -5011,6 +5100,7 @@ const config: {
     },
   ],
   hardhat: [
+    ...nivoMarketsConfig.hardhat,
     {
       tokens: { indexToken: "WETH", longToken: "WETH", shortToken: "USDC" },
     },
@@ -5039,11 +5129,9 @@ const config: {
     {
       tokens: { indexToken: "WBTC", longToken: "USDC", shortToken: "USDC" },
     },
-    {
-      tokens: { indexToken: "BRL", longToken: "USDC", shortToken: "USDC" },
-    },
   ],
   localhost: [
+    ...nivoMarketsConfig.localhost,
     {
       tokens: { indexToken: "WETH", longToken: "WETH", shortToken: "USDC" },
     },
@@ -5056,9 +5144,6 @@ const config: {
     },
     {
       tokens: { indexToken: "SOL", longToken: "WETH", shortToken: "USDC" },
-    },
-    {
-      tokens: { indexToken: "BRL", longToken: "USDC", shortToken: "USDC" },
     },
   ],
 };
