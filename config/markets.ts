@@ -436,17 +436,84 @@ const hardhatBaseMarketConfig: Partial<BaseMarketConfig> = {
   maxFundingFactorPerSecond: "100000000000000000000000",
 };
 
+const nivoBaseMarketConfig: Partial<BaseMarketConfig> = {
+  minCollateralFactor: percentageToFloat("1%"), // 100x max leverage
+  minCollateralFactorForLiquidation: percentageToFloat("1%"),
+  minCollateralUsd: decimalToFloat(1, 0), // $1 minimum
+
+  reserveFactor: percentageToFloat("90%"),
+  openInterestReserveFactor: percentageToFloat("80%"),
+
+  maxPnlFactorForTraders: percentageToFloat("60%"),
+  maxPnlFactorForAdl: percentageToFloat("55%"),
+  minPnlFactorAfterAdl: percentageToFloat("50%"),
+
+  maxPnlFactorForDeposits: percentageToFloat("60%"),
+  maxPnlFactorForWithdrawals: percentageToFloat("45%"),
+
+  positionFeeFactorForPositiveImpact: percentageToFloat("0.20%"),
+  positionFeeFactorForNegativeImpact: percentageToFloat("0.75%"),
+  liquidationFeeFactor: percentageToFloat("0.45%"),
+
+  negativePositionImpactFactor: exponentToFloat("1e-9"),
+  positivePositionImpactFactor: exponentToFloat("5e-10"),
+
+  // Exponents (2 = quadratic, large trades hit harder)
+  negativePositionImpactExponentFactor: exponentToFloat("2e0"),
+  positivePositionImpactExponentFactor: exponentToFloat("1e0"),
+
+  // Caps
+  negativeMaxPositionImpactFactor: percentageToFloat("1%"), // Max 1% negative impact
+  positiveMaxPositionImpactFactor: percentageToFloat("0.5%"), // Max 0.5% positive impact
+
+  negativeSwapImpactFactor: exponentToFloat("5e-10"), // 0.01% for 200,000 USD of imbalance
+  positiveSwapImpactFactor: exponentToFloat("5e-10"), // 0.01% for 200,000 USD of imbalance
+
+  swapFeeFactorForPositiveImpact: bigNumberify(0),
+  swapFeeFactorForNegativeImpact: bigNumberify(0),
+
+  maxLongTokenPoolAmount: expandDecimals(5_000_000, 6),
+  maxShortTokenPoolAmount: expandDecimals(5_000_000, 6),
+
+  // will fill longs and shorts together after automatically
+  maxOpenInterest: decimalToFloat(2_000_000),
+
+  maxPoolUsdForDeposit: decimalToFloat(6_000_000),
+};
+
+const nivoFundingRateConfig: FundingRateConfig = {
+  fundingIncreaseFactorPerSecond: percentageToFloat("4%")
+    .div(SECONDS_PER_YEAR)
+    .div(SECONDS_PER_HOUR * 12),
+
+  // Funding rate decreases over 24 hours when balanced
+  fundingDecreaseFactorPerSecond: percentageToFloat("4%")
+    .div(SECONDS_PER_YEAR)
+    .div(SECONDS_PER_HOUR * 24),
+
+  // Max ~4% APR
+  maxFundingFactorPerSecond: percentageToFloat("4%").div(SECONDS_PER_YEAR),
+
+  // Thresholds
+  thresholdForStableFunding: percentageToFloat("15%"),
+  thresholdForDecreaseFunding: percentageToFloat("8%"),
+};
+
+const nivoBorrowingRateConfig: BorrowingRateConfig = {
+  optimalUsageFactor: percentageToFloat("75%"),
+  baseBorrowingFactor: percentageToFloat("5%").div(SECONDS_PER_YEAR),
+  aboveOptimalUsageBorrowingFactor: percentageToFloat("15%").div(SECONDS_PER_YEAR),
+};
+
 const getNivoMarketsConfig = (indexToken: string, collateralToken = "USDT"): PerpMarketConfig => {
   return {
     tokens: { indexToken: indexToken, longToken: collateralToken, shortToken: collateralToken },
     virtualTokenIdForIndexToken: hashString(`PERP:${indexToken}/USD`), // To be confirmed: Order FX/USD vs USD/FX
+    virtualMarketId: hashString(`SPOT:${indexToken}/USD`),
 
-    ...fundingRateConfig_SingleToken, //  (same funding rate config as fundingRateConfig_Default)
-    // Pick on of the BorrowingRateConfig
-    ...singleTokenMarketConfig,
-    ...syntheticMarketConfig, //extends baseMarketConfig - Do we need to use the syntheticMarketConfig_IncreasedCapacity?
-
-    // TO BE DEFINED: Full config
+    ...nivoBaseMarketConfig,
+    ...nivoFundingRateConfig,
+    ...nivoBorrowingRateConfig,
   };
 };
 
@@ -454,19 +521,25 @@ const getNivoMarketsTestnetConfig = (indexToken: string, collateralToken = "USDT
   return {
     tokens: { indexToken: indexToken, longToken: collateralToken, shortToken: collateralToken },
     virtualTokenIdForIndexToken: hashString(`PERP:${indexToken}/USD`), // To be confirmed: Order FX/USD vs USD/FX
+    virtualMarketId: hashString(`SPOT:${indexToken}/USD`),
 
-    ...fundingRateConfig_SingleToken, //  (same funding rate config as fundingRateConfig_Default)
-    // Pick on of the BorrowingRateConfig
-    ...singleTokenMarketConfig,
-    ...syntheticMarketConfig, //extends baseMarketConfig - Do we need to use the syntheticMarketConfig_IncreasedCapacity?
-
-    // TO BE DEFINED: Full config
+    ...nivoBaseMarketConfig,
+    ...nivoFundingRateConfig,
+    ...nivoBorrowingRateConfig,
   };
 };
 
 const getNivoMarketsLocalConfig = (indexToken: string, collateralToken = "USDT"): PerpMarketConfig => {
   return {
     tokens: { indexToken: indexToken, longToken: collateralToken, shortToken: collateralToken },
+    virtualTokenIdForIndexToken: hashString(`PERP:${indexToken}/USD`), // To be confirmed: Order FX/USD vs USD/FX
+    virtualMarketId: hashString(`SPOT:${indexToken}/USD`),
+
+    maxCollateralSum: expandDecimals(10_000_000_000_000, 18), // 10 trillion with 18 decimals
+
+    ...nivoBaseMarketConfig,
+    ...nivoFundingRateConfig,
+    ...nivoBorrowingRateConfig,
   };
 };
 
