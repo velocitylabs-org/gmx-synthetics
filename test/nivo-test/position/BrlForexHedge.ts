@@ -29,12 +29,12 @@ import hre from "hardhat";
 
 describe("BRL/USD Forex Hedging", () => {
   let fixture;
-  let dataStore, reader, brlUsdMarket, brl, usdc;
+  let dataStore, reader, brlUsdMarket, brl, usdt;
   let user0, user1;
 
   beforeEach(async () => {
     fixture = await deployFixture();
-    ({ dataStore, reader, brlUsdMarket, brl, usdc } = fixture.contracts);
+    ({ dataStore, reader, brlUsdMarket, brl, usdt } = fixture.contracts);
     ({ user0, user1 } = fixture.accounts);
 
     // Seed liquidity into BRL/USD market
@@ -42,14 +42,14 @@ describe("BRL/USD Forex Hedging", () => {
     await handleDeposit(fixture, {
       create: {
         market: brlUsdMarket,
-        longTokenAmount: expandDecimals(2_500_000, 6), // 2.5M USDC
-        shortTokenAmount: expandDecimals(2_500_000, 6), // 2.5M USDC
+        longTokenAmount: expandDecimals(2_500_000, 6), // 2.5M usdt
+        shortTokenAmount: expandDecimals(2_500_000, 6), // 2.5M usdt
       },
       execute: {
-        tokens: [brl.address, usdc.address],
-        precisions: [prices.brl.precision, prices.usdc.precision],
-        minPrices: [prices.brl.min, prices.usdc.min],
-        maxPrices: [prices.brl.max, prices.usdc.max],
+        tokens: [brl.address, usdt.address],
+        precisions: [prices.brl.precision, prices.usdt.precision],
+        minPrices: [prices.brl.min, prices.usdt.min],
+        maxPrices: [prices.brl.max, prices.usdt.max],
       },
     });
   });
@@ -76,14 +76,14 @@ describe("BRL/USD Forex Hedging", () => {
       expect(initialPositionCount).to.equal(0);
 
       // Open SHORT position
-      // - Collateral: 1,000 USDC
+      // - Collateral: 1,000 usdt
       // - Size: $10,000 (10x leverage)
       // - Direction: SHORT (betting BRL drops)
       await createOrder(fixture, {
         account: user0,
         market: brlUsdMarket,
-        initialCollateralToken: usdc,
-        initialCollateralDeltaAmount: expandDecimals(1000, 6), // 1,000 USDC
+        initialCollateralToken: usdt,
+        initialCollateralDeltaAmount: expandDecimals(1000, 6), // 1,000 usdt
         sizeDeltaUsd: decimalToFloat(10_000), // $10,000 position
         acceptablePrice: expandDecimals(1, 21), // Min price for SHORT entry
         triggerPrice: 0,
@@ -94,10 +94,10 @@ describe("BRL/USD Forex Hedging", () => {
 
       // Execute order at BRL = $0.16
       await executeOrder(fixture, {
-        tokens: [brl.address, usdc.address],
-        precisions: [prices.brl.precision, prices.usdc.precision],
-        minPrices: [prices.brl.min, prices.usdc.min],
-        maxPrices: [prices.brl.max, prices.usdc.max],
+        tokens: [brl.address, usdt.address],
+        precisions: [prices.brl.precision, prices.usdt.precision],
+        minPrices: [prices.brl.min, prices.usdt.min],
+        maxPrices: [prices.brl.max, prices.usdt.max],
       });
 
       // Verify position opened
@@ -120,7 +120,7 @@ describe("BRL/USD Forex Hedging", () => {
       await createOrder(fixture, {
         account: user0,
         market: brlUsdMarket,
-        initialCollateralToken: usdc,
+        initialCollateralToken: usdt,
         initialCollateralDeltaAmount: 0,
         sizeDeltaUsd: decimalToFloat(10_000), // Close full position
         acceptablePrice: expandDecimals(2, 22), // Max price for SHORT exit
@@ -131,14 +131,14 @@ describe("BRL/USD Forex Hedging", () => {
       });
 
       // Get user balance before close
-      const balanceBeforeClose = await usdc.balanceOf(user0.address);
+      const balanceBeforeClose = await usdt.balanceOf(user0.address);
 
       // Execute close at BRL = $0.14 (decreased price)
       await executeOrder(fixture, {
-        tokens: [brl.address, usdc.address],
-        precisions: [prices.brl.precision, prices.usdc.precision],
-        minPrices: [prices.brl.decreased.min, prices.usdc.min],
-        maxPrices: [prices.brl.decreased.max, prices.usdc.max],
+        tokens: [brl.address, usdt.address],
+        precisions: [prices.brl.precision, prices.usdt.precision],
+        minPrices: [prices.brl.decreased.min, prices.usdt.min],
+        maxPrices: [prices.brl.decreased.max, prices.usdt.max],
       });
 
       // Verify position closed
@@ -146,7 +146,7 @@ describe("BRL/USD Forex Hedging", () => {
       expect(positionCountAfterClose).to.equal(0);
 
       // Get user balance after close
-      const balanceAfterClose = await usdc.balanceOf(user0.address);
+      const balanceAfterClose = await usdt.balanceOf(user0.address);
 
       // Calculate profit
       const profit = balanceAfterClose.sub(balanceBeforeClose);
@@ -156,7 +156,7 @@ describe("BRL/USD Forex Hedging", () => {
       console.log(`Entry Price: $0.16/BRL`);
       console.log(`Exit Price: $0.14/BRL (-12.5%)`);
       console.log(`Position Size: $10,000`);
-      console.log(`Profit: $${profitUsd.toFixed(2)} USDC`);
+      console.log(`Profit: $${profitUsd.toFixed(2)} usdt`);
 
       // Expected profit calculation:
       // Position size in BRL = $10,000 / $0.16 = 62,500 BRL
@@ -173,7 +173,7 @@ describe("BRL/USD Forex Hedging", () => {
       await createOrder(fixture, {
         account: user0,
         market: brlUsdMarket,
-        initialCollateralToken: usdc,
+        initialCollateralToken: usdt,
         initialCollateralDeltaAmount: expandDecimals(2000, 6), // 2x more collateral
         sizeDeltaUsd: decimalToFloat(10_000),
         acceptablePrice: expandDecimals(1, 21),
@@ -185,17 +185,17 @@ describe("BRL/USD Forex Hedging", () => {
 
       // Execute at BRL = $0.16
       await executeOrder(fixture, {
-        tokens: [brl.address, usdc.address],
-        precisions: [prices.brl.precision, prices.usdc.precision],
-        minPrices: [prices.brl.min, prices.usdc.min],
-        maxPrices: [prices.brl.max, prices.usdc.max],
+        tokens: [brl.address, usdt.address],
+        precisions: [prices.brl.precision, prices.usdt.precision],
+        minPrices: [prices.brl.min, prices.usdt.min],
+        maxPrices: [prices.brl.max, prices.usdt.max],
       });
 
       // Close position when BRL INCREASES to $0.18
       await createOrder(fixture, {
         account: user0,
         market: brlUsdMarket,
-        initialCollateralToken: usdc,
+        initialCollateralToken: usdt,
         initialCollateralDeltaAmount: 0,
         sizeDeltaUsd: decimalToFloat(10_000),
         acceptablePrice: expandDecimals(3, 22), // Higher max price for loss scenario
@@ -205,24 +205,24 @@ describe("BRL/USD Forex Hedging", () => {
         shouldUnwrapNativeToken: false,
       });
 
-      const balanceBeforeClose = await usdc.balanceOf(user0.address);
+      const balanceBeforeClose = await usdt.balanceOf(user0.address);
 
       // Execute close at BRL = $0.18 (increased price - bad for SHORT)
       await executeOrder(fixture, {
-        tokens: [brl.address, usdc.address],
-        precisions: [prices.brl.precision, prices.usdc.precision],
-        minPrices: [prices.brl.increased.min, prices.usdc.min],
-        maxPrices: [prices.brl.increased.max, prices.usdc.max],
+        tokens: [brl.address, usdt.address],
+        precisions: [prices.brl.precision, prices.usdt.precision],
+        minPrices: [prices.brl.increased.min, prices.usdt.min],
+        maxPrices: [prices.brl.increased.max, prices.usdt.max],
       });
 
-      const balanceAfterClose = await usdc.balanceOf(user0.address);
+      const balanceAfterClose = await usdt.balanceOf(user0.address);
       const pnl = balanceAfterClose.sub(balanceBeforeClose);
       const pnlUsd = Number(hre.ethers.utils.formatUnits(pnl, 6));
 
       console.log("\n=== SHORT BRL/USD Loss Scenario ===");
       console.log(`Entry Price: $0.16/BRL`);
       console.log(`Exit Price: $0.18/BRL (+12.5%)`);
-      console.log(`PnL: $${pnlUsd.toFixed(2)} USDC`);
+      console.log(`PnL: $${pnlUsd.toFixed(2)} usdt`);
 
       // SHORT loses when price goes UP
       // Position size in BRL = $10,000 / $0.16 = 62,500 BRL
@@ -255,13 +255,13 @@ describe("BRL/USD Forex Hedging", () => {
       expect(initialPositionCount).to.equal(0);
 
       // Open LONG position
-      // - Collateral: 1,000 USDC
+      // - Collateral: 1,000 usdt
       // - Size: $10,000 (10x leverage)
       // - Direction: LONG (betting BRL rises)
       await createOrder(fixture, {
         account: user1,
         market: brlUsdMarket,
-        initialCollateralToken: usdc,
+        initialCollateralToken: usdt,
         initialCollateralDeltaAmount: expandDecimals(1000, 6),
         sizeDeltaUsd: decimalToFloat(10_000),
         acceptablePrice: expandDecimals(3, 22), // Max price for LONG entry
@@ -273,10 +273,10 @@ describe("BRL/USD Forex Hedging", () => {
 
       // Execute order at BRL = $0.16
       await executeOrder(fixture, {
-        tokens: [brl.address, usdc.address],
-        precisions: [prices.brl.precision, prices.usdc.precision],
-        minPrices: [prices.brl.min, prices.usdc.min],
-        maxPrices: [prices.brl.max, prices.usdc.max],
+        tokens: [brl.address, usdt.address],
+        precisions: [prices.brl.precision, prices.usdt.precision],
+        minPrices: [prices.brl.min, prices.usdt.min],
+        maxPrices: [prices.brl.max, prices.usdt.max],
       });
 
       // Verify position opened
@@ -291,7 +291,7 @@ describe("BRL/USD Forex Hedging", () => {
       await createOrder(fixture, {
         account: user1,
         market: brlUsdMarket,
-        initialCollateralToken: usdc,
+        initialCollateralToken: usdt,
         initialCollateralDeltaAmount: 0,
         sizeDeltaUsd: decimalToFloat(10_000),
         acceptablePrice: expandDecimals(1, 21), // Min price for LONG exit
@@ -301,20 +301,20 @@ describe("BRL/USD Forex Hedging", () => {
         shouldUnwrapNativeToken: false,
       });
 
-      const balanceBeforeClose = await usdc.balanceOf(user1.address);
+      const balanceBeforeClose = await usdt.balanceOf(user1.address);
 
       // Execute close at BRL = $0.18 (increased price - good for LONG)
       await executeOrder(fixture, {
-        tokens: [brl.address, usdc.address],
-        precisions: [prices.brl.precision, prices.usdc.precision],
-        minPrices: [prices.brl.increased.min, prices.usdc.min],
-        maxPrices: [prices.brl.increased.max, prices.usdc.max],
+        tokens: [brl.address, usdt.address],
+        precisions: [prices.brl.precision, prices.usdt.precision],
+        minPrices: [prices.brl.increased.min, prices.usdt.min],
+        maxPrices: [prices.brl.increased.max, prices.usdt.max],
       });
 
       const positionCountAfterClose = await getAccountPositionCount(dataStore, user1.address);
       expect(positionCountAfterClose).to.equal(0);
 
-      const balanceAfterClose = await usdc.balanceOf(user1.address);
+      const balanceAfterClose = await usdt.balanceOf(user1.address);
       const profit = balanceAfterClose.sub(balanceBeforeClose);
       const profitUsd = Number(hre.ethers.utils.formatUnits(profit, 6));
 
@@ -322,7 +322,7 @@ describe("BRL/USD Forex Hedging", () => {
       console.log(`Entry Price: $0.16/BRL`);
       console.log(`Exit Price: $0.18/BRL (+12.5%)`);
       console.log(`Position Size: $10,000`);
-      console.log(`Profit: $${profitUsd.toFixed(2)} USDC`);
+      console.log(`Profit: $${profitUsd.toFixed(2)} usdt`);
 
       // Expected profit calculation:
       // Position size in BRL = $10,000 / $0.16 = 62,500 BRL
@@ -338,7 +338,7 @@ describe("BRL/USD Forex Hedging", () => {
       await createOrder(fixture, {
         account: user1,
         market: brlUsdMarket,
-        initialCollateralToken: usdc,
+        initialCollateralToken: usdt,
         initialCollateralDeltaAmount: expandDecimals(2000, 6), // 2x more collateral
         sizeDeltaUsd: decimalToFloat(10_000),
         acceptablePrice: expandDecimals(3, 22),
@@ -350,17 +350,17 @@ describe("BRL/USD Forex Hedging", () => {
 
       // Execute at BRL = $0.16
       await executeOrder(fixture, {
-        tokens: [brl.address, usdc.address],
-        precisions: [prices.brl.precision, prices.usdc.precision],
-        minPrices: [prices.brl.min, prices.usdc.min],
-        maxPrices: [prices.brl.max, prices.usdc.max],
+        tokens: [brl.address, usdt.address],
+        precisions: [prices.brl.precision, prices.usdt.precision],
+        minPrices: [prices.brl.min, prices.usdt.min],
+        maxPrices: [prices.brl.max, prices.usdt.max],
       });
 
       // Close position when BRL DECREASES to $0.14 (bad for LONG)
       await createOrder(fixture, {
         account: user1,
         market: brlUsdMarket,
-        initialCollateralToken: usdc,
+        initialCollateralToken: usdt,
         initialCollateralDeltaAmount: 0,
         sizeDeltaUsd: decimalToFloat(10_000),
         acceptablePrice: expandDecimals(1, 20), // Lower min price for loss scenario
@@ -370,24 +370,24 @@ describe("BRL/USD Forex Hedging", () => {
         shouldUnwrapNativeToken: false,
       });
 
-      const balanceBeforeClose = await usdc.balanceOf(user1.address);
+      const balanceBeforeClose = await usdt.balanceOf(user1.address);
 
       // Execute close at BRL = $0.14 (decreased price - bad for LONG)
       await executeOrder(fixture, {
-        tokens: [brl.address, usdc.address],
-        precisions: [prices.brl.precision, prices.usdc.precision],
-        minPrices: [prices.brl.decreased.min, prices.usdc.min],
-        maxPrices: [prices.brl.decreased.max, prices.usdc.max],
+        tokens: [brl.address, usdt.address],
+        precisions: [prices.brl.precision, prices.usdt.precision],
+        minPrices: [prices.brl.decreased.min, prices.usdt.min],
+        maxPrices: [prices.brl.decreased.max, prices.usdt.max],
       });
 
-      const balanceAfterClose = await usdc.balanceOf(user1.address);
+      const balanceAfterClose = await usdt.balanceOf(user1.address);
       const pnl = balanceAfterClose.sub(balanceBeforeClose);
       const pnlUsd = Number(hre.ethers.utils.formatUnits(pnl, 6));
 
       console.log("\n=== LONG BRL/USD Loss Scenario ===");
       console.log(`Entry Price: $0.16/BRL`);
       console.log(`Exit Price: $0.14/BRL (-12.5%)`);
-      console.log(`PnL: $${pnlUsd.toFixed(2)} USDC`);
+      console.log(`PnL: $${pnlUsd.toFixed(2)} usdt`);
 
       // LONG loses when price goes DOWN
       // Returned amount (collateral - loss) should be less than initial collateral
@@ -428,7 +428,7 @@ describe("BRL/USD Forex Hedging", () => {
       await createOrder(fixture, {
         account: user0,
         market: brlUsdMarket,
-        initialCollateralToken: usdc,
+        initialCollateralToken: usdt,
         initialCollateralDeltaAmount: expandDecimals(1000, 6), // $1,000 collateral
         sizeDeltaUsd: decimalToFloat(10_000), // $10,000 position = savings value
         acceptablePrice: expandDecimals(1, 21),
@@ -439,23 +439,23 @@ describe("BRL/USD Forex Hedging", () => {
       });
 
       await executeOrder(fixture, {
-        tokens: [brl.address, usdc.address],
-        precisions: [prices.brl.precision, prices.usdc.precision],
-        minPrices: [prices.brl.min, prices.usdc.min],
-        maxPrices: [prices.brl.max, prices.usdc.max],
+        tokens: [brl.address, usdt.address],
+        precisions: [prices.brl.precision, prices.usdt.precision],
+        minPrices: [prices.brl.min, prices.usdt.min],
+        maxPrices: [prices.brl.max, prices.usdt.max],
       });
 
       console.log("Hedge Position Opened:");
       console.log("  - Type: SHORT BRL/USD");
       console.log("  - Size: $10,000 USD");
-      console.log("  - Collateral: $1,000 USDC");
+      console.log("  - Collateral: $1,000 usdt");
       console.log("  - Leverage: 10x\n");
 
       // Simulate BRL crash - close position at lower price
       await createOrder(fixture, {
         account: user0,
         market: brlUsdMarket,
-        initialCollateralToken: usdc,
+        initialCollateralToken: usdt,
         initialCollateralDeltaAmount: 0,
         sizeDeltaUsd: decimalToFloat(10_000),
         acceptablePrice: expandDecimals(2, 22),
@@ -465,16 +465,16 @@ describe("BRL/USD Forex Hedging", () => {
         shouldUnwrapNativeToken: false,
       });
 
-      const balanceBefore = await usdc.balanceOf(user0.address);
+      const balanceBefore = await usdt.balanceOf(user0.address);
 
       await executeOrder(fixture, {
-        tokens: [brl.address, usdc.address],
-        precisions: [prices.brl.precision, prices.usdc.precision],
-        minPrices: [prices.brl.decreased.min, prices.usdc.min],
-        maxPrices: [prices.brl.decreased.max, prices.usdc.max],
+        tokens: [brl.address, usdt.address],
+        precisions: [prices.brl.precision, prices.usdt.precision],
+        minPrices: [prices.brl.decreased.min, prices.usdt.min],
+        maxPrices: [prices.brl.decreased.max, prices.usdt.max],
       });
 
-      const balanceAfter = await usdc.balanceOf(user0.address);
+      const balanceAfter = await usdt.balanceOf(user0.address);
 
       // Calculate results
       const positionPnl = Number(hre.ethers.utils.formatUnits(balanceAfter.sub(balanceBefore), 6));

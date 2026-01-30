@@ -251,8 +251,8 @@ async function setup() {
 
   const brlUsdMarketAddress = getMarketTokenAddress(
     brl.address,
-    usdc.address,
-    usdc.address,
+    usdt.address,
+    usdt.address,
     DEFAULT_MARKET_TYPE,
     marketFactory.address,
     roleStore.address,
