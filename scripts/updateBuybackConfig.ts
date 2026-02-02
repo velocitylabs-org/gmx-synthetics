@@ -27,19 +27,19 @@ async function main() {
     }
   }
 
-  for (const { version, factor } of buybackConfig.gmxFactors) {
-    const key = keys.buybackGmxFactorKey(version);
+  for (const { factor } of buybackConfig.gmxFactors) {
+    const key = keys.BUYBACK_GMX_FACTOR;
 
     const oldFactor = await dataStore.getUint(key);
     if (oldFactor.eq(factor)) {
-      console.log(`no change for gmxFactor(${version}): ${oldFactor.toString()} -> ${factor.toString()}`);
+      console.log(`no change for gmxFactor: ${oldFactor.toString()} -> ${factor.toString()}`);
       continue;
     }
 
-    console.log(`updated value for gmxFactor(${version}): ${oldFactor.toString()} -> ${factor.toString()}`);
+    console.log(`updated value for gmxFactor: ${oldFactor.toString()} -> ${factor.toString()}`);
     if (process.env.WRITE === "true") {
       console.log("sending transaction...");
-      const tx = await config.setUint(keys.BUYBACK_GMX_FACTOR, encodeData(["uint256"], [version]), factor);
+      const tx = await config.setUint(keys.BUYBACK_GMX_FACTOR, "0x", factor);
       console.log("tx sent: %s", tx.hash);
     }
   }

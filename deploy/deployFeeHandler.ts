@@ -8,23 +8,14 @@ const contractName = "FeeHandler";
 const func = createDeployFunction({
   contractName: contractName,
   dependencyNames: constructorContracts,
-  getDeployArgs: async ({ dependencyContracts, gmx, network, get }) => {
+  getDeployArgs: async ({ dependencyContracts, gmx, network }) => {
     const vaultV1Config = await gmx.getVaultV1();
-    let vaultV1Address = vaultV1Config.vaultV1;
     let gmxAddress = vaultV1Config.gmx;
     if (network.name === "hardhat") {
-      const vaultV1 = await get("MockVaultV1");
       const tokens = await hre.gmx.getTokens();
-      vaultV1Address = vaultV1.address;
       gmxAddress = tokens.GMX.address;
     }
-    if (!vaultV1Address) {
-      throw new Error("vaultV1Address is not defined");
-    }
-    return constructorContracts
-      .map((dependencyName) => dependencyContracts[dependencyName].address)
-      .concat(vaultV1Address)
-      .concat(gmxAddress);
+    return constructorContracts.map((dependencyName) => dependencyContracts[dependencyName].address).concat(gmxAddress);
   },
   libraryNames: ["MarketUtils"],
   afterDeploy: async ({ deployedContract }) => {
@@ -38,7 +29,6 @@ const func = createDeployFunction({
   id: "FeeHandler_1",
 });
 
-func.dependencies = func.dependencies.concat(["MockVaultV1"]);
 func.skip = async (hre: HardhatRuntimeEnvironment) => {
   if (["botanix", "avalancheFuji", "arbitrumSepolia"].includes(hre.network.name)) {
     return true;

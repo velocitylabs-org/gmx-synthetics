@@ -24,8 +24,7 @@ describe("FeeHandler", () => {
     ethUsdMarket,
     feeHandler,
     config,
-    chainlinkPriceFeedProvider,
-    mockVaultV1;
+    chainlinkPriceFeedProvider;
 
   beforeEach(async () => {
     fixture = await deployFixture();
@@ -44,7 +43,6 @@ describe("FeeHandler", () => {
       feeHandler,
       config,
       chainlinkPriceFeedProvider,
-      mockVaultV1,
     } = fixture.contracts);
 
     // Deposit collateral to the ETH/USDC GM market so a position can be opened in the test to generate fees
@@ -70,9 +68,8 @@ describe("FeeHandler", () => {
     await config.setUint(keys.BUYBACK_BATCH_AMOUNT, encodeData(["address"], [gmx.address]), expandDecimals(100, 18)); // 100 * 10 ^ 18
     await config.setUint(keys.BUYBACK_BATCH_AMOUNT, encodeData(["address"], [wnt.address]), expandDecimals(1, 18)); // 1 * 10 ^ 18
 
-    // Set BUYBACK_GMX_FACTOR for V1 and V2
-    await config.setUint(keys.BUYBACK_GMX_FACTOR, encodeData(["uint256"], [1]), percentageToFloat("30%")); // 30/100 = 30%
-    await config.setUint(keys.BUYBACK_GMX_FACTOR, encodeData(["uint256"], [2]), percentageToFloat("72.97%")); // 27/37 = 72.97%
+    // Set BUYBACK_GMX_FACTOR
+    await config.setUint(keys.BUYBACK_GMX_FACTOR, "0x", percentageToFloat("72.97%")); // 27/37 = 72.97%
 
     // Set BUYBACK_MAX_PRICE_IMPACT_FACTOR for GMX, WETH and USDC
     await config.setUint(
@@ -123,7 +120,6 @@ describe("FeeHandler", () => {
         [ethUsdMarket.marketToken],
         usdc.address,
         gmx.address,
-        2,
         usdcPriceAdjusted,
         gmxPriceAdjusted
       )
@@ -135,7 +131,6 @@ describe("FeeHandler", () => {
         [ethUsdMarket.marketToken],
         wnt.address,
         usdc.address,
-        2,
         wethPriceAdjusted,
         usdcPriceAdjusted
       )
@@ -147,23 +142,10 @@ describe("FeeHandler", () => {
         [ethUsdMarket.marketToken, ethers.constants.AddressZero],
         usdc.address,
         gmx.address,
-        2,
         usdcPriceAdjusted,
         gmxPriceAdjusted
       )
     ).to.be.revertedWithCustomError(errorsContract, "EmptyClaimFeesMarket");
-
-    // Validate that the function will revert if an invalid version number is passed
-    await expect(
-      feeHandler.getOutputAmount(
-        [ethUsdMarket.marketToken],
-        usdc.address,
-        gmx.address,
-        3,
-        usdcPriceAdjusted,
-        gmxPriceAdjusted
-      )
-    ).to.be.revertedWithCustomError(errorsContract, "InvalidVersion");
 
     // User opens a position and experiences a USDC position fee,
     // a portion of which is claimable by the fee keeper
@@ -186,53 +168,23 @@ describe("FeeHandler", () => {
       },
     });
 
-    // Minting $40 of USDC and $40 of WETH for V1 fees
-    await usdc.mint(mockVaultV1.address, expandDecimals(40, 6));
-    await wnt.mint(mockVaultV1.address, expandDecimals(8, 15));
-
-    // Validate that getOutputAmount for V1 USDC/GMX after the position increase returns $40 * 30% = 12
-    expect(
-      await feeHandler.getOutputAmount(
-        [ethers.constants.AddressZero],
-        usdc.address,
-        gmx.address,
-        1,
-        usdcPriceAdjusted,
-        gmxPriceAdjusted
-      )
-    ).to.eq(expandDecimals(12, 6));
-
-    // Validate that for V1 USDC/WETH after the position increase returns $40 * 70% = 28
-    expect(
-      await feeHandler.getOutputAmount(
-        [ethers.constants.AddressZero],
-        usdc.address,
-        wnt.address,
-        1,
-        usdcPriceAdjusted,
-        wethPriceAdjusted
-      )
-    ).to.eq(expandDecimals(28, 6));
-
-    // Validate that getOutputAmount for V2 USDC/GMX after the position increase returns $25 * 72.97% = 18.2425
+    // Validate that getOutputAmount for USDC/GMX after the position increase returns $25 * 72.97% = 18.2425
     expect(
       await feeHandler.getOutputAmount(
         [ethUsdMarket.marketToken],
         usdc.address,
         gmx.address,
-        2,
         usdcPriceAdjusted,
         gmxPriceAdjusted
       )
     ).to.eq("18242500");
 
-    // Validate that for V2 USDC/WETH after the position increase returns $25 * 27.03% = 6.7575
+    // Validate that for USDC/WETH after the position increase returns $25 * 27.03% = 6.7575
     expect(
       await feeHandler.getOutputAmount(
         [ethUsdMarket.marketToken],
         usdc.address,
         wnt.address,
-        2,
         usdcPriceAdjusted,
         wethPriceAdjusted
       )
@@ -252,25 +204,12 @@ describe("FeeHandler", () => {
       maxPriceImpactFactorGmxUsdc + BigInt(FLOAT_PRECISION)
     );
 
-    // Validate that for V1 USDC/GMX after the batch size decrease returns maxFeeTokenAmountGmxUsdc
-    expect(
-      await feeHandler.getOutputAmount(
-        [ethers.constants.AddressZero],
-        usdc.address,
-        gmx.address,
-        1,
-        usdcPriceAdjusted,
-        gmxPriceAdjusted
-      )
-    ).to.eq(maxFeeTokenAmountGmxUsdc);
-
-    // Validate that for V2 USDC/GMX after the batch size decrease returns maxFeeTokenAmountGmxUsdc
+    // Validate that USDC/GMX after the batch size decrease returns maxFeeTokenAmountGmxUsdc
     expect(
       await feeHandler.getOutputAmount(
         [ethUsdMarket.marketToken],
         usdc.address,
         gmx.address,
-        2,
         usdcPriceAdjusted,
         gmxPriceAdjusted
       )
@@ -293,6 +232,8 @@ describe("FeeHandler", () => {
       chainlinkPriceFeedProvider.address
     );
 
+    // CLAIM TESTS
+
     // Set USDC/GMX params for the buyback function's withOraclePrices modifier
     const usdcGmxParams = {
       tokens: [usdc.address, gmx.address],
@@ -300,26 +241,25 @@ describe("FeeHandler", () => {
       data: ["0x", "0x"],
     };
 
-    // Validate that an error is thrown when availableFeeAmount = 0
+    // Validate that an error is thrown when availableFeeAmount = 0 (because no claim has been made yet)
     await expect(
       feeHandler.connect(user0).buyback(usdc.address, gmx.address, "18242500", usdcGmxParams)
     ).to.be.revertedWithCustomError(errorsContract, "AvailableFeeAmountIsZero");
 
-    // Validate that claimFees reverts if market = address(0) and version = 2
+    // Validate that claimFees reverts if market = address(0)
     await expect(
-      feeHandler.connect(user0).claimFees(ethers.constants.AddressZero, usdc.address, 2)
+      feeHandler.connect(user0).claimFees(ethers.constants.AddressZero, usdc.address)
     ).to.be.revertedWithCustomError(errorsContract, "EmptyClaimFeesMarket");
 
-    // Validate that user0 successfully claims V2 USDC fees from the ETH/USD market
-    await feeHandler.connect(user0).claimFees(ethUsdMarket.marketToken, usdc.address, 2);
-
-    // Validate that user0 successfully claims V1 USDC fees
-    await feeHandler.connect(user0).claimFees(ethers.constants.AddressZero, usdc.address, 1);
+    // Validate that user0 successfully claims USDC fees from the ETH/USD market
+    await feeHandler.connect(user0).claimFees(ethUsdMarket.marketToken, usdc.address);
 
     // Validate expected balances after claiming USDC fees
-    expect(await usdc.balanceOf(feeHandler.address)).eq(expandDecimals(65, 6)); // $25 + $40
-    expect(await dataStore.getUint(keys.buybackAvailableFeeAmountKey(usdc.address, gmx.address))).eq("30242500"); // $25 * 72.97% = 18.2425 + 12
-    expect(await dataStore.getUint(keys.buybackAvailableFeeAmountKey(usdc.address, wnt.address))).eq("34757500"); // $25 * 27.03% = 6.7575 + 28
+    expect(await usdc.balanceOf(feeHandler.address)).eq(expandDecimals(25, 6)); // $25
+    expect(await dataStore.getUint(keys.buybackAvailableFeeAmountKey(usdc.address, gmx.address))).eq("18242500"); // $25 * 72.97% = 18.2425
+    expect(await dataStore.getUint(keys.buybackAvailableFeeAmountKey(usdc.address, wnt.address))).eq("6757500"); // $25 * 27.03% = 6.7575
+
+    // BUYBACK TESTS
 
     // Mint GMX and WETH to user0 for testing the buyback function
     await gmx.mint(user0.address, expandDecimals(5, 17));
@@ -372,6 +312,8 @@ describe("FeeHandler", () => {
       BigInt(maxFeeTokenAmountGmxUsdc) + BigInt(maxFeeTokenAmountWethUsdc)
     );
 
+    // WHITHDRAW TESTS
+
     // Set user1 as the FEE_RECEIVER
     await dataStore.setAddress(keys.FEE_RECEIVER, user1.address);
 
@@ -391,64 +333,5 @@ describe("FeeHandler", () => {
     // Withdraw WETH from feeHandler
     await feeHandler.connect(user1).withdrawFees(wnt.address);
     expect(await wnt.balanceOf(user1.address)).eq(await dataStore.getUint(keys.buybackBatchAmountKey(wnt.address)));
-
-    // Validate that user0 succesfully claims V1 WETH fees
-    await feeHandler.connect(user0).claimFees(ethers.constants.AddressZero, wnt.address, 1);
-    expect(await wnt.balanceOf(feeHandler.address)).eq(expandDecimals(8, 15));
-
-    // Validate that WETH WithdrawableBuybackTokenAmount equals claimed WETH fees * (1 - gmx buyback factor)
-    const wethAvailableToWithdraw = applyFactor(
-      BigInt(expandDecimals(8, 15)),
-      BigInt(FLOAT_PRECISION) - BigInt(await dataStore.getUint(keys.buybackGmxFactorKey(1)))
-    );
-    expect(await dataStore.getUint(keys.withdrawableBuybackTokenAmountKey(wnt.address))).eq(wethAvailableToWithdraw);
-
-    // Set WETH/GMX params for the buyback function's withOraclePrices modifier
-    const wethGmxParams = {
-      tokens: [wnt.address, gmx.address],
-      providers: [chainlinkPriceFeedProvider.address, chainlinkPriceFeedProvider.address],
-      data: ["0x", "0x"],
-    };
-
-    // Calculate cumulative max price impact factor for GMX and WETH
-    const maxPriceImpactFactorGmxWeth =
-      BigInt(await dataStore.getUint(keys.buybackMaxPriceImpactFactorKey(gmx.address))) +
-      BigInt(await dataStore.getUint(keys.buybackMaxPriceImpactFactorKey(wnt.address)));
-
-    // Calculate the max fee token amount using max price impact factor for GMX and WETH
-    const maxFeeTokenAmountGmxWeth = applyFactor(
-      BigInt(expandDecimals(2, 15)),
-      maxPriceImpactFactorGmxWeth + BigInt(FLOAT_PRECISION)
-    );
-
-    // Mint and approve more GMX for user0 to test the buyback function and validate wethAvailableToWithdraw is correct
-    await gmx.mint(user0.address, expandDecimals(5, 17));
-    await gmx.connect(user0).approve(feeHandler.address, expandDecimals(5, 17));
-
-    // Buyback WETH fees with GMX
-    await feeHandler.connect(user0).buyback(wnt.address, gmx.address, expandDecimals(2, 15), wethGmxParams);
-    expect(await wnt.balanceOf(user0.address)).eq(maxFeeTokenAmountGmxWeth);
-
-    // Withdraw WETH from feeHandler
-    await feeHandler.connect(user1).withdrawFees(wnt.address);
-
-    // Validate that user1's WETH balance increased by wethAvailableToWithdraw after executing withdrawFees
-    expect(await wnt.balanceOf(user1.address)).eq(
-      BigInt(await dataStore.getUint(keys.buybackBatchAmountKey(wnt.address))) + BigInt(wethAvailableToWithdraw)
-    );
-
-    // Withdraw GMX from feeHandler
-    await feeHandler.connect(user1).withdrawFees(gmx.address);
-    expect(await gmx.balanceOf(user1.address)).eq(
-      BigInt(await dataStore.getUint(keys.buybackBatchAmountKey(gmx.address))) +
-        BigInt(await dataStore.getUint(keys.buybackBatchAmountKey(gmx.address)))
-    );
-
-    // Validate availableFeeAmount for USDC/GMX, USDC/WETH and WETH/GMX
-    expect(await dataStore.getUint(keys.buybackAvailableFeeAmountKey(usdc.address, gmx.address))).eq("20202500"); // $25 * 72.97% = 18.2425 + 12 - 10.04
-    expect(await dataStore.getUint(keys.buybackAvailableFeeAmountKey(usdc.address, wnt.address))).eq("29742500"); // $25 * 27.03% = 6.7575 + 28 - 5.015
-    expect(await dataStore.getUint(keys.buybackAvailableFeeAmountKey(wnt.address, gmx.address))).eq(
-      expandDecimals(8, 15) - wethAvailableToWithdraw - maxFeeTokenAmountGmxWeth
-    ); // 0.0008 WETH - 0.00056 WETH - 0.000201 WETH = 0.000039 WETH
   });
 });

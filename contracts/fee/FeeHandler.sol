@@ -10,8 +10,6 @@ import "../role/RoleModule.sol";
 import "../oracle/OracleModule.sol";
 import "../utils/BasicMulticall.sol";
 import "../fee/FeeUtils.sol";
-import "../v1/IVaultV1.sol";
-import "../v1/IVaultGovV1.sol";
 
 // @title FeeHandler
 contract FeeHandler is ReentrancyGuard, RoleModule, OracleModule, BasicMulticall {
@@ -24,12 +22,8 @@ contract FeeHandler is ReentrancyGuard, RoleModule, OracleModule, BasicMulticall
         uint256 wnt;
     }
 
-    uint256 public constant v1 = 1;
-    uint256 public constant v2 = 2;
-
     DataStore public immutable dataStore;
     EventEmitter public immutable eventEmitter;
-    IVaultV1 public immutable vaultV1;
     address public immutable gmx;
 
     constructor(
@@ -37,12 +31,10 @@ contract FeeHandler is ReentrancyGuard, RoleModule, OracleModule, BasicMulticall
         IOracle _oracle,
         DataStore _dataStore,
         EventEmitter _eventEmitter,
-        IVaultV1 _vaultV1,
         address _gmx
     ) RoleModule(_roleStore) OracleModule(_oracle) {
         dataStore = _dataStore;
         eventEmitter = _eventEmitter;
-        vaultV1 = _vaultV1;
         gmx = _gmx;
     }
 
@@ -64,21 +56,11 @@ contract FeeHandler is ReentrancyGuard, RoleModule, OracleModule, BasicMulticall
     // @dev claim fees in feeToken from the specified markets
     // @param market the market from which to claim fees
     // @param feeToken the fee tokens to claim from the market
-    function claimFees(address market, address feeToken, uint256 version) external nonReentrant {
-        uint256 feeAmount;
-        if (version == v1) {
-            uint256 balanceBefore = IERC20(feeToken).balanceOf(address(this));
-            IVaultGovV1(vaultV1.gov()).withdrawFees(address(vaultV1), feeToken, address(this));
-            uint256 balanceAfter = IERC20(feeToken).balanceOf(address(this));
-            feeAmount = balanceAfter - balanceBefore;
-        } else if (version == v2) {
-            _validateMarket(market);
-            feeAmount = FeeUtils.claimFees(dataStore, eventEmitter, market, feeToken, address(this));
-        } else {
-            revert Errors.InvalidVersion(version);
-        }
+    function claimFees(address market, address feeToken) external nonReentrant {
+        _validateMarket(market);
+        uint256 feeAmount = FeeUtils.claimFees(dataStore, eventEmitter, market, feeToken, address(this));
 
-        _incrementAvailableFeeAmounts(version, feeToken, feeAmount);
+        _incrementAvailableFeeAmounts(feeToken, feeAmount);
     }
 
     // @dev receive an amount in feeToken by depositing the batchSize amount of the buybackToken
@@ -119,29 +101,20 @@ contract FeeHandler is ReentrancyGuard, RoleModule, OracleModule, BasicMulticall
         address[] calldata markets,
         address feeToken,
         address buybackToken,
-        uint256 version,
         uint256 feeTokenPrice,
         uint256 buybackTokenPrice
     ) external view returns (uint256) {
         uint256 batchSize = _getBatchSize(buybackToken);
         _validateBuybackToken(batchSize, buybackToken);
 
-        uint256 feeAmount;
         uint256 availableFeeAmount = _getAvailableFeeAmount(feeToken, buybackToken);
-        FeeAmounts memory feeAmounts;
 
         for (uint256 i; i < markets.length; i++) {
-            if (version == v1) {
-                feeAmount = vaultV1.feeReserves(feeToken);
-            } else if (version == v2) {
-                address market = markets[i];
-                _validateMarket(market);
-                feeAmount = _getUint(Keys.claimableFeeAmountKey(market, feeToken));
-            } else {
-                revert Errors.InvalidVersion(version);
-            }
+            address market = markets[i];
+            _validateMarket(market);
+            uint256 feeAmount = _getUint(Keys.claimableFeeAmountKey(market, feeToken));
 
-            feeAmounts = _getFeeAmounts(version, feeAmount);
+            FeeAmounts memory feeAmounts = _getFeeAmounts(feeAmount);
             feeAmount = buybackToken == gmx ? feeAmounts.gmx : feeAmounts.wnt;
             availableFeeAmount = availableFeeAmount + feeAmount;
         }
@@ -193,10 +166,10 @@ contract FeeHandler is ReentrancyGuard, RoleModule, OracleModule, BasicMulticall
         dataStore.setUint(Keys.withdrawableBuybackTokenAmountKey(buybackToken), withdrawableAmount + amount);
     }
 
-    function _incrementAvailableFeeAmounts(uint256 version, address feeToken, uint256 feeAmount) internal {
+    function _incrementAvailableFeeAmounts(address feeToken, uint256 feeAmount) internal {
         address wnt = dataStore.getAddress(Keys.WNT);
 
-        FeeAmounts memory feeAmounts = _getFeeAmounts(version, feeAmount);
+        FeeAmounts memory feeAmounts = _getFeeAmounts(feeAmount);
 
         _incrementAvailableFeeAmount(feeToken, gmx, feeAmounts.gmx);
         _incrementAvailableFeeAmount(feeToken, wnt, feeAmounts.wnt);
@@ -232,8 +205,8 @@ contract FeeHandler is ReentrancyGuard, RoleModule, OracleModule, BasicMulticall
         return _getUint(Keys.buybackAvailableFeeAmountKey(feeToken, buybackToken));
     }
 
-    function _getFeeAmounts(uint256 version, uint256 feeAmount) internal view returns (FeeAmounts memory) {
-        uint256 gmxFactor = _getUint(Keys.buybackGmxFactorKey(version));
+    function _getFeeAmounts(uint256 feeAmount) internal view returns (FeeAmounts memory) {
+        uint256 gmxFactor = _getUint(Keys.BUYBACK_GMX_FACTOR);
         FeeAmounts memory feeAmounts;
 
         feeAmounts.gmx = Precision.applyFactor(feeAmount, gmxFactor);
@@ -256,13 +229,7 @@ contract FeeHandler is ReentrancyGuard, RoleModule, OracleModule, BasicMulticall
         uint256 feeTokenPrice = oracle.getPrimaryPrice(feeToken).max;
         uint256 buybackTokenPrice = oracle.getPrimaryPrice(buybackToken).min;
 
-        return _getMaxFeeTokenAmount(
-            feeToken,
-            buybackToken,
-            batchSize,
-            feeTokenPrice,
-            buybackTokenPrice
-        );
+        return _getMaxFeeTokenAmount(feeToken, buybackToken, batchSize, feeTokenPrice, buybackTokenPrice);
     }
 
     function _getMaxFeeTokenAmount(

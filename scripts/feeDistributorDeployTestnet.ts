@@ -442,7 +442,6 @@ async function deployContracts(): Promise<DeploymentResult> {
       contracts.oracle,
       contracts.dataStore,
       contracts.eventEmitter,
-      contracts.mockVaultV1,
       contracts.gmx
     );
     await feeHandler.deployed();

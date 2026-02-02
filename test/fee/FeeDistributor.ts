@@ -1312,7 +1312,7 @@ describe("FeeDistributor", function () {
     ]);
     const feeHandlerD = await deployContract(
       "FeeHandler",
-      [roleStore.address, oracle.address, dataStoreD.address, eventEmitter.address, mockVaultV1.address, gmxD.address],
+      [roleStore.address, oracle.address, dataStoreD.address, eventEmitter.address, gmxD.address],
       {
         libraries: {
           "contracts/market/MarketUtils.sol:MarketUtils": marketUtils.address,

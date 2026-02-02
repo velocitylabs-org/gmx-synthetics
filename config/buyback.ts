@@ -8,7 +8,6 @@ export type BuybackBatchAmount = {
 };
 
 export type BuybackGmxFactor = {
-  version: number;
   factor: BigNumberish;
 };
 
@@ -27,11 +26,6 @@ export default async function (hre: HardhatRuntimeEnvironment): Promise<BuybackC
 
   const defaultBuybackGmxFactor = [
     {
-      version: 1,
-      factor: percentageToFloat("30%"),
-    },
-    {
-      version: 2,
       factor: percentageToFloat("72.97%"), // 27 / 37
     },
   ];
