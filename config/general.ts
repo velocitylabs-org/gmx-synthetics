@@ -165,6 +165,12 @@ export default async function ({ network }: HardhatRuntimeEnvironment) {
   };
 
   const networkConfig = {
+    localhost: {
+      maxAutoCancelOrders: 11,
+      maxTotalCallbackGasLimitForAutoCancelOrders: 10_000_000,
+      claimableCollateralDelay: 24 * 60 * 60,
+      chainlinkPaymentToken: ethers.constants.AddressZero,
+    },
     arbitrumGoerli: {},
     arbitrumSepolia: {
       maxAutoCancelOrders: 11,

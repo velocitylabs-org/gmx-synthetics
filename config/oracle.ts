@@ -37,6 +37,7 @@ export default async function (hre: HardhatRuntimeEnvironment): Promise<OracleCo
       maxOracleTimestampRange,
       maxRefPriceDeviationFactor: decimalToFloat(5, 1), // 50%
       edgeOracleSigner: "0x1C498E2FE362e489A5Aac71690f9121914e0d55e",
+      chainlinkPaymentToken: "0x0000000000000000000000000000000000000000",
     },
 
     hardhat: {

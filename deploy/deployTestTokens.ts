@@ -1,9 +1,6 @@
 import { setBalance } from "@nomicfoundation/hardhat-network-helpers";
-import { HardhatRuntimeEnvironment } from "hardhat/types";
-import { TokenConfig } from "../config/tokens";
-
-import * as keys from "../utils/keys";
-import { setAddressIfDifferent, setUintIfDifferent } from "../utils/dataStore";
+import type { HardhatRuntimeEnvironment } from "hardhat/types";
+import type { TokenConfig } from "../config/tokens";
 import { expandDecimals } from "../utils/math";
 
 const func = async ({ getNamedAccounts, deployments, gmx, network }: HardhatRuntimeEnvironment) => {
@@ -49,6 +46,7 @@ const func = async ({ getNamedAccounts, deployments, gmx, network }: HardhatRunt
     }
   }
 
+  /*
   for (const [tokenSymbol, token] of Object.entries(tokens)) {
     if (token.synthetic) {
       continue;
@@ -60,12 +58,13 @@ const func = async ({ getNamedAccounts, deployments, gmx, network }: HardhatRunt
       `${tokenSymbol} transfer gas limit`
     );
   }
+  */
 
   const wrappedAddress = Object.values(tokens).find((token) => token.wrappedNative)?.address;
   if (!wrappedAddress) {
     throw new Error("No wrapped native token found");
   }
-  await setAddressIfDifferent(keys.WNT, wrappedAddress, "WNT");
+  // await setAddressIfDifferent(keys.WNT, wrappedAddress, "WNT");
 };
 
 func.tags = ["Tokens"];
