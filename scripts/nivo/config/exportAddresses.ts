@@ -34,6 +34,11 @@ interface ExportedAddresses {
     dataStore: string;
     reader: string;
     roleStore: string;
+    orderHandler: string;
+    depositHandler: string;
+    chainlinkPriceFeedProvider: string;
+    eventEmitter: string;
+    oracle: string;
     mockPriceFeed: string;
     weth: string;
     usdt: string;
@@ -60,6 +65,11 @@ async function main() {
     "DataStore",
     "Reader",
     "RoleStore",
+    "OrderHandler",
+    "DepositHandler",
+    "ChainlinkPriceFeedProvider",
+    "EventEmitter",
+    "Oracle",
     "MockPriceFeed",
     "WETH",
     "USDT",
@@ -154,6 +164,11 @@ async function main() {
       dataStore: addresses.DataStore || "",
       reader: addresses.Reader || "",
       roleStore: addresses.RoleStore || "",
+      orderHandler: addresses.OrderHandler || "",
+      depositHandler: addresses.DepositHandler || "",
+      chainlinkPriceFeedProvider: addresses.ChainlinkPriceFeedProvider || "",
+      eventEmitter: addresses.EventEmitter || "",
+      oracle: addresses.Oracle || "",
       mockPriceFeed: addresses.MockPriceFeed || "",
       weth: addresses.WETH || "",
       usdt: addresses.USDT || "",
