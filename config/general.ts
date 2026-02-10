@@ -276,6 +276,7 @@ export default async function ({ network }: HardhatRuntimeEnvironment) {
     botanix: {
       positionFeeReceiverFactor: decimalToFloat(50, 2), // 50%
     },
+    localhost: {},
   }[network.name];
 
   if (!networkConfig) {

@@ -19,7 +19,7 @@ const func = createDeployFunction({
     let gmxAddress = feeDistributorConfig.gmx;
     let esGmxAddress = feeDistributorConfig.esGmx;
     let wntAddress = feeDistributorConfig.wnt;
-    if (network.name === "hardhat") {
+    if (network.name === "hardhat" || network.name === "localhost") {
       const tokens = await hre.gmx.getTokens();
       gmxAddress = tokens.GMX.address;
       esGmxAddress = tokens.ESGMX.address;
@@ -53,7 +53,7 @@ const func = createDeployFunction({
 });
 
 func.skip = async (hre) => {
-  if (["botanix", "avalancheFuji", "arbitrumSepolia"].includes(hre.network.name)) {
+  if (["botanix", "avalancheFuji", "arbitrumSepolia", "localhost"].includes(hre.network.name)) {
     return true;
   }
 
