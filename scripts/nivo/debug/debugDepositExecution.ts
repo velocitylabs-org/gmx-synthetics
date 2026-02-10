@@ -5,7 +5,7 @@
  * to decode the exact cancellation reason if the deposit fails.
  */
 import { deployments, ethers } from "hardhat";
-import { formatParsedError, parseError } from "../utils/error";
+import { formatParsedError, parseError } from "../../../utils/error";
 
 async function main() {
   console.log("╔═══════════════════════════════════════════════════════════════╗");
@@ -46,7 +46,7 @@ async function main() {
   }
 
   // Get deposit keys
-  const { hashString } = await import("../utils/hash");
+  const { hashString } = await import("../../../utils/hash");
   const DEPOSIT_LIST = hashString("DEPOSIT_LIST");
   const depositCount = await dataStore.getBytes32Count(DEPOSIT_LIST);
   console.log("\nPending deposits:", depositCount.toString());

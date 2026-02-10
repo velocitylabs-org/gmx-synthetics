@@ -16,7 +16,7 @@ const func = createDeployFunction({
 });
 
 func.skip = async ({ network }) => {
-  return network.name !== "hardhat";
+  return network.name !== "hardhat" && network.name !== "localhost";
 };
 
 export default func;

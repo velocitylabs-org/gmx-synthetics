@@ -1,10 +1,10 @@
-import { HardhatRuntimeEnvironment } from "hardhat/types";
-import * as keys from "../utils/keys";
-import { setBoolIfDifferent, setBytes32IfDifferent, setUintIfDifferent } from "../utils/dataStore";
-import { DEFAULT_MARKET_TYPE, getMarketTokenAddresses, getMarketKey, getOnchainMarkets } from "../utils/market";
+import type { HardhatRuntimeEnvironment } from "hardhat/types";
 import { updateMarketConfig } from "../scripts/updateMarketConfigUtils";
+import { setBoolIfDifferent, setBytes32IfDifferent, setUintIfDifferent } from "../utils/dataStore";
+import * as keys from "../utils/keys";
+import { DEFAULT_MARKET_TYPE, getMarketKey, getMarketTokenAddresses, getOnchainMarkets } from "../utils/market";
 
-const func = async ({ deployments, getNamedAccounts, gmx }: HardhatRuntimeEnvironment) => {
+const func = async ({ deployments, getNamedAccounts, gmx, network }: HardhatRuntimeEnvironment) => {
   const { execute, get, read, log } = deployments;
 
   if (process.env.SKIP_NEW_MARKETS) {
@@ -102,8 +102,10 @@ const func = async ({ deployments, getNamedAccounts, gmx }: HardhatRuntimeEnviro
     }
   }
 
-  if (!gmx.isExistingMainnetDeployment) {
+  if (!gmx.isExistingMainnetDeployment && network.name !== "localhost") {
     await updateMarketConfig({ write: true });
+  } else if (network.name === "localhost") {
+    log("SKIP: updateMarketConfig on localhost (run 'npm run local:update-market-config' separately)");
   }
 };
 
@@ -118,5 +120,5 @@ func.skip = async ({ gmx, network }) => {
 };
 func.runAtTheEnd = true;
 func.tags = ["Markets"];
-func.dependencies = ["MarketFactory", "Tokens", "DataStore", "Config", "Multicall", "Roles"];
+func.dependencies = ["MarketFactory", "Tokens", "DataStore", "Config", "Multicall", "Roles", "Reader"];
 export default func;

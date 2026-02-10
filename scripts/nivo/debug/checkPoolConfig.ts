@@ -1,8 +1,10 @@
 /**
  * Check Pool Configuration
+ *
+ * Dynamically reads markets from the Reader contract so addresses are always current.
  */
 import { deployments, ethers } from "hardhat";
-import * as keys from "../utils/keys";
+import * as keys from "../../../utils/keys";
 
 async function main() {
   console.log("=== Checking Pool Configuration ===\n");
@@ -12,12 +14,30 @@ async function main() {
   // Get the Reader contract which has access to MarketUtils
   const reader = await ethers.getContractAt("Reader", (await deployments.get("Reader")).address);
 
-  // Get market addresses
-  const market = "0x763779b6c23e29C02d675eA0cE6CBFf8DCc328e6"; // BRL/USD
-  const longToken = "0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9"; // USDT
+  // Get markets dynamically
+  const allMarkets = await reader.getMarkets(dataStore.address, 0, 100);
+  if (allMarkets.length === 0) {
+    console.log("No markets deployed.");
+    return;
+  }
 
-  console.log("Market:", market);
-  console.log("Token:", longToken);
+  console.log("Deployed markets:");
+  for (let i = 0; i < allMarkets.length; i++) {
+    let name = allMarkets[i].marketToken;
+    try {
+      const token = await ethers.getContractAt("MintableToken", allMarkets[i].indexToken);
+      name = `${await token.symbol()}/USD`;
+    } catch { /* ignore */ }
+    console.log(`  [${i}] ${name}: ${allMarkets[i].marketToken}`);
+  }
+
+  const marketIdx = process.env.MARKET_INDEX ? parseInt(process.env.MARKET_INDEX) : 0;
+  const selected = allMarkets[marketIdx];
+  const market = selected.marketToken;
+  const longToken = selected.longToken;
+
+  console.log("\nSelected market:", market);
+  console.log("Long token:", longToken);
 
   // Use the official GMX keys library function
   console.log("\n=== Using Official GMX Keys Library ===");
@@ -31,24 +51,13 @@ async function main() {
   console.log("Value at official key:", officialValue.toString());
   console.log("Value in USD:", ethers.utils.formatUnits(officialValue, 30));
 
-  // Get market info to see what token is actually used
-  const marketInfo = await reader.getMarket(dataStore.address, market);
+  // Get detailed market info from Reader
+  const detailedMarket = await reader.getMarket(dataStore.address, market);
   console.log("\n=== Market Info ===");
-  console.log("  Market Token:", marketInfo.marketToken);
-  console.log("  Index Token:", marketInfo.indexToken);
-  console.log("  Long Token:", marketInfo.longToken);
-  console.log("  Short Token:", marketInfo.shortToken);
-
-  // Use the actual market longToken from chain
-  const actualLongToken = marketInfo.longToken;
-  console.log("\nUsing actual long token from market:", actualLongToken);
-
-  const keyWithActualToken = keys.maxPoolUsdForDepositKey(market, actualLongToken);
-  console.log("Key with actual token:", keyWithActualToken);
-
-  const valueWithActualToken = await dataStore.getUint(keyWithActualToken);
-  console.log("Value at key with actual token:", valueWithActualToken.toString());
-  console.log("Value in USD:", ethers.utils.formatUnits(valueWithActualToken, 30));
+  console.log("  Market Token:", detailedMarket.marketToken);
+  console.log("  Index Token:", detailedMarket.indexToken);
+  console.log("  Long Token:", detailedMarket.longToken);
+  console.log("  Short Token:", detailedMarket.shortToken);
 
   // Check MAX_POOL_AMOUNT as well
   const maxPoolAmountKey = keys.maxPoolAmountKey(market, longToken);

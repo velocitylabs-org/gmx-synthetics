@@ -88,7 +88,7 @@ const func = async ({ deployments, getNamedAccounts, gmx }: HardhatRuntimeEnviro
 };
 
 func.skip = async ({ network }) => {
-  return network.name !== "hardhat";
+  return network.name !== "hardhat" && network.name !== "localhost";
 };
 func.runAtTheEnd = true;
 func.tags = ["Glv"];

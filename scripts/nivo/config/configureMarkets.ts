@@ -1,0 +1,359 @@
+/**
+ * Configure Forex Markets
+ *
+ * Applies ALL market configuration needed for local development to the DataStore.
+ * This is the single "configure everything" script for Nivo on localhost.
+ *
+ * It handles:
+ *   1. Deploying MockPriceFeed contracts for each token (if missing)
+ *   2. Setting price feed addresses, multipliers, and heartbeat in DataStore
+ *   3. Enabling ChainlinkPriceFeedProvider as oracle provider for tokens
+ *   4. Setting pool limits (MAX_POOL_USD_FOR_DEPOSIT, MAX_POOL_AMOUNT, etc.)
+ *   5. Setting collateral and open interest limits
+ *
+ * On testnet/mainnet, most of this is handled by deployment scripts.
+ * On localhost, this script ensures all config is applied after deployment.
+ *
+ * Usage: npm run local:configure-markets
+ */
+import { deployments, ethers } from "hardhat";
+import { hashData, hashString } from "../../../utils/hash";
+
+async function main() {
+  console.log("╔═══════════════════════════════════════════════════════════════╗");
+  console.log("║           CONFIGURE FOREX MARKETS                             ║");
+  console.log("╚═══════════════════════════════════════════════════════════════╝\n");
+
+  const [signer] = await ethers.getSigners();
+  console.log("Signer:", signer.address);
+
+  // Get contracts
+  const dataStoreDeployment = await deployments.get("DataStore");
+  const readerDeployment = await deployments.get("Reader");
+
+  const dataStore = await ethers.getContractAt("DataStore", dataStoreDeployment.address);
+  const reader = await ethers.getContractAt("Reader", readerDeployment.address);
+
+  console.log("DataStore:", dataStoreDeployment.address);
+  console.log("Reader:", readerDeployment.address);
+
+  // Get all markets up front (needed by multiple steps)
+  const markets = await reader.getMarkets(dataStoreDeployment.address, 0, 100);
+  console.log(`Found ${markets.length} markets`);
+
+  // Collect all unique token addresses across all markets
+  const allTokens = new Set<string>();
+  for (const market of markets) {
+    for (const token of [market.indexToken, market.longToken, market.shortToken]) {
+      if (token !== ethers.constants.AddressZero) {
+        allTokens.add(token);
+      }
+    }
+  }
+  console.log(`Unique tokens across markets: ${allTokens.size}`);
+
+  // =============================================
+  // STEP 1: Deploy price feeds for tokens that don't have them
+  // =============================================
+  console.log("\n=== Step 1: Deploy & Configure Price Feeds ===\n");
+
+  const PRICE_FEED = hashString("PRICE_FEED");
+  const PRICE_FEED_MULTIPLIER = hashString("PRICE_FEED_MULTIPLIER");
+  const PRICE_FEED_HEARTBEAT_DURATION = hashString("PRICE_FEED_HEARTBEAT_DURATION");
+
+  const MockPriceFeedFactory = await ethers.getContractFactory("MockPriceFeed");
+
+  for (const tokenAddr of allTokens) {
+    const priceFeedKeyHash = hashData(["bytes32", "address"], [PRICE_FEED, tokenAddr]);
+    const currentFeed = await dataStore.getAddress(priceFeedKeyHash);
+
+    if (currentFeed !== ethers.constants.AddressZero) {
+      console.log(`  ✅ Price feed already set for ${tokenAddr}: ${currentFeed}`);
+      continue;
+    }
+
+    // Get token decimals to determine price and multiplier
+    const tokenContract = await ethers.getContractAt("MintableToken", tokenAddr);
+    let tokenDecimals: number;
+    try {
+      tokenDecimals = await tokenContract.decimals();
+    } catch {
+      tokenDecimals = 18; // default for synthetic tokens
+    }
+
+    // Stablecoins (6 decimals) get $1.00, forex/synthetic tokens (18 decimals) get ~$0.18
+    const priceFeedDecimals = 8;
+    const initPrice = tokenDecimals === 6 ? "100000000" : "18000000";
+
+    console.log(`  Deploying MockPriceFeed for ${tokenAddr} (decimals: ${tokenDecimals})...`);
+    const feed = await MockPriceFeedFactory.deploy();
+    await feed.deployed();
+    await (await feed.setAnswer(initPrice)).wait();
+    console.log(`    Feed deployed at: ${feed.address} (initPrice: ${initPrice})`);
+
+    // Set price feed address in DataStore
+    await (await dataStore.setAddress(priceFeedKeyHash, feed.address)).wait();
+
+    // Set multiplier: 10^(60 - priceFeedDecimals - tokenDecimals)
+    const multiplierKeyHash = hashData(["bytes32", "address"], [PRICE_FEED_MULTIPLIER, tokenAddr]);
+    const multiplier = ethers.BigNumber.from(10).pow(60 - priceFeedDecimals - tokenDecimals);
+    await (await dataStore.setUint(multiplierKeyHash, multiplier)).wait();
+
+    // Set heartbeat duration: 24 hours
+    const heartbeatKeyHash = hashData(["bytes32", "address"], [PRICE_FEED_HEARTBEAT_DURATION, tokenAddr]);
+    await (await dataStore.setUint(heartbeatKeyHash, 86400)).wait();
+
+    console.log(
+      `    ✅ Price feed configured (multiplier: 10^${60 - priceFeedDecimals - tokenDecimals}, heartbeat: 86400s)`
+    );
+  }
+
+  // =============================================
+  // STEP 2: Enable ChainlinkPriceFeedProvider for all forex tokens
+  // =============================================
+  console.log("\n=== Step 2: Configure Oracle Providers ===\n");
+
+  let chainlinkPriceFeedProviderAddress: string;
+  try {
+    const chainlinkPriceFeedProviderDeployment = await deployments.get("ChainlinkPriceFeedProvider");
+    chainlinkPriceFeedProviderAddress = chainlinkPriceFeedProviderDeployment.address;
+    console.log("ChainlinkPriceFeedProvider:", chainlinkPriceFeedProviderAddress);
+  } catch {
+    console.log("⚠️ ChainlinkPriceFeedProvider not deployed. Skipping oracle provider config.");
+    console.log("   This is expected if Oracle deployment hasn't run yet.");
+    return;
+  }
+
+  // Get the Oracle contract address - needed for the provider key
+  const oracleDeployment = await deployments.get("Oracle");
+  console.log("Oracle:", oracleDeployment.address);
+
+  // Enable ChainlinkPriceFeedProvider in the Oracle
+  const IS_ORACLE_PROVIDER_ENABLED = hashString("IS_ORACLE_PROVIDER_ENABLED");
+  const isEnabledKey = hashData(
+    ["bytes32", "address"],
+    [IS_ORACLE_PROVIDER_ENABLED, chainlinkPriceFeedProviderAddress]
+  );
+
+  const isEnabled = await dataStore.getBool(isEnabledKey);
+  if (!isEnabled) {
+    console.log("Enabling ChainlinkPriceFeedProvider...");
+    await (await dataStore.setBool(isEnabledKey, true)).wait();
+    console.log("✅ ChainlinkPriceFeedProvider enabled");
+  } else {
+    console.log("✅ ChainlinkPriceFeedProvider already enabled");
+  }
+
+  // Set oracle provider for each token in each market
+  const ORACLE_PROVIDER_FOR_TOKEN = hashString("ORACLE_PROVIDER_FOR_TOKEN");
+  const configuredTokens = new Set<string>();
+
+  for (const market of markets) {
+    const tokens = [market.indexToken, market.longToken, market.shortToken];
+
+    for (const token of tokens) {
+      if (token === ethers.constants.AddressZero || configuredTokens.has(token.toLowerCase())) {
+        continue;
+      }
+
+      // Key must include Oracle address: hash(ORACLE_PROVIDER_FOR_TOKEN, oracleAddr, tokenAddr)
+      // This matches the Solidity: Keys.oracleProviderForTokenKey(address(this), token)
+      const providerKey = hashData(
+        ["bytes32", "address", "address"],
+        [ORACLE_PROVIDER_FOR_TOKEN, oracleDeployment.address, token]
+      );
+      const currentProvider = await dataStore.getAddress(providerKey);
+
+      if (currentProvider.toLowerCase() !== chainlinkPriceFeedProviderAddress.toLowerCase()) {
+        console.log(`  Setting oracle provider for ${token} (Oracle: ${oracleDeployment.address})...`);
+        await (await dataStore.setAddress(providerKey, chainlinkPriceFeedProviderAddress)).wait();
+        console.log(`  ✅ Oracle provider set`);
+      } else {
+        console.log(`  ✅ Oracle provider already set for ${token}`);
+      }
+
+      configuredTokens.add(token.toLowerCase());
+    }
+  }
+
+  // =============================================
+  // STEP 3: Set market configuration values
+  // =============================================
+  console.log("\n=== Step 3: Set Market Configuration ===\n");
+
+  // Check REQUEST_EXPIRATION_TIME
+  const REQUEST_EXPIRATION_TIME = hashString("REQUEST_EXPIRATION_TIME");
+  const requestExpiration = await dataStore.getUint(REQUEST_EXPIRATION_TIME);
+  console.log("REQUEST_EXPIRATION_TIME:", requestExpiration.toString(), "seconds");
+
+  // For local development, use a very long expiration (24 hours) so requests
+  // don't expire while debugging. On testnet/mainnet this would be much shorter.
+  const targetExpiration = 86400; // 24 hours
+  if (requestExpiration.lt(targetExpiration)) {
+    console.log(`  ⚠️ REQUEST_EXPIRATION_TIME is ${requestExpiration.toString()}s - too short for local dev`);
+    console.log(`  Setting to ${targetExpiration} seconds (24 hours)...`);
+    await (await dataStore.setUint(REQUEST_EXPIRATION_TIME, targetExpiration)).wait();
+    console.log(`  ✅ Set to ${targetExpiration} seconds`);
+  }
+
+  // Market config values from config/markets.ts nivoBaseMarketConfig
+  // These must be set in DataStore for deposits, withdrawals, and orders to work
+  const MAX_POOL_USD_FOR_DEPOSIT = hashString("MAX_POOL_USD_FOR_DEPOSIT");
+  const MAX_POOL_AMOUNT = hashString("MAX_POOL_AMOUNT");
+  const MAX_COLLATERAL_SUM = hashString("MAX_COLLATERAL_SUM");
+  const MAX_OPEN_INTEREST = hashString("MAX_OPEN_INTEREST");
+
+  // Values matching config/markets.ts nivoBaseMarketConfig
+  const maxPoolUsdForDeposit = ethers.utils.parseUnits("6000000", 30); // $6M USD (30 decimals)
+  const maxPoolAmount = ethers.utils.parseUnits("5000000", 6); // 5M USDT (6 decimals)
+  const maxCollateralSum = ethers.utils.parseUnits("10000000", 6); // 10M USDT (6 decimals)
+  const maxOpenInterest = ethers.utils.parseUnits("2000000", 30); // $2M USD (30 decimals)
+
+  for (const market of markets) {
+    console.log(`\nConfiguring market: ${market.marketToken}`);
+    const tokenSet = new Set<string>();
+    for (const token of [market.longToken, market.shortToken]) {
+      if (token === ethers.constants.AddressZero || tokenSet.has(token.toLowerCase())) continue;
+      tokenSet.add(token.toLowerCase());
+
+      // MAX_POOL_USD_FOR_DEPOSIT
+      const maxPoolUsdKey = hashData(
+        ["bytes32", "address", "address"],
+        [MAX_POOL_USD_FOR_DEPOSIT, market.marketToken, token]
+      );
+      const currentMaxPoolUsd = await dataStore.getUint(maxPoolUsdKey);
+      if (currentMaxPoolUsd.eq(0)) {
+        console.log(`  Setting MAX_POOL_USD_FOR_DEPOSIT for ${token}...`);
+        await (await dataStore.setUint(maxPoolUsdKey, maxPoolUsdForDeposit)).wait();
+        console.log(`  ✅ Set to $6,000,000`);
+      } else {
+        console.log(
+          `  ✅ MAX_POOL_USD_FOR_DEPOSIT already set: ${ethers.utils.formatUnits(currentMaxPoolUsd, 30)} USD`
+        );
+      }
+
+      // MAX_POOL_AMOUNT
+      const maxPoolAmountKey = hashData(
+        ["bytes32", "address", "address"],
+        [MAX_POOL_AMOUNT, market.marketToken, token]
+      );
+      const currentMaxPoolAmount = await dataStore.getUint(maxPoolAmountKey);
+      if (currentMaxPoolAmount.eq(0)) {
+        console.log(`  Setting MAX_POOL_AMOUNT for ${token}...`);
+        await (await dataStore.setUint(maxPoolAmountKey, maxPoolAmount)).wait();
+        console.log(`  ✅ Set to 5,000,000 USDT`);
+      } else {
+        console.log(`  ✅ MAX_POOL_AMOUNT already set: ${ethers.utils.formatUnits(currentMaxPoolAmount, 6)} USDT`);
+      }
+
+      // MAX_COLLATERAL_SUM (for both long and short sides)
+      for (const isLong of [true, false]) {
+        const maxCollKey = hashData(
+          ["bytes32", "address", "address", "bool"],
+          [MAX_COLLATERAL_SUM, market.marketToken, token, isLong]
+        );
+        const currentMaxColl = await dataStore.getUint(maxCollKey);
+        if (currentMaxColl.eq(0)) {
+          console.log(`  Setting MAX_COLLATERAL_SUM (${isLong ? "long" : "short"} side) for ${token}...`);
+          await (await dataStore.setUint(maxCollKey, maxCollateralSum)).wait();
+          console.log(`  ✅ Set to 10,000,000 USDT`);
+        } else {
+          console.log(
+            `  ✅ MAX_COLLATERAL_SUM (${isLong ? "long" : "short"}) already set: ${ethers.utils.formatUnits(
+              currentMaxColl,
+              6
+            )} USDT`
+          );
+        }
+      }
+    }
+
+    // MAX_OPEN_INTEREST (per side: long and short)
+    for (const isLong of [true, false]) {
+      const maxOIKey = hashData(["bytes32", "address", "bool"], [MAX_OPEN_INTEREST, market.marketToken, isLong]);
+      const currentMaxOI = await dataStore.getUint(maxOIKey);
+      if (currentMaxOI.eq(0)) {
+        console.log(`  Setting MAX_OPEN_INTEREST (${isLong ? "long" : "short"})...`);
+        await (await dataStore.setUint(maxOIKey, maxOpenInterest)).wait();
+        console.log(`  ✅ Set to $2,000,000`);
+      } else {
+        console.log(
+          `  ✅ MAX_OPEN_INTEREST (${isLong ? "long" : "short"}) already set: ${ethers.utils.formatUnits(
+            currentMaxOI,
+            30
+          )} USD`
+        );
+      }
+    }
+  }
+
+  // =============================================
+  // STEP 4: Verify configuration
+  // =============================================
+  console.log("\n=== Step 4: Verify Configuration ===\n");
+
+  if (markets.length > 0) {
+    const sampleMarket = markets[0];
+    console.log(`Sample market: ${sampleMarket.marketToken}`);
+
+    const verifyMaxPoolUsdKey = hashData(
+      ["bytes32", "address", "address"],
+      [MAX_POOL_USD_FOR_DEPOSIT, sampleMarket.marketToken, sampleMarket.longToken]
+    );
+    const verifyMaxPoolUsd = await dataStore.getUint(verifyMaxPoolUsdKey);
+    console.log("  MAX_POOL_USD_FOR_DEPOSIT:", ethers.utils.formatUnits(verifyMaxPoolUsd, 30), "USD");
+
+    const verifyMaxPoolAmountKey = hashData(
+      ["bytes32", "address", "address"],
+      [MAX_POOL_AMOUNT, sampleMarket.marketToken, sampleMarket.longToken]
+    );
+    const verifyMaxPoolAmount = await dataStore.getUint(verifyMaxPoolAmountKey);
+    console.log("  MAX_POOL_AMOUNT:", ethers.utils.formatUnits(verifyMaxPoolAmount, 6), "USDT");
+
+    const verifyMaxCollKey = hashData(
+      ["bytes32", "address", "address", "bool"],
+      [MAX_COLLATERAL_SUM, sampleMarket.marketToken, sampleMarket.longToken, true]
+    );
+    const verifyMaxColl = await dataStore.getUint(verifyMaxCollKey);
+    console.log("  MAX_COLLATERAL_SUM (long):", ethers.utils.formatUnits(verifyMaxColl, 6), "USDT");
+
+    const verifyMaxOIKey = hashData(
+      ["bytes32", "address", "bool"],
+      [MAX_OPEN_INTEREST, sampleMarket.marketToken, true]
+    );
+    const verifyMaxOI = await dataStore.getUint(verifyMaxOIKey);
+    console.log("  MAX_OPEN_INTEREST (long):", ethers.utils.formatUnits(verifyMaxOI, 30), "USD");
+
+    const providerKey = hashData(
+      ["bytes32", "address", "address"],
+      [ORACLE_PROVIDER_FOR_TOKEN, oracleDeployment.address, sampleMarket.longToken]
+    );
+    const provider = await dataStore.getAddress(providerKey);
+    console.log("  Oracle provider for long token:", provider);
+
+    const verifyPriceFeedKey = hashData(["bytes32", "address"], [PRICE_FEED, sampleMarket.longToken]);
+    const verifyPriceFeed = await dataStore.getAddress(verifyPriceFeedKey);
+    console.log("  Price feed for long token:", verifyPriceFeed);
+
+    const verifyIndexPriceFeedKey = hashData(["bytes32", "address"], [PRICE_FEED, sampleMarket.indexToken]);
+    const verifyIndexPriceFeed = await dataStore.getAddress(verifyIndexPriceFeedKey);
+    console.log("  Price feed for index token:", verifyIndexPriceFeed);
+  }
+
+  console.log("\n╔═══════════════════════════════════════════════════════════════╗");
+  console.log("║           CONFIGURATION COMPLETE                              ║");
+  console.log("╚═══════════════════════════════════════════════════════════════╝\n");
+
+  console.log("Next steps:");
+  console.log("1. Add liquidity:    npm run local:add-liquidity");
+  console.log("2. Execute deposits: npm run local:execute-deposits");
+  console.log("3. Create orders via the frontend or: npm run local:simulate-order");
+  console.log("4. Execute orders:   npm run local:execute-orders");
+}
+
+main()
+  .then(() => process.exit(0))
+  .catch((error) => {
+    console.error(error);
+    process.exit(1);
+  });

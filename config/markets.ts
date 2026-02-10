@@ -479,6 +479,8 @@ const nivoBaseMarketConfig: Partial<BaseMarketConfig> = {
   maxOpenInterest: decimalToFloat(2_000_000),
 
   maxPoolUsdForDeposit: decimalToFloat(6_000_000),
+
+  maxCollateralSum: expandDecimals(10_000_000, 6), // 10M USDT (6 decimals)
 };
 
 const nivoFundingRateConfig: FundingRateConfig = {
@@ -531,8 +533,6 @@ const getNivoMarketsLocalConfig = (indexToken: string, collateralToken = "USDT")
   return {
     tokens: { indexToken: indexToken, longToken: collateralToken, shortToken: collateralToken },
     virtualTokenIdForIndexToken: hashString(`PERP:${indexToken}/USD`), // To be confirmed: Order FX/USD vs USD/FX
-
-    maxCollateralSum: expandDecimals(10_000_000_000_000, 18), // 10 trillion with 18 decimals
 
     ...nivoBaseMarketConfig,
     ...nivoFundingRateConfig,

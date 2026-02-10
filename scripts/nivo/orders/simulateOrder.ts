@@ -202,16 +202,28 @@ async function main() {
 
   const _dataStore = await ethers.getContractAt("DataStore", dataStoreAddress);
 
-  // Use the BRL/USD forex market (uses USDT as collateral)
-  // Created by deployAndConfigureMarkets.ts from config/markets.ts
-  const marketAddress = "0x763779b6c23e29C02d675eA0cE6CBFf8DCc328e6"; // BRL/USD market
-  console.log("Using BRL/USD market at:", marketAddress);
-
-  // Get market count via Reader
+  // Dynamically fetch markets from Reader
   const readerDeployment = await deployments.get("Reader");
   const reader = await ethers.getContractAt("Reader", readerDeployment.address);
   const markets = await reader.getMarkets(dataStoreAddress, 0, 100);
   console.log("Total markets:", markets.length);
+
+  if (markets.length === 0) {
+    console.log("❌ No markets deployed. Run: npm run local:deploy:markets");
+    process.exit(1);
+  }
+
+  // Select first market or use MARKET_INDEX env var
+  const marketIdx = process.env.MARKET_INDEX ? parseInt(process.env.MARKET_INDEX) : 0;
+  const selectedMarket = markets[marketIdx];
+  const marketAddress = selectedMarket.marketToken;
+
+  let marketName = marketAddress;
+  try {
+    const token = await ethers.getContractAt("MintableToken", selectedMarket.indexToken);
+    marketName = `${await token.symbol()}/USD`;
+  } catch { /* ignore */ }
+  console.log(`Using market: ${marketName} at ${marketAddress}`);
 
   // =============================================
   // PHASE 5: Prepare and Execute Order
@@ -253,7 +265,7 @@ async function main() {
   };
 
   console.log("Order Parameters:");
-  console.log("  Market:", params.addresses.market, "(BRL/USD)");
+  console.log("  Market:", params.addresses.market, `(${marketName})`);
   console.log("  Collateral:", params.addresses.initialCollateralToken, "(USDT)");
   console.log("  Size (USD):", ethers.utils.formatUnits(params.numbers.sizeDeltaUsd, 30));
   console.log("  Collateral Amount:", ethers.utils.formatUnits(params.numbers.initialCollateralDeltaAmount, 6), "USDT");

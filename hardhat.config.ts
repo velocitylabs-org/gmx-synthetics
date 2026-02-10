@@ -1,11 +1,11 @@
 import dotenv from "dotenv";
+
 dotenv.config();
 
-import path from "path";
-import fs from "fs";
 import { ethers } from "ethers";
-
-import { HardhatUserConfig, task, types } from "hardhat/config";
+import fs from "node:fs";
+import { type HardhatUserConfig, task, types } from "hardhat/config";
+import path from "node:path";
 import "@nomicfoundation/hardhat-verify";
 import "hardhat-contract-sizer";
 import "solidity-coverage";
@@ -23,16 +23,16 @@ import "./config";
 
 // add test helper methods
 import "./utils/test";
+import { TASK_VERIFY } from "@nomicfoundation/hardhat-verify/internal/task-names";
+import { TASK_FLATTEN_GET_DEPENDENCY_GRAPH } from "hardhat/builtin-tasks/task-names";
+import type { DependencyGraph } from "hardhat/types";
+import { collectDeployments } from "./scripts/collectDeployments";
+import { checkContractsSizing } from "./scripts/contractSizes";
+import { generateDeploymentDocs } from "./scripts/generateDeploymentDocs";
 import { updateGlvConfig } from "./scripts/updateGlvConfigUtils";
 import { updateMarketConfig } from "./scripts/updateMarketConfigUtils";
-import { collectDeployments } from "./scripts/collectDeployments";
-import { generateDeploymentDocs } from "./scripts/generateDeploymentDocs";
-import { TASK_FLATTEN_GET_DEPENDENCY_GRAPH } from "hardhat/builtin-tasks/task-names";
-import { DependencyGraph } from "hardhat/types";
-import { checkContractsSizing } from "./scripts/contractSizes";
 import { collectDependents } from "./utils/dependencies";
 import { deleteFile, writeJsonFile } from "./utils/file";
-import { TASK_VERIFY } from "@nomicfoundation/hardhat-verify/internal/task-names";
 
 const getNetworkFromCLI = () => {
   if (process.env.HARDHAT_NETWORK) return process.env.HARDHAT_NETWORK;
@@ -380,7 +380,7 @@ const config: HardhatUserConfig = {
     enabled: false,
   },
   gasReporter: {
-    enabled: process.env.REPORT_GAS ? true : false,
+    enabled: !!process.env.REPORT_GAS,
   },
   namedAccounts: {
     deployer: 0,
@@ -416,8 +416,10 @@ task("dependencies", "Print dependencies for a contract")
 task("deploy", "Deploy contracts", async (taskArgs: any, env, runSuper) => {
   env.deployTags = taskArgs.tags ?? "";
   if (
-    !(process.env.SKIP_AUTO_HANDLER_REDEPLOYMENT == "true" || process.env.SKIP_AUTO_HANDLER_REDEPLOYMENT == "false") &&
-    env.network.name != "hardhat"
+    !(
+      process.env.SKIP_AUTO_HANDLER_REDEPLOYMENT === "true" || process.env.SKIP_AUTO_HANDLER_REDEPLOYMENT === "false"
+    ) &&
+    env.network.name !== "hardhat"
   ) {
     throw new Error("SKIP_AUTO_HANDLER_REDEPLOYMENT flag is mandatory");
   }
@@ -434,9 +436,11 @@ task("generate-deployment-docs", "Generate deployment documentation for all netw
     await collectDeployments();
   });
 
-task("measure-contract-sizes", "Check if contract characters count hit 900k limit").setAction(async (taskArgs, env) => {
-  await checkContractsSizing(env);
-});
+task("measure-contract-sizes", "Check if contract characters count hit 900k limit").setAction(
+  async (_taskArgs, env) => {
+    await checkContractsSizing(env);
+  }
+);
 
 task("reverse-dependencies", "Print dependent contracts")
   .addPositionalParam("file", "Contract", undefined, types.string)
@@ -463,7 +467,7 @@ task("verify-complex-args", "Verify contract with complex args", async (taskArgs
   try {
     const cacheFilePath = `./cache/verifications-args-${taskArgs.address}.json`;
     let args = [];
-    if (taskArgs.constructorArgsParams != undefined && taskArgs.constructorArgsParams != "") {
+    if (taskArgs.constructorArgsParams !== undefined && taskArgs.constructorArgsParams !== "") {
       // split args string with spaces, but do not split quoted strings
       // "A B C" D E => ["A B C", "D", "E"]
       args = taskArgs.constructorArgsParams.match(/"[^"]*"|\[[^\]]*\]|\S+/g);

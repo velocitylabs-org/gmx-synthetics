@@ -12,7 +12,7 @@ const func = createDeployFunction({
     const vaultV1Config = await gmx.getVaultV1();
     let vaultV1Address = vaultV1Config.vaultV1;
     let gmxAddress = vaultV1Config.gmx;
-    if (network.name === "hardhat") {
+    if (network.name === "hardhat" || network.name === "localhost") {
       const vaultV1 = await get("MockVaultV1");
       const tokens = await hre.gmx.getTokens();
       vaultV1Address = vaultV1.address;
@@ -40,7 +40,7 @@ const func = createDeployFunction({
 
 func.dependencies = func.dependencies.concat(["MockVaultV1"]);
 func.skip = async (hre: HardhatRuntimeEnvironment) => {
-  if (["botanix", "avalancheFuji", "arbitrumSepolia"].includes(hre.network.name)) {
+  if (["botanix", "avalancheFuji", "arbitrumSepolia", "localhost"].includes(hre.network.name)) {
     return true;
   }
 

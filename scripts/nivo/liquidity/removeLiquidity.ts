@@ -12,13 +12,25 @@
  */
 import { deployments, ethers } from "hardhat";
 
-// Markets available for liquidity
-const MARKETS = {
-  "BRL/USD": "0x763779b6c23e29C02d675eA0cE6CBFf8DCc328e6",
-  "COP/USD": "0xFEf866Ed484CbecF5Aff364B30F0e034B37B765A",
-  "MXN/USD": "0xc45b0e23458085495F9150883DA72784155178f4",
-  "PEN/USD": "0xc7eA3eeDf93070373Fc0C6cbc9C5D2e9a36a965D",
-};
+/** Fetch all deployed markets dynamically from the Reader contract */
+async function getDeployedMarkets() {
+  const dataStoreDeployment = await deployments.get("DataStore");
+  const readerDeployment = await deployments.get("Reader");
+  const reader = await ethers.getContractAt("Reader", readerDeployment.address);
+  const markets = await reader.getMarkets(dataStoreDeployment.address, 0, 100);
+
+  const result: { name: string; marketToken: string; indexToken: string; longToken: string; shortToken: string }[] = [];
+  for (const m of markets) {
+    let name = m.marketToken;
+    try {
+      const token = await ethers.getContractAt("MintableToken", m.indexToken);
+      const symbol = await token.symbol();
+      name = `${symbol}/USD`;
+    } catch { /* ignore */ }
+    result.push({ name, marketToken: m.marketToken, indexToken: m.indexToken, longToken: m.longToken, shortToken: m.shortToken });
+  }
+  return result;
+}
 
 async function main() {
   console.log("╔═══════════════════════════════════════════════════════════════╗");
@@ -33,7 +45,6 @@ async function main() {
   const withdrawalVaultDeployment = await deployments.get("WithdrawalVault");
   const routerDeployment = await deployments.get("Router");
   const usdtDeployment = await deployments.get("USDT");
-  const _wethDeployment = await deployments.get("WETH");
 
   const exchangeRouter = await ethers.getContractAt("ExchangeRouter", exchangeRouterDeployment.address);
   const router = await ethers.getContractAt("Router", routerDeployment.address);
@@ -43,13 +54,35 @@ async function main() {
   console.log("Router:", routerDeployment.address);
   console.log("USDT:", usdtDeployment.address);
 
+  // Fetch markets dynamically
+  const markets = await getDeployedMarkets();
+  if (markets.length === 0) {
+    console.log("\nNo markets deployed. Run: npm run local:deploy:markets");
+    process.exit(1);
+  }
+
+  console.log("\nDeployed markets:");
+  for (let i = 0; i < markets.length; i++) {
+    console.log(`  [${i}] ${markets[i].name}: ${markets[i].marketToken}`);
+  }
+
+  // Select market
+  let selectedMarket = markets[0];
+  if (process.env.MARKET_ADDRESS) {
+    const envAddr = process.env.MARKET_ADDRESS as string;
+    const found = markets.find(m => m.marketToken.toLowerCase() === envAddr.toLowerCase());
+    if (found) selectedMarket = found;
+    else console.log(`\nWARN: MARKET_ADDRESS ${envAddr} not found, using first market`);
+  } else if (process.env.MARKET_INDEX) {
+    const idx = parseInt(process.env.MARKET_INDEX);
+    if (idx >= 0 && idx < markets.length) selectedMarket = markets[idx];
+  }
+
   // Configuration
-  const marketAddress = process.env.MARKET_ADDRESS || MARKETS["BRL/USD"];
+  const marketAddress = selectedMarket.marketToken;
   const executionFee = ethers.utils.parseEther("0.01"); // 0.01 ETH
 
-  // Find market name
-  const marketName =
-    Object.entries(MARKETS).find(([_, addr]) => addr.toLowerCase() === marketAddress.toLowerCase())?.[0] || "Unknown";
+  const marketName = selectedMarket.name;
 
   console.log("\n=== Withdrawal Configuration ===\n");
   console.log("Market:", marketName, `(${marketAddress})`);

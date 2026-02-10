@@ -1,14 +1,14 @@
 /**
- * Execute Pending Deposits
+ * Execute Pending Orders
  *
- * In GMX, createDeposit() creates a pending deposit. A keeper must call
- * executeDeposit() to actually mint market tokens. This script acts as
+ * In GMX, createOrder() creates a pending order. A keeper must call
+ * executeOrder() to actually open/close positions. This script acts as
  * a keeper for local development.
  *
  * Uses ChainlinkPriceFeedProvider to read prices from the configured
  * price feeds without requiring oracle signatures.
  *
- * Usage: npm run local:execute-deposits
+ * Usage: npm run local:execute-orders
  */
 import { deployments, ethers } from "hardhat";
 
@@ -32,9 +32,21 @@ function formatUnits(value: any, decimals: number): string {
   }
 }
 
+// Order type names
+const ORDER_TYPE_NAMES: Record<number, string> = {
+  0: "MarketSwap",
+  1: "LimitSwap",
+  2: "MarketIncrease",
+  3: "LimitIncrease",
+  4: "MarketDecrease",
+  5: "LimitDecrease",
+  6: "StopLossDecrease",
+  7: "Liquidation",
+};
+
 async function main() {
   console.log("╔═══════════════════════════════════════════════════════════════╗");
-  console.log("║              EXECUTE PENDING DEPOSITS                         ║");
+  console.log("║              EXECUTE PENDING ORDERS                           ║");
   console.log("╚═══════════════════════════════════════════════════════════════╝\n");
 
   const [signer] = await ethers.getSigners();
@@ -42,20 +54,19 @@ async function main() {
 
   // Get contract deployments
   const dataStoreDeployment = await deployments.get("DataStore");
-  const depositHandlerDeployment = await deployments.get("DepositHandler");
+  const orderHandlerDeployment = await deployments.get("OrderHandler");
   const readerDeployment = await deployments.get("Reader");
   const chainlinkPriceFeedProviderDeployment = await deployments.get("ChainlinkPriceFeedProvider");
   const roleStoreDeployment = await deployments.get("RoleStore");
 
   const dataStore = await ethers.getContractAt("DataStore", dataStoreDeployment.address);
-  const depositHandler = await ethers.getContractAt("DepositHandler", depositHandlerDeployment.address);
+  const orderHandler = await ethers.getContractAt("OrderHandler", orderHandlerDeployment.address);
   const reader = await ethers.getContractAt("Reader", readerDeployment.address);
   const roleStore = await ethers.getContractAt("RoleStore", roleStoreDeployment.address);
 
   console.log("DataStore:", dataStoreDeployment.address);
-  console.log("DepositHandler:", depositHandlerDeployment.address);
+  console.log("OrderHandler:", orderHandlerDeployment.address);
   console.log("Reader:", readerDeployment.address);
-  console.log("ChainlinkPriceFeedProvider:", chainlinkPriceFeedProviderDeployment.address);
 
   // Check/Grant ORDER_KEEPER role
   const ORDER_KEEPER = ethers.utils.keccak256(ethers.utils.defaultAbiCoder.encode(["string"], ["ORDER_KEEPER"]));
@@ -67,85 +78,72 @@ async function main() {
     console.log("✅ ORDER_KEEPER role granted");
   }
 
-  // Get deposit count
-  const DEPOSIT_LIST = ethers.utils.keccak256(ethers.utils.defaultAbiCoder.encode(["string"], ["DEPOSIT_LIST"]));
-  const depositCount = await dataStore.getBytes32Count(DEPOSIT_LIST);
-  console.log("\nTotal deposits in system:", depositCount.toString());
+  // Get order count
+  const ORDER_LIST = ethers.utils.keccak256(ethers.utils.defaultAbiCoder.encode(["string"], ["ORDER_LIST"]));
+  const orderCount = await dataStore.getBytes32Count(ORDER_LIST);
+  console.log("\nTotal orders in system:", orderCount.toString());
 
-  if (depositCount.eq(0)) {
-    console.log("No pending deposits to execute.");
+  if (orderCount.eq(0)) {
+    console.log("No pending orders to execute.");
     return;
   }
 
-  // Get all deposit keys
-  const depositKeys = await dataStore.getBytes32ValuesAt(DEPOSIT_LIST, 0, depositCount);
-  console.log("Deposit keys found:", depositKeys.length);
+  // Get all order keys
+  const orderKeys = await dataStore.getBytes32ValuesAt(ORDER_LIST, 0, orderCount);
+  console.log("Order keys found:", orderKeys.length);
 
-  console.log("\n=== Executing Deposits ===\n");
+  console.log("\n=== Executing Orders ===\n");
 
   let executedCount = 0;
   let failedCount = 0;
 
-  for (let i = 0; i < depositKeys.length; i++) {
-    const depositKey = depositKeys[i];
-    console.log(`\nDeposit ${i + 1}/${depositKeys.length}`);
-    console.log("Key:", depositKey);
+  for (let i = 0; i < orderKeys.length; i++) {
+    const orderKey = orderKeys[i];
+    console.log(`\nOrder ${i + 1}/${orderKeys.length}`);
+    console.log("Key:", orderKey);
 
     try {
-      // Get deposit info using the Reader contract
-      const depositInfo = await reader.getDeposit(dataStoreDeployment.address, depositKey);
+      // Get order info using the Reader contract
+      const orderInfo = await reader.getOrder(dataStoreDeployment.address, orderKey);
 
-      const marketAddress = depositInfo.addresses.market;
-      const account = depositInfo.addresses.account;
-      const longToken = depositInfo.addresses.initialLongToken;
-      const shortToken = depositInfo.addresses.initialShortToken;
+      const marketAddress = orderInfo.addresses.market;
+      const account = orderInfo.addresses.account;
+      const collateralToken = orderInfo.addresses.initialCollateralToken;
+      const orderType = toNumber(orderInfo.numbers.orderType);
+      const isLong = orderInfo.flags.isLong;
 
       console.log("  Market:", marketAddress);
       console.log("  Account:", account);
-      console.log("  Long Token:", longToken);
-      console.log("  Short Token:", shortToken);
-
-      const longTokenAmount = depositInfo.numbers.initialLongTokenAmount;
-      const shortTokenAmount = depositInfo.numbers.initialShortTokenAmount;
-      const updatedAtTime = toNumber(depositInfo.numbers.updatedAtTime);
-
-      console.log("  Long Token Amount:", formatUnits(longTokenAmount, 6), "USDT");
-      console.log("  Short Token Amount:", formatUnits(shortTokenAmount, 6), "USDT");
-      console.log("  Created At:", new Date(updatedAtTime * 1000).toISOString());
+      console.log("  Collateral Token:", collateralToken);
+      console.log("  Order Type:", ORDER_TYPE_NAMES[orderType] || `Unknown (${orderType})`);
+      console.log("  Size:", formatUnits(orderInfo.numbers.sizeDeltaUsd, 30), "USD");
+      console.log("  Collateral:", formatUnits(orderInfo.numbers.initialCollateralDeltaAmount, 6), "USDT");
+      console.log("  Direction:", isLong ? "Long" : "Short");
 
       // Get market info
       const marketInfo = await reader.getMarket(dataStoreDeployment.address, marketAddress);
       const indexToken = marketInfo.indexToken;
       console.log("  Index Token:", indexToken);
 
-      console.log("  Attempting real execution with ChainlinkPriceFeedProvider...");
+      console.log("  Attempting execution with ChainlinkPriceFeedProvider...");
 
       try {
-        // Build SetPricesParams for executeDeposit
-        // The ChainlinkPriceFeedProvider reads prices from the DataStore's configured price feeds
-        // We need to provide the token addresses and the provider address
-        // The data can be empty as the provider reads from the DataStore
-        const tokens = [indexToken, longToken];
-
-        // If longToken == shortToken, don't duplicate
-        const uniqueTokens = longToken.toLowerCase() === shortToken.toLowerCase() ? tokens : [...tokens, shortToken];
-
-        // ChainlinkPriceFeedProvider for all tokens
-        const providers = uniqueTokens.map(() => chainlinkPriceFeedProviderDeployment.address);
-
-        // Empty data - ChainlinkPriceFeedProvider reads from DataStore
-        const data = uniqueTokens.map(() => "0x");
+        // Build oracle params
+        const tokens = [indexToken, collateralToken];
+        const uniqueTokens = indexToken.toLowerCase() === collateralToken.toLowerCase() ? [indexToken] : tokens;
 
         const oracleParams = {
           tokens: uniqueTokens,
-          providers: providers,
-          data: data,
+          providers: uniqueTokens.map(() => chainlinkPriceFeedProviderDeployment.address),
+          data: uniqueTokens.map(() => "0x"),
         };
 
         console.log("  Tokens:", uniqueTokens);
         console.log("  Provider:", chainlinkPriceFeedProviderDeployment.address);
 
-        const tx = await depositHandler.executeDeposit(depositKey, oracleParams, { gasLimit: 10000000 });
+        const tx = await orderHandler.executeOrder(orderKey, oracleParams, {
+          gasLimit: 15000000,
+        });
 
         const receipt = await tx.wait();
         console.log("  Gas used:", receipt.gasUsed.toString());
@@ -158,8 +156,8 @@ async function main() {
           ).address
         );
 
-        let depositCancelled = false;
-        let depositExecuted = false;
+        let orderCancelled = false;
+        let orderExecuted = false;
         let cancellationReasonBytes = "";
 
         for (const log of receipt.logs) {
@@ -169,9 +167,8 @@ async function main() {
             const parsed = eventEmitter.interface.parseLog(log);
             const eventName = parsed.args[1];
 
-            if (eventName === "DepositCancelled") {
-              depositCancelled = true;
-              // Extract reasonBytes from event data
+            if (eventName === "OrderCancelled") {
+              orderCancelled = true;
               const eventData = parsed.args[parsed.args.length - 1];
               if (eventData.bytesItems?.items) {
                 for (const item of eventData.bytesItems.items) {
@@ -182,24 +179,23 @@ async function main() {
               }
             }
 
-            if (eventName === "DepositExecuted") {
-              depositExecuted = true;
+            if (eventName === "OrderExecuted") {
+              orderExecuted = true;
             }
           } catch {
             // Not parseable, skip
           }
         }
 
-        if (depositExecuted) {
-          console.log("  ✅ Deposit executed successfully!");
+        if (orderExecuted) {
+          console.log("  ✅ Order executed successfully!");
           executedCount++;
-        } else if (depositCancelled) {
-          console.log("  ⚠️ Deposit was CANCELLED during execution!");
+        } else if (orderCancelled) {
+          console.log("  ⚠️ Order was CANCELLED during execution!");
 
-          // Decode the cancellation reason
           if (cancellationReasonBytes && cancellationReasonBytes !== "0x") {
             try {
-              const { parseError, formatParsedError } = await import("../utils/error");
+              const { parseError, formatParsedError } = await import("../../../utils/error");
               const decodedError = parseError(cancellationReasonBytes, false);
               if (decodedError) {
                 console.log("  Error:", formatParsedError(decodedError));
@@ -208,8 +204,6 @@ async function main() {
               console.log("  Reason bytes:", `${cancellationReasonBytes.slice(0, 66)}...`);
             }
           }
-
-          console.log("  Run 'npm run local:debug-deposit' for detailed debugging");
           failedCount++;
         } else {
           console.log("  ⚠️ Unknown outcome - check logs manually");
@@ -219,63 +213,46 @@ async function main() {
         const errorMsg = execError.reason || execError.message || "";
         console.log("  ❌ Execution failed:", errorMsg.slice(0, 300));
 
-        // Try simulation fallback for debugging
-        if (!errorMsg.includes("EndOfOracleSimulation")) {
-          console.log("  Trying simulation for debugging...");
-          try {
-            // Use corrected prices for simulation
-            const usdtPrice = ethers.utils.parseUnits("1", 24); // $1.00 for 6-decimal token
-            const indexTokenPrice = ethers.utils.parseUnits("0.18", 12); // ~$0.18 for 18-decimal token
-
-            const simulatePricesParams = {
-              primaryTokens: [indexToken, longToken],
-              primaryPrices: [
-                { min: indexTokenPrice, max: indexTokenPrice },
-                { min: usdtPrice, max: usdtPrice },
-              ],
-              minTimestamp: updatedAtTime,
-              maxTimestamp: updatedAtTime + 300,
-            };
-
-            await depositHandler.simulateExecuteDeposit(depositKey, simulatePricesParams, { gasLimit: 10000000 });
-          } catch (simError: any) {
-            const simMsg = simError.reason || simError.message || "";
-            if (simMsg.includes("EndOfOracleSimulation")) {
-              console.log("  Simulation passed (EndOfOracleSimulation is expected)");
-            } else {
-              console.log("  Simulation error:", simMsg.slice(0, 200));
-            }
-          }
+        // Provide helpful hints based on error
+        if (errorMsg.includes("EmptyPrimaryPrice")) {
+          console.log("  Hint: Price feed not configured for one of the tokens");
+          console.log("  Fix: Run npm run local:configure-markets");
+        } else if (errorMsg.includes("MaxCollateralSumExceeded")) {
+          console.log("  Hint: MAX_COLLATERAL_SUM not set for this market");
+          console.log("  Fix: Run npm run local:configure-markets");
+        } else if (errorMsg.includes("OracleTimestamps")) {
+          console.log("  Hint: Order is too old - cancel and create a new one");
+          console.log("  Fix: Run npm run local:cancel-all-orders");
+        } else if (errorMsg.includes("InsufficientPoolAmount") || errorMsg.includes("InsufficientReserve")) {
+          console.log("  Hint: Not enough liquidity in the pool");
+          console.log("  Fix: Run npm run local:add-liquidity && npm run local:execute-deposits");
         }
         failedCount++;
       }
     } catch (error: any) {
-      console.log("  ❌ Error reading deposit:", error.message?.slice(0, 100));
+      console.log("  ❌ Error reading order:", error.message?.slice(0, 100));
       failedCount++;
     }
   }
 
   console.log("\n╔═══════════════════════════════════════════════════════════════╗");
   console.log(
-    `${`║  Executed: ${executedCount}  |  Failed: ${failedCount}  |  Total: ${depositKeys.length}`.padEnd(63)}║`
+    `${`║  Executed: ${executedCount}  |  Failed: ${failedCount}  |  Total: ${orderKeys.length}`.padEnd(63)}║`
   );
   console.log("╚═══════════════════════════════════════════════════════════════╝\n");
 
   if (executedCount > 0) {
-    console.log("✅ Deposits executed successfully!");
-    console.log("Market tokens have been minted to the depositor's wallet.");
-    console.log("\nYou can now:");
-    console.log("1. Run: npm run local:execute-orders - to execute pending orders");
-    console.log("2. Open positions via the frontend");
+    console.log("✅ Orders executed successfully!");
+    console.log("Positions have been opened/modified on-chain.");
   }
 
   if (failedCount > 0) {
     console.log("\n═══════════════════════════════════════════════════════════════");
-    console.log("NOTE: Some deposits failed to execute.");
+    console.log("NOTE: Some orders failed to execute.");
     console.log("Common reasons:");
-    console.log("  - Price feed not configured for tokens");
-    console.log("  - Market not properly configured");
-    console.log("  - Missing roles");
+    console.log("  - Price feed not configured: npm run local:configure-markets");
+    console.log("  - Order too old: npm run local:cancel-all-orders");
+    console.log("  - Insufficient liquidity: npm run local:add-liquidity");
     console.log("═══════════════════════════════════════════════════════════════");
   }
 }

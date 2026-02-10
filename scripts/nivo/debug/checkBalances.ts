@@ -1,5 +1,7 @@
 /**
  * Check all relevant balances
+ * 
+ * Dynamically reads markets from the Reader contract so addresses are always current.
  */
 import { deployments, ethers } from "hardhat";
 
@@ -7,14 +9,41 @@ async function main() {
   console.log("=== Balance Check ===\n");
 
   const [signer] = await ethers.getSigners();
-  const usdt = await ethers.getContractAt("MintableToken", "0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9");
-  const market = "0x763779b6c23e29C02d675eA0cE6CBFf8DCc328e6";
+
+  // Get USDT dynamically from deployments
+  const usdtDeployment = await deployments.get("USDT");
+  const usdt = await ethers.getContractAt("MintableToken", usdtDeployment.address);
+
+  // Get markets dynamically from Reader
+  const dataStoreDeployment = await deployments.get("DataStore");
+  const readerDeployment = await deployments.get("Reader");
+  const reader = await ethers.getContractAt("Reader", readerDeployment.address);
+  const dataStore = await ethers.getContractAt("DataStore", dataStoreDeployment.address);
+  const allMarkets = await reader.getMarkets(dataStoreDeployment.address, 0, 100);
+
+  if (allMarkets.length === 0) {
+    console.log("No markets deployed.");
+    return;
+  }
+
+  // Use first market (or MARKET_INDEX env var)
+  const marketIdx = process.env.MARKET_INDEX ? parseInt(process.env.MARKET_INDEX) : 0;
+  const marketInfo = allMarkets[marketIdx];
+  const market = marketInfo.marketToken;
   const marketToken = await ethers.getContractAt("MarketToken", market);
 
+  let marketName = market;
+  try {
+    const token = await ethers.getContractAt("MintableToken", marketInfo.indexToken);
+    marketName = `${await token.symbol()}/USD`;
+  } catch { /* ignore */ }
+
   const depositVault = await deployments.get("DepositVault");
-  const _marketStore = await deployments.get("MarketStoreUtils"); // This might not exist as a separate deployment
 
   console.log("Signer:", signer.address);
+  console.log("Market:", marketName, `(${market})`);
+  console.log("USDT:", usdtDeployment.address);
+
   console.log("\n=== USDT Balances ===");
   console.log("Signer USDT:", ethers.utils.formatUnits(await usdt.balanceOf(signer.address), 6));
   console.log("DepositVault USDT:", ethers.utils.formatUnits(await usdt.balanceOf(depositVault.address), 6));
@@ -25,8 +54,7 @@ async function main() {
   console.log("Total Supply:", ethers.utils.formatUnits(await marketToken.totalSupply(), 18));
 
   // Check DataStore pool amount
-  const dataStore = await ethers.getContractAt("DataStore", (await deployments.get("DataStore")).address);
-  const { hashString, hashData } = await import("../utils/hash");
+  const { hashString, hashData } = await import("../../../utils/hash");
   const POOL_AMOUNT = hashString("POOL_AMOUNT");
   const poolAmountKey = hashData(["bytes32", "address", "address"], [POOL_AMOUNT, market, usdt.address]);
   const poolAmount = await dataStore.getUint(poolAmountKey);

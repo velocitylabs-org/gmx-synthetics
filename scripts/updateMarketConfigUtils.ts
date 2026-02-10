@@ -716,7 +716,7 @@ export async function updateMarketConfig({
   includePositionImpact = false,
   includeMaxOpenInterest = false,
 }) {
-  if (!["arbitrumGoerli", "avalancheFuji", "hardhat"].includes(hre.network.name)) {
+  if (!["arbitrumGoerli", "avalancheFuji", "hardhat", "localhost"].includes(hre.network.name)) {
     const { errors } = await validateMarketConfigs();
     if (errors.length !== 0) {
       throw new Error("Invalid market configs");
@@ -765,7 +765,8 @@ export async function updateMarketConfig({
     console.info("Add INCLUDE_KEEPER_BASE_KEYS=true to include them\n");
   }
 
-  await handleConfigChanges(configItems, write, 100);
+  const batchSize = hre.network.name === "localhost" ? 20 : 100;
+  await handleConfigChanges(configItems, write, batchSize);
 }
 
 function getIgnoredParameterNames(ignoredParams) {
