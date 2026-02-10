@@ -202,12 +202,18 @@ async function main() {
   const MAX_POOL_AMOUNT = hashString("MAX_POOL_AMOUNT");
   const MAX_COLLATERAL_SUM = hashString("MAX_COLLATERAL_SUM");
   const MAX_OPEN_INTEREST = hashString("MAX_OPEN_INTEREST");
+  const RESERVE_FACTOR = hashString("RESERVE_FACTOR");
+  const OPEN_INTEREST_RESERVE_FACTOR = hashString("OPEN_INTEREST_RESERVE_FACTOR");
 
   // Values matching config/markets.ts nivoBaseMarketConfig
   const maxPoolUsdForDeposit = ethers.utils.parseUnits("6000000", 30); // $6M USD (30 decimals)
   const maxPoolAmount = ethers.utils.parseUnits("5000000", 6); // 5M USDT (6 decimals)
   const maxCollateralSum = ethers.utils.parseUnits("10000000", 6); // 10M USDT (6 decimals)
   const maxOpenInterest = ethers.utils.parseUnits("2000000", 30); // $2M USD (30 decimals)
+  // Reserve factors: fraction of pool that can be reserved (30-decimal float)
+  // 90% = 9 * 10^29, 80% = 8 * 10^29
+  const reserveFactor = ethers.BigNumber.from(9).mul(ethers.BigNumber.from(10).pow(29)); // 90%
+  const openInterestReserveFactor = ethers.BigNumber.from(8).mul(ethers.BigNumber.from(10).pow(29)); // 80%
 
   for (const market of markets) {
     console.log(`\nConfiguring market: ${market.marketToken}`);
@@ -283,6 +289,35 @@ async function main() {
             30
           )} USD`
         );
+      }
+    }
+
+    // RESERVE_FACTOR (per side: long and short)
+    for (const isLong of [true, false]) {
+      const rfKey = hashData(["bytes32", "address", "bool"], [RESERVE_FACTOR, market.marketToken, isLong]);
+      const currentRF = await dataStore.getUint(rfKey);
+      if (currentRF.eq(0)) {
+        console.log(`  Setting RESERVE_FACTOR (${isLong ? "long" : "short"})...`);
+        await (await dataStore.setUint(rfKey, reserveFactor)).wait();
+        console.log(`  ✅ Set to 90%`);
+      } else {
+        console.log(`  ✅ RESERVE_FACTOR (${isLong ? "long" : "short"}) already set`);
+      }
+    }
+
+    // OPEN_INTEREST_RESERVE_FACTOR (per side: long and short)
+    for (const isLong of [true, false]) {
+      const oirfKey = hashData(
+        ["bytes32", "address", "bool"],
+        [OPEN_INTEREST_RESERVE_FACTOR, market.marketToken, isLong]
+      );
+      const currentOIRF = await dataStore.getUint(oirfKey);
+      if (currentOIRF.eq(0)) {
+        console.log(`  Setting OPEN_INTEREST_RESERVE_FACTOR (${isLong ? "long" : "short"})...`);
+        await (await dataStore.setUint(oirfKey, openInterestReserveFactor)).wait();
+        console.log(`  ✅ Set to 80%`);
+      } else {
+        console.log(`  ✅ OPEN_INTEREST_RESERVE_FACTOR (${isLong ? "long" : "short"}) already set`);
       }
     }
   }

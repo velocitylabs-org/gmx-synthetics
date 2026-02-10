@@ -10,7 +10,7 @@
  *
  * Output: ../nivo-demo/src/generated/contracts.json
  */
-import { deployments, ethers } from "hardhat";
+import { deployments, ethers, gmx } from "hardhat";
 import * as fs from "fs";
 import * as path from "path";
 
@@ -79,6 +79,22 @@ async function main() {
     }
   }
 
+  // Build address -> symbol map from token config (handles synthetic tokens too)
+  console.log("\n=== Building Token Map ===\n");
+  const tokenAddressToSymbol: Record<string, string> = {};
+  try {
+    const tokens = await gmx.getTokens();
+    for (const [symbol, tokenConfig] of Object.entries(tokens)) {
+      if (tokenConfig.address) {
+        tokenAddressToSymbol[tokenConfig.address.toLowerCase()] = symbol;
+        console.log(`  ${symbol}: ${tokenConfig.address}`);
+      }
+    }
+  } catch (e: unknown) {
+    const msg = e instanceof Error ? e.message.slice(0, 100) : String(e);
+    console.log("  Failed to load token config:", msg);
+  }
+
   // Read markets from Reader
   console.log("\n=== Fetching Markets ===\n");
   const markets: MarketInfo[] = [];
@@ -90,13 +106,22 @@ async function main() {
 
       for (const m of allMarkets) {
         let name = m.marketToken;
-        try {
-          const token = await ethers.getContractAt("MintableToken", m.indexToken);
-          const symbol = await token.symbol();
-          name = `${symbol}/USD`;
-        } catch {
-          /* ignore */
+
+        // Look up index token symbol from the config map (works for synthetic tokens)
+        const indexSymbol = tokenAddressToSymbol[m.indexToken.toLowerCase()];
+        if (indexSymbol) {
+          name = `${indexSymbol}/USD`;
+        } else if (m.indexToken !== ethers.constants.AddressZero) {
+          // Fallback: try calling symbol() on the contract (works for deployed tokens)
+          try {
+            const token = await ethers.getContractAt("MintableToken", m.indexToken);
+            const symbol = await token.symbol();
+            name = `${symbol}/USD`;
+          } catch {
+            /* non-contract synthetic token, keep address as name */
+          }
         }
+
         markets.push({
           name,
           marketToken: m.marketToken,
