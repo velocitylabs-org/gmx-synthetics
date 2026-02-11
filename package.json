@@ -33,12 +33,7 @@
     "local:execute-deposits": "npx hardhat run scripts/nivo/liquidity/executeDeposits.ts --network localhost",
     "local:remove-liquidity": "npx hardhat run scripts/nivo/liquidity/removeLiquidity.ts --network localhost",
     "local:execute-withdrawals": "npx hardhat run scripts/nivo/liquidity/executeWithdrawals.ts --network localhost",
-    "local:cancel-all-deposits": "npx hardhat run scripts/nivo/liquidity/cancelAllDeposits.ts --network localhost",
-    "local:debug-deposit": "npx hardhat run scripts/nivo/debug/debugDepositExecution.ts --network localhost",
-    "local:check-balances": "npx hardhat run scripts/nivo/debug/checkBalances.ts --network localhost",
-    "local:check-pool": "npx hardhat run scripts/nivo/debug/checkPoolConfig.ts --network localhost",
-    "local:debug-price-feed": "npx hardhat run scripts/nivo/debug/debugPriceFeed.ts --network localhost",
-    "local:test-oracle": "npx hardhat run scripts/nivo/debug/testOraclePrice.ts --network localhost"
+    "local:cancel-all-deposits": "npx hardhat run scripts/nivo/liquidity/cancelAllDeposits.ts --network localhost"
   },
   "author": "",
   "license": "ISC",
