@@ -7,7 +7,6 @@ export type FeeDistributorConfig = {
 export default async function (hre: HardhatRuntimeEnvironment): Promise<FeeDistributorConfig> {
   const config: { [network: string]: FeeDistributorConfig } = {
     hardhat: {},
-    localhost: {},
     arbitrum: {
       gmx: "0xfc5A1A6EB076a2C7aD06eD22C90d7E710E35ad0a",
       esGmx: "0xf42Ae1D54fd613C9bb14810b0588FaAa09a426cA",

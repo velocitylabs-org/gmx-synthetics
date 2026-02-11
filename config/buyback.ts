@@ -39,7 +39,6 @@ export default async function (hre: HardhatRuntimeEnvironment): Promise<BuybackC
   const defaultMaxPriceAge = 30;
 
   const config: { [network: string]: BuybackConfig } = {
-    localhost: defaultEmptyConfig,
     hardhat: defaultEmptyConfig,
 
     arbitrum: {
