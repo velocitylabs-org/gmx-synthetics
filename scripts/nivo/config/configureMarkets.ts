@@ -323,9 +323,87 @@ async function main() {
   }
 
   // =============================================
-  // STEP 4: Verify configuration
+  // STEP 4: Set TOKEN_TRANSFER_GAS_LIMIT for market tokens
   // =============================================
-  console.log("\n=== Step 4: Verify Configuration ===\n");
+  // The WithdrawalHandler (and other handlers) need a gas limit configured
+  // in the DataStore for every token they transfer. Market tokens (GM tokens)
+  // are created during market deployment but don't get this config automatically.
+  // Without it, executeWithdrawal reverts with EmptyTokenTranferGasLimit.
+  console.log("\n=== Step 4: Set Token Transfer Gas Limits ===\n");
+
+  const TOKEN_TRANSFER_GAS_LIMIT = hashString("TOKEN_TRANSFER_GAS_LIMIT");
+  const transferGasLimit = 200_000; // Standard value from config/general.ts
+
+  for (const market of markets) {
+    const gasLimitKey = hashData(["bytes32", "address"], [TOKEN_TRANSFER_GAS_LIMIT, market.marketToken]);
+    const currentGasLimit = await dataStore.getUint(gasLimitKey);
+    if (currentGasLimit.eq(0)) {
+      console.log(`  Setting TOKEN_TRANSFER_GAS_LIMIT for market token ${market.marketToken}...`);
+      await (await dataStore.setUint(gasLimitKey, transferGasLimit)).wait();
+      console.log(`  ✅ Set to ${transferGasLimit}`);
+    } else {
+      console.log(`  ✅ TOKEN_TRANSFER_GAS_LIMIT already set for ${market.marketToken}: ${currentGasLimit}`);
+    }
+  }
+
+  // =============================================
+  // STEP 5: Set MAX_PNL_FACTOR for withdrawals, deposits, and traders
+  // =============================================
+  // GMX checks the PnL-to-pool ratio before allowing withdrawals/deposits.
+  // If MAX_PNL_FACTOR_FOR_WITHDRAWALS is 0, any non-zero PnL blocks withdrawals
+  // with error: PnlFactorExceededForShorts(pnlToPoolFactor=X, maxPnlFactor=0)
+  console.log("\n=== Step 5: Set PnL Factor Limits ===\n");
+
+  const MAX_PNL_FACTOR = hashString("MAX_PNL_FACTOR");
+  const MAX_PNL_FACTOR_FOR_WITHDRAWALS = hashString("MAX_PNL_FACTOR_FOR_WITHDRAWALS");
+  const MAX_PNL_FACTOR_FOR_DEPOSITS = hashString("MAX_PNL_FACTOR_FOR_DEPOSITS");
+  const MAX_PNL_FACTOR_FOR_TRADERS = hashString("MAX_PNL_FACTOR_FOR_TRADERS");
+
+  // 70% = 7 * 10^29 (30-decimal float) — standard GMX value
+  const maxPnlForWithdrawals = ethers.BigNumber.from(7).mul(ethers.BigNumber.from(10).pow(29));
+  // 90% for deposits
+  const maxPnlForDeposits = ethers.BigNumber.from(9).mul(ethers.BigNumber.from(10).pow(29));
+  // 90% for traders
+  const maxPnlForTraders = ethers.BigNumber.from(9).mul(ethers.BigNumber.from(10).pow(29));
+
+  const pnlConfigs = [
+    {
+      label: "MAX_PNL_FACTOR_FOR_WITHDRAWALS",
+      typeHash: MAX_PNL_FACTOR_FOR_WITHDRAWALS,
+      value: maxPnlForWithdrawals,
+      pct: "70%",
+    },
+    {
+      label: "MAX_PNL_FACTOR_FOR_DEPOSITS",
+      typeHash: MAX_PNL_FACTOR_FOR_DEPOSITS,
+      value: maxPnlForDeposits,
+      pct: "90%",
+    },
+    { label: "MAX_PNL_FACTOR_FOR_TRADERS", typeHash: MAX_PNL_FACTOR_FOR_TRADERS, value: maxPnlForTraders, pct: "90%" },
+  ];
+
+  for (const market of markets) {
+    for (const isLong of [true, false]) {
+      for (const cfg of pnlConfigs) {
+        const key = hashData(
+          ["bytes32", "bytes32", "address", "bool"],
+          [MAX_PNL_FACTOR, cfg.typeHash, market.marketToken, isLong]
+        );
+        const current = await dataStore.getUint(key);
+        if (current.eq(0)) {
+          await (await dataStore.setUint(key, cfg.value)).wait();
+          console.log(`  ✅ ${cfg.label} (${isLong ? "long" : "short"}) set to ${cfg.pct} for ${market.marketToken}`);
+        } else {
+          console.log(`  ✅ ${cfg.label} (${isLong ? "long" : "short"}) already set for ${market.marketToken}`);
+        }
+      }
+    }
+  }
+
+  // =============================================
+  // STEP 6: Verify configuration
+  // =============================================
+  console.log("\n=== Step 6: Verify Configuration ===\n");
 
   if (markets.length > 0) {
     const sampleMarket = markets[0];

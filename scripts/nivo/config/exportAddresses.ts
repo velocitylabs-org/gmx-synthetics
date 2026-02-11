@@ -36,6 +36,7 @@ interface ExportedAddresses {
     roleStore: string;
     orderHandler: string;
     depositHandler: string;
+    withdrawalHandler: string;
     chainlinkPriceFeedProvider: string;
     eventEmitter: string;
     oracle: string;
@@ -67,6 +68,7 @@ async function main() {
     "RoleStore",
     "OrderHandler",
     "DepositHandler",
+    "WithdrawalHandler",
     "ChainlinkPriceFeedProvider",
     "EventEmitter",
     "Oracle",
@@ -166,6 +168,7 @@ async function main() {
       roleStore: addresses.RoleStore || "",
       orderHandler: addresses.OrderHandler || "",
       depositHandler: addresses.DepositHandler || "",
+      withdrawalHandler: addresses.WithdrawalHandler || "",
       chainlinkPriceFeedProvider: addresses.ChainlinkPriceFeedProvider || "",
       eventEmitter: addresses.EventEmitter || "",
       oracle: addresses.Oracle || "",

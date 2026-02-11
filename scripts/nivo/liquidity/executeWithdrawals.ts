@@ -5,6 +5,9 @@
  * executeWithdrawal() to actually burn market tokens and return the underlying
  * tokens. This script acts as a keeper for local development.
  *
+ * Uses ChainlinkPriceFeedProvider to read prices from the configured
+ * price feeds without requiring oracle signatures.
+ *
  * Usage: npm run local:execute-withdrawals
  */
 import { deployments, ethers } from "hardhat";
@@ -41,14 +44,43 @@ async function main() {
   const dataStoreDeployment = await deployments.get("DataStore");
   const withdrawalHandlerDeployment = await deployments.get("WithdrawalHandler");
   const readerDeployment = await deployments.get("Reader");
+  const chainlinkPriceFeedProviderDeployment = await deployments.get("ChainlinkPriceFeedProvider");
+  const roleStoreDeployment = await deployments.get("RoleStore");
+  const oracleDeployment = await deployments.get("Oracle");
 
   const dataStore = await ethers.getContractAt("DataStore", dataStoreDeployment.address);
   const withdrawalHandler = await ethers.getContractAt("WithdrawalHandler", withdrawalHandlerDeployment.address);
   const reader = await ethers.getContractAt("Reader", readerDeployment.address);
+  const roleStore = await ethers.getContractAt("RoleStore", roleStoreDeployment.address);
+  const oracle = await ethers.getContractAt("Oracle", oracleDeployment.address);
 
   console.log("DataStore:", dataStoreDeployment.address);
   console.log("WithdrawalHandler:", withdrawalHandlerDeployment.address);
   console.log("Reader:", readerDeployment.address);
+  console.log("ChainlinkPriceFeedProvider:", chainlinkPriceFeedProviderDeployment.address);
+
+  // Check/Grant ORDER_KEEPER role (needed for execution)
+  const ORDER_KEEPER = ethers.utils.keccak256(ethers.utils.defaultAbiCoder.encode(["string"], ["ORDER_KEEPER"]));
+  const hasKeeperRole = await roleStore.hasRole(signer.address, ORDER_KEEPER);
+  if (!hasKeeperRole) {
+    console.log("\n⚠️ Granting ORDER_KEEPER role to executor...");
+    const tx = await roleStore.grantRole(signer.address, ORDER_KEEPER);
+    await tx.wait();
+    console.log("✅ ORDER_KEEPER role granted");
+  }
+
+  // Clear any stale prices left in the Oracle from previous failed executions
+  try {
+    const tokensWithPricesCount = await oracle.getTokensWithPricesCount();
+    if (tokensWithPricesCount.gt(0)) {
+      console.log(`\n⚠️ Oracle has ${tokensWithPricesCount} stale token prices. Clearing...`);
+      const clearTx = await oracle.clearAllPrices();
+      await clearTx.wait();
+      console.log("✅ Stale oracle prices cleared");
+    }
+  } catch (clearError: any) {
+    console.log("⚠️ Could not check/clear oracle prices:", clearError.message?.slice(0, 100));
+  }
 
   // Get withdrawal count
   const WITHDRAWAL_LIST = ethers.utils.keccak256(ethers.utils.defaultAbiCoder.encode(["string"], ["WITHDRAWAL_LIST"]));
@@ -96,42 +128,108 @@ async function main() {
       const marketInfo = await reader.getMarket(dataStoreDeployment.address, marketAddress);
       const indexToken = marketInfo.indexToken;
       const longToken = marketInfo.longToken;
+      const shortToken = marketInfo.shortToken;
+
       console.log("  Index Token:", indexToken);
       console.log("  Long Token:", longToken);
 
-      // Try to execute the withdrawal using simulateExecuteWithdrawal
-      console.log("  Attempting execution with simulated prices...");
+      console.log("  Attempting execution with ChainlinkPriceFeedProvider...");
 
       try {
-        // Define prices - GMX uses 30 decimals for USD prices internally
-        const usdtPrice = ethers.utils.parseUnits("1", 30); // $1.00
-        const indexTokenPrice = ethers.utils.parseUnits("0.18", 30); // ~$0.18 for BRL
+        // Build SetPricesParams for executeWithdrawal
+        // Same pattern as executeDeposits.ts -- the ChainlinkPriceFeedProvider
+        // reads prices from the DataStore's configured price feeds
+        const tokens = [indexToken, longToken];
 
-        // Build the price params - use withdrawal creation time for timestamps
-        const primaryTokens = [indexToken, longToken];
-        const primaryPrices = [
-          { min: indexTokenPrice, max: indexTokenPrice },
-          { min: usdtPrice, max: usdtPrice },
-        ];
+        // If longToken == shortToken (forex markets), don't duplicate
+        const uniqueTokens = longToken.toLowerCase() === shortToken.toLowerCase() ? tokens : [...tokens, shortToken];
 
-        // SimulatePricesParams structure
-        const simulatePricesParams = {
-          primaryTokens: primaryTokens,
-          primaryPrices: primaryPrices,
-          minTimestamp: updatedAtTime,
-          maxTimestamp: updatedAtTime + 300, // 5 minute window
+        // ChainlinkPriceFeedProvider for all tokens
+        const providers = uniqueTokens.map(() => chainlinkPriceFeedProviderDeployment.address);
+
+        // Empty data -- ChainlinkPriceFeedProvider reads from DataStore
+        const data = uniqueTokens.map(() => "0x");
+
+        const oracleParams = {
+          tokens: uniqueTokens,
+          providers: providers,
+          data: data,
         };
 
-        console.log("  Primary tokens:", primaryTokens);
-        console.log("  Prices: Index=$0.18, USDT=$1.00");
+        console.log("  Tokens:", uniqueTokens);
+        console.log("  Provider:", chainlinkPriceFeedProviderDeployment.address);
 
-        const simTx = await withdrawalHandler.simulateExecuteWithdrawal(withdrawalKey, simulatePricesParams, {
+        const tx = await withdrawalHandler.executeWithdrawal(withdrawalKey, oracleParams, {
           gasLimit: 10000000,
         });
 
-        const simReceipt = await simTx.wait();
-        console.log("  ✅ Withdrawal executed! Gas used:", simReceipt.gasUsed.toString());
-        executedCount++;
+        const receipt = await tx.wait();
+        console.log("  Gas used:", receipt.gasUsed.toString());
+
+        // Parse EventEmitter logs to check for success/cancellation
+        const eventEmitter = await ethers.getContractAt(
+          "EventEmitter",
+          (
+            await deployments.get("EventEmitter")
+          ).address
+        );
+
+        let withdrawalCancelled = false;
+        let withdrawalExecuted = false;
+        let cancellationReasonBytes = "";
+
+        for (const log of receipt.logs) {
+          if (log.address.toLowerCase() !== eventEmitter.address.toLowerCase()) continue;
+
+          try {
+            const parsed = eventEmitter.interface.parseLog(log);
+            const eventName = parsed.args[1];
+
+            if (eventName === "WithdrawalCancelled") {
+              withdrawalCancelled = true;
+              const eventData = parsed.args[parsed.args.length - 1];
+              if (eventData.bytesItems?.items) {
+                for (const item of eventData.bytesItems.items) {
+                  if (item.key === "reasonBytes") {
+                    cancellationReasonBytes = item.value;
+                  }
+                }
+              }
+            }
+
+            if (eventName === "WithdrawalExecuted") {
+              withdrawalExecuted = true;
+            }
+          } catch {
+            // Not parseable, skip
+          }
+        }
+
+        if (withdrawalExecuted) {
+          console.log("  ✅ Withdrawal executed successfully! USDT returned to receiver.");
+          executedCount++;
+        } else if (withdrawalCancelled) {
+          console.log("  ⚠️ Withdrawal was CANCELLED during execution!");
+
+          // Decode the cancellation reason
+          if (cancellationReasonBytes && cancellationReasonBytes !== "0x") {
+            try {
+              const { parseError, formatParsedError } = await import("../../../utils/error");
+              const decodedError = parseError(cancellationReasonBytes, false);
+              if (decodedError) {
+                console.log("  Error:", formatParsedError(decodedError));
+              }
+            } catch {
+              console.log("  Reason bytes:", `${cancellationReasonBytes.slice(0, 66)}...`);
+            }
+          }
+
+          failedCount++;
+        } else {
+          console.log("  ⚠️ Transaction succeeded but could not determine result from events");
+          console.log("  Check market token balance to verify");
+          executedCount++;
+        }
       } catch (execError: any) {
         console.log("  ❌ Execution failed:", execError.reason || execError.message?.slice(0, 150));
         failedCount++;
@@ -155,11 +253,12 @@ async function main() {
 
   if (failedCount > 0) {
     console.log("\n═══════════════════════════════════════════════════════════════");
-    console.log("NOTE: Some withdrawals failed to execute.");
+    console.log("NOTE: Some withdrawals failed or were cancelled.");
     console.log("Common reasons:");
-    console.log("  - Invalid price configuration");
-    console.log("  - Insufficient pool balance");
+    console.log("  - Price feed not configured: npm run local:configure-markets");
+    console.log("  - Stale oracle prices: try running again");
     console.log("  - Missing roles");
+    console.log("  - TOKEN_TRANSFER_GAS_LIMIT not set: npm run local:configure-markets");
     console.log("═══════════════════════════════════════════════════════════════");
   }
 }
