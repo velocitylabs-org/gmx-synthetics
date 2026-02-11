@@ -1,9 +1,10 @@
 import { setBalance } from "@nomicfoundation/hardhat-network-helpers";
-import type { HardhatRuntimeEnvironment } from "hardhat/types";
-import type { TokenConfig } from "../config/tokens";
-import { expandDecimals } from "../utils/math";
-import { setAddressIfDifferent, setUintIfDifferent } from "../utils/dataStore";
+import { HardhatRuntimeEnvironment } from "hardhat/types";
+import { TokenConfig } from "../config/tokens";
+
 import * as keys from "../utils/keys";
+import { setAddressIfDifferent, setUintIfDifferent } from "../utils/dataStore";
+import { expandDecimals } from "../utils/math";
 
 const func = async ({ getNamedAccounts, deployments, gmx, network }: HardhatRuntimeEnvironment) => {
   const { deploy, log } = deployments;
