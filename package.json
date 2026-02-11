@@ -23,7 +23,6 @@
     "local:deploy:all": "SKIP_AUTO_HANDLER_REDEPLOYMENT=true npx hardhat deploy --network localhost",
     "local:update-market-config": "npx hardhat update-market-config --write true --network localhost",
     "local:grant-roles": "npx hardhat run scripts/grantRolesLocal.ts --network localhost",
-    "local:set-prices": "npx hardhat run scripts/setMockPrice.ts --network localhost",
     "local:create-market": "npx hardhat run scripts/createLocalMarket.ts --network localhost",
     "local:verify-setup": "npx hardhat run scripts/verifyLocalSetup.ts --network localhost",
     "local:simulate-order": "npx hardhat run scripts/nivo/orders/simulateOrder.ts --network localhost",
