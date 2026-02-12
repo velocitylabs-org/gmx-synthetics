@@ -94,17 +94,10 @@ const getCurrencyConfig = (dataStreamFeedId: string): SyntheticTokenConfig => {
   };
 };
 
-const getCurrencyTestnetConfig = (): TestTokenConfig => {
+const getCurrencyTestnetConfig = (): SyntheticTokenConfig => {
   return {
     synthetic: true,
     decimals: 18,
-    deploy: true,
-    priceFeed: {
-      decimals: 8,
-      heartbeatDuration: 24 * 60 * 60,
-      deploy: true,
-      initPrice: "18000000", // ~$0.18 default (8 decimals)
-    },
   };
 };
 
@@ -1925,12 +1918,6 @@ const config: {
       decimals: 6,
       transferGasLimit: 200 * 1000,
       deploy: true,
-      priceFeed: {
-        decimals: 8,
-        heartbeatDuration: 24 * 60 * 60,
-        deploy: true,
-        initPrice: "100000000", // $1.00 (8 decimals)
-      },
     },
 
     // GMX TOKENS
