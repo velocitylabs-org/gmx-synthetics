@@ -258,7 +258,6 @@ export default async function ({ network }: HardhatRuntimeEnvironment) {
         ],
       },
     ],
-    localhost: [],
   }[network.name]!;
 
   if (!config) {
