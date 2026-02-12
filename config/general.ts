@@ -3,7 +3,7 @@ import { HardhatRuntimeEnvironment } from "hardhat/types";
 import { decimalToFloat, percentageToFloat, expandDecimals } from "../utils/math";
 
 export default async function ({ network }: HardhatRuntimeEnvironment) {
-  if (network.name === "hardhat") {
+  if (network.name === "hardhat" || network.name === "localhost") {
     // Note that this is only for the hardhat config, the config for all
     // other networks is separate from this
     return {

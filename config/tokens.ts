@@ -1798,6 +1798,13 @@ const config: {
   hardhat: {
     // NIVO CURRENCIES
 
+    // G10 currencies (available on Chainlink Data Streams testnet)
+    // Euro
+    EUR: getCurrencyTestnetConfig(),
+    // Pound Sterling
+    GBP: getCurrencyTestnetConfig(),
+
+    // Emerging market currencies
     // Brazilian Real
     BRL: getCurrencyTestnetConfig(),
     // Mexican Peso
@@ -1885,6 +1892,13 @@ const config: {
   localhost: {
     // NIVO CURRENCIES
 
+    // G10 currencies (available on Chainlink Data Streams testnet)
+    // Euro
+    EUR: getCurrencyTestnetConfig(),
+    // Pound Sterling
+    GBP: getCurrencyTestnetConfig(),
+
+    // Emerging market currencies
     // Brazilian Real
     BRL: getCurrencyTestnetConfig(),
     // Mexican Peso
