@@ -35,11 +35,9 @@ export default async function (hre: HardhatRuntimeEnvironment): Promise<OracleCo
       maxOraclePriceAge,
       maxAtomicOraclePriceAge,
       maxOracleTimestampRange,
-      // Mirrors "hardhat" config — needed for `--network localhost` deployments
-      chainlinkPaymentToken: "0x99bbA657f2BbC93c02D617f8bA121cB8Fc104Acf",
       maxRefPriceDeviationFactor: decimalToFloat(5, 1), // 50%
       edgeOracleSigner: "0x1C498E2FE362e489A5Aac71690f9121914e0d55e",
-      chainlinkPaymentToken: "0x0000000000000000000000000000000000000000",
+      chainlinkPaymentToken: ethers.constants.AddressZero,
     },
 
     hardhat: {
