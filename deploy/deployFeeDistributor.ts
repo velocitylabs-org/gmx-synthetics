@@ -19,7 +19,7 @@ const func = createDeployFunction({
     let gmxAddress = feeDistributorConfig.gmx;
     let esGmxAddress = feeDistributorConfig.esGmx;
     let wntAddress = feeDistributorConfig.wnt;
-    if (network.name === "hardhat" || network.name === "localhost") {
+    if (network.name === "hardhat") {
       const tokens = await hre.gmx.getTokens();
       gmxAddress = tokens.GMX.address;
       esGmxAddress = tokens.ESGMX.address;
