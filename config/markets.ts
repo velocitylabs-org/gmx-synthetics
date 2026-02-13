@@ -516,7 +516,7 @@ const getNivoMarketsConfig = (indexToken: string, collateralToken = "USDT"): Per
   };
 };
 
-const getNivoMarketsTestnetConfig = (indexToken: string, collateralToken = "USDT.SG"): PerpMarketConfig => {
+const getNivoMarketsTestnetConfig = (indexToken: string, collateralToken = "USDC"): PerpMarketConfig => {
   return {
     tokens: { indexToken: indexToken, longToken: collateralToken, shortToken: collateralToken },
     virtualTokenIdForIndexToken: hashString(`PERP:${indexToken}/USD`), // To be confirmed: Order FX/USD vs USD/FX
@@ -543,22 +543,8 @@ const getNivoMarketsLocalConfig = (indexToken: string, collateralToken = "USDT")
 const nivoMarketsConfig: {
   [network: string]: PerpMarketConfig[];
 } = {
-  arbitrum: [
-    getNivoMarketsConfig("EUR"),
-    getNivoMarketsConfig("GBP"),
-    getNivoMarketsConfig("BRL"),
-    getNivoMarketsConfig("MXN"),
-    getNivoMarketsConfig("COP"),
-    getNivoMarketsConfig("IDR"),
-    getNivoMarketsConfig("PHP"),
-    getNivoMarketsConfig("PEN"),
-    getNivoMarketsConfig("NGN"),
-    getNivoMarketsConfig("KES"),
-    getNivoMarketsConfig("ZAR"),
-    getNivoMarketsConfig("THB"),
-  ],
-  arbitrumSepolia: [
-    getNivoMarketsTestnetConfig("EUR"),
+  baseSepolia: [
+    getNivoMarketsTestnetConfig("JPY"),
     getNivoMarketsTestnetConfig("GBP"),
     getNivoMarketsTestnetConfig("BRL"),
     getNivoMarketsTestnetConfig("MXN"),
@@ -604,8 +590,8 @@ const nivoMarketsConfig: {
 const config: {
   [network: string]: MarketConfig[];
 } = {
+  baseSepolia: [...nivoMarketsConfig.baseSepolia],
   arbitrum: [
-    ...nivoMarketsConfig.arbitrum,
     {
       tokens: { indexToken: "APE", longToken: "APE", shortToken: "USDC" },
       virtualTokenIdForIndexToken: hashString("PERP:APE/USD"),
@@ -4631,7 +4617,6 @@ const config: {
     },
   ],
   arbitrumSepolia: [
-    ...nivoMarketsConfig.arbitrumSepolia,
     {
       tokens: { indexToken: "WETH", longToken: "WETH", shortToken: "USDC.SG" },
       virtualTokenIdForIndexToken: hashString("PERP:ETH/USD"),

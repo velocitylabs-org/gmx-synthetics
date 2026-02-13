@@ -53,6 +53,18 @@ export default async function (hre: HardhatRuntimeEnvironment): Promise<OracleCo
       edgeOracleSigner: "0x1C498E2FE362e489A5Aac71690f9121914e0d55e",
     },
 
+    baseSepolia: {
+      signers: [], // No signers should be needed since Chainlink Data Streams is used for verification
+      maxOraclePriceAge,
+      maxAtomicOraclePriceAge,
+      maxOracleTimestampRange,
+      maxRefPriceDeviationFactor: decimalToFloat(5, 1), // 50%
+      minOracleBlockConfirmations: 255,
+      minOracleSigners: 1,
+      dataStreamFeedVerifier: "0x8Ac491b7c118a0cdcF048e0f707247fD8C9575f9",
+      chainlinkPaymentToken: "0xE4aB69C077896252FAFBD49EFD26B5D171A32410",
+    },
+
     arbitrum: {
       signers: ["0x0F711379095f2F0a6fdD1e8Fccd6eBA0833c1F1f"],
       maxOraclePriceAge,

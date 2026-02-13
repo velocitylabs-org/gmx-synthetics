@@ -12,6 +12,8 @@ export type RolesConfig = {
   };
 };
 
+const NIVO_KEEPER_ADDRESS: string | undefined = process.env.NIVO_KEEPER_ADDRESS;
+
 const requiredRolesForContracts = {
   CONFIG_KEEPER: ["ConfigSyncer"],
   CONTROLLER: [
@@ -79,6 +81,10 @@ const requiredRolesForContracts = {
 // to add / remove roles after deployment, scripts/updateRoles.ts can be used
 export default async function (hre: HardhatRuntimeEnvironment): Promise<RolesConfig> {
   const { deployer } = await hre.getNamedAccounts();
+
+  if (hre.network.name === "baseSepolia" && !NIVO_KEEPER_ADDRESS) {
+    throw new Error("NIVO_KEEPER_ADDRESS is undefined");
+  }
 
   const syntheticKeepers = {
     mainnet: {
@@ -254,19 +260,32 @@ export default async function (hre: HardhatRuntimeEnvironment): Promise<RolesCon
       },
       ...testnetConfig,
     },
+    baseSepolia: {
+      CONTROLLER: { [deployer]: true },
+      ORDER_KEEPER: { [NIVO_KEEPER_ADDRESS]: true, [deployer]: true },
+      ADL_KEEPER: { [NIVO_KEEPER_ADDRESS]: true, [deployer]: true },
+      LIQUIDATION_KEEPER: { [NIVO_KEEPER_ADDRESS]: true, [deployer]: true },
+      FROZEN_ORDER_KEEPER: { [NIVO_KEEPER_ADDRESS]: true, [deployer]: true },
+      MARKET_KEEPER: { [deployer]: true },
+      CONFIG_KEEPER: { [deployer]: true },
+      LIMITED_CONFIG_KEEPER: { [deployer]: true },
+      TIMELOCK_ADMIN: { [deployer]: true },
+      FEE_KEEPER: { [deployer]: true },
+    },
   };
 
   // normalize addresses
-  for (const rolesForNetwork of Object.values(roles)) {
-    for (const accounts of Object.values(rolesForNetwork)) {
-      for (const account of Object.keys(accounts)) {
+  for (const network of Object.values(roles)) {
+    for (const role of Object.values(network)) {
+      for (const account of Object.keys(role)) {
         if (account === "undefined") {
           continue;
         }
+        // Convert address to checksummed format (EIP-55)
         const checksumAccount = ethers.utils.getAddress(account);
         if (account !== checksumAccount) {
-          accounts[checksumAccount] = accounts[account];
-          delete accounts[account];
+          role[checksumAccount] = role[account];
+          delete role[account];
         }
       }
     }

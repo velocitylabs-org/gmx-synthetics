@@ -20,9 +20,7 @@ const func = createDeployFunction({
 });
 
 func.skip = async (hre: HardhatRuntimeEnvironment) => {
-  if (["botanix", "avalanche"].includes(hre.network.name)) {
-    return true;
-  }
+  return ["botanix", "avalanche", "baseSepolia"].includes(hre.network.name);
 };
 
 export default func;
