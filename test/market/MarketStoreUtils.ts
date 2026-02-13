@@ -49,13 +49,13 @@ describe("MarketStoreUtils", () => {
     expect(Object.keys(emptyStoreItem).length).eq(expectedPropsLength * 2);
 
     Object.keys(emptyStoreItem).forEach((key, index) => {
-      if (isNaN(key)) {
+      if (isNaN(parseInt(key))) {
         sampleItem[key] = accountList[index].address;
       }
     });
 
     const initialItemCount = await getItemCount(dataStore);
-    const initialItemKeys = await getItemKeys(dataStore, 0, 10);
+    const initialItemKeys = await getItemKeys(dataStore, 0, initialItemCount);
 
     await logGasUsage({
       tx: setItem(dataStore, itemKey, sampleItem),
@@ -65,25 +65,25 @@ describe("MarketStoreUtils", () => {
     let fetchedItem = await getItem(dataStore, itemKey);
 
     Object.keys(emptyStoreItem).forEach((key) => {
-      if (isNaN(key)) {
+      if (isNaN(parseInt(key))) {
         expect(fetchedItem[key]).deep.eq(sampleItem[key]);
       }
     });
+    const newItemCount = await getItemCount(dataStore);
+    expect(newItemCount).eq(initialItemCount.add(1));
+    expect(await getItemKeys(dataStore, 0, newItemCount)).deep.equal(initialItemKeys.concat(itemKey));
 
-    expect(await getItemCount(dataStore)).eq(initialItemCount.add(1));
-    expect(await getItemKeys(dataStore, 0, 10)).deep.equal(initialItemKeys.concat(itemKey));
-
-    await removeItem(dataStore, itemKey, sampleItem);
+    await removeItem(dataStore, itemKey);
 
     fetchedItem = await getItem(dataStore, itemKey);
 
     Object.keys(emptyStoreItem).forEach((key) => {
-      if (isNaN(key)) {
+      if (isNaN(parseInt(key))) {
         expect(fetchedItem[key]).deep.eq(ethers.constants.AddressZero);
       }
     });
 
     expect(await getItemCount(dataStore)).eq(initialItemCount);
-    expect(await getItemKeys(dataStore, 0, 10)).deep.equal(initialItemKeys);
+    expect(await getItemKeys(dataStore, 0, initialItemCount)).deep.equal(initialItemKeys);
   });
 });
