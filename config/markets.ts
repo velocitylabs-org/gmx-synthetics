@@ -544,7 +544,6 @@ const nivoMarketsConfig: {
   [network: string]: PerpMarketConfig[];
 } = {
   arbitrum: [
-    getNivoMarketsConfig("EUR"),
     getNivoMarketsConfig("GBP"),
     getNivoMarketsConfig("BRL"),
     getNivoMarketsConfig("MXN"),
@@ -558,7 +557,6 @@ const nivoMarketsConfig: {
     getNivoMarketsConfig("THB"),
   ],
   arbitrumSepolia: [
-    getNivoMarketsTestnetConfig("EUR"),
     getNivoMarketsTestnetConfig("GBP"),
     getNivoMarketsTestnetConfig("BRL"),
     getNivoMarketsTestnetConfig("MXN"),
@@ -572,7 +570,6 @@ const nivoMarketsConfig: {
     getNivoMarketsTestnetConfig("THB"),
   ],
   hardhat: [
-    getNivoMarketsLocalConfig("EUR", "USDC"),
     getNivoMarketsLocalConfig("GBP", "USDC"),
     getNivoMarketsLocalConfig("BRL"),
     getNivoMarketsLocalConfig("MXN"),
@@ -586,7 +583,6 @@ const nivoMarketsConfig: {
     getNivoMarketsLocalConfig("THB"),
   ],
   localhost: [
-    getNivoMarketsLocalConfig("EUR", "USDC"),
     getNivoMarketsLocalConfig("GBP", "USDC"),
     getNivoMarketsLocalConfig("BRL"),
     getNivoMarketsLocalConfig("MXN"),

@@ -1792,8 +1792,6 @@ const config: {
     // NIVO CURRENCIES
 
     // G10 currencies (available on Chainlink Data Streams testnet)
-    // Euro
-    EUR: getCurrencyTestnetConfig(),
     // Pound Sterling
     GBP: getCurrencyTestnetConfig(),
 
@@ -1886,12 +1884,10 @@ const config: {
     // NIVO CURRENCIES
 
     // G10 currencies (available on Chainlink Data Streams testnet)
-    // Euro
-    EUR: getCurrencyTestnetConfig(),
     // Pound Sterling
-    GBP: getCurrencyTestnetConfig(),
+    GBP: getCurrencyConfig("0x00080ca1eb3009703b00bfb3dd86ebae19a55631e20b18db633559e6175b1580"),
 
-    // Emerging market currencies
+    // Emerging market currencies (no Chainlink Data Stream feeds yet)
     // Brazilian Real
     BRL: getCurrencyTestnetConfig(),
     // Mexican Peso
@@ -1941,6 +1937,8 @@ const config: {
       decimals: 6,
       transferGasLimit: 200 * 1000,
       deploy: true,
+      dataStreamFeedId: "0x0003dc85e8b01946bf9dfd8b0db860129181eb6105a8c8981d9f28e00b6f60d9",
+      dataStreamFeedDecimals: 18,
     },
     SOL: {
       synthetic: true,
