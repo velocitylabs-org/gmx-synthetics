@@ -558,7 +558,6 @@ const nivoMarketsConfig: {
     getNivoMarketsTestnetConfig("THB"),
   ],
   hardhat: [
-    getNivoMarketsLocalConfig("EUR", "USDC"),
     getNivoMarketsLocalConfig("GBP", "USDC"),
     getNivoMarketsLocalConfig("BRL"),
     getNivoMarketsLocalConfig("MXN"),
@@ -572,7 +571,6 @@ const nivoMarketsConfig: {
     getNivoMarketsLocalConfig("THB"),
   ],
   localhost: [
-    getNivoMarketsLocalConfig("EUR", "USDC"),
     getNivoMarketsLocalConfig("GBP", "USDC"),
     getNivoMarketsLocalConfig("BRL"),
     getNivoMarketsLocalConfig("MXN"),
