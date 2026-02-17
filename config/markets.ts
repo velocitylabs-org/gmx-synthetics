@@ -466,8 +466,8 @@ const nivoBaseMarketConfig: Partial<BaseMarketConfig> = {
   negativeMaxPositionImpactFactor: percentageToFloat("1%"), // Max 1% negative impact
   positiveMaxPositionImpactFactor: percentageToFloat("0.5%"), // Max 0.5% positive impact
 
-  negativeSwapImpactFactor: exponentToFloat("5e-10"), // 0.01% for 200,000 USD of imbalance
-  positiveSwapImpactFactor: exponentToFloat("5e-10"), // 0.01% for 200,000 USD of imbalance
+  negativeSwapImpactFactor: bigNumberify(0), // zero for same-token collateral markets (e.g. USDC/USDC)
+  positiveSwapImpactFactor: bigNumberify(0), // zero for same-token collateral markets (e.g. USDC/USDC)
 
   swapFeeFactorForPositiveImpact: bigNumberify(0),
   swapFeeFactorForNegativeImpact: bigNumberify(0),
