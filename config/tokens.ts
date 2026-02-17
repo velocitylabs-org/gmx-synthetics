@@ -94,18 +94,30 @@ const getCurrencyConfig = (dataStreamFeedId: string): SyntheticTokenConfig => {
   };
 };
 
-const getCurrencyTestnetConfig = (): SyntheticTokenConfig => {
+const getCurrencyTestConfig = (dataStreamFeedId?: string): SyntheticTokenConfig => {
   return {
     synthetic: true,
     decimals: 18,
+    ...(dataStreamFeedId && {
+      dataStreamFeedId,
+      dataStreamFeedDecimals: 18,
+      oracleTimestampAdjustment: 1,
+      dataStreamSpreadReductionFactor: percentageToFloat("100%"),
+    }),
   };
 };
 
 const config: {
   [network: string]: TokensConfig;
 } = {
-  arbitrum: {
+  baseSepolia: {
     // NIVO CURRENCIES
+
+    // TMP - Already available Chainlink Data Streams
+    // Pound Sterling
+    GBP: getCurrencyConfig("0x00080ca1eb3009703b00bfb3dd86ebae19a55631e20b18db633559e6175b1580"),
+    // Japanese Yen
+    JPY: getCurrencyConfig("0x0008e10fbb69e00a36425b9a462b17a715fb374b4959e6177214c8c0dd4998ca"),
 
     // Brazilian Real
     BRL: getCurrencyConfig("0x0000000000000000000000000000000000000000000000000000000000000000"), // TODO: Update with the real Chainlink Data Stream ID
@@ -129,23 +141,38 @@ const config: {
     THB: getCurrencyConfig("0x0000000000000000000000000000000000000000000000000000000000000000"), // TODO: Update with the real Chainlink Data Stream ID
 
     // NIVO COLLATERAL
-    USDT: {
-      address: "0xFd086bC7CD5C481DCC9C85ebE478A1C0b69FCbb9",
+    USDC: {
+      address: "0x036CbD53842c5426634e7929541eC2318f3dCF7e",
       decimals: 6,
       transferGasLimit: 200 * 1000,
-      dataStreamFeedId: "0x0003a910a43485e0685ff5d6d366541f5c21150f0634c5b14254392d1a1c06db",
+      dataStreamFeedId: "0x0003dc85e8b01946bf9dfd8b0db860129181eb6105a8c8981d9f28e00b6f60d9",
       dataStreamFeedDecimals: 18,
       oracleTimestampAdjustment: 1,
-      priceFeed: {
-        address: "0x3f3f5dF88dC9F13eac63DF89EC16ef6e7E25DdE7",
-        decimals: 8,
-        heartbeatDuration: (24 + 1) * 60 * 60,
-        stablePriceUsd: decimalToFloat(1),
-      },
-      buybackMaxPriceImpactFactor: LOW_BUYBACK_IMPACT,
+      // priceFeed: {
+      //   address: "0x0153002d20B96532C639313c2d54c3dA09109309",
+      //   decimals: 8,
+      //   heartbeatDuration: (24 + 1) * 60 * 60,
+      //   stablePriceUsd: decimalToFloat(1),
+      // },
+      // buybackMaxPriceImpactFactor: LOW_BUYBACK_IMPACT,
     },
 
-    // GMX TOKENS
+    // WNT
+    WETH: {
+      address: "0x4200000000000000000000000000000000000006", // WETH9 on Base Sepolia doc
+      decimals: 18,
+      wrappedNative: true,
+      transferGasLimit: 200 * 1000,
+      dataStreamFeedId: "0x000359843a543ee2fe414dc14c7e7920ef10f4372990b79d6361cdc0dd1ba782",
+      dataStreamFeedDecimals: 18,
+      // priceFeed: {
+      //   address: "0xd30e2101a97dcbAeBCBC04F14C3f624E67A35165", // ETH / USD
+      //   decimals: 8,
+      //   heartbeatDuration: 144 * 60 * 60,
+      // },
+    },
+  },
+  arbitrum: {
     APE: {
       address: "0x7f9FBf9bDd3F4105C478b996B648FE6e828a1e98",
       decimals: 18,
@@ -1131,6 +1158,21 @@ const config: {
       },
       buybackMaxPriceImpactFactor: LOW_BUYBACK_IMPACT,
     },
+    USDT: {
+      address: "0xFd086bC7CD5C481DCC9C85ebE478A1C0b69FCbb9",
+      decimals: 6,
+      transferGasLimit: 200 * 1000,
+      dataStreamFeedId: "0x0003a910a43485e0685ff5d6d366541f5c21150f0634c5b14254392d1a1c06db",
+      dataStreamFeedDecimals: 18,
+      oracleTimestampAdjustment: 1,
+      priceFeed: {
+        address: "0x3f3f5dF88dC9F13eac63DF89EC16ef6e7E25DdE7",
+        decimals: 8,
+        heartbeatDuration: (24 + 1) * 60 * 60,
+        stablePriceUsd: decimalToFloat(1),
+      },
+      buybackMaxPriceImpactFactor: LOW_BUYBACK_IMPACT,
+    },
     USDe: {
       address: "0x5d3a1Ff2b6BAb83b63cd9AD0787074081a52ef34",
       decimals: 18,
@@ -1458,58 +1500,6 @@ const config: {
     },
   },
   arbitrumSepolia: {
-    // NIVO CURRENCIES
-
-    // Brazilian Real
-    BRL: getCurrencyConfig("0x0000000000000000000000000000000000000000000000000000000000000000"), // TODO: Update with the real Chainlink Data Stream ID
-    // Mexican Peso
-    MXN: getCurrencyConfig("0x0000000000000000000000000000000000000000000000000000000000000000"), // TODO: Update with the real Chainlink Data Stream ID
-    // Colombian Peso
-    COP: getCurrencyConfig("0x0000000000000000000000000000000000000000000000000000000000000000"), // TODO: Update with the real Chainlink Data Stream ID
-    // Indonesian Rupiah
-    IDR: getCurrencyConfig("0x0000000000000000000000000000000000000000000000000000000000000000"), // TODO: Update with the real Chainlink Data Stream ID
-    // Philippine Peso
-    PHP: getCurrencyConfig("0x0000000000000000000000000000000000000000000000000000000000000000"), // TODO: Update with the real Chainlink Data Stream ID
-    // Peruvian Sol
-    PEN: getCurrencyConfig("0x0000000000000000000000000000000000000000000000000000000000000000"), // TODO: Update with the real Chainlink Data Stream ID
-    // Nigerian Naira
-    NGN: getCurrencyConfig("0x0000000000000000000000000000000000000000000000000000000000000000"), // TODO: Update with the real Chainlink Data Stream ID
-    // Kenyan Shilling
-    KES: getCurrencyConfig("0x0000000000000000000000000000000000000000000000000000000000000000"), // TODO: Update with the real Chainlink Data Stream ID
-    // South African Rand
-    ZAR: getCurrencyConfig("0x0000000000000000000000000000000000000000000000000000000000000000"), // TODO: Update with the real Chainlink Data Stream ID
-    // Thai Baht
-    THB: getCurrencyConfig("0x0000000000000000000000000000000000000000000000000000000000000000"), // TODO: Update with the real Chainlink Data Stream ID
-
-    // NIVO COLLATERAL
-    // USDT0: {
-    //   address: "0x6c54BB7A9E203995Bd4577b3bd5200855b02E328", // USDT0 - https://testnet.layerzeroscan.com/application/usdt0
-    //   decimals: 6,
-    //   transferGasLimit: 200 * 1000,
-    //   dataStreamFeedId: "0x00032874077216155926e26c159c1c20a572921371d9de605fe9633e48d136f9", // USDT/USD Chainlink Data Stream
-    //   dataStreamFeedDecimals: 18,
-    //   priceFeed: {
-    //     address: "0x80EDee6f667eCc9f63a0a6f55578F870651f06A4", //  USDT/USD Chainlink price feed
-    //     decimals: 8,
-    //     heartbeatDuration: 144 * 60 * 60,
-    //     stablePriceUsd: decimalToFloat(1),
-    //   },
-    // },
-    "USDT.SG": {
-      address: "0x095f40616FA98Ff75D1a7D0c68685c5ef806f110", // Stargate USDT
-      decimals: 6,
-      transferGasLimit: 200 * 1000,
-      dataStreamFeedId: "0x00032874077216155926e26c159c1c20a572921371d9de605fe9633e48d136f9", //  USDT/USD Chainlink Data Stream
-      dataStreamFeedDecimals: 18,
-      priceFeed: {
-        address: "0x80EDee6f667eCc9f63a0a6f55578F870651f06A4", //  USDT/USD Chainlink price feed
-        decimals: 8,
-        heartbeatDuration: 144 * 60 * 60,
-        stablePriceUsd: decimalToFloat(1),
-      },
-    },
-
-    // GMX TOKENS
     WETH: {
       address: "0x980b62da83eff3d4576c647993b0c1d7faf17c73", // not verified
       decimals: 18,
@@ -1544,6 +1534,19 @@ const config: {
     },
     "USDC.SG": {
       address: "0x3253a335E7bFfB4790Aa4C25C4250d206E9b9773", // Stargate USDC
+      decimals: 6,
+      transferGasLimit: 200 * 1000,
+      dataStreamFeedId: "0x0003dc85e8b01946bf9dfd8b0db860129181eb6105a8c8981d9f28e00b6f60d9", // Circle USDC
+      dataStreamFeedDecimals: 18,
+      priceFeed: {
+        address: "0x0153002d20B96532C639313c2d54c3dA09109309", // Circle USDC
+        decimals: 8,
+        heartbeatDuration: 144 * 60 * 60,
+        stablePriceUsd: decimalToFloat(1),
+      },
+    },
+    "USDT.SG": {
+      address: "0x095f40616FA98Ff75D1a7D0c68685c5ef806f110", // Stargate USDT
       decimals: 6,
       transferGasLimit: 200 * 1000,
       dataStreamFeedId: "0x0003dc85e8b01946bf9dfd8b0db860129181eb6105a8c8981d9f28e00b6f60d9", // Circle USDC
@@ -1793,29 +1796,29 @@ const config: {
 
     // G10 currencies (available on Chainlink Data Streams testnet)
     // Pound Sterling
-    GBP: getCurrencyTestnetConfig(),
+    GBP: getCurrencyTestConfig(),
 
     // Emerging market currencies
     // Brazilian Real
-    BRL: getCurrencyTestnetConfig(),
+    BRL: getCurrencyTestConfig(),
     // Mexican Peso
-    MXN: getCurrencyTestnetConfig(),
+    MXN: getCurrencyTestConfig(),
     // Colombian Peso
-    COP: getCurrencyTestnetConfig(),
+    COP: getCurrencyTestConfig(),
     // Indonesian Rupiah
-    IDR: getCurrencyTestnetConfig(),
+    IDR: getCurrencyTestConfig(),
     // Philippine Peso
-    PHP: getCurrencyTestnetConfig(),
+    PHP: getCurrencyTestConfig(),
     // Peruvian Sol
-    PEN: getCurrencyTestnetConfig(),
+    PEN: getCurrencyTestConfig(),
     // Nigerian Naira
-    NGN: getCurrencyTestnetConfig(),
+    NGN: getCurrencyTestConfig(),
     // Kenyan Shilling
-    KES: getCurrencyTestnetConfig(),
+    KES: getCurrencyTestConfig(),
     // South African Rand
-    ZAR: getCurrencyTestnetConfig(),
+    ZAR: getCurrencyTestConfig(),
     // Thai Baht
-    THB: getCurrencyTestnetConfig(),
+    THB: getCurrencyTestConfig(),
 
     // NIVO COLLATERAL
     USDT: {
@@ -1885,29 +1888,29 @@ const config: {
 
     // G10 currencies (available on Chainlink Data Streams testnet)
     // Pound Sterling
-    GBP: getCurrencyConfig("0x00080ca1eb3009703b00bfb3dd86ebae19a55631e20b18db633559e6175b1580"),
+    GBP: getCurrencyTestConfig("0x00080ca1eb3009703b00bfb3dd86ebae19a55631e20b18db633559e6175b1580"),
 
     // Emerging market currencies (no Chainlink Data Stream feeds yet)
     // Brazilian Real
-    BRL: getCurrencyTestnetConfig(),
+    BRL: getCurrencyTestConfig(),
     // Mexican Peso
-    MXN: getCurrencyTestnetConfig(),
+    MXN: getCurrencyTestConfig(),
     // Colombian Peso
-    COP: getCurrencyTestnetConfig(),
+    COP: getCurrencyTestConfig(),
     // Indonesian Rupiah
-    IDR: getCurrencyTestnetConfig(),
+    IDR: getCurrencyTestConfig(),
     // Philippine Peso
-    PHP: getCurrencyTestnetConfig(),
+    PHP: getCurrencyTestConfig(),
     // Peruvian Sol
-    PEN: getCurrencyTestnetConfig(),
+    PEN: getCurrencyTestConfig(),
     // Nigerian Naira
-    NGN: getCurrencyTestnetConfig(),
+    NGN: getCurrencyTestConfig(),
     // Kenyan Shilling
-    KES: getCurrencyTestnetConfig(),
+    KES: getCurrencyTestConfig(),
     // South African Rand
-    ZAR: getCurrencyTestnetConfig(),
+    ZAR: getCurrencyTestConfig(),
     // Thai Baht
-    THB: getCurrencyTestnetConfig(),
+    THB: getCurrencyTestConfig(),
 
     // NIVO COLLATERAL
     USDT: {

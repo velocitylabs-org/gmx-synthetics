@@ -165,6 +165,28 @@ export default async function ({ network }: HardhatRuntimeEnvironment) {
   };
 
   const networkConfig = {
+    baseSepolia: {
+      feeReceiver: "0x6DdBBB0834084185BeF7Bd1567E835E44683600D", // Deployer
+      holdingAddress: "0x6DdBBB0834084185BeF7Bd1567E835E44683600D", // Deployer
+      // Shared configs
+      maxAutoCancelOrders: 11,
+      maxTotalCallbackGasLimitForAutoCancelOrders: 10_000_000,
+      // Gelato configs
+      gelatoRelayFeeMultiplierFactor: 0,
+      gelatoRelayFeeBaseAmount: 0,
+      relayFeeAddress: ethers.constants.AddressZero,
+      maxRelayFeeUsdForSubaccount: 0,
+      // Fee Handler configs
+      positionFeeReceiverFactor: 0,
+      swapFeeReceiverFactor: 0,
+      borrowingFeeReceiverFactor: 0,
+      liquidationFeeReceiverFactor: 0,
+      // Multichain configs
+      multichainProviders: {},
+      multichainEndpoints: {}, // "0x6EDCE65403992e310A62460808c4b910D972f10f": true, // LZ Endpoint
+      srcChainIds: {},
+      eids: {},
+    },
     arbitrumGoerli: {},
     arbitrumSepolia: {
       maxAutoCancelOrders: 11,

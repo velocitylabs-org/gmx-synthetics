@@ -1,3 +1,4 @@
+import { HardhatRuntimeEnvironment } from "hardhat/types";
 import { createDeployFunction } from "../utils/deploy";
 
 const func = createDeployFunction({
@@ -8,5 +9,9 @@ const func = createDeployFunction({
   },
   id: "EdgeDataStreamVerifier_6",
 });
+
+func.skip = async (hre: HardhatRuntimeEnvironment) => {
+  return ["baseSepolia"].includes(hre.network.name);
+};
 
 export default func;

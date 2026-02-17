@@ -27,7 +27,7 @@ const func = createDeployFunction({
 });
 
 func.skip = async ({ network }) => {
-  return network.name === "botanix";
+  return ["botanix", "baseSepolia"].includes(network.name);
 };
 
 func.dependencies = func.dependencies.concat(["MockRiskOracle"]);

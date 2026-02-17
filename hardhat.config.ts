@@ -133,7 +133,17 @@ const getEtherscanApiKey = () => {
 };
 
 const getEnvAccounts = (chainName?: string) => {
-  const { ACCOUNT_KEY, ACCOUNT_KEY_FILE, ARBITRUM_SEPOLIA_ACCOUNT_KEY, ARBITRUM_ACCOUNT_KEY } = process.env;
+  const {
+    ACCOUNT_KEY,
+    ACCOUNT_KEY_FILE,
+    ARBITRUM_SEPOLIA_ACCOUNT_KEY,
+    ARBITRUM_ACCOUNT_KEY,
+    BASE_SEPOLIA_ACCOUNT_KEY,
+  } = process.env;
+
+  if (chainName === "baseSepolia" && BASE_SEPOLIA_ACCOUNT_KEY) {
+    return [BASE_SEPOLIA_ACCOUNT_KEY];
+  }
 
   if (chainName === "arbitrumSepolia" && ARBITRUM_SEPOLIA_ACCOUNT_KEY) {
     return [ARBITRUM_SEPOLIA_ACCOUNT_KEY];
@@ -348,6 +358,14 @@ const config: HardhatUserConfig = {
         urls: {
           apiURL: "https://api.etherscan.io/v2/api",
           browserURL: "https://sepolia.arbiscan.io/",
+        },
+      },
+      {
+        network: "baseSepolia",
+        chainId: 84532,
+        urls: {
+          apiURL: "https://api.etherscan.io/v2/api?chainid=84532",
+          browserURL: "https://sepolia.basescan.org",
         },
       },
       {

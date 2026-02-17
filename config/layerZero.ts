@@ -8,6 +8,9 @@ export default async function (hre: HardhatRuntimeEnvironment): Promise<LayerZer
   const config: { [network: string]: LayerZeroEndpointConfig } = {
     hardhat: {},
     localhost: {},
+    baseSepolia: {
+      endpoint: "0x6EDCE65403992e310A62460808c4b910D972f10f",
+    },
     arbitrum: {
       endpoint: "0x1a44076050125825900e736c501f859c50fE728c",
     },
