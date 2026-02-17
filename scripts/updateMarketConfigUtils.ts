@@ -765,7 +765,8 @@ export async function updateMarketConfig({
     console.info("Add INCLUDE_KEEPER_BASE_KEYS=true to include them\n");
   }
 
-  await handleConfigChanges(configItems, write, 100);
+  const batchSize = hre.network.name === "localhost" ? 20 : 100;
+  await handleConfigChanges(configItems, write, batchSize);
 }
 
 function getIgnoredParameterNames(ignoredParams) {

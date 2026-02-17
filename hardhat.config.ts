@@ -212,6 +212,7 @@ const config: HardhatUserConfig = {
     localhost: {
       saveDeployments: true,
       chainId: 31337,
+      blockGasLimit: 90_000_000,
     },
     arbitrum: {
       url: getRpcUrl("arbitrum"),
