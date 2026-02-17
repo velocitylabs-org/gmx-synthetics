@@ -712,6 +712,58 @@ const recommendedMarketConfig = {
       negativeSwapImpactFactor: exponentToFloat("5e-9").div(2),
     },
   },
+  baseSepolia: {
+    // expectedPositionImpactRatio is (negative / positive) * BASIS_POINTS_DIVISOR (10_000)
+    // nivoBaseMarketConfig: negative = 1e-9, positive = 5e-10 => ratio = 2x => 20_000
+    JPY: {
+      negativePositionImpactFactor: exponentToFloat("1e-9"),
+      expectedPositionImpactRatio: 20_000,
+    },
+    GBP: {
+      negativePositionImpactFactor: exponentToFloat("1e-9"),
+      expectedPositionImpactRatio: 20_000,
+    },
+    BRL: {
+      negativePositionImpactFactor: exponentToFloat("1e-9"),
+      expectedPositionImpactRatio: 20_000,
+    },
+    MXN: {
+      negativePositionImpactFactor: exponentToFloat("1e-9"),
+      expectedPositionImpactRatio: 20_000,
+    },
+    COP: {
+      negativePositionImpactFactor: exponentToFloat("1e-9"),
+      expectedPositionImpactRatio: 20_000,
+    },
+    IDR: {
+      negativePositionImpactFactor: exponentToFloat("1e-9"),
+      expectedPositionImpactRatio: 20_000,
+    },
+    PHP: {
+      negativePositionImpactFactor: exponentToFloat("1e-9"),
+      expectedPositionImpactRatio: 20_000,
+    },
+    PEN: {
+      negativePositionImpactFactor: exponentToFloat("1e-9"),
+      expectedPositionImpactRatio: 20_000,
+    },
+    NGN: {
+      negativePositionImpactFactor: exponentToFloat("1e-9"),
+      expectedPositionImpactRatio: 20_000,
+    },
+    KES: {
+      negativePositionImpactFactor: exponentToFloat("1e-9"),
+      expectedPositionImpactRatio: 20_000,
+    },
+    ZAR: {
+      negativePositionImpactFactor: exponentToFloat("1e-9"),
+      expectedPositionImpactRatio: 20_000,
+    },
+    THB: {
+      negativePositionImpactFactor: exponentToFloat("1e-9"),
+      expectedPositionImpactRatio: 20_000,
+    },
+  },
 };
 
 const configTokenMapping = {
