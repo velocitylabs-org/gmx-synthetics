@@ -13,18 +13,23 @@ export type RealtimeFeedReport = {
   medianPrice: BigNumber;
   minPrice: BigNumber;
   maxPrice: BigNumber;
-  minBlockNumber: number;
-  maxBlockNumber: number;
-  maxBlockHash: string;
-  maxBlockTimestamp: number;
   blob: string;
+};
+
+type ReportLatestResponse = {
+  report: {
+    feedID: string;
+    validFromTimestamp: number;
+    observationsTimestamp: number;
+    fullReport: string;
+  };
 };
 
 function getBaseUrl() {
   if (hre.network.name === "arbitrum") {
     return "https://dataengine.chain.link";
-  } else if (hre.network.name === "arbitrumGoerli" || hre.network.name === "arbitrumSepolia") {
-    return "https://mercury-arbitrum-testnet.chain.link";
+  } else if (hre.network.name === "baseSepolia" || hre.network.name === "arbitrumSepolia") {
+    return "https://api.testnet-dataengine.chain.link";
   }
   throw new Error("Unsupported network");
 }
@@ -32,18 +37,12 @@ function getBaseUrl() {
 function generateHmacString(url: string, body: string, timestamp: number, clientId: string) {
   const method = "GET";
   const parsedUrl = urlLib.parse(url);
-
   const bodyDigest = crypto.createHash("sha256").update(body).digest("hex");
-
-  const authString = `${method} ${parsedUrl.path} ${bodyDigest} ${clientId} ${timestamp}`;
-  return authString;
+  return `${method} ${parsedUrl.path} ${bodyDigest} ${clientId} ${timestamp}`;
 }
 
 function computeHmacSignature(message: string, clientSecret: string) {
-  return crypto
-    .createHmac("sha256", clientSecret as string)
-    .update(message)
-    .digest("hex");
+  return crypto.createHmac("sha256", clientSecret).update(message).digest("hex");
 }
 
 function signRequest(url: string, clientId: string, clientSecret: string) {
@@ -55,16 +54,14 @@ function signRequest(url: string, clientId: string, clientSecret: string) {
   const signatureString = generateHmacString(url, "", timestamp, clientId);
   const signature = computeHmacSignature(signatureString, clientSecret);
 
-  return {
-    timestamp,
-    signature,
-  };
+  return { timestamp, signature };
 }
 
-type ClientBulkResponse = {
-  chainlinkBlob: string[];
-};
-
+/**
+ * Decode a Chainlink Data Streams signed report blob.
+ * Supports both v1/v2 (block-based) and v3+ (fee-based) report schemas,
+ * detected automatically from the feedId 2-byte prefix.
+ */
 export function decodeBlob(blob: string): {
   reportContext: string[];
   report: RealtimeFeedReport;
@@ -77,43 +74,72 @@ export function decodeBlob(blob: string): {
     blob
   );
 
-  const [
-    feedId,
-    observationTimestamp,
-    medianPrice,
-    minPrice,
-    maxPrice,
-    maxBlockNumber,
-    maxBlockHash,
-    minBlockNumber,
-    maxBlockTimestamp,
-  ] = coder.decode(
-    [
-      "bytes32", // feed id
-      "uint32", // observation timestamp
-      "int192", // median
-      "int192", // bid
-      "int192", // ask
-      "uint64", // max block number
-      "bytes32", // max block hash
-      "uint64", // min block number
-      "uint64", // max block timestamp
-    ],
+  const feedId = coder.decode(["bytes32"], reportData)[0] as string;
+  const versionPrefix = parseInt(feedId.slice(2, 6), 16);
+
+  if (versionPrefix <= 2) {
+    const [_feedId, observationTimestamp, medianPrice, bid, ask] = coder.decode(
+      ["bytes32", "uint32", "int192", "int192", "int192", "uint64", "bytes32", "uint64", "uint64"],
+      reportData
+    );
+
+    return {
+      reportContext,
+      report: { feedId: _feedId, observationTimestamp, medianPrice, minPrice: bid, maxPrice: ask, blob },
+      rs,
+      ss,
+      rawVs,
+    };
+  }
+
+  // v0x0008 (RWA Standard): has lastUpdateTimestamp, midPrice, marketStatus (no bid/ask)
+  if (versionPrefix === 8) {
+    const decoded = coder.decode(
+      ["bytes32", "uint32", "uint32", "uint192", "uint192", "uint32", "uint64", "int192", "uint32"],
+      reportData
+    );
+
+    const _feedId = decoded[0];
+    const observationsTimestamp = decoded[2];
+    const midPrice = decoded[7];
+
+    // RWA feeds only have midPrice, use it for both bid and ask
+    return {
+      reportContext,
+      report: {
+        feedId: _feedId,
+        observationTimestamp: observationsTimestamp,
+        medianPrice: midPrice,
+        minPrice: midPrice,
+        maxPrice: midPrice,
+        blob,
+      },
+      rs,
+      ss,
+      rawVs,
+    };
+  }
+
+  // v3+ schema (0x0003, etc.): fee fields with bid/ask
+  const decoded = coder.decode(
+    ["bytes32", "uint32", "uint32", "uint192", "uint192", "uint32", "int192", "int192", "int192"],
     reportData
   );
+
+  const _feedId = decoded[0];
+  const observationsTimestamp = decoded[2];
+  const benchmarkPrice = decoded[6];
+  const bid = decoded[7];
+  const ask = decoded[8];
 
   return {
     reportContext,
     report: {
-      feedId,
-      observationTimestamp,
-      medianPrice,
-      minPrice,
-      maxPrice,
-      minBlockNumber: minBlockNumber.toNumber(),
-      maxBlockNumber: maxBlockNumber.toNumber(),
-      maxBlockHash,
-      maxBlockTimestamp: maxBlockTimestamp.toNumber(),
+      feedId: _feedId,
+      observationTimestamp: observationsTimestamp,
+      medianPrice: benchmarkPrice,
+      minPrice: bid,
+      maxPrice: ask,
       blob,
     },
     rs,
@@ -122,26 +148,26 @@ export function decodeBlob(blob: string): {
   };
 }
 
-export async function fetchRealtimeFeedReport({ feedId, blockNumber, clientId, clientSecret }) {
+export async function fetchRealtimeFeedReport({ feedId, clientId, clientSecret }) {
   const baseUrl = getBaseUrl();
-  const url = `${baseUrl}/client/bulk?feedIdHex=${feedId}&limit=20&afterBlockNumber=${blockNumber - 10}`;
+  const feedIDParam = feedId.startsWith("0x") ? feedId : `0x${feedId}`;
+  const url = `${baseUrl}/api/v1/reports/latest?feedID=${feedIDParam}`;
   const { timestamp, signature } = signRequest(url, clientId, clientSecret);
 
-  const headers = {
-    Authorization: clientId,
-    "X-Authorization-Timestamp": String(timestamp),
-    "X-Authorization-Signature-SHA256": signature,
-  };
-
   const res = await got(url, {
-    headers: headers,
+    headers: {
+      Authorization: clientId,
+      "X-Authorization-Timestamp": String(timestamp),
+      "X-Authorization-Signature-SHA256": signature,
+    },
     timeout: 30000,
   }).json();
-  const data = res as ClientBulkResponse;
-  const reports = data.chainlinkBlob.map((blob) => {
-    const decoded = decodeBlob(blob);
-    return decoded.report;
-  });
 
-  return reports[reports.length - 1];
+  const data = res as ReportLatestResponse;
+  const blob = data.report?.fullReport;
+  if (!blob) {
+    throw new Error("No fullReport in Data Streams API response");
+  }
+
+  return decodeBlob(blob).report;
 }
