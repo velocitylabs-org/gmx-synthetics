@@ -39,7 +39,7 @@ const func = async ({ getNamedAccounts, deployments, gmx, network }: HardhatRunt
     tokens[tokenSymbol].address = address;
     if (newlyDeployed) {
       if (token.wrappedNative && !network.live) {
-        await setBalance(address, expandDecimals(1000, token.decimals));
+        await setBalance(address.toLowerCase(), expandDecimals(1000, token.decimals));
       }
 
       if (!token.wrappedNative) {

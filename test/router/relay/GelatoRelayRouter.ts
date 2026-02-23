@@ -101,8 +101,9 @@ describe("GelatoRelayRouter", () => {
       dataList: [],
     };
 
-    await impersonateAccount(GELATO_RELAY_ADDRESS);
-    await setBalance(GELATO_RELAY_ADDRESS, expandDecimals(100, 18));
+    const relayAddr = GELATO_RELAY_ADDRESS.toLowerCase();
+    await impersonateAccount(relayAddr);
+    await setBalance(relayAddr, expandDecimals(100, 18));
     await usdc.mint(user0.address, expandDecimals(10000, 6));
     await wnt.connect(user0).deposit({ value: expandDecimals(1000, 18) });
 
@@ -430,7 +431,7 @@ describe("GelatoRelayRouter", () => {
             expect(userWntBalanceAfter).eq(userWntBalanceBefore.sub(expandDecimals(3, 15)));
           }
 
-          await stopImpersonatingAccount(GELATO_RELAY_ADDRESS);
+          await stopImpersonatingAccount(GELATO_RELAY_ADDRESS.toLowerCase());
 
           await logGasUsage({
             tx,
@@ -499,7 +500,7 @@ describe("GelatoRelayRouter", () => {
       const order2 = await reader.getOrder(dataStore.address, orderKeys[1]);
       expect(order2.addresses.account).eq(user0.address);
 
-      await stopImpersonatingAccount(GELATO_RELAY_ADDRESS);
+      await stopImpersonatingAccount(GELATO_RELAY_ADDRESS.toLowerCase());
     });
 
     it("sponsoredCall: skips signature validation in gas estimation if tx.origin is GMX_SIMULATION_ORIGIN", async () => {

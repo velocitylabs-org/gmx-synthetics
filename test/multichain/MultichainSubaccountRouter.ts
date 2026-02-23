@@ -118,8 +118,9 @@ describe("MultichainSubaccountRouter", () => {
       await wnt.connect(user1).approve(router.address, expandDecimals(100, 18));
     };
 
-    await impersonateAccount(GELATO_RELAY_ADDRESS);
-    await setBalance(GELATO_RELAY_ADDRESS, expandDecimals(100, 18));
+    const relayAddr = GELATO_RELAY_ADDRESS.toLowerCase();
+    await impersonateAccount(relayAddr);
+    await setBalance(relayAddr, expandDecimals(100, 18));
 
     await dataStore.setUint(keys.MAX_RELAY_FEE_SWAP_USD_FOR_SUBACCOUNT, decimalToFloat(100));
 
@@ -655,7 +656,7 @@ describe("MultichainSubaccountRouter", () => {
       expect(order.flags.shouldUnwrapNativeToken).eq(true);
       expect(order.flags.isFrozen).eq(false);
 
-      await stopImpersonatingAccount(GELATO_RELAY_ADDRESS);
+      await stopImpersonatingAccount(GELATO_RELAY_ADDRESS.toLowerCase());
 
       await logGasUsage({
         tx,
