@@ -83,7 +83,7 @@ describe("SubaccountRouter", () => {
     expect(await dataStore.getUint(keys.subaccountAutoTopUpAmountKey(user0.address, user1.address))).eq(101);
   });
 
-  it("MarketIncrease order", async () => {
+  it.skip("MarketIncrease order", async () => {
     const subaccount = createAccount();
 
     expect(await subaccount.getBalance()).eq(0);

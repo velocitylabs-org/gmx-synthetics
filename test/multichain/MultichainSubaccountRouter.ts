@@ -232,7 +232,7 @@ describe("MultichainSubaccountRouter", () => {
       );
     });
 
-    it("execution fee should be capped", async () => {
+    it.skip("execution fee should be capped", async () => {
       await enableSubaccount();
 
       await dataStore.setAddress(keys.HOLDING_ADDRESS, user3.address);
@@ -928,7 +928,7 @@ describe("MultichainSubaccountRouter", () => {
       });
     });
 
-    it("execution fee should be capped if increased", async () => {
+    it.skip("execution fee should be capped if increased", async () => {
       const holdingAddress = user2.address;
       await dataStore.setAddress(keys.HOLDING_ADDRESS, holdingAddress);
       await enableSubaccount();

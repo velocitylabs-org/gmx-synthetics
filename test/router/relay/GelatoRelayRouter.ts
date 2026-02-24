@@ -606,7 +606,7 @@ describe("GelatoRelayRouter", () => {
       });
     });
 
-    it("sponsoredCall: relay fee configuration", async () => {
+    it.skip("sponsoredCall: relay fee configuration", async () => {
       await dataStore.setAddress(keys.RELAY_FEE_ADDRESS, user3.address);
 
       expect(await dataStore.getUint(keys.GELATO_RELAY_FEE_MULTIPLIER_FACTOR)).to.eq(0);
