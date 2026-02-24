@@ -2,15 +2,18 @@
 
 pragma solidity ^0.8.0;
 
-import "../data/DataStore.sol";
-import "../data/Keys.sol";
-import "./IOracleProvider.sol";
-import "./IChainlinkDataStreamVerifier.sol";
-import "../utils/Precision.sol";
-import "../chain/Chain.sol";
+import { IERC20 } from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import { DataStore } from "../data/DataStore.sol";
+import { Keys } from "../data/Keys.sol";
+import { Errors } from "../error/Errors.sol";
+import { OracleUtils } from "./OracleUtils.sol";
+import { IOracleProvider } from "./IOracleProvider.sol";
+import { IChainlinkDataStreamVerifier } from "./IChainlinkDataStreamVerifier.sol";
+import { IChainlinkDataStreamFeeManager, FeeAsset } from "./IChainlinkDataStreamFeeManager.sol";
+import { Precision } from "../utils/Precision.sol";
+import { Chain } from "../chain/Chain.sol";
 
 contract ChainlinkDataStreamProvider is IOracleProvider {
-
     DataStore public immutable dataStore;
     address public immutable oracle;
     IChainlinkDataStreamVerifier public immutable verifier;
@@ -36,11 +39,7 @@ contract ChainlinkDataStreamProvider is IOracleProvider {
         _;
     }
 
-    constructor(
-        DataStore _dataStore,
-        address _oracle,
-        IChainlinkDataStreamVerifier _verifier
-    ) {
+    constructor(DataStore _dataStore, address _oracle, IChainlinkDataStreamVerifier _verifier) {
         dataStore = _dataStore;
         oracle = _oracle;
         verifier = _verifier;
@@ -58,12 +57,11 @@ contract ChainlinkDataStreamProvider is IOracleProvider {
         address token,
         bytes memory data
     ) external onlyOracle returns (OracleUtils.ValidatedPrice memory) {
-
         bytes32 feedId = dataStore.getBytes32(Keys.dataStreamIdKey(token));
         if (feedId == bytes32(0)) {
             revert Errors.EmptyDataStreamFeedId(token);
         }
-
+        _ensureAllowance();
         bytes memory payloadParameter = _getPayloadParameter();
         bytes memory verifierResponse = verifier.verify(data, payloadParameter);
 
@@ -98,13 +96,14 @@ contract ChainlinkDataStreamProvider is IOracleProvider {
             }
         }
 
-        return OracleUtils.ValidatedPrice({
-            token: token,
-            min: adjustedBidPrice,
-            max: adjustedAskPrice,
-            timestamp: report.observationsTimestamp,
-            provider: address(this)
-        });
+        return
+            OracleUtils.ValidatedPrice({
+                token: token,
+                min: adjustedBidPrice,
+                max: adjustedAskPrice,
+                timestamp: report.observationsTimestamp,
+                provider: address(this)
+            });
     }
 
     function _getDataStreamSpreadReductionFactor(address token) internal view returns (uint256) {
@@ -135,5 +134,38 @@ contract ChainlinkDataStreamProvider is IOracleProvider {
         }
 
         return abi.encode(feeToken);
+    }
+
+    /**
+     * @notice Ensures allowance for the verifier's RewardManager before verify().
+     * @dev When s_feeManager() is non-zero, validates CHAINLINK_PAYMENT_TOKEN matches the
+     *      FeeManager's LINK address and approves allowance to the RewardManager proxy.
+     */
+    function _ensureAllowance() internal {
+        address feeToken = dataStore.getAddress(Keys.CHAINLINK_PAYMENT_TOKEN);
+        if (feeToken == address(0)) {
+            return;
+        }
+
+        address feeManagerAddr = verifier.s_feeManager();
+        if (feeManagerAddr == address(0)) {
+            return;
+        }
+
+        IChainlinkDataStreamFeeManager feeManager = IChainlinkDataStreamFeeManager(feeManagerAddr);
+        if (feeToken != feeManager.i_linkAddress()) {
+            revert Errors.InvalidChainlinkFeeToken(feeToken, feeManager.i_linkAddress());
+        }
+
+        address rewardManager = feeManager.i_rewardManager();
+
+        uint256 threshold = dataStore.getUint(Keys.CHAINLINK_PAYMENT_ALLOWANCE_THRESHOLD);
+        if (threshold == 0) {
+            threshold = 100 * 10 ** 18; // default 100 LINK
+        }
+        uint256 currentAllowance = IERC20(feeToken).allowance(address(this), rewardManager);
+        if (currentAllowance < threshold) {
+            IERC20(feeToken).approve(rewardManager, threshold);
+        }
     }
 }

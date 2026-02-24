@@ -199,6 +199,8 @@ library Keys {
     bytes32 public constant ORACLE_PROVIDER_MIN_CHANGE_DELAY = keccak256(abi.encode("ORACLE_PROVIDER_MIN_CHANGE_DELAY"));
     // @dev key for the chainlink payment token
     bytes32 public constant CHAINLINK_PAYMENT_TOKEN = keccak256(abi.encode("CHAINLINK_PAYMENT_TOKEN"));
+    // @dev key for the min LINK allowance
+    bytes32 public constant CHAINLINK_PAYMENT_ALLOWANCE_THRESHOLD = keccak256(abi.encode("CHAINLINK_PAYMENT_ALLOWANCE_THRESHOLD"));
     // @dev key for the sequencer grace duration
     bytes32 public constant SEQUENCER_GRACE_DURATION = keccak256(abi.encode("SEQUENCER_GRACE_DURATION"));
 
