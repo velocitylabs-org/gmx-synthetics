@@ -1,7 +1,7 @@
 import hre from "hardhat";
 import { Signer } from "ethers";
 
-import { getMarketTokenAddress, DEFAULT_MARKET_TYPE } from "../utils/market";
+import { fetchMarketAddress, DEFAULT_MARKET_TYPE } from "../utils/market";
 import { bigNumberify, expandDecimals } from "../utils/math";
 
 import { WNT, ExchangeRouter, MintableToken } from "../typechain-types";
@@ -82,8 +82,8 @@ async function main() {
   }
 
   // For Nivo FX markets, both longToken and shortToken are the same collateral token (USDC)
-  const longTokenAmount = expandDecimals(5, 6); // 5 USDC
-  const shortTokenAmount = expandDecimals(5, 6); // 5 USDC
+  const longTokenAmount = expandDecimals(10, 6); // 10 USDC
+  const shortTokenAmount = expandDecimals(10, 6); // 10 USDC
 
   const collateralTokenAllowance = await collateralToken.allowance(wallet.address, router.address);
   console.log("Collateral token address %s", collateralToken.address);
@@ -104,16 +104,16 @@ async function main() {
     );
   }
 
-  // For Nivo FX markets: indexToken = FX currency (BRL), longToken = USDC, shortToken = USDC
-  const syntheticMarketAddress = await getMarketTokenAddress(
+  // For Nivo FX markets: indexToken = FX currency (GBP), longToken = USDC, shortToken = USDC
+  const syntheticMarketAddress = await fetchMarketAddress(
     syntheticFx.address,
     collateralToken.address,
     collateralToken.address,
-    DEFAULT_MARKET_TYPE,
-    marketFactory.address,
-    roleStore.address,
-    dataStore.address
+    DEFAULT_MARKET_TYPE
   );
+  if (!syntheticMarketAddress || syntheticMarketAddress === ethers.constants.AddressZero) {
+    throw new Error(`Market not found in DataStore for GBP/USDC.`);
+  }
   console.log("market %s", syntheticMarketAddress);
 
   const params: IDepositUtils.CreateDepositParamsStruct = {
