@@ -231,6 +231,7 @@ library Errors {
     error GmInvalidMinMaxBlockNumber(uint256 minOracleBlockNumber, uint256 maxOracleBlockNumber);
     error EmptyDataStreamFeedId(address token);
     error InvalidDataStreamFeedId(address token, bytes32 feedId, bytes32 expectedFeedId);
+    error InvalidDataStreamReportVersion(address token, bytes32 feedId, bytes2 version);
     error InvalidDataStreamBidAsk(address token, int192 bid, int192 ask);
     error InvalidDataStreamPrices(address token, int192 bid, int192 ask);
     error MaxPriceAgeExceeded(uint256 oracleTimestamp, uint256 currentTimestamp);
