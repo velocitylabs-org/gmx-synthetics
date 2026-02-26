@@ -90,7 +90,7 @@ contract ChainlinkDataStreamProvider is IOracleProvider {
         } else if (version == VERSION_V8) {
             return _processV8Report(token, feedId, verifierResponse);
         } else {
-            revert Errors.InvalidDataStreamFeedId(token, feedId, feedId);
+            revert Errors.InvalidDataStreamFeedId(token, feedId, version);
         }
     }
 
