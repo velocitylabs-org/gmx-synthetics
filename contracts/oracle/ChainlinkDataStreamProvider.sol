@@ -18,7 +18,7 @@ contract ChainlinkDataStreamProvider is IOracleProvider {
     address public immutable oracle;
     IChainlinkDataStreamVerifier public immutable verifier;
 
-    // V3: Crypto feeds (feedId prefix 0x0003) — bid/ask spread
+    // V3 Crypto feeds (feedId prefix 0x0003) bid/ask spread
     // https://docs.chain.link/data-streams/reference/report-schema-v3
     struct ReportV3 {
         bytes32 feedId;
@@ -32,7 +32,7 @@ contract ChainlinkDataStreamProvider is IOracleProvider {
         int192 ask;
     }
 
-    // V8: RWA/forex feeds (feedId prefix 0x0008) — single midPrice, no bid/ask
+    // V8 RWA/forex feeds (feedId prefix 0x0008) single midPrice, no bid/ask
     // https://docs.chain.link/data-streams/reference/report-schema-v8
     struct ReportV8 {
         bytes32 feedId;
@@ -156,7 +156,7 @@ contract ChainlinkDataStreamProvider is IOracleProvider {
         uint256 precision = _getDataStreamMultiplier(token);
         uint256 adjustedPrice = Precision.mulDiv(uint256(uint192(report.midPrice)), precision, Precision.FLOAT_PRECISION);
 
-        // V8 has no bid/ask spread — midPrice used for both min and max
+        // V8 has no bid/ask spread midPrice used for both min and max
         return OracleUtils.ValidatedPrice({
             token: token,
             min: adjustedPrice,
