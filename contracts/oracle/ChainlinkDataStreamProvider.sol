@@ -18,19 +18,35 @@ contract ChainlinkDataStreamProvider is IOracleProvider {
     address public immutable oracle;
     IChainlinkDataStreamVerifier public immutable verifier;
 
-    // bid: min price, highest buy price
-    // ask: max price, lowest sell price
-    struct Report {
-        bytes32 feedId; // The feed ID the report has data for
-        uint32 validFromTimestamp; // Earliest timestamp for which price is applicable
-        uint32 observationsTimestamp; // Latest timestamp for which price is applicable
-        uint192 nativeFee; // Base cost to validate a transaction using the report, denominated in the chain’s native token (WETH/ETH)
-        uint192 linkFee; // Base cost to validate a transaction using the report, denominated in LINK
-        uint32 expiresAt; // Latest timestamp where the report can be verified onchain
-        int192 price; // DON consensus median price, carried to 8 decimal places
-        int192 bid; // Simulated price impact of a buy order up to the X% depth of liquidity utilisation
-        int192 ask; // Simulated price impact of a sell order up to the X% depth of liquidity utilisation
+    // V3 Crypto feeds (feedId prefix 0x0003) bid/ask spread
+    // https://docs.chain.link/data-streams/reference/report-schema-v3
+    struct ReportV3 {
+        bytes32 feedId;
+        uint32 validFromTimestamp;
+        uint32 observationsTimestamp;
+        uint192 nativeFee;
+        uint192 linkFee;
+        uint32 expiresAt;
+        int192 price;
+        int192 bid;
+        int192 ask;
     }
+
+    // V8 RWA/forex feeds (feedId prefix 0x0008) single midPrice, no bid/ask
+    // https://docs.chain.link/data-streams/reference/report-schema-v8
+    struct ReportV8 {
+        bytes32 feedId;
+        uint32 validFromTimestamp;
+        uint32 observationsTimestamp;
+        uint192 nativeFee;
+        uint192 linkFee;
+        uint32 expiresAt;
+        uint64 lastUpdateTimestamp;
+        int192 midPrice;
+        uint32 marketStatus;
+    }
+
+    bytes2 private constant VERSION_V8 = 0x0008;
 
     modifier onlyOracle() {
         if (msg.sender != oracle) {
@@ -65,7 +81,23 @@ contract ChainlinkDataStreamProvider is IOracleProvider {
         bytes memory payloadParameter = _getPayloadParameter();
         bytes memory verifierResponse = verifier.verify(data, payloadParameter);
 
-        Report memory report = abi.decode(verifierResponse, (Report));
+        // Detect report schema from feedId version prefix (first 2 bytes)
+        bytes2 version = bytes2(feedId);
+
+        if (version == VERSION_V8) {
+            return _processV8Report(token, feedId, verifierResponse);
+        }
+
+        // Default V3 schema
+        return _processV3Report(token, feedId, verifierResponse);
+    }
+
+    function _processV3Report(
+        address token,
+        bytes32 feedId,
+        bytes memory verifierResponse
+    ) internal view returns (OracleUtils.ValidatedPrice memory) {
+        ReportV3 memory report = abi.decode(verifierResponse, (ReportV3));
 
         if (feedId != report.feedId) {
             revert Errors.InvalidDataStreamFeedId(token, report.feedId, feedId);
@@ -85,7 +117,6 @@ contract ChainlinkDataStreamProvider is IOracleProvider {
 
         uint256 spreadReductionFactor = _getDataStreamSpreadReductionFactor(token);
         if (spreadReductionFactor != 0) {
-            // small optimization for full reduction
             if (spreadReductionFactor == Precision.FLOAT_PRECISION) {
                 adjustedBidPrice = (adjustedAskPrice + adjustedBidPrice) / 2;
                 adjustedAskPrice = adjustedBidPrice;
@@ -96,14 +127,41 @@ contract ChainlinkDataStreamProvider is IOracleProvider {
             }
         }
 
-        return
-            OracleUtils.ValidatedPrice({
-                token: token,
-                min: adjustedBidPrice,
-                max: adjustedAskPrice,
-                timestamp: report.observationsTimestamp,
-                provider: address(this)
-            });
+        return OracleUtils.ValidatedPrice({
+            token: token,
+            min: adjustedBidPrice,
+            max: adjustedAskPrice,
+            timestamp: report.observationsTimestamp,
+            provider: address(this)
+        });
+    }
+
+    function _processV8Report(
+        address token,
+        bytes32 feedId,
+        bytes memory verifierResponse
+    ) internal view returns (OracleUtils.ValidatedPrice memory) {
+        ReportV8 memory report = abi.decode(verifierResponse, (ReportV8));
+
+        if (feedId != report.feedId) {
+            revert Errors.InvalidDataStreamFeedId(token, report.feedId, feedId);
+        }
+
+        if (report.midPrice <= 0) {
+            revert Errors.InvalidDataStreamPrices(token, report.midPrice, report.midPrice);
+        }
+
+        uint256 precision = _getDataStreamMultiplier(token);
+        uint256 adjustedPrice = Precision.mulDiv(uint256(uint192(report.midPrice)), precision, Precision.FLOAT_PRECISION);
+
+        // V8 has no bid/ask spread midPrice used for both min and max
+        return OracleUtils.ValidatedPrice({
+            token: token,
+            min: adjustedPrice,
+            max: adjustedPrice,
+            timestamp: report.observationsTimestamp,
+            provider: address(this)
+        });
     }
 
     function _getDataStreamSpreadReductionFactor(address token) internal view returns (uint256) {
