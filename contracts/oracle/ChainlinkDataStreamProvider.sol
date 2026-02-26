@@ -46,7 +46,6 @@ contract ChainlinkDataStreamProvider is IOracleProvider {
         uint32 marketStatus;
     }
 
-    bytes2 private constant VERSION_V3 = 0x0003;
     bytes2 private constant VERSION_V8 = 0x0008;
 
     modifier onlyOracle() {
@@ -85,13 +84,12 @@ contract ChainlinkDataStreamProvider is IOracleProvider {
         // Detect report schema from feedId version prefix (first 2 bytes)
         bytes2 version = bytes2(feedId);
 
-        if (version == VERSION_V3) {
-            return _processV3Report(token, feedId, verifierResponse);
-        } else if (version == VERSION_V8) {
+        if (version == VERSION_V8) {
             return _processV8Report(token, feedId, verifierResponse);
-        } else {
-            revert Errors.InvalidDataStreamReportVersion(token, feedId, version);
         }
+
+        // Default V3 schema
+        return _processV3Report(token, feedId, verifierResponse);
     }
 
     function _processV3Report(
