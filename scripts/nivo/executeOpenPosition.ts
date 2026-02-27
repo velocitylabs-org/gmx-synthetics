@@ -1,6 +1,6 @@
 import hre from "hardhat";
 import { getOrderKeys } from "../../utils/order";
-import { fetchSignedPricesBaseSepolia } from "../../utils/pricesBaseSepolia";
+import { fetchSignedPricesBaseSepolia } from "./chainlinkProvider/signedPricesBaseSepolia";
 import { hashString } from "../../utils/hash";
 
 const { ethers } = hre;
@@ -85,7 +85,7 @@ async function main() {
     }
 
     providers.push(chainlinkDataStreamProvider.address);
-    data.push(priceData.blob);
+    data.push(priceData.report);
 
     console.log(`Token ${token}: min=${priceData.min.toString()}, max=${priceData.max.toString()}`);
   }

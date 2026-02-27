@@ -1,6 +1,6 @@
 import hre from "hardhat";
 import { getDepositKeys } from "../../utils/deposit";
-import { fetchSignedPricesBaseSepolia } from "../../utils/pricesBaseSepolia";
+import { fetchSignedPricesBaseSepolia } from "./chainlinkProvider/signedPricesBaseSepolia";
 import { hashString } from "../../utils/hash";
 
 const { ethers } = hre;
@@ -10,9 +10,9 @@ const { ethers } = hre;
  *
  * Run it with the DEPOSIT_KEY env var you want to execute.
  * npx hardhat run scripts/nivo/executeDeposit.ts --network baseSepolia
- * Log deposits again: npx hardhat run scripts/printDeposits.ts --network baseSepolia 
+ * Log deposits again: npx hardhat run scripts/printDeposits.ts --network baseSepolia
  * Your deposit should be removed from the list.
- * 
+ *
  */
 async function main() {
   const keeperPrivateKey = process.env.NIVO_KEEPER_PRIVATE_KEY;
@@ -77,7 +77,10 @@ async function main() {
 
   // Fetch signed prices from oracle API
   console.log("\n=== Fetching Oracle Prices from Chainlink Data Streams API ===");
-  const tokens = [indexToken, longToken, shortToken];
+  const tokens =
+    longToken.toLowerCase() === shortToken.toLowerCase()
+      ? [indexToken, longToken]
+      : [indexToken, longToken, shortToken];
   const signedPrices = await fetchSignedPricesBaseSepolia(tokens);
 
   // Get prices for all required tokens (indexToken, longToken, shortToken)
@@ -92,7 +95,7 @@ async function main() {
     }
 
     providers.push(chainlinkDataStreamProvider.address);
-    data.push(priceData.blob);
+    data.push(priceData.report);
 
     console.log(`Token ${token}: min=${priceData.min.toString()}, max=${priceData.max.toString()}`);
   }
@@ -111,16 +114,8 @@ async function main() {
     dataLengths: oracleParams.data.map((d) => d.length),
   });
 
-  try {
-    await depositHandler.connect(keeperWallet).callStatic.executeDeposit(depositKey, oracleParams);
-    console.log("callStatic OK (should not happen if tx reverts)");
-  } catch (e: any) {
-    console.log("callStatic revert data:", e?.error?.data ?? e?.data ?? e);
-    throw e;
-  }
-
   const tx = await depositHandler.connect(keeperWallet).executeDeposit(depositKey, oracleParams, {
-    gasLimit: 2500000,
+    gasLimit: 25_000_000,
   });
 
   console.log("Transaction sent:", tx.hash);
