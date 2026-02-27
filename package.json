@@ -51,6 +51,7 @@
   "dependencies": {
     "@apollo/client": "^3.9.3",
     "@chainlink/contracts": "1.1.0",
+    "@chainlink/data-streams-sdk": "^1.2.1",
     "@gelatonetwork/relay-context": "4.1.1",
     "@layerzerolabs/lz-evm-messagelib-v2": "3.0.74",
     "@layerzerolabs/lz-evm-oapp-v2": "3.0.75",
