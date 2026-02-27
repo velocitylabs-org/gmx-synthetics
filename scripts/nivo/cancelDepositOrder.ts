@@ -1,14 +1,18 @@
 import hre from "hardhat";
-import { getAccountDepositCount, getAccountDepositKeys } from "../utils/deposit";
+import { getAccountDepositCount, getAccountDepositKeys } from "../../utils/deposit";
 
 const { ethers } = hre;
 
 /**
  * Cancel a deposit created with createDepositNivoMarket.ts, uses the WALLET_TESTER_PRIVATE_KEY.
  *
- * Cancel all deposits for the wallet: npx hardhat run scripts/cancelDepositNivoMarket.ts --network baseSepolia
- * Cancel a specific deposit by key:DEPOSIT_KEY=0x... npx hardhat run scripts/cancelDepositNivoMarket.ts --network baseSepolia
+ * Cancel all deposits for the wallet: 
+ * npx hardhat run scripts/nivo/cancelDeposit.ts --network baseSepolia 
+ * Cancel a specific deposit by key:
+ * DEPOSIT_KEY=0x... npx hardhat run scripts/nivo/cancelDepositOrder.ts --network baseSepolia  (or set the DEPOSIT_KEY in your env var)
+ * 
  * Log deposits: npx hardhat run scripts/printDeposits.ts --network baseSepolia
+ * Your deposit should be removed from the list.
  */
 async function main() {
   const walletTesterPrivateKey = process.env.WALLET_TESTER_PRIVATE_KEY;

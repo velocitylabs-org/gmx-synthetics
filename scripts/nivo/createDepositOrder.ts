@@ -1,18 +1,19 @@
 import hre from "hardhat";
 import { Signer } from "ethers";
 
-import { fetchMarketAddress, DEFAULT_MARKET_TYPE } from "../utils/market";
-import { bigNumberify, expandDecimals } from "../utils/math";
+import { fetchMarketAddress, DEFAULT_MARKET_TYPE } from "../../utils/market";
+import { bigNumberify, expandDecimals } from "../../utils/math";
+import { minMarketTokensForFirstDeposit } from "../../utils/keys";
 
-import { WNT, ExchangeRouter, MintableToken } from "../typechain-types";
-import { IDepositUtils } from "../typechain-types/contracts/exchange/DepositHandler";
+import { WNT, ExchangeRouter, MintableToken } from "../../typechain-types";
+import { IDepositUtils } from "../../typechain-types/contracts/exchange/DepositHandler";
 
 const { ethers } = hre;
 
 /**
  * Create a deposit into a Nivo FX market (GBP/USDC). Uses the WALLET_TESTER_PRIVATE_KEY.
  *
- * npx hardhat run scripts/createDepositNivoMarket.ts --network baseSepolia
+ * npx hardhat run scripts/nivo/createDepositOrder.ts --network baseSepolia
  * Log deposits: npx hardhat run scripts/printDeposits.ts --network baseSepolia
  */
 async function getValues(
@@ -48,8 +49,6 @@ async function main() {
   }
   const wallet = new ethers.Wallet(walletTesterPrivateKey, ethers.provider);
 
-  const marketFactory = await ethers.getContract("MarketFactory");
-  const roleStore = await ethers.getContract("RoleStore");
   const dataStore = await ethers.getContract("DataStore");
   const depositVault = await ethers.getContract("DepositVault");
   const exchangeRouter: ExchangeRouter = await ethers.getContract("ExchangeRouter");
@@ -116,9 +115,25 @@ async function main() {
   }
   console.log("market %s", syntheticMarketAddress);
 
+  // First deposit: when market token supply is 0, the protocol may require receiver = address(1) and a minimum mint.
+  let receiver = wallet.address;
+  let minMarketTokens = bigNumberify(0);
+  const marketToken = await ethers.getContractAt("MarketToken", syntheticMarketAddress, wallet);
+  const supply = await marketToken.totalSupply();
+  if (supply.isZero()) {
+    const requiredMin = await dataStore.getUint(minMarketTokensForFirstDeposit(syntheticMarketAddress));
+    if (requiredMin.gt(0)) {
+      /** Receiver required by the protocol for the first deposit in a market (when minMarketTokensForFirstDeposit > 0). */
+      const RECEIVER_FOR_FIRST_DEPOSIT = "0x0000000000000000000000000000000000000001";
+      receiver = RECEIVER_FOR_FIRST_DEPOSIT;
+      minMarketTokens = requiredMin;
+      console.log("Using first deposit receiver %s and minMarketTokens %s", receiver, minMarketTokens.toString());
+    }
+  }
+
   const params: IDepositUtils.CreateDepositParamsStruct = {
     addresses: {
-      receiver: wallet.address,
+      receiver,
       callbackContract: ethers.constants.AddressZero,
       uiFeeReceiver: ethers.constants.AddressZero,
       market: syntheticMarketAddress,
@@ -127,15 +142,12 @@ async function main() {
       longTokenSwapPath: [],
       shortTokenSwapPath: [],
     },
-    minMarketTokens: 0,
+    minMarketTokens,
     shouldUnwrapNativeToken: false,
     executionFee: executionFee,
     callbackGasLimit: 0,
     dataList: [],
   };
-  console.log("exchange router %s", exchangeRouter.address);
-  console.log("deposit vault %s", depositVault.address);
-  console.log("creating deposit %s", JSON.stringify(params));
 
   const multicallArgs = [
     exchangeRouter.interface.encodeFunctionData("sendWnt", [depositVault.address, executionFee]),
@@ -158,9 +170,9 @@ async function main() {
     gasLimit: 2500000,
   });
 
-  console.log("transaction sent", tx.hash);
+  console.log("Transaction sent:", tx.hash);
   const receipt = await tx.wait();
-  console.log("receipt received, block:", receipt.blockNumber);
+  console.log("Transaction confirmed in block:", receipt.blockNumber);
 }
 
 main()

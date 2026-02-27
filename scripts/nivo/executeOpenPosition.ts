@@ -1,12 +1,12 @@
 import hre from "hardhat";
-import { getDepositKeys } from "../utils/deposit";
-import { fetchSignedPricesBaseSepolia } from "../utils/pricesBaseSepolia";
-import { hashString } from "../utils/hash";
+import { getOrderKeys } from "../../utils/order";
+import { fetchSignedPricesBaseSepolia } from "../../utils/pricesBaseSepolia";
+import { hashString } from "../../utils/hash";
 
 const { ethers } = hre;
 
-// To use this script, run it with the DEPOSIT_KEY env var you want to execute.
-// Example: DEPOSIT_KEY=0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef npx hardhat run scripts/executeDepositNivoMarket.ts --network baseSepolia
+// To use this script, run it with the ORDER_KEY env var you want to execute.
+// Example: ORDER_KEY=0x1234... npx hardhat run scripts/nivo/executePosition.ts --network baseSepolia
 
 async function main() {
   const keeperPrivateKey = process.env.NIVO_KEEPER_PRIVATE_KEY;
@@ -17,7 +17,7 @@ async function main() {
 
   const dataStore = await ethers.getContract("DataStore");
   const reader = await ethers.getContract("Reader");
-  const depositHandler = await ethers.getContract("DepositHandler");
+  const orderHandler = await ethers.getContract("OrderHandler");
   const chainlinkDataStreamProvider = await ethers.getContract("ChainlinkDataStreamProvider");
   const roleStore = await ethers.getContract("RoleStore");
 
@@ -29,37 +29,37 @@ async function main() {
     throw new Error("Wallet does not have ORDER_KEEPER role");
   }
 
-  // Get deposit key
-  let depositKey: string;
-  const depositKeyFromEnv = process.env.DEPOSIT_KEY;
-  if (depositKeyFromEnv) {
-    depositKey = depositKeyFromEnv;
-    console.log("Using deposit key from DEPOSIT_KEY env var:", depositKey);
+  // Get order key
+  let orderKey: string;
+  const orderKeyFromEnv = process.env.ORDER_KEY;
+  if (orderKeyFromEnv) {
+    orderKey = orderKeyFromEnv;
+    console.log("Using order key from ORDER_KEY env var:", orderKey);
   } else {
-    // Get first available deposit (getDepositKeys returns a Promise because it calls contract view methods)
-    const depositKeys = await getDepositKeys(dataStore, 0, 1);
-    if (depositKeys.length === 0) {
-      throw new Error("No deposits found. Please create a deposit first or provide DEPOSIT_KEY env var.");
+    const orderKeys = await getOrderKeys(dataStore, 0, 1);
+    if (orderKeys.length === 0) {
+      throw new Error("No orders found. Please create a position order first or provide ORDER_KEY env var.");
     }
-    depositKey = depositKeys[0];
-    console.log("Using first available deposit:", depositKey);
+    orderKey = orderKeys[0];
+    console.log("Using first available order:", orderKey);
   }
 
-  // Read deposit details
-  const deposit = await reader.getDeposit(dataStore.address, depositKey);
+  // Read order details
+  const order = await reader.getOrder(dataStore.address, orderKey);
+  const { receiver, market: orderMarket, initialCollateralToken: initialCollateralTokenAddress } = order.addresses;
 
-  if (deposit.addresses.account === ethers.constants.AddressZero) {
-    throw new Error(`Deposit ${depositKey} not found or already executed`);
+  if (orderMarket === ethers.constants.AddressZero) {
+    throw new Error(`Order ${orderKey} not found or already executed`);
   }
 
-  console.log("\n=== Deposit Info ===");
-  console.log("Deposit Key:", depositKey);
-  console.log("Account:", deposit.addresses.account);
-  console.log("Market:", deposit.addresses.market);
-  console.log("Initial Long Token:", deposit.addresses.initialLongToken);
+  console.log("\n=== Order Info ===");
+  console.log("Order Key:", orderKey);
+  console.log("Account:", receiver);
+  console.log("Market:", orderMarket);
+  console.log("Initial Collateral Token:", initialCollateralTokenAddress);
 
   // Get market info to determine which tokens need prices
-  const market = await reader.getMarket(dataStore.address, deposit.addresses.market);
+  const market = await reader.getMarket(dataStore.address, orderMarket);
   const indexToken = market.indexToken;
   const longToken = market.longToken;
   const shortToken = market.shortToken;
@@ -74,7 +74,6 @@ async function main() {
   const tokens = [indexToken, longToken, shortToken];
   const signedPrices = await fetchSignedPricesBaseSepolia(tokens);
 
-  // Get prices for all required tokens (indexToken, longToken, shortToken)
   const providers: string[] = [];
   const data: string[] = [];
 
@@ -91,30 +90,21 @@ async function main() {
     console.log(`Token ${token}: min=${priceData.min.toString()}, max=${priceData.max.toString()}`);
   }
 
-  // Prepare oracle params
   const oracleParams = {
     tokens,
     providers,
     data,
   };
 
-  console.log("\n=== Executing Deposit ===");
+  console.log("\n=== Executing Order ===");
   console.log("Oracle Params:", {
     tokens: oracleParams.tokens,
     providers: oracleParams.providers,
     dataLengths: oracleParams.data.map((d) => d.length),
   });
 
-  // try {
-  //   await depositHandler.connect(keeperWallet).callStatic.executeDeposit(depositKey, oracleParams);
-  //   console.log("callStatic OK (should not happen if tx reverts)");
-  // } catch (e: any) {
-  //   console.log("callStatic revert data:", e?.error?.data ?? e?.data ?? e);
-  //   throw e;
-  // }
-
-  const tx = await depositHandler.connect(keeperWallet).executeDeposit(depositKey, oracleParams, {
-    gasLimit: 5000000,
+  const tx = await orderHandler.connect(keeperWallet).executeOrder(orderKey, oracleParams, {
+    gasLimit: 2500000,
   });
 
   console.log("Transaction sent:", tx.hash);

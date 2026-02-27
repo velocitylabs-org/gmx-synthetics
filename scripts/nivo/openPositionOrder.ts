@@ -1,9 +1,9 @@
 import hre from "hardhat";
 
-import { expandDecimals, decimalToFloat } from "../utils/math";
-import { OrderType, DecreasePositionSwapType } from "../utils/order";
-import { contractAt } from "../utils/deploy";
-import { DataStore, ExchangeRouter, Reader, Router } from "../typechain-types";
+import { expandDecimals, decimalToFloat } from "../../utils/math";
+import { OrderType, DecreasePositionSwapType } from "../../utils/order";
+import { contractAt } from "../../utils/deploy";
+import { DataStore, ExchangeRouter, Reader, Router } from "../../typechain-types";
 import { BigNumberish } from "ethers";
 const { ethers } = hre;
 
@@ -47,10 +47,7 @@ async function createOrder({
     await collateralToken.approve(router.address, initialCollateralDeltaAmount);
   }
 
-  const estimatedGasLimit = 10_000_000;
-  const gasPrice = await signer.getGasPrice();
-  const executionFee = gasPrice.mul(estimatedGasLimit);
-
+  const executionFee = expandDecimals(10, 15); // 0.010 ETH (min is ~0.0051 ETH)
   const orderParams: Parameters<typeof exchangeRouter.createOrder>[0] = {
     addresses: {
       receiver,
@@ -80,35 +77,22 @@ async function createOrder({
     dataList: [],
   };
 
-  const estimatedGas = await exchangeRouter.estimateGas.multicall(
-    [
-      // send WETH to the orderVault pay for the execution fee
-      exchangeRouter.interface.encodeFunctionData("sendWnt", [orderVault.address, executionFee]),
-      // send the collateral to the orderVault
-      exchangeRouter.interface.encodeFunctionData("sendTokens", [
-        initialCollateralToken,
-        orderVault.address,
-        initialCollateralDeltaAmount,
-      ]),
-      exchangeRouter.interface.encodeFunctionData("createOrder", [orderParams]),
-    ],
-    { value: executionFee }
-  );
+  const multicallArgs = [
+    exchangeRouter.interface.encodeFunctionData("sendWnt", [orderVault.address, executionFee]),
+    exchangeRouter.interface.encodeFunctionData("sendTokens", [
+      initialCollateralToken,
+      orderVault.address,
+      initialCollateralDeltaAmount,
+    ]),
+    exchangeRouter.interface.encodeFunctionData("createOrder", [orderParams]),
+  ];
 
-  const tx = await exchangeRouter.multicall(
-    [
-      // send WETH to the orderVault pay for the execution fee
-      exchangeRouter.interface.encodeFunctionData("sendWnt", [orderVault.address, executionFee]),
-      // send the collateral to the orderVault
-      exchangeRouter.interface.encodeFunctionData("sendTokens", [
-        initialCollateralToken,
-        orderVault.address,
-        initialCollateralDeltaAmount,
-      ]),
-      exchangeRouter.interface.encodeFunctionData("createOrder", [orderParams]),
-    ],
-    { value: executionFee, gasLimit: estimatedGas.mul(120).div(100) }
-  );
+  const estimatedGas = await exchangeRouter.estimateGas.multicall(multicallArgs, { value: executionFee });
+
+  const tx = await exchangeRouter.multicall(multicallArgs, {
+    value: executionFee,
+    gasLimit: estimatedGas.mul(120).div(100),
+  });
 
   return tx;
 }
@@ -169,7 +153,9 @@ async function main() {
     decreasePositionSwapType: DecreasePositionSwapType.NoSwap,
   });
 
-  console.log(`tx sent: ${tx.hash}`);
+  console.log("Transaction sent:", tx.hash);
+  const receipt = await tx.wait();
+  console.log("Transaction confirmed in block:", receipt.blockNumber);
 }
 
 main()
