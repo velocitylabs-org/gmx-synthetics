@@ -25,10 +25,15 @@ slither . \
   --print call-graph
 
 echo ""
-echo "Call-graph DOT files written in project root, e.g.:"
-echo "  - all_contracts.call-graph.dot"
-echo "  - ExchangeRouter.call-graph.dot"
-echo "  - DepositHandler.call-graph.dot, OrderHandler.call-graph.dot, ..."
+mkdir -p slither-output
+# Move generated .dot files into slither-output to keep project root clean
+for f in *.call-graph.dot; do
+  [[ -f "$f" ]] && mv "$f" slither-output/
+done
+echo "Call-graph DOT files written to slither-output/, e.g.:"
+echo "  - slither-output/all_contracts.call-graph.dot"
+echo "  - slither-output/ExchangeRouter.call-graph.dot"
+echo "  - slither-output/DepositHandler.call-graph.dot, slither-output/OrderHandler.call-graph.dot, ..."
 
 if [[ "${1:-}" == "--render" ]]; then
   if ! command -v dot &>/dev/null; then
@@ -37,9 +42,9 @@ if [[ "${1:-}" == "--render" ]]; then
   fi
   mkdir -p docs/diagrams
   for name in all_contracts ExchangeRouter; do
-    if [[ -f "${name}.call-graph.dot" ]]; then
-      dot -Tsvg -o "docs/diagrams/${name}.call-graph.svg" "${name}.call-graph.dot"
-      dot -Tpng -o "docs/diagrams/${name}.call-graph.png" "${name}.call-graph.dot"
+    if [[ -f "slither-output/${name}.call-graph.dot" ]]; then
+      dot -Tsvg -o "docs/diagrams/${name}.call-graph.svg" "slither-output/${name}.call-graph.dot"
+      dot -Tpng -o "docs/diagrams/${name}.call-graph.png" "slither-output/${name}.call-graph.dot"
       echo "Rendered docs/diagrams/${name}.call-graph.{svg,png}"
     fi
   done
