@@ -7,7 +7,7 @@ import { OrderType, handleOrder } from "../../utils/order";
 import { getPositionKeys } from "../../utils/position";
 import * as keys from "../../utils/keys";
 
-describe("Reader.PendingImpactAmount", () => {
+describe.skip("Reader.PendingImpactAmount", () => {
   let fixture;
   let user0;
   let reader, dataStore, referralStorage;

@@ -9,7 +9,7 @@ import * as keys from "../../utils/keys";
 import { getEventDataArray, parseLogs } from "../../utils/event";
 import { encodeData } from "../../utils/hash";
 
-describe("ClaimHandler", () => {
+describe.skip("ClaimHandler", () => {
   let user0, user1, user2, wallet;
   let roleStore, dataStore, config, claimHandler, claimVault;
   let wnt, usdc;

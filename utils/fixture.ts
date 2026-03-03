@@ -64,7 +64,6 @@ async function setup() {
 
   const config = await hre.ethers.getContract("Config");
   const configUtils = await hre.ethers.getContract("ConfigUtils");
-  const configSyncer = await hre.ethers.getContract("ConfigSyncer");
   const mockRiskOracle = await hre.ethers.getContract("MockRiskOracle");
   const timelockConfig = await hre.ethers.getContract("TimelockConfig");
   const configTimelockController = await hre.ethers.getContract("ConfigTimelockController");
@@ -72,6 +71,7 @@ async function setup() {
   const glvReader = await hre.ethers.getContract("GlvReader");
   const roleStore = await hre.ethers.getContract("RoleStore");
   const dataStore = await hre.ethers.getContract("DataStore");
+  const marketStoreUtils = await hre.ethers.getContract("MarketStoreUtils");
   const depositVault = await hre.ethers.getContract("DepositVault");
   const withdrawalVault = await hre.ethers.getContract("WithdrawalVault");
   const shiftVault = await hre.ethers.getContract("ShiftVault");
@@ -119,7 +119,6 @@ async function setup() {
   const multichainOrderRouter = await hre.ethers.getContract("MultichainOrderRouter");
   const multichainGlvRouter = await hre.ethers.getContract("MultichainGlvRouter");
   const multichainTransferRouter = await hre.ethers.getContract("MultichainTransferRouter");
-  const multichainClaimsRouter = await hre.ethers.getContract("MultichainClaimsRouter");
   const bridgeOutFromControllerUtils = await hre.ethers.getContract("BridgeOutFromControllerUtils");
   const relayUtils = await hre.ethers.getContract("RelayUtils");
   const oracle = await hre.ethers.getContract("Oracle");
@@ -127,7 +126,6 @@ async function setup() {
   const chainlinkPriceFeedProvider = await hre.ethers.getContract("ChainlinkPriceFeedProvider");
   const chainlinkDataStreamProvider = await hre.ethers.getContract("ChainlinkDataStreamProvider");
   const marketUtils = await hre.ethers.getContract("MarketUtils");
-  const marketStoreUtils = await hre.ethers.getContract("MarketStoreUtils");
   const depositStoreUtils = await hre.ethers.getContract("DepositStoreUtils");
   const withdrawalStoreUtils = await hre.ethers.getContract("WithdrawalStoreUtils");
   const shiftStoreUtils = await hre.ethers.getContract("ShiftStoreUtils");
@@ -150,16 +148,9 @@ async function setup() {
   const mockOracleProvider = await hre.ethers.getContract("MockOracleProvider");
   const edgeDataStreamVerifier = await hre.ethers.getContract("EdgeDataStreamVerifier");
   const edgeDataStreamProvider = await hre.ethers.getContract("EdgeDataStreamProvider");
-  const claimHandler = await hre.ethers.getContract("ClaimHandler");
-  const claimVault = await hre.ethers.getContract("ClaimVault");
-  const claimUtils = await hre.ethers.getContract("ClaimUtils");
   const multichainReader = await hre.ethers.getContract("MultichainReader");
   const mockEndpointV2 = await hre.ethers.getContract("MockEndpointV2");
   const mockMultichainReaderOriginator = await hre.ethers.getContract("MockMultichainReaderOriginator");
-  const feeDistributorVault = await hre.ethers.getContract("FeeDistributorVault");
-  const feeDistributor = await hre.ethers.getContract("FeeDistributor");
-  const feeDistributorUtils = await hre.ethers.getContract("FeeDistributorUtils");
-  const contributorHandler = await hre.ethers.getContract("ContributorHandler");
 
   const ethUsdMarketAddress = getMarketTokenAddress(
     wnt.address,
@@ -170,8 +161,6 @@ async function setup() {
     roleStore.address,
     dataStore.address
   );
-  const ethUsdMarket = await reader.getMarket(dataStore.address, ethUsdMarketAddress);
-
   const ethUsdtMarketAddress = getMarketTokenAddress(
     wnt.address,
     wnt.address,
@@ -181,8 +170,6 @@ async function setup() {
     roleStore.address,
     dataStore.address
   );
-  const ethUsdtMarket = await reader.getMarket(dataStore.address, ethUsdtMarketAddress);
-
   const ethUsdSpotOnlyMarketAddress = getMarketTokenAddress(
     ethers.constants.AddressZero,
     wnt.address,
@@ -192,8 +179,6 @@ async function setup() {
     roleStore.address,
     dataStore.address
   );
-  const ethUsdSpotOnlyMarket = await reader.getMarket(dataStore.address, ethUsdSpotOnlyMarketAddress);
-
   const ethUsdSingleTokenMarketAddress = getMarketTokenAddress(
     wnt.address,
     usdc.address,
@@ -203,8 +188,6 @@ async function setup() {
     roleStore.address,
     dataStore.address
   );
-  const ethUsdSingleTokenMarket = await reader.getMarket(dataStore.address, ethUsdSingleTokenMarketAddress);
-
   const ethUsdSingleTokenMarket2Address = getMarketTokenAddress(
     wnt.address,
     wnt.address,
@@ -214,8 +197,6 @@ async function setup() {
     roleStore.address,
     dataStore.address
   );
-  const ethUsdSingleTokenMarket2 = await reader.getMarket(dataStore.address, ethUsdSingleTokenMarket2Address);
-
   const btcUsdMarketAddress = getMarketTokenAddress(
     wbtc.address,
     wbtc.address,
@@ -225,8 +206,6 @@ async function setup() {
     roleStore.address,
     dataStore.address
   );
-  const btcUsdMarket = await reader.getMarket(dataStore.address, btcUsdMarketAddress);
-
   const btcUsdSingleTokenMarketAddress = getMarketTokenAddress(
     wbtc.address,
     usdc.address,
@@ -236,8 +215,6 @@ async function setup() {
     roleStore.address,
     dataStore.address
   );
-  const btcUsdSingleTokenMarket = await reader.getMarket(dataStore.address, btcUsdSingleTokenMarketAddress);
-
   const solUsdMarketAddress = getMarketTokenAddress(
     sol.address,
     wnt.address,
@@ -247,8 +224,6 @@ async function setup() {
     roleStore.address,
     dataStore.address
   );
-  const solUsdMarket = await reader.getMarket(dataStore.address, solUsdMarketAddress);
-
   const brlUsdMarketAddress = getMarketTokenAddress(
     brl.address,
     usdc.address,
@@ -258,6 +233,14 @@ async function setup() {
     roleStore.address,
     dataStore.address
   );
+  const ethUsdMarket = await reader.getMarket(dataStore.address, ethUsdMarketAddress);
+  const ethUsdtMarket = await reader.getMarket(dataStore.address, ethUsdtMarketAddress);
+  const ethUsdSpotOnlyMarket = await reader.getMarket(dataStore.address, ethUsdSpotOnlyMarketAddress);
+  const ethUsdSingleTokenMarket = await reader.getMarket(dataStore.address, ethUsdSingleTokenMarketAddress);
+  const ethUsdSingleTokenMarket2 = await reader.getMarket(dataStore.address, ethUsdSingleTokenMarket2Address);
+  const btcUsdMarket = await reader.getMarket(dataStore.address, btcUsdMarketAddress);
+  const btcUsdSingleTokenMarket = await reader.getMarket(dataStore.address, btcUsdSingleTokenMarketAddress);
+  const solUsdMarket = await reader.getMarket(dataStore.address, solUsdMarketAddress);
   const brlUsdMarket = await reader.getMarket(dataStore.address, brlUsdMarketAddress);
 
   const ethUsdGlvAddress = getGlvAddress(
@@ -302,7 +285,6 @@ async function setup() {
     contracts: {
       config,
       configUtils,
-      configSyncer,
       mockRiskOracle,
       timelockConfig,
       configTimelockController,
@@ -343,7 +325,6 @@ async function setup() {
       multichainOrderRouter,
       multichainGlvRouter,
       multichainTransferRouter,
-      multichainClaimsRouter,
       bridgeOutFromControllerUtils,
       relayUtils,
       oracle,
@@ -409,16 +390,9 @@ async function setup() {
       mockOracleProvider,
       edgeDataStreamVerifier,
       edgeDataStreamProvider,
-      claimHandler,
-      claimVault,
-      claimUtils,
       multichainReader,
       mockEndpointV2,
       mockMultichainReaderOriginator,
-      feeDistributorVault,
-      feeDistributor,
-      feeDistributorUtils,
-      contributorHandler,
     },
     props: { oracleSalt, signerIndexes: [0, 1, 2, 3, 4, 5, 6], executionFee: "1000000000000000" },
   };

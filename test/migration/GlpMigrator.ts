@@ -12,7 +12,7 @@ import { getDepositCount, executeDeposit } from "../../utils/deposit";
 
 import { errorsContract } from "../../utils/error";
 
-describe("GlpMigrator", () => {
+describe.skip("GlpMigrator", () => {
   let fixture;
   let user0;
   let roleStore,

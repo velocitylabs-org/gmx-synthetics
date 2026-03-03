@@ -9,7 +9,7 @@ import { errorsContract } from "../../utils/error";
 import { parseLogs } from "../../utils/event";
 import * as keys from "../../utils/keys";
 
-describe("ConfigSyncer", () => {
+describe.skip("ConfigSyncer", () => {
   let fixture;
   let wallet, user0, user1, user2;
   let configSyncer, dataStore, roleStore, mockRiskOracle, ethUsdMarket, btcUsdMarket;

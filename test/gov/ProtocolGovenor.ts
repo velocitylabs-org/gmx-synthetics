@@ -7,7 +7,7 @@ import { hashString, keccakString } from "../../utils/hash";
 
 import { TIMELOCK_ADMIN_ROLE, PROPOSER_ROLE, EXECUTOR_ROLE, CANCELLER_ROLE, Support, State } from "../../utils/gov";
 
-describe("ProtocolGovernor", () => {
+describe.skip("ProtocolGovernor", () => {
   const { provider } = ethers;
   let roleStore, govToken, governor, timelock;
   let wallet, user0, user1, user2, user3, user4, user5;

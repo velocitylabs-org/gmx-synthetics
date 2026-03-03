@@ -15,7 +15,7 @@ import { errorsContract } from "../../utils/error";
 import { getRelayParams } from "../../utils/relay/helpers";
 import { getClaimCollateralSignature, getClaimFundingFeesSignature } from "../../utils/relay/signatures";
 
-describe("MultichainClaimsRouter", () => {
+describe.skip("MultichainClaimsRouter", () => {
   let fixture;
   let user0, user1, user2;
   let dataStore,

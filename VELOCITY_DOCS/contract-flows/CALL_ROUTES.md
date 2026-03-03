@@ -423,6 +423,38 @@ EOA
 
 ---
 
+### 13. `AdlHandler.executeAdl()` (keeper — ADL)
+
+**Flow:** Keeper calls `AdlHandler.executeAdl(account, market, collateralToken, isLong, oracleParams)` to run Auto-Deleveraging (ADL).
+
+**Call route:**
+
+```
+Keeper
+  → AdlHandler.executeAdl(account, market, collateralToken, isLong, oracleParams)
+  → AdlUtils.updateAdlState, validateAdl, createAdlOrder
+  → OrderHandler path (ADL creates a decrease order executed in same flow)
+```
+
+---
+
+### 14. `LiquidationHandler.executeLiquidation()` (keeper — liquidations)
+
+**Flow:** Keeper calls `LiquidationHandler.executeLiquidation(account, market, collateralToken, isLong, oracleParams)` to liquidate underwater positions, or `executeCloseExpired(key)` for expired positions.
+
+**Call route:**
+
+```
+Keeper
+  → LiquidationHandler.executeLiquidation(account, market, collateralToken, isLong, oracleParams)
+  → LiquidationUtils.createLiquidationOrder
+  → OrderHandler path (liquidation executed as decrease order)
+```
+
+**Also:** `LiquidationHandler.executeCloseExpired(key)` — same handler, close expired position by key.
+
+---
+
 ## Summary — keeper vs user
 
 | Who | Entry | Modifier | Purpose |
@@ -434,6 +466,11 @@ EOA
 | **Keeper** | WithdrawalHandler.executeWithdrawal | onlyOrderKeeper, withOraclePrices | Execute pending withdrawal |
 | **Keeper** | OrderHandler.executeOrder | onlyOrderKeeper, withOraclePrices | Execute pending order |
 | **Keeper** | ShiftHandler.executeShift | onlyOrderKeeper, withOraclePrices | Execute pending shift |
+| **Keeper** | GlvDepositHandler.executeGlvDeposit | onlyOrderKeeper, withOraclePrices | Execute GLV deposit |
+| **Keeper** | GlvWithdrawalHandler.executeGlvWithdrawal | onlyOrderKeeper, withOraclePrices | Execute GLV withdrawal |
+| **Keeper** | AdlHandler.executeAdl | onlyOrderKeeper, withOraclePrices | ADL (auto-deleveraging) |
+| **Keeper** | LiquidationHandler.executeLiquidation | onlyOrderKeeper, withOraclePrices | Liquidate underwater / expired positions |
+| **Keeper** | LiquidationHandler.executeCloseExpired | onlyOrderKeeper | Close expired position by key |
 
 ---
 
@@ -462,6 +499,8 @@ The following contracts are used across the LP, user, multicall, and keeper flow
 | **GlvWithdrawalHandler** | createGlvWithdrawal, cancelGlvWithdrawal, executeGlvWithdrawal |
 | **GlvShiftHandler** | createGlvShift, executeGlvShift |
 | **JitOrderHandler** | executeJitOrder |
+| **AdlHandler** | executeAdl (keeper: ADL) |
+| **LiquidationHandler** | executeLiquidation, executeCloseExpired (keeper: liquidations) |
 | **ExternalHandler** | makeExternalCalls (used from multicall) |
 
 ### Store utils and data
@@ -498,6 +537,8 @@ The following contracts are used across the LP, user, multicall, and keeper flow
 | **CallbackUtils** | Callback invocation |
 | **ErrorUtils** | revertWithParsedMessage |
 | **OracleUtils** | Price validation, SetPricesParams |
+| **AdlUtils** | ADL state, validation, createAdlOrder (used by AdlHandler) |
+| **LiquidationUtils** | createLiquidationOrder (used by LiquidationHandler) |
 
 ### Vaults
 
@@ -535,21 +576,21 @@ The following contracts are used across the LP, user, multicall, and keeper flow
 
 ### Extended conclusion — count and interfaces
 
-**Total count:** 51 contracts + 31 interfaces = **82** artifacts used across the documented LP, user, multicall, and keeper flows.
+**Total count:** 55 contracts + 31 interfaces = **86** artifacts used across the documented LP, user, multicall, and keeper flows.
 
 #### Contract count by role
 
 | Role | Count |
 |------|-------|
 | Routers and base | 4 |
-| Handlers (exchange/) | 9 |
+| Handlers (exchange/) | 11 |
 | Store utils and data | 6 |
-| Utils (libraries) | 19 |
+| Utils (libraries) | 21 |
 | Vaults | 5 |
 | Core infrastructure | 3 |
 | Order executors | 3 |
 | Dependencies | 2 |
-| **Total contracts** | **51** |
+| **Total contracts** | **55** |
 
 #### Interfaces used in these flows
 
