@@ -1,0 +1,20 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_48359_DepositUtils {
+label = "DepositUtils"
+"48359_cancelDeposit" [label="cancelDeposit"]
+"48359_createDeposit" [label="createDeposit"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"gasleft()" 
+"revert EmptyDeposit()" 
+"revert InsufficientWntAmountForExecutionFee(uint256,uint256)" 
+"revert EmptyDepositAmounts()" 
+"48359_createDeposit" -> "revert EmptyDepositAmounts()"
+"48359_createDeposit" -> "revert InsufficientWntAmountForExecutionFee(uint256,uint256)"
+"48359_cancelDeposit" -> "revert EmptyDeposit()"
+"48359_cancelDeposit" -> "gasleft()"
+"48359_cancelDeposit" -> "revert EmptyDepositAmounts()"
+}
+}

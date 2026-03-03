@@ -1,0 +1,17 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_148028_SafeUtils {
+label = "SafeUtils"
+"148028_slitherConstructorConstantVariables" [label="slitherConstructorConstantVariables"]
+"148028_getMessageHash" [label="getMessageHash"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"abi.encode()" 
+"keccak256(bytes)" 
+"abi.encodePacked()" 
+"148028_getMessageHash" -> "abi.encodePacked()"
+"148028_getMessageHash" -> "abi.encode()"
+"148028_getMessageHash" -> "keccak256(bytes)"
+}
+}

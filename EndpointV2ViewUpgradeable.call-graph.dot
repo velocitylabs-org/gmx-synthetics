@@ -1,0 +1,25 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_10739_Initializable {
+label = "Initializable"
+"10739__disableInitializers" [label="_disableInitializers"]
+"10739__isInitializing" [label="_isInitializing"]
+"10739__getInitializedVersion" [label="_getInitializedVersion"]
+}subgraph cluster_4349_EndpointV2ViewUpgradeable {
+label = "EndpointV2ViewUpgradeable"
+"4349_initializable" [label="initializable"]
+"4349___EndpointV2View_init" [label="__EndpointV2View_init"]
+"4349_verifiable" [label="verifiable"]
+"4349_executable" [label="executable"]
+"4349___EndpointV2View_init_unchained" [label="__EndpointV2View_init_unchained"]
+"4349_slitherConstructorConstantVariables" [label="slitherConstructorConstantVariables"]
+"4349___EndpointV2View_init" -> "4349___EndpointV2View_init_unchained"
+"4349___EndpointV2View_init" -> "4349_onlyInitializing"
+"4349___EndpointV2View_init_unchained" -> "4349_onlyInitializing"
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"require(bool,string)" 
+"10739__disableInitializers" -> "require(bool,string)"
+}
+}

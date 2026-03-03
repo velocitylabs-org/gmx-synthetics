@@ -1,0 +1,19 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_141184_RoleModule {
+label = "RoleModule"
+"141184_constructor" [label="constructor"]
+"141184__validateRole" [label="_validateRole"]
+}subgraph cluster_142925_Router {
+label = "Router"
+"142925_pluginTransfer" [label="pluginTransfer"]
+"142925_constructor" [label="constructor"]
+"142925_pluginTransfer" -> "142925_onlyRouterPlugin"
+"142925_constructor" -> "142925_constructor"
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"revert Unauthorized(address,string)" 
+"141184__validateRole" -> "revert Unauthorized(address,string)"
+}
+}

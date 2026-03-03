@@ -1,0 +1,347 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_13153_Governor {
+label = "Governor"
+"13153_onERC1155Received" [label="onERC1155Received"]
+"13153_relay" [label="relay"]
+"13153_version" [label="version"]
+"13153__tryHexToUint" [label="_tryHexToUint"]
+"13153_constructor" [label="constructor"]
+"13153__beforeExecute" [label="_beforeExecute"]
+"13153__executor" [label="_executor"]
+"13153_proposalSnapshot" [label="proposalSnapshot"]
+"13153_castVoteWithReasonAndParamsBySig" [label="castVoteWithReasonAndParamsBySig"]
+"13153_state" [label="state"]
+"13153_getVotes" [label="getVotes"]
+"13153_cancel" [label="cancel"]
+"13153__defaultParams" [label="_defaultParams"]
+"13153_propose" [label="propose"]
+"13153_onERC721Received" [label="onERC721Received"]
+"13153_execute" [label="execute"]
+"13153_proposalThreshold" [label="proposalThreshold"]
+"13153_castVoteWithReason" [label="castVoteWithReason"]
+"13153__isValidDescriptionForProposer" [label="_isValidDescriptionForProposer"]
+"13153_name" [label="name"]
+"13153_supportsInterface" [label="supportsInterface"]
+"13153__voteSucceeded" [label="_voteSucceeded"]
+"13153_castVote" [label="castVote"]
+"13153__countVote" [label="_countVote"]
+"13153_hashProposal" [label="hashProposal"]
+"13153_castVoteBySig" [label="castVoteBySig"]
+"13153_castVoteWithReasonAndParams" [label="castVoteWithReasonAndParams"]
+"13153_onERC1155BatchReceived" [label="onERC1155BatchReceived"]
+"13153__quorumReached" [label="_quorumReached"]
+"13153__execute" [label="_execute"]
+"13153_getVotesWithParams" [label="getVotesWithParams"]
+"13153__getVotes" [label="_getVotes"]
+"13153__cancel" [label="_cancel"]
+"13153__afterExecute" [label="_afterExecute"]
+"13153_proposalDeadline" [label="proposalDeadline"]
+"13153_receive" [label="receive"]
+"13153__castVote" [label="_castVote"]
+"13153_proposalProposer" [label="proposalProposer"]
+"13153_constructor" -> "13153_version"
+"13153_castVoteWithReasonAndParamsBySig" -> "13153__hashTypedDataV4"
+"13153_state" -> "13153_proposalDeadline"
+"13153_getVotes" -> "13153__defaultParams"
+"13153_execute" -> "13153__afterExecute"
+"13153_getVotesWithParams" -> "13153__getVotes"
+"13153_execute" -> "13153__execute"
+"13153_castVote" -> "13153__msgSender"
+"13153_propose" -> "13153_getVotes"
+"13153__beforeExecute" -> "13153__executor"
+"13153__isValidDescriptionForProposer" -> "13153__tryHexToUint"
+"13153_getVotes" -> "13153__getVotes"
+"13153_castVoteBySig" -> "13153__hashTypedDataV4"
+"13153_cancel" -> "13153__cancel"
+"13153_castVoteWithReasonAndParamsBySig" -> "13153__castVote"
+"13153_propose" -> "13153_clock"
+"13153_castVoteBySig" -> "13153__castVote"
+"13153_castVote" -> "13153__castVote"
+"13153_state" -> "13153_proposalSnapshot"
+"13153__cancel" -> "13153_state"
+"13153_castVoteWithReasonAndParams" -> "13153__msgSender"
+"13153__castVote" -> "13153__castVote"
+"13153_execute" -> "13153_state"
+"13153__castVote" -> "13153__countVote"
+"13153_propose" -> "13153__msgSender"
+"13153_castVoteWithReasonAndParams" -> "13153__castVote"
+"13153_castVoteWithReason" -> "13153__castVote"
+"13153__castVote" -> "13153__getVotes"
+"13153_propose" -> "13153__isValidDescriptionForProposer"
+"13153_receive" -> "13153__executor"
+"13153_cancel" -> "13153_state"
+"13153_constructor" -> "13153_constructor"
+"13153__cancel" -> "13153_hashProposal"
+"13153_state" -> "13153__voteSucceeded"
+"13153_relay" -> "13153_onlyGovernance"
+"13153__castVote" -> "13153_state"
+"13153_propose" -> "13153_votingPeriod"
+"13153__castVote" -> "13153__defaultParams"
+"13153_cancel" -> "13153_hashProposal"
+"13153_state" -> "13153_clock"
+"13153_execute" -> "13153__beforeExecute"
+"13153_cancel" -> "13153__msgSender"
+"13153_propose" -> "13153_proposalThreshold"
+"13153_supportsInterface" -> "13153_supportsInterface"
+"13153_propose" -> "13153_votingDelay"
+"13153_execute" -> "13153_hashProposal"
+"13153_state" -> "13153__quorumReached"
+"13153_propose" -> "13153_hashProposal"
+"13153__afterExecute" -> "13153__executor"
+"13153_castVoteWithReason" -> "13153__msgSender"
+}subgraph cluster_16514_IERC6372 {
+label = "IERC6372"
+"16514_CLOCK_MODE" [label="CLOCK_MODE"]
+"16514_clock" [label="clock"]
+}subgraph cluster_21861_ERC165 {
+label = "ERC165"
+"21861_supportsInterface" [label="supportsInterface"]
+}subgraph cluster_15462_IGovernorCompatibilityBravo {
+label = "IGovernorCompatibilityBravo"
+"15462_getActions" [label="getActions"]
+"15462_getReceipt" [label="getReceipt"]
+"15462_execute" [label="execute"]
+"15462_queue" [label="queue"]
+"15462_quorumVotes" [label="quorumVotes"]
+"15462_proposals" [label="proposals"]
+"15462_cancel" [label="cancel"]
+"15462_propose" [label="propose"]
+}subgraph cluster_16329_GovernorVotesQuorumFraction {
+label = "GovernorVotesQuorumFraction"
+"16329_constructor" [label="constructor"]
+"16329_updateQuorumNumerator" [label="updateQuorumNumerator"]
+"16329_quorumDenominator" [label="quorumDenominator"]
+"16329_quorum" [label="quorum"]
+"16329_quorumNumerator" [label="quorumNumerator"]
+"16329__updateQuorumNumerator" [label="_updateQuorumNumerator"]
+"16329_constructor" -> "16329__updateQuorumNumerator"
+"16329_updateQuorumNumerator" -> "16329_onlyGovernance"
+"16329_quorum" -> "16329_quorumDenominator"
+"16329__updateQuorumNumerator" -> "16329_quorumDenominator"
+"16329_quorum" -> "16329_quorumNumerator"
+"16329_updateQuorumNumerator" -> "16329__updateQuorumNumerator"
+"16329__updateQuorumNumerator" -> "16329_clock"
+"16329__updateQuorumNumerator" -> "16329_quorumNumerator"
+}subgraph cluster_21738_EIP712 {
+label = "EIP712"
+"21738_eip712Domain" [label="eip712Domain"]
+"21738__domainSeparatorV4" [label="_domainSeparatorV4"]
+"21738__hashTypedDataV4" [label="_hashTypedDataV4"]
+"21738_constructor" [label="constructor"]
+"21738__buildDomainSeparator" [label="_buildDomainSeparator"]
+"21738_constructor" -> "21738__buildDomainSeparator"
+"21738__hashTypedDataV4" -> "21738__domainSeparatorV4"
+"21738__domainSeparatorV4" -> "21738__buildDomainSeparator"
+}subgraph cluster_16490_IERC5267 {
+label = "IERC5267"
+"16490_eip712Domain" [label="eip712Domain"]
+}subgraph cluster_16620_IERC1155Receiver {
+label = "IERC1155Receiver"
+"16620_onERC1155Received" [label="onERC1155Received"]
+"16620_onERC1155BatchReceived" [label="onERC1155BatchReceived"]
+}subgraph cluster_15309_GovernorCompatibilityBravo {
+label = "GovernorCompatibilityBravo"
+"15309__countVote" [label="_countVote"]
+"15309__getProposalParameters" [label="_getProposalParameters"]
+"15309_quorumVotes" [label="quorumVotes"]
+"15309__storeProposal" [label="_storeProposal"]
+"15309__quorumReached" [label="_quorumReached"]
+"15309_queue" [label="queue"]
+"15309__encodeCalldata" [label="_encodeCalldata"]
+"15309_cancel" [label="cancel"]
+"15309_getActions" [label="getActions"]
+"15309_propose" [label="propose"]
+"15309_execute" [label="execute"]
+"15309_proposals" [label="proposals"]
+"15309__voteSucceeded" [label="_voteSucceeded"]
+"15309_COUNTING_MODE" [label="COUNTING_MODE"]
+"15309_hasVoted" [label="hasVoted"]
+"15309_getReceipt" [label="getReceipt"]
+"15309__getProposalParameters" -> "15309__encodeCalldata"
+"15309__quorumReached" -> "15309_quorum"
+"15309_cancel" -> "15309_cancel"
+"15309_queue" -> "15309_queue"
+"15309_execute" -> "15309_execute"
+"15309_propose" -> "15309__encodeCalldata"
+"15309_proposals" -> "15309_proposalEta"
+"15309_proposals" -> "15309_proposalDeadline"
+"15309_proposals" -> "15309_proposalSnapshot"
+"15309__quorumReached" -> "15309_proposalSnapshot"
+"15309_propose" -> "15309_propose"
+"15309_propose" -> "15309__storeProposal"
+"15309_propose" -> "15309__msgSender"
+"15309_cancel" -> "15309_hashProposal"
+"15309_proposals" -> "15309_state"
+"15309_execute" -> "15309__getProposalParameters"
+"15309_quorumVotes" -> "15309_clock"
+"15309_quorumVotes" -> "15309_quorum"
+"15309_cancel" -> "15309__cancel"
+"15309_cancel" -> "15309_getVotes"
+"15309__storeProposal" -> "15309__encodeCalldata"
+"15309_cancel" -> "15309_proposalThreshold"
+"15309_cancel" -> "15309_clock"
+"15309_cancel" -> "15309__getProposalParameters"
+"15309_queue" -> "15309__getProposalParameters"
+"15309_cancel" -> "15309__msgSender"
+"15309__storeProposal" -> "15309_hashProposal"
+}subgraph cluster_16017_GovernorTimelockControl {
+label = "GovernorTimelockControl"
+"16017_timelock" [label="timelock"]
+"16017_state" [label="state"]
+"16017__cancel" [label="_cancel"]
+"16017_updateTimelock" [label="updateTimelock"]
+"16017__updateTimelock" [label="_updateTimelock"]
+"16017_constructor" [label="constructor"]
+"16017_queue" [label="queue"]
+"16017__executor" [label="_executor"]
+"16017__execute" [label="_execute"]
+"16017_supportsInterface" [label="supportsInterface"]
+"16017_proposalEta" [label="proposalEta"]
+"16017_supportsInterface" -> "16017_supportsInterface"
+"16017_updateTimelock" -> "16017__updateTimelock"
+"16017_queue" -> "16017_hashProposal"
+"16017_updateTimelock" -> "16017_onlyGovernance"
+"16017_constructor" -> "16017__updateTimelock"
+"16017__cancel" -> "16017__cancel"
+"16017_state" -> "16017_state"
+"16017_queue" -> "16017_state"
+}subgraph cluster_21873_IERC165 {
+label = "IERC165"
+"21873_supportsInterface" [label="supportsInterface"]
+}subgraph cluster_16370_IGovernorTimelock {
+label = "IGovernorTimelock"
+"16370_timelock" [label="timelock"]
+"16370_queue" [label="queue"]
+"16370_proposalEta" [label="proposalEta"]
+}subgraph cluster_13492_IGovernor {
+label = "IGovernor"
+"13492_getVotesWithParams" [label="getVotesWithParams"]
+"13492_CLOCK_MODE" [label="CLOCK_MODE"]
+"13492_quorum" [label="quorum"]
+"13492_votingPeriod" [label="votingPeriod"]
+"13492_version" [label="version"]
+"13492_name" [label="name"]
+"13492_COUNTING_MODE" [label="COUNTING_MODE"]
+"13492_getVotes" [label="getVotes"]
+"13492_propose" [label="propose"]
+"13492_castVoteWithReasonAndParams" [label="castVoteWithReasonAndParams"]
+"13492_cancel" [label="cancel"]
+"13492_castVoteWithReason" [label="castVoteWithReason"]
+"13492_castVoteBySig" [label="castVoteBySig"]
+"13492_votingDelay" [label="votingDelay"]
+"13492_proposalProposer" [label="proposalProposer"]
+"13492_state" [label="state"]
+"13492_execute" [label="execute"]
+"13492_hasVoted" [label="hasVoted"]
+"13492_proposalSnapshot" [label="proposalSnapshot"]
+"13492_castVoteWithReasonAndParamsBySig" [label="castVoteWithReasonAndParamsBySig"]
+"13492_clock" [label="clock"]
+"13492_hashProposal" [label="hashProposal"]
+"13492_castVote" [label="castVote"]
+"13492_proposalDeadline" [label="proposalDeadline"]
+}subgraph cluster_16114_GovernorVotes {
+label = "GovernorVotes"
+"16114_CLOCK_MODE" [label="CLOCK_MODE"]
+"16114_constructor" [label="constructor"]
+"16114__getVotes" [label="_getVotes"]
+"16114_clock" [label="clock"]
+}subgraph cluster_18646_IERC721Receiver {
+label = "IERC721Receiver"
+"18646_onERC721Received" [label="onERC721Received"]
+}subgraph cluster_15640_GovernorSettings {
+label = "GovernorSettings"
+"15640_votingDelay" [label="votingDelay"]
+"15640_setVotingPeriod" [label="setVotingPeriod"]
+"15640__setVotingPeriod" [label="_setVotingPeriod"]
+"15640_setProposalThreshold" [label="setProposalThreshold"]
+"15640__setVotingDelay" [label="_setVotingDelay"]
+"15640_setVotingDelay" [label="setVotingDelay"]
+"15640_proposalThreshold" [label="proposalThreshold"]
+"15640_votingPeriod" [label="votingPeriod"]
+"15640__setProposalThreshold" [label="_setProposalThreshold"]
+"15640_constructor" [label="constructor"]
+"15640_setVotingDelay" -> "15640_onlyGovernance"
+"15640_setProposalThreshold" -> "15640__setProposalThreshold"
+"15640_setProposalThreshold" -> "15640_onlyGovernance"
+"15640_setVotingPeriod" -> "15640__setVotingPeriod"
+"15640_constructor" -> "15640__setProposalThreshold"
+"15640_constructor" -> "15640__setVotingPeriod"
+"15640_setVotingDelay" -> "15640__setVotingDelay"
+"15640_constructor" -> "15640__setVotingDelay"
+"15640_setVotingPeriod" -> "15640_onlyGovernance"
+}subgraph cluster_20539_Context {
+label = "Context"
+"20539__msgSender" [label="_msgSender"]
+"20539__msgData" [label="_msgData"]
+}subgraph cluster_80156_ProtocolGovernor {
+label = "ProtocolGovernor"
+"80156_constructor" [label="constructor"]
+"80156_propose" [label="propose"]
+"80156_CLOCK_MODE" [label="CLOCK_MODE"]
+"80156_version" [label="version"]
+"80156__executor" [label="_executor"]
+"80156_supportsInterface" [label="supportsInterface"]
+"80156_clock" [label="clock"]
+"80156_cancel" [label="cancel"]
+"80156_slitherConstructorConstantVariables" [label="slitherConstructorConstantVariables"]
+"80156_proposalThreshold" [label="proposalThreshold"]
+"80156_state" [label="state"]
+"80156__execute" [label="_execute"]
+"80156__cancel" [label="_cancel"]
+"80156_state" -> "80156_state"
+"80156_CLOCK_MODE" -> "80156_clock"
+"80156_cancel" -> "80156_cancel"
+"80156__execute" -> "80156__execute"
+"80156__cancel" -> "80156__cancel"
+"80156__executor" -> "80156__executor"
+"80156_supportsInterface" -> "80156_supportsInterface"
+"80156_constructor" -> "80156_constructor"
+"80156_propose" -> "80156_propose"
+"80156_proposalThreshold" -> "80156_proposalThreshold"
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"revert(string)" 
+"abi.encodePacked()" 
+"abi.encode()" 
+"type()" 
+"require(bool,string)" 
+"mload(uint256)" 
+"keccak256(bytes)" 
+"15309__encodeCalldata" -> "keccak256(bytes)"
+"13153__beforeExecute" -> "keccak256(bytes)"
+"13153_castVoteBySig" -> "abi.encode()"
+"16017_supportsInterface" -> "type()"
+"13153_propose" -> "require(bool,string)"
+"13153_castVoteWithReasonAndParamsBySig" -> "abi.encode()"
+"13153_supportsInterface" -> "type()"
+"15640__setVotingPeriod" -> "require(bool,string)"
+"13153__castVote" -> "require(bool,string)"
+"15309_cancel" -> "require(bool,string)"
+"80156_slitherConstructorConstantVariables" -> "keccak256(bytes)"
+"13153_state" -> "revert(string)"
+"13153_hashProposal" -> "abi.encode()"
+"21861_supportsInterface" -> "type()"
+"13153_propose" -> "keccak256(bytes)"
+"80156_CLOCK_MODE" -> "require(bool,string)"
+"13153_castVoteWithReasonAndParamsBySig" -> "keccak256(bytes)"
+"15309__countVote" -> "revert(string)"
+"21738_constructor" -> "keccak256(bytes)"
+"21738__buildDomainSeparator" -> "abi.encode()"
+"16017_queue" -> "require(bool,string)"
+"13153_castVoteBySig" -> "keccak256(bytes)"
+"13153__isValidDescriptionForProposer" -> "mload(uint256)"
+"16329__updateQuorumNumerator" -> "require(bool,string)"
+"13153_receive" -> "require(bool,string)"
+"15309_propose" -> "require(bool,string)"
+"21738__buildDomainSeparator" -> "keccak256(bytes)"
+"13153_cancel" -> "require(bool,string)"
+"13153_execute" -> "require(bool,string)"
+"15309__storeProposal" -> "keccak256(bytes)"
+"15309__encodeCalldata" -> "abi.encodePacked()"
+"13153_hashProposal" -> "keccak256(bytes)"
+"15309__countVote" -> "require(bool,string)"
+"13153__cancel" -> "require(bool,string)"
+}
+}

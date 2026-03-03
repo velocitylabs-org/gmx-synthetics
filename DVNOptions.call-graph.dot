@@ -1,0 +1,23 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_2977_DVNOptions {
+label = "DVNOptions"
+"2977_groupDVNOptionsByIdx" [label="groupDVNOptionsByIdx"]
+"2977__insertDVNOptions" [label="_insertDVNOptions"]
+"2977_slitherConstructorConstantVariables" [label="slitherConstructorConstantVariables"]
+"2977_getNumDVNs" [label="getNumDVNs"]
+"2977_nextDVNOption" [label="nextDVNOption"]
+"2977_groupDVNOptionsByIdx" -> "2977__insertDVNOptions"
+"2977_groupDVNOptionsByIdx" -> "2977_getNumDVNs"
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"revert DVN_InvalidDVNOptions(uint256)" 
+"abi.encodePacked()" 
+"revert DVN_InvalidDVNIdx()" 
+"2977_getNumDVNs" -> "revert DVN_InvalidDVNOptions(uint256)"
+"2977_getNumDVNs" -> "revert DVN_InvalidDVNIdx()"
+"2977__insertDVNOptions" -> "abi.encodePacked()"
+"2977__insertDVNOptions" -> "revert DVN_InvalidDVNIdx()"
+}
+}

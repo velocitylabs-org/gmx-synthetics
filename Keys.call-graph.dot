@@ -1,0 +1,564 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_44976_Keys {
+label = "Keys"
+"44976_dataStreamIdKey" [label="dataStreamIdKey"]
+"44976_maxLendableImpactUsdKey" [label="maxLendableImpactUsdKey"]
+"44976_executeGlvWithdrawalFeatureDisabledKey" [label="executeGlvWithdrawalFeatureDisabledKey"]
+"44976_claimCollateralFeatureDisabledKey" [label="claimCollateralFeatureDisabledKey"]
+"44976_executeDepositFeatureDisabledKey" [label="executeDepositFeatureDisabledKey"]
+"44976_poolAmountKey" [label="poolAmountKey"]
+"44976_glvShiftLastExecutedAtKey" [label="glvShiftLastExecutedAtKey"]
+"44976_cancelOrderFeatureDisabledKey" [label="cancelOrderFeatureDisabledKey"]
+"44976_borrowingExponentFactorKey" [label="borrowingExponentFactorKey"]
+"44976_openInterestKey" [label="openInterestKey"]
+"44976_minFundingFactorPerSecondKey" [label="minFundingFactorPerSecondKey"]
+"44976_claimableCollateralFactorKey" [label="claimableCollateralFactorKey"]
+"44976_glvWithdrawalGasLimitKey" [label="glvWithdrawalGasLimitKey"]
+"44976_atomicWithdrawalFeeFactorKey" [label="atomicWithdrawalFeeFactorKey"]
+"44976_virtualInventoryForPositionsKey" [label="virtualInventoryForPositionsKey"]
+"44976_minGlvTokensForFirstGlvDepositKey" [label="minGlvTokensForFirstGlvDepositKey"]
+"44976_executeOrderFeatureDisabledKey" [label="executeOrderFeatureDisabledKey"]
+"44976_minAffiliateRewardFactorKey" [label="minAffiliateRewardFactorKey"]
+"44976_optimalUsageFactorKey" [label="optimalUsageFactorKey"]
+"44976_maxLendableImpactFactorKey" [label="maxLendableImpactFactorKey"]
+"44976_getFullKey" [label="getFullKey"]
+"44976_updateOrderFeatureDisabledKey" [label="updateOrderFeatureDisabledKey"]
+"44976_swapImpactPoolAmountKey" [label="swapImpactPoolAmountKey"]
+"44976_cumulativeBorrowingFactorKey" [label="cumulativeBorrowingFactorKey"]
+"44976_isMultichainEndpointEnabledKey" [label="isMultichainEndpointEnabledKey"]
+"44976_withdrawalFeeFactorKey" [label="withdrawalFeeFactorKey"]
+"44976_claimUiFeesFeatureDisabledKey" [label="claimUiFeesFeatureDisabledKey"]
+"44976_eidToSrcChainId" [label="eidToSrcChainId"]
+"44976_swapFeeFactorKey" [label="swapFeeFactorKey"]
+"44976_createGlvWithdrawalFeatureDisabledKey" [label="createGlvWithdrawalFeatureDisabledKey"]
+"44976_virtualMarketIdKey" [label="virtualMarketIdKey"]
+"44976_accountPositionListKey" [label="accountPositionListKey"]
+"44976_claimableCollateralReductionFactorKey" [label="claimableCollateralReductionFactorKey"]
+"44976_createWithdrawalFeatureDisabledKey" [label="createWithdrawalFeatureDisabledKey"]
+"44976_positionLastSrcChainId" [label="positionLastSrcChainId"]
+"44976_oracleProviderForTokenKey" [label="oracleProviderForTokenKey"]
+"44976_customContributorFundingAccountKey" [label="customContributorFundingAccountKey"]
+"44976_virtualTokenIdKey" [label="virtualTokenIdKey"]
+"44976_shiftGasLimitKey" [label="shiftGasLimitKey"]
+"44976_minMarketTokensForFirstDepositKey" [label="minMarketTokensForFirstDepositKey"]
+"44976_stablePriceKey" [label="stablePriceKey"]
+"44976_accountGlvDepositListKey" [label="accountGlvDepositListKey"]
+"44976_claimFundingFeesFeatureDisabledKey" [label="claimFundingFeesFeatureDisabledKey"]
+"44976_executeWithdrawalFeatureDisabledKey" [label="executeWithdrawalFeatureDisabledKey"]
+"44976_glvMaxMarketTokenBalanceAmountKey" [label="glvMaxMarketTokenBalanceAmountKey"]
+"44976_swapOrderGasLimitKey" [label="swapOrderGasLimitKey"]
+"44976_minCollateralFactorKey" [label="minCollateralFactorKey"]
+"44976_totalPendingImpactAmountKey" [label="totalPendingImpactAmountKey"]
+"44976_fundingExponentFactorKey" [label="fundingExponentFactorKey"]
+"44976_fundingFactorKey" [label="fundingFactorKey"]
+"44976_decreaseOrderGasLimitKey" [label="decreaseOrderGasLimitKey"]
+"44976_createShiftFeatureDisabledKey" [label="createShiftFeatureDisabledKey"]
+"44976_createGlvShiftFeatureDisabledKey" [label="createGlvShiftFeatureDisabledKey"]
+"44976_glvSupportedMarketListKey" [label="glvSupportedMarketListKey"]
+"44976_maxPoolAmountKey" [label="maxPoolAmountKey"]
+"44976_syncConfigLatestUpdateIdKey" [label="syncConfigLatestUpdateIdKey"]
+"44976_isOracleProviderEnabledKey" [label="isOracleProviderEnabledKey"]
+"44976_minCollateralFactorForLiquidationKey" [label="minCollateralFactorForLiquidationKey"]
+"44976_positionImpactExponentFactorKey" [label="positionImpactExponentFactorKey"]
+"44976_atomicSwapFeeFactorKey" [label="atomicSwapFeeFactorKey"]
+"44976_maxOpenInterestKey" [label="maxOpenInterestKey"]
+"44976_swapImpactFactorKey" [label="swapImpactFactorKey"]
+"44976_cumulativeBorrowingFactorUpdatedAtKey" [label="cumulativeBorrowingFactorUpdatedAtKey"]
+"44976_thresholdForStableFundingKey" [label="thresholdForStableFundingKey"]
+"44976_withdrawalGasLimitKey" [label="withdrawalGasLimitKey"]
+"44976_claimableCollateralAmountKey" [label="claimableCollateralAmountKey"]
+"44976_positionImpactPoolDistributedAtKey" [label="positionImpactPoolDistributedAtKey"]
+"44976_positionImpactPoolAmountKey" [label="positionImpactPoolAmountKey"]
+"44976_baseBorrowingFactorKey" [label="baseBorrowingFactorKey"]
+"44976_savedCallbackContract" [label="savedCallbackContract"]
+"44976_createOrderFeatureDisabledKey" [label="createOrderFeatureDisabledKey"]
+"44976_glvShiftMaxLossFactorKey" [label="glvShiftMaxLossFactorKey"]
+"44976_positionFeeFactorKey" [label="positionFeeFactorKey"]
+"44976_thresholdForDecreaseFundingKey" [label="thresholdForDecreaseFundingKey"]
+"44976_subaccountIntegrationIdKey" [label="subaccountIntegrationIdKey"]
+"44976_swapPathMarketFlagKey" [label="swapPathMarketFlagKey"]
+"44976_claimTermsKey" [label="claimTermsKey"]
+"44976_edgeDataStreamIdKey" [label="edgeDataStreamIdKey"]
+"44976_proTraderTierKey" [label="proTraderTierKey"]
+"44976_syncConfigMarketParameterDisabledKey" [label="syncConfigMarketParameterDisabledKey"]
+"44976_priceFeedMultiplierKey" [label="priceFeedMultiplierKey"]
+"44976_maxTotalContributorTokenAmountKey" [label="maxTotalContributorTokenAmountKey"]
+"44976_contributorTokenAmountKey" [label="contributorTokenAmountKey"]
+"44976_borrowingFactorKey" [label="borrowingFactorKey"]
+"44976_edgeDataStreamTokenDecimalsKey" [label="edgeDataStreamTokenDecimalsKey"]
+"44976_claimableFundingAmountPerSizeKey" [label="claimableFundingAmountPerSizeKey"]
+"44976_swapImpactExponentFactorKey" [label="swapImpactExponentFactorKey"]
+"44976_uiFeeFactorKey" [label="uiFeeFactorKey"]
+"44976_accountGlvWithdrawalListKey" [label="accountGlvWithdrawalListKey"]
+"44976_claimableFundingAmountKey" [label="claimableFundingAmountKey"]
+"44976_slitherConstructorConstantVariables" [label="slitherConstructorConstantVariables"]
+"44976_cancelGlvDepositFeatureDisabledKey" [label="cancelGlvDepositFeatureDisabledKey"]
+"44976_priceFeedKey" [label="priceFeedKey"]
+"44976_contributorFundingAccountKey" [label="contributorFundingAccountKey"]
+"44976_totalBorrowingKey" [label="totalBorrowingKey"]
+"44976_buybackBatchAmountKey" [label="buybackBatchAmountKey"]
+"44976_fundingDecreaseFactorPerSecondKey" [label="fundingDecreaseFactorPerSecondKey"]
+"44976_minPositionImpactPoolAmountKey" [label="minPositionImpactPoolAmountKey"]
+"44976_buybackGmxFactorKey" [label="buybackGmxFactorKey"]
+"44976_multichainBalanceKey" [label="multichainBalanceKey"]
+"44976_depositFeeFactorKey" [label="depositFeeFactorKey"]
+"44976_subaccountActionCountKey" [label="subaccountActionCountKey"]
+"44976_tokenTransferGasLimit" [label="tokenTransferGasLimit"]
+"44976_isMarketDisabledKey" [label="isMarketDisabledKey"]
+"44976_glvShiftGasLimitKey" [label="glvShiftGasLimitKey"]
+"44976_withdrawableBuybackTokenAmountKey" [label="withdrawableBuybackTokenAmountKey"]
+"44976_feeDistributorSwapTokenIndexKey" [label="feeDistributorSwapTokenIndexKey"]
+"44976_subaccountAutoTopUpAmountKey" [label="subaccountAutoTopUpAmountKey"]
+"44976_maxFundingFactorPerSecondKey" [label="maxFundingFactorPerSecondKey"]
+"44976_positionImpactFactorKey" [label="positionImpactFactorKey"]
+"44976_positionImpactPoolDistributionRateKey" [label="positionImpactPoolDistributionRateKey"]
+"44976_isAdlEnabledKey" [label="isAdlEnabledKey"]
+"44976_autoCancelOrderListKey" [label="autoCancelOrderListKey"]
+"44976_isGlvMarketDisabledKey" [label="isGlvMarketDisabledKey"]
+"44976_accountDepositListKey" [label="accountDepositListKey"]
+"44976_createGlvDepositFeatureDisabledKey" [label="createGlvDepositFeatureDisabledKey"]
+"44976_maxPositionImpactFactorKey" [label="maxPositionImpactFactorKey"]
+"44976_totalClaimableFundsAmountKey" [label="totalClaimableFundsAmountKey"]
+"44976_isAtomicOracleProviderKey" [label="isAtomicOracleProviderKey"]
+"44976_cancelGlvWithdrawalFeatureDisabledKey" [label="cancelGlvWithdrawalFeatureDisabledKey"]
+"44976_claimAffiliateRewardsFeatureDisabledKey" [label="claimAffiliateRewardsFeatureDisabledKey"]
+"44976_liquidationFeeFactorKey" [label="liquidationFeeFactorKey"]
+"44976_virtualInventoryForPositionsInTokensKey" [label="virtualInventoryForPositionsInTokensKey"]
+"44976_isMultichainProviderEnabledKey" [label="isMultichainProviderEnabledKey"]
+"44976_maxCollateralSumKey" [label="maxCollateralSumKey"]
+"44976_claimableUiFeeAmountKey" [label="claimableUiFeeAmountKey"]
+"44976_feeDistributorSwapFeeBatchKey" [label="feeDistributorSwapFeeBatchKey"]
+"44976_glvShiftMinIntervalKey" [label="glvShiftMinIntervalKey"]
+"44976_generalClaimFeatureDisabled" [label="generalClaimFeatureDisabled"]
+"44976_maxLendableImpactFactorForWithdrawalsKey" [label="maxLendableImpactFactorForWithdrawalsKey"]
+"44976_glvDepositGasLimitKey" [label="glvDepositGasLimitKey"]
+"44976_accountWithdrawalListKey" [label="accountWithdrawalListKey"]
+"44976_maxPoolUsdForDepositKey" [label="maxPoolUsdForDepositKey"]
+"44976_savedFundingFactorPerSecondKey" [label="savedFundingFactorPerSecondKey"]
+"44976_subaccountExpiresAtKey" [label="subaccountExpiresAtKey"]
+"44976_latestAdlAtKey" [label="latestAdlAtKey"]
+"44976_gaslessFeatureDisabledKey" [label="gaslessFeatureDisabledKey"]
+"44976_maxAllowedSubaccountActionCountKey" [label="maxAllowedSubaccountActionCountKey"]
+"44976_minCollateralFactorForOpenInterestMultiplierKey" [label="minCollateralFactorForOpenInterestMultiplierKey"]
+"44976_openInterestReserveFactorKey" [label="openInterestReserveFactorKey"]
+"44976_isRelayFeeExcludedKey" [label="isRelayFeeExcludedKey"]
+"44976_virtualInventoryForSwapsKey" [label="virtualInventoryForSwapsKey"]
+"44976_executeShiftFeatureDisabledKey" [label="executeShiftFeatureDisabledKey"]
+"44976_glvPerMarketGasLimitKey" [label="glvPerMarketGasLimitKey"]
+"44976_collateralSumKey" [label="collateralSumKey"]
+"44976_oracleTypeKey" [label="oracleTypeKey"]
+"44976_claimableFundsAmountKey" [label="claimableFundsAmountKey"]
+"44976_minPnlFactorAfterAdlKey" [label="minPnlFactorAfterAdlKey"]
+"44976_claimedCollateralAmountKey" [label="claimedCollateralAmountKey"]
+"44976_dataStreamSpreadReductionFactorKey" [label="dataStreamSpreadReductionFactorKey"]
+"44976_accountOrderListKey" [label="accountOrderListKey"]
+"44976_cancelWithdrawalFeatureDisabledKey" [label="cancelWithdrawalFeatureDisabledKey"]
+"44976_syncConfigMarketDisabledKey" [label="syncConfigMarketDisabledKey"]
+"44976_syncConfigParameterDisabledKey" [label="syncConfigParameterDisabledKey"]
+"44976_openInterestInTokensKey" [label="openInterestInTokensKey"]
+"44976_claimTermsBackrefKey" [label="claimTermsBackrefKey"]
+"44976_priceFeedHeartbeatDurationKey" [label="priceFeedHeartbeatDurationKey"]
+"44976_createDepositFeatureDisabledKey" [label="createDepositFeatureDisabledKey"]
+"44976_increaseOrderGasLimitKey" [label="increaseOrderGasLimitKey"]
+"44976_oracleProviderUpdatedAt" [label="oracleProviderUpdatedAt"]
+"44976_singleSwapGasLimitKey" [label="singleSwapGasLimitKey"]
+"44976_syncConfigFeatureDisabledKey" [label="syncConfigFeatureDisabledKey"]
+"44976_fundingFeeAmountPerSizeKey" [label="fundingFeeAmountPerSizeKey"]
+"44976_fundingUpdatedAtKey" [label="fundingUpdatedAtKey"]
+"44976_lentPositionImpactPoolAmountKey" [label="lentPositionImpactPoolAmountKey"]
+"44976_executeGlvShiftFeatureDisabledKey" [label="executeGlvShiftFeatureDisabledKey"]
+"44976_dataStreamMultiplierKey" [label="dataStreamMultiplierKey"]
+"44976_claimableFeeAmountKey" [label="claimableFeeAmountKey"]
+"44976_fundingIncreaseFactorPerSecondKey" [label="fundingIncreaseFactorPerSecondKey"]
+"44976_depositGasLimitKey" [label="depositGasLimitKey"]
+"44976_subaccountListKey" [label="subaccountListKey"]
+"44976_buybackMaxPriceImpactFactorKey" [label="buybackMaxPriceImpactFactorKey"]
+"44976_maxPositionImpactFactorForLiquidationsKey" [label="maxPositionImpactFactorForLiquidationsKey"]
+"44976_jitFeatureDisabledKey" [label="jitFeatureDisabledKey"]
+"44976_executeGlvDepositFeatureDisabledKey" [label="executeGlvDepositFeatureDisabledKey"]
+"44976_subaccountIntegrationDisabledKey" [label="subaccountIntegrationDisabledKey"]
+"44976_subaccountFeatureDisabledKey" [label="subaccountFeatureDisabledKey"]
+"44976_oracleTimestampAdjustmentKey" [label="oracleTimestampAdjustmentKey"]
+"44976_aboveOptimalUsageBorrowingFactorKey" [label="aboveOptimalUsageBorrowingFactorKey"]
+"44976_cancelDepositFeatureDisabledKey" [label="cancelDepositFeatureDisabledKey"]
+"44976_glvMaxMarketTokenBalanceUsdKey" [label="glvMaxMarketTokenBalanceUsdKey"]
+"44976_reserveFactorKey" [label="reserveFactorKey"]
+"44976_affiliateRewardKey" [label="affiliateRewardKey"]
+"44976_isSrcChainIdEnabledKey" [label="isSrcChainIdEnabledKey"]
+"44976_executeAtomicWithdrawalFeatureDisabledKey" [label="executeAtomicWithdrawalFeatureDisabledKey"]
+"44976_proDiscountFactorKey" [label="proDiscountFactorKey"]
+"44976_maxPnlFactorKey" [label="maxPnlFactorKey"]
+"44976_cancelShiftFeatureDisabledKey" [label="cancelShiftFeatureDisabledKey"]
+"44976_executeAdlFeatureDisabledKey" [label="executeAdlFeatureDisabledKey"]
+"44976_accountShiftListKey" [label="accountShiftListKey"]
+"44976_buybackAvailableFeeAmountKey" [label="buybackAvailableFeeAmountKey"]
+"44976_syncConfigUpdateCompletedKey" [label="syncConfigUpdateCompletedKey"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"abi.encode()" 
+"keccak256(bytes)" 
+"bytes.concat()" 
+"44976_cancelDepositFeatureDisabledKey" -> "abi.encode()"
+"44976_openInterestReserveFactorKey" -> "abi.encode()"
+"44976_getFullKey" -> "keccak256(bytes)"
+"44976_edgeDataStreamTokenDecimalsKey" -> "keccak256(bytes)"
+"44976_fundingExponentFactorKey" -> "keccak256(bytes)"
+"44976_oracleTypeKey" -> "abi.encode()"
+"44976_claimableFundingAmountPerSizeKey" -> "keccak256(bytes)"
+"44976_openInterestInTokensKey" -> "keccak256(bytes)"
+"44976_priceFeedHeartbeatDurationKey" -> "abi.encode()"
+"44976_executeWithdrawalFeatureDisabledKey" -> "keccak256(bytes)"
+"44976_minCollateralFactorForLiquidationKey" -> "keccak256(bytes)"
+"44976_latestAdlAtKey" -> "abi.encode()"
+"44976_cancelDepositFeatureDisabledKey" -> "keccak256(bytes)"
+"44976_minPnlFactorAfterAdlKey" -> "abi.encode()"
+"44976_virtualInventoryForSwapsKey" -> "abi.encode()"
+"44976_positionImpactExponentFactorKey" -> "abi.encode()"
+"44976_borrowingExponentFactorKey" -> "abi.encode()"
+"44976_fundingDecreaseFactorPerSecondKey" -> "keccak256(bytes)"
+"44976_fundingFactorKey" -> "abi.encode()"
+"44976_stablePriceKey" -> "abi.encode()"
+"44976_reserveFactorKey" -> "keccak256(bytes)"
+"44976_dataStreamMultiplierKey" -> "abi.encode()"
+"44976_subaccountFeatureDisabledKey" -> "abi.encode()"
+"44976_glvShiftMinIntervalKey" -> "abi.encode()"
+"44976_oracleProviderUpdatedAt" -> "abi.encode()"
+"44976_claimableCollateralFactorKey" -> "keccak256(bytes)"
+"44976_priceFeedMultiplierKey" -> "abi.encode()"
+"44976_atomicSwapFeeFactorKey" -> "keccak256(bytes)"
+"44976_swapImpactExponentFactorKey" -> "keccak256(bytes)"
+"44976_maxPositionImpactFactorKey" -> "keccak256(bytes)"
+"44976_positionImpactPoolAmountKey" -> "keccak256(bytes)"
+"44976_proDiscountFactorKey" -> "keccak256(bytes)"
+"44976_cumulativeBorrowingFactorUpdatedAtKey" -> "abi.encode()"
+"44976_executeGlvDepositFeatureDisabledKey" -> "abi.encode()"
+"44976_positionFeeFactorKey" -> "abi.encode()"
+"44976_totalBorrowingKey" -> "abi.encode()"
+"44976_oracleProviderUpdatedAt" -> "keccak256(bytes)"
+"44976_minCollateralFactorKey" -> "abi.encode()"
+"44976_executeOrderFeatureDisabledKey" -> "keccak256(bytes)"
+"44976_syncConfigParameterDisabledKey" -> "abi.encode()"
+"44976_subaccountExpiresAtKey" -> "abi.encode()"
+"44976_minGlvTokensForFirstGlvDepositKey" -> "abi.encode()"
+"44976_claimableCollateralReductionFactorKey" -> "abi.encode()"
+"44976_savedFundingFactorPerSecondKey" -> "abi.encode()"
+"44976_executeGlvWithdrawalFeatureDisabledKey" -> "abi.encode()"
+"44976_isAdlEnabledKey" -> "keccak256(bytes)"
+"44976_claimableUiFeeAmountKey" -> "keccak256(bytes)"
+"44976_eidToSrcChainId" -> "abi.encode()"
+"44976_aboveOptimalUsageBorrowingFactorKey" -> "abi.encode()"
+"44976_subaccountActionCountKey" -> "abi.encode()"
+"44976_glvSupportedMarketListKey" -> "keccak256(bytes)"
+"44976_syncConfigMarketParameterDisabledKey" -> "keccak256(bytes)"
+"44976_minAffiliateRewardFactorKey" -> "abi.encode()"
+"44976_isMarketDisabledKey" -> "keccak256(bytes)"
+"44976_accountGlvDepositListKey" -> "abi.encode()"
+"44976_claimCollateralFeatureDisabledKey" -> "keccak256(bytes)"
+"44976_poolAmountKey" -> "keccak256(bytes)"
+"44976_claimableFundingAmountKey" -> "keccak256(bytes)"
+"44976_gaslessFeatureDisabledKey" -> "abi.encode()"
+"44976_swapImpactPoolAmountKey" -> "keccak256(bytes)"
+"44976_glvShiftMinIntervalKey" -> "keccak256(bytes)"
+"44976_subaccountIntegrationDisabledKey" -> "abi.encode()"
+"44976_aboveOptimalUsageBorrowingFactorKey" -> "keccak256(bytes)"
+"44976_createDepositFeatureDisabledKey" -> "keccak256(bytes)"
+"44976_accountGlvWithdrawalListKey" -> "keccak256(bytes)"
+"44976_cancelWithdrawalFeatureDisabledKey" -> "abi.encode()"
+"44976_virtualInventoryForSwapsKey" -> "keccak256(bytes)"
+"44976_thresholdForDecreaseFundingKey" -> "abi.encode()"
+"44976_subaccountExpiresAtKey" -> "keccak256(bytes)"
+"44976_glvMaxMarketTokenBalanceUsdKey" -> "abi.encode()"
+"44976_fundingFeeAmountPerSizeKey" -> "abi.encode()"
+"44976_minGlvTokensForFirstGlvDepositKey" -> "keccak256(bytes)"
+"44976_getFullKey" -> "bytes.concat()"
+"44976_maxPositionImpactFactorForLiquidationsKey" -> "abi.encode()"
+"44976_collateralSumKey" -> "keccak256(bytes)"
+"44976_cancelShiftFeatureDisabledKey" -> "keccak256(bytes)"
+"44976_openInterestReserveFactorKey" -> "keccak256(bytes)"
+"44976_subaccountActionCountKey" -> "keccak256(bytes)"
+"44976_isRelayFeeExcludedKey" -> "keccak256(bytes)"
+"44976_positionImpactPoolDistributionRateKey" -> "keccak256(bytes)"
+"44976_claimTermsKey" -> "abi.encode()"
+"44976_cumulativeBorrowingFactorUpdatedAtKey" -> "keccak256(bytes)"
+"44976_buybackMaxPriceImpactFactorKey" -> "abi.encode()"
+"44976_totalClaimableFundsAmountKey" -> "keccak256(bytes)"
+"44976_claimableCollateralAmountKey" -> "keccak256(bytes)"
+"44976_syncConfigFeatureDisabledKey" -> "keccak256(bytes)"
+"44976_maxFundingFactorPerSecondKey" -> "abi.encode()"
+"44976_buybackMaxPriceImpactFactorKey" -> "keccak256(bytes)"
+"44976_autoCancelOrderListKey" -> "abi.encode()"
+"44976_accountGlvWithdrawalListKey" -> "abi.encode()"
+"44976_autoCancelOrderListKey" -> "keccak256(bytes)"
+"44976_minPositionImpactPoolAmountKey" -> "keccak256(bytes)"
+"44976_stablePriceKey" -> "keccak256(bytes)"
+"44976_virtualMarketIdKey" -> "abi.encode()"
+"44976_minFundingFactorPerSecondKey" -> "abi.encode()"
+"44976_positionFeeFactorKey" -> "keccak256(bytes)"
+"44976_executeGlvShiftFeatureDisabledKey" -> "keccak256(bytes)"
+"44976_executeAtomicWithdrawalFeatureDisabledKey" -> "keccak256(bytes)"
+"44976_createShiftFeatureDisabledKey" -> "keccak256(bytes)"
+"44976_virtualInventoryForPositionsInTokensKey" -> "keccak256(bytes)"
+"44976_affiliateRewardKey" -> "keccak256(bytes)"
+"44976_glvShiftMaxLossFactorKey" -> "abi.encode()"
+"44976_maxTotalContributorTokenAmountKey" -> "abi.encode()"
+"44976_uiFeeFactorKey" -> "abi.encode()"
+"44976_atomicWithdrawalFeeFactorKey" -> "abi.encode()"
+"44976_fundingUpdatedAtKey" -> "abi.encode()"
+"44976_executeDepositFeatureDisabledKey" -> "keccak256(bytes)"
+"44976_withdrawableBuybackTokenAmountKey" -> "abi.encode()"
+"44976_executeDepositFeatureDisabledKey" -> "abi.encode()"
+"44976_createGlvDepositFeatureDisabledKey" -> "keccak256(bytes)"
+"44976_accountShiftListKey" -> "abi.encode()"
+"44976_dataStreamIdKey" -> "keccak256(bytes)"
+"44976_contributorTokenAmountKey" -> "abi.encode()"
+"44976_claimableCollateralAmountKey" -> "abi.encode()"
+"44976_syncConfigFeatureDisabledKey" -> "abi.encode()"
+"44976_thresholdForStableFundingKey" -> "abi.encode()"
+"44976_claimableFundingAmountKey" -> "abi.encode()"
+"44976_accountGlvDepositListKey" -> "keccak256(bytes)"
+"44976_subaccountAutoTopUpAmountKey" -> "abi.encode()"
+"44976_feeDistributorSwapTokenIndexKey" -> "keccak256(bytes)"
+"44976_claimTermsKey" -> "keccak256(bytes)"
+"44976_executeShiftFeatureDisabledKey" -> "keccak256(bytes)"
+"44976_subaccountAutoTopUpAmountKey" -> "keccak256(bytes)"
+"44976_minAffiliateRewardFactorKey" -> "keccak256(bytes)"
+"44976_executeShiftFeatureDisabledKey" -> "abi.encode()"
+"44976_buybackGmxFactorKey" -> "keccak256(bytes)"
+"44976_subaccountIntegrationDisabledKey" -> "keccak256(bytes)"
+"44976_claimTermsBackrefKey" -> "keccak256(bytes)"
+"44976_minCollateralFactorForOpenInterestMultiplierKey" -> "abi.encode()"
+"44976_subaccountFeatureDisabledKey" -> "keccak256(bytes)"
+"44976_glvMaxMarketTokenBalanceUsdKey" -> "keccak256(bytes)"
+"44976_positionImpactPoolDistributedAtKey" -> "keccak256(bytes)"
+"44976_edgeDataStreamIdKey" -> "keccak256(bytes)"
+"44976_openInterestInTokensKey" -> "abi.encode()"
+"44976_baseBorrowingFactorKey" -> "abi.encode()"
+"44976_buybackAvailableFeeAmountKey" -> "keccak256(bytes)"
+"44976_isMarketDisabledKey" -> "abi.encode()"
+"44976_claimableFundsAmountKey" -> "abi.encode()"
+"44976_positionImpactFactorKey" -> "abi.encode()"
+"44976_accountOrderListKey" -> "abi.encode()"
+"44976_maxLendableImpactFactorKey" -> "keccak256(bytes)"
+"44976_thresholdForStableFundingKey" -> "keccak256(bytes)"
+"44976_oracleProviderForTokenKey" -> "keccak256(bytes)"
+"44976_depositFeeFactorKey" -> "keccak256(bytes)"
+"44976_oracleTypeKey" -> "keccak256(bytes)"
+"44976_borrowingFactorKey" -> "keccak256(bytes)"
+"44976_accountWithdrawalListKey" -> "keccak256(bytes)"
+"44976_uiFeeFactorKey" -> "keccak256(bytes)"
+"44976_fundingExponentFactorKey" -> "abi.encode()"
+"44976_totalPendingImpactAmountKey" -> "keccak256(bytes)"
+"44976_optimalUsageFactorKey" -> "abi.encode()"
+"44976_buybackBatchAmountKey" -> "keccak256(bytes)"
+"44976_isAdlEnabledKey" -> "abi.encode()"
+"44976_syncConfigUpdateCompletedKey" -> "keccak256(bytes)"
+"44976_isGlvMarketDisabledKey" -> "abi.encode()"
+"44976_syncConfigMarketDisabledKey" -> "keccak256(bytes)"
+"44976_isMultichainEndpointEnabledKey" -> "abi.encode()"
+"44976_positionImpactPoolDistributedAtKey" -> "abi.encode()"
+"44976_baseBorrowingFactorKey" -> "keccak256(bytes)"
+"44976_openInterestKey" -> "keccak256(bytes)"
+"44976_fundingDecreaseFactorPerSecondKey" -> "abi.encode()"
+"44976_isRelayFeeExcludedKey" -> "abi.encode()"
+"44976_withdrawableBuybackTokenAmountKey" -> "keccak256(bytes)"
+"44976_executeAdlFeatureDisabledKey" -> "keccak256(bytes)"
+"44976_oracleProviderForTokenKey" -> "abi.encode()"
+"44976_slitherConstructorConstantVariables" -> "abi.encode()"
+"44976_contributorTokenAmountKey" -> "keccak256(bytes)"
+"44976_reserveFactorKey" -> "abi.encode()"
+"44976_createOrderFeatureDisabledKey" -> "abi.encode()"
+"44976_minFundingFactorPerSecondKey" -> "keccak256(bytes)"
+"44976_positionImpactExponentFactorKey" -> "keccak256(bytes)"
+"44976_updateOrderFeatureDisabledKey" -> "keccak256(bytes)"
+"44976_isOracleProviderEnabledKey" -> "abi.encode()"
+"44976_feeDistributorSwapTokenIndexKey" -> "abi.encode()"
+"44976_maxOpenInterestKey" -> "keccak256(bytes)"
+"44976_maxLendableImpactFactorForWithdrawalsKey" -> "keccak256(bytes)"
+"44976_poolAmountKey" -> "abi.encode()"
+"44976_virtualInventoryForPositionsInTokensKey" -> "abi.encode()"
+"44976_edgeDataStreamIdKey" -> "abi.encode()"
+"44976_claimableCollateralReductionFactorKey" -> "keccak256(bytes)"
+"44976_accountDepositListKey" -> "abi.encode()"
+"44976_cumulativeBorrowingFactorKey" -> "keccak256(bytes)"
+"44976_priceFeedKey" -> "keccak256(bytes)"
+"44976_jitFeatureDisabledKey" -> "keccak256(bytes)"
+"44976_virtualTokenIdKey" -> "abi.encode()"
+"44976_contributorFundingAccountKey" -> "keccak256(bytes)"
+"44976_customContributorFundingAccountKey" -> "abi.encode()"
+"44976_claimableFundsAmountKey" -> "keccak256(bytes)"
+"44976_depositFeeFactorKey" -> "abi.encode()"
+"44976_executeAdlFeatureDisabledKey" -> "abi.encode()"
+"44976_savedCallbackContract" -> "abi.encode()"
+"44976_withdrawalFeeFactorKey" -> "abi.encode()"
+"44976_swapImpactPoolAmountKey" -> "abi.encode()"
+"44976_atomicWithdrawalFeeFactorKey" -> "keccak256(bytes)"
+"44976_customContributorFundingAccountKey" -> "keccak256(bytes)"
+"44976_oracleTimestampAdjustmentKey" -> "abi.encode()"
+"44976_maxFundingFactorPerSecondKey" -> "keccak256(bytes)"
+"44976_feeDistributorSwapFeeBatchKey" -> "abi.encode()"
+"44976_claimableUiFeeAmountKey" -> "abi.encode()"
+"44976_proTraderTierKey" -> "keccak256(bytes)"
+"44976_swapImpactFactorKey" -> "abi.encode()"
+"44976_positionLastSrcChainId" -> "abi.encode()"
+"44976_priceFeedHeartbeatDurationKey" -> "keccak256(bytes)"
+"44976_cancelShiftFeatureDisabledKey" -> "abi.encode()"
+"44976_accountShiftListKey" -> "keccak256(bytes)"
+"44976_syncConfigParameterDisabledKey" -> "keccak256(bytes)"
+"44976_fundingIncreaseFactorPerSecondKey" -> "keccak256(bytes)"
+"44976_minCollateralFactorForOpenInterestMultiplierKey" -> "keccak256(bytes)"
+"44976_dataStreamIdKey" -> "abi.encode()"
+"44976_createGlvWithdrawalFeatureDisabledKey" -> "abi.encode()"
+"44976_totalPendingImpactAmountKey" -> "abi.encode()"
+"44976_maxCollateralSumKey" -> "keccak256(bytes)"
+"44976_claimUiFeesFeatureDisabledKey" -> "abi.encode()"
+"44976_thresholdForDecreaseFundingKey" -> "keccak256(bytes)"
+"44976_minCollateralFactorForLiquidationKey" -> "abi.encode()"
+"44976_totalClaimableFundsAmountKey" -> "abi.encode()"
+"44976_multichainBalanceKey" -> "abi.encode()"
+"44976_claimableCollateralFactorKey" -> "abi.encode()"
+"44976_maxOpenInterestKey" -> "abi.encode()"
+"44976_executeOrderFeatureDisabledKey" -> "abi.encode()"
+"44976_claimUiFeesFeatureDisabledKey" -> "keccak256(bytes)"
+"44976_proDiscountFactorKey" -> "abi.encode()"
+"44976_maxPnlFactorKey" -> "abi.encode()"
+"44976_fundingFeeAmountPerSizeKey" -> "keccak256(bytes)"
+"44976_glvShiftLastExecutedAtKey" -> "keccak256(bytes)"
+"44976_syncConfigMarketParameterDisabledKey" -> "abi.encode()"
+"44976_executeGlvShiftFeatureDisabledKey" -> "abi.encode()"
+"44976_isSrcChainIdEnabledKey" -> "keccak256(bytes)"
+"44976_contributorFundingAccountKey" -> "abi.encode()"
+"44976_createWithdrawalFeatureDisabledKey" -> "abi.encode()"
+"44976_generalClaimFeatureDisabled" -> "abi.encode()"
+"44976_openInterestKey" -> "abi.encode()"
+"44976_optimalUsageFactorKey" -> "keccak256(bytes)"
+"44976_maxTotalContributorTokenAmountKey" -> "keccak256(bytes)"
+"44976_claimedCollateralAmountKey" -> "abi.encode()"
+"44976_cancelGlvDepositFeatureDisabledKey" -> "keccak256(bytes)"
+"44976_subaccountIntegrationIdKey" -> "keccak256(bytes)"
+"44976_createWithdrawalFeatureDisabledKey" -> "keccak256(bytes)"
+"44976_maxPoolUsdForDepositKey" -> "abi.encode()"
+"44976_swapImpactExponentFactorKey" -> "abi.encode()"
+"44976_claimedCollateralAmountKey" -> "keccak256(bytes)"
+"44976_virtualMarketIdKey" -> "keccak256(bytes)"
+"44976_executeWithdrawalFeatureDisabledKey" -> "abi.encode()"
+"44976_isMultichainProviderEnabledKey" -> "abi.encode()"
+"44976_minMarketTokensForFirstDepositKey" -> "keccak256(bytes)"
+"44976_claimCollateralFeatureDisabledKey" -> "abi.encode()"
+"44976_glvMaxMarketTokenBalanceAmountKey" -> "keccak256(bytes)"
+"44976_cancelWithdrawalFeatureDisabledKey" -> "keccak256(bytes)"
+"44976_createGlvWithdrawalFeatureDisabledKey" -> "keccak256(bytes)"
+"44976_totalBorrowingKey" -> "keccak256(bytes)"
+"44976_maxPnlFactorKey" -> "keccak256(bytes)"
+"44976_minPnlFactorAfterAdlKey" -> "keccak256(bytes)"
+"44976_cancelGlvDepositFeatureDisabledKey" -> "abi.encode()"
+"44976_withdrawalFeeFactorKey" -> "keccak256(bytes)"
+"44976_createGlvShiftFeatureDisabledKey" -> "keccak256(bytes)"
+"44976_maxPositionImpactFactorForLiquidationsKey" -> "keccak256(bytes)"
+"44976_subaccountListKey" -> "keccak256(bytes)"
+"44976_swapFeeFactorKey" -> "keccak256(bytes)"
+"44976_maxPoolUsdForDepositKey" -> "keccak256(bytes)"
+"44976_buybackAvailableFeeAmountKey" -> "abi.encode()"
+"44976_dataStreamMultiplierKey" -> "keccak256(bytes)"
+"44976_fundingFactorKey" -> "keccak256(bytes)"
+"44976_feeDistributorSwapFeeBatchKey" -> "keccak256(bytes)"
+"44976_savedFundingFactorPerSecondKey" -> "keccak256(bytes)"
+"44976_accountWithdrawalListKey" -> "abi.encode()"
+"44976_executeGlvWithdrawalFeatureDisabledKey" -> "keccak256(bytes)"
+"44976_eidToSrcChainId" -> "keccak256(bytes)"
+"44976_positionImpactFactorKey" -> "keccak256(bytes)"
+"44976_buybackBatchAmountKey" -> "abi.encode()"
+"44976_glvShiftLastExecutedAtKey" -> "abi.encode()"
+"44976_generalClaimFeatureDisabled" -> "keccak256(bytes)"
+"44976_isAtomicOracleProviderKey" -> "abi.encode()"
+"44976_oracleTimestampAdjustmentKey" -> "keccak256(bytes)"
+"44976_accountPositionListKey" -> "abi.encode()"
+"44976_accountDepositListKey" -> "keccak256(bytes)"
+"44976_subaccountIntegrationIdKey" -> "abi.encode()"
+"44976_priceFeedKey" -> "abi.encode()"
+"44976_maxPoolAmountKey" -> "abi.encode()"
+"44976_maxLendableImpactUsdKey" -> "abi.encode()"
+"44976_isMultichainProviderEnabledKey" -> "keccak256(bytes)"
+"44976_swapPathMarketFlagKey" -> "abi.encode()"
+"44976_subaccountListKey" -> "abi.encode()"
+"44976_tokenTransferGasLimit" -> "keccak256(bytes)"
+"44976_claimTermsBackrefKey" -> "abi.encode()"
+"44976_createShiftFeatureDisabledKey" -> "abi.encode()"
+"44976_swapFeeFactorKey" -> "abi.encode()"
+"44976_isOracleProviderEnabledKey" -> "keccak256(bytes)"
+"44976_liquidationFeeFactorKey" -> "abi.encode()"
+"44976_claimFundingFeesFeatureDisabledKey" -> "keccak256(bytes)"
+"44976_executeGlvDepositFeatureDisabledKey" -> "keccak256(bytes)"
+"44976_minPositionImpactPoolAmountKey" -> "abi.encode()"
+"44976_executeAtomicWithdrawalFeatureDisabledKey" -> "abi.encode()"
+"44976_proTraderTierKey" -> "abi.encode()"
+"44976_maxLendableImpactUsdKey" -> "keccak256(bytes)"
+"44976_glvMaxMarketTokenBalanceAmountKey" -> "abi.encode()"
+"44976_maxAllowedSubaccountActionCountKey" -> "abi.encode()"
+"44976_fundingUpdatedAtKey" -> "keccak256(bytes)"
+"44976_buybackGmxFactorKey" -> "abi.encode()"
+"44976_maxAllowedSubaccountActionCountKey" -> "keccak256(bytes)"
+"44976_savedCallbackContract" -> "keccak256(bytes)"
+"44976_claimableFeeAmountKey" -> "abi.encode()"
+"44976_cancelOrderFeatureDisabledKey" -> "keccak256(bytes)"
+"44976_atomicSwapFeeFactorKey" -> "abi.encode()"
+"44976_syncConfigMarketDisabledKey" -> "abi.encode()"
+"44976_cancelGlvWithdrawalFeatureDisabledKey" -> "keccak256(bytes)"
+"44976_gaslessFeatureDisabledKey" -> "keccak256(bytes)"
+"44976_lentPositionImpactPoolAmountKey" -> "keccak256(bytes)"
+"44976_maxLendableImpactFactorKey" -> "abi.encode()"
+"44976_positionImpactPoolDistributionRateKey" -> "abi.encode()"
+"44976_maxCollateralSumKey" -> "abi.encode()"
+"44976_liquidationFeeFactorKey" -> "keccak256(bytes)"
+"44976_dataStreamSpreadReductionFactorKey" -> "abi.encode()"
+"44976_accountPositionListKey" -> "keccak256(bytes)"
+"44976_cancelOrderFeatureDisabledKey" -> "abi.encode()"
+"44976_claimableFundingAmountPerSizeKey" -> "abi.encode()"
+"44976_slitherConstructorConstantVariables" -> "keccak256(bytes)"
+"44976_borrowingFactorKey" -> "abi.encode()"
+"44976_positionLastSrcChainId" -> "keccak256(bytes)"
+"44976_virtualInventoryForPositionsKey" -> "abi.encode()"
+"44976_affiliateRewardKey" -> "abi.encode()"
+"44976_isSrcChainIdEnabledKey" -> "abi.encode()"
+"44976_priceFeedMultiplierKey" -> "keccak256(bytes)"
+"44976_latestAdlAtKey" -> "keccak256(bytes)"
+"44976_glvShiftMaxLossFactorKey" -> "keccak256(bytes)"
+"44976_isAtomicOracleProviderKey" -> "keccak256(bytes)"
+"44976_lentPositionImpactPoolAmountKey" -> "abi.encode()"
+"44976_createGlvShiftFeatureDisabledKey" -> "abi.encode()"
+"44976_maxPoolAmountKey" -> "keccak256(bytes)"
+"44976_minMarketTokensForFirstDepositKey" -> "abi.encode()"
+"44976_tokenTransferGasLimit" -> "abi.encode()"
+"44976_cumulativeBorrowingFactorKey" -> "abi.encode()"
+"44976_cancelGlvWithdrawalFeatureDisabledKey" -> "abi.encode()"
+"44976_claimAffiliateRewardsFeatureDisabledKey" -> "keccak256(bytes)"
+"44976_virtualInventoryForPositionsKey" -> "keccak256(bytes)"
+"44976_createOrderFeatureDisabledKey" -> "keccak256(bytes)"
+"44976_isMultichainEndpointEnabledKey" -> "keccak256(bytes)"
+"44976_borrowingExponentFactorKey" -> "keccak256(bytes)"
+"44976_swapImpactFactorKey" -> "keccak256(bytes)"
+"44976_multichainBalanceKey" -> "keccak256(bytes)"
+"44976_dataStreamSpreadReductionFactorKey" -> "keccak256(bytes)"
+"44976_fundingIncreaseFactorPerSecondKey" -> "abi.encode()"
+"44976_updateOrderFeatureDisabledKey" -> "abi.encode()"
+"44976_edgeDataStreamTokenDecimalsKey" -> "abi.encode()"
+"44976_createDepositFeatureDisabledKey" -> "abi.encode()"
+"44976_minCollateralFactorKey" -> "keccak256(bytes)"
+"44976_glvSupportedMarketListKey" -> "abi.encode()"
+"44976_isGlvMarketDisabledKey" -> "keccak256(bytes)"
+"44976_maxLendableImpactFactorForWithdrawalsKey" -> "abi.encode()"
+"44976_accountOrderListKey" -> "keccak256(bytes)"
+"44976_claimFundingFeesFeatureDisabledKey" -> "abi.encode()"
+"44976_syncConfigUpdateCompletedKey" -> "abi.encode()"
+"44976_claimAffiliateRewardsFeatureDisabledKey" -> "abi.encode()"
+"44976_positionImpactPoolAmountKey" -> "abi.encode()"
+"44976_jitFeatureDisabledKey" -> "abi.encode()"
+"44976_claimableFeeAmountKey" -> "keccak256(bytes)"
+"44976_swapPathMarketFlagKey" -> "keccak256(bytes)"
+"44976_maxPositionImpactFactorKey" -> "abi.encode()"
+"44976_virtualTokenIdKey" -> "keccak256(bytes)"
+"44976_collateralSumKey" -> "abi.encode()"
+"44976_createGlvDepositFeatureDisabledKey" -> "abi.encode()"
+}
+}

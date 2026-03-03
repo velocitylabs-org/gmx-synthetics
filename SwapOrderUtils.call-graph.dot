@@ -1,0 +1,16 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_122769_SwapOrderUtils {
+label = "SwapOrderUtils"
+"122769_processOrder" [label="processOrder"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"revert UnexpectedMarket()" 
+"revert OracleTimestampsAreSmallerThanRequired(uint256,uint256)" 
+"revert OracleTimestampsAreLargerThanRequestExpirationTime(uint256,uint256,uint256)" 
+"122769_processOrder" -> "revert UnexpectedMarket()"
+"122769_processOrder" -> "revert OracleTimestampsAreSmallerThanRequired(uint256,uint256)"
+"122769_processOrder" -> "revert OracleTimestampsAreLargerThanRequestExpirationTime(uint256,uint256,uint256)"
+}
+}

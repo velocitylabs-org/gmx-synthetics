@@ -1,0 +1,21 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_100088_MockGlpVault {
+label = "MockGlpVault"
+"100088_taxBasisPoints" [label="taxBasisPoints"]
+"100088_stableSwapFeeBasisPoints" [label="stableSwapFeeBasisPoints"]
+"100088_stableTaxBasisPoints" [label="stableTaxBasisPoints"]
+"100088_swapFeeBasisPoints" [label="swapFeeBasisPoints"]
+"100088_mintBurnFeeBasisPoints" [label="mintBurnFeeBasisPoints"]
+}subgraph cluster_93564_IGlpVault {
+label = "IGlpVault"
+"93564_stableSwapFeeBasisPoints" [label="stableSwapFeeBasisPoints"]
+"93564_stableTaxBasisPoints" [label="stableTaxBasisPoints"]
+"93564_mintBurnFeeBasisPoints" [label="mintBurnFeeBasisPoints"]
+"93564_taxBasisPoints" [label="taxBasisPoints"]
+"93564_swapFeeBasisPoints" [label="swapFeeBasisPoints"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+}
+}

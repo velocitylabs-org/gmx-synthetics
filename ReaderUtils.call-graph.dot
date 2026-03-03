@@ -1,0 +1,20 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_139562_ReaderUtils {
+label = "ReaderUtils"
+"139562_getMarketInfo" [label="getMarketInfo"]
+"139562_getAdlState" [label="getAdlState"]
+"139562_getOrder" [label="getOrder"]
+"139562_getAccountOrders" [label="getAccountOrders"]
+"139562_getMarkets" [label="getMarkets"]
+"139562_getVirtualInventory" [label="getVirtualInventory"]
+"139562_getBaseFundingValues" [label="getBaseFundingValues"]
+"139562_getMarketInfoList" [label="getMarketInfoList"]
+"139562_getMarketInfo" -> "139562_getVirtualInventory"
+"139562_getMarketInfo" -> "139562_getBaseFundingValues"
+"139562_getMarketInfoList" -> "139562_getMarketInfo"
+}subgraph cluster_solidity {
+label = "[Solidity]"
+}
+}

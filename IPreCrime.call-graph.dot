@@ -1,0 +1,14 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_8898_IPreCrime {
+label = "IPreCrime"
+"8898_version" [label="version"]
+"8898_preCrime" [label="preCrime"]
+"8898_simulate" [label="simulate"]
+"8898_getConfig" [label="getConfig"]
+"8898_buildSimulationResult" [label="buildSimulationResult"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+}
+}

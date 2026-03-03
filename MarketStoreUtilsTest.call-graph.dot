@@ -1,0 +1,12 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_154070_MarketStoreUtilsTest {
+label = "MarketStoreUtilsTest"
+"154070_removeMarket" [label="removeMarket"]
+"154070_setMarket" [label="setMarket"]
+"154070_getEmptyMarket" [label="getEmptyMarket"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+}
+}

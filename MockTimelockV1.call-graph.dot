@@ -1,0 +1,31 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_102563_MockTimelockV1 {
+label = "MockTimelockV1"
+"102563_setContractHandler" [label="setContractHandler"]
+"102563_setTier" [label="setTier"]
+"102563_setKeeper" [label="setKeeper"]
+"102563_acceptGov" [label="acceptGov"]
+"102563_govSetCodeOwner" [label="govSetCodeOwner"]
+"102563_constructor" [label="constructor"]
+"102563_setHandler" [label="setHandler"]
+"102563_setGov" [label="setGov"]
+"102563_setAdmin" [label="setAdmin"]
+"102563_setReferrerTier" [label="setReferrerTier"]
+"102563_setTier" -> "102563_onlyKeeperAndAbove"
+"102563_setGov" -> "102563_onlyAdmin"
+"102563_setReferrerTier" -> "102563_onlyKeeperAndAbove"
+"102563_setContractHandler" -> "102563_onlyAdmin"
+"102563_setAdmin" -> "102563_onlyAdmin"
+"102563_acceptGov" -> "102563_onlyAdmin"
+"102563_govSetCodeOwner" -> "102563_onlyKeeperAndAbove"
+"102563_setHandler" -> "102563_onlyAdmin"
+"102563_setKeeper" -> "102563_onlyAdmin"
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"require(bool,string)" 
+"102563_constructor" -> "require(bool,string)"
+"102563_setAdmin" -> "require(bool,string)"
+}
+}

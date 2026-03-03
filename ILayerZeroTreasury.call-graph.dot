@@ -1,0 +1,11 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_1942_ILayerZeroTreasury {
+label = "ILayerZeroTreasury"
+"1942_payFee" [label="payFee"]
+"1942_getFee" [label="getFee"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+}
+}

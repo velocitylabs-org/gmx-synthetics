@@ -1,0 +1,19 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_113188_IPriceFeed {
+label = "IPriceFeed"
+"113188_decimals" [label="decimals"]
+"113188_description" [label="description"]
+"113188_latestRoundData" [label="latestRoundData"]
+}subgraph cluster_101247_MockPriceFeed {
+label = "MockPriceFeed"
+"101247_decimals" [label="decimals"]
+"101247_description" [label="description"]
+"101247_latestAnswer" [label="latestAnswer"]
+"101247_setAnswer" [label="setAnswer"]
+"101247_latestRoundData" [label="latestRoundData"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+}
+}

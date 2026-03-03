@@ -1,0 +1,140 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_169377_console {
+label = "console"
+"169377_logBytes24" [label="logBytes24"]
+"169377_logBytes25" [label="logBytes25"]
+"169377_logBytes18" [label="logBytes18"]
+"169377_logBytes14" [label="logBytes14"]
+"169377__sendLogPayloadImplementation" [label="_sendLogPayloadImplementation"]
+"169377_logBytes27" [label="logBytes27"]
+"169377_logBytes16" [label="logBytes16"]
+"169377_logBytes20" [label="logBytes20"]
+"169377_slitherConstructorConstantVariables" [label="slitherConstructorConstantVariables"]
+"169377_logBytes6" [label="logBytes6"]
+"169377_logString" [label="logString"]
+"169377_logBytes32" [label="logBytes32"]
+"169377_logBytes9" [label="logBytes9"]
+"169377_logBytes11" [label="logBytes11"]
+"169377__castToPure" [label="_castToPure"]
+"169377_logBytes12" [label="logBytes12"]
+"169377_logBytes31" [label="logBytes31"]
+"169377_logBytes28" [label="logBytes28"]
+"169377_logAddress" [label="logAddress"]
+"169377_logBytes" [label="logBytes"]
+"169377_logBytes2" [label="logBytes2"]
+"169377_logBytes3" [label="logBytes3"]
+"169377_logBytes22" [label="logBytes22"]
+"169377_logBytes17" [label="logBytes17"]
+"169377_logBytes21" [label="logBytes21"]
+"169377_logBytes30" [label="logBytes30"]
+"169377_logBytes4" [label="logBytes4"]
+"169377__sendLogPayload" [label="_sendLogPayload"]
+"169377_logBytes7" [label="logBytes7"]
+"169377_logBytes1" [label="logBytes1"]
+"169377_logBytes23" [label="logBytes23"]
+"169377_logBool" [label="logBool"]
+"169377_logBytes19" [label="logBytes19"]
+"169377_logBytes10" [label="logBytes10"]
+"169377_logBytes26" [label="logBytes26"]
+"169377_logBytes8" [label="logBytes8"]
+"169377_logUint" [label="logUint"]
+"169377_logBytes29" [label="logBytes29"]
+"169377_logBytes15" [label="logBytes15"]
+"169377_logInt" [label="logInt"]
+"169377_logBytes13" [label="logBytes13"]
+"169377_log" [label="log"]
+"169377_logBytes5" [label="logBytes5"]
+"169377_logBytes13" -> "169377__sendLogPayload"
+"169377_logBytes17" -> "169377__sendLogPayload"
+"169377_logBytes11" -> "169377__sendLogPayload"
+"169377_logBytes3" -> "169377__sendLogPayload"
+"169377_logBytes9" -> "169377__sendLogPayload"
+"169377_logBytes2" -> "169377__sendLogPayload"
+"169377_logUint" -> "169377__sendLogPayload"
+"169377_logBytes4" -> "169377__sendLogPayload"
+"169377_logBytes16" -> "169377__sendLogPayload"
+"169377_logBytes29" -> "169377__sendLogPayload"
+"169377_logBytes12" -> "169377__sendLogPayload"
+"169377_logBytes" -> "169377__sendLogPayload"
+"169377_logBytes14" -> "169377__sendLogPayload"
+"169377_logBytes15" -> "169377__sendLogPayload"
+"169377_logBytes25" -> "169377__sendLogPayload"
+"169377_logBytes8" -> "169377__sendLogPayload"
+"169377_logBytes6" -> "169377__sendLogPayload"
+"169377_logBytes18" -> "169377__sendLogPayload"
+"169377_logString" -> "169377__sendLogPayload"
+"169377_log" -> "169377__sendLogPayload"
+"169377_logBytes23" -> "169377__sendLogPayload"
+"169377_logAddress" -> "169377__sendLogPayload"
+"169377_logBytes24" -> "169377__sendLogPayload"
+"169377_logBytes20" -> "169377__sendLogPayload"
+"169377_logInt" -> "169377__sendLogPayload"
+"169377__sendLogPayload" -> "169377__castToPure"
+"169377_logBytes10" -> "169377__sendLogPayload"
+"169377_logBytes19" -> "169377__sendLogPayload"
+"169377_logBytes27" -> "169377__sendLogPayload"
+"169377_logBytes5" -> "169377__sendLogPayload"
+"169377_logBytes21" -> "169377__sendLogPayload"
+"169377_logBytes30" -> "169377__sendLogPayload"
+"169377_logBytes32" -> "169377__sendLogPayload"
+"169377_logBytes7" -> "169377__sendLogPayload"
+"169377_logBytes22" -> "169377__sendLogPayload"
+"169377_logBytes31" -> "169377__sendLogPayload"
+"169377_logBytes28" -> "169377__sendLogPayload"
+"169377_logBool" -> "169377__sendLogPayload"
+"169377_logBytes26" -> "169377__sendLogPayload"
+"169377_logBytes1" -> "169377__sendLogPayload"
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"staticcall(uint256,uint256,uint256,uint256,uint256,uint256)" 
+"pop(uint256)" 
+"abi.encodeWithSignature()" 
+"mload(uint256)" 
+"gas()" 
+"169377_logBytes4" -> "abi.encodeWithSignature()"
+"169377_logBytes21" -> "abi.encodeWithSignature()"
+"169377_logBytes5" -> "abi.encodeWithSignature()"
+"169377_logBytes22" -> "abi.encodeWithSignature()"
+"169377_logBytes7" -> "abi.encodeWithSignature()"
+"169377_logAddress" -> "abi.encodeWithSignature()"
+"169377_logBytes3" -> "abi.encodeWithSignature()"
+"169377_logBytes8" -> "abi.encodeWithSignature()"
+"169377_logBytes28" -> "abi.encodeWithSignature()"
+"169377_logBytes19" -> "abi.encodeWithSignature()"
+"169377_logBytes9" -> "abi.encodeWithSignature()"
+"169377_logInt" -> "abi.encodeWithSignature()"
+"169377_logBytes27" -> "abi.encodeWithSignature()"
+"169377_logBytes1" -> "abi.encodeWithSignature()"
+"169377_logBytes17" -> "abi.encodeWithSignature()"
+"169377_logBytes12" -> "abi.encodeWithSignature()"
+"169377_logBytes16" -> "abi.encodeWithSignature()"
+"169377_log" -> "abi.encodeWithSignature()"
+"169377_logBytes2" -> "abi.encodeWithSignature()"
+"169377__sendLogPayloadImplementation" -> "staticcall(uint256,uint256,uint256,uint256,uint256,uint256)"
+"169377__sendLogPayloadImplementation" -> "gas()"
+"169377_logBytes" -> "abi.encodeWithSignature()"
+"169377__sendLogPayloadImplementation" -> "pop(uint256)"
+"169377_logBytes24" -> "abi.encodeWithSignature()"
+"169377_logString" -> "abi.encodeWithSignature()"
+"169377_logBytes25" -> "abi.encodeWithSignature()"
+"169377_logUint" -> "abi.encodeWithSignature()"
+"169377_logBool" -> "abi.encodeWithSignature()"
+"169377_logBytes11" -> "abi.encodeWithSignature()"
+"169377_logBytes30" -> "abi.encodeWithSignature()"
+"169377_logBytes26" -> "abi.encodeWithSignature()"
+"169377_logBytes15" -> "abi.encodeWithSignature()"
+"169377_logBytes20" -> "abi.encodeWithSignature()"
+"169377_logBytes29" -> "abi.encodeWithSignature()"
+"169377_logBytes10" -> "abi.encodeWithSignature()"
+"169377_logBytes31" -> "abi.encodeWithSignature()"
+"169377_logBytes13" -> "abi.encodeWithSignature()"
+"169377_logBytes32" -> "abi.encodeWithSignature()"
+"169377_logBytes6" -> "abi.encodeWithSignature()"
+"169377__sendLogPayloadImplementation" -> "mload(uint256)"
+"169377_logBytes18" -> "abi.encodeWithSignature()"
+"169377_logBytes14" -> "abi.encodeWithSignature()"
+"169377_logBytes23" -> "abi.encodeWithSignature()"
+}
+}

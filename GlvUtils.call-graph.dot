@@ -1,0 +1,56 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_69897_GlvUtils {
+label = "GlvUtils"
+"69897__getGlvMarketValue" [label="_getGlvMarketValue"]
+"69897_validateGlvMarketTokenBalance" [label="validateGlvMarketTokenBalance"]
+"69897_getGlvTokenPrice" [label="getGlvTokenPrice"]
+"69897_validateGlvMarketCount" [label="validateGlvMarketCount"]
+"69897_addMarketToGlv" [label="addMarketToGlv"]
+"69897__getGlvTokenPrice" [label="_getGlvTokenPrice"]
+"69897_validateGlvMarket" [label="validateGlvMarket"]
+"69897_glvTokenAmountToUsd" [label="glvTokenAmountToUsd"]
+"69897_removeMarketFromGlv" [label="removeMarketFromGlv"]
+"69897_getGlvValue" [label="getGlvValue"]
+"69897_usdToGlvTokenAmount" [label="usdToGlvTokenAmount"]
+"69897_getGlvMarketCount" [label="getGlvMarketCount"]
+"69897_validateGlv" [label="validateGlv"]
+"69897_getGlvTokenPrice" -> "69897_getGlvValue"
+"69897_getGlvValue" -> "69897_getGlvTokenPrice"
+"69897_addMarketToGlv" -> "69897_validateGlvMarketCount"
+"69897_getGlvTokenPrice" -> "69897__getGlvTokenPrice"
+"69897_getGlvValue" -> "69897__getGlvMarketValue"
+"69897_addMarketToGlv" -> "69897_validateGlv"
+"69897_removeMarketFromGlv" -> "69897_validateGlv"
+"69897_removeMarketFromGlv" -> "69897_validateGlvMarket"
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"revert GlvNonZeroMarketBalance(address,address)" 
+"revert GlvDisabledMarket(address,address)" 
+"revert EmptyGlv(address)" 
+"revert GlvMaxMarketTokenBalanceAmountExceeded(address,address,uint256,uint256)" 
+"revert GlvInvalidLongToken(address,address,address)" 
+"revert GlvNegativeMarketPoolValue(address,address)" 
+"revert GlvInvalidShortToken(address,address,address)" 
+"revert EmptyGlvTokenSupply()" 
+"revert GlvMaxMarketCountExceeded(address,uint256)" 
+"revert GlvUnsupportedMarket(address,address)" 
+"revert GlvEnabledMarket(address,address)" 
+"revert GlvMaxMarketTokenBalanceUsdExceeded(address,address,uint256,uint256)" 
+"revert GlvMarketAlreadyExists(address,address)" 
+"69897_addMarketToGlv" -> "revert GlvInvalidLongToken(address,address,address)"
+"69897_validateGlvMarketTokenBalance" -> "revert GlvMaxMarketTokenBalanceUsdExceeded(address,address,uint256,uint256)"
+"69897_addMarketToGlv" -> "revert GlvMarketAlreadyExists(address,address)"
+"69897_removeMarketFromGlv" -> "revert GlvEnabledMarket(address,address)"
+"69897_validateGlvMarket" -> "revert GlvUnsupportedMarket(address,address)"
+"69897_validateGlvMarketCount" -> "revert GlvMaxMarketCountExceeded(address,uint256)"
+"69897__getGlvMarketValue" -> "revert GlvNegativeMarketPoolValue(address,address)"
+"69897_addMarketToGlv" -> "revert GlvInvalidShortToken(address,address,address)"
+"69897_validateGlvMarketTokenBalance" -> "revert GlvMaxMarketTokenBalanceAmountExceeded(address,address,uint256,uint256)"
+"69897_removeMarketFromGlv" -> "revert GlvNonZeroMarketBalance(address,address)"
+"69897_validateGlvMarket" -> "revert GlvDisabledMarket(address,address)"
+"69897_glvTokenAmountToUsd" -> "revert EmptyGlvTokenSupply()"
+"69897_validateGlv" -> "revert EmptyGlv(address)"
+}
+}

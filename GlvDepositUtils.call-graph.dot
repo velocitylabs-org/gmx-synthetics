@@ -1,0 +1,26 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_74362_GlvDepositUtils {
+label = "GlvDepositUtils"
+"74362_createGlvDeposit" [label="createGlvDeposit"]
+"74362_slitherConstructorConstantVariables" [label="slitherConstructorConstantVariables"]
+"74362_cancelGlvDeposit" [label="cancelGlvDeposit"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"revert EmptyGlvMarketAmount()" 
+"revert InvalidGlvDepositSwapPath(uint256,uint256)" 
+"revert EmptyGlvDepositAmounts()" 
+"revert InvalidGlvDepositInitialLongToken(address)" 
+"gasleft()" 
+"revert InsufficientWntAmountForExecutionFee(uint256,uint256)" 
+"revert InvalidGlvDepositInitialShortToken(address)" 
+"74362_createGlvDeposit" -> "revert InvalidGlvDepositInitialShortToken(address)"
+"74362_cancelGlvDeposit" -> "gasleft()"
+"74362_createGlvDeposit" -> "revert EmptyGlvDepositAmounts()"
+"74362_createGlvDeposit" -> "revert InvalidGlvDepositSwapPath(uint256,uint256)"
+"74362_createGlvDeposit" -> "revert InsufficientWntAmountForExecutionFee(uint256,uint256)"
+"74362_createGlvDeposit" -> "revert EmptyGlvMarketAmount()"
+"74362_createGlvDeposit" -> "revert InvalidGlvDepositInitialLongToken(address)"
+}
+}

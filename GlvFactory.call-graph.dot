@@ -1,0 +1,31 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_141184_RoleModule {
+label = "RoleModule"
+"141184_constructor" [label="constructor"]
+"141184__validateRole" [label="_validateRole"]
+}subgraph cluster_68437_GlvFactory {
+label = "GlvFactory"
+"68437_constructor" [label="constructor"]
+"68437_createGlv" [label="createGlv"]
+"68437_emitGlvCreated" [label="emitGlvCreated"]
+"68437_constructor" -> "68437_constructor"
+"68437_createGlv" -> "68437_onlyMarketKeeper"
+"68437_createGlv" -> "68437_emitGlvCreated"
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"revert GlvNameTooLong()" 
+"revert GlvAlreadyExists(bytes32,address)" 
+"abi.encode()" 
+"revert Unauthorized(address,string)" 
+"revert GlvSymbolTooLong()" 
+"keccak256(bytes)" 
+"141184__validateRole" -> "revert Unauthorized(address,string)"
+"68437_createGlv" -> "keccak256(bytes)"
+"68437_createGlv" -> "revert GlvAlreadyExists(bytes32,address)"
+"68437_createGlv" -> "abi.encode()"
+"68437_createGlv" -> "revert GlvSymbolTooLong()"
+"68437_createGlv" -> "revert GlvNameTooLong()"
+}
+}

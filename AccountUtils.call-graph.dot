@@ -1,0 +1,18 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_155041_AccountUtils {
+label = "AccountUtils"
+"155041_validateReceiver" [label="validateReceiver"]
+"155041_validateAccount" [label="validateAccount"]
+"155041_isContract" [label="isContract"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"revert EmptyAccount()" 
+"revert EmptyReceiver()" 
+"code(address)" 
+"155041_validateAccount" -> "revert EmptyAccount()"
+"155041_validateReceiver" -> "revert EmptyReceiver()"
+"155041_isContract" -> "code(address)"
+}
+}

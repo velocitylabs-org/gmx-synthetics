@@ -1,0 +1,18 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_111846_ChainlinkPriceFeedUtils {
+label = "ChainlinkPriceFeedUtils"
+"111846_getPriceFeedPrice" [label="getPriceFeedPrice"]
+"111846_getPriceFeedMultiplier" [label="getPriceFeedMultiplier"]
+"111846_getPriceFeedPrice" -> "111846_getPriceFeedMultiplier"
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"revert EmptyChainlinkPriceFeedMultiplier(address)" 
+"revert InvalidFeedPrice(address,int256)" 
+"revert ChainlinkPriceFeedNotUpdated(address,uint256,uint256)" 
+"111846_getPriceFeedPrice" -> "revert InvalidFeedPrice(address,int256)"
+"111846_getPriceFeedPrice" -> "revert ChainlinkPriceFeedNotUpdated(address,uint256,uint256)"
+"111846_getPriceFeedMultiplier" -> "revert EmptyChainlinkPriceFeedMultiplier(address)"
+}
+}

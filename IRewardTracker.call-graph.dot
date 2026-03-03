@@ -1,0 +1,11 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_157074_IRewardTracker {
+label = "IRewardTracker"
+"157074_distributor" [label="distributor"]
+"157074_updateRewards" [label="updateRewards"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+}
+}

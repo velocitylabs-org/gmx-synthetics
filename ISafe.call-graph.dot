@@ -1,0 +1,10 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_147981_ISafe {
+label = "ISafe"
+"147981_domainSeparator" [label="domainSeparator"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+}
+}

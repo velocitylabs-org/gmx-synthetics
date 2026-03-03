@@ -1,0 +1,12 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_1863_IExecutorFeeLib {
+label = "IExecutorFeeLib"
+"1863_getFeeOnSend" [label="getFeeOnSend"]
+"1863_version" [label="version"]
+"1863_getFee" [label="getFee"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+}
+}

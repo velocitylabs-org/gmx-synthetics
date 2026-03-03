@@ -1,0 +1,27 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_6272_ExecutorOptions {
+label = "ExecutorOptions"
+"6272_decodeLzComposeOption" [label="decodeLzComposeOption"]
+"6272_encodeNativeDropOption" [label="encodeNativeDropOption"]
+"6272_decodeNativeDropOption" [label="decodeNativeDropOption"]
+"6272_nextExecutorOption" [label="nextExecutorOption"]
+"6272_decodeLzReceiveOption" [label="decodeLzReceiveOption"]
+"6272_encodeLzComposeOption" [label="encodeLzComposeOption"]
+"6272_encodeLzReceiveOption" [label="encodeLzReceiveOption"]
+"6272_slitherConstructorConstantVariables" [label="slitherConstructorConstantVariables"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"revert Executor_InvalidLzComposeOption()" 
+"revert Executor_InvalidLzReceiveOption()" 
+"revert Executor_InvalidNativeDropOption()" 
+"abi.encodePacked()" 
+"6272_decodeLzReceiveOption" -> "revert Executor_InvalidLzReceiveOption()"
+"6272_encodeLzComposeOption" -> "abi.encodePacked()"
+"6272_encodeLzReceiveOption" -> "abi.encodePacked()"
+"6272_encodeNativeDropOption" -> "abi.encodePacked()"
+"6272_decodeNativeDropOption" -> "revert Executor_InvalidNativeDropOption()"
+"6272_decodeLzComposeOption" -> "revert Executor_InvalidLzComposeOption()"
+}
+}

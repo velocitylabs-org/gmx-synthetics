@@ -1,0 +1,34 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_68775_GlvStoreUtils {
+label = "GlvStoreUtils"
+"68775_set" [label="set"]
+"68775_get" [label="get"]
+"68775_getBySalt" [label="getBySalt"]
+"68775_getGlvSaltHash" [label="getGlvSaltHash"]
+"68775_remove" [label="remove"]
+"68775_getGlvKeys" [label="getGlvKeys"]
+"68775_getGlvCount" [label="getGlvCount"]
+"68775_slitherConstructorConstantVariables" [label="slitherConstructorConstantVariables"]
+"68775_set" -> "68775_getGlvSaltHash"
+"68775_getBySalt" -> "68775_getGlvSaltHash"
+"68775_getBySalt" -> "68775_get"
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"abi.encode()" 
+"revert GlvNotFound(address)" 
+"keccak256(bytes)" 
+"68775_getGlvSaltHash" -> "keccak256(bytes)"
+"68775_get" -> "keccak256(bytes)"
+"68775_remove" -> "abi.encode()"
+"68775_set" -> "abi.encode()"
+"68775_remove" -> "keccak256(bytes)"
+"68775_getGlvSaltHash" -> "abi.encode()"
+"68775_get" -> "abi.encode()"
+"68775_set" -> "keccak256(bytes)"
+"68775_remove" -> "revert GlvNotFound(address)"
+"68775_slitherConstructorConstantVariables" -> "abi.encode()"
+"68775_slitherConstructorConstantVariables" -> "keccak256(bytes)"
+}
+}

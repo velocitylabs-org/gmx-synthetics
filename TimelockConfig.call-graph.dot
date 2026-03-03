@@ -1,0 +1,168 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_155480_BasicMulticall {
+label = "BasicMulticall"
+"155480_multicall" [label="multicall"]
+}subgraph cluster_141184_RoleModule {
+label = "RoleModule"
+"141184_constructor" [label="constructor"]
+"141184__validateRole" [label="_validateRole"]
+}subgraph cluster_37415_TimelockConfig {
+label = "TimelockConfig"
+"37415_cancelAction" [label="cancelAction"]
+"37415_signalSetHoldingAddress" [label="signalSetHoldingAddress"]
+"37415__schedule" [label="_schedule"]
+"37415_signalSetAtomicOracleProvider" [label="signalSetAtomicOracleProvider"]
+"37415_increaseTimelockDelay" [label="increaseTimelockDelay"]
+"37415_getHashBatch" [label="getHashBatch"]
+"37415_signalReduceLentAmount" [label="signalReduceLentAmount"]
+"37415_executeBatch" [label="executeBatch"]
+"37415_signalGrantRole" [label="signalGrantRole"]
+"37415__scheduleBatch" [label="_scheduleBatch"]
+"37415_signalSetMinContributorPaymentInterval" [label="signalSetMinContributorPaymentInterval"]
+"37415_getHash" [label="getHash"]
+"37415__signalPendingAction" [label="_signalPendingAction"]
+"37415_signalSetFeeReceiver" [label="signalSetFeeReceiver"]
+"37415_signalSetOracleProviderEnabled" [label="signalSetOracleProviderEnabled"]
+"37415_execute" [label="execute"]
+"37415_signalSetMaxTotalContributorTokenAmount" [label="signalSetMaxTotalContributorTokenAmount"]
+"37415_executeWithOraclePrice" [label="executeWithOraclePrice"]
+"37415_constructor" [label="constructor"]
+"37415_slitherConstructorConstantVariables" [label="slitherConstructorConstantVariables"]
+"37415_signalRevokeRole" [label="signalRevokeRole"]
+"37415_signalSetEdgeDataStream" [label="signalSetEdgeDataStream"]
+"37415_signalSetDataStream" [label="signalSetDataStream"]
+"37415_signalWithdrawFromPositionImpactPool" [label="signalWithdrawFromPositionImpactPool"]
+"37415_signalRemoveOracleSigner" [label="signalRemoveOracleSigner"]
+"37415_signalAddOracleSigner" [label="signalAddOracleSigner"]
+"37415_signalSetPriceFeed" [label="signalSetPriceFeed"]
+"37415_signalWithdrawTokens" [label="signalWithdrawTokens"]
+"37415_revokeRole" [label="revokeRole"]
+"37415_signalRevokeRole" -> "37415__signalPendingAction"
+"37415_increaseTimelockDelay" -> "37415_onlyTimelockAdmin"
+"37415_signalRemoveOracleSigner" -> "37415__signalPendingAction"
+"37415_execute" -> "37415_onlyTimelockAdmin"
+"37415_signalAddOracleSigner" -> "37415__schedule"
+"37415_revokeRole" -> "37415_onlyTimelockMultisig"
+"37415_signalSetMinContributorPaymentInterval" -> "37415_onlyTimelockAdmin"
+"37415_signalSetHoldingAddress" -> "37415_onlyTimelockAdmin"
+"37415_signalGrantRole" -> "37415_onlyTimelockAdmin"
+"37415_signalAddOracleSigner" -> "37415__signalPendingAction"
+"37415_signalSetAtomicOracleProvider" -> "37415_onlyTimelockAdmin"
+"37415_signalSetMinContributorPaymentInterval" -> "37415__signalPendingAction"
+"37415_signalSetEdgeDataStream" -> "37415_onlyTimelockAdmin"
+"37415_signalSetFeeReceiver" -> "37415__signalPendingAction"
+"37415_signalSetPriceFeed" -> "37415_onlyTimelockAdmin"
+"37415_signalSetPriceFeed" -> "37415__signalPendingAction"
+"37415_signalReduceLentAmount" -> "37415_onlyTimelockAdmin"
+"37415_increaseTimelockDelay" -> "37415__signalPendingAction"
+"37415_signalSetEdgeDataStream" -> "37415__scheduleBatch"
+"37415_signalSetOracleProviderEnabled" -> "37415__signalPendingAction"
+"37415_signalWithdrawTokens" -> "37415__signalPendingAction"
+"37415_signalRemoveOracleSigner" -> "37415__schedule"
+"37415_signalGrantRole" -> "37415__schedule"
+"37415_signalSetDataStream" -> "37415__signalPendingAction"
+"37415_signalSetMaxTotalContributorTokenAmount" -> "37415__schedule"
+"37415_constructor" -> "37415_constructor"
+"37415_signalAddOracleSigner" -> "37415_onlyTimelockAdmin"
+"37415_increaseTimelockDelay" -> "37415__schedule"
+"37415_signalWithdrawFromPositionImpactPool" -> "37415__signalPendingAction"
+"37415_signalSetFeeReceiver" -> "37415_onlyTimelockAdmin"
+"37415_signalSetOracleProviderEnabled" -> "37415__schedule"
+"37415_signalRevokeRole" -> "37415__schedule"
+"37415_signalReduceLentAmount" -> "37415__schedule"
+"37415_signalSetMinContributorPaymentInterval" -> "37415__schedule"
+"37415_signalGrantRole" -> "37415__signalPendingAction"
+"37415_signalSetHoldingAddress" -> "37415__signalPendingAction"
+"37415_signalSetOracleProviderEnabled" -> "37415_onlyTimelockAdmin"
+"37415_signalRemoveOracleSigner" -> "37415_onlyTimelockAdmin"
+"37415_signalRevokeRole" -> "37415_onlyTimelockAdmin"
+"37415_signalSetPriceFeed" -> "37415__scheduleBatch"
+"37415_signalReduceLentAmount" -> "37415__signalPendingAction"
+"37415_signalSetEdgeDataStream" -> "37415__signalPendingAction"
+"37415_signalSetDataStream" -> "37415_onlyTimelockAdmin"
+"37415_signalSetDataStream" -> "37415__scheduleBatch"
+"37415_signalSetMaxTotalContributorTokenAmount" -> "37415_onlyTimelockAdmin"
+"37415_executeBatch" -> "37415_onlyTimelockAdmin"
+"37415_signalSetAtomicOracleProvider" -> "37415__signalPendingAction"
+"37415_cancelAction" -> "37415_onlyTimelockAdmin"
+"37415_signalWithdrawTokens" -> "37415_onlyTimelockAdmin"
+"37415_signalWithdrawFromPositionImpactPool" -> "37415__schedule"
+"37415_executeWithOraclePrice" -> "37415_onlyTimelockAdmin"
+"37415_signalWithdrawTokens" -> "37415__schedule"
+"37415_signalWithdrawFromPositionImpactPool" -> "37415_onlyTimelockAdmin"
+"37415_signalSetFeeReceiver" -> "37415__schedule"
+"37415_signalSetAtomicOracleProvider" -> "37415__schedule"
+"37415_signalSetHoldingAddress" -> "37415__schedule"
+"37415_signalSetMaxTotalContributorTokenAmount" -> "37415__signalPendingAction"
+"37415_revokeRole" -> "37415__signalPendingAction"
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"revert EmptyToken()" 
+"abi.encode()" 
+"revert InvalidContributorToken(address)" 
+"revert Unauthorized(address,string)" 
+"revert InvalidFeeReceiver(address)" 
+"revert EmptyPositionImpactWithdrawalAmount()" 
+"revert InvalidOracleSigner(address)" 
+"revert MinContributorPaymentIntervalBelowAllowedRange(uint256)" 
+"revert InvalidSetMaxTotalContributorTokenAmountInput(uint256,uint256)" 
+"revert EmptyReceiver()" 
+"revert InvalidHoldingAddress(address)" 
+"abi.encodeWithSignature()" 
+"revert EmptyWithdrawalAmount()" 
+"revert EmptyMarket()" 
+"revert InvalidTimelockDelay(uint256)" 
+"revert EmptyReduceLentAmount()" 
+"revert EmptyTarget()" 
+"revert EmptyDataStreamFeedId(address)" 
+"revert ConfigValueExceedsAllowedRange(bytes32,uint256)" 
+"revert EmptyFundingAccount()" 
+"revert MaxTimelockDelayExceeded(uint256)" 
+"keccak256(bytes)" 
+"37415_signalRemoveOracleSigner" -> "revert InvalidOracleSigner(address)"
+"37415_increaseTimelockDelay" -> "revert InvalidTimelockDelay(uint256)"
+"37415_signalWithdrawFromPositionImpactPool" -> "revert EmptyMarket()"
+"37415_signalReduceLentAmount" -> "revert EmptyMarket()"
+"37415_increaseTimelockDelay" -> "revert MaxTimelockDelayExceeded(uint256)"
+"37415_signalWithdrawTokens" -> "revert EmptyTarget()"
+"37415_signalRemoveOracleSigner" -> "abi.encodeWithSignature()"
+"37415_signalSetEdgeDataStream" -> "abi.encodeWithSignature()"
+"37415_signalRevokeRole" -> "abi.encodeWithSignature()"
+"37415_signalWithdrawTokens" -> "revert EmptyToken()"
+"37415_signalWithdrawTokens" -> "abi.encodeWithSignature()"
+"141184__validateRole" -> "revert Unauthorized(address,string)"
+"37415_signalSetEdgeDataStream" -> "revert EmptyDataStreamFeedId(address)"
+"37415_signalWithdrawFromPositionImpactPool" -> "revert EmptyReceiver()"
+"37415_signalSetOracleProviderEnabled" -> "abi.encodeWithSignature()"
+"37415_signalSetMaxTotalContributorTokenAmount" -> "abi.encodeWithSignature()"
+"37415_signalSetMinContributorPaymentInterval" -> "abi.encodeWithSignature()"
+"37415_signalSetMinContributorPaymentInterval" -> "revert MinContributorPaymentIntervalBelowAllowedRange(uint256)"
+"37415__signalPendingAction" -> "keccak256(bytes)"
+"37415_signalSetFeeReceiver" -> "abi.encodeWithSignature()"
+"37415_signalWithdrawTokens" -> "revert EmptyWithdrawalAmount()"
+"37415__signalPendingAction" -> "abi.encode()"
+"37415_signalGrantRole" -> "abi.encodeWithSignature()"
+"37415_signalAddOracleSigner" -> "revert InvalidOracleSigner(address)"
+"37415_signalReduceLentAmount" -> "revert EmptyFundingAccount()"
+"37415_increaseTimelockDelay" -> "abi.encodeWithSignature()"
+"37415_signalSetMaxTotalContributorTokenAmount" -> "revert EmptyTarget()"
+"37415_signalSetDataStream" -> "revert ConfigValueExceedsAllowedRange(bytes32,uint256)"
+"37415_signalSetFeeReceiver" -> "revert InvalidFeeReceiver(address)"
+"37415_signalSetPriceFeed" -> "abi.encodeWithSignature()"
+"37415_signalSetDataStream" -> "abi.encodeWithSignature()"
+"37415_signalReduceLentAmount" -> "abi.encodeWithSignature()"
+"37415_signalWithdrawFromPositionImpactPool" -> "abi.encodeWithSignature()"
+"37415_signalSetMaxTotalContributorTokenAmount" -> "revert InvalidContributorToken(address)"
+"37415_signalWithdrawTokens" -> "revert EmptyReceiver()"
+"37415_signalSetHoldingAddress" -> "abi.encodeWithSignature()"
+"37415_signalSetAtomicOracleProvider" -> "abi.encodeWithSignature()"
+"37415_signalSetHoldingAddress" -> "revert InvalidHoldingAddress(address)"
+"37415_signalSetMaxTotalContributorTokenAmount" -> "revert InvalidSetMaxTotalContributorTokenAmountInput(uint256,uint256)"
+"37415_signalAddOracleSigner" -> "abi.encodeWithSignature()"
+"37415_signalReduceLentAmount" -> "revert EmptyReduceLentAmount()"
+"37415_signalSetMinContributorPaymentInterval" -> "revert EmptyTarget()"
+"37415_signalWithdrawFromPositionImpactPool" -> "revert EmptyPositionImpactWithdrawalAmount()"
+}
+}

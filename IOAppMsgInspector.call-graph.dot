@@ -1,0 +1,10 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_7193_IOAppMsgInspector {
+label = "IOAppMsgInspector"
+"7193_inspect" [label="inspect"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+}
+}

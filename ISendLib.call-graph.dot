@@ -1,0 +1,24 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_21873_IERC165 {
+label = "IERC165"
+"21873_supportsInterface" [label="supportsInterface"]
+}subgraph cluster_4772_IMessageLib {
+label = "IMessageLib"
+"4772_setConfig" [label="setConfig"]
+"4772_messageLibType" [label="messageLibType"]
+"4772_version" [label="version"]
+"4772_isSupportedEid" [label="isSupportedEid"]
+"4772_getConfig" [label="getConfig"]
+}subgraph cluster_5327_ISendLib {
+label = "ISendLib"
+"5327_withdrawLzTokenFee" [label="withdrawLzTokenFee"]
+"5327_quote" [label="quote"]
+"5327_send" [label="send"]
+"5327_withdrawFee" [label="withdrawFee"]
+"5327_setTreasury" [label="setTreasury"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+}
+}

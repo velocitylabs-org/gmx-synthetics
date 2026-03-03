@@ -1,0 +1,62 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_27498_CallbackUtils {
+label = "CallbackUtils"
+"27498_afterShiftExecution" [label="afterShiftExecution"]
+"27498_afterOrderFrozen" [label="afterOrderFrozen"]
+"27498_afterDepositCancellation" [label="afterDepositCancellation"]
+"27498_afterOrderExecution" [label="afterOrderExecution"]
+"27498_afterGlvDepositExecution" [label="afterGlvDepositExecution"]
+"27498_afterGlvWithdrawalCancellation" [label="afterGlvWithdrawalCancellation"]
+"27498_refundExecutionFee" [label="refundExecutionFee"]
+"27498_afterDepositExecution" [label="afterDepositExecution"]
+"27498_afterOrderCancellation" [label="afterOrderCancellation"]
+"27498_validateGasLeftForCallback" [label="validateGasLeftForCallback"]
+"27498_afterWithdrawalExecution" [label="afterWithdrawalExecution"]
+"27498_afterGlvDepositCancellation" [label="afterGlvDepositCancellation"]
+"27498_afterShiftCancellation" [label="afterShiftCancellation"]
+"27498_afterWithdrawalCancellation" [label="afterWithdrawalCancellation"]
+"27498_isValidCallbackContract" [label="isValidCallbackContract"]
+"27498_afterGlvWithdrawalExecution" [label="afterGlvWithdrawalExecution"]
+"27498_getSavedCallbackContract" [label="getSavedCallbackContract"]
+"27498_validateCallbackGasLimit" [label="validateCallbackGasLimit"]
+"27498_setSavedCallbackContract" [label="setSavedCallbackContract"]
+"27498_afterShiftCancellation" -> "27498_validateGasLeftForCallback"
+"27498_afterGlvDepositCancellation" -> "27498_validateGasLeftForCallback"
+"27498_afterGlvDepositCancellation" -> "27498_isValidCallbackContract"
+"27498_afterGlvWithdrawalCancellation" -> "27498_isValidCallbackContract"
+"27498_afterGlvWithdrawalCancellation" -> "27498_validateGasLeftForCallback"
+"27498_afterDepositExecution" -> "27498_isValidCallbackContract"
+"27498_afterShiftExecution" -> "27498_validateGasLeftForCallback"
+"27498_afterWithdrawalExecution" -> "27498_isValidCallbackContract"
+"27498_afterOrderExecution" -> "27498_isValidCallbackContract"
+"27498_afterWithdrawalExecution" -> "27498_validateGasLeftForCallback"
+"27498_afterShiftCancellation" -> "27498_isValidCallbackContract"
+"27498_refundExecutionFee" -> "27498_isValidCallbackContract"
+"27498_afterGlvWithdrawalExecution" -> "27498_isValidCallbackContract"
+"27498_afterDepositExecution" -> "27498_validateGasLeftForCallback"
+"27498_afterOrderFrozen" -> "27498_validateGasLeftForCallback"
+"27498_afterOrderCancellation" -> "27498_isValidCallbackContract"
+"27498_afterOrderFrozen" -> "27498_isValidCallbackContract"
+"27498_afterOrderCancellation" -> "27498_validateGasLeftForCallback"
+"27498_afterWithdrawalCancellation" -> "27498_isValidCallbackContract"
+"27498_afterGlvDepositExecution" -> "27498_isValidCallbackContract"
+"27498_afterShiftExecution" -> "27498_isValidCallbackContract"
+"27498_afterOrderExecution" -> "27498_validateGasLeftForCallback"
+"27498_refundExecutionFee" -> "27498_validateGasLeftForCallback"
+"27498_afterGlvDepositExecution" -> "27498_validateGasLeftForCallback"
+"27498_afterDepositCancellation" -> "27498_validateGasLeftForCallback"
+"27498_afterWithdrawalCancellation" -> "27498_validateGasLeftForCallback"
+"27498_afterGlvWithdrawalExecution" -> "27498_validateGasLeftForCallback"
+"27498_afterDepositCancellation" -> "27498_isValidCallbackContract"
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"revert MaxCallbackGasLimitExceeded(uint256,uint256)" 
+"revert InsufficientGasLeftForCallback(uint256,uint256)" 
+"gasleft()" 
+"27498_validateGasLeftForCallback" -> "revert InsufficientGasLeftForCallback(uint256,uint256)"
+"27498_validateGasLeftForCallback" -> "gasleft()"
+"27498_validateCallbackGasLimit" -> "revert MaxCallbackGasLimitExceeded(uint256,uint256)"
+}
+}

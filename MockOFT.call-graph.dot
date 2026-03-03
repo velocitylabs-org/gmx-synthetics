@@ -1,0 +1,284 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_17285_IERC20 {
+label = "IERC20"
+"17285_allowance" [label="allowance"]
+"17285_transferFrom" [label="transferFrom"]
+"17285_balanceOf" [label="balanceOf"]
+"17285_totalSupply" [label="totalSupply"]
+"17285_transfer" [label="transfer"]
+"17285_approve" [label="approve"]
+}subgraph cluster_7173_IOAppCore {
+label = "IOAppCore"
+"7173_endpoint" [label="endpoint"]
+"7173_oAppVersion" [label="oAppVersion"]
+"7173_setPeer" [label="setPeer"]
+"7173_peers" [label="peers"]
+"7173_setDelegate" [label="setDelegate"]
+}subgraph cluster_10247_IOFT {
+label = "IOFT"
+"10247_oftVersion" [label="oftVersion"]
+"10247_sharedDecimals" [label="sharedDecimals"]
+"10247_send" [label="send"]
+"10247_quoteOFT" [label="quoteOFT"]
+"10247_quoteSend" [label="quoteSend"]
+"10247_approvalRequired" [label="approvalRequired"]
+"10247_token" [label="token"]
+}subgraph cluster_6924_OAppReceiver {
+label = "OAppReceiver"
+"6924_nextNonce" [label="nextNonce"]
+"6924_isComposeMsgSender" [label="isComposeMsgSender"]
+"6924_allowInitializePath" [label="allowInitializePath"]
+"6924_oAppVersion" [label="oAppVersion"]
+"6924_lzReceive" [label="lzReceive"]
+"6924__lzReceive" [label="_lzReceive"]
+"6924_lzReceive" -> "6924__lzReceive"
+"6924_lzReceive" -> "6924__getPeerOrRevert"
+}subgraph cluster_18216_IERC20Metadata {
+label = "IERC20Metadata"
+"18216_name" [label="name"]
+"18216_decimals" [label="decimals"]
+"18216_symbol" [label="symbol"]
+}subgraph cluster_11571_Ownable {
+label = "Ownable"
+"11571_owner" [label="owner"]
+"11571_transferOwnership" [label="transferOwnership"]
+"11571_renounceOwnership" [label="renounceOwnership"]
+"11571_constructor" [label="constructor"]
+"11571__transferOwnership" [label="_transferOwnership"]
+"11571__checkOwner" [label="_checkOwner"]
+"11571_renounceOwnership" -> "11571__transferOwnership"
+"11571_transferOwnership" -> "11571_onlyOwner"
+"11571_constructor" -> "11571__transferOwnership"
+"11571_transferOwnership" -> "11571__transferOwnership"
+"11571__checkOwner" -> "11571_owner"
+"11571_constructor" -> "11571__msgSender"
+"11571_renounceOwnership" -> "11571_onlyOwner"
+"11571__checkOwner" -> "11571__msgSender"
+}subgraph cluster_17207_ERC20 {
+label = "ERC20"
+"17207_increaseAllowance" [label="increaseAllowance"]
+"17207_balanceOf" [label="balanceOf"]
+"17207__mint" [label="_mint"]
+"17207__transfer" [label="_transfer"]
+"17207_constructor" [label="constructor"]
+"17207_allowance" [label="allowance"]
+"17207_decimals" [label="decimals"]
+"17207__approve" [label="_approve"]
+"17207__burn" [label="_burn"]
+"17207_totalSupply" [label="totalSupply"]
+"17207__afterTokenTransfer" [label="_afterTokenTransfer"]
+"17207_approve" [label="approve"]
+"17207_transferFrom" [label="transferFrom"]
+"17207_decreaseAllowance" [label="decreaseAllowance"]
+"17207_transfer" [label="transfer"]
+"17207_name" [label="name"]
+"17207__spendAllowance" [label="_spendAllowance"]
+"17207__beforeTokenTransfer" [label="_beforeTokenTransfer"]
+"17207_symbol" [label="symbol"]
+"17207_transferFrom" -> "17207__transfer"
+"17207__mint" -> "17207__afterTokenTransfer"
+"17207_approve" -> "17207__msgSender"
+"17207_decreaseAllowance" -> "17207__approve"
+"17207_approve" -> "17207__approve"
+"17207_transferFrom" -> "17207__spendAllowance"
+"17207_transfer" -> "17207__msgSender"
+"17207_increaseAllowance" -> "17207__msgSender"
+"17207_transferFrom" -> "17207__msgSender"
+"17207__burn" -> "17207__afterTokenTransfer"
+"17207__mint" -> "17207__beforeTokenTransfer"
+"17207_increaseAllowance" -> "17207_allowance"
+"17207_decreaseAllowance" -> "17207_allowance"
+"17207__spendAllowance" -> "17207_allowance"
+"17207__spendAllowance" -> "17207__approve"
+"17207__burn" -> "17207__beforeTokenTransfer"
+"17207_increaseAllowance" -> "17207__approve"
+"17207_transfer" -> "17207__transfer"
+"17207__transfer" -> "17207__afterTokenTransfer"
+"17207_decreaseAllowance" -> "17207__msgSender"
+"17207__transfer" -> "17207__beforeTokenTransfer"
+}subgraph cluster_8760_OAppPreCrimeSimulator {
+label = "OAppPreCrimeSimulator"
+"8760_setPreCrime" [label="setPreCrime"]
+"8760_lzReceiveSimulate" [label="lzReceiveSimulate"]
+"8760__lzReceiveSimulate" [label="_lzReceiveSimulate"]
+"8760_oApp" [label="oApp"]
+"8760_isPeer" [label="isPeer"]
+"8760_lzReceiveAndRevert" [label="lzReceiveAndRevert"]
+"8760_lzReceiveAndRevert" -> "8760_isPeer"
+"8760_setPreCrime" -> "8760_onlyOwner"
+"8760_lzReceiveSimulate" -> "8760__lzReceiveSimulate"
+}subgraph cluster_100791_MockOFT {
+label = "MockOFT"
+"100791_removeDust" [label="removeDust"]
+"100791_toSD" [label="toSD"]
+"100791_credit" [label="credit"]
+"100791_constructor" [label="constructor"]
+"100791_debit" [label="debit"]
+"100791_buildMsgAndOptions" [label="buildMsgAndOptions"]
+"100791_slitherConstructorConstantVariables" [label="slitherConstructorConstantVariables"]
+"100791_debitView" [label="debitView"]
+"100791_mint" [label="mint"]
+"100791_toLD" [label="toLD"]
+"100791_removeDust" -> "100791__removeDust"
+"100791_debit" -> "100791__debit"
+"100791_constructor" -> "100791_constructor"
+"100791_toSD" -> "100791__toSD"
+"100791_debitView" -> "100791__debitView"
+"100791_credit" -> "100791__credit"
+"100791_buildMsgAndOptions" -> "100791__buildMsgAndOptions"
+"100791_mint" -> "100791__mint"
+"100791_toLD" -> "100791__toLD"
+}subgraph cluster_20539_Context {
+label = "Context"
+"20539__msgSender" [label="_msgSender"]
+"20539__msgData" [label="_msgData"]
+}subgraph cluster_7235_IOAppOptionsType3 {
+label = "IOAppOptionsType3"
+"7235_setEnforcedOptions" [label="setEnforcedOptions"]
+"7235_combineOptions" [label="combineOptions"]
+}subgraph cluster_7110_OAppSender {
+label = "OAppSender"
+"7110__lzSend" [label="_lzSend"]
+"7110__payNative" [label="_payNative"]
+"7110__payLzToken" [label="_payLzToken"]
+"7110_oAppVersion" [label="oAppVersion"]
+"7110__quote" [label="_quote"]
+"7110__lzSend" -> "7110__payLzToken"
+"7110__lzSend" -> "7110__getPeerOrRevert"
+"7110__quote" -> "7110__getPeerOrRevert"
+"7110__lzSend" -> "7110__payNative"
+}subgraph cluster_7256_IOAppReceiver {
+label = "IOAppReceiver"
+"7256_isComposeMsgSender" [label="isComposeMsgSender"]
+}subgraph cluster_10079_OFTCore {
+label = "OFTCore"
+"10079_oftVersion" [label="oftVersion"]
+"10079__lzReceiveSimulate" [label="_lzReceiveSimulate"]
+"10079__toLD" [label="_toLD"]
+"10079_quoteOFT" [label="quoteOFT"]
+"10079__toSD" [label="_toSD"]
+"10079_isPeer" [label="isPeer"]
+"10079__buildMsgAndOptions" [label="_buildMsgAndOptions"]
+"10079_setMsgInspector" [label="setMsgInspector"]
+"10079_sharedDecimals" [label="sharedDecimals"]
+"10079__credit" [label="_credit"]
+"10079_send" [label="send"]
+"10079_constructor" [label="constructor"]
+"10079__removeDust" [label="_removeDust"]
+"10079_quoteSend" [label="quoteSend"]
+"10079__send" [label="_send"]
+"10079__lzReceive" [label="_lzReceive"]
+"10079__debitView" [label="_debitView"]
+"10079__debit" [label="_debit"]
+"10079_quoteSend" -> "10079__quote"
+"10079_send" -> "10079__send"
+"10079__buildMsgAndOptions" -> "10079_combineOptions"
+"10079__debitView" -> "10079__removeDust"
+"10079__send" -> "10079__buildMsgAndOptions"
+"10079__lzReceive" -> "10079__credit"
+"10079__send" -> "10079__lzSend"
+"10079_constructor" -> "10079_constructor"
+"10079_quoteOFT" -> "10079__debitView"
+"10079__send" -> "10079__debit"
+"10079_quoteSend" -> "10079__debitView"
+"10079_constructor" -> "10079_sharedDecimals"
+"10079__lzReceiveSimulate" -> "10079__lzReceive"
+"10079__buildMsgAndOptions" -> "10079__toSD"
+"10079_setMsgInspector" -> "10079_onlyOwner"
+"10079_quoteSend" -> "10079__buildMsgAndOptions"
+"10079__lzReceive" -> "10079__toLD"
+}subgraph cluster_9320_OFT {
+label = "OFT"
+"9320__debit" [label="_debit"]
+"9320__credit" [label="_credit"]
+"9320_approvalRequired" [label="approvalRequired"]
+"9320_constructor" [label="constructor"]
+"9320_token" [label="token"]
+"9320__debit" -> "9320__burn"
+"9320__credit" -> "9320__mint"
+"9320__debit" -> "9320__debitView"
+"9320_constructor" -> "9320_decimals"
+"9320_constructor" -> "9320_constructor"
+}subgraph cluster_4717_ILayerZeroReceiver {
+label = "ILayerZeroReceiver"
+"4717_lzReceive" [label="lzReceive"]
+"4717_nextNonce" [label="nextNonce"]
+"4717_allowInitializePath" [label="allowInitializePath"]
+}subgraph cluster_8814_IOAppPreCrimeSimulator {
+label = "IOAppPreCrimeSimulator"
+"8814_preCrime" [label="preCrime"]
+"8814_setPreCrime" [label="setPreCrime"]
+"8814_oApp" [label="oApp"]
+"8814_lzReceiveAndRevert" [label="lzReceiveAndRevert"]
+"8814_isPeer" [label="isPeer"]
+}subgraph cluster_6642_OApp {
+label = "OApp"
+"6642_constructor" [label="constructor"]
+"6642_oAppVersion" [label="oAppVersion"]
+"6642_constructor" -> "6642_constructor"
+}subgraph cluster_6772_OAppCore {
+label = "OAppCore"
+"6772__setPeer" [label="_setPeer"]
+"6772__getPeerOrRevert" [label="_getPeerOrRevert"]
+"6772_constructor" [label="constructor"]
+"6772_setPeer" [label="setPeer"]
+"6772_setDelegate" [label="setDelegate"]
+"6772_setDelegate" -> "6772_onlyOwner"
+"6772_setPeer" -> "6772_onlyOwner"
+"6772_setPeer" -> "6772__setPeer"
+}subgraph cluster_7420_OAppOptionsType3 {
+label = "OAppOptionsType3"
+"7420__setEnforcedOptions" [label="_setEnforcedOptions"]
+"7420_setEnforcedOptions" [label="setEnforcedOptions"]
+"7420__assertOptionsType3" [label="_assertOptionsType3"]
+"7420_combineOptions" [label="combineOptions"]
+"7420__setEnforcedOptions" -> "7420__assertOptionsType3"
+"7420_setEnforcedOptions" -> "7420__setEnforcedOptions"
+"7420_combineOptions" -> "7420__assertOptionsType3"
+"7420_setEnforcedOptions" -> "7420_onlyOwner"
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"revert OnlyEndpoint(address)" 
+"revert InvalidLocalDecimals()" 
+"revert OnlyPeer(uint32,bytes32)" 
+"type()" 
+"revert LzTokenUnavailable()" 
+"revert InvalidOptions(bytes)" 
+"require(bool,string)" 
+"revert NotEnoughNative(uint256)" 
+"revert SlippageExceeded(uint256,uint256)" 
+"revert SimulationResult(bytes)" 
+"mload(uint256)" 
+"revert InvalidDelegate()" 
+"revert NoPeer(uint32)" 
+"bytes.concat()" 
+"revert OnlySelf()" 
+"10079_oftVersion" -> "type()"
+"17207__approve" -> "require(bool,string)"
+"6772__getPeerOrRevert" -> "revert NoPeer(uint32)"
+"11571__checkOwner" -> "require(bool,string)"
+"17207__spendAllowance" -> "require(bool,string)"
+"6772_constructor" -> "revert InvalidDelegate()"
+"10079_constructor" -> "revert InvalidLocalDecimals()"
+"7420__assertOptionsType3" -> "mload(uint256)"
+"11571_transferOwnership" -> "require(bool,string)"
+"7110__payLzToken" -> "revert LzTokenUnavailable()"
+"8760_lzReceiveAndRevert" -> "revert SimulationResult(bytes)"
+"8760_lzReceiveSimulate" -> "revert OnlySelf()"
+"7420__assertOptionsType3" -> "revert InvalidOptions(bytes)"
+"6924_lzReceive" -> "revert OnlyPeer(uint32,bytes32)"
+"6924_lzReceive" -> "revert OnlyEndpoint(address)"
+"17207_decreaseAllowance" -> "require(bool,string)"
+"17207__mint" -> "require(bool,string)"
+"17207__transfer" -> "require(bool,string)"
+"17207__burn" -> "require(bool,string)"
+"7110__payNative" -> "revert NotEnoughNative(uint256)"
+"7420_combineOptions" -> "bytes.concat()"
+"7420_combineOptions" -> "revert InvalidOptions(bytes)"
+"10079__debitView" -> "revert SlippageExceeded(uint256,uint256)"
+}"8760_lzReceiveAndRevert" -> "100791_lzReceiveSimulate"
+"10079_quoteOFT" -> "100791_token"
+"10079_quoteOFT" -> "17285_totalSupply"
+}

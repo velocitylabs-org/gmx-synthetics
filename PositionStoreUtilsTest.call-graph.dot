@@ -1,0 +1,12 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_154430_PositionStoreUtilsTest {
+label = "PositionStoreUtilsTest"
+"154430_removePosition" [label="removePosition"]
+"154430_setPosition" [label="setPosition"]
+"154430_getEmptyPosition" [label="getEmptyPosition"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+}
+}

@@ -1,0 +1,48 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_103499_Multicall3 {
+label = "Multicall3"
+"103499_tryAggregate" [label="tryAggregate"]
+"103499_getEthBalance" [label="getEthBalance"]
+"103499_blockAndAggregate" [label="blockAndAggregate"]
+"103499_aggregate3Value" [label="aggregate3Value"]
+"103499_getBlockHash" [label="getBlockHash"]
+"103499_getCurrentBlockGasLimit" [label="getCurrentBlockGasLimit"]
+"103499_getChainId" [label="getChainId"]
+"103499_getLastBlockHash" [label="getLastBlockHash"]
+"103499_getCurrentBlockCoinbase" [label="getCurrentBlockCoinbase"]
+"103499_getCurrentBlockTimestamp" [label="getCurrentBlockTimestamp"]
+"103499_aggregate" [label="aggregate"]
+"103499_aggregate3" [label="aggregate3"]
+"103499_getBasefee" [label="getBasefee"]
+"103499_getBlockNumber" [label="getBlockNumber"]
+"103499_tryBlockAndAggregate" [label="tryBlockAndAggregate"]
+"103499_blockAndAggregate" -> "103499_tryBlockAndAggregate"
+"103499_tryBlockAndAggregate" -> "103499_tryAggregate"
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"calldataload(uint256)" 
+"balance(address)" 
+"revert(uint256,uint256)" 
+"require(bool,string)" 
+"blockhash(uint256)" 
+"mstore(uint256,uint256)" 
+"mload(uint256)" 
+"103499_aggregate3Value" -> "revert(uint256,uint256)"
+"103499_aggregate3" -> "mstore(uint256,uint256)"
+"103499_aggregate3" -> "mload(uint256)"
+"103499_aggregate3Value" -> "mload(uint256)"
+"103499_aggregate3Value" -> "mstore(uint256,uint256)"
+"103499_getBlockHash" -> "blockhash(uint256)"
+"103499_aggregate3Value" -> "require(bool,string)"
+"103499_aggregate" -> "require(bool,string)"
+"103499_getLastBlockHash" -> "blockhash(uint256)"
+"103499_aggregate3" -> "revert(uint256,uint256)"
+"103499_aggregate3Value" -> "calldataload(uint256)"
+"103499_tryAggregate" -> "require(bool,string)"
+"103499_getEthBalance" -> "balance(address)"
+"103499_aggregate3" -> "calldataload(uint256)"
+"103499_tryBlockAndAggregate" -> "blockhash(uint256)"
+}
+}

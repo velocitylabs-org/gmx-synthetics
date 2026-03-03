@@ -1,0 +1,29 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_113162_IOracleProvider {
+label = "IOracleProvider"
+"113162_isChainlinkOnChainProvider" [label="isChainlinkOnChainProvider"]
+"113162_shouldAdjustTimestamp" [label="shouldAdjustTimestamp"]
+"113162_getOraclePrice" [label="getOraclePrice"]
+}subgraph cluster_112100_EdgeDataStreamProvider {
+label = "EdgeDataStreamProvider"
+"112100_constructor" [label="constructor"]
+"112100_isChainlinkOnChainProvider" [label="isChainlinkOnChainProvider"]
+"112100_getOraclePrice" [label="getOraclePrice"]
+"112100_shouldAdjustTimestamp" [label="shouldAdjustTimestamp"]
+"112100_getOraclePrice" -> "112100_onlyOracle"
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"revert InvalidEdgeDataStreamBidAsk(address,uint256,uint256)" 
+"revert EmptyDataStreamFeedId(address)" 
+"revert InvalidDataStreamFeedId(address,bytes32,bytes32)" 
+"revert InvalidEdgeDataStreamExpo(int256)" 
+"revert InvalidEdgeDataStreamPrices(address,uint256,uint256)" 
+"112100_getOraclePrice" -> "revert EmptyDataStreamFeedId(address)"
+"112100_getOraclePrice" -> "revert InvalidEdgeDataStreamBidAsk(address,uint256,uint256)"
+"112100_getOraclePrice" -> "revert InvalidEdgeDataStreamExpo(int256)"
+"112100_getOraclePrice" -> "revert InvalidDataStreamFeedId(address,bytes32,bytes32)"
+"112100_getOraclePrice" -> "revert InvalidEdgeDataStreamPrices(address,uint256,uint256)"
+}
+}

@@ -1,0 +1,30 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_133652_PositionPricingUtils {
+label = "PositionPricingUtils"
+"133652_getPriceImpactUsd" [label="getPriceImpactUsd"]
+"133652__getPriceImpactUsd" [label="_getPriceImpactUsd"]
+"133652_getNextOpenInterestForVirtualInventory" [label="getNextOpenInterestForVirtualInventory"]
+"133652_getPositionFeesAfterReferral" [label="getPositionFeesAfterReferral"]
+"133652_getPositionFees" [label="getPositionFees"]
+"133652_getLiquidationFees" [label="getLiquidationFees"]
+"133652_getNextOpenInterestParams" [label="getNextOpenInterestParams"]
+"133652_getBorrowingFees" [label="getBorrowingFees"]
+"133652_getUiFees" [label="getUiFees"]
+"133652_getFundingFees" [label="getFundingFees"]
+"133652_getNextOpenInterest" [label="getNextOpenInterest"]
+"133652_getNextOpenInterest" -> "133652_getNextOpenInterestParams"
+"133652_getPositionFees" -> "133652_getPositionFeesAfterReferral"
+"133652_getPositionFees" -> "133652_getLiquidationFees"
+"133652_getPriceImpactUsd" -> "133652__getPriceImpactUsd"
+"133652_getNextOpenInterestForVirtualInventory" -> "133652_getNextOpenInterestParams"
+"133652_getPositionFees" -> "133652_getFundingFees"
+"133652_getPriceImpactUsd" -> "133652_getNextOpenInterest"
+"133652_getPriceImpactUsd" -> "133652_getNextOpenInterestForVirtualInventory"
+"133652_getPositionFees" -> "133652_getBorrowingFees"
+"133652_getPositionFees" -> "133652_getUiFees"
+}subgraph cluster_solidity {
+label = "[Solidity]"
+}
+}

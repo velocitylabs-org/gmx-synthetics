@@ -1,0 +1,18 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_155935_Calc {
+label = "Calc"
+"155935_toSigned" [label="toSigned"]
+"155935_roundUpDivision" [label="roundUpDivision"]
+"155935_sumReturnInt256" [label="sumReturnInt256"]
+"155935_roundUpMagnitudeDivision" [label="roundUpMagnitudeDivision"]
+"155935_sumReturnUint256" [label="sumReturnUint256"]
+"155935_boundedSub" [label="boundedSub"]
+"155935_boundedAdd" [label="boundedAdd"]
+"155935_diff" [label="diff"]
+"155935_boundMagnitude" [label="boundMagnitude"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+}
+}

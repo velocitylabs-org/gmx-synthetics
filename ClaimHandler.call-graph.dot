@@ -1,0 +1,70 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_141184_RoleModule {
+label = "RoleModule"
+"141184_constructor" [label="constructor"]
+"141184__validateRole" [label="_validateRole"]
+}subgraph cluster_29562_ClaimHandler {
+label = "ClaimHandler"
+"29562_depositFunds" [label="depositFunds"]
+"29562_setTerms" [label="setTerms"]
+"29562_withdrawFunds" [label="withdrawFunds"]
+"29562_constructor" [label="constructor"]
+"29562_getClaimableAmount" [label="getClaimableAmount"]
+"29562_getTotalClaimableAmount" [label="getTotalClaimableAmount"]
+"29562_removeTerms" [label="removeTerms"]
+"29562__validateTermsSignature" [label="_validateTermsSignature"]
+"29562_transferClaim" [label="transferClaim"]
+"29562__validateNonEmptyReceiver" [label="_validateNonEmptyReceiver"]
+"29562_acceptTermsAndClaim" [label="acceptTermsAndClaim"]
+"29562_withdrawFunds" -> "29562_globalNonReentrant"
+"29562_acceptTermsAndClaim" -> "29562__validateNonEmptyReceiver"
+"29562_withdrawFunds" -> "29562_onlyTimelockMultisig"
+"29562_constructor" -> "29562_constructor"
+"29562_setTerms" -> "29562_globalNonReentrant"
+"29562_setTerms" -> "29562_onlyClaimAdmin"
+"29562_depositFunds" -> "29562_globalNonReentrant"
+"29562_depositFunds" -> "29562_onlyClaimAdmin"
+"29562_acceptTermsAndClaim" -> "29562_globalNonReentrant"
+"29562_acceptTermsAndClaim" -> "29562__validateTermsSignature"
+"29562_transferClaim" -> "29562_onlyTimelockMultisig"
+"29562_transferClaim" -> "29562__validateNonEmptyReceiver"
+"29562_removeTerms" -> "29562_globalNonReentrant"
+"29562_removeTerms" -> "29562_onlyClaimAdmin"
+"29562_withdrawFunds" -> "29562__validateNonEmptyReceiver"
+"29562_transferClaim" -> "29562_globalNonReentrant"
+}subgraph cluster_156387_GlobalReentrancyGuard {
+label = "GlobalReentrancyGuard"
+"156387__globalNonReentrantBefore" [label="_globalNonReentrantBefore"]
+"156387_constructor" [label="constructor"]
+"156387__globalNonReentrantAfter" [label="_globalNonReentrantAfter"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"string.concat()" 
+"revert EmptyReceiver()" 
+"revert InvalidClaimTermsSignature(address,address)" 
+"require(bool,string)" 
+"revert EmptyClaimableAmount(address)" 
+"revert InvalidParams(string)" 
+"revert Unauthorized(address,string)" 
+"revert InvalidClaimTermsSignatureForContract(address)" 
+"revert DuplicateClaimTerms(uint256)" 
+"keccak256(bytes)" 
+"29562_removeTerms" -> "keccak256(bytes)"
+"141184__validateRole" -> "revert Unauthorized(address,string)"
+"29562_transferClaim" -> "revert InvalidParams(string)"
+"29562__validateTermsSignature" -> "string.concat()"
+"29562_removeTerms" -> "revert InvalidParams(string)"
+"29562_setTerms" -> "revert InvalidParams(string)"
+"29562_acceptTermsAndClaim" -> "revert EmptyClaimableAmount(address)"
+"29562_acceptTermsAndClaim" -> "revert InvalidParams(string)"
+"29562__validateTermsSignature" -> "revert InvalidClaimTermsSignatureForContract(address)"
+"29562__validateNonEmptyReceiver" -> "revert EmptyReceiver()"
+"29562_withdrawFunds" -> "revert InvalidParams(string)"
+"156387__globalNonReentrantBefore" -> "require(bool,string)"
+"29562_setTerms" -> "keccak256(bytes)"
+"29562_setTerms" -> "revert DuplicateClaimTerms(uint256)"
+"29562__validateTermsSignature" -> "revert InvalidClaimTermsSignature(address,address)"
+}
+}

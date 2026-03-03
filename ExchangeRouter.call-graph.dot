@@ -1,0 +1,103 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_141184_RoleModule {
+label = "RoleModule"
+"141184_constructor" [label="constructor"]
+"141184__validateRole" [label="_validateRole"]
+}subgraph cluster_16579_ReentrancyGuard {
+label = "ReentrancyGuard"
+"16579__reentrancyGuardEntered" [label="_reentrancyGuardEntered"]
+"16579__nonReentrantBefore" [label="_nonReentrantBefore"]
+"16579__nonReentrantAfter" [label="_nonReentrantAfter"]
+"16579_constructor" [label="constructor"]
+}subgraph cluster_156456_PayableMulticall {
+label = "PayableMulticall"
+"156456_multicall" [label="multicall"]
+}subgraph cluster_141594_BaseRouter {
+label = "BaseRouter"
+"141594_sendNativeToken" [label="sendNativeToken"]
+"141594_sendTokens" [label="sendTokens"]
+"141594_constructor" [label="constructor"]
+"141594_sendWnt" [label="sendWnt"]
+"141594_constructor" -> "141594_constructor"
+"141594_sendNativeToken" -> "141594_nonReentrant"
+"141594_sendWnt" -> "141594_nonReentrant"
+"141594_sendTokens" -> "141594_nonReentrant"
+}subgraph cluster_142429_ExchangeRouter {
+label = "ExchangeRouter"
+"142429_simulateExecuteLatestOrder" [label="simulateExecuteLatestOrder"]
+"142429_simulateExecuteLatestShift" [label="simulateExecuteLatestShift"]
+"142429_updateOrder" [label="updateOrder"]
+"142429_setSavedCallbackContract" [label="setSavedCallbackContract"]
+"142429_createShift" [label="createShift"]
+"142429_simulateExecuteLatestJitOrder" [label="simulateExecuteLatestJitOrder"]
+"142429_cancelOrder" [label="cancelOrder"]
+"142429_claimAffiliateRewards" [label="claimAffiliateRewards"]
+"142429_constructor" [label="constructor"]
+"142429_claimFundingFees" [label="claimFundingFees"]
+"142429_claimCollateral" [label="claimCollateral"]
+"142429_cancelDeposit" [label="cancelDeposit"]
+"142429_cancelShift" [label="cancelShift"]
+"142429_simulateExecuteLatestWithdrawal" [label="simulateExecuteLatestWithdrawal"]
+"142429_makeExternalCalls" [label="makeExternalCalls"]
+"142429_createOrder" [label="createOrder"]
+"142429_setUiFeeFactor" [label="setUiFeeFactor"]
+"142429_simulateExecuteLatestDeposit" [label="simulateExecuteLatestDeposit"]
+"142429_executeAtomicWithdrawal" [label="executeAtomicWithdrawal"]
+"142429_createDeposit" [label="createDeposit"]
+"142429_claimUiFees" [label="claimUiFees"]
+"142429_createWithdrawal" [label="createWithdrawal"]
+"142429_cancelWithdrawal" [label="cancelWithdrawal"]
+"142429_constructor" -> "142429_constructor"
+"142429_setUiFeeFactor" -> "142429_nonReentrant"
+"142429_claimCollateral" -> "142429_nonReentrant"
+"142429_simulateExecuteLatestDeposit" -> "142429_nonReentrant"
+"142429_claimFundingFees" -> "142429_nonReentrant"
+"142429_cancelWithdrawal" -> "142429_nonReentrant"
+"142429_simulateExecuteLatestWithdrawal" -> "142429_nonReentrant"
+"142429_claimUiFees" -> "142429_nonReentrant"
+"142429_cancelDeposit" -> "142429_nonReentrant"
+"142429_createOrder" -> "142429_nonReentrant"
+"142429_simulateExecuteLatestOrder" -> "142429_nonReentrant"
+"142429_createWithdrawal" -> "142429_nonReentrant"
+"142429_setSavedCallbackContract" -> "142429_nonReentrant"
+"142429_createShift" -> "142429_nonReentrant"
+"142429_makeExternalCalls" -> "142429_nonReentrant"
+"142429_simulateExecuteLatestJitOrder" -> "142429_nonReentrant"
+"142429_updateOrder" -> "142429_nonReentrant"
+"142429_simulateExecuteLatestShift" -> "142429_nonReentrant"
+"142429_claimAffiliateRewards" -> "142429_nonReentrant"
+"142429_createDeposit" -> "142429_nonReentrant"
+"142429_executeAtomicWithdrawal" -> "142429_nonReentrant"
+"142429_cancelOrder" -> "142429_nonReentrant"
+"142429_cancelShift" -> "142429_nonReentrant"
+}subgraph cluster_142878_IExchangeRouter {
+label = "IExchangeRouter"
+"142878_createDeposit" [label="createDeposit"]
+"142878_executeAtomicWithdrawal" [label="executeAtomicWithdrawal"]
+"142878_updateOrder" [label="updateOrder"]
+"142878_createShift" [label="createShift"]
+"142878_cancelOrder" [label="cancelOrder"]
+"142878_cancelShift" [label="cancelShift"]
+"142878_createWithdrawal" [label="createWithdrawal"]
+"142878_cancelWithdrawal" [label="cancelWithdrawal"]
+"142878_cancelDeposit" [label="cancelDeposit"]
+"142878_createOrder" [label="createOrder"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"revert EmptyDeposit()" 
+"require(bool,string)" 
+"revert EmptyOrder()" 
+"revert Unauthorized(address,string)" 
+"141184__validateRole" -> "revert Unauthorized(address,string)"
+"142429_cancelDeposit" -> "revert Unauthorized(address,string)"
+"142429_cancelOrder" -> "revert EmptyOrder()"
+"16579__nonReentrantBefore" -> "require(bool,string)"
+"142429_updateOrder" -> "revert Unauthorized(address,string)"
+"142429_cancelOrder" -> "revert Unauthorized(address,string)"
+"142429_cancelShift" -> "revert Unauthorized(address,string)"
+"142429_cancelDeposit" -> "revert EmptyDeposit()"
+"142429_cancelWithdrawal" -> "revert Unauthorized(address,string)"
+}
+}

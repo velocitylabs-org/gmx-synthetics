@@ -1,0 +1,33 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_115464_BaseOrderUtils {
+label = "BaseOrderUtils"
+"115464_validateOrderValidFromTime" [label="validateOrderValidFromTime"]
+"115464_getPositionKey" [label="getPositionKey"]
+"115464_validateNonEmptyOrder" [label="validateNonEmptyOrder"]
+"115464_getExecutionPriceForIncrease" [label="getExecutionPriceForIncrease"]
+"115464_getExecutionPriceForDecrease" [label="getExecutionPriceForDecrease"]
+"115464_validateOrderTriggerPrice" [label="validateOrderTriggerPrice"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"revert OrderValidFromTimeNotReached(uint256,uint256)" 
+"revert EmptySizeDeltaInTokens()" 
+"revert OrderNotFulfillableAtAcceptablePrice(uint256,uint256)" 
+"revert PriceImpactLargerThanOrderSize(int256,uint256)" 
+"revert NegativeExecutionPrice(int256,uint256,uint256,int256,uint256)" 
+"revert InvalidOrderPrices(uint256,uint256,uint256,uint256)" 
+"revert EmptyOrder()" 
+"revert UnsupportedOrderType(uint256)" 
+"115464_validateOrderValidFromTime" -> "revert OrderValidFromTimeNotReached(uint256,uint256)"
+"115464_getExecutionPriceForDecrease" -> "revert OrderNotFulfillableAtAcceptablePrice(uint256,uint256)"
+"115464_getPositionKey" -> "revert UnsupportedOrderType(uint256)"
+"115464_getExecutionPriceForIncrease" -> "revert OrderNotFulfillableAtAcceptablePrice(uint256,uint256)"
+"115464_validateOrderTriggerPrice" -> "revert InvalidOrderPrices(uint256,uint256,uint256,uint256)"
+"115464_getExecutionPriceForIncrease" -> "revert EmptySizeDeltaInTokens()"
+"115464_getExecutionPriceForDecrease" -> "revert NegativeExecutionPrice(int256,uint256,uint256,int256,uint256)"
+"115464_getExecutionPriceForDecrease" -> "revert PriceImpactLargerThanOrderSize(int256,uint256)"
+"115464_validateNonEmptyOrder" -> "revert EmptyOrder()"
+"115464_validateOrderTriggerPrice" -> "revert UnsupportedOrderType(uint256)"
+}
+}

@@ -1,0 +1,27 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_141184_RoleModule {
+label = "RoleModule"
+"141184_constructor" [label="constructor"]
+"141184__validateRole" [label="_validateRole"]
+}subgraph cluster_93973_TimestampInitializer {
+label = "TimestampInitializer"
+"93973_initializePositionTimestamps" [label="initializePositionTimestamps"]
+"93973_initializeOrderTimestamps" [label="initializeOrderTimestamps"]
+"93973_constructor" [label="constructor"]
+"93973_initializeOrderTimestamps" -> "93973_onlyConfigKeeper"
+"93973_constructor" -> "93973_constructor"
+"93973_initializePositionTimestamps" -> "93973_onlyConfigKeeper"
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"abi.encode()" 
+"keccak256(bytes)" 
+"revert Unauthorized(address,string)" 
+"141184__validateRole" -> "revert Unauthorized(address,string)"
+"93973_initializeOrderTimestamps" -> "abi.encode()"
+"93973_initializePositionTimestamps" -> "abi.encode()"
+"93973_initializeOrderTimestamps" -> "keccak256(bytes)"
+"93973_initializePositionTimestamps" -> "keccak256(bytes)"
+}
+}

@@ -1,0 +1,18 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_153455_AssemblyReturnTest {
+label = "AssemblyReturnTest"
+"153455_slitherConstructorVariables" [label="slitherConstructorVariables"]
+"153455_testReturnNormal" [label="testReturnNormal"]
+"153455_testReturnAssembly" [label="testReturnAssembly"]
+"153455_testReturnWithExternalCall" [label="testReturnWithExternalCall"]
+"153455_testReturnWithExternalCall" -> "153455_nonExecutable"
+"153455_testReturnAssembly" -> "153455_nonExecutable"
+"153455_testReturnNormal" -> "153455_nonExecutable"
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"return(uint256,uint256)" 
+"153455_testReturnAssembly" -> "return(uint256,uint256)"
+}
+}

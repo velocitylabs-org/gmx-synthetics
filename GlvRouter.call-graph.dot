@@ -1,0 +1,65 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_141184_RoleModule {
+label = "RoleModule"
+"141184_constructor" [label="constructor"]
+"141184__validateRole" [label="_validateRole"]
+}subgraph cluster_16579_ReentrancyGuard {
+label = "ReentrancyGuard"
+"16579__reentrancyGuardEntered" [label="_reentrancyGuardEntered"]
+"16579__nonReentrantBefore" [label="_nonReentrantBefore"]
+"16579__nonReentrantAfter" [label="_nonReentrantAfter"]
+"16579_constructor" [label="constructor"]
+}subgraph cluster_156456_PayableMulticall {
+label = "PayableMulticall"
+"156456_multicall" [label="multicall"]
+}subgraph cluster_142792_GlvRouter {
+label = "GlvRouter"
+"142792_receive" [label="receive"]
+"142792_makeExternalCalls" [label="makeExternalCalls"]
+"142792_createGlvWithdrawal" [label="createGlvWithdrawal"]
+"142792_simulateExecuteLatestGlvWithdrawal" [label="simulateExecuteLatestGlvWithdrawal"]
+"142792_simulateExecuteLatestGlvDeposit" [label="simulateExecuteLatestGlvDeposit"]
+"142792_createGlvDeposit" [label="createGlvDeposit"]
+"142792_constructor" [label="constructor"]
+"142792_cancelGlvDeposit" [label="cancelGlvDeposit"]
+"142792_simulateExecuteGlvWithdrawal" [label="simulateExecuteGlvWithdrawal"]
+"142792_cancelGlvWithdrawal" [label="cancelGlvWithdrawal"]
+"142792_simulateExecuteGlvDeposit" [label="simulateExecuteGlvDeposit"]
+"142792_cancelGlvDeposit" -> "142792_nonReentrant"
+"142792_simulateExecuteGlvWithdrawal" -> "142792_nonReentrant"
+"142792_createGlvWithdrawal" -> "142792_nonReentrant"
+"142792_simulateExecuteLatestGlvWithdrawal" -> "142792_nonReentrant"
+"142792_makeExternalCalls" -> "142792_nonReentrant"
+"142792_constructor" -> "142792_constructor"
+"142792_cancelGlvWithdrawal" -> "142792_nonReentrant"
+"142792_simulateExecuteLatestGlvDeposit" -> "142792_nonReentrant"
+"142792_createGlvDeposit" -> "142792_nonReentrant"
+"142792_simulateExecuteGlvDeposit" -> "142792_nonReentrant"
+}subgraph cluster_141594_BaseRouter {
+label = "BaseRouter"
+"141594_sendNativeToken" [label="sendNativeToken"]
+"141594_sendTokens" [label="sendTokens"]
+"141594_constructor" [label="constructor"]
+"141594_sendWnt" [label="sendWnt"]
+"141594_constructor" -> "141594_constructor"
+"141594_sendNativeToken" -> "141594_nonReentrant"
+"141594_sendWnt" -> "141594_nonReentrant"
+"141594_sendTokens" -> "141594_nonReentrant"
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"revert EmptyGlvWithdrawal()" 
+"revert EmptyGlvDeposit()" 
+"require(bool,string)" 
+"revert Unauthorized(address,string)" 
+"revert InvalidNativeTokenSender(address)" 
+"141184__validateRole" -> "revert Unauthorized(address,string)"
+"142792_cancelGlvWithdrawal" -> "revert EmptyGlvWithdrawal()"
+"142792_receive" -> "revert InvalidNativeTokenSender(address)"
+"16579__nonReentrantBefore" -> "require(bool,string)"
+"142792_cancelGlvDeposit" -> "revert Unauthorized(address,string)"
+"142792_cancelGlvWithdrawal" -> "revert Unauthorized(address,string)"
+"142792_cancelGlvDeposit" -> "revert EmptyGlvDeposit()"
+}
+}

@@ -1,0 +1,27 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_141184_RoleModule {
+label = "RoleModule"
+"141184_constructor" [label="constructor"]
+"141184__validateRole" [label="_validateRole"]
+}subgraph cluster_83499_MarketFactory {
+label = "MarketFactory"
+"83499_emitMarketCreated" [label="emitMarketCreated"]
+"83499_createMarket" [label="createMarket"]
+"83499_constructor" [label="constructor"]
+"83499_createMarket" -> "83499_emitMarketCreated"
+"83499_constructor" -> "83499_constructor"
+"83499_createMarket" -> "83499_onlyMarketKeeper"
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"abi.encode()" 
+"revert MarketAlreadyExists(bytes32,address)" 
+"keccak256(bytes)" 
+"revert Unauthorized(address,string)" 
+"83499_createMarket" -> "abi.encode()"
+"141184__validateRole" -> "revert Unauthorized(address,string)"
+"83499_createMarket" -> "keccak256(bytes)"
+"83499_createMarket" -> "revert MarketAlreadyExists(bytes32,address)"
+}
+}

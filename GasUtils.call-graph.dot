@@ -1,0 +1,85 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_67894_GasUtils {
+label = "GasUtils"
+"67894_transferExcessiveExecutionFee" [label="transferExcessiveExecutionFee"]
+"67894_getMinHandleExecutionErrorGasToForward" [label="getMinHandleExecutionErrorGasToForward"]
+"67894_validateExecutionGas" [label="validateExecutionGas"]
+"67894_estimateCreateDepositGasLimit" [label="estimateCreateDepositGasLimit"]
+"67894_estimateExecuteDepositGasLimit" [label="estimateExecuteDepositGasLimit"]
+"67894_getExecutionGas" [label="getExecutionGas"]
+"67894_emitExecutionFeeRefundCallback" [label="emitExecutionFeeRefundCallback"]
+"67894_validateAndCapExecutionFee" [label="validateAndCapExecutionFee"]
+"67894_estimateCreateWithdrawalGasLimit" [label="estimateCreateWithdrawalGasLimit"]
+"67894_estimateDepositOraclePriceCount" [label="estimateDepositOraclePriceCount"]
+"67894_estimateWithdrawalOraclePriceCount" [label="estimateWithdrawalOraclePriceCount"]
+"67894_emitKeeperExecutionFee" [label="emitKeeperExecutionFee"]
+"67894_estimateExecuteIncreaseOrderGasLimit" [label="estimateExecuteIncreaseOrderGasLimit"]
+"67894_estimateExecuteDecreaseOrderGasLimit" [label="estimateExecuteDecreaseOrderGasLimit"]
+"67894__getCalldataGas" [label="_getCalldataGas"]
+"67894_estimateOrderOraclePriceCount" [label="estimateOrderOraclePriceCount"]
+"67894_estimateGlvWithdrawalOraclePriceCount" [label="estimateGlvWithdrawalOraclePriceCount"]
+"67894_estimateExecuteSwapOrderGasLimit" [label="estimateExecuteSwapOrderGasLimit"]
+"67894_validateExecutionFee" [label="validateExecutionFee"]
+"67894_estimateExecuteOrderGasLimit" [label="estimateExecuteOrderGasLimit"]
+"67894_estimateShiftOraclePriceCount" [label="estimateShiftOraclePriceCount"]
+"67894_estimateExecuteWithdrawalGasLimit" [label="estimateExecuteWithdrawalGasLimit"]
+"67894_estimateCreateGlvWithdrawalGasLimit" [label="estimateCreateGlvWithdrawalGasLimit"]
+"67894_estimateExecuteGlvDepositGasLimit" [label="estimateExecuteGlvDepositGasLimit"]
+"67894_adjustGasLimitForEstimate" [label="adjustGasLimitForEstimate"]
+"67894_payGelatoRelayFee" [label="payGelatoRelayFee"]
+"67894_payExecutionFee" [label="payExecutionFee"]
+"67894_estimateCreateGlvDepositGasLimit" [label="estimateCreateGlvDepositGasLimit"]
+"67894_getMinHandleExecutionErrorGas" [label="getMinHandleExecutionErrorGas"]
+"67894_estimateExecuteGlvShiftGasLimit" [label="estimateExecuteGlvShiftGasLimit"]
+"67894_estimateSetTraderReferralCodeGasLimit" [label="estimateSetTraderReferralCodeGasLimit"]
+"67894_estimateGlvDepositOraclePriceCount" [label="estimateGlvDepositOraclePriceCount"]
+"67894_estimateExecuteShiftGasLimit" [label="estimateExecuteShiftGasLimit"]
+"67894_estimateExecuteGlvWithdrawalGasLimit" [label="estimateExecuteGlvWithdrawalGasLimit"]
+"67894_estimateRegisterCodeGasLimit" [label="estimateRegisterCodeGasLimit"]
+"67894_getMinAdditionalGasForExecution" [label="getMinAdditionalGasForExecution"]
+"67894_validateExecutionErrorGas" [label="validateExecutionErrorGas"]
+"67894_adjustGasUsage" [label="adjustGasUsage"]
+"67894_emitExecutionFeeRefund" [label="emitExecutionFeeRefund"]
+"67894_estimateExecuteOrderGasLimit" -> "67894_estimateExecuteIncreaseOrderGasLimit"
+"67894_payExecutionFee" -> "67894_emitExecutionFeeRefund"
+"67894_estimateExecuteOrderGasLimit" -> "67894_estimateExecuteDecreaseOrderGasLimit"
+"67894_payExecutionFee" -> "67894_emitExecutionFeeRefundCallback"
+"67894_validateExecutionFee" -> "67894_adjustGasLimitForEstimate"
+"67894_payExecutionFee" -> "67894_adjustGasUsage"
+"67894_payExecutionFee" -> "67894_emitKeeperExecutionFee"
+"67894_validateAndCapExecutionFee" -> "67894_validateExecutionFee"
+"67894_getExecutionGas" -> "67894_getMinHandleExecutionErrorGasToForward"
+"67894_validateExecutionErrorGas" -> "67894_getMinHandleExecutionErrorGas"
+"67894_validateExecutionGas" -> "67894_getMinAdditionalGasForExecution"
+"67894_estimateExecuteOrderGasLimit" -> "67894_estimateExecuteSwapOrderGasLimit"
+"67894_payGelatoRelayFee" -> "67894__getCalldataGas"
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"revert InsufficientHandleExecutionErrorGas(uint256,uint256)" 
+"revert InsufficientExecutionFee(uint256,uint256)" 
+"revert InsufficientExecutionGas(uint256,uint256,uint256)" 
+"revert RelayCalldataTooLong(uint256)" 
+"revert EmptyRelayFeeAddress()" 
+"revert InsufficientRelayFee(uint256,uint256)" 
+"revert InvalidExecutionFee(uint256,uint256,uint256)" 
+"gasleft()" 
+"revert InsufficientExecutionGasForErrorHandling(uint256,uint256)" 
+"revert EmptyHoldingAddress()" 
+"revert UnsupportedOrderType(uint256)" 
+"67894_validateExecutionErrorGas" -> "gasleft()"
+"67894_transferExcessiveExecutionFee" -> "revert EmptyHoldingAddress()"
+"67894_payGelatoRelayFee" -> "revert EmptyRelayFeeAddress()"
+"67894_payGelatoRelayFee" -> "revert InsufficientRelayFee(uint256,uint256)"
+"67894_validateExecutionGas" -> "revert InsufficientExecutionGas(uint256,uint256,uint256)"
+"67894_payExecutionFee" -> "gasleft()"
+"67894_estimateExecuteOrderGasLimit" -> "revert UnsupportedOrderType(uint256)"
+"67894_payGelatoRelayFee" -> "gasleft()"
+"67894_validateExecutionErrorGas" -> "revert InsufficientHandleExecutionErrorGas(uint256,uint256)"
+"67894__getCalldataGas" -> "revert RelayCalldataTooLong(uint256)"
+"67894_getExecutionGas" -> "revert InsufficientExecutionGasForErrorHandling(uint256,uint256)"
+"67894_validateExecutionFee" -> "revert InsufficientExecutionFee(uint256,uint256)"
+"67894_validateAndCapExecutionFee" -> "revert InvalidExecutionFee(uint256,uint256,uint256)"
+}
+}

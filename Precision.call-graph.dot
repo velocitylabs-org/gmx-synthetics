@@ -1,0 +1,22 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_156895_Precision {
+label = "Precision"
+"156895_floatToWei" [label="floatToWei"]
+"156895_basisPointsToFloat" [label="basisPointsToFloat"]
+"156895_slitherConstructorConstantVariables" [label="slitherConstructorConstantVariables"]
+"156895_applyExponentFactor" [label="applyExponentFactor"]
+"156895_mulDiv" [label="mulDiv"]
+"156895_weiToFloat" [label="weiToFloat"]
+"156895_applyFactor" [label="applyFactor"]
+"156895_toFactor" [label="toFactor"]
+"156895_applyExponentFactor" -> "156895_floatToWei"
+"156895_toFactor" -> "156895_toFactor"
+"156895_mulDiv" -> "156895_mulDiv"
+"156895_applyFactor" -> "156895_mulDiv"
+"156895_applyExponentFactor" -> "156895_weiToFloat"
+}subgraph cluster_solidity {
+label = "[Solidity]"
+}
+}

@@ -1,0 +1,16 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_138873_ReaderPricingUtils {
+label = "ReaderPricingUtils"
+"138873_getSwapAmountOut" [label="getSwapAmountOut"]
+"138873__getProportionalPendingImpactValues" [label="_getProportionalPendingImpactValues"]
+"138873_getSwapPriceImpact" [label="getSwapPriceImpact"]
+"138873_getExecutionPrice" [label="getExecutionPrice"]
+"138873_getExecutionPrice" -> "138873__getProportionalPendingImpactValues"
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"revert InvalidTokenIn(address,address)" 
+"138873_getSwapAmountOut" -> "revert InvalidTokenIn(address,address)"
+}
+}

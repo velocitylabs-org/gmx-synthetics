@@ -1,0 +1,35 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_76267_GlvShiftUtils {
+label = "GlvShiftUtils"
+"76267_createGlvShift" [label="createGlvShift"]
+"76267_validateGlvShift" [label="validateGlvShift"]
+"76267_executeGlvShift" [label="executeGlvShift"]
+"76267_validateGlvShiftInterval" [label="validateGlvShiftInterval"]
+"76267_validateGlvShiftMaxLoss" [label="validateGlvShiftMaxLoss"]
+"76267_cancelGlvShift" [label="cancelGlvShift"]
+"76267_validateGlvShift" -> "76267_validateGlvShiftInterval"
+"76267_executeGlvShift" -> "76267_validateGlvShiftMaxLoss"
+"76267_createGlvShift" -> "76267_validateGlvShift"
+"76267_executeGlvShift" -> "76267_validateGlvShiftInterval"
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"revert ShiftFromAndToMarketAreEqual(address)" 
+"revert GlvShiftMaxLossExceeded(uint256,uint256)" 
+"abi.encode()" 
+"revert GlvShiftIntervalNotYetPassed(uint256,uint256,uint256)" 
+"revert GlvInsufficientMarketTokenBalance(address,address,uint256,uint256)" 
+"gasleft()" 
+"revert RemovalShouldNotBeSkipped(bytes32,bytes32)" 
+"keccak256(bytes)" 
+"76267_executeGlvShift" -> "keccak256(bytes)"
+"76267_executeGlvShift" -> "abi.encode()"
+"76267_validateGlvShiftInterval" -> "revert GlvShiftIntervalNotYetPassed(uint256,uint256,uint256)"
+"76267_validateGlvShiftMaxLoss" -> "revert GlvShiftMaxLossExceeded(uint256,uint256)"
+"76267_validateGlvShift" -> "revert ShiftFromAndToMarketAreEqual(address)"
+"76267_validateGlvShift" -> "revert GlvInsufficientMarketTokenBalance(address,address,uint256,uint256)"
+"76267_executeGlvShift" -> "revert RemovalShouldNotBeSkipped(bytes32,bytes32)"
+"76267_executeGlvShift" -> "gasleft()"
+}
+}

@@ -1,0 +1,58 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_101872_MockRiskOracle {
+label = "MockRiskOracle"
+"101872_addUpdateType" [label="addUpdateType"]
+"101872_isAuthorized" [label="isAuthorized"]
+"101872_getUpdateById" [label="getUpdateById"]
+"101872_publishBulkRiskParameterUpdates" [label="publishBulkRiskParameterUpdates"]
+"101872__processUpdate" [label="_processUpdate"]
+"101872_getAllUpdateTypes" [label="getAllUpdateTypes"]
+"101872_constructor" [label="constructor"]
+"101872_getLatestUpdateByParameterAndMarket" [label="getLatestUpdateByParameterAndMarket"]
+"101872_removeAuthorizedSender" [label="removeAuthorizedSender"]
+"101872_publishRiskParameterUpdate" [label="publishRiskParameterUpdate"]
+"101872_addAuthorizedSender" [label="addAuthorizedSender"]
+"101872_addUpdateType" -> "101872_onlyValidString"
+"101872_publishBulkRiskParameterUpdates" -> "101872__processUpdate"
+"101872_addUpdateType" -> "101872_onlyOwner"
+"101872_addAuthorizedSender" -> "101872_onlyOwner"
+"101872_publishRiskParameterUpdate" -> "101872_onlyAuthorized"
+"101872_publishBulkRiskParameterUpdates" -> "101872_onlyAuthorized"
+"101872_publishRiskParameterUpdate" -> "101872__processUpdate"
+"101872_removeAuthorizedSender" -> "101872_onlyOwner"
+}subgraph cluster_20539_Context {
+label = "Context"
+"20539__msgSender" [label="_msgSender"]
+"20539__msgData" [label="_msgData"]
+}subgraph cluster_11571_Ownable {
+label = "Ownable"
+"11571_owner" [label="owner"]
+"11571_transferOwnership" [label="transferOwnership"]
+"11571_renounceOwnership" [label="renounceOwnership"]
+"11571_constructor" [label="constructor"]
+"11571__transferOwnership" [label="_transferOwnership"]
+"11571__checkOwner" [label="_checkOwner"]
+"11571_renounceOwnership" -> "11571__transferOwnership"
+"11571_transferOwnership" -> "11571_onlyOwner"
+"11571_constructor" -> "11571__transferOwnership"
+"11571_transferOwnership" -> "11571__transferOwnership"
+"11571__checkOwner" -> "11571_owner"
+"11571_constructor" -> "11571__msgSender"
+"11571_renounceOwnership" -> "11571_onlyOwner"
+"11571__checkOwner" -> "11571__msgSender"
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"require(bool,string)" 
+"101872_publishBulkRiskParameterUpdates" -> "require(bool,string)"
+"101872_addUpdateType" -> "require(bool,string)"
+"101872_getUpdateById" -> "require(bool,string)"
+"11571_transferOwnership" -> "require(bool,string)"
+"101872_getLatestUpdateByParameterAndMarket" -> "require(bool,string)"
+"101872_publishRiskParameterUpdate" -> "require(bool,string)"
+"11571__checkOwner" -> "require(bool,string)"
+"101872_removeAuthorizedSender" -> "require(bool,string)"
+"101872_addAuthorizedSender" -> "require(bool,string)"
+}
+}

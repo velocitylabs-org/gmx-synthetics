@@ -1,0 +1,31 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_112396_EdgeDataStreamVerifier {
+label = "EdgeDataStreamVerifier"
+"112396_verifyData" [label="verifyData"]
+"112396_getMessageHash" [label="getMessageHash"]
+"112396_constructor" [label="constructor"]
+"112396_verifySignature" [label="verifySignature"]
+"112396_extractSigner" [label="extractSigner"]
+"112396_verifyData" -> "112396_verifySignature"
+"112396_verifySignature" -> "112396_extractSigner"
+"112396_extractSigner" -> "112396_getMessageHash"
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"abi.decode()" 
+"abi.encodePacked()" 
+"revert InvalidTrustedSignerAddress()" 
+"revert InvalidEdgeSigner()" 
+"revert InvalidEdgeSignature(uint256)" 
+"keccak256(bytes)" 
+"112396_getMessageHash" -> "abi.encodePacked()"
+"112396_extractSigner" -> "keccak256(bytes)"
+"112396_constructor" -> "revert InvalidTrustedSignerAddress()"
+"112396_verifyData" -> "keccak256(bytes)"
+"112396_verifyData" -> "abi.decode()"
+"112396_getMessageHash" -> "keccak256(bytes)"
+"112396_extractSigner" -> "revert InvalidEdgeSignature(uint256)"
+"112396_verifyData" -> "revert InvalidEdgeSigner()"
+}
+}

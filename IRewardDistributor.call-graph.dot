@@ -1,0 +1,11 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_157063_IRewardDistributor {
+label = "IRewardDistributor"
+"157063_setTokensPerInterval" [label="setTokensPerInterval"]
+"157063_updateLastDistributionTime" [label="updateLastDistributionTime"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+}
+}

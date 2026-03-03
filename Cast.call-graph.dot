@@ -1,0 +1,24 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_156079_Cast {
+label = "Cast"
+"156079_uint256ToBytes" [label="uint256ToBytes"]
+"156079_uint192ToBytes" [label="uint192ToBytes"]
+"156079_int32ToBytes" [label="int32ToBytes"]
+"156079_bytesToUint256" [label="bytesToUint256"]
+"156079_uint32ToBytes" [label="uint32ToBytes"]
+"156079_toBytes32" [label="toBytes32"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"mstore(uint256,uint256)" 
+"revert Uint256AsBytesLengthExceeds32Bytes(uint256)" 
+"mload(uint256)" 
+"156079_uint192ToBytes" -> "mstore(uint256,uint256)"
+"156079_int32ToBytes" -> "mstore(uint256,uint256)"
+"156079_bytesToUint256" -> "mload(uint256)"
+"156079_uint32ToBytes" -> "mstore(uint256,uint256)"
+"156079_bytesToUint256" -> "revert Uint256AsBytesLengthExceeds32Bytes(uint256)"
+"156079_uint256ToBytes" -> "mstore(uint256,uint256)"
+}
+}

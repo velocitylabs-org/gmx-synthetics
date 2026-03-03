@@ -1,0 +1,35 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_6596_PacketV1Codec {
+label = "PacketV1Codec"
+"6596_encodePacketHeader" [label="encodePacketHeader"]
+"6596_encode" [label="encode"]
+"6596_sender" [label="sender"]
+"6596_message" [label="message"]
+"6596_srcEid" [label="srcEid"]
+"6596_receiver" [label="receiver"]
+"6596_encodePayload" [label="encodePayload"]
+"6596_version" [label="version"]
+"6596_senderAddressB20" [label="senderAddressB20"]
+"6596_receiverB20" [label="receiverB20"]
+"6596_payload" [label="payload"]
+"6596_nonce" [label="nonce"]
+"6596_slitherConstructorConstantVariables" [label="slitherConstructorConstantVariables"]
+"6596_payloadHash" [label="payloadHash"]
+"6596_header" [label="header"]
+"6596_guid" [label="guid"]
+"6596_dstEid" [label="dstEid"]
+"6596_receiverB20" -> "6596_receiver"
+"6596_senderAddressB20" -> "6596_sender"
+"6596_payloadHash" -> "6596_payload"
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"keccak256(bytes)" 
+"abi.encodePacked()" 
+"6596_payloadHash" -> "keccak256(bytes)"
+"6596_encodePayload" -> "abi.encodePacked()"
+"6596_encode" -> "abi.encodePacked()"
+"6596_encodePacketHeader" -> "abi.encodePacked()"
+}
+}

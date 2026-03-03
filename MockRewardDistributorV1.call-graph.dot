@@ -1,0 +1,13 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_101281_MockRewardDistributorV1 {
+label = "MockRewardDistributorV1"
+"101281_setTokensPerInterval" [label="setTokensPerInterval"]
+"101281_updateLastDistributionTime" [label="updateLastDistributionTime"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"require(bool,string)" 
+"101281_setTokensPerInterval" -> "require(bool,string)"
+}
+}

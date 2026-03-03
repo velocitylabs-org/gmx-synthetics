@@ -1,0 +1,22 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_65034_FeeSwapUtils {
+label = "FeeSwapUtils"
+"65034_swapFeesUsingV2" [label="swapFeesUsingV2"]
+"65034__getSwapOrderParamsV2" [label="_getSwapOrderParamsV2"]
+"65034__getSwapValues" [label="_getSwapValues"]
+"65034_swapFeesUsingV1" [label="swapFeesUsingV1"]
+"65034_swapFeesUsingV2" -> "65034__getSwapOrderParamsV2"
+"65034_swapFeesUsingV2" -> "65034__getSwapValues"
+"65034_swapFeesUsingV1" -> "65034__getSwapValues"
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"revert InvalidFeeBatchTokenIndex(uint256,uint256)" 
+"revert InvalidAmountInForFeeBatch(uint256,uint256)" 
+"revert InvalidSwapPathForV1(address[],address)" 
+"65034__getSwapValues" -> "revert InvalidFeeBatchTokenIndex(uint256,uint256)"
+"65034__getSwapValues" -> "revert InvalidAmountInForFeeBatch(uint256,uint256)"
+"65034_swapFeesUsingV1" -> "revert InvalidSwapPathForV1(address[],address)"
+}
+}

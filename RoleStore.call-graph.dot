@@ -1,0 +1,28 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_141452_RoleStore {
+label = "RoleStore"
+"141452_constructor" [label="constructor"]
+"141452__revokeRole" [label="_revokeRole"]
+"141452_revokeRole" [label="revokeRole"]
+"141452_getRoleCount" [label="getRoleCount"]
+"141452_getRoleMemberCount" [label="getRoleMemberCount"]
+"141452_hasRole" [label="hasRole"]
+"141452_getRoleMembers" [label="getRoleMembers"]
+"141452_getRoles" [label="getRoles"]
+"141452__grantRole" [label="_grantRole"]
+"141452_grantRole" [label="grantRole"]
+"141452_grantRole" -> "141452__grantRole"
+"141452_constructor" -> "141452__grantRole"
+"141452_revokeRole" -> "141452_onlyRoleAdmin"
+"141452_grantRole" -> "141452_onlyRoleAdmin"
+"141452_revokeRole" -> "141452__revokeRole"
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"revert ThereMustBeAtLeastOneRoleAdmin()" 
+"revert ThereMustBeAtLeastOneTimelockMultiSig()" 
+"141452__revokeRole" -> "revert ThereMustBeAtLeastOneTimelockMultiSig()"
+"141452__revokeRole" -> "revert ThereMustBeAtLeastOneRoleAdmin()"
+}
+}

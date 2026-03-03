@@ -1,0 +1,33 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_154985_TokenUtils {
+label = "TokenUtils"
+"154985_transfer" [label="transfer"]
+"154985_withdrawAndSendNativeToken" [label="withdrawAndSendNativeToken"]
+"154985_nonRevertingTransferWithGasLimit" [label="nonRevertingTransferWithGasLimit"]
+"154985_wnt" [label="wnt"]
+"154985_sendNativeToken" [label="sendNativeToken"]
+"154985_depositAndSendWrappedNativeToken" [label="depositAndSendWrappedNativeToken"]
+"154985_withdrawAndSendNativeToken" -> "154985_depositAndSendWrappedNativeToken"
+"154985_transfer" -> "154985_nonRevertingTransferWithGasLimit"
+"154985_sendNativeToken" -> "154985_depositAndSendWrappedNativeToken"
+"154985_depositAndSendWrappedNativeToken" -> "154985_transfer"
+"154985_depositAndSendWrappedNativeToken" -> "154985_wnt"
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"abi.decode()" 
+"revert EmptyTokenTranferGasLimit(address)" 
+"abi.encodeWithSelector()" 
+"revert EmptyHoldingAddress()" 
+"call(uint256,uint256,uint256,uint256,uint256,uint256,uint256)" 
+"revert TokenTransferError(address,address,uint256)" 
+"154985_withdrawAndSendNativeToken" -> "call(uint256,uint256,uint256,uint256,uint256,uint256,uint256)"
+"154985_transfer" -> "revert TokenTransferError(address,address,uint256)"
+"154985_sendNativeToken" -> "call(uint256,uint256,uint256,uint256,uint256,uint256,uint256)"
+"154985_transfer" -> "revert EmptyTokenTranferGasLimit(address)"
+"154985_nonRevertingTransferWithGasLimit" -> "abi.encodeWithSelector()"
+"154985_transfer" -> "revert EmptyHoldingAddress()"
+"154985_nonRevertingTransferWithGasLimit" -> "abi.decode()"
+}
+}

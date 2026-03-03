@@ -1,0 +1,13 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_93536_IGlpTimelock {
+label = "IGlpTimelock"
+"93536_setSwapFees" [label="setSwapFees"]
+}subgraph cluster_100042_MockGlpTimelock {
+label = "MockGlpTimelock"
+"100042_setSwapFees" [label="setSwapFees"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+}
+}

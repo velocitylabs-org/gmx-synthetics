@@ -1,0 +1,14 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_137110_ReaderDepositUtils {
+label = "ReaderDepositUtils"
+"137110_getDepositAmountOut" [label="getDepositAmountOut"]
+"137110_getDepositAmountOutForSingleToken" [label="getDepositAmountOutForSingleToken"]
+"137110_getDepositAmountOut" -> "137110_getDepositAmountOutForSingleToken"
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"revert InvalidPoolValueForDeposit(int256)" 
+"137110_getDepositAmountOutForSingleToken" -> "revert InvalidPoolValueForDeposit(int256)"
+}
+}

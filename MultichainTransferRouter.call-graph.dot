@@ -1,0 +1,200 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_141184_RoleModule {
+label = "RoleModule"
+"141184_constructor" [label="constructor"]
+"141184__validateRole" [label="_validateRole"]
+}subgraph cluster_144961_BaseGelatoRelayRouter {
+label = "BaseGelatoRelayRouter"
+"144961_constructor" [label="constructor"]
+"144961__sendTokens" [label="_sendTokens"]
+"144961__isMultichain" [label="_isMultichain"]
+"144961__handleRelayBeforeAction" [label="_handleRelayBeforeAction"]
+"144961__batch" [label="_batch"]
+"144961__recordRefundedAmounts" [label="_recordRefundedAmounts"]
+"144961__validateDigest" [label="_validateDigest"]
+"144961__createOrder" [label="_createOrder"]
+"144961__validateDeadline" [label="_validateDeadline"]
+"144961__transferResidualFee" [label="_transferResidualFee"]
+"144961__validateCall" [label="_validateCall"]
+"144961__updateOrder" [label="_updateOrder"]
+"144961__getContracts" [label="_getContracts"]
+"144961__handleRelayFee" [label="_handleRelayFee"]
+"144961__handleRelayAfterAction" [label="_handleRelayAfterAction"]
+"144961__validateGaslessFeature" [label="_validateGaslessFeature"]
+"144961__cancelOrder" [label="_cancelOrder"]
+"144961__handleTokenPermits" [label="_handleTokenPermits"]
+"144961__validateCallWithoutSignature" [label="_validateCallWithoutSignature"]
+"144961__handleExternalCalls" [label="_handleExternalCalls"]
+"144961__cancelOrder" -> "144961__getContracts"
+"144961__validateCallWithoutSignature" -> "144961__isMultichain"
+"144961__handleRelayBeforeAction" -> "144961__handleRelayFee"
+"144961__handleRelayBeforeAction" -> "144961_withOraclePricesForAtomicAction"
+"144961__handleRelayAfterAction" -> "144961__transferResidualFee"
+"144961__handleRelayFee" -> "144961__sendTokens"
+"144961__validateCallWithoutSignature" -> "144961__validateDeadline"
+"144961__validateCall" -> "144961__validateCallWithoutSignature"
+"144961__updateOrder" -> "144961__getContracts"
+"144961__handleRelayAfterAction" -> "144961__getFee"
+"144961__handleRelayAfterAction" -> "144961__isGelatoRelay"
+"144961__batch" -> "144961__updateOrder"
+"144961_constructor" -> "144961_constructor"
+"144961__handleRelayBeforeAction" -> "144961__handleExternalCalls"
+"144961__batch" -> "144961__cancelOrder"
+"144961__createOrder" -> "144961__getContracts"
+"144961__validateCall" -> "144961__validateDigest"
+"144961__handleRelayAfterAction" -> "144961__transferRelayFee"
+"144961__createOrder" -> "144961__sendTokens"
+"144961__handleRelayBeforeAction" -> "144961__handleTokenPermits"
+"144961__batch" -> "144961__createOrder"
+"144961__handleRelayFee" -> "144961__getFeeToken"
+"144961__handleExternalCalls" -> "144961__recordRefundedAmounts"
+"144961__handleExternalCalls" -> "144961__sendTokens"
+"144961__handleRelayFee" -> "144961__isGelatoRelay"
+}subgraph cluster_16579_ReentrancyGuard {
+label = "ReentrancyGuard"
+"16579__reentrancyGuardEntered" [label="_reentrancyGuardEntered"]
+"16579__nonReentrantBefore" [label="_nonReentrantBefore"]
+"16579__nonReentrantAfter" [label="_nonReentrantAfter"]
+"16579_constructor" [label="constructor"]
+}subgraph cluster_104935_IMultichainTransferRouter {
+label = "IMultichainTransferRouter"
+"104935_bridgeOutFromController" [label="bridgeOutFromController"]
+"104935_bridgeIn" [label="bridgeIn"]
+"104935_transferOut" [label="transferOut"]
+"104935_bridgeOut" [label="bridgeOut"]
+}subgraph cluster_156456_PayableMulticall {
+label = "PayableMulticall"
+"156456_multicall" [label="multicall"]
+}subgraph cluster_235_GelatoRelayContext {
+label = "GelatoRelayContext"
+"235__getFeeCollector" [label="_getFeeCollector"]
+"235__transferRelayFeeCapped" [label="_transferRelayFeeCapped"]
+"235__transferRelayFee" [label="_transferRelayFee"]
+"235__getMsgData" [label="_getMsgData"]
+"235__getFee" [label="_getFee"]
+"235__getFeeToken" [label="_getFeeToken"]
+"235__getFeeCollector" -> "235__getFeeCollectorRelayContext"
+"235__transferRelayFee" -> "235__getFee"
+"235__transferRelayFeeCapped" -> "235__getFeeToken"
+"235__getFee" -> "235__getFeeRelayContext"
+"235__transferRelayFeeCapped" -> "235__getFeeCollector"
+"235__getMsgData" -> "235__isGelatoRelay"
+"235__transferRelayFee" -> "235__getFeeCollector"
+"235__getFeeToken" -> "235__getFeeTokenRelayContext"
+"235__transferRelayFee" -> "235__getFeeToken"
+"235__transferRelayFeeCapped" -> "235__getFee"
+}subgraph cluster_271_GelatoRelayBase {
+label = "GelatoRelayBase"
+"271__isGelatoRelay" [label="_isGelatoRelay"]
+}subgraph cluster_110673_MultichainTransferRouter {
+label = "MultichainTransferRouter"
+"110673_bridgeOut" [label="bridgeOut"]
+"110673_initialize" [label="initialize"]
+"110673__bridgeOut" [label="_bridgeOut"]
+"110673_bridgeIn" [label="bridgeIn"]
+"110673_constructor" [label="constructor"]
+"110673_transferOut" [label="transferOut"]
+"110673_bridgeOutFromController" [label="bridgeOutFromController"]
+"110673_bridgeOutFromController" -> "110673__bridgeOut"
+"110673_transferOut" -> "110673__bridgeOut"
+"110673_bridgeIn" -> "110673_nonReentrant"
+"110673_bridgeOut" -> "110673_nonReentrant"
+"110673_bridgeOutFromController" -> "110673_nonReentrant"
+"110673_bridgeOutFromController" -> "110673_onlyController"
+"110673_transferOut" -> "110673_nonReentrant"
+"110673_bridgeOut" -> "110673__bridgeOut"
+"110673_bridgeOut" -> "110673__validateCall"
+"110673_bridgeOut" -> "110673_withRelay"
+"110673_constructor" -> "110673_constructor"
+"110673_initialize" -> "110673_initializer"
+"110673_bridgeOutFromController" -> "110673__validateCallWithoutSignature"
+}subgraph cluster_10739_Initializable {
+label = "Initializable"
+"10739__disableInitializers" [label="_disableInitializers"]
+"10739__isInitializing" [label="_isInitializing"]
+"10739__getInitializedVersion" [label="_getInitializedVersion"]
+}subgraph cluster_109845_MultichainRouter {
+label = "MultichainRouter"
+"109845__sendTokens" [label="_sendTokens"]
+"109845__recordRefundedAmounts" [label="_recordRefundedAmounts"]
+"109845__transferResidualFee" [label="_transferResidualFee"]
+"109845_constructor" [label="constructor"]
+"109845__isMultichain" [label="_isMultichain"]
+"109845__processTransferRequests" [label="_processTransferRequests"]
+"109845_constructor" -> "109845_constructor"
+"109845__processTransferRequests" -> "109845__sendTokens"
+}subgraph cluster_114391_OracleModule {
+label = "OracleModule"
+"114391_constructor" [label="constructor"]
+}subgraph cluster_141594_BaseRouter {
+label = "BaseRouter"
+"141594_sendNativeToken" [label="sendNativeToken"]
+"141594_sendTokens" [label="sendTokens"]
+"141594_constructor" [label="constructor"]
+"141594_sendWnt" [label="sendWnt"]
+"141594_constructor" -> "141594_constructor"
+"141594_sendNativeToken" -> "141594_nonReentrant"
+"141594_sendWnt" -> "141594_nonReentrant"
+"141594_sendTokens" -> "141594_nonReentrant"
+}subgraph cluster_894_GelatoRelayContractsUtils {
+label = "GelatoRelayContractsUtils"
+"894__isV1ZkSyncChainId" [label="_isV1ZkSyncChainId"]
+"894_constructor" [label="constructor"]
+"894__getRelayAddresses" [label="_getRelayAddresses"]
+"894__isBotanixChainId" [label="_isBotanixChainId"]
+"894__isV2ZkSyncChainId" [label="_isV2ZkSyncChainId"]
+"894__isV1ChainId" [label="_isV1ChainId"]
+"894__getRelayAddresses" -> "894__isBotanixChainId"
+"894__getRelayAddresses" -> "894__isV1ChainId"
+"894__getRelayAddresses" -> "894__isV2ZkSyncChainId"
+"894__getRelayAddresses" -> "894__isV1ZkSyncChainId"
+"894_constructor" -> "894__getRelayAddresses"
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"revert MaxRelayFeeSwapForSubaccountExceeded(uint256,uint256)" 
+"revert UnsupportedRelayFeeToken(address,address)" 
+"revert InsufficientRelayFee(uint256,uint256)" 
+"revert Unauthorized(address,string)" 
+"revert RelayEmptyBatch()" 
+"revert InvalidPermitSpender(address,address)" 
+"require(bool,string)" 
+"revert UnexpectedRelayFeeToken(address,address)" 
+"revert InvalidUserDigest(bytes32)" 
+"revert EmptyOrder()" 
+"revert InvalidTransferRequestsLength()" 
+"revert DeadlinePassed(uint256,uint256)" 
+"revert InvalidMultichainProvider(address)" 
+"revert InvalidSrcChainId(uint256)" 
+"revert TokenPermitsNotAllowedForMultichain()" 
+"revert InvalidInitializer()" 
+"revert InvalidExternalCalls(uint256,uint256)" 
+"revert InvalidDestinationChainId(uint256)" 
+"revert NonEmptyExternalCallsForSubaccountOrder()" 
+"144961__validateDigest" -> "revert InvalidUserDigest(bytes32)"
+"144961__validateDeadline" -> "revert DeadlinePassed(uint256,uint256)"
+"144961__handleExternalCalls" -> "revert NonEmptyExternalCallsForSubaccountOrder()"
+"141184__validateRole" -> "revert Unauthorized(address,string)"
+"144961__cancelOrder" -> "revert EmptyOrder()"
+"144961__validateCallWithoutSignature" -> "revert InvalidSrcChainId(uint256)"
+"144961__batch" -> "revert RelayEmptyBatch()"
+"144961__handleRelayFee" -> "revert UnsupportedRelayFeeToken(address,address)"
+"144961__validateCallWithoutSignature" -> "revert InvalidDestinationChainId(uint256)"
+"144961__cancelOrder" -> "revert Unauthorized(address,string)"
+"109845__processTransferRequests" -> "revert InvalidTransferRequestsLength()"
+"144961__updateOrder" -> "revert EmptyOrder()"
+"110673_initialize" -> "revert InvalidMultichainProvider(address)"
+"144961__updateOrder" -> "revert Unauthorized(address,string)"
+"144961__handleRelayAfterAction" -> "revert InsufficientRelayFee(uint256,uint256)"
+"144961__handleExternalCalls" -> "revert InvalidExternalCalls(uint256,uint256)"
+"16579__nonReentrantBefore" -> "require(bool,string)"
+"10739__disableInitializers" -> "require(bool,string)"
+"235__transferRelayFeeCapped" -> "require(bool,string)"
+"144961__handleTokenPermits" -> "revert InvalidPermitSpender(address,address)"
+"110673_initialize" -> "revert InvalidInitializer()"
+"144961__handleRelayFee" -> "revert MaxRelayFeeSwapForSubaccountExceeded(uint256,uint256)"
+"144961__validateCallWithoutSignature" -> "revert TokenPermitsNotAllowedForMultichain()"
+"144961__handleRelayFee" -> "revert UnexpectedRelayFeeToken(address,address)"
+}
+}

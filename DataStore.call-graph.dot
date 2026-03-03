@@ -1,0 +1,108 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_141184_RoleModule {
+label = "RoleModule"
+"141184_constructor" [label="constructor"]
+"141184__validateRole" [label="_validateRole"]
+}subgraph cluster_39421_DataStore {
+label = "DataStore"
+"39421_removeAddressArray" [label="removeAddressArray"]
+"39421_setBytes32Array" [label="setBytes32Array"]
+"39421_removeUintArray" [label="removeUintArray"]
+"39421_incrementInt" [label="incrementInt"]
+"39421_constructor" [label="constructor"]
+"39421_containsAddress" [label="containsAddress"]
+"39421_getAddress" [label="getAddress"]
+"39421_setUintArray" [label="setUintArray"]
+"39421_setInt" [label="setInt"]
+"39421_getBoolArray" [label="getBoolArray"]
+"39421_applyBoundedDeltaToUint" [label="applyBoundedDeltaToUint"]
+"39421_removeBytes32Array" [label="removeBytes32Array"]
+"39421_applyDeltaToInt" [label="applyDeltaToInt"]
+"39421_applyDeltaToUint" [label="applyDeltaToUint"]
+"39421_removeBytes32" [label="removeBytes32"]
+"39421_addUint" [label="addUint"]
+"39421_addBytes32" [label="addBytes32"]
+"39421_getUint" [label="getUint"]
+"39421_getUintArray" [label="getUintArray"]
+"39421_getUintValuesAt" [label="getUintValuesAt"]
+"39421_getBytes32Array" [label="getBytes32Array"]
+"39421_getAddressValuesAt" [label="getAddressValuesAt"]
+"39421_removeUint" [label="removeUint"]
+"39421_decrementInt" [label="decrementInt"]
+"39421_getIntArray" [label="getIntArray"]
+"39421_removeIntArray" [label="removeIntArray"]
+"39421_getInt" [label="getInt"]
+"39421_getUintCount" [label="getUintCount"]
+"39421_getString" [label="getString"]
+"39421_getAddressCount" [label="getAddressCount"]
+"39421_setString" [label="setString"]
+"39421_removeInt" [label="removeInt"]
+"39421_removeBoolArray" [label="removeBoolArray"]
+"39421_decrementUint" [label="decrementUint"]
+"39421_setBool" [label="setBool"]
+"39421_setBytes32" [label="setBytes32"]
+"39421_getBytes32ValuesAt" [label="getBytes32ValuesAt"]
+"39421_removeStringArray" [label="removeStringArray"]
+"39421_setUint" [label="setUint"]
+"39421_getBytes32" [label="getBytes32"]
+"39421_incrementUint" [label="incrementUint"]
+"39421_setAddressArray" [label="setAddressArray"]
+"39421_getAddressArray" [label="getAddressArray"]
+"39421_setAddress" [label="setAddress"]
+"39421_setIntArray" [label="setIntArray"]
+"39421_removeAddress" [label="removeAddress"]
+"39421_removeBool" [label="removeBool"]
+"39421_setStringArray" [label="setStringArray"]
+"39421_getStringArray" [label="getStringArray"]
+"39421_getBytes32Count" [label="getBytes32Count"]
+"39421_containsBytes32" [label="containsBytes32"]
+"39421_addAddress" [label="addAddress"]
+"39421_getBool" [label="getBool"]
+"39421_setBoolArray" [label="setBoolArray"]
+"39421_containsUint" [label="containsUint"]
+"39421_removeString" [label="removeString"]
+"39421_removeStringArray" -> "39421_onlyController"
+"39421_decrementInt" -> "39421_onlyController"
+"39421_setUintArray" -> "39421_onlyController"
+"39421_incrementInt" -> "39421_onlyController"
+"39421_removeBoolArray" -> "39421_onlyController"
+"39421_setBool" -> "39421_onlyController"
+"39421_setInt" -> "39421_onlyController"
+"39421_removeString" -> "39421_onlyController"
+"39421_setAddressArray" -> "39421_onlyController"
+"39421_setStringArray" -> "39421_onlyController"
+"39421_setIntArray" -> "39421_onlyController"
+"39421_setBoolArray" -> "39421_onlyController"
+"39421_setAddress" -> "39421_onlyController"
+"39421_constructor" -> "39421_constructor"
+"39421_setBytes32Array" -> "39421_onlyController"
+"39421_decrementUint" -> "39421_onlyController"
+"39421_removeUintArray" -> "39421_onlyController"
+"39421_applyBoundedDeltaToUint" -> "39421_onlyController"
+"39421_setString" -> "39421_onlyController"
+"39421_removeAddress" -> "39421_onlyController"
+"39421_applyDeltaToInt" -> "39421_onlyController"
+"39421_addBytes32" -> "39421_onlyController"
+"39421_removeBool" -> "39421_onlyController"
+"39421_setBytes32" -> "39421_onlyController"
+"39421_incrementUint" -> "39421_onlyController"
+"39421_removeBytes32Array" -> "39421_onlyController"
+"39421_removeInt" -> "39421_onlyController"
+"39421_removeIntArray" -> "39421_onlyController"
+"39421_removeBytes32" -> "39421_onlyController"
+"39421_addAddress" -> "39421_onlyController"
+"39421_applyDeltaToUint" -> "39421_onlyController"
+"39421_addUint" -> "39421_onlyController"
+"39421_removeUint" -> "39421_onlyController"
+"39421_removeAddressArray" -> "39421_onlyController"
+"39421_setUint" -> "39421_onlyController"
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"revert(string)" 
+"revert Unauthorized(address,string)" 
+"141184__validateRole" -> "revert Unauthorized(address,string)"
+"39421_applyDeltaToUint" -> "revert(string)"
+}
+}

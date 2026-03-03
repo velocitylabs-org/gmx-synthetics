@@ -1,0 +1,16 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_71591_GlvDepositCalc {
+label = "GlvDepositCalc"
+"71591_slitherConstructorConstantVariables" [label="slitherConstructorConstantVariables"]
+"71591_getMintAmount" [label="getMintAmount"]
+"71591_validateFirstGlvDeposit" [label="validateFirstGlvDeposit"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"revert InvalidReceiverForFirstGlvDeposit(address,address)" 
+"revert InvalidMinGlvTokensForFirstGlvDeposit(uint256,uint256)" 
+"71591_validateFirstGlvDeposit" -> "revert InvalidReceiverForFirstGlvDeposit(address,address)"
+"71591_validateFirstGlvDeposit" -> "revert InvalidMinGlvTokensForFirstGlvDeposit(uint256,uint256)"
+}
+}

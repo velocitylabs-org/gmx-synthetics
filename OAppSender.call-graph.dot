@@ -1,0 +1,67 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_3820_IOAppCore {
+label = "IOAppCore"
+"3820_setDelegate" [label="setDelegate"]
+"3820_oAppVersion" [label="oAppVersion"]
+"3820_endpoint" [label="endpoint"]
+"3820_setPeer" [label="setPeer"]
+"3820_peers" [label="peers"]
+}subgraph cluster_3757_OAppSender {
+label = "OAppSender"
+"3757__lzSend" [label="_lzSend"]
+"3757_oAppVersion" [label="oAppVersion"]
+"3757__payNative" [label="_payNative"]
+"3757_slitherConstructorConstantVariables" [label="slitherConstructorConstantVariables"]
+"3757__quote" [label="_quote"]
+"3757__payLzToken" [label="_payLzToken"]
+"3757__lzSend" -> "3757__payNative"
+"3757__quote" -> "3757__getPeerOrRevert"
+"3757__lzSend" -> "3757__getPeerOrRevert"
+"3757__lzSend" -> "3757__payLzToken"
+}subgraph cluster_11571_Ownable {
+label = "Ownable"
+"11571_owner" [label="owner"]
+"11571_transferOwnership" [label="transferOwnership"]
+"11571_renounceOwnership" [label="renounceOwnership"]
+"11571_constructor" [label="constructor"]
+"11571__transferOwnership" [label="_transferOwnership"]
+"11571__checkOwner" [label="_checkOwner"]
+"11571_renounceOwnership" -> "11571__transferOwnership"
+"11571_transferOwnership" -> "11571_onlyOwner"
+"11571_constructor" -> "11571__transferOwnership"
+"11571_transferOwnership" -> "11571__transferOwnership"
+"11571__checkOwner" -> "11571_owner"
+"11571_constructor" -> "11571__msgSender"
+"11571_renounceOwnership" -> "11571_onlyOwner"
+"11571__checkOwner" -> "11571__msgSender"
+}subgraph cluster_3571_OAppCore {
+label = "OAppCore"
+"3571_setPeer" [label="setPeer"]
+"3571_constructor" [label="constructor"]
+"3571__getPeerOrRevert" [label="_getPeerOrRevert"]
+"3571_setDelegate" [label="setDelegate"]
+"3571__setPeer" [label="_setPeer"]
+"3571_setPeer" -> "3571_onlyOwner"
+"3571_setDelegate" -> "3571_onlyOwner"
+"3571_setPeer" -> "3571__setPeer"
+}subgraph cluster_20539_Context {
+label = "Context"
+"20539__msgSender" [label="_msgSender"]
+"20539__msgData" [label="_msgData"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"revert LzTokenUnavailable()" 
+"revert NotEnoughNative(uint256)" 
+"require(bool,string)" 
+"revert NoPeer(uint32)" 
+"revert InvalidDelegate()" 
+"3757__payLzToken" -> "revert LzTokenUnavailable()"
+"3757__payNative" -> "revert NotEnoughNative(uint256)"
+"11571_transferOwnership" -> "require(bool,string)"
+"3571__getPeerOrRevert" -> "revert NoPeer(uint32)"
+"11571__checkOwner" -> "require(bool,string)"
+"3571_constructor" -> "revert InvalidDelegate()"
+}
+}

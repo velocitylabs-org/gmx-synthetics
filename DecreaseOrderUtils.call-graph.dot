@@ -1,0 +1,27 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_116481_DecreaseOrderUtils {
+label = "DecreaseOrderUtils"
+"116481_getOutputEventData" [label="getOutputEventData"]
+"116481_processOrder" [label="processOrder"]
+"116481__handleSwapError" [label="_handleSwapError"]
+"116481__validateOutputAmount" [label="_validateOutputAmount"]
+"116481_validateOracleTimestamp" [label="validateOracleTimestamp"]
+"116481__handleSwapError" -> "116481__validateOutputAmount"
+"116481_processOrder" -> "116481_getOutputEventData"
+"116481_processOrder" -> "116481__handleSwapError"
+"116481_processOrder" -> "116481_validateOracleTimestamp"
+"116481_processOrder" -> "116481__validateOutputAmount"
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"revert InsufficientOutputAmount(uint256,uint256)" 
+"revert OracleTimestampsAreSmallerThanRequired(uint256,uint256)" 
+"revert OracleTimestampsAreLargerThanRequestExpirationTime(uint256,uint256,uint256)" 
+"revert UnsupportedOrderType(uint256)" 
+"116481_validateOracleTimestamp" -> "revert UnsupportedOrderType(uint256)"
+"116481_validateOracleTimestamp" -> "revert OracleTimestampsAreLargerThanRequestExpirationTime(uint256,uint256,uint256)"
+"116481_validateOracleTimestamp" -> "revert OracleTimestampsAreSmallerThanRequired(uint256,uint256)"
+"116481__validateOutputAmount" -> "revert InsufficientOutputAmount(uint256,uint256)"
+}
+}

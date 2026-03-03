@@ -1,0 +1,35 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_83933_MarketStoreUtils {
+label = "MarketStoreUtils"
+"83933_getMarketKeys" [label="getMarketKeys"]
+"83933_slitherConstructorConstantVariables" [label="slitherConstructorConstantVariables"]
+"83933_remove" [label="remove"]
+"83933_getMarketSaltHash" [label="getMarketSaltHash"]
+"83933_set" [label="set"]
+"83933_getMarketCount" [label="getMarketCount"]
+"83933_get" [label="get"]
+"83933_getBySalt" [label="getBySalt"]
+"83933_remove" -> "83933_getMarketSaltHash"
+"83933_getBySalt" -> "83933_get"
+"83933_getBySalt" -> "83933_getMarketSaltHash"
+"83933_set" -> "83933_getMarketSaltHash"
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"abi.encode()" 
+"revert MarketNotFound(address)" 
+"keccak256(bytes)" 
+"83933_get" -> "keccak256(bytes)"
+"83933_remove" -> "keccak256(bytes)"
+"83933_set" -> "keccak256(bytes)"
+"83933_remove" -> "abi.encode()"
+"83933_set" -> "abi.encode()"
+"83933_remove" -> "revert MarketNotFound(address)"
+"83933_getMarketSaltHash" -> "keccak256(bytes)"
+"83933_get" -> "abi.encode()"
+"83933_slitherConstructorConstantVariables" -> "keccak256(bytes)"
+"83933_getMarketSaltHash" -> "abi.encode()"
+"83933_slitherConstructorConstantVariables" -> "abi.encode()"
+}
+}

@@ -1,0 +1,20 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_161272_WithdrawalUtils {
+label = "WithdrawalUtils"
+"161272_createWithdrawal" [label="createWithdrawal"]
+"161272_cancelWithdrawal" [label="cancelWithdrawal"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"gasleft()" 
+"revert EmptyWithdrawal()" 
+"revert InsufficientWntAmountForExecutionFee(uint256,uint256)" 
+"revert EmptyWithdrawalAmount()" 
+"161272_cancelWithdrawal" -> "revert EmptyWithdrawalAmount()"
+"161272_createWithdrawal" -> "revert EmptyWithdrawalAmount()"
+"161272_createWithdrawal" -> "revert InsufficientWntAmountForExecutionFee(uint256,uint256)"
+"161272_cancelWithdrawal" -> "revert EmptyWithdrawal()"
+"161272_cancelWithdrawal" -> "gasleft()"
+}
+}

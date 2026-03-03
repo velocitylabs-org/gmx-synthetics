@@ -1,0 +1,244 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_7173_IOAppCore {
+label = "IOAppCore"
+"7173_endpoint" [label="endpoint"]
+"7173_oAppVersion" [label="oAppVersion"]
+"7173_setPeer" [label="setPeer"]
+"7173_peers" [label="peers"]
+"7173_setDelegate" [label="setDelegate"]
+}subgraph cluster_10247_IOFT {
+label = "IOFT"
+"10247_oftVersion" [label="oftVersion"]
+"10247_sharedDecimals" [label="sharedDecimals"]
+"10247_send" [label="send"]
+"10247_quoteOFT" [label="quoteOFT"]
+"10247_quoteSend" [label="quoteSend"]
+"10247_approvalRequired" [label="approvalRequired"]
+"10247_token" [label="token"]
+}subgraph cluster_8586_RateLimiter {
+label = "RateLimiter"
+"8586__outflow" [label="_outflow"]
+"8586__setRateLimits" [label="_setRateLimits"]
+"8586__inflow" [label="_inflow"]
+"8586_getAmountCanBeSent" [label="getAmountCanBeSent"]
+"8586__amountCanBeSent" [label="_amountCanBeSent"]
+"8586__setRateLimits" -> "8586__outflow"
+"8586_getAmountCanBeSent" -> "8586__amountCanBeSent"
+"8586__outflow" -> "8586__amountCanBeSent"
+}subgraph cluster_6924_OAppReceiver {
+label = "OAppReceiver"
+"6924_nextNonce" [label="nextNonce"]
+"6924_isComposeMsgSender" [label="isComposeMsgSender"]
+"6924_allowInitializePath" [label="allowInitializePath"]
+"6924_oAppVersion" [label="oAppVersion"]
+"6924_lzReceive" [label="lzReceive"]
+"6924__lzReceive" [label="_lzReceive"]
+"6924_lzReceive" -> "6924__lzReceive"
+"6924_lzReceive" -> "6924__getPeerOrRevert"
+}subgraph cluster_101007_IOverridableInboundRateLimiter {
+label = "IOverridableInboundRateLimiter"
+"101007_modifyOverridableGUIDs" [label="modifyOverridableGUIDs"]
+"101007_exemptAddresses" [label="exemptAddresses"]
+"101007_setRateLimits" [label="setRateLimits"]
+"101007_guidOverrides" [label="guidOverrides"]
+"101007_modifyRateLimitExemptAddresses" [label="modifyRateLimitExemptAddresses"]
+}subgraph cluster_99738_MockGMX_MintBurnAdapter {
+label = "MockGMX_MintBurnAdapter"
+"99738__debit" [label="_debit"]
+"99738_slitherConstructorConstantVariables" [label="slitherConstructorConstantVariables"]
+"99738_constructor" [label="constructor"]
+"99738__credit" [label="_credit"]
+"99738__lzReceive" [label="_lzReceive"]
+"99738_constructor" -> "99738_constructor"
+"99738__lzReceive" -> "99738__toLD"
+"99738__debit" -> "99738__debitView"
+"99738_constructor" -> "99738__setRateLimits"
+"99738__lzReceive" -> "99738__lzReceive"
+"99738__debit" -> "99738__outflowOverridable"
+"99738__lzReceive" -> "99738__inflowOverridable"
+}subgraph cluster_11571_Ownable {
+label = "Ownable"
+"11571_owner" [label="owner"]
+"11571_transferOwnership" [label="transferOwnership"]
+"11571_renounceOwnership" [label="renounceOwnership"]
+"11571_constructor" [label="constructor"]
+"11571__transferOwnership" [label="_transferOwnership"]
+"11571__checkOwner" [label="_checkOwner"]
+"11571_renounceOwnership" -> "11571__transferOwnership"
+"11571_transferOwnership" -> "11571_onlyOwner"
+"11571_constructor" -> "11571__transferOwnership"
+"11571_transferOwnership" -> "11571__transferOwnership"
+"11571__checkOwner" -> "11571_owner"
+"11571_constructor" -> "11571__msgSender"
+"11571_renounceOwnership" -> "11571_onlyOwner"
+"11571__checkOwner" -> "11571__msgSender"
+}subgraph cluster_101175_MockOverridableInboundRateLimiter {
+label = "MockOverridableInboundRateLimiter"
+"101175__inflowOverridable" [label="_inflowOverridable"]
+"101175_setRateLimits" [label="setRateLimits"]
+"101175_modifyOverridableGUIDs" [label="modifyOverridableGUIDs"]
+"101175_modifyRateLimitExemptAddresses" [label="modifyRateLimitExemptAddresses"]
+"101175__outflowOverridable" [label="_outflowOverridable"]
+"101175__inflowOverridable" -> "101175__outflow"
+"101175_setRateLimits" -> "101175_onlyOwner"
+"101175_modifyRateLimitExemptAddresses" -> "101175_onlyOwner"
+"101175_setRateLimits" -> "101175__setRateLimits"
+"101175_modifyOverridableGUIDs" -> "101175_onlyOwner"
+"101175__outflowOverridable" -> "101175__inflow"
+}subgraph cluster_8760_OAppPreCrimeSimulator {
+label = "OAppPreCrimeSimulator"
+"8760_setPreCrime" [label="setPreCrime"]
+"8760_lzReceiveSimulate" [label="lzReceiveSimulate"]
+"8760__lzReceiveSimulate" [label="_lzReceiveSimulate"]
+"8760_oApp" [label="oApp"]
+"8760_isPeer" [label="isPeer"]
+"8760_lzReceiveAndRevert" [label="lzReceiveAndRevert"]
+"8760_lzReceiveAndRevert" -> "8760_isPeer"
+"8760_setPreCrime" -> "8760_onlyOwner"
+"8760_lzReceiveSimulate" -> "8760__lzReceiveSimulate"
+}subgraph cluster_20539_Context {
+label = "Context"
+"20539__msgSender" [label="_msgSender"]
+"20539__msgData" [label="_msgData"]
+}subgraph cluster_7235_IOAppOptionsType3 {
+label = "IOAppOptionsType3"
+"7235_setEnforcedOptions" [label="setEnforcedOptions"]
+"7235_combineOptions" [label="combineOptions"]
+}subgraph cluster_7110_OAppSender {
+label = "OAppSender"
+"7110__lzSend" [label="_lzSend"]
+"7110__payNative" [label="_payNative"]
+"7110__payLzToken" [label="_payLzToken"]
+"7110_oAppVersion" [label="oAppVersion"]
+"7110__quote" [label="_quote"]
+"7110__lzSend" -> "7110__payLzToken"
+"7110__lzSend" -> "7110__payNative"
+"7110__quote" -> "7110__getPeerOrRevert"
+"7110__lzSend" -> "7110__getPeerOrRevert"
+}subgraph cluster_7256_IOAppReceiver {
+label = "IOAppReceiver"
+"7256_isComposeMsgSender" [label="isComposeMsgSender"]
+}subgraph cluster_10079_OFTCore {
+label = "OFTCore"
+"10079_oftVersion" [label="oftVersion"]
+"10079__lzReceiveSimulate" [label="_lzReceiveSimulate"]
+"10079__toLD" [label="_toLD"]
+"10079_quoteOFT" [label="quoteOFT"]
+"10079__toSD" [label="_toSD"]
+"10079_isPeer" [label="isPeer"]
+"10079__buildMsgAndOptions" [label="_buildMsgAndOptions"]
+"10079_setMsgInspector" [label="setMsgInspector"]
+"10079_sharedDecimals" [label="sharedDecimals"]
+"10079__credit" [label="_credit"]
+"10079_send" [label="send"]
+"10079_constructor" [label="constructor"]
+"10079__removeDust" [label="_removeDust"]
+"10079_quoteSend" [label="quoteSend"]
+"10079__send" [label="_send"]
+"10079__lzReceive" [label="_lzReceive"]
+"10079__debitView" [label="_debitView"]
+"10079__debit" [label="_debit"]
+"10079_quoteSend" -> "10079__quote"
+"10079_send" -> "10079__send"
+"10079__buildMsgAndOptions" -> "10079_combineOptions"
+"10079__debitView" -> "10079__removeDust"
+"10079__send" -> "10079__buildMsgAndOptions"
+"10079__lzReceive" -> "10079__credit"
+"10079__send" -> "10079__lzSend"
+"10079_constructor" -> "10079_constructor"
+"10079_quoteOFT" -> "10079__debitView"
+"10079__send" -> "10079__debit"
+"10079_constructor" -> "10079_sharedDecimals"
+"10079_quoteSend" -> "10079__debitView"
+"10079__lzReceiveSimulate" -> "10079__lzReceive"
+"10079__buildMsgAndOptions" -> "10079__toSD"
+"10079_setMsgInspector" -> "10079_onlyOwner"
+"10079_quoteSend" -> "10079__buildMsgAndOptions"
+"10079__lzReceive" -> "10079__toLD"
+}subgraph cluster_9195_MintBurnOFTAdapter {
+label = "MintBurnOFTAdapter"
+"9195_approvalRequired" [label="approvalRequired"]
+"9195_constructor" [label="constructor"]
+"9195__debit" [label="_debit"]
+"9195__credit" [label="_credit"]
+"9195_token" [label="token"]
+"9195__debit" -> "9195__debitView"
+"9195_constructor" -> "9195_constructor"
+}subgraph cluster_4717_ILayerZeroReceiver {
+label = "ILayerZeroReceiver"
+"4717_lzReceive" [label="lzReceive"]
+"4717_nextNonce" [label="nextNonce"]
+"4717_allowInitializePath" [label="allowInitializePath"]
+}subgraph cluster_8814_IOAppPreCrimeSimulator {
+label = "IOAppPreCrimeSimulator"
+"8814_preCrime" [label="preCrime"]
+"8814_setPreCrime" [label="setPreCrime"]
+"8814_oApp" [label="oApp"]
+"8814_lzReceiveAndRevert" [label="lzReceiveAndRevert"]
+"8814_isPeer" [label="isPeer"]
+}subgraph cluster_6642_OApp {
+label = "OApp"
+"6642_constructor" [label="constructor"]
+"6642_oAppVersion" [label="oAppVersion"]
+"6642_constructor" -> "6642_constructor"
+}subgraph cluster_6772_OAppCore {
+label = "OAppCore"
+"6772__setPeer" [label="_setPeer"]
+"6772__getPeerOrRevert" [label="_getPeerOrRevert"]
+"6772_constructor" [label="constructor"]
+"6772_setPeer" [label="setPeer"]
+"6772_setDelegate" [label="setDelegate"]
+"6772_setDelegate" -> "6772_onlyOwner"
+"6772_setPeer" -> "6772_onlyOwner"
+"6772_setPeer" -> "6772__setPeer"
+}subgraph cluster_7420_OAppOptionsType3 {
+label = "OAppOptionsType3"
+"7420__setEnforcedOptions" [label="_setEnforcedOptions"]
+"7420_setEnforcedOptions" [label="setEnforcedOptions"]
+"7420__assertOptionsType3" [label="_assertOptionsType3"]
+"7420_combineOptions" [label="combineOptions"]
+"7420__setEnforcedOptions" -> "7420__assertOptionsType3"
+"7420_setEnforcedOptions" -> "7420__setEnforcedOptions"
+"7420_combineOptions" -> "7420__assertOptionsType3"
+"7420_setEnforcedOptions" -> "7420_onlyOwner"
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"revert RateLimitExceeded()" 
+"revert OnlyEndpoint(address)" 
+"revert InvalidLocalDecimals()" 
+"revert OnlyPeer(uint32,bytes32)" 
+"type()" 
+"revert LzTokenUnavailable()" 
+"revert InvalidOptions(bytes)" 
+"require(bool,string)" 
+"revert NotEnoughNative(uint256)" 
+"revert SlippageExceeded(uint256,uint256)" 
+"revert SimulationResult(bytes)" 
+"mload(uint256)" 
+"revert InvalidDelegate()" 
+"revert NoPeer(uint32)" 
+"bytes.concat()" 
+"revert OnlySelf()" 
+"7420__assertOptionsType3" -> "revert InvalidOptions(bytes)"
+"8586__outflow" -> "revert RateLimitExceeded()"
+"6924_lzReceive" -> "revert OnlyEndpoint(address)"
+"10079_constructor" -> "revert InvalidLocalDecimals()"
+"6924_lzReceive" -> "revert OnlyPeer(uint32,bytes32)"
+"10079_oftVersion" -> "type()"
+"8760_lzReceiveAndRevert" -> "revert SimulationResult(bytes)"
+"6772__getPeerOrRevert" -> "revert NoPeer(uint32)"
+"7110__payNative" -> "revert NotEnoughNative(uint256)"
+"7420__assertOptionsType3" -> "mload(uint256)"
+"11571_transferOwnership" -> "require(bool,string)"
+"7420_combineOptions" -> "bytes.concat()"
+"7110__payLzToken" -> "revert LzTokenUnavailable()"
+"11571__checkOwner" -> "require(bool,string)"
+"7420_combineOptions" -> "revert InvalidOptions(bytes)"
+"10079__debitView" -> "revert SlippageExceeded(uint256,uint256)"
+"6772_constructor" -> "revert InvalidDelegate()"
+"8760_lzReceiveSimulate" -> "revert OnlySelf()"
+}"8760_lzReceiveAndRevert" -> "99738_lzReceiveSimulate"
+"10079_quoteOFT" -> "99738_token"
+}

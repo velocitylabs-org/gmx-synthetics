@@ -1,0 +1,92 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_155480_BasicMulticall {
+label = "BasicMulticall"
+"155480_multicall" [label="multicall"]
+}subgraph cluster_16579_ReentrancyGuard {
+label = "ReentrancyGuard"
+"16579__reentrancyGuardEntered" [label="_reentrancyGuardEntered"]
+"16579__nonReentrantBefore" [label="_nonReentrantBefore"]
+"16579__nonReentrantAfter" [label="_nonReentrantAfter"]
+"16579_constructor" [label="constructor"]
+}subgraph cluster_32724_Config {
+label = "Config"
+"32724_setClaimableCollateralFactorForAccount" [label="setClaimableCollateralFactorForAccount"]
+"32724_setBytes32" [label="setBytes32"]
+"32724_setOracleProviderForToken" [label="setOracleProviderForToken"]
+"32724_initOracleConfig" [label="initOracleConfig"]
+"32724_setClaimableCollateralReductionFactorForAccount" [label="setClaimableCollateralReductionFactorForAccount"]
+"32724_setUint" [label="setUint"]
+"32724_constructor" [label="constructor"]
+"32724_setOracleProviderForFeeHandlerToken" [label="setOracleProviderForFeeHandlerToken"]
+"32724_setPositionImpactDistributionRate" [label="setPositionImpactDistributionRate"]
+"32724_setBool" [label="setBool"]
+"32724_setAddress" [label="setAddress"]
+"32724__initAllowedBaseKeys" [label="_initAllowedBaseKeys"]
+"32724_initOracleProviderForToken" [label="initOracleProviderForToken"]
+"32724_setInt" [label="setInt"]
+"32724__initAllowedLimitedBaseKeys" [label="_initAllowedLimitedBaseKeys"]
+"32724_setClaimableCollateralFactorForTime" [label="setClaimableCollateralFactorForTime"]
+"32724__validateKey" [label="_validateKey"]
+"32724_setClaimableCollateralFactorForAccount" -> "32724_nonReentrant"
+"32724_setBool" -> "32724_onlyKeeper"
+"32724_setBool" -> "32724__validateKey"
+"32724_setOracleProviderForFeeHandlerToken" -> "32724_nonReentrant"
+"32724_setAddress" -> "32724__validateKey"
+"32724_setPositionImpactDistributionRate" -> "32724_nonReentrant"
+"32724_setClaimableCollateralFactorForAccount" -> "32724_onlyConfigKeeper"
+"32724_setPositionImpactDistributionRate" -> "32724_onlyConfigKeeper"
+"32724_setBytes32" -> "32724__validateKey"
+"32724_constructor" -> "32724__initAllowedLimitedBaseKeys"
+"32724_constructor" -> "32724__initAllowedBaseKeys"
+"32724_setAddress" -> "32724_onlyKeeper"
+"32724_setUint" -> "32724__validateKey"
+"32724_setUint" -> "32724_onlyKeeper"
+"32724_setClaimableCollateralReductionFactorForAccount" -> "32724_nonReentrant"
+"32724_setBytes32" -> "32724_onlyKeeper"
+"32724_setClaimableCollateralFactorForTime" -> "32724_nonReentrant"
+"32724_setOracleProviderForFeeHandlerToken" -> "32724_onlyConfigKeeper"
+"32724_setUint" -> "32724_nonReentrant"
+"32724_setClaimableCollateralReductionFactorForAccount" -> "32724_onlyConfigKeeper"
+"32724_initOracleProviderForToken" -> "32724_onlyConfigKeeper"
+"32724_setOracleProviderForToken" -> "32724_onlyConfigKeeper"
+"32724_setBool" -> "32724_nonReentrant"
+"32724_initOracleConfig" -> "32724_onlyConfigKeeper"
+"32724_setOracleProviderForToken" -> "32724_nonReentrant"
+"32724_initOracleConfig" -> "32724_nonReentrant"
+"32724_setAddress" -> "32724_nonReentrant"
+"32724_setInt" -> "32724_onlyKeeper"
+"32724_setInt" -> "32724__validateKey"
+"32724_setBytes32" -> "32724_nonReentrant"
+"32724_setInt" -> "32724_nonReentrant"
+"32724_constructor" -> "32724_constructor"
+"32724_setClaimableCollateralFactorForTime" -> "32724_onlyConfigKeeper"
+"32724_initOracleProviderForToken" -> "32724_nonReentrant"
+}subgraph cluster_141184_RoleModule {
+label = "RoleModule"
+"141184_constructor" [label="constructor"]
+"141184__validateRole" [label="_validateRole"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"revert EmptyToken()" 
+"revert InvalidBaseKey(bytes32)" 
+"require(bool,string)" 
+"revert OracleProviderMinChangeDelayNotYetPassed(address,address)" 
+"revert InvalidOracleProvider(address)" 
+"revert Unauthorized(address,string)" 
+"revert OracleProviderAlreadyExistsForToken(address,address)" 
+"32724_setOracleProviderForFeeHandlerToken" -> "revert OracleProviderMinChangeDelayNotYetPassed(address,address)"
+"141184__validateRole" -> "revert Unauthorized(address,string)"
+"32724_initOracleProviderForToken" -> "revert EmptyToken()"
+"32724_setOracleProviderForToken" -> "revert InvalidOracleProvider(address)"
+"16579__nonReentrantBefore" -> "require(bool,string)"
+"32724_setOracleProviderForToken" -> "revert EmptyToken()"
+"32724__validateKey" -> "revert InvalidBaseKey(bytes32)"
+"32724_initOracleProviderForToken" -> "revert InvalidOracleProvider(address)"
+"32724_setOracleProviderForFeeHandlerToken" -> "revert InvalidOracleProvider(address)"
+"32724_initOracleProviderForToken" -> "revert OracleProviderAlreadyExistsForToken(address,address)"
+"32724_setOracleProviderForToken" -> "revert OracleProviderMinChangeDelayNotYetPassed(address,address)"
+"32724_setOracleProviderForFeeHandlerToken" -> "revert EmptyToken()"
+}
+}

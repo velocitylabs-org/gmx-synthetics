@@ -1,0 +1,10 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_157089_IRouterV1 {
+label = "IRouterV1"
+"157089_swap" [label="swap"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+}
+}

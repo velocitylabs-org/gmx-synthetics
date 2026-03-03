@@ -1,0 +1,16 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_21837_SignatureChecker {
+label = "SignatureChecker"
+"21837_isValidSignatureNow" [label="isValidSignatureNow"]
+"21837_isValidERC1271SignatureNow" [label="isValidERC1271SignatureNow"]
+"21837_isValidSignatureNow" -> "21837_isValidERC1271SignatureNow"
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"abi.encodeWithSelector()" 
+"abi.decode()" 
+"21837_isValidERC1271SignatureNow" -> "abi.decode()"
+"21837_isValidERC1271SignatureNow" -> "abi.encodeWithSelector()"
+}
+}

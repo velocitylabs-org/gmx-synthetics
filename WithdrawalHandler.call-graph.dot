@@ -1,0 +1,91 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_141184_RoleModule {
+label = "RoleModule"
+"141184_constructor" [label="constructor"]
+"141184__validateRole" [label="_validateRole"]
+}subgraph cluster_56960_IWithdrawalHandler {
+label = "IWithdrawalHandler"
+"56960_executeWithdrawalFromController" [label="executeWithdrawalFromController"]
+"56960_executeAtomicWithdrawal" [label="executeAtomicWithdrawal"]
+"56960_createWithdrawal" [label="createWithdrawal"]
+"56960_cancelWithdrawal" [label="cancelWithdrawal"]
+"56960_simulateExecuteWithdrawal" [label="simulateExecuteWithdrawal"]
+}subgraph cluster_16579_ReentrancyGuard {
+label = "ReentrancyGuard"
+"16579__reentrancyGuardEntered" [label="_reentrancyGuardEntered"]
+"16579__nonReentrantBefore" [label="_nonReentrantBefore"]
+"16579__nonReentrantAfter" [label="_nonReentrantAfter"]
+"16579_constructor" [label="constructor"]
+}subgraph cluster_156387_GlobalReentrancyGuard {
+label = "GlobalReentrancyGuard"
+"156387__globalNonReentrantBefore" [label="_globalNonReentrantBefore"]
+"156387_constructor" [label="constructor"]
+"156387__globalNonReentrantAfter" [label="_globalNonReentrantAfter"]
+}subgraph cluster_59556_WithdrawalHandler {
+label = "WithdrawalHandler"
+"59556_createWithdrawal" [label="createWithdrawal"]
+"59556__executeWithdrawal" [label="_executeWithdrawal"]
+"59556__handleWithdrawalError" [label="_handleWithdrawalError"]
+"59556_simulateExecuteWithdrawal" [label="simulateExecuteWithdrawal"]
+"59556_executeAtomicWithdrawal" [label="executeAtomicWithdrawal"]
+"59556_constructor" [label="constructor"]
+"59556_cancelWithdrawal" [label="cancelWithdrawal"]
+"59556_executeWithdrawalFromController" [label="executeWithdrawalFromController"]
+"59556_executeWithdrawal" [label="executeWithdrawal"]
+"59556_cancelWithdrawal" -> "59556_validateRequestCancellation"
+"59556_createWithdrawal" -> "59556_onlyController"
+"59556_executeWithdrawal" -> "59556_onlyOrderKeeper"
+"59556__handleWithdrawalError" -> "59556_validateNonKeeperError"
+"59556_executeAtomicWithdrawal" -> "59556_withOraclePricesForAtomicAction"
+"59556_executeWithdrawal" -> "59556__handleWithdrawalError"
+"59556_cancelWithdrawal" -> "59556_globalNonReentrant"
+"59556_executeWithdrawal" -> "59556_globalNonReentrant"
+"59556__executeWithdrawal" -> "59556_onlySelf"
+"59556_createWithdrawal" -> "59556_globalNonReentrant"
+"59556_createWithdrawal" -> "59556_validateDataListLength"
+"59556_simulateExecuteWithdrawal" -> "59556_globalNonReentrant"
+"59556_simulateExecuteWithdrawal" -> "59556_withSimulatedOraclePrices"
+"59556_executeWithdrawalFromController" -> "59556_onlyController"
+"59556_cancelWithdrawal" -> "59556_onlyController"
+"59556_executeWithdrawal" -> "59556_withOraclePrices"
+"59556_constructor" -> "59556_constructor"
+"59556_executeWithdrawalFromController" -> "59556_nonReentrant"
+"59556_executeAtomicWithdrawal" -> "59556_validateDataListLength"
+"59556_executeAtomicWithdrawal" -> "59556_globalNonReentrant"
+"59556_executeAtomicWithdrawal" -> "59556_onlyController"
+}subgraph cluster_54637_BaseHandler {
+label = "BaseHandler"
+"54637_validateDataListLength" [label="validateDataListLength"]
+"54637_receive" [label="receive"]
+"54637_validateRequestCancellation" [label="validateRequestCancellation"]
+"54637_validateNonKeeperError" [label="validateNonKeeperError"]
+"54637_constructor" [label="constructor"]
+"54637_constructor" -> "54637_constructor"
+}subgraph cluster_114391_OracleModule {
+label = "OracleModule"
+"114391_constructor" [label="constructor"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"revert MaxDataListLengthExceeded(uint256,uint256)" 
+"revert SwapsNotAllowedForAtomicWithdrawal(uint256,uint256)" 
+"require(bool,string)" 
+"gasleft()" 
+"revert Unauthorized(address,string)" 
+"revert RequestNotYetCancellable(uint256,uint256,string)" 
+"revert InvalidNativeTokenSender(address)" 
+"141184__validateRole" -> "revert Unauthorized(address,string)"
+"59556_cancelWithdrawal" -> "gasleft()"
+"16579__nonReentrantBefore" -> "require(bool,string)"
+"54637_validateDataListLength" -> "revert MaxDataListLengthExceeded(uint256,uint256)"
+"54637_validateRequestCancellation" -> "revert RequestNotYetCancellable(uint256,uint256,string)"
+"59556_executeAtomicWithdrawal" -> "revert SwapsNotAllowedForAtomicWithdrawal(uint256,uint256)"
+"59556_executeWithdrawal" -> "gasleft()"
+"156387__globalNonReentrantBefore" -> "require(bool,string)"
+"54637_receive" -> "revert InvalidNativeTokenSender(address)"
+"59556__executeWithdrawal" -> "gasleft()"
+}"59556_executeWithdrawal" -> "59556__executeWithdrawal"
+"59556_executeAtomicWithdrawal" -> "59556__executeWithdrawal"
+"59556_simulateExecuteWithdrawal" -> "59556__executeWithdrawal"
+}

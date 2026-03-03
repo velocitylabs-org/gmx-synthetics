@@ -1,0 +1,28 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_65964_FeeUtils {
+label = "FeeUtils"
+"65964__claimUiFees" [label="_claimUiFees"]
+"65964_batchClaimFundingFees" [label="batchClaimFundingFees"]
+"65964_batchClaimUiFees" [label="batchClaimUiFees"]
+"65964_incrementClaimableUiFeeAmount" [label="incrementClaimableUiFeeAmount"]
+"65964_emitClaimableUiFeeAmountUpdated" [label="emitClaimableUiFeeAmountUpdated"]
+"65964_claimFees" [label="claimFees"]
+"65964_emitFeesClaimed" [label="emitFeesClaimed"]
+"65964_emitClaimableFeeAmountUpdated" [label="emitClaimableFeeAmountUpdated"]
+"65964_incrementClaimableFeeAmount" [label="incrementClaimableFeeAmount"]
+"65964_emitUiFeesClaimed" [label="emitUiFeesClaimed"]
+"65964_incrementClaimableFeeAmount" -> "65964_emitClaimableFeeAmountUpdated"
+"65964_claimFees" -> "65964_emitFeesClaimed"
+"65964_incrementClaimableUiFeeAmount" -> "65964_emitClaimableUiFeeAmountUpdated"
+"65964_batchClaimUiFees" -> "65964__claimUiFees"
+"65964__claimUiFees" -> "65964_emitUiFeesClaimed"
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"revert InvalidClaimUiFeesInput(uint256,uint256)" 
+"revert InvalidClaimFundingFeesInput(uint256,uint256)" 
+"65964_batchClaimFundingFees" -> "revert InvalidClaimFundingFeesInput(uint256,uint256)"
+"65964_batchClaimUiFees" -> "revert InvalidClaimUiFeesInput(uint256,uint256)"
+}
+}

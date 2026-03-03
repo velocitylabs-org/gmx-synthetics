@@ -1,0 +1,14 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_59790_FeatureUtils {
+label = "FeatureUtils"
+"59790_validateFeature" [label="validateFeature"]
+"59790_isFeatureDisabled" [label="isFeatureDisabled"]
+"59790_validateFeature" -> "59790_isFeatureDisabled"
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"revert DisabledFeature(bytes32)" 
+"59790_validateFeature" -> "revert DisabledFeature(bytes32)"
+}
+}

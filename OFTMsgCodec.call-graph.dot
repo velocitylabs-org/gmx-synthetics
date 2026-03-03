@@ -1,0 +1,20 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_10570_OFTMsgCodec {
+label = "OFTMsgCodec"
+"10570_sendTo" [label="sendTo"]
+"10570_bytes32ToAddress" [label="bytes32ToAddress"]
+"10570_slitherConstructorConstantVariables" [label="slitherConstructorConstantVariables"]
+"10570_composeMsg" [label="composeMsg"]
+"10570_isComposed" [label="isComposed"]
+"10570_addressToBytes32" [label="addressToBytes32"]
+"10570_amountSD" [label="amountSD"]
+"10570_encode" [label="encode"]
+"10570_encode" -> "10570_addressToBytes32"
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"abi.encodePacked()" 
+"10570_encode" -> "abi.encodePacked()"
+}
+}

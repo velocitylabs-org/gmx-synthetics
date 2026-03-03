@@ -1,0 +1,43 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_49814_ExecuteDepositUtils {
+label = "ExecuteDepositUtils"
+"49814_swap" [label="swap"]
+"49814__executeDeposit" [label="_executeDeposit"]
+"49814_executeDeposit" [label="executeDeposit"]
+"49814_slitherConstructorConstantVariables" [label="slitherConstructorConstantVariables"]
+"49814__validateFirstDeposit" [label="_validateFirstDeposit"]
+"49814_executeDeposit" -> "49814__executeDeposit"
+"49814_executeDeposit" -> "49814__validateFirstDeposit"
+"49814_executeDeposit" -> "49814_swap"
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"abi.encode()" 
+"revert EmptyDepositAmountsAfterSwap()" 
+"revert InvalidPoolValueForDeposit(int256)" 
+"revert OracleTimestampsAreLargerThanRequestExpirationTime(uint256,uint256,uint256)" 
+"revert InvalidSwapOutputToken(address,address)" 
+"gasleft()" 
+"revert OracleTimestampsAreSmallerThanRequired(uint256,uint256)" 
+"revert InvalidReceiverForFirstDeposit(address,address)" 
+"revert InvalidMinMarketTokensForFirstDeposit(uint256,uint256)" 
+"revert RemovalShouldNotBeSkipped(bytes32,bytes32)" 
+"revert EmptyDeposit()" 
+"revert MinMarketTokens(uint256,uint256)" 
+"keccak256(bytes)" 
+"49814__validateFirstDeposit" -> "revert InvalidMinMarketTokensForFirstDeposit(uint256,uint256)"
+"49814_executeDeposit" -> "revert MinMarketTokens(uint256,uint256)"
+"49814__executeDeposit" -> "revert InvalidPoolValueForDeposit(int256)"
+"49814_executeDeposit" -> "keccak256(bytes)"
+"49814_executeDeposit" -> "revert RemovalShouldNotBeSkipped(bytes32,bytes32)"
+"49814_executeDeposit" -> "gasleft()"
+"49814_executeDeposit" -> "revert EmptyDepositAmountsAfterSwap()"
+"49814_executeDeposit" -> "revert OracleTimestampsAreLargerThanRequestExpirationTime(uint256,uint256,uint256)"
+"49814_executeDeposit" -> "abi.encode()"
+"49814_swap" -> "revert InvalidSwapOutputToken(address,address)"
+"49814__validateFirstDeposit" -> "revert InvalidReceiverForFirstDeposit(address,address)"
+"49814_executeDeposit" -> "revert OracleTimestampsAreSmallerThanRequired(uint256,uint256)"
+"49814_executeDeposit" -> "revert EmptyDeposit()"
+}
+}

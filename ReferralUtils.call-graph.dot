@@ -1,0 +1,17 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_140704_ReferralUtils {
+label = "ReferralUtils"
+"140704_incrementAffiliateReward" [label="incrementAffiliateReward"]
+"140704_batchClaimAffiliateRewards" [label="batchClaimAffiliateRewards"]
+"140704__claimAffiliateReward" [label="_claimAffiliateReward"]
+"140704_getReferralInfo" [label="getReferralInfo"]
+"140704_setTraderReferralCode" [label="setTraderReferralCode"]
+"140704_batchClaimAffiliateRewards" -> "140704__claimAffiliateReward"
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"revert InvalidClaimAffiliateRewardsInput(uint256,uint256)" 
+"140704_batchClaimAffiliateRewards" -> "revert InvalidClaimAffiliateRewardsInput(uint256,uint256)"
+}
+}

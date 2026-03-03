@@ -1,0 +1,13 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_153391_CounterTest {
+label = "CounterTest"
+"153391_slitherConstructorVariables" [label="slitherConstructorVariables"]
+"153391_increment" [label="increment"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"return(uint256,uint256)" 
+"153391_increment" -> "return(uint256,uint256)"
+}
+}

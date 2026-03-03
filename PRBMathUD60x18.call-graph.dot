@@ -1,0 +1,52 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_171882_PRBMathUD60x18 {
+label = "PRBMathUD60x18"
+"171882_log2" [label="log2"]
+"171882_log10" [label="log10"]
+"171882_pow" [label="pow"]
+"171882_slitherConstructorConstantVariables" [label="slitherConstructorConstantVariables"]
+"171882_div" [label="div"]
+"171882_floor" [label="floor"]
+"171882_toUint" [label="toUint"]
+"171882_mul" [label="mul"]
+"171882_exp" [label="exp"]
+"171882_fromUint" [label="fromUint"]
+"171882_scale" [label="scale"]
+"171882_inv" [label="inv"]
+"171882_powu" [label="powu"]
+"171882_gm" [label="gm"]
+"171882_ln" [label="ln"]
+"171882_exp2" [label="exp2"]
+"171882_frac" [label="frac"]
+"171882_avg" [label="avg"]
+"171882_e" [label="e"]
+"171882_sqrt" [label="sqrt"]
+"171882_ceil" [label="ceil"]
+"171882_pi" [label="pi"]
+"171882_log10" -> "171882_log2"
+"171882_pow" -> "171882_log2"
+"171882_pow" -> "171882_exp2"
+"171882_pow" -> "171882_mul"
+"171882_ln" -> "171882_log2"
+"171882_exp" -> "171882_exp2"
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"revert PRBMathUD60x18__CeilOverflow(uint256)" 
+"revert PRBMathUD60x18__FromUintOverflow(uint256)" 
+"revert PRBMathUD60x18__LogInputTooSmall(uint256)" 
+"revert PRBMathUD60x18__Exp2InputTooBig(uint256)" 
+"revert PRBMathUD60x18__SqrtOverflow(uint256)" 
+"revert PRBMathUD60x18__GmOverflow(uint256,uint256)" 
+"revert PRBMathUD60x18__ExpInputTooBig(uint256)" 
+"171882_exp2" -> "revert PRBMathUD60x18__Exp2InputTooBig(uint256)"
+"171882_log10" -> "revert PRBMathUD60x18__LogInputTooSmall(uint256)"
+"171882_ceil" -> "revert PRBMathUD60x18__CeilOverflow(uint256)"
+"171882_gm" -> "revert PRBMathUD60x18__GmOverflow(uint256,uint256)"
+"171882_sqrt" -> "revert PRBMathUD60x18__SqrtOverflow(uint256)"
+"171882_log2" -> "revert PRBMathUD60x18__LogInputTooSmall(uint256)"
+"171882_exp" -> "revert PRBMathUD60x18__ExpInputTooBig(uint256)"
+"171882_fromUint" -> "revert PRBMathUD60x18__FromUintOverflow(uint256)"
+}
+}

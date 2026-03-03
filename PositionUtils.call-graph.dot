@@ -1,0 +1,35 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_131954_PositionUtils {
+label = "PositionUtils"
+"131954_isPositionLiquidatable" [label="isPositionLiquidatable"]
+"131954_handleReferral" [label="handleReferral"]
+"131954_willPositionCollateralBeSufficient" [label="willPositionCollateralBeSufficient"]
+"131954_validateNonEmptyPosition" [label="validateNonEmptyPosition"]
+"131954_updateTotalBorrowing" [label="updateTotalBorrowing"]
+"131954_updateFundingAndBorrowingState" [label="updateFundingAndBorrowingState"]
+"131954_validatePosition" [label="validatePosition"]
+"131954_updateOpenInterest" [label="updateOpenInterest"]
+"131954_getExecutionPriceForIncrease" [label="getExecutionPriceForIncrease"]
+"131954_getExecutionPriceForDecrease" [label="getExecutionPriceForDecrease"]
+"131954_incrementClaimableFundingAmount" [label="incrementClaimableFundingAmount"]
+"131954_getPositionPnlUsd" [label="getPositionPnlUsd"]
+"131954_validateBasicPositionInfo" [label="validateBasicPositionInfo"]
+"131954_isPositionLiquidatable" -> "131954_getPositionPnlUsd"
+"131954_validatePosition" -> "131954_isPositionLiquidatable"
+"131954_validatePosition" -> "131954_validateBasicPositionInfo"
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"revert InvalidPositionSizeValues(uint256,uint256)" 
+"revert EmptyPosition()" 
+"revert MinPositionSize(uint256,uint256)" 
+"revert LiquidatablePosition(string,int256,int256,int256)" 
+"revert PriceImpactLargerThanOrderSize(int256,uint256)" 
+"131954_validatePosition" -> "revert LiquidatablePosition(string,int256,int256,int256)"
+"131954_validateBasicPositionInfo" -> "revert InvalidPositionSizeValues(uint256,uint256)"
+"131954_getExecutionPriceForIncrease" -> "revert PriceImpactLargerThanOrderSize(int256,uint256)"
+"131954_validatePosition" -> "revert MinPositionSize(uint256,uint256)"
+"131954_validateNonEmptyPosition" -> "revert EmptyPosition()"
+}
+}

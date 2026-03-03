@@ -1,0 +1,58 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_141184_RoleModule {
+label = "RoleModule"
+"141184_constructor" [label="constructor"]
+"141184__validateRole" [label="_validateRole"]
+}subgraph cluster_112920_GmOracleProvider {
+label = "GmOracleProvider"
+"112920__getSigners" [label="_getSigners"]
+"112920_slitherConstructorConstantVariables" [label="slitherConstructorConstantVariables"]
+"112920__getSalt" [label="_getSalt"]
+"112920_getOraclePrice" [label="getOraclePrice"]
+"112920_shouldAdjustTimestamp" [label="shouldAdjustTimestamp"]
+"112920_isChainlinkOnChainProvider" [label="isChainlinkOnChainProvider"]
+"112920_constructor" [label="constructor"]
+"112920_getOraclePrice" -> "112920__getSalt"
+"112920_constructor" -> "112920_constructor"
+"112920_getOraclePrice" -> "112920__getSigners"
+}subgraph cluster_113162_IOracleProvider {
+label = "IOracleProvider"
+"113162_isChainlinkOnChainProvider" [label="isChainlinkOnChainProvider"]
+"113162_shouldAdjustTimestamp" [label="shouldAdjustTimestamp"]
+"113162_getOraclePrice" [label="getOraclePrice"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"revert GmMaxPricesNotSorted(address,uint256,uint256)" 
+"revert InvalidGmSignerMinMaxPrice(uint256,uint256)" 
+"revert GmEmptySigner(uint256)" 
+"revert GmMinPricesNotSorted(address,uint256,uint256)" 
+"abi.decode()" 
+"abi.encode()" 
+"revert GmMaxSignerIndex(uint256,uint256)" 
+"revert GmMinOracleSigners(uint256,uint256)" 
+"revert InvalidGmOraclePrice(address)" 
+"revert Unauthorized(address,string)" 
+"revert InvalidGmMedianMinMaxPrice(uint256,uint256)" 
+"revert GmInvalidBlockNumber(uint256,uint256)" 
+"revert GmMaxOracleSigners(uint256,uint256)" 
+"keccak256(bytes)" 
+"revert GmInvalidMinMaxBlockNumber(uint256,uint256)" 
+"112920_getOraclePrice" -> "revert GmInvalidBlockNumber(uint256,uint256)"
+"112920_getOraclePrice" -> "revert InvalidGmMedianMinMaxPrice(uint256,uint256)"
+"141184__validateRole" -> "revert Unauthorized(address,string)"
+"112920__getSigners" -> "revert GmMaxOracleSigners(uint256,uint256)"
+"112920__getSalt" -> "abi.encode()"
+"112920__getSalt" -> "keccak256(bytes)"
+"112920_getOraclePrice" -> "revert GmInvalidMinMaxBlockNumber(uint256,uint256)"
+"112920_getOraclePrice" -> "revert InvalidGmSignerMinMaxPrice(uint256,uint256)"
+"112920__getSigners" -> "revert GmEmptySigner(uint256)"
+"112920__getSigners" -> "revert GmMaxSignerIndex(uint256,uint256)"
+"112920_getOraclePrice" -> "revert GmMaxPricesNotSorted(address,uint256,uint256)"
+"112920_getOraclePrice" -> "revert GmMinPricesNotSorted(address,uint256,uint256)"
+"112920_getOraclePrice" -> "abi.decode()"
+"112920__getSigners" -> "revert GmMinOracleSigners(uint256,uint256)"
+"112920_getOraclePrice" -> "revert InvalidGmOraclePrice(address)"
+}
+}

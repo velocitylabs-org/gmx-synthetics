@@ -1,0 +1,38 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_8311_ReadCodecV1 {
+label = "ReadCodecV1"
+"8311_decodeEVMCallRequestV1" [label="decodeEVMCallRequestV1"]
+"8311_slitherConstructorConstantVariables" [label="slitherConstructorConstantVariables"]
+"8311_decode" [label="decode"]
+"8311_decodeEVMCallComputeV1" [label="decodeEVMCallComputeV1"]
+"8311_decodeCmdAppLabel" [label="decodeCmdAppLabel"]
+"8311_decodeRequestsV1" [label="decodeRequestsV1"]
+"8311_decodeRequestV1AppRequestLabel" [label="decodeRequestV1AppRequestLabel"]
+"8311_appendEVMCallRequestV1" [label="appendEVMCallRequestV1"]
+"8311_encode" [label="encode"]
+"8311_appendEVMCallComputeV1" [label="appendEVMCallComputeV1"]
+"8311_decode" -> "8311_decodeRequestsV1"
+"8311_decodeRequestsV1" -> "8311_decodeEVMCallRequestV1"
+"8311_decode" -> "8311_decodeEVMCallComputeV1"
+"8311_encode" -> "8311_encode"
+"8311_encode" -> "8311_appendEVMCallComputeV1"
+"8311_encode" -> "8311_appendEVMCallRequestV1"
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"abi.encodePacked()" 
+"revert InvalidType()" 
+"revert InvalidVersion()" 
+"8311_appendEVMCallRequestV1" -> "abi.encodePacked()"
+"8311_decodeEVMCallComputeV1" -> "revert InvalidVersion()"
+"8311_decode" -> "revert InvalidVersion()"
+"8311_decodeRequestV1AppRequestLabel" -> "revert InvalidVersion()"
+"8311_decodeCmdAppLabel" -> "revert InvalidVersion()"
+"8311_encode" -> "abi.encodePacked()"
+"8311_decodeRequestsV1" -> "revert InvalidType()"
+"8311_appendEVMCallComputeV1" -> "abi.encodePacked()"
+"8311_decodeEVMCallComputeV1" -> "revert InvalidType()"
+"8311_decodeRequestsV1" -> "revert InvalidVersion()"
+}
+}

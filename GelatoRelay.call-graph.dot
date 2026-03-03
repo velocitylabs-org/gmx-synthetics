@@ -1,0 +1,14 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_153775_GelatoRelay {
+label = "GelatoRelay"
+"153775_sponsoredCall" [label="sponsoredCall"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"mload(uint256)" 
+"revert(uint256,uint256)" 
+"153775_sponsoredCall" -> "mload(uint256)"
+"153775_sponsoredCall" -> "revert(uint256,uint256)"
+}
+}

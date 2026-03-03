@@ -1,0 +1,17 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_114838_AutoCancelUtils {
+label = "AutoCancelUtils"
+"114838_getAutoCancelOrderKeys" [label="getAutoCancelOrderKeys"]
+"114838_getMaxAutoCancelOrders" [label="getMaxAutoCancelOrders"]
+"114838_addAutoCancelOrderKey" [label="addAutoCancelOrderKey"]
+"114838_removeAutoCancelOrderKey" [label="removeAutoCancelOrderKey"]
+"114838_addAutoCancelOrderKey" -> "114838_getMaxAutoCancelOrders"
+"114838_getAutoCancelOrderKeys" -> "114838_getMaxAutoCancelOrders"
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"revert MaxAutoCancelOrdersExceeded(uint256,uint256)" 
+"114838_addAutoCancelOrderKey" -> "revert MaxAutoCancelOrdersExceeded(uint256,uint256)"
+}
+}

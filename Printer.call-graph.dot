@@ -1,0 +1,10 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_156952_Printer {
+label = "Printer"
+"156952_log" [label="log"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+}
+}
