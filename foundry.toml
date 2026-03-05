@@ -2,5 +2,14 @@
 src = 'contracts'
 out = 'out'
 libs = ['node_modules', 'lib']
-test = 'test'
-cache_path  = 'cache_forge'
+test = 'test-forge'
+cache_path = 'cache_forge'
+# Run Forge tests: `forge test --no-match-path 'contracts/test/**'` or `npm run test:forge`
+# (contracts/test/ are legacy library wrappers, not part of the Foundry migration; they fail under Forge)
+
+# Match Hardhat; higher runs can reduce stack depth
+solc = "0.8.29"
+optimizer = true
+optimizer_runs = 200
+via_ir = false
+evm_version = "paris"

@@ -9,6 +9,7 @@
   "scripts": {
     "app": "vite",
     "test": "NODE_OPTIONS=\"--max-old-space-size=8192\" npx hardhat test",
+    "test:forge": "forge test --no-match-path 'contracts/test/**'",
     "test:failing": "NODE_OPTIONS=\"--max-old-space-size=8192\" npx hardhat test test/multichain/MultichainSubaccountRouter.ts test/router/SubaccountRouter.ts test/router/relay/GelatoRelayRouter.ts test/router/relay/SubaccountGelatoRelayRouter.ts --grep \"execution fee should be capped|sponsoredCall: relay fee configuration|MarketIncrease order\"",
     "prepare": "husky install",
     "lint": "pnpm lint:eslint && pnpm lint:prettier",
@@ -18,7 +19,9 @@
     "fork:avalanche": "npx hardhat node --fork https://api.avax.network/ext/bc/C/rpc --no-deploy",
     "fork:arbitrum": "npx hardhat node --fork https://arb1.arbitrum.io/rpc --no-deploy",
     "verify:tenderly": "npx hardhat --config hardhat.config.tenderly.ts run scripts/verifyTenderly.ts --network",
-    "slither:callgraph": "npx hardhat compile && ./scripts/slither-callgraph.sh --render"
+    "slither:callgraph": "npx hardhat compile && ./scripts/slither-callgraph.sh --render",
+    "docs:reboot-diagrams": "./scripts/reboot-call-routes-diagrams.sh",
+    "docs:call-routes-html": "node scripts/call-routes-to-html.js"
   },
   "author": "",
   "license": "ISC",
