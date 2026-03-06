@@ -41,17 +41,20 @@ async function createOrder({
 
   const signer = exchangeRouter.signer;
 
-  const collateralToken = await contractAt("MintableToken", initialCollateralToken, signer);
-  const approvedAmount = await collateralToken.allowance(await signer.getAddress(), router.address);
-  if (approvedAmount.lt(initialCollateralDeltaAmount)) {
-    await collateralToken.approve(router.address, initialCollateralDeltaAmount);
+  const isIncreaseOrder = orderType === OrderType.MarketIncrease;
+  if (isIncreaseOrder) {
+    const collateralToken = await contractAt("MintableToken", initialCollateralToken, signer);
+    const approvedAmount = await collateralToken.allowance(await signer.getAddress(), router.address);
+    if (approvedAmount.lt(initialCollateralDeltaAmount)) {
+      await collateralToken.approve(router.address, initialCollateralDeltaAmount);
+    }
   }
 
   const executionFee = expandDecimals(10, 15); // 0.010 ETH (min is ~0.0051 ETH)
   const orderParams: Parameters<typeof exchangeRouter.createOrder>[0] = {
     addresses: {
       receiver,
-      cancellationReceiver: AddressZero,
+      cancellationReceiver: receiver,
       callbackContract: AddressZero,
       uiFeeReceiver: AddressZero,
       market,
@@ -60,18 +63,18 @@ async function createOrder({
     },
     numbers: {
       sizeDeltaUsd,
-      initialCollateralDeltaAmount,
+      initialCollateralDeltaAmount: isIncreaseOrder ? initialCollateralDeltaAmount : 0,
       triggerPrice,
       acceptablePrice,
       executionFee,
       callbackGasLimit: 0,
-      minOutputAmount: initialCollateralDeltaAmount,
+      minOutputAmount: 0,
       validFromTime: 0,
     },
     orderType,
     decreasePositionSwapType,
     isLong,
-    shouldUnwrapNativeToken: true,
+    shouldUnwrapNativeToken: false,
     autoCancel: false,
     referralCode,
     dataList: [],
@@ -79,10 +82,12 @@ async function createOrder({
 
   const multicallArgs = [
     exchangeRouter.interface.encodeFunctionData("sendWnt", [orderVault.address, executionFee]),
-    exchangeRouter.interface.encodeFunctionData("sendTokens", [
-      initialCollateralToken,
-      orderVault.address,
-      initialCollateralDeltaAmount,
+    ...(isIncreaseOrder && [
+      exchangeRouter.interface.encodeFunctionData("sendTokens", [
+        initialCollateralToken,
+        orderVault.address,
+        initialCollateralDeltaAmount,
+      ]),
     ]),
     exchangeRouter.interface.encodeFunctionData("createOrder", [orderParams]),
   ];
@@ -130,12 +135,22 @@ async function main() {
     throw new Error(`${USDC} is not a valid token`);
   }
 
-  // GBP market: Chainlink price ~$1.3509 per GBP.
-  // Short increase: execution only if executionPrice >= acceptablePrice.
-  // 1% slippage: 1.3509 * 0.99 ≈ 1.3374 USD per GBP.
-  // Price decimals on-chain = 30 - token.decimals (config/tokens.ts: GBP has decimals 18) => 12 decimals.
-  // expandDecimals(1337391, 6) => 1.337391e12, which matches that format.
-  const acceptablePrice = expandDecimals(1337391, 6); // 1.3374 USD per GBP
+  // --- Configuration ---
+  const isLong = false;
+  const orderType = OrderType.MarketIncrease; // MarketIncrease (open) or MarketDecrease (close)
+  const collateralAmountUsdc = 2500000; // 2.5 USDC (6 decimals)
+  const sizeUsd = decimalToFloat(10); // $10 position
+
+  // Acceptable price for market orders (wide slippage to avoid stale-price failures):
+  // GBP is an 18-decimal token → on-chain price has 12 decimals (30 - 18)
+  //
+  // Increase: Long wants executionPrice <= acceptable (buy low), Short wants >= acceptable (sell high)
+  // Decrease: Long wants executionPrice >= acceptable (sell high), Short wants <= acceptable (buy low)
+  const isIncreaseOrder = orderType === OrderType.MarketIncrease;
+  const wantsHighPrice = (isLong && isIncreaseOrder) || (!isLong && !isIncreaseOrder);
+  const acceptablePrice = wantsHighPrice
+    ? expandDecimals(200, 12) // $200 ceiling (way above any GBP price)
+    : 0; // $0 floor
 
   const tx = await createOrder({
     router,
@@ -144,11 +159,11 @@ async function main() {
     referralCode,
     market,
     initialCollateralToken: USDC,
-    initialCollateralDeltaAmount: 2500000, // 2.5 USDC
-    sizeDeltaUsd: decimalToFloat(10), // 10 USD
-    triggerPrice: 0, // not needed for market order
+    initialCollateralDeltaAmount: collateralAmountUsdc,
+    sizeDeltaUsd: sizeUsd,
+    triggerPrice: 0,
     acceptablePrice,
-    isLong: false,
+    isLong,
     orderType: OrderType.MarketIncrease,
     decreasePositionSwapType: DecreasePositionSwapType.NoSwap,
   });

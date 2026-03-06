@@ -71,7 +71,10 @@ async function main() {
 
   // Fetch signed prices from oracle API
   console.log("\n=== Fetching Oracle Prices from Chainlink Data Streams API ===");
-  const tokens = [indexToken, longToken, shortToken];
+  const tokens =
+    longToken.toLowerCase() === shortToken.toLowerCase()
+      ? [indexToken, longToken]
+      : [indexToken, longToken, shortToken];
   const signedPrices = await fetchSignedPricesBaseSepolia(tokens);
 
   const providers: string[] = [];
@@ -104,7 +107,7 @@ async function main() {
   });
 
   const tx = await orderHandler.connect(keeperWallet).executeOrder(orderKey, oracleParams, {
-    gasLimit: 2500000,
+    gasLimit: 25_000_000,
   });
 
   console.log("Transaction sent:", tx.hash);
