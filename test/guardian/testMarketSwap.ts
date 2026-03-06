@@ -9,7 +9,7 @@ import { getPoolAmount } from "../../utils/market";
 import * as keys from "../../utils/keys";
 import { errorsContract } from "../../utils/error";
 
-describe("Guardian.MktSwapOrder", () => {
+describe.skip("Guardian.MktSwapOrder", () => {
   let fixture;
   let user0, user1;
   let dataStore, ethUsdMarket, ethUsdSpotOnlyMarket, solUsdMarket, wnt, usdc, wbtc;

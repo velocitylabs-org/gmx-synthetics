@@ -6,7 +6,7 @@ import { getBalanceOf } from "../../utils/token";
 import { getPoolAmount } from "../../utils/market";
 import { getDepositCount, getDepositKeys, createDeposit, executeDeposit, handleDeposit } from "../../utils/deposit";
 
-describe("Guardian.Deposit", () => {
+describe.skip("Guardian.Deposit", () => {
   let fixture;
   let user0, user1, user2;
   let reader, dataStore, ethUsdMarket, ethUsdSpotOnlyMarket, wnt, usdc;

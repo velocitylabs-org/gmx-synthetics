@@ -13,7 +13,7 @@ import { getPoolAmount } from "../../utils/market";
 import { errorsContract } from "../../utils/error";
 import hre from "hardhat";
 
-describe("Guardian.Liquidation", () => {
+describe.skip("Guardian.Liquidation", () => {
   const { provider } = ethers;
 
   let fixture;

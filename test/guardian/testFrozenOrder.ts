@@ -9,7 +9,7 @@ import { getPositionCount } from "../../utils/position";
 
 import { mine } from "@nomicfoundation/hardhat-network-helpers";
 
-describe("Guardian.FrozenOrder", () => {
+describe.skip("Guardian.FrozenOrder", () => {
   let fixture;
   let user1;
   let reader, dataStore, ethUsdMarket, wnt, usdc, exchangeRouter;

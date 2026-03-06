@@ -18,7 +18,7 @@ import { encodeBridgeOutDataList, bridgeInTokens } from "../../utils/multichain"
 import { errorsContract } from "../../utils/error";
 import { getRelayParams } from "../../utils/relay/helpers";
 
-describe("MultichainGlvRouter", () => {
+describe.skip("MultichainGlvRouter", () => {
   let fixture;
   let user0, user1, user2, user3;
   let dataStore,

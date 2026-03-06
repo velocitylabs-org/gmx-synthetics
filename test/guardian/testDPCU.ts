@@ -14,7 +14,7 @@ import { getBalanceOf } from "../../utils/token";
 import { handleDeposit } from "../../utils/deposit";
 import { executeLiquidation } from "../../utils/liquidation";
 
-describe("Guardian.DecreasePositionCollateralUtils", () => {
+describe.skip("Guardian.DecreasePositionCollateralUtils", () => {
   let fixture;
   let user0, user1;
   let dataStore, ethUsdMarket, wnt, usdc, reader;

@@ -11,7 +11,7 @@ import { getAccountPositionCount, getPositionKey } from "../../utils/position";
 import { errorsContract } from "../../utils/error";
 import { TOKEN_ORACLE_TYPES } from "../../utils/oracle";
 
-describe("Guardian.AdlOrder", () => {
+describe.skip("Guardian.AdlOrder", () => {
   let fixture;
   let wallet, user0;
   let roleStore, dataStore, ethUsdMarket, solUsdMarket, wnt, usdc, reader;

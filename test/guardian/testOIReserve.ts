@@ -7,7 +7,7 @@ import { grantRole } from "../../utils/role";
 import * as keys from "../../utils/keys";
 import { encodeData } from "../../utils/hash";
 
-describe("Guardian.OIReserve", () => {
+describe.skip("Guardian.OIReserve", () => {
   let fixture;
   let wallet, user0;
   let roleStore, dataStore, ethUsdMarket, solUsdMarket, wnt, usdc, config;

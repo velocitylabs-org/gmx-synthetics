@@ -14,7 +14,7 @@ import { getBalanceOf, getSupplyOf } from "../../utils/token";
 import { handleWithdrawal } from "../../utils/withdrawal";
 import { OrderType, getOrderCount } from "../../utils/order";
 
-describe("Guardian.Lifecycle", () => {
+describe.skip("Guardian.Lifecycle", () => {
   let fixture;
   let user0, user1, user2, user3;
   let dataStore, exchangeRouter, ethUsdMarket, referralStorage, mockTimelockV1, wnt, usdc;

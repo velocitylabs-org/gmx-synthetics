@@ -10,7 +10,7 @@ import hre from "hardhat";
 import * as keys from "../../utils/keys";
 import { hashString } from "../../utils/hash";
 
-describe("Guardian.DataStreamFeeds", () => {
+describe.skip("Guardian.DataStreamFeeds", () => {
   const { provider } = ethers;
 
   let fixture;

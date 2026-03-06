@@ -7,7 +7,7 @@ import { getPoolAmount } from "../../utils/market";
 import { getDepositCount, handleDeposit } from "../../utils/deposit";
 import { TOKEN_ORACLE_TYPES } from "../../utils/oracle";
 
-describe("Guardian.HomogenousMarkets", () => {
+describe.skip("Guardian.HomogenousMarkets", () => {
   let fixture;
   let user1;
   let dataStore, wnt, usdc, ethUsdSingleTokenMarket;

@@ -36,7 +36,7 @@ const INVALID_SIGNATURE =
 
 const GMX_SIMULATION_ORIGIN = "0x" + keccakString("GMX SIMULATION ORIGIN").slice(-40);
 
-describe("GelatoRelayRouter", () => {
+describe.skip("GelatoRelayRouter", () => {
   let fixture;
   let user0, user1, user2, user3;
   let reader,

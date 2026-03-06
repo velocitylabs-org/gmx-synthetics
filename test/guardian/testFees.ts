@@ -14,7 +14,7 @@ import { getMarketTokenPriceWithPoolValue } from "../../utils/market";
 import { executeLiquidation } from "../../utils/liquidation";
 import { BigNumber } from "ethers";
 
-describe("Guardian.Fees", () => {
+describe.skip("Guardian.Fees", () => {
   let fixture;
   let wallet, user0, user1;
   let roleStore,

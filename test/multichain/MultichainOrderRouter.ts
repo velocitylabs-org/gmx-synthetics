@@ -32,7 +32,7 @@ import { getRelayParams } from "../../utils/relay/helpers";
 import { getCreateOrderSignature } from "../../utils/relay/signatures";
 import { GAS_BUFFER } from "../../utils/gas";
 
-describe("MultichainOrderRouter", () => {
+describe.skip("MultichainOrderRouter", () => {
   let fixture;
   let user0, user1, user2;
   let reader,

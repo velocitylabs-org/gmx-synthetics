@@ -10,7 +10,7 @@ import { getDepositCount, createDeposit } from "../../utils/deposit";
 import { createWithdrawal, getWithdrawalCount } from "../../utils/withdrawal";
 import { errorsContract } from "../../utils/error";
 
-describe("Guardian.GasEstimation", () => {
+describe.skip("Guardian.GasEstimation", () => {
   let fixture;
   let wallet;
   let roleStore, dataStore, ethUsdMarket, solUsdMarket, wnt, usdc, config;

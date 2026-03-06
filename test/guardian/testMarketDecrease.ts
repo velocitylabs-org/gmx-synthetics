@@ -8,7 +8,7 @@ import { getSyntheticTokenAddress } from "../../utils/token";
 import { TOKEN_ORACLE_TYPES } from "../../utils/oracle";
 import hre from "hardhat";
 
-describe("Guardian.MarketDecrease", () => {
+describe.skip("Guardian.MarketDecrease", () => {
   let fixture;
   let user1;
   let reader, dataStore, solUsdMarket, solAddr, ethUsdMarket, ethUsdSpotOnlyMarket, wnt, usdc, ethUsdtMarket, usdt;

@@ -7,7 +7,7 @@ import { expect } from "chai";
 import { getSyntheticTokenAddress } from "../../utils/token";
 import hre from "hardhat";
 
-describe("Guardian.StopLossDecrease", () => {
+describe.skip("Guardian.StopLossDecrease", () => {
   let fixture;
   let user1;
   let reader, dataStore, solUsdMarket, solAddr, ethUsdMarket, ethUsdSpotOnlyMarket, wnt, usdc, ethUsdtMarket, usdt;

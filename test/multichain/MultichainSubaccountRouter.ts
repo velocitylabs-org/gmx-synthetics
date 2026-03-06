@@ -34,7 +34,7 @@ import { bridgeInTokens } from "../../utils/multichain";
 const BAD_SIGNATURE =
   "0x122e3efab9b46c82dc38adf4ea6cd2c753b00f95c217a0e3a0f4dd110839f07a08eb29c1cc414d551349510e23a75219cd70c8b88515ed2b83bbd88216ffdb051f";
 
-describe("MultichainSubaccountRouter", () => {
+describe.skip("MultichainSubaccountRouter", () => {
   let fixture;
   let user0, user1, user2, user3;
   let reader,

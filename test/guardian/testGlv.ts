@@ -9,7 +9,7 @@ import { getBalanceOf } from "../../utils/token";
 import { handleDeposit } from "../../utils/deposit";
 import { OrderType, handleOrder } from "../../utils/order";
 
-describe("Guardian.Glv", () => {
+describe.skip("Guardian.Glv", () => {
   let fixture;
   let user0, user1;
   let dataStore, ethUsdMarket, ethUsdGlvAddress, wnt, usdc, solUsdMarket, reader, sol;

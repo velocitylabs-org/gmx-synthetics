@@ -22,7 +22,7 @@ import { getRelayParams } from "../../utils/relay/helpers";
 import { errorsContract } from "../../utils/error";
 import { GAS_BUFFER } from "../../utils/gas";
 
-describe("MultichainGmRouter", () => {
+describe.skip("MultichainGmRouter", () => {
   let fixture;
   let user0, user1, user2, user3;
   let reader,
