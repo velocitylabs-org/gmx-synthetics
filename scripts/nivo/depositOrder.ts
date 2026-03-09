@@ -13,7 +13,7 @@ const { ethers } = hre;
 /**
  * Create a deposit into a Nivo FX market (GBP/USDC). Uses the WALLET_TESTER_PRIVATE_KEY.
  *
- * npx hardhat run scripts/nivo/createDepositOrder.ts --network baseSepolia
+ * npx hardhat run scripts/nivo/depositOrder.ts --network baseSepolia
  * Log deposits: npx hardhat run scripts/printDeposits.ts --network baseSepolia
  */
 async function getValues(
