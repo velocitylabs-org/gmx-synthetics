@@ -138,11 +138,11 @@ const getEnvAccounts = (chainName?: string) => {
     ACCOUNT_KEY_FILE,
     ARBITRUM_SEPOLIA_ACCOUNT_KEY,
     ARBITRUM_ACCOUNT_KEY,
-    BASE_SEPOLIA_DEPLOYER_PRIVATE_KEY,
+    BASE_SEPOLIA_ACCOUNT_KEY,
   } = process.env;
 
-  if (chainName === "baseSepolia" && BASE_SEPOLIA_DEPLOYER_PRIVATE_KEY) {
-    return [BASE_SEPOLIA_DEPLOYER_PRIVATE_KEY];
+  if (chainName === "baseSepolia" && BASE_SEPOLIA_ACCOUNT_KEY) {
+    return [BASE_SEPOLIA_ACCOUNT_KEY];
   }
 
   if (chainName === "arbitrumSepolia" && ARBITRUM_SEPOLIA_ACCOUNT_KEY) {
