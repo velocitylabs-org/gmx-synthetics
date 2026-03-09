@@ -8,7 +8,6 @@ const { ethers } = hre;
 /**
  * Execute a close (MarketDecrease) order. Same flow as executeOpenPosition:
  * keeper runs this with ORDER_KEY from the close order created by closePositionOrder.ts.
- *
  * Example: ORDER_KEY=0x1234... npx hardhat run scripts/nivo/executeClosePosition.ts --network baseSepolia
  */
 async function main() {
@@ -69,7 +68,10 @@ async function main() {
   console.log("Short Token:", shortToken);
 
   console.log("\n=== Fetching Oracle Prices from Chainlink Data Streams API ===");
-  const tokens = [indexToken, longToken, shortToken];
+  const tokens =
+    longToken.toLowerCase() === shortToken.toLowerCase()
+      ? [indexToken, longToken]
+      : [indexToken, longToken, shortToken];
   const signedPrices = await fetchSignedPricesBaseSepolia(tokens);
 
   const providers: string[] = [];
@@ -95,9 +97,14 @@ async function main() {
   };
 
   console.log("\n=== Executing close order ===");
+  console.log("Oracle Params:", {
+    tokens: oracleParams.tokens,
+    providers: oracleParams.providers,
+    dataLengths: oracleParams.data.map((d) => d.length),
+  });
 
   const tx = await orderHandler.connect(keeperWallet).executeOrder(orderKey, oracleParams, {
-    gasLimit: 2500000,
+    gasLimit: 25_000_000,
   });
 
   console.log("Transaction sent:", tx.hash);

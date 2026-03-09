@@ -1,9 +1,10 @@
 import hre from "hardhat";
 
-import { expandDecimals } from "../../utils/math";
 import { OrderType, DecreasePositionSwapType } from "../../utils/order";
 import { DataStore, ExchangeRouter, Reader } from "../../typechain-types";
-import { BigNumberish } from "ethers";
+import { BigNumber, BigNumberish } from "ethers";
+import { fetchSignedPricesBaseSepolia } from "./chainlinkProvider/signedPricesBaseSepolia";
+import { expandDecimals } from "../../utils/math";
 const { ethers } = hre;
 
 async function createCloseOrder({
@@ -34,16 +35,11 @@ async function createCloseOrder({
   const { AddressZero } = ethers.constants;
   const orderVault = await hre.ethers.getContract("OrderVault");
 
-  const signer = exchangeRouter.signer;
-
-  const estimatedGasLimit = 10_000_000;
-  const gasPrice = await signer.getGasPrice();
-  const executionFee = gasPrice.mul(estimatedGasLimit);
-
+  const executionFee = expandDecimals(10, 15);
   const orderParams: Parameters<typeof exchangeRouter.createOrder>[0] = {
     addresses: {
       receiver,
-      cancellationReceiver: AddressZero,
+      cancellationReceiver: receiver,
       callbackContract: AddressZero,
       uiFeeReceiver: AddressZero,
       market,
@@ -63,7 +59,7 @@ async function createCloseOrder({
     orderType: OrderType.MarketDecrease,
     decreasePositionSwapType,
     isLong,
-    shouldUnwrapNativeToken: true,
+    shouldUnwrapNativeToken: false,
     autoCancel: false,
     referralCode,
     dataList: [],
@@ -108,23 +104,13 @@ async function main() {
   if (positions.length === 0) {
     throw new Error("No open positions found for this account.");
   }
-
-  const marketFilter = process.env.MARKET ? ethers.utils.getAddress(process.env.MARKET) : null;
-  const positionIndex = process.env.POSITION_INDEX ? parseInt(process.env.POSITION_INDEX, 10) : 0;
-
-  const position = marketFilter
-    ? positions.find((p) => p.addresses.market.toLowerCase() === marketFilter.toLowerCase())
-    : positions[positionIndex];
-
+  const position = positions[0];
   if (!position) {
-    throw new Error(
-      marketFilter
-        ? `No position found for market ${marketFilter}.`
-        : `No position at index ${positionIndex}. Use POSITION_INDEX=0..${positions.length - 1} or MARKET=0x...`
-    );
+    throw new Error("No position found for market.");
   }
 
-  const market = position.addresses.market;
+  const market: string = ethers.utils.getAddress("0x090aAF3eee5f64140e2F752a9f568a49A985ffD9"); // index: GBP  long: USDC  short: USDC
+  const GBP: string = ethers.utils.getAddress("0x6FCdee981b7CC0A30a34187529F1f46836522263"); // GBP
   const initialCollateralToken = position.addresses.collateralToken;
   const sizeDeltaUsd = position.numbers.sizeInUsd;
   const initialCollateralDeltaAmount = position.numbers.collateralAmount;
@@ -140,10 +126,14 @@ async function main() {
   // GBP market: use conservative acceptable price (slippage).
   // Short decrease: we "buy" index, so executionPrice <= acceptablePrice (max we pay).
   // Long decrease: we "sell" index, so executionPrice >= acceptablePrice (min we accept).
-  // 1% slippage: ~1.3509 * 1.01 for short (pay at most), ~1.3509 * 0.99 for long (accept at least).
+
+  // Acceptable price for market orders (wide slippage to avoid stale-price failures):
+  // GBP is an 18-decimal token → on-chain price has 12 decimals (30 - 18)
+  const signedPrices = await fetchSignedPricesBaseSepolia([GBP.toLowerCase()]);
+  const price = signedPrices[GBP.toLowerCase()];
   const acceptablePrice = isLong
-    ? expandDecimals(1337391, 6) // ~0.99 * 1.35
-    : expandDecimals(1364409, 6); // ~1.01 * 1.35
+    ? BigNumber.from(price.min).mul(95).div(100) // ~0.95
+    : BigNumber.from(price.max).mul(105).div(100); // ~1.05
 
   const tx = await createCloseOrder({
     exchangeRouter: exchangeRouterConnected,
@@ -159,8 +149,9 @@ async function main() {
     decreasePositionSwapType: DecreasePositionSwapType.NoSwap,
   });
 
-  console.log("\ntx sent:", tx.hash);
-  console.log("Run executeClosePosition with ORDER_KEY=<orderKey> after the order is created.");
+  console.log("Transaction sent:", tx.hash);
+  const receipt = await tx.wait();
+  console.log("Transaction confirmed in block:", receipt.blockNumber);
 }
 
 main()
