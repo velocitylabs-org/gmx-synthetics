@@ -14,9 +14,6 @@ importers:
       '@chainlink/contracts':
         specifier: 1.1.0
         version: 1.1.0(bufferutil@4.1.0)(encoding@0.1.13)(ethers@5.8.0(bufferutil@4.1.0)(utf-8-validate@5.0.10))(utf-8-validate@5.0.10)
-      '@chainlink/data-streams-sdk':
-        specifier: ^1.2.1
-        version: 1.2.1(bufferutil@4.1.0)(dotenv@16.0.3)(utf-8-validate@5.0.10)
       '@gelatonetwork/relay-context':
         specifier: 4.1.1
         version: 4.1.1
@@ -162,6 +159,9 @@ importers:
         specifier: ^1.4.7
         version: 1.4.13(@types/react@18.3.27)(bufferutil@4.1.0)(encoding@0.1.13)(immer@10.0.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@4.9.5)(utf-8-validate@5.0.10)(viem@1.21.4(bufferutil@4.1.0)(typescript@4.9.5)(utf-8-validate@5.0.10)(zod@3.25.76))(zod@3.25.76)
     devDependencies:
+      '@chainlink/data-streams-sdk':
+        specifier: ^1.2.1
+        version: 1.2.1(bufferutil@4.1.0)(dotenv@16.0.3)(utf-8-validate@5.0.10)
       '@ethersproject/providers':
         specifier: ^5.7.1
         version: 5.8.0(bufferutil@4.1.0)(utf-8-validate@5.0.10)
