@@ -21,7 +21,8 @@
     "verify:tenderly": "npx hardhat --config hardhat.config.tenderly.ts run scripts/verifyTenderly.ts --network",
     "slither:callgraph": "npx hardhat compile && ./scripts/slither-callgraph.sh --render",
     "docs:reboot-diagrams": "./scripts/reboot-call-routes-diagrams.sh",
-    "docs:call-routes-html": "node scripts/call-routes-to-html.js"
+    "docs:call-routes-html": "node scripts/call-routes-to-html.js",
+    "extract": "ts-node scripts/extract-deployment-addresses.ts"
   },
   "author": "",
   "license": "ISC",
