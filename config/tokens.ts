@@ -172,6 +172,56 @@ const config: {
       // },
     },
   },
+  base: {
+    // NIVO CURRENCIES
+
+    // TMP - Already available Chainlink Data Streams
+    // Pound Sterling
+    GBP: getCurrencyConfig("0x00080ca1eb3009703b00bfb3dd86ebae19a55631e20b18db633559e6175b1580"),
+    // Japanese Yen
+    JPY: getCurrencyConfig("0x0008e10fbb69e00a36425b9a462b17a715fb374b4959e6177214c8c0dd4998ca"),
+
+    // Brazilian Real
+    BRL: getCurrencyConfig("0x0000000000000000000000000000000000000000000000000000000000000000"), // TODO: Update with the real Chainlink Data Stream ID
+    // Mexican Peso
+    MXN: getCurrencyConfig("0x0000000000000000000000000000000000000000000000000000000000000000"), // TODO: Update with the real Chainlink Data Stream ID
+    // Colombian Peso
+    COP: getCurrencyConfig("0x0000000000000000000000000000000000000000000000000000000000000000"), // TODO: Update with the real Chainlink Data Stream ID
+    // Indonesian Rupiah
+    IDR: getCurrencyConfig("0x0000000000000000000000000000000000000000000000000000000000000000"), // TODO: Update with the real Chainlink Data Stream ID
+    // Philippine Peso
+    PHP: getCurrencyConfig("0x0000000000000000000000000000000000000000000000000000000000000000"), // TODO: Update with the real Chainlink Data Stream ID
+    // Peruvian Sol
+    PEN: getCurrencyConfig("0x0000000000000000000000000000000000000000000000000000000000000000"), // TODO: Update with the real Chainlink Data Stream ID
+    // Nigerian Naira
+    NGN: getCurrencyConfig("0x0000000000000000000000000000000000000000000000000000000000000000"), // TODO: Update with the real Chainlink Data Stream ID
+    // Kenyan Shilling
+    KES: getCurrencyConfig("0x0000000000000000000000000000000000000000000000000000000000000000"), // TODO: Update with the real Chainlink Data Stream ID
+    // South African Rand
+    ZAR: getCurrencyConfig("0x0000000000000000000000000000000000000000000000000000000000000000"), // TODO: Update with the real Chainlink Data Stream ID
+    // Thai Baht
+    THB: getCurrencyConfig("0x0000000000000000000000000000000000000000000000000000000000000000"), // TODO: Update with the real Chainlink Data Stream ID
+
+    // NIVO COLLATERAL
+    USDC: {
+      address: "0x833589fCD6eDb6E08f4c7C32D4f71b54bda02913",
+      decimals: 6,
+      transferGasLimit: 200 * 1000,
+      dataStreamFeedId: "0x0003dc85e8b01946bf9dfd8b0db860129181eb6105a8c8981d9f28e00b6f60d9",
+      dataStreamFeedDecimals: 18,
+      oracleTimestampAdjustment: 1,
+    },
+
+    // WNT
+    WETH: {
+      address: "0x4200000000000000000000000000000000000006", // WETH9 on Base
+      decimals: 18,
+      wrappedNative: true,
+      transferGasLimit: 200 * 1000,
+      dataStreamFeedId: "0x000359843a543ee2fe414dc14c7e7920ef10f4372990b79d6361cdc0dd1ba782",
+      dataStreamFeedDecimals: 18,
+    },
+  },
   arbitrum: {
     APE: {
       address: "0x7f9FBf9bDd3F4105C478b996B648FE6e828a1e98",
