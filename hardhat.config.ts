@@ -314,6 +314,7 @@ const config: HardhatUserConfig = {
     baseSepolia: {
       url: getRpcUrl("baseSepolia"),
       chainId: 84532,
+      live: true,
       accounts: getEnvAccounts("baseSepolia"),
       verify: {
         etherscan: {
@@ -326,6 +327,7 @@ const config: HardhatUserConfig = {
     base: {
       url: getRpcUrl("base"),
       chainId: 8453,
+      live: true,
       accounts: getEnvAccounts("base"),
       verify: {
         etherscan: {
