@@ -79,8 +79,8 @@ export const getExplorerUrl = (network) => {
     snowscan: "https://api.snowscan.xyz/",
     arbitrumGoerli: "https://api-goerli.arbiscan.io/",
     arbitrumSepolia: "https://api.etherscan.io/v2/api?chainid=421614",
-    base: "https://api.etherscan.io/v2/api",
-    baseSepolia: "https://api.etherscan.io/v2/api",
+    base: "https://api.etherscan.io/v2/api?chainid=8453",
+    baseSepolia: "https://api.etherscan.io/v2/api?chainid=84532",
     sepolia: "https://api.etherscan.io/v2/api?chainid=11155111",
     avalancheFuji: "https://api-testnet.snowtrace.io/",
     arbitrumBlockscout: "https://arbitrum.blockscout.com/api",
@@ -386,7 +386,7 @@ const config: HardhatUserConfig = {
         network: "baseSepolia",
         chainId: 84532,
         urls: {
-          apiURL: "https://api.etherscan.io/v2/api",
+          apiURL: "https://api.etherscan.io/v2/api?chainid=84532",
           browserURL: "https://sepolia.basescan.org",
         },
       },
@@ -394,7 +394,7 @@ const config: HardhatUserConfig = {
         network: "base",
         chainId: 8453,
         urls: {
-          apiURL: "https://api.etherscan.io/v2/api",
+          apiURL: "https://api.etherscan.io/v2/api?chainid=8453",
           browserURL: "https://basescan.org",
         },
       },
