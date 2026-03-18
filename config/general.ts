@@ -187,6 +187,30 @@ export default async function ({ network }: HardhatRuntimeEnvironment) {
       srcChainIds: {},
       eids: {},
     },
+    base: {
+      maxAutoCancelOrders: 11,
+      maxTotalCallbackGasLimitForAutoCancelOrders: 10_000_000,
+      multichainProviders: {},
+      multichainEndpoints: {
+        "0x1a44076050125825900e736c501f859c50fE728c": true, // LZ Endpoint
+      },
+      srcChainIds: {
+        8453: true, // Base
+        42161: true, // Arbitrum
+        1: true, // Ethereum
+        56: true, // BSC
+        3637: true, // Botanix
+        80094: true, // Berachain
+      },
+      eids: {
+        8453: 30184, // Base
+        42161: 30110, // Arbitrum
+        1: 30101, // Ethereum
+        56: 30102, // BSC
+        3637: 30376, // Botanix
+        80094: 30362, // Berachain
+      },
+    },
     arbitrumGoerli: {},
     arbitrumSepolia: {
       maxAutoCancelOrders: 11,
