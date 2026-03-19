@@ -589,6 +589,7 @@ const config: {
   [network: string]: MarketConfig[];
 } = {
   baseSepolia: [...nivoMarketsConfig.baseSepolia],
+  base: [...nivoMarketsConfig.baseSepolia],
   arbitrum: [
     {
       tokens: { indexToken: "APE", longToken: "APE", shortToken: "USDC" },
