@@ -11,6 +11,9 @@ export default async function (hre: HardhatRuntimeEnvironment): Promise<LayerZer
     baseSepolia: {
       endpoint: "0x6EDCE65403992e310A62460808c4b910D972f10f",
     },
+    base: {
+      endpoint: "0x1a44076050125825900e736c501f859c50fE728c",
+    },
     arbitrum: {
       endpoint: "0x1a44076050125825900e736c501f859c50fE728c",
     },
