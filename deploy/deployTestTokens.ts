@@ -68,6 +68,16 @@ const func = async ({ getNamedAccounts, deployments, gmx, network }: HardhatRunt
   await setAddressIfDifferent(keys.WNT, wrappedAddress, "WNT");
 };
 
+func.skip = async (hre: HardhatRuntimeEnvironment) => {
+  const deployOnFork = process.env.DEPLOY_ON_FORK === "true";
+  const rpcUrl = typeof hre.network.config.url === "string" ? hre.network.config.url : "";
+  const usesLocalRpc = rpcUrl.includes("127.0.0.1") || rpcUrl.includes("localhost");
+
+  // On Base fork runs, token wiring writes to DataStore can fail before
+  // full controller/admin wiring is complete. Skip this step in fork mode.
+  return hre.network.name === "base" && (deployOnFork || usesLocalRpc);
+};
+
 func.tags = ["Tokens"];
 func.dependencies = ["DataStore"];
 export default func;

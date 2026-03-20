@@ -41,6 +41,16 @@ const func = async ({ gmx }: HardhatRuntimeEnvironment) => {
   }
 };
 
+func.skip = async (hre: HardhatRuntimeEnvironment) => {
+  const deployOnFork = process.env.DEPLOY_ON_FORK === "true";
+  const rpcUrl = typeof hre.network.config.url === "string" ? hre.network.config.url : "";
+  const usesLocalRpc = rpcUrl.includes("127.0.0.1") || rpcUrl.includes("localhost");
+
+  // On Base fork runs, these DataStore writes may be blocked until
+  // full controller/admin wiring has been completed.
+  return hre.network.name === "base" && (deployOnFork || usesLocalRpc);
+};
+
 func.tags = ["ChainlinkDataStreamFeeds"];
 func.dependencies = ["Tokens"];
 export default func;

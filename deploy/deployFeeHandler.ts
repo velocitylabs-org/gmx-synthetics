@@ -40,7 +40,11 @@ const func = createDeployFunction({
 
 func.dependencies = func.dependencies.concat(["MockVaultV1"]);
 func.skip = async (hre: HardhatRuntimeEnvironment) => {
-  if (["botanix", "avalancheFuji", "arbitrumSepolia", "baseSepolia"].includes(hre.network.name)) {
+  const deployOnFork = process.env.DEPLOY_ON_FORK === "true";
+  if (
+    ["botanix", "avalancheFuji", "arbitrumSepolia", "baseSepolia"].includes(hre.network.name) ||
+    (hre.network.name === "base" && deployOnFork)
+  ) {
     return true;
   }
 

@@ -26,4 +26,11 @@ const func = createDeployFunction({
   id: "ChainlinkPriceFeedProvider_6",
 });
 
+func.skip = async (hre) => {
+  const deployOnFork = process.env.DEPLOY_ON_FORK === "true";
+  const rpcUrl = typeof hre.network.config.url === "string" ? hre.network.config.url : "";
+  const usesLocalRpc = rpcUrl.includes("127.0.0.1") || rpcUrl.includes("localhost");
+  return hre.network.name === "base" && (deployOnFork || usesLocalRpc);
+};
+
 export default func;
