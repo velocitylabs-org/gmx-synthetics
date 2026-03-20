@@ -5,7 +5,6 @@
 - `package.json`
 - `config/vaultV1.ts`
 - `config/feeDistributor.ts`
-- `deploy/deployChainlinkPriceFeedProvider.ts`
 - `deploy/deployEdgeDataStreamVerifier.ts`
 - `deploy/deployEdgeDataStreamProvider.ts`
 - `scripts/validateMarketConfigsUtils.ts`
@@ -50,13 +49,6 @@ These skips/guards only trigger for local fork workflows (either `DEPLOY_ON_FORK
   - skipped by default
   - deploy only if `ENABLE_EDGE_DATA_STREAMS=true`
 - Reason: same dependency on `edgeOracleSigner` as the verifier deployment.
-
-### `deploy/deployChainlinkPriceFeedProvider.ts`
-
-- On `base`, this provider deployment is skipped when:
-  - `DEPLOY_ON_FORK=true`, or
-  - RPC URL resolves to local (`127.0.0.1` or `localhost`)
-- Reason: prevents fork-only controller-gated `DataStore` wiring from reverting during initial bootstrap ordering.
 
 ### `package.json`
 
