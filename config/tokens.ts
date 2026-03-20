@@ -204,7 +204,7 @@ const config: {
 
     // NIVO COLLATERAL
     USDC: {
-      address: "0x833589fCD6eDb6E08f4c7C32D4f71b54bda02913",
+      address: "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
       decimals: 6,
       transferGasLimit: 200 * 1000,
       dataStreamFeedId: "0x0003dc85e8b01946bf9dfd8b0db860129181eb6105a8c8981d9f28e00b6f60d9",
