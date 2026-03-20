@@ -30,7 +30,9 @@ contract FeeHandler is ReentrancyGuard, RoleModule, OracleModule, BasicMulticall
     DataStore public immutable dataStore;
     EventEmitter public immutable eventEmitter;
     IVaultV1 public immutable vaultV1;
-    address public immutable gmx;
+    // Not immutable so the GMX token wiring can be corrected on a per-deployment basis
+    // (e.g. fork bring-up vs. production wiring differences).
+    address public gmx;
 
     constructor(
         RoleStore _roleStore,
@@ -44,6 +46,15 @@ contract FeeHandler is ReentrancyGuard, RoleModule, OracleModule, BasicMulticall
         eventEmitter = _eventEmitter;
         vaultV1 = _vaultV1;
         gmx = _gmx;
+    }
+
+    function getGmx() external view returns (address) {
+        return gmx;
+    }
+
+    function setGmx(address newGmx) external onlyTimelockAdmin {
+        if (newGmx == address(0)) revert Errors.EmptyToken();
+        gmx = newGmx;
     }
 
     // @dev withdraw fees in buybackTokens from this contract

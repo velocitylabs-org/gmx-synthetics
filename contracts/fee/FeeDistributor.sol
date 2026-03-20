@@ -39,7 +39,7 @@ contract FeeDistributor is ReentrancyGuard, RoleModule {
     MultichainReader internal immutable multichainReader;
 
     address internal immutable claimVault;
-    address internal immutable gmx;
+    address internal gmx;
     address internal immutable esGmx;
     address internal immutable wnt;
 
@@ -71,6 +71,16 @@ contract FeeDistributor is ReentrancyGuard, RoleModule {
     // @dev withdraw the specified 'amount' of native token from this contract to 'receiver'
     // @param receiver the receiver of the native token
     // @param amount the amount of native token to withdraw
+
+    function getGmx() external view returns (address) {
+        return gmx;
+    }
+
+    function setGmx(address newGmx) external onlyTimelockAdmin {
+        if (newGmx == address(0)) revert Errors.EmptyToken();
+        gmx = newGmx;
+    }
+
     function withdrawNativeToken(address receiver, uint256 amount) external onlyTimelockAdmin {
         FeeDistributorUtils.withdrawNativeToken(dataStore, receiver, amount);
     }
