@@ -10,7 +10,6 @@
 - `deploy/deployEdgeDataStreamProvider.ts`
 - `scripts/validateMarketConfigsUtils.ts`
 - `deploy/configureRoles.ts`
-- `deploy/configureGeneralSettings.ts`
 - `deploy/deployMockTimelockV1.ts`
 - `deploy/deployReferralStorage.ts`
 - `deploy/deployOracle.ts`
@@ -83,14 +82,6 @@ These skips/guards only trigger for local fork workflows (either `DEPLOY_ON_FORK
   - `DEPLOY_ON_FORK=true`, or
   - RPC URL resolves to local (`127.0.0.1` or `localhost`)
 - Reason: those post-deploy writes to controller-gated `DataStore` keys can revert during fork bootstrap.
-- Real mainnet deploy remains unaffected when using non-local RPC and no fork flags.
-
-### `deploy/configureGeneralSettings.ts`
-
-- On `base`, general settings writes are skipped when:
-  - `DEPLOY_ON_FORK=true`, or
-  - RPC URL resolves to local (`127.0.0.1` or `localhost`)
-- Reason: these are controller-gated `DataStore` writes that can revert during fork bootstrap.
 - Real mainnet deploy remains unaffected when using non-local RPC and no fork flags.
 
 ### `deploy/deployMockTimelockV1.ts`

@@ -38,13 +38,6 @@ const func = async ({ gmx }: HardhatRuntimeEnvironment) => {
   }
 };
 
-func.skip = async (hre: HardhatRuntimeEnvironment) => {
-  const deployOnFork = process.env.DEPLOY_ON_FORK === "true";
-  const rpcUrl = typeof hre.network.config.url === "string" ? hre.network.config.url : "";
-  const usesLocalRpc = rpcUrl.includes("127.0.0.1") || rpcUrl.includes("localhost");
-  return hre.network.name === "base" && (deployOnFork || usesLocalRpc);
-};
-
 func.tags = ["GeneralSettings"];
 func.dependencies = ["DataStore", "Config", "Multicall", "Roles", "LayerZeroProvider"];
 export default func;
