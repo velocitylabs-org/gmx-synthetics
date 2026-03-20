@@ -9,19 +9,14 @@
 - `deploy/deployEdgeDataStreamProvider.ts`
 - `scripts/validateMarketConfigsUtils.ts`
 - `deploy/configureRoles.ts`
-- `deploy/deployMockTimelockV1.ts`
-- `deploy/deployReferralStorage.ts`
-- `deploy/deployOracle.ts`
-- `deploy/deployChainlinkDataStreamProvider.ts`
-- `deploy/deployGmOracleProvider.ts`
 
 ## Why this doc exists
 
-This records the skip and conditional behavior introduced during local fork bring-up, so the real Base mainnet deployment can be reviewed with confidence.
+This records **remaining** Base mainnet vs Sepolia adaptation differences (placeholders, opt-in deploys, validation helpers). Items that were temporarily fork-skipped and later unskipped are intentionally omitted.
 
-## Fork-only skip behavior (safe for mainnet)
+## Conditional behavior (Base mainnet vs Sepolia adaptation)
 
-These skips/guards only trigger for local fork workflows (either `DEPLOY_ON_FORK=true` and/or when the configured RPC URL points to `127.0.0.1` / `localhost`).
+Only items that still differ intentionally or need production follow-up are listed below. Scripts that were previously fork-skipped and are now unskipped are **not** documented here.
 
 ### `config/vaultV1.ts`
 
@@ -52,39 +47,7 @@ These skips/guards only trigger for local fork workflows (either `DEPLOY_ON_FORK
 
 ### `package.json`
 
-- Fork helper script sets fork mode explicitly:
-  - `deploy:base:fork` includes `DEPLOY_ON_FORK=true`
-- This keeps fork-only skips isolated to that workflow.
-
-### `deploy/configureRoles.ts`
-
-- `deploy/configureRoles.ts` is now intended to run normally on `base` (including fork/local runs).
-- Ensure `BASE_ACCOUNT_KEY` is set consistently so the deployer that calls `RoleStore.grantRole(...)` also owns `RoleStore.ROLE_ADMIN`.
-
-### `deploy/deployChainlinkDataStreamProvider.ts`, `deploy/deployGmOracleProvider.ts`
-
-- On `base`, `GmOracleProvider` and `ChainlinkDataStreamProvider` are deployed even during fork runs.
-- Rationale: `deploy/configureOracleTokens.ts` depends on these provider deployments. With `deploy/configureRoles.ts` un-skipped for `base`, controller wiring is in place before the oracle provider post-deploy `DataStore` writes run.
-- Real mainnet deploy remains unaffected when using non-local RPC and no fork flags.
-
-### `deploy/deployOracle.ts`
-
-- Oracle **deployment still runs** on `base`.
-- On `base` fork/local runs, only the Oracle post-deploy config writes are skipped when:
-  - `DEPLOY_ON_FORK=true`, or
-  - RPC URL resolves to local (`127.0.0.1` or `localhost`)
-- Reason: those post-deploy writes to controller-gated `DataStore` keys can revert during fork bootstrap.
-- Real mainnet deploy remains unaffected when using non-local RPC and no fork flags.
-
-### `deploy/deployMockTimelockV1.ts`
-
-- Fork bring-up required this dependency to exist for `base`, so the `func.skip` guard now includes `base` in `shouldDeployForNetwork`.
-- Practical effect: `deployMockTimelockV1` is no longer excluded from `base` deployments (it is still excluded from non-target networks in the guard).
-
-### `deploy/deployReferralStorage.ts`
-
-- Same dependency-order motivation as `MockTimelockV1`: the `func.skip` guard was updated to include `base` in `shouldDeployForNetwork`.
-- Practical effect: `ReferralStorage` is now deployed on `base` (when the other deployment dependencies are being satisfied in fork workflows).
+- Fork helper scripts set `DEPLOY_ON_FORK=true` (and Anvil dev key) so local fork runs are explicit; this does **not** gate deployment scripts anymore beyond your own conventions.
 
 ## Non-skip but critical fork fix
 
@@ -108,4 +71,4 @@ These skips/guards only trigger for local fork workflows (either `DEPLOY_ON_FORK
 - Confirm your deployment environment does not export `DEPLOY_ON_FORK`.
 - Re-check whether `EdgeDataStream*` should be deployed on `base` for production, or intentionally disabled.
 - Validate role-admin ownership and grant authority ahead of `configureRoles`.
-- Run a final dry run against a fresh fork with and without `DEPLOY_ON_FORK` to verify intended behavior differences.
+- Run a final dry run against a fresh Base mainnet fork before going live.

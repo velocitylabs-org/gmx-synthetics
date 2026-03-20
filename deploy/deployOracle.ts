@@ -14,16 +14,7 @@ const func = createDeployFunction({
       .map((dependencyName) => dependencyContracts[dependencyName].address)
       .concat(generalConfig.sequencerUptimeFeed);
   },
-  afterDeploy: async ({ deployedContract, gmx, network }) => {
-    const deployOnFork = process.env.DEPLOY_ON_FORK === "true";
-    const rpcUrl = typeof network.config?.url === "string" ? network.config.url : "";
-    const usesLocalRpc = rpcUrl.includes("127.0.0.1") || rpcUrl.includes("localhost");
-    const skipPostDeployConfig = network.name === "base" && (deployOnFork || usesLocalRpc);
-
-    if (skipPostDeployConfig) {
-      return;
-    }
-
+  afterDeploy: async ({ deployedContract, gmx }) => {
     const oracleConfig = await gmx.getOracle();
     await setUintIfDifferent(
       keys.MIN_ORACLE_BLOCK_CONFIRMATIONS,
