@@ -10,7 +10,6 @@
 - `deploy/deployEdgeDataStreamProvider.ts`
 - `scripts/validateMarketConfigsUtils.ts`
 - `deploy/configureRoles.ts`
-- `deploy/configureDataStreamFeeds.ts`
 - `deploy/configureGeneralSettings.ts`
 - `deploy/deployMockTimelockV1.ts`
 - `deploy/deployReferralStorage.ts`
@@ -70,14 +69,6 @@ These skips/guards only trigger for local fork workflows (either `DEPLOY_ON_FORK
 
 - `deploy/configureRoles.ts` is now intended to run normally on `base` (including fork/local runs).
 - Ensure `BASE_ACCOUNT_KEY` is set consistently so the deployer that calls `RoleStore.grantRole(...)` also owns `RoleStore.ROLE_ADMIN`.
-
-### `deploy/configureDataStreamFeeds.ts`
-
-- On `base`, data stream feed writes are skipped when:
-  - `DEPLOY_ON_FORK=true`, or
-  - RPC URL resolves to local (`127.0.0.1` or `localhost`)
-- This avoids fork-only `DataStore` permission gating before full controller wiring.
-- Real mainnet deploy remains unaffected when using non-local RPC and no fork flags.
 
 ### `deploy/deployChainlinkDataStreamProvider.ts`, `deploy/deployGmOracleProvider.ts`
 
