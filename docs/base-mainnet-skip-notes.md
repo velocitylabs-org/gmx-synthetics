@@ -3,14 +3,13 @@
 ## TL;DR (Impacted Files)
 
 - `package.json`
-- `deploy/deployFeeHandler.ts`
-- `deploy/deployFeeDistributor.ts`
+- `config/vaultV1.ts`
+- `config/feeDistributor.ts`
 - `deploy/deployChainlinkPriceFeedProvider.ts`
 - `deploy/deployEdgeDataStreamVerifier.ts`
 - `deploy/deployEdgeDataStreamProvider.ts`
 - `scripts/validateMarketConfigsUtils.ts`
 - `deploy/configureRoles.ts`
-- `deploy/deployTestTokens.ts`
 - `deploy/configureDataStreamFeeds.ts`
 - `deploy/configureGeneralSettings.ts`
 - `deploy/deployMockTimelockV1.ts`
@@ -27,15 +26,15 @@ This records the skip and conditional behavior introduced during local fork brin
 
 These skips/guards only trigger for local fork workflows (either `DEPLOY_ON_FORK=true` and/or when the configured RPC URL points to `127.0.0.1` / `localhost`).
 
-### `deploy/deployFeeHandler.ts`
+### `config/vaultV1.ts`
 
-- `deploy/deployFeeHandler.ts` is **not skipped** on `base` forks anymore.
-- Caveat: this repo currently provides a `base` entry in `config/vaultV1.ts` using placeholders for `vaultV1`/`gmx` until the correct GMX V1 wiring for Base is confirmed. This is sufficient for the fork bring-up deploy to succeed, but you must replace these placeholders before any logic that actually uses `vaultV1` (`version == 1`) is exercised.
+- `base` now has a bring-up placeholder config so `FeeHandler` constructor args resolve during fork deployment.
+- Caveat: this does **not** imply confirmed production GMX V1 mapping on Base; replace placeholder values before any production rollout that relies on v1 fee paths.
 
-### `deploy/deployFeeDistributor.ts`
+### `config/feeDistributor.ts`
 
-- `deploy/deployFeeDistributor.ts` is **not skipped** on `base` forks anymore.
-- Caveat: `config/feeDistributor.ts` now includes a `base` mapping for fork bring-up, with `gmx` verified on Base and `esGmx` set to a placeholder address pending confirmation of the real escrowed GMX token on Base. Replace placeholders for production correctness.
+- `base` now has explicit `gmx`, `esGmx`, `wnt` mapping for fork bring-up.
+- Caveat: `esGmx` is currently placeholder wiring and must be replaced with the confirmed escrowed GMX token address for production correctness.
 
 ### `deploy/deployEdgeDataStreamVerifier.ts`
 
@@ -71,14 +70,6 @@ These skips/guards only trigger for local fork workflows (either `DEPLOY_ON_FORK
 
 - `deploy/configureRoles.ts` is now intended to run normally on `base` (including fork/local runs).
 - Ensure `BASE_ACCOUNT_KEY` is set consistently so the deployer that calls `RoleStore.grantRole(...)` also owns `RoleStore.ROLE_ADMIN`.
-
-### `deploy/deployTestTokens.ts`
-
-- On `base`, token deployment / token gas-limit / WNT DataStore writes are skipped when:
-  - `DEPLOY_ON_FORK=true`, or
-  - RPC URL resolves to local (`127.0.0.1` or `localhost`)
-- This avoids fork-only permission ordering issues when `DataStore` writes are attempted before full role/controller wiring.
-- Real mainnet deploy remains unaffected when using non-local RPC and no fork flags.
 
 ### `deploy/configureDataStreamFeeds.ts`
 
