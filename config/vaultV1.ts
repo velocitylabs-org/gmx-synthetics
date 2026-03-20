@@ -8,6 +8,14 @@ export default async function (hre: HardhatRuntimeEnvironment): Promise<VaultV1C
   const config: { [network: string]: VaultV1Config } = {
     hardhat: {},
     localhost: {},
+    // Base mainnet currently uses GMX V2 for trading; this contract still requires
+    // a non-empty IVaultV1 + gmx address at construction time. FeeHandler will
+    // only touch the vault for `version == 1`, so we can safely provide placeholders
+    // for fork bring-up until the correct V1 vault/token mapping is confirmed.
+    base: {
+      vaultV1: "0x0000000000000000000000000000000000000000",
+      gmx: "0x4200000000000000000000000000000000000006", // WETH9 on Base (used as placeholder)
+    },
     arbitrum: {
       vaultV1: "0x489ee077994B6658eAfA855C308275EAd8097C4A",
       gmx: "0xfc5A1A6EB076a2C7aD06eD22C90d7E710E35ad0a",
