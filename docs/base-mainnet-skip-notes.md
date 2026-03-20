@@ -29,17 +29,13 @@ These skips/guards only trigger for local fork workflows (either `DEPLOY_ON_FORK
 
 ### `deploy/deployFeeHandler.ts`
 
-- `base` is skipped only in fork mode:
-  - condition: `hre.network.name === "base" && DEPLOY_ON_FORK=true`
-- Without `DEPLOY_ON_FORK=true`, `base` is **not** skipped by this fork guard.
-- Reason: this script performs controller-gated `DataStore` wiring; on fork bootstrap the roles/controller admin path may not be ready yet, which can cause fork-only reverts.
+- `deploy/deployFeeHandler.ts` is **not skipped** on `base` forks anymore.
+- Caveat: this repo currently provides a `base` entry in `config/vaultV1.ts` using placeholders for `vaultV1`/`gmx` until the correct GMX V1 wiring for Base is confirmed. This is sufficient for the fork bring-up deploy to succeed, but you must replace these placeholders before any logic that actually uses `vaultV1` (`version == 1`) is exercised.
 
 ### `deploy/deployFeeDistributor.ts`
 
-- `base` is skipped only in fork mode:
-  - condition: `hre.network.name === "base" && DEPLOY_ON_FORK=true`
-- Without `DEPLOY_ON_FORK=true`, `base` is **not** skipped by this fork guard.
-- Reason: same controller-gated `DataStore` write ordering risk as `FeeHandler`.
+- `deploy/deployFeeDistributor.ts` is **not skipped** on `base` forks anymore.
+- Caveat: `config/feeDistributor.ts` now includes a `base` mapping for fork bring-up, with `gmx` verified on Base and `esGmx` set to a placeholder address pending confirmation of the real escrowed GMX token on Base. Replace placeholders for production correctness.
 
 ### `deploy/deployEdgeDataStreamVerifier.ts`
 

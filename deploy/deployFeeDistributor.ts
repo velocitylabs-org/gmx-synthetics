@@ -52,16 +52,4 @@ const func = createDeployFunction({
   id: "FeeDistributor_1",
 });
 
-func.skip = async (hre) => {
-  const deployOnFork = process.env.DEPLOY_ON_FORK === "true";
-  if (
-    ["botanix", "avalancheFuji", "arbitrumSepolia", "baseSepolia", "localhost"].includes(hre.network.name) ||
-    (hre.network.name === "base" && deployOnFork)
-  ) {
-    return true;
-  }
-
-  return false;
-};
-
 export default func;
