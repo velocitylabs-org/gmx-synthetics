@@ -13,6 +13,10 @@
     "fork:avalancheFuji": "npx hardhat node --fork https://api.avax-test.network/ext/bc/C/rpc --no-deploy --fork-block-number 16658163",
     "fork:avalanche": "npx hardhat node --fork https://api.avax.network/ext/bc/C/rpc --no-deploy",
     "fork:arbitrum": "npx hardhat node --fork https://arb1.arbitrum.io/rpc --no-deploy",
+    "fork:base": "npx hardhat node --fork https://mainnet.base.org --no-deploy",
+    "hardhat:fork": "anvil --fork-url https://mainnet.base.org --chain-id 8453 --port 8545",
+    "hardhat:deploy-fork": "BASE_ACCOUNT_KEY=0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80 HARDHAT_NETWORK=base DEPLOY_ON_FORK=true SKIP_AUTO_HANDLER_REDEPLOYMENT=true npx hardhat deploy --network base --reset",
+    "deploy:base:fork": "BASE_ACCOUNT_KEY=0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80 HARDHAT_NETWORK=base DEPLOY_ON_FORK=true SKIP_AUTO_HANDLER_REDEPLOYMENT=true npx hardhat run scripts/validateMarketConfigs.ts --network base && BASE_ACCOUNT_KEY=0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80 HARDHAT_NETWORK=base DEPLOY_ON_FORK=true SKIP_AUTO_HANDLER_REDEPLOYMENT=true npx hardhat deploy --network base",
     "verify:tenderly": "npx hardhat --config hardhat.config.tenderly.ts run scripts/verifyTenderly.ts --network"
   },
   "author": "",
