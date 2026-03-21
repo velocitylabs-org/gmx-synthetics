@@ -2,6 +2,8 @@
 
 ## TL;DR (Impacted Files)
 
+**Still outstanding or intentionally conditional**
+
 - `package.json`
 - `config/vaultV1.ts`
 - `config/feeDistributor.ts`
@@ -10,6 +12,12 @@
 - `scripts/validateMarketConfigsUtils.ts`
 - `deploy/configureRoles.ts`
 
+**Peer mainnet inputs (implemented in repo — re-verify before live deploy)**
+
+- `config/general.ts` — GMX removed from shared defaults; `base` / `baseSepolia` use `NIVO_PROTOCOL_FEE_AND_HOLDING` (same address as Sepolia deployer policy until treasury is final).
+- `config/oracle.ts` — Base `dataStreamFeedVerifier` + `chainlinkPaymentToken` set from peer; confirm against Chainlink docs at deploy time.
+- `config/tokens.ts` — Base `dataStreamFeedId` for WETH, USDC, GBP, JPY from peer; confirm `dataStreamFeedDecimals` (and stream metadata) against Chainlink docs.
+
 ## Why this doc exists
 
 This records **remaining** Base mainnet vs Sepolia adaptation differences (placeholders, opt-in deploys, validation helpers). Items that were temporarily fork-skipped and later unskipped are intentionally omitted.
@@ -17,6 +25,12 @@ This records **remaining** Base mainnet vs Sepolia adaptation differences (place
 ## Conditional behavior (Base mainnet vs Sepolia adaptation)
 
 Only items that still differ intentionally or need production follow-up are listed below. Scripts that were previously fork-skipped and are now unskipped are **not** documented here.
+
+### `config/general.ts` (production follow-up)
+
+- Shared `generalConfig` no longer defaults `feeReceiver` / `holdingAddress` to GMX (`AddressZero` until overridden per network).
+- `base` and `baseSepolia` both set `feeReceiver` and `holdingAddress` to `NIVO_PROTOCOL_FEE_AND_HOLDING` in code (same wallet as the historical Sepolia deployer policy).
+- **Outstanding:** If Base mainnet must use a different treasury / multisig than that wallet, update the constant or override `base` only before production.
 
 ### `config/vaultV1.ts`
 
@@ -69,6 +83,8 @@ Only items that still differ intentionally or need production follow-up are list
 
 - Run mainnet deploy commands **without** `DEPLOY_ON_FORK=true`.
 - Confirm your deployment environment does not export `DEPLOY_ON_FORK`.
+- Re-verify in Chainlink documentation: Base `dataStreamFeedVerifier`, `chainlinkPaymentToken`, and Data Stream feed IDs / decimals in `config/tokens.ts` (`base`).
+- Confirm `feeReceiver` / `holdingAddress` for `base` match the intended production treasury (vs `NIVO_PROTOCOL_FEE_AND_HOLDING`).
 - Re-check whether `EdgeDataStream*` should be deployed on `base` for production, or intentionally disabled.
 - Validate role-admin ownership and grant authority ahead of `configureRoles`.
 - Run a final dry run against a fresh Base mainnet fork before going live.
