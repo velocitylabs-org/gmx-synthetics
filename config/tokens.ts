@@ -175,11 +175,11 @@ const config: {
   base: {
     // NIVO CURRENCIES
 
-    // TMP - Already available Chainlink Data Streams
+    // Chainlink Data Streams — Base mainnet feed IDs (verify decimals in Chainlink docs)
     // Pound Sterling
-    GBP: getCurrencyConfig("0x00080ca1eb3009703b00bfb3dd86ebae19a55631e20b18db633559e6175b1580"),
+    GBP: getCurrencyConfig("0x00086bdceb0b66669c04e7315815614f4ad910e6bb0134e2a7b9070145eb2e7b"),
     // Japanese Yen
-    JPY: getCurrencyConfig("0x0008e10fbb69e00a36425b9a462b17a715fb374b4959e6177214c8c0dd4998ca"),
+    JPY: getCurrencyConfig("0x0008308e2aa7bfdc5e326f142a495da6dc8355e01d64015c68cbdc50ab2ae129"),
 
     // Brazilian Real
     BRL: getCurrencyConfig("0x0000000000000000000000000000000000000000000000000000000000000000"), // TODO: Update with the real Chainlink Data Stream ID
@@ -207,7 +207,7 @@ const config: {
       address: "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
       decimals: 6,
       transferGasLimit: 200 * 1000,
-      dataStreamFeedId: "0x0003dc85e8b01946bf9dfd8b0db860129181eb6105a8c8981d9f28e00b6f60d9",
+      dataStreamFeedId: "0x00038f83323b6b08116d1614cf33a9bd71ab5e0abf0c9f1b783a74a43e7bd992",
       dataStreamFeedDecimals: 18,
       oracleTimestampAdjustment: 1,
     },
@@ -218,7 +218,7 @@ const config: {
       decimals: 18,
       wrappedNative: true,
       transferGasLimit: 200 * 1000,
-      dataStreamFeedId: "0x000359843a543ee2fe414dc14c7e7920ef10f4372990b79d6361cdc0dd1ba782",
+      dataStreamFeedId: "0x000362205e10b3a147d02792eccee483dca6c7b44ecce7012cb8c6e0b68b3ae9",
       dataStreamFeedDecimals: 18,
     },
   },
