@@ -5,10 +5,8 @@
 **Still outstanding or intentionally conditional**
 
 - `package.json`
-- `config/vaultV1.ts`
-- `config/feeDistributor.ts`
-- `deploy/deployEdgeDataStreamVerifier.ts`
-- `deploy/deployEdgeDataStreamProvider.ts`
+- `config/vaultV1.ts` (interim — see roadmap below)
+- `config/feeDistributor.ts` (interim — Nivo fee system redesign)
 - `scripts/validateMarketConfigsUtils.ts`
 - `deploy/configureRoles.ts`
 
@@ -18,9 +16,13 @@
 - `config/oracle.ts` — Base `dataStreamFeedVerifier` + `chainlinkPaymentToken` set from peer; confirm against Chainlink docs at deploy time.
 - `config/tokens.ts` — Base `dataStreamFeedId` for WETH, USDC, GBP, JPY from peer; confirm `dataStreamFeedDecimals` (and stream metadata) against Chainlink docs.
 
+**Out of scope for Nivo (not listed here)**
+
+- **Edge Oracle (Chaos Labs):** does not support FX; not useful for Nivo. No checklist or deployment guidance for Edge in this document.
+
 ## Why this doc exists
 
-This records **remaining** Base mainnet vs Sepolia adaptation differences (placeholders, opt-in deploys, validation helpers). Items that were temporarily fork-skipped and later unskipped are intentionally omitted.
+This records **remaining** Base mainnet vs Sepolia adaptation differences (placeholders, validation helpers, roles). Items that were temporarily fork-skipped and later unskipped are intentionally omitted.
 
 ## Conditional behavior (Base mainnet vs Sepolia adaptation)
 
@@ -32,32 +34,16 @@ Only items that still differ intentionally or need production follow-up are list
 - `base` and `baseSepolia` both set `feeReceiver` and `holdingAddress` to `NIVO_PROTOCOL_FEE_AND_HOLDING` in code (same wallet as the historical Sepolia deployer policy).
 - **Outstanding:** If Base mainnet must use a different treasury / multisig than that wallet, update the constant or override `base` only before production.
 
-### `config/vaultV1.ts`
+### `config/vaultV1.ts` (roadmap)
 
-- `base` now has a bring-up placeholder config so `FeeHandler` constructor args resolve during fork deployment.
-- Caveat: this does **not** imply confirmed production GMX V1 mapping on Base; replace placeholder values before any production rollout that relies on v1 fee paths.
+- **What it is today:** only used for **fee distribution to GMX V1 stakers** (legacy GMX path). It is **not** a Nivo product requirement.
+- **Direction:** remove reliance on this for Nivo and **redesign `FeeDistributor` (and related fee plumbing)** for something that suits Nivo (work in progress).
+- **Until then:** `base` may still carry bring-up placeholders so constructor wiring / fork deploys succeed; treat as **technical debt**, not a long-term Base mainnet design.
 
-### `config/feeDistributor.ts`
+### `config/feeDistributor.ts` (roadmap)
 
-- `base` now has explicit `gmx`, `esGmx`, `wnt` mapping for fork bring-up.
-- Caveat: `esGmx` is currently placeholder wiring and must be replaced with the confirmed escrowed GMX token address for production correctness.
-
-### `deploy/deployEdgeDataStreamVerifier.ts`
-
-- `baseSepolia` is always skipped.
-- `base` is **opt-in**:
-  - skipped by default
-  - deploy only if `ENABLE_EDGE_DATA_STREAMS=true`
-  - note: if enabled, you must configure `edgeOracleSigner` in the oracle config for `base`
-- Reason: `base` edge data stream deployment depends on `edgeOracleSigner`. If that signer is unset, fork runs can fail or write incorrect oracle wiring.
-
-### `deploy/deployEdgeDataStreamProvider.ts`
-
-- `baseSepolia` is always skipped.
-- `base` is **opt-in**:
-  - skipped by default
-  - deploy only if `ENABLE_EDGE_DATA_STREAMS=true`
-- Reason: same dependency on `edgeOracleSigner` as the verifier deployment.
+- **Direction:** align with the **Nivo-specific FeeDistributor / fee system** above rather than extending GMX + `esGmx` semantics indefinitely.
+- **Until then:** `base` may use fork-bring-up token addresses; **`esGmx`** in particular may remain placeholder until the new design and tokenomics are fixed.
 
 ### `package.json`
 
@@ -79,12 +65,16 @@ Only items that still differ intentionally or need production follow-up are list
 - This prevents iterator crashes, but role grants still require deployer permissions (`ROLE_ADMIN` path).
 - On mainnet, ensure deployer and role-admin strategy are explicitly validated before running deploy.
 
+### Oracle contract (peer)
+
+- Expect a **small Oracle-contract improvement** from the team before locking the final mainnet cut; coordinate before treating oracle bytecode as frozen.
+
 ## Mainnet preflight checklist
 
 - Run mainnet deploy commands **without** `DEPLOY_ON_FORK=true`.
 - Confirm your deployment environment does not export `DEPLOY_ON_FORK`.
 - Re-verify in Chainlink documentation: Base `dataStreamFeedVerifier`, `chainlinkPaymentToken`, and Data Stream feed IDs / decimals in `config/tokens.ts` (`base`).
 - Confirm `feeReceiver` / `holdingAddress` for `base` match the intended production treasury (vs `NIVO_PROTOCOL_FEE_AND_HOLDING`).
-- Re-check whether `EdgeDataStream*` should be deployed on `base` for production, or intentionally disabled.
+- **Bridge / fund operational wallets:** bridge tokens as needed and **check balances** on the relevant addresses (**ETH** for gas, **LINK** or other tokens required for Chainlink / oracle operations on Base).
 - Validate role-admin ownership and grant authority ahead of `configureRoles`.
 - Run a final dry run against a fresh Base mainnet fork before going live.
