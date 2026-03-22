@@ -7,7 +7,8 @@ import { BigNumberish } from "ethers";
 import { encodeData, keccakString } from "../../utils/hash";
 import { ethers } from "hardhat";
 
-describe("EdgeDataStreamProvider", function () {
+// Edge (Chaos Labs) deploy scripts removed for Nivo; contract tests skipped unless Edge is deployed manually.
+describe.skip("EdgeDataStreamProvider", function () {
   let fixture;
   let edgeDataStreamProvider, dataStore, oracle, wbtc, wnt;
   const BTC_USD_FEED_ID = "BTCUSD";

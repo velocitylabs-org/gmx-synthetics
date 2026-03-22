@@ -18,7 +18,7 @@
 
 **Out of scope for Nivo (not listed here)**
 
-- **Edge Oracle (Chaos Labs):** does not support FX; not useful for Nivo. No checklist or deployment guidance for Edge in this document.
+- **Edge Oracle (Chaos Labs):** does not support FX; not useful for Nivo. `deploy/deployEdgeDataStreamVerifier.ts` and `deploy/deployEdgeDataStreamProvider.ts` have been **removed** from the deploy pipeline (Solidity + timelock hooks may remain for upstream compatibility; Edge unit tests are skipped unless you deploy those contracts manually).
 
 ## Why this doc exists
 

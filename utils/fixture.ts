@@ -148,8 +148,15 @@ async function setup() {
   const mockStargatePoolUsdc = await hre.ethers.getContract("MockStargatePoolUsdc");
   const mockStargatePoolNative = await hre.ethers.getContract("MockStargatePoolNative");
   const mockOracleProvider = await hre.ethers.getContract("MockOracleProvider");
-  const edgeDataStreamVerifier = await hre.ethers.getContract("EdgeDataStreamVerifier");
-  const edgeDataStreamProvider = await hre.ethers.getContract("EdgeDataStreamProvider");
+  // Edge (Chaos Labs) contracts are not deployed on Nivo paths; optional for legacy tests.
+  const edgeVerifierDeployment = await hre.deployments.getOrNull("EdgeDataStreamVerifier");
+  const edgeDataStreamVerifier = edgeVerifierDeployment
+    ? await hre.ethers.getContractAt("EdgeDataStreamVerifier", edgeVerifierDeployment.address)
+    : undefined;
+  const edgeProviderDeployment = await hre.deployments.getOrNull("EdgeDataStreamProvider");
+  const edgeDataStreamProvider = edgeProviderDeployment
+    ? await hre.ethers.getContractAt("EdgeDataStreamProvider", edgeProviderDeployment.address)
+    : undefined;
   const claimHandler = await hre.ethers.getContract("ClaimHandler");
   const claimVault = await hre.ethers.getContract("ClaimVault");
   const claimUtils = await hre.ethers.getContract("ClaimUtils");
