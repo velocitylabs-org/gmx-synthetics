@@ -16,9 +16,9 @@
 - `config/oracle.ts` — Base `dataStreamFeedVerifier` + `chainlinkPaymentToken` set from peer; confirm against Chainlink docs at deploy time.
 - `config/tokens.ts` — Base `dataStreamFeedId` for WETH, USDC, GBP, JPY from peer; confirm `dataStreamFeedDecimals` (and stream metadata) against Chainlink docs.
 
-**Out of scope for Nivo (not listed here)**
+**Out of scope for Nivo (kept skip-gated, not removed)**
 
-- **Edge Oracle (Chaos Labs):** does not support FX; not useful for Nivo. `deploy/deployEdgeDataStreamVerifier.ts` and `deploy/deployEdgeDataStreamProvider.ts` have been **removed** from the deploy pipeline (Solidity + timelock hooks may remain for upstream compatibility; Edge unit tests are skipped unless you deploy those contracts manually).
+- **Edge Oracle (Chaos Labs):** does not support FX; not useful for Nivo. `deploy/deployEdgeDataStreamVerifier.ts` and `deploy/deployEdgeDataStreamProvider.ts` are kept in the repo but remain **opt-in skipped** on `base` unless `ENABLE_EDGE_DATA_STREAMS=true`.
 
 ## Why this doc exists
 
