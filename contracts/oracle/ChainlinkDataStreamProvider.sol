@@ -47,6 +47,7 @@ contract ChainlinkDataStreamProvider is IOracleProvider {
     }
 
     bytes2 private constant VERSION_V8 = 0x0008;
+    uint256 private constant MAX_PRICE_STALE_THRESHOLD = 5 minutes;
 
     modifier onlyOracle() {
         if (msg.sender != oracle) {
@@ -127,13 +128,14 @@ contract ChainlinkDataStreamProvider is IOracleProvider {
             }
         }
 
-        return OracleUtils.ValidatedPrice({
-            token: token,
-            min: adjustedBidPrice,
-            max: adjustedAskPrice,
-            timestamp: report.observationsTimestamp,
-            provider: address(this)
-        });
+        return
+            OracleUtils.ValidatedPrice({
+                token: token,
+                min: adjustedBidPrice,
+                max: adjustedAskPrice,
+                timestamp: report.observationsTimestamp,
+                provider: address(this)
+            });
     }
 
     function _processV8Report(
@@ -151,17 +153,48 @@ contract ChainlinkDataStreamProvider is IOracleProvider {
             revert Errors.InvalidDataStreamPrices(token, report.midPrice, report.midPrice);
         }
 
+        _validateForexMarketState(report, token);
+
         uint256 precision = _getDataStreamMultiplier(token);
-        uint256 adjustedPrice = Precision.mulDiv(uint256(uint192(report.midPrice)), precision, Precision.FLOAT_PRECISION);
+        uint256 adjustedPrice = Precision.mulDiv(
+            uint256(uint192(report.midPrice)),
+            precision,
+            Precision.FLOAT_PRECISION
+        );
 
         // V8 has no bid/ask spread midPrice used for both min and max
-        return OracleUtils.ValidatedPrice({
-            token: token,
-            min: adjustedPrice,
-            max: adjustedPrice,
-            timestamp: report.observationsTimestamp,
-            provider: address(this)
-        });
+        return
+            OracleUtils.ValidatedPrice({
+                token: token,
+                min: adjustedPrice,
+                max: adjustedPrice,
+                timestamp: report.observationsTimestamp,
+                provider: address(this)
+            });
+    }
+
+    function _validateForexMarketState(ReportV8 memory report, address token) internal view {
+        // Timestamp of the closing price of the last session.
+        uint256 lastReportUpdate = uint256(report.lastUpdateTimestamp);
+
+        // RWA markets operate during specific hours, with breaks for holidays
+        // Market status:
+        // - unknown: 0
+        // - closed: 1
+        // - open: 2
+        if (report.marketStatus != 2) {
+            if (report.marketStatus == 1) {
+                revert Errors.ForexMarketClosed(token, report.feedId, report.marketStatus);
+            } else {
+                revert Errors.ForexMarketStatusUnknown(token, report.feedId, report.marketStatus);
+            }
+        }
+
+        // Handles stale price & market gaps:
+        // Periods where the last available price may not reflect current market conditions.
+        if (block.timestamp > lastReportUpdate + MAX_PRICE_STALE_THRESHOLD) {
+            revert Errors.StaleForexPrice(token, report.lastUpdateTimestamp, block.timestamp);
+        }
     }
 
     function _getDataStreamSpreadReductionFactor(address token) internal view returns (uint256) {
