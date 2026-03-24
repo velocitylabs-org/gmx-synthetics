@@ -128,8 +128,7 @@ contract ChainlinkDataStreamProvider is IOracleProvider {
             }
         }
 
-        return
-            OracleUtils.ValidatedPrice({
+        return OracleUtils.ValidatedPrice({
                 token: token,
                 min: adjustedBidPrice,
                 max: adjustedAskPrice,
@@ -156,15 +155,10 @@ contract ChainlinkDataStreamProvider is IOracleProvider {
         _validateForexMarketState(report, token);
 
         uint256 precision = _getDataStreamMultiplier(token);
-        uint256 adjustedPrice = Precision.mulDiv(
-            uint256(uint192(report.midPrice)),
-            precision,
-            Precision.FLOAT_PRECISION
-        );
+        uint256 adjustedPrice = Precision.mulDiv(uint256(uint192(report.midPrice)), precision, Precision.FLOAT_PRECISION);
 
         // V8 has no bid/ask spread midPrice used for both min and max
-        return
-            OracleUtils.ValidatedPrice({
+        return OracleUtils.ValidatedPrice({
                 token: token,
                 min: adjustedPrice,
                 max: adjustedPrice,
