@@ -167,6 +167,9 @@ contract ChainlinkDataStreamProvider is IOracleProvider {
         });
     }
 
+    // Market hours are determined by Chainlink's data feed, not by this contract.
+    // The marketStatus field in ReportV8 reflects the real-time state
+    // See: https://docs.chain.link/data-feeds/selecting-data-feeds#market-hours
     function _validateForexMarketState(ReportV8 memory report, address token) internal view {
         // Timestamp of the closing price of the last session.
         uint256 lastReportUpdate = uint256(report.lastUpdateTimestamp);
