@@ -47,7 +47,7 @@ contract ChainlinkDataStreamProvider is IOracleProvider {
     }
 
     bytes2 private constant VERSION_V8 = 0x0008;
-    uint256 private constant MAX_PRICE_STALE_THRESHOLD = 5 minutes;
+    uint256 private constant MAX_PRICE_STALE_THRESHOLD = 30 seconds;
 
     modifier onlyOracle() {
         if (msg.sender != oracle) {
