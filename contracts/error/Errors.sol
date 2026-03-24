@@ -253,8 +253,8 @@ library Errors {
     error NonEmptyTokensWithPrices(uint256 tokensWithPricesLength);
     error InvalidMinMaxForPrice(address token, uint256 min, uint256 max);
     error EmptyChainlinkPriceFeed(address token);
-    error ForexMarketClosed(address token, bytes32 feedId, uint256 marketStatus);
-    error ForexMarketStatusUnknown(address token, bytes32 feedId, uint256 marketStatus);
+    error ForexMarketClosed(address token, bytes32 feedId);
+    error ForexMarketUnknown(address token, bytes32 feedId);
     error StaleForexPrice(address token, uint256 lastUpdateTimestamp, uint256 currentTimestamp);
     error PriceAlreadySet(address token, uint256 minPrice, uint256 maxPrice);
     error MaxRefPriceDeviationExceeded(

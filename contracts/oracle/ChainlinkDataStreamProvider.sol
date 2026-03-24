@@ -178,9 +178,9 @@ contract ChainlinkDataStreamProvider is IOracleProvider {
         // - open: 2
         if (report.marketStatus != 2) {
             if (report.marketStatus == 1) {
-                revert Errors.ForexMarketClosed(token, report.feedId, report.marketStatus);
+                revert Errors.ForexMarketClosed(token, report.feedId);
             } else {
-                revert Errors.ForexMarketStatusUnknown(token, report.feedId, report.marketStatus);
+                revert Errors.ForexMarketUnknown(token, report.feedId);
             }
         }
 
