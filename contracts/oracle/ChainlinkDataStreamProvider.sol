@@ -47,6 +47,7 @@ contract ChainlinkDataStreamProvider is IOracleProvider {
     }
 
     bytes2 private constant VERSION_V8 = 0x0008;
+    uint256 private constant MAX_PRICE_STALE_THRESHOLD = 30 seconds;
 
     modifier onlyOracle() {
         if (msg.sender != oracle) {
@@ -151,6 +152,8 @@ contract ChainlinkDataStreamProvider is IOracleProvider {
             revert Errors.InvalidDataStreamPrices(token, report.midPrice, report.midPrice);
         }
 
+        _validateForexMarketState(report, token);
+
         uint256 precision = _getDataStreamMultiplier(token);
         uint256 adjustedPrice = Precision.mulDiv(uint256(uint192(report.midPrice)), precision, Precision.FLOAT_PRECISION);
 
@@ -162,6 +165,33 @@ contract ChainlinkDataStreamProvider is IOracleProvider {
             timestamp: report.observationsTimestamp,
             provider: address(this)
         });
+    }
+
+    // Market hours are determined by Chainlink's data feed, not by this contract.
+    // The marketStatus field in ReportV8 reflects the real-time state
+    // See: https://docs.chain.link/data-feeds/selecting-data-feeds#market-hours
+    function _validateForexMarketState(ReportV8 memory report, address token) internal view {
+        // Timestamp of the closing price of the last session.
+        uint256 lastReportUpdate = uint256(report.lastUpdateTimestamp);
+
+        // RWA markets operate during specific hours, with breaks for holidays
+        // Market status:
+        // - unknown: 0
+        // - closed: 1
+        // - open: 2
+        if (report.marketStatus != 2) {
+            if (report.marketStatus == 1) {
+                revert Errors.ForexMarketClosed(token, report.feedId);
+            } else {
+                revert Errors.ForexMarketUnknown(token, report.feedId);
+            }
+        }
+
+        // Handles stale price & market gaps:
+        // Periods where the last available price may not reflect current market conditions.
+        if (block.timestamp > lastReportUpdate + MAX_PRICE_STALE_THRESHOLD) {
+            revert Errors.StaleForexPrice(token, report.lastUpdateTimestamp, block.timestamp);
+        }
     }
 
     function _getDataStreamSpreadReductionFactor(address token) internal view returns (uint256) {
