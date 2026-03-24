@@ -129,12 +129,12 @@ contract ChainlinkDataStreamProvider is IOracleProvider {
         }
 
         return OracleUtils.ValidatedPrice({
-                token: token,
-                min: adjustedBidPrice,
-                max: adjustedAskPrice,
-                timestamp: report.observationsTimestamp,
-                provider: address(this)
-            });
+            token: token,
+            min: adjustedBidPrice,
+            max: adjustedAskPrice,
+            timestamp: report.observationsTimestamp,
+            provider: address(this)
+        });
     }
 
     function _processV8Report(
@@ -159,12 +159,12 @@ contract ChainlinkDataStreamProvider is IOracleProvider {
 
         // V8 has no bid/ask spread midPrice used for both min and max
         return OracleUtils.ValidatedPrice({
-                token: token,
-                min: adjustedPrice,
-                max: adjustedPrice,
-                timestamp: report.observationsTimestamp,
-                provider: address(this)
-            });
+            token: token,
+            min: adjustedPrice,
+            max: adjustedPrice,
+            timestamp: report.observationsTimestamp,
+            provider: address(this)
+        });
     }
 
     function _validateForexMarketState(ReportV8 memory report, address token) internal view {
