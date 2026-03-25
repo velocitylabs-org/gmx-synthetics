@@ -20,9 +20,9 @@
   "ProtocolGovernor_1": 1771322746,
   "OracleStore_3": 1771322783,
   "GmOracleProvider_2": 1771322800,
-  "ChainlinkDataStreamProvider_6": 1771322814,
   "MarketFactory_3": 1771323010,
   "GlvFactory_2": 1771323024,
   "ClaimVault_1": 1771323039,
-  "FeeDistributorVault_1": 1771323172
+  "FeeDistributorVault_1": 1771323172,
+  "ChainlinkDataStreamProvider_6": 1772116149
 }

@@ -14,12 +14,12 @@ export async function grantRoleIfNotGranted(deployedContract, role: string, addr
     return;
   }
 
-  const { address } = deployedContract;
+  const { address, contractName } = deployedContract;
   const { deployments, getNamedAccounts } = hre;
   const { read, execute, log } = deployments;
   const { deployer } = await getNamedAccounts();
 
-  log(`grantRoleIfNotGranted: ${deployedContract.contractName}, ${role}`);
+  log(`grantRoleIfNotGranted: ${contractName ?? address}, ${role}`);
 
   const roleHash = hashString(role);
   const hasRole = await read("RoleStore", "hasRole", address, roleHash);
