@@ -27,7 +27,10 @@ const func = createDeployFunction({
 });
 
 func.skip = async ({ network }) => {
-  return ["botanix", "baseSepolia"].includes(network.name);
+  // Nivo doesn't rely on ConfigSyncer automation at launch. RiskOracle for `base`
+  // is configured as `address(0)` so we skip deploying ConfigSyncer on Base until
+  // the real risk oracle address + sync policy are finalized.
+  return ["botanix", "baseSepolia", "base"].includes(network.name);
 };
 
 func.dependencies = func.dependencies.concat(["MockRiskOracle"]);
