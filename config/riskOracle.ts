@@ -1,4 +1,5 @@
 import { HardhatRuntimeEnvironment } from "hardhat/types";
+import { ethers } from "ethers";
 
 export type RiskOracleConfig = {
   riskOracle?: string;
@@ -66,7 +67,7 @@ export default async function (hre: HardhatRuntimeEnvironment): Promise<RiskOrac
       riskOracle: "0x48b67764dBB6B8fc2A0c3987ed3819e543212Bc3",
     },
     base: {
-      riskOracle: "0x0000000000000000000000000000000000000000",
+      riskOracle: ethers.constants.AddressZero,
     },
   };
 
