@@ -1,5 +1,5 @@
 import { grantRoleIfNotGranted } from "../utils/role";
-import { createDeployFunction, skipHandlerFunction } from "../utils/deploy";
+import { createDeployFunction } from "../utils/deploy";
 import { HardhatRuntimeEnvironment } from "hardhat/types";
 
 const constructorContracts = ["RoleStore", "Oracle", "DataStore", "EventEmitter"];
@@ -39,12 +39,5 @@ const func = createDeployFunction({
 });
 
 func.dependencies = func.dependencies.concat(["MockVaultV1"]);
-func.skip = async (hre: HardhatRuntimeEnvironment) => {
-  if (["botanix", "avalancheFuji", "arbitrumSepolia", "baseSepolia"].includes(hre.network.name)) {
-    return true;
-  }
-
-  return skipHandlerFunction(contractName)(hre);
-};
 
 export default func;

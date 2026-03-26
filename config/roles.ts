@@ -272,6 +272,18 @@ export default async function (hre: HardhatRuntimeEnvironment): Promise<RolesCon
       TIMELOCK_ADMIN: { [deployer]: true },
       FEE_KEEPER: { [deployer]: true },
     },
+    base: {
+      CONTROLLER: { [deployer]: true },
+      ORDER_KEEPER: { ...(NIVO_KEEPER_ADDRESS && { [NIVO_KEEPER_ADDRESS]: true }), [deployer]: true },
+      ADL_KEEPER: { ...(NIVO_KEEPER_ADDRESS && { [NIVO_KEEPER_ADDRESS]: true }), [deployer]: true },
+      LIQUIDATION_KEEPER: { ...(NIVO_KEEPER_ADDRESS && { [NIVO_KEEPER_ADDRESS]: true }), [deployer]: true },
+      FROZEN_ORDER_KEEPER: { ...(NIVO_KEEPER_ADDRESS && { [NIVO_KEEPER_ADDRESS]: true }), [deployer]: true },
+      MARKET_KEEPER: { [deployer]: true },
+      CONFIG_KEEPER: { [deployer]: true },
+      LIMITED_CONFIG_KEEPER: { [deployer]: true },
+      TIMELOCK_ADMIN: { [deployer]: true },
+      FEE_KEEPER: { [deployer]: true },
+    },
   };
 
   // normalize addresses

@@ -2,7 +2,8 @@ import { expect } from "chai";
 import hre from "hardhat";
 import { deployFixture } from "../../utils/fixture";
 
-describe("EdgeDataStreamVerifier", function () {
+// Edge (Chaos Labs) deploy scripts removed for Nivo; contract tests skipped unless Edge is deployed manually.
+describe.skip("EdgeDataStreamVerifier", function () {
   let fixture;
   let verifier: any;
   let trustedSigner: string;

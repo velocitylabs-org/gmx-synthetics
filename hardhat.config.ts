@@ -51,6 +51,7 @@ const getRpcUrl = (network) => {
     arbitrumSepolia: "https://sepolia-rollup.arbitrum.io/rpc",
     sepolia: "https://ethereum-sepolia-rpc.publicnode.com",
     avalancheFuji: "https://api.avax-test.network/ext/bc/C/rpc",
+    base: "https://mainnet.base.org",
     baseSepolia: "https://sepolia.base.org",
     snowtrace: "https://api.avax.network/ext/bc/C/rpc",
     arbitrumBlockscout: "https://arb1.arbitrum.io/rpc",
@@ -78,7 +79,8 @@ export const getExplorerUrl = (network) => {
     snowscan: "https://api.snowscan.xyz/",
     arbitrumGoerli: "https://api-goerli.arbiscan.io/",
     arbitrumSepolia: "https://api.etherscan.io/v2/api?chainid=421614",
-    baseSepolia: "https://api.etherscan.io/v2/api",
+    base: "https://api.etherscan.io/v2/api?chainid=8453",
+    baseSepolia: "https://api.etherscan.io/v2/api?chainid=84532",
     sepolia: "https://api.etherscan.io/v2/api?chainid=11155111",
     avalancheFuji: "https://api-testnet.snowtrace.io/",
     arbitrumBlockscout: "https://arbitrum.blockscout.com/api",
@@ -98,6 +100,7 @@ export const getBlockExplorerUrl = (network) => {
     avalanche: "https://snowtrace.io",
     botanix: "https://botanixscan.io",
     arbitrumSepolia: "https://sepolia.arbiscan.io",
+    base: "https://basescan.org",
     baseSepolia: "https://sepolia.basescan.io",
     avalancheFuji: "https://testnet.snowtrace.io",
   };
@@ -124,6 +127,7 @@ const getEtherscanApiKey = () => {
     arbitrumGoerli: process.env.ARBISCAN_API_KEY,
     sepolia: process.env.ETHERSCAN_API_KEY,
     arbitrumSepolia: process.env.ARBISCAN_API_KEY,
+    base: process.env.BASESCAN_API_KEY,
     baseSepolia: process.env.BASESCAN_API_KEY,
     avalancheFujiTestnet: process.env.SNOWTRACE_API_KEY,
     snowtrace: "snowtrace", // apiKey is not required, just set a placeholder
@@ -138,8 +142,13 @@ const getEnvAccounts = (chainName?: string) => {
     ACCOUNT_KEY_FILE,
     ARBITRUM_SEPOLIA_ACCOUNT_KEY,
     ARBITRUM_ACCOUNT_KEY,
+    BASE_ACCOUNT_KEY,
     BASE_SEPOLIA_ACCOUNT_KEY,
   } = process.env;
+
+  if (chainName === "base" && BASE_ACCOUNT_KEY) {
+    return [BASE_ACCOUNT_KEY];
+  }
 
   if (chainName === "baseSepolia" && BASE_SEPOLIA_ACCOUNT_KEY) {
     return [BASE_SEPOLIA_ACCOUNT_KEY];
@@ -305,10 +314,24 @@ const config: HardhatUserConfig = {
     baseSepolia: {
       url: getRpcUrl("baseSepolia"),
       chainId: 84532,
+      live: true,
       accounts: getEnvAccounts("baseSepolia"),
       verify: {
         etherscan: {
           apiUrl: getExplorerUrl("baseSepolia"),
+          apiKey: process.env.BASESCAN_API_KEY,
+        },
+      },
+      blockGasLimit: 10000000,
+    },
+    base: {
+      url: getRpcUrl("base"),
+      chainId: 8453,
+      live: true,
+      accounts: getEnvAccounts("base"),
+      verify: {
+        etherscan: {
+          apiUrl: getExplorerUrl("base"),
           apiKey: process.env.BASESCAN_API_KEY,
         },
       },
@@ -365,8 +388,16 @@ const config: HardhatUserConfig = {
         network: "baseSepolia",
         chainId: 84532,
         urls: {
-          apiURL: "https://api.etherscan.io/v2/api",
+          apiURL: "https://api.etherscan.io/v2/api?chainid=84532",
           browserURL: "https://sepolia.basescan.org",
+        },
+      },
+      {
+        network: "base",
+        chainId: 8453,
+        urls: {
+          apiURL: "https://api.etherscan.io/v2/api?chainid=8453",
+          browserURL: "https://basescan.org",
         },
       },
       {

@@ -7,6 +7,15 @@ export type FeeDistributorConfig = {
 export default async function (hre: HardhatRuntimeEnvironment): Promise<FeeDistributorConfig> {
   const config: { [network: string]: FeeDistributorConfig } = {
     hardhat: {},
+    base: {
+      // FeeDistributor expects (gmx, esGmx, wnt) addresses at construction time.
+      // Base mainnet currently lacks canonical config wiring in this repo, so we
+      // provide a fork-bring-up mapping with verified GMX token and a placeholder
+      // esGMX mapping (needs confirmation for production).
+      gmx: "0xa1D7caBCe916E6B8e0506eaa3788B23ebC81232E", // GMX token on Base (verified via fork RPC)
+      esGmx: "0xa1D7caBCe916E6B8e0506eaa3788B23ebC81232E", // TODO: replace with the real escrowed GMX token on Base
+      wnt: "0x4200000000000000000000000000000000000006", // WETH9 on Base
+    },
     arbitrum: {
       gmx: "0xfc5A1A6EB076a2C7aD06eD22C90d7E710E35ad0a",
       esGmx: "0xf42Ae1D54fd613C9bb14810b0588FaAa09a426cA",

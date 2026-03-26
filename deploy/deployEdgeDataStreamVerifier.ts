@@ -11,7 +11,16 @@ const func = createDeployFunction({
 });
 
 func.skip = async (hre: HardhatRuntimeEnvironment) => {
-  return ["baseSepolia"].includes(hre.network.name);
+  // Edge data streams are optional; keep them explicitly opt-in so we don't
+  // block deployments when edgeOracleSigner isn't configured.
+  if (hre.network.name === "baseSepolia") return true;
+
+  if (hre.network.name === "base") {
+    const enableEdgeDataStreams = process.env.ENABLE_EDGE_DATA_STREAMS === "true";
+    return !enableEdgeDataStreams;
+  }
+
+  return false;
 };
 
 export default func;
