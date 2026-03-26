@@ -1,4 +1,5 @@
 import { HardhatRuntimeEnvironment } from "hardhat/types";
+import { ethers } from "ethers";
 
 export type VaultV1Config = {
   vaultV1?: string;
@@ -13,7 +14,7 @@ export default async function (hre: HardhatRuntimeEnvironment): Promise<VaultV1C
     // only touch the vault for `version == 1`, so we can safely provide placeholders
     // for fork bring-up until the correct V1 vault/token mapping is confirmed.
     base: {
-      vaultV1: "0x0000000000000000000000000000000000000000",
+      vaultV1: ethers.constants.AddressZero,
       gmx: "0x4200000000000000000000000000000000000006", // WETH9 on Base (used as placeholder)
     },
     arbitrum: {
