@@ -1,11 +1,31 @@
 import { ethers } from "ethers";
-import { HardhatRuntimeEnvironment } from "hardhat/types";
 import * as keys from "../utils/keys";
 import { setUintIfDifferent } from "../utils/dataStore";
+import { hashString } from "../utils/hash";
 
-const func = async ({ deployments, getNamedAccounts, gmx }: HardhatRuntimeEnvironment) => {
-  const { read, execute, log } = deployments;
+const func = async ({ deployments, getNamedAccounts, gmx }: any) => {
+  const { read, execute, log, get } = deployments;
   const { deployer } = await getNamedAccounts();
+  const controllerRoleHash = hashString("CONTROLLER");
+
+  // `OracleStore.addSigner/removeSigner` are guarded by `onlyController` (RoleStore.CONTROLLER).
+  // On existing mainnet deployments, role auto-configuration might be skipped, so ensure
+  // the deployer can perform the signer updates.
+  const deployerHasControllerRole = await read("RoleStore", "hasRole", deployer, controllerRoleHash);
+  if (!deployerHasControllerRole) {
+    log("deployer %s missing CONTROLLER role, granting it via RoleStore...", deployer);
+    await execute("RoleStore", { from: deployer, log: true }, "grantRole", deployer, controllerRoleHash);
+  }
+
+  // OracleStore emits events through EventEmitter, whose emit functions are onlyController.
+  // This means OracleStore contract address itself must also have CONTROLLER role.
+  const oracleStore = await get("OracleStore");
+  const oracleStoreHasControllerRole = await read("RoleStore", "hasRole", oracleStore.address, controllerRoleHash);
+  if (!oracleStoreHasControllerRole) {
+    log("OracleStore %s missing CONTROLLER role, granting it via RoleStore...", oracleStore.address);
+    await execute("RoleStore", { from: deployer, log: true }, "grantRole", oracleStore.address, controllerRoleHash);
+  }
+
   const oracleConfig = await gmx.getOracle();
   const oracleSigners = oracleConfig.signers.map((s) => ethers.utils.getAddress(s));
 

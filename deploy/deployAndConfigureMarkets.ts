@@ -3,6 +3,7 @@ import * as keys from "../utils/keys";
 import { setBoolIfDifferent, setBytes32IfDifferent, setUintIfDifferent } from "../utils/dataStore";
 import { DEFAULT_MARKET_TYPE, getMarketTokenAddresses, getMarketKey, getOnchainMarkets } from "../utils/market";
 import { updateMarketConfig } from "../scripts/updateMarketConfigUtils";
+import { hashString } from "../utils/hash";
 
 const func = async ({ deployments, getNamedAccounts, gmx }: HardhatRuntimeEnvironment) => {
   const { execute, get, read, log } = deployments;
@@ -17,6 +18,26 @@ const func = async ({ deployments, getNamedAccounts, gmx }: HardhatRuntimeEnviro
   const markets = await gmx.getMarkets();
 
   const dataStore = await get("DataStore");
+
+  // `MarketFactory.createMarket` requires the caller to have `MARKET_KEEPER` in RoleStore.
+  // Some mainnet deployments skip auto role-granting, so make this step self-sufficient.
+  const marketKeeperRoleHash = hashString("MARKET_KEEPER");
+  const hasMarketKeeperRole = await read("RoleStore", "hasRole", deployer, marketKeeperRoleHash);
+  if (!hasMarketKeeperRole) {
+    log("deployer missing MARKET_KEEPER role; granting via RoleStore...");
+    await execute("RoleStore", { from: deployer, log: true }, "grantRole", deployer, marketKeeperRoleHash);
+  }
+
+  // Market creation emits events via EventEmitter from within MarketFactory.
+  // EventEmitter's emit methods require msg.sender to have CONTROLLER role,
+  // so MarketFactory itself must be a CONTROLLER.
+  const marketFactory = await get("MarketFactory");
+  const controllerRoleHash = hashString("CONTROLLER");
+  const marketFactoryHasControllerRole = await read("RoleStore", "hasRole", marketFactory.address, controllerRoleHash);
+  if (!marketFactoryHasControllerRole) {
+    log("MarketFactory %s missing CONTROLLER role; granting via RoleStore...", marketFactory.address);
+    await execute("RoleStore", { from: deployer, log: true }, "grantRole", marketFactory.address, controllerRoleHash);
+  }
 
   let onchainMarketsByTokens = await getOnchainMarkets(read, dataStore.address);
 

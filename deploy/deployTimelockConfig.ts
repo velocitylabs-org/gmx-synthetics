@@ -13,10 +13,25 @@ async function grantProposerRole(timelockConfig: string) {
   const configTimelockController = await ethers.getContract("ConfigTimelockController");
 
   if (await configTimelockController.hasRole(TIMELOCK_ADMIN_ROLE, deployer)) {
-    await configTimelockController.grantRole(PROPOSER_ROLE, timelockConfig);
-    await configTimelockController.grantRole(CANCELLER_ROLE, timelockConfig);
-    await configTimelockController.grantRole(EXECUTOR_ROLE, timelockConfig);
-    await configTimelockController.revokeRole(TIMELOCK_ADMIN_ROLE, deployer);
+    if (!(await configTimelockController.hasRole(PROPOSER_ROLE, timelockConfig))) {
+      const tx = await configTimelockController.grantRole(PROPOSER_ROLE, timelockConfig);
+      await tx.wait();
+    }
+
+    if (!(await configTimelockController.hasRole(CANCELLER_ROLE, timelockConfig))) {
+      const tx = await configTimelockController.grantRole(CANCELLER_ROLE, timelockConfig);
+      await tx.wait();
+    }
+
+    if (!(await configTimelockController.hasRole(EXECUTOR_ROLE, timelockConfig))) {
+      const tx = await configTimelockController.grantRole(EXECUTOR_ROLE, timelockConfig);
+      await tx.wait();
+    }
+
+    if (await configTimelockController.hasRole(TIMELOCK_ADMIN_ROLE, deployer)) {
+      const tx = await configTimelockController.revokeRole(TIMELOCK_ADMIN_ROLE, deployer);
+      await tx.wait();
+    }
   } else {
     console.warn("skipping configTimelockController role config, as deployer does not have access to update roles");
   }
