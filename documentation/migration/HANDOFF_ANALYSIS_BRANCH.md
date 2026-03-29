@@ -1,6 +1,6 @@
 # Handoff: `SCRUM126-SCRUM127` branch — TLDR for peer dev
 
-Short note on what landed on **`SCRUM126-SCRUM127`** before handoff. For full rollout and commands, see **`VELOCITY_DOCS/MIGRATION_STATUS.md`**.
+Short note on what landed on **`SCRUM126-SCRUM127`** before handoff. For full rollout and commands, see **`documentation/migration/MIGRATION_STATUS.md`**.
 
 ---
 
@@ -44,9 +44,9 @@ We documented core protocol call routes (**CALL_ROUTES**, ~86 flow artifacts), a
 
 | Path | Why |
 |------|-----|
-| `VELOCITY_DOCS/MIGRATION_STATUS.md` | Test commands, Slither, phase plan (tests first, deploy trim second), allowlist vs full deploy explanation |
-| `VELOCITY_DOCS/contract-flows/CALL_ROUTES.md` | User + keeper routes; ~55 contracts + 31 interfaces in documented flows |
-| `test/HARDHAT_SKIP.md` | Which Hardhat suites are `describe.skip` and why |
+| `documentation/migration/MIGRATION_STATUS.md` | Test commands, Slither, phase plan (tests first, deploy trim second), allowlist vs full deploy explanation |
+| `documentation/migration/contract-flows/CALL_ROUTES.md` | User + keeper routes; ~55 contracts + 31 interfaces in documented flows |
+| `documentation/migration/HARDHAT_SKIP.md` | Which Hardhat suites are `describe.skip` and why |
 | `test-forge/` | Foundry tests (placeholder + future `Protocol.t.sol`) |
 | `foundry.toml` / `remappings.txt` | Forge config |
 | `versions/baseSepolia/v1.0.1.json` | Named deployment snapshot for Base Sepolia |
@@ -57,7 +57,7 @@ We documented core protocol call routes (**CALL_ROUTES**, ~86 flow artifacts), a
 
 ## Known gaps / next steps
 
-1. **`Protocol.t.sol`** + fork tests using `versions/…` — not implemented yet (Phase 0 in `MIGRATION_STATUS.md`).
+1. **`Protocol.t.sol`** + fork tests using `versions/…` — not implemented yet (Phase 0 in `documentation/migration/MIGRATION_STATUS.md`).
 2. **`deploy/` trim** — deferred until tests clarify required surface; full manifest still ~115 names vs CALL_ROUTES allowlist (~86 artifacts).
 3. **Untracked / local:** `deployments/base/` may exist untracked — confirm before commit.
 

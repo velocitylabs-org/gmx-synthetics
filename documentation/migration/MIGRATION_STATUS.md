@@ -55,11 +55,11 @@ Then move `*.call-graph.dot` into `slither-output/` if you want to match the scr
 
 | Source | Role |
 |--------|------|
-| **`VELOCITY_DOCS/contract-flows/CALL_ROUTES.md`** (and `VELOCITY_DOCS/CALL_ROUTES.md` if duplicated) | User / keeper call routes; **conclusion counts ~86 flow artifacts: 55 implementing contracts + 31 interfaces** for documented LP, user, multicall, and keeper paths (often rounded to “~85”). |
+| **`documentation/migration/contract-flows/CALL_ROUTES.md`** (and `documentation/migration/CALL_ROUTES.md` if duplicated) | User / keeper call routes; **conclusion counts ~86 flow artifacts: 55 implementing contracts + 31 interfaces** for documented LP, user, multicall, and keeper paths (often rounded to “~85”). |
 | **`slither-output/*.call-graph.dot`** and **`docs/diagrams/*.call-graph.{svg,png}`** | Full dependency / call-graph (many more nodes than the CALL_ROUTES summary). |
-| **`README-TRIM.md`** | Product/doc scope: **perpetuals + liquidity only**; spot/swap narrative trimmed. |
+| **`documentation/migration/README-TRIM.md`** | Product/doc scope: **perpetuals + liquidity only**; spot/swap narrative trimmed. |
 | **`config/markets.ts`** (and related `config/`) | Which markets/tokens/feeds are configured for deploys. |
-| **`test/HARDHAT_SKIP.md`** | Test suites aligned with “not remaining protocol” (multichain, relay, guardian, etc.). |
+| **`documentation/migration/HARDHAT_SKIP.md`** | Test suites aligned with “not remaining protocol” (multichain, relay, guardian, etc.). |
 | **`versions/<network>/vX.Y.Z.json`** | **Full deploy manifest** for a network: e.g. `versions/baseSepolia/v1.0.1.json` names **on the order of ~115** deployed contracts (includes claim, multichain, gov, relay, fee distributor, mocks, etc.) — **wider** than the CALL_ROUTES **55-contract** table. |
 
 **Fork / RPC examples** (from `package.json`): Arbitrum, Avalanche, Fuji URLs — add Base in `hardhat.config.ts` / `.rpcs.json` as needed.
@@ -73,7 +73,7 @@ Then move `*.call-graph.dot` into `slither-output/` if you want to match the scr
 | **~85 / 86 “used in protocol”** | Documented in **CALL_ROUTES** as **55 contracts + 31 interfaces** on the **core** LP / user / keeper flows. That is an **allowlist in documentation**, not “every `.sol` file under `contracts/`” (the tree has **hundreds** of `.sol` files including libraries, mocks, interfaces, and `contracts/test/` helpers). |
 | **“Remove the remaining ~30”** | **Intent:** the **extra** named deployments in a **full** manifest (claim, multichain routers, Gelato/subaccount relay, gov stack, fee distributor, some oracle/stream plumbing, etc.) are **candidates** to **stop deploying** for the trimmed Velocity protocol — on the order of **dozens** of names vs the slimmer CALL_ROUTES surface. |
 | **What is done on this branch today** | That gap is **identified** (docs + manifests + skipped tests); **we have not** yet **bulk-deleted** Solidity sources nor **disabled** the matching **`deploy/*.ts`** scripts. So: **allowlist + test skips; deploy still ships the wide set until Phase 2 trim.** |
-| **Hardhat tests** | **Deprecated areas skipped** (`describe.skip`); **309 pass, 545 pending**. See `test/HARDHAT_SKIP.md`. |
+| **Hardhat tests** | **Deprecated areas skipped** (`describe.skip`); **309 pass, 545 pending**. See `documentation/migration/HARDHAT_SKIP.md`. |
 
 When **Phase 2 (deploy trim)** lands, replace the hand-wavy “~30” with an **exact list**: deploy scripts turned off + contracts no longer in `versions/…` (and any `.sol` deletes if you choose to remove dead code).
 
@@ -85,7 +85,7 @@ When **Phase 2 (deploy trim)** lands, replace the hand-wavy “~30” with an **
 
 **Contract redaction (deploy scope):** **Allowlist vs full deploy is documented** (see §3); **trimming `deploy/`** is deferred until after test alignment. No mass deletion of Solidity or deploy scripts on this branch yet.
 
-**Hardhat test updates (done so far):** Added `describe.skip` across deprecated/non-remaining suites (multichain, relay/subaccount, guardian, contributor, data-stream oracle, fee/gov extras, etc.). Added `test/HARDHAT_SKIP.md`. Verified full run: **309 passing, 545 pending**. Committed as `2d7fdd64`.
+**Hardhat test updates (done so far):** Added `describe.skip` across deprecated/non-remaining suites (multichain, relay/subaccount, guardian, contributor, data-stream oracle, fee/gov extras, etc.). Documented in `documentation/migration/HARDHAT_SKIP.md`. Verified full run: **309 passing, 545 pending**. Committed as `2d7fdd64`.
 
 **Foundry setup (done so far):** `test-forge/`, `foundry.toml`, `npm run test:forge`, `remappings.txt`, `.vscode/settings.json`, placeholder Foundry test. Committed as `9a78fa58`.
 

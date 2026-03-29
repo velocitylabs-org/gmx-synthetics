@@ -1,5 +1,7 @@
 # Hardhat test suites skipped (pre–Phase 1)
 
+> **Location:** `documentation/migration/HARDHAT_SKIP.md` — skipped test files still live under `test/`.
+
 These suites use `describe.skip` because they target deprecated/removed contracts or features that are not part of the remaining protocol. They remain in the repo for reference and can be re-enabled or migrated to Foundry later.
 
 ## Skipped suites
