@@ -44,6 +44,7 @@ We documented core protocol call routes (**CALL_ROUTES**, ~86 flow artifacts), a
 
 | Path | Why |
 |------|-----|
+| `documentation/migration/HANDOFF_SCRUM126-127_BRANCH.md` | This handoff (branch TLDR) |
 | `documentation/migration/MIGRATION_STATUS.md` | Test commands, Slither, phase plan (tests first, deploy trim second), allowlist vs full deploy explanation |
 | `documentation/migration/contract-flows/CALL_ROUTES.md` | User + keeper routes; ~55 contracts + 31 interfaces in documented flows |
 | `documentation/migration/HARDHAT_SKIP.md` | Which Hardhat suites are `describe.skip` and why |
