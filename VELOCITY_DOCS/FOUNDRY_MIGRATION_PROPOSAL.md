@@ -1,5 +1,7 @@
 # Proposal: Migrate from Hardhat to Foundry
 
+**Operational sequencing (Velocity / `analysis`):** See **`VELOCITY_DOCS/MIGRATION_STATUS.md`** for the current rollout: **test updates and Foundry migration first**; **trim `deploy/` scripts after** tests define the required protocol surface. The phase numbers below are the original proposal; map them to that doc’s Phase 0–3 table for day-to-day work.
+
 ## 1. Current state
 
 | Aspect | Current (Hardhat) |
