@@ -1,4 +1,4 @@
-# Migration status (analysis branch)
+# Migration status (`SCRUM126-SCRUM127` branch)
 
 ## Test commands
 
@@ -72,14 +72,14 @@ Then move `*.call-graph.dot` into `slither-output/` if you want to match the scr
 |------|----------------------------|
 | **~85 / 86 “used in protocol”** | Documented in **CALL_ROUTES** as **55 contracts + 31 interfaces** on the **core** LP / user / keeper flows. That is an **allowlist in documentation**, not “every `.sol` file under `contracts/`” (the tree has **hundreds** of `.sol` files including libraries, mocks, interfaces, and `contracts/test/` helpers). |
 | **“Remove the remaining ~30”** | **Intent:** the **extra** named deployments in a **full** manifest (claim, multichain routers, Gelato/subaccount relay, gov stack, fee distributor, some oracle/stream plumbing, etc.) are **candidates** to **stop deploying** for the trimmed Velocity protocol — on the order of **dozens** of names vs the slimmer CALL_ROUTES surface. |
-| **What is done on `analysis` today** | That gap is **identified** (docs + manifests + skipped tests); **we have not** yet **bulk-deleted** Solidity sources nor **disabled** the matching **`deploy/*.ts`** scripts. So: **analysis = allowlist + test skips; deploy still ships the wide set until Phase 2 trim.** |
+| **What is done on this branch today** | That gap is **identified** (docs + manifests + skipped tests); **we have not** yet **bulk-deleted** Solidity sources nor **disabled** the matching **`deploy/*.ts`** scripts. So: **allowlist + test skips; deploy still ships the wide set until Phase 2 trim.** |
 | **Hardhat tests** | **Deprecated areas skipped** (`describe.skip`); **309 pass, 545 pending**. See `test/HARDHAT_SKIP.md`. |
 
 When **Phase 2 (deploy trim)** lands, replace the hand-wavy “~30” with an **exact list**: deploy scripts turned off + contracts no longer in `versions/…` (and any `.sol` deletes if you choose to remove dead code).
 
 ---
 
-## Current status on **analysis**
+## Current status on **SCRUM126-SCRUM127**
 
 **Priority order (updated):** **Tests first** — extend and migrate test suites (Hardhat + Foundry). **Deploy redaction second** — trim `deploy/` and config only after tests define the required surface.
 
@@ -91,7 +91,7 @@ When **Phase 2 (deploy trim)** lands, replace the hand-wavy “~30” with an **
 
 **Docs / planning:** `Protocol.t.sol` + versions JSON + fork pattern discussed for Foundry tests; Hardhat deploy remains the source of deployed addresses until Phase 2.
 
-**Repo state right now:** Branch: `analysis`. Working tree: clean except untracked `deployments/base/` (if present).
+**Repo state right now:** Branch: `SCRUM126-SCRUM127`. Working tree: clean except untracked `deployments/base/` (if present).
 
 ---
 
@@ -104,4 +104,4 @@ When **Phase 2 (deploy trim)** lands, replace the hand-wavy “~30” with an **
 | **2** | **Deploy (Hardhat) — redaction** | Trim `deploy/` + `config/` to match what tests prove is required | (1) From Phases 0–1, list contracts/scripts that nothing exercises. (2) Gate or remove deploy scripts; update `config/markets.ts` etc. (3) Fork + `npx hardhat deploy --network localhost` until clean. (4) Regenerate `versions/<network>/vX.Y.Z.json` via `npm run extract -- …`. |
 | **3** | **Deploy (Forge) — optional** | Port trimmed deploy to `forge script` | (1) `script/Deploy*.s.sol` mirroring Phase 2 graph. (2) Same manifest shape as `versions/…`. (3) Decide Hardhat vs Forge for each network. |
 
-**Reference commits:** Foundry Phase 0 — `9a78fa58`; Hardhat skips — `2d7fdd64`. Additional commits may exist on `analysis` after these.
+**Reference commits:** Foundry Phase 0 — `9a78fa58`; Hardhat skips — `2d7fdd64`. Additional commits may exist on this branch after these.

@@ -1,6 +1,6 @@
-# Handoff: `analysis` branch — TLDR for peer dev
+# Handoff: `SCRUM126-SCRUM127` branch — TLDR for peer dev
 
-Short note on what landed on **`analysis`** before handoff. For full rollout and commands, see **`VELOCITY_DOCS/MIGRATION_STATUS.md`**.
+Short note on what landed on **`SCRUM126-SCRUM127`** before handoff. For full rollout and commands, see **`VELOCITY_DOCS/MIGRATION_STATUS.md`**.
 
 ---
 
@@ -36,7 +36,7 @@ We documented core protocol call routes (**CALL_ROUTES**, ~86 flow artifacts), a
 | `8336b3d4` | fix: install and test suite (840 passing, 6 known failing) |
 | `412f305a` | Merge PR #13 (base-sepolia-deployment) |
 
-**Earlier on the same line of work (older commits, still on branch):** Base Sepolia deployment folder + config, EUR config removal, localhost / multichain config cleanup, BRL / e2e test removals, Nivo / synthetic token config merges, etc. Use `git log analysis --oneline -50` for the full list.
+**Earlier on the same line of work (older commits, still on branch):** Base Sepolia deployment folder + config, EUR config removal, localhost / multichain config cleanup, BRL / e2e test removals, Nivo / synthetic token config merges, etc. Use `git log SCRUM126-SCRUM127 --oneline -50` for the full list.
 
 ---
 
@@ -63,4 +63,4 @@ We documented core protocol call routes (**CALL_ROUTES**, ~86 flow artifacts), a
 
 ---
 
-*Branch: `analysis`. Generate this list anytime with: `git log analysis --oneline -15`.*
+*Branch: `SCRUM126-SCRUM127`. Generate this list anytime with: `git log SCRUM126-SCRUM127 --oneline -15`.*
