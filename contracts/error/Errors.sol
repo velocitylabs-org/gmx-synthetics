@@ -242,6 +242,7 @@ library Errors {
     error GmMaxPricesNotSorted(address token, uint256 price, uint256 prevPrice);
     error EmptyChainlinkPriceFeedMultiplier(address token);
     error EmptyDataStreamMultiplier(address token);
+    error InvalidChainlinkFeeToken(address feeToken, address expectedFeeToken);
     error InvalidDataStreamSpreadReductionFactor(address token, uint256 spreadReductionFactor);
     error InvalidFeedPrice(address token, int256 price);
     error ChainlinkPriceFeedNotUpdated(address token, uint256 timestamp, uint256 heartbeatDuration);
@@ -252,6 +253,9 @@ library Errors {
     error NonEmptyTokensWithPrices(uint256 tokensWithPricesLength);
     error InvalidMinMaxForPrice(address token, uint256 min, uint256 max);
     error EmptyChainlinkPriceFeed(address token);
+    error ForexMarketClosed(address token, bytes32 feedId);
+    error ForexMarketUnknown(address token, bytes32 feedId);
+    error StaleForexPrice(address token, uint256 lastUpdateTimestamp, uint256 currentTimestamp);
     error PriceAlreadySet(address token, uint256 minPrice, uint256 maxPrice);
     error MaxRefPriceDeviationExceeded(
         address token,

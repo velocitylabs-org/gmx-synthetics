@@ -13,7 +13,7 @@ async function main() {
   console.log("timelock", timelock.address);
   const chainlinkPriceFeedProvider = await hre.ethers.getContract("ChainlinkPriceFeedProvider");
   const chainlinkDataStreamProvider = await hre.ethers.getContract("ChainlinkDataStreamProvider");
-  const edgeDataStreamProvider = await hre.ethers.getContract("EdgeDataStreamProvider");
+  const edgeDeployment = await hre.deployments.getOrNull("EdgeDataStreamProvider");
 
   // TODO: remove the old oracle providers
   // const providersToAdd = {
@@ -36,7 +36,7 @@ async function main() {
   const providersToAdd = [
     chainlinkPriceFeedProvider.address,
     chainlinkDataStreamProvider.address,
-    edgeDataStreamProvider.address,
+    ...(edgeDeployment ? [edgeDeployment.address] : []),
   ];
 
   const multicallWriteParams = [];

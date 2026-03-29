@@ -7,6 +7,7 @@ import { BigNumberish } from "ethers";
 import { encodeData, keccakString } from "../../utils/hash";
 import { ethers } from "hardhat";
 
+// Edge (Chaos Labs) deploy scripts removed for Nivo; contract tests skipped unless Edge is deployed manually.
 describe.skip("EdgeDataStreamProvider", function () {
   let fixture;
   let edgeDataStreamProvider, dataStore, oracle, wbtc, wnt;

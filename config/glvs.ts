@@ -259,6 +259,7 @@ export default async function ({ network }: HardhatRuntimeEnvironment) {
       },
     ],
     baseSepolia: [],
+    base: [],
   }[network.name]!;
 
   if (!config) {

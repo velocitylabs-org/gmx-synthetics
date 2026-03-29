@@ -15,6 +15,8 @@ export type OracleConfig = {
   edgeOracleSigner?: string;
 };
 
+const NIVO_KEEPER_ADDRESS: string | undefined = process.env.NIVO_KEEPER_ADDRESS;
+
 export default async function (hre: HardhatRuntimeEnvironment): Promise<OracleConfig> {
   const network = hre.network;
 
@@ -26,6 +28,10 @@ export default async function (hre: HardhatRuntimeEnvironment): Promise<OracleCo
   const maxOraclePriceAge = 5 * 60;
   const maxAtomicOraclePriceAge = 30;
   const maxOracleTimestampRange = 60;
+
+  if (network.name === "base" && !NIVO_KEEPER_ADDRESS) {
+    throw new Error("NIVO_KEEPER_ADDRESS is undefined");
+  }
 
   const config: { [network: string]: OracleConfig } = {
     localhost: {
@@ -63,6 +69,19 @@ export default async function (hre: HardhatRuntimeEnvironment): Promise<OracleCo
       minOracleSigners: 1,
       dataStreamFeedVerifier: "0x8Ac491b7c118a0cdcF048e0f707247fD8C9575f9",
       chainlinkPaymentToken: "0xE4aB69C077896252FAFBD49EFD26B5D171A32410",
+    },
+
+    base: {
+      signers: NIVO_KEEPER_ADDRESS ? [NIVO_KEEPER_ADDRESS] : [],
+      maxOraclePriceAge,
+      maxAtomicOraclePriceAge,
+      maxOracleTimestampRange,
+      maxRefPriceDeviationFactor: decimalToFloat(5, 1), // 50%
+      minOracleBlockConfirmations: 255,
+      minOracleSigners: 1,
+      // Base mainnet Chainlink Data Streams (verify in Chainlink docs at deploy time)
+      dataStreamFeedVerifier: "0xDE1A28D87Afd0f546505B28AB50410A5c3a7387a",
+      chainlinkPaymentToken: "0x88Fb150BDc53A65fe94Dea0c9BA0a6dAf8C6e196",
     },
 
     arbitrum: {

@@ -172,6 +172,56 @@ const config: {
       // },
     },
   },
+  base: {
+    // NIVO CURRENCIES
+
+    // Chainlink Data Streams — Base mainnet feed IDs (verify decimals in Chainlink docs)
+    // Pound Sterling
+    GBP: getCurrencyConfig("0x00086bdceb0b66669c04e7315815614f4ad910e6bb0134e2a7b9070145eb2e7b"),
+    // Japanese Yen
+    JPY: getCurrencyConfig("0x0008308e2aa7bfdc5e326f142a495da6dc8355e01d64015c68cbdc50ab2ae129"),
+
+    // Brazilian Real
+    BRL: getCurrencyConfig("0x0000000000000000000000000000000000000000000000000000000000000000"), // TODO: Update with the real Chainlink Data Stream ID
+    // Mexican Peso
+    MXN: getCurrencyConfig("0x0000000000000000000000000000000000000000000000000000000000000000"), // TODO: Update with the real Chainlink Data Stream ID
+    // Colombian Peso
+    COP: getCurrencyConfig("0x0000000000000000000000000000000000000000000000000000000000000000"), // TODO: Update with the real Chainlink Data Stream ID
+    // Indonesian Rupiah
+    IDR: getCurrencyConfig("0x0000000000000000000000000000000000000000000000000000000000000000"), // TODO: Update with the real Chainlink Data Stream ID
+    // Philippine Peso
+    PHP: getCurrencyConfig("0x0000000000000000000000000000000000000000000000000000000000000000"), // TODO: Update with the real Chainlink Data Stream ID
+    // Peruvian Sol
+    PEN: getCurrencyConfig("0x0000000000000000000000000000000000000000000000000000000000000000"), // TODO: Update with the real Chainlink Data Stream ID
+    // Nigerian Naira
+    NGN: getCurrencyConfig("0x0000000000000000000000000000000000000000000000000000000000000000"), // TODO: Update with the real Chainlink Data Stream ID
+    // Kenyan Shilling
+    KES: getCurrencyConfig("0x0000000000000000000000000000000000000000000000000000000000000000"), // TODO: Update with the real Chainlink Data Stream ID
+    // South African Rand
+    ZAR: getCurrencyConfig("0x0000000000000000000000000000000000000000000000000000000000000000"), // TODO: Update with the real Chainlink Data Stream ID
+    // Thai Baht
+    THB: getCurrencyConfig("0x0000000000000000000000000000000000000000000000000000000000000000"), // TODO: Update with the real Chainlink Data Stream ID
+
+    // NIVO COLLATERAL
+    USDC: {
+      address: "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913",
+      decimals: 6,
+      transferGasLimit: 200 * 1000,
+      dataStreamFeedId: "0x00038f83323b6b08116d1614cf33a9bd71ab5e0abf0c9f1b783a74a43e7bd992",
+      dataStreamFeedDecimals: 18,
+      oracleTimestampAdjustment: 1,
+    },
+
+    // WNT
+    WETH: {
+      address: "0x4200000000000000000000000000000000000006", // WETH9 on Base
+      decimals: 18,
+      wrappedNative: true,
+      transferGasLimit: 200 * 1000,
+      dataStreamFeedId: "0x000362205e10b3a147d02792eccee483dca6c7b44ecce7012cb8c6e0b68b3ae9",
+      dataStreamFeedDecimals: 18,
+    },
+  },
   arbitrum: {
     APE: {
       address: "0x7f9FBf9bDd3F4105C478b996B648FE6e828a1e98",

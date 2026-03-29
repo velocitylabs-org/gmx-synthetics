@@ -2,6 +2,15 @@ import { ethers } from "ethers";
 import { HardhatRuntimeEnvironment } from "hardhat/types";
 import { decimalToFloat, percentageToFloat, expandDecimals } from "../utils/math";
 
+// Former `generalConfig` defaults (GMX). Kept explicit on non-Nivo networks so removing
+// GMX from the shared `generalConfig` spread does not change Arbitrum/Avalanche/etc.
+const LEGACY_GMX_FEE_RECEIVER = "0x43ce1d475e06c65dd879f4ec644b8e0e10ff2b6d";
+const LEGACY_GMX_HOLDING_ADDRESS = "0x3f59203ea1c66527422998b54287e1efcacbe2c5";
+
+// Nivo Base Sepolia deployer — also used as Base mainnet placeholder until a dedicated
+// protocol treasury / multisig is confirmed (replace in `base` when ready).
+const NIVO_PROTOCOL_FEE_AND_HOLDING = "0x6DdBBB0834084185BeF7Bd1567E835E44683600D";
+
 export default async function ({ network }: HardhatRuntimeEnvironment) {
   if (network.name === "hardhat" || network.name === "localhost") {
     // Note that this is only for the hardhat config, the config for all
@@ -84,8 +93,9 @@ export default async function ({ network }: HardhatRuntimeEnvironment) {
   }
 
   const generalConfig = {
-    feeReceiver: "0x43ce1d475e06c65dd879f4ec644b8e0e10ff2b6d",
-    holdingAddress: "0x3f59203ea1c66527422998b54287e1efcacbe2c5",
+    // Do not default to GMX; each `networkConfig` entry sets these (Nivo vs legacy chains).
+    feeReceiver: ethers.constants.AddressZero,
+    holdingAddress: ethers.constants.AddressZero,
     sequencerUptimeFeed: ethers.constants.AddressZero,
     sequencerGraceDuration: 300,
     maxUiFeeFactor: percentageToFloat("0.1%"),
@@ -166,8 +176,8 @@ export default async function ({ network }: HardhatRuntimeEnvironment) {
 
   const networkConfig = {
     baseSepolia: {
-      feeReceiver: "0x6DdBBB0834084185BeF7Bd1567E835E44683600D", // Deployer
-      holdingAddress: "0x6DdBBB0834084185BeF7Bd1567E835E44683600D", // Deployer
+      feeReceiver: NIVO_PROTOCOL_FEE_AND_HOLDING,
+      holdingAddress: NIVO_PROTOCOL_FEE_AND_HOLDING,
       // Shared configs
       maxAutoCancelOrders: 11,
       maxTotalCallbackGasLimitForAutoCancelOrders: 10_000_000,
@@ -187,8 +197,34 @@ export default async function ({ network }: HardhatRuntimeEnvironment) {
       srcChainIds: {},
       eids: {},
     },
-    arbitrumGoerli: {},
+    base: {
+      feeReceiver: NIVO_PROTOCOL_FEE_AND_HOLDING,
+      holdingAddress: NIVO_PROTOCOL_FEE_AND_HOLDING,
+      maxAutoCancelOrders: 11,
+      maxTotalCallbackGasLimitForAutoCancelOrders: 10_000_000,
+      // Gelato configs
+      gelatoRelayFeeMultiplierFactor: 0,
+      gelatoRelayFeeBaseAmount: 0,
+      relayFeeAddress: ethers.constants.AddressZero,
+      maxRelayFeeUsdForSubaccount: 0,
+      // Fee Handler configs
+      positionFeeReceiverFactor: 0,
+      swapFeeReceiverFactor: 0,
+      borrowingFeeReceiverFactor: 0,
+      liquidationFeeReceiverFactor: 0,
+      // Multichain configs
+      multichainProviders: {},
+      multichainEndpoints: {},
+      srcChainIds: {},
+      eids: {},
+    },
+    arbitrumGoerli: {
+      feeReceiver: LEGACY_GMX_FEE_RECEIVER,
+      holdingAddress: LEGACY_GMX_HOLDING_ADDRESS,
+    },
     arbitrumSepolia: {
+      feeReceiver: LEGACY_GMX_FEE_RECEIVER,
+      holdingAddress: LEGACY_GMX_HOLDING_ADDRESS,
       maxAutoCancelOrders: 11,
       maxTotalCallbackGasLimitForAutoCancelOrders: 10_000_000,
       claimableCollateralDelay: 24 * 60 * 60,
@@ -214,6 +250,8 @@ export default async function ({ network }: HardhatRuntimeEnvironment) {
       },
     },
     avalancheFuji: {
+      feeReceiver: LEGACY_GMX_FEE_RECEIVER,
+      holdingAddress: LEGACY_GMX_HOLDING_ADDRESS,
       maxAutoCancelOrders: 11,
       maxTotalCallbackGasLimitForAutoCancelOrders: 10_000_000,
       multichainProviders: {
@@ -232,6 +270,8 @@ export default async function ({ network }: HardhatRuntimeEnvironment) {
       },
     },
     arbitrum: {
+      feeReceiver: LEGACY_GMX_FEE_RECEIVER,
+      holdingAddress: LEGACY_GMX_HOLDING_ADDRESS,
       maxAutoCancelOrders: 11,
       maxTotalCallbackGasLimitForAutoCancelOrders: 10_000_000,
       maxCallbackGasLimit: 4_000_000,
@@ -277,6 +317,8 @@ export default async function ({ network }: HardhatRuntimeEnvironment) {
       },
     },
     avalanche: {
+      feeReceiver: LEGACY_GMX_FEE_RECEIVER,
+      holdingAddress: LEGACY_GMX_HOLDING_ADDRESS,
       multichainProviders: {
         "0x5634c4a5FEd09819E3c46D86A965Dd9447d86e47": true, // StargatePoolUSDC
         "0x12dC9256Acc9895B076f6638D628382881e62CeE": true, // StargatePoolUSDT
@@ -296,6 +338,8 @@ export default async function ({ network }: HardhatRuntimeEnvironment) {
       },
     },
     botanix: {
+      feeReceiver: LEGACY_GMX_FEE_RECEIVER,
+      holdingAddress: LEGACY_GMX_HOLDING_ADDRESS,
       positionFeeReceiverFactor: decimalToFloat(50, 2), // 50%
     },
   }[network.name];

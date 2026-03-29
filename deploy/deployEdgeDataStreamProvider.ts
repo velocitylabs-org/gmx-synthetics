@@ -13,7 +13,14 @@ const func = createDeployFunction({
 });
 
 func.skip = async (hre: HardhatRuntimeEnvironment) => {
-  return ["baseSepolia"].includes(hre.network.name);
+  if (hre.network.name === "baseSepolia") return true;
+
+  if (hre.network.name === "base") {
+    const enableEdgeDataStreams = process.env.ENABLE_EDGE_DATA_STREAMS === "true";
+    return !enableEdgeDataStreams;
+  }
+
+  return false;
 };
 
 export default func;

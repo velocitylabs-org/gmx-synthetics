@@ -146,8 +146,27 @@ async function setup() {
   const mockStargatePoolUsdc = await hre.ethers.getContract("MockStargatePoolUsdc");
   const mockStargatePoolNative = await hre.ethers.getContract("MockStargatePoolNative");
   const mockOracleProvider = await hre.ethers.getContract("MockOracleProvider");
-  const edgeDataStreamVerifier = await hre.ethers.getContract("EdgeDataStreamVerifier");
-  const edgeDataStreamProvider = await hre.ethers.getContract("EdgeDataStreamProvider");
+  // Edge (Chaos Labs) contracts are not deployed on Nivo paths; optional for legacy tests.
+  const edgeVerifierDeployment = await hre.deployments.getOrNull("EdgeDataStreamVerifier");
+  const edgeDataStreamVerifier = edgeVerifierDeployment
+    ? await hre.ethers.getContractAt("EdgeDataStreamVerifier", edgeVerifierDeployment.address)
+    : undefined;
+  const edgeProviderDeployment = await hre.deployments.getOrNull("EdgeDataStreamProvider");
+  const edgeDataStreamProvider = edgeProviderDeployment
+    ? await hre.ethers.getContractAt("EdgeDataStreamProvider", edgeProviderDeployment.address)
+    : undefined;
+  const claimVaultDeployment = await hre.deployments.getOrNull("ClaimVault");
+  const claimVault = claimVaultDeployment
+    ? await hre.ethers.getContractAt("ClaimVault", claimVaultDeployment.address)
+    : undefined;
+  const claimHandlerDeployment = await hre.deployments.getOrNull("ClaimHandler");
+  const claimHandler = claimHandlerDeployment
+    ? await hre.ethers.getContractAt("ClaimHandler", claimHandlerDeployment.address)
+    : undefined;
+  const claimUtilsDeployment = await hre.deployments.getOrNull("ClaimUtils");
+  const claimUtils = claimUtilsDeployment
+    ? await hre.ethers.getContractAt("ClaimUtils", claimUtilsDeployment.address)
+    : undefined;
   const multichainReader = await hre.ethers.getContract("MultichainReader");
   const mockEndpointV2 = await hre.ethers.getContract("MockEndpointV2");
   const mockMultichainReaderOriginator = await hre.ethers.getContract("MockMultichainReaderOriginator");
@@ -390,6 +409,9 @@ async function setup() {
       mockOracleProvider,
       edgeDataStreamVerifier,
       edgeDataStreamProvider,
+      claimHandler,
+      claimVault,
+      claimUtils,
       multichainReader,
       mockEndpointV2,
       mockMultichainReaderOriginator,

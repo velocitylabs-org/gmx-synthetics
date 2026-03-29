@@ -557,6 +557,22 @@ const nivoMarketsConfig: {
     getNivoMarketsTestnetConfig("ZAR"),
     getNivoMarketsTestnetConfig("THB"),
   ],
+  // Base mainnet markets use the same Nivo market set as baseSepolia, but we build
+  // them via the mainnet market config helper to keep the collateral token explicit.
+  base: [
+    getNivoMarketsConfig("JPY", "USDC"),
+    getNivoMarketsConfig("GBP", "USDC"),
+    getNivoMarketsConfig("BRL", "USDC"),
+    getNivoMarketsConfig("MXN", "USDC"),
+    getNivoMarketsConfig("COP", "USDC"),
+    getNivoMarketsConfig("IDR", "USDC"),
+    getNivoMarketsConfig("PHP", "USDC"),
+    getNivoMarketsConfig("PEN", "USDC"),
+    getNivoMarketsConfig("NGN", "USDC"),
+    getNivoMarketsConfig("KES", "USDC"),
+    getNivoMarketsConfig("ZAR", "USDC"),
+    getNivoMarketsConfig("THB", "USDC"),
+  ],
   hardhat: [
     getNivoMarketsLocalConfig("GBP", "USDC"),
     getNivoMarketsLocalConfig("BRL"),
@@ -589,6 +605,7 @@ const config: {
   [network: string]: MarketConfig[];
 } = {
   baseSepolia: [...nivoMarketsConfig.baseSepolia],
+  base: [...nivoMarketsConfig.base],
   arbitrum: [
     {
       tokens: { indexToken: "APE", longToken: "APE", shortToken: "USDC" },
