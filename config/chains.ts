@@ -1,6 +1,6 @@
 import { HardhatRuntimeEnvironment } from "hardhat/types";
 
-export const EXISTING_MAINNET_DEPLOYMENTS = ["arbitrum", "avalanche", "botanix", "base"];
+export const EXISTING_MAINNET_DEPLOYMENTS = ["arbitrum", "avalanche", "botanix"]; // "base"
 
 export function isExistingMainnetDeployment(hre: HardhatRuntimeEnvironment) {
   const deployOnFork = process.env.DEPLOY_ON_FORK === "true";
