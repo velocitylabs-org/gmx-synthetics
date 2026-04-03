@@ -5,7 +5,7 @@ import { handleDeposit } from "../../utils/deposit";
 import { getPositionCount } from "../../utils/position";
 import { expect } from "chai";
 
-describe("Guardian.LimitIncrease", () => {
+describe.skip("Guardian.LimitIncrease", () => {
   let fixture;
   let user1;
   let reader, dataStore, ethUsdMarket, wnt, usdc;

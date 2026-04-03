@@ -1,0 +1,16 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_113018_GmOracleUtils {
+label = "GmOracleUtils"
+"113018_validateSigner" [label="validateSigner"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"abi.encode()" 
+"revert InvalidGmSignature(address,address)" 
+"keccak256(bytes)" 
+"113018_validateSigner" -> "abi.encode()"
+"113018_validateSigner" -> "revert InvalidGmSignature(address,address)"
+"113018_validateSigner" -> "keccak256(bytes)"
+}
+}

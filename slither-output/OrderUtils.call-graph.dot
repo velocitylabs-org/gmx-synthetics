@@ -1,0 +1,53 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_122399_OrderUtils {
+label = "OrderUtils"
+"122399_createOrder" [label="createOrder"]
+"122399_clearAutoCancelOrders" [label="clearAutoCancelOrders"]
+"122399_updateAutoCancelList" [label="updateAutoCancelList"]
+"122399_cancelOrder" [label="cancelOrder"]
+"122399_validateTotalCallbackGasLimitForAutoCancelOrders" [label="validateTotalCallbackGasLimitForAutoCancelOrders"]
+"122399__updatePositionLastSrcChainId" [label="_updatePositionLastSrcChainId"]
+"122399_freezeOrder" [label="freezeOrder"]
+"122399_getTotalCallbackGasLimitForAutoCancelOrders" [label="getTotalCallbackGasLimitForAutoCancelOrders"]
+"122399_cancelOrder" -> "122399_updateAutoCancelList"
+"122399_createOrder" -> "122399_validateTotalCallbackGasLimitForAutoCancelOrders"
+"122399_createOrder" -> "122399__updatePositionLastSrcChainId"
+"122399_clearAutoCancelOrders" -> "122399_cancelOrder"
+"122399_createOrder" -> "122399_updateAutoCancelList"
+"122399_validateTotalCallbackGasLimitForAutoCancelOrders" -> "122399_getTotalCallbackGasLimitForAutoCancelOrders"
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"revert UnsupportedOrderType(uint256)" 
+"abi.encode()" 
+"revert MaxTotalCallbackGasLimitForAutoCancelOrdersExceeded(uint256,uint256)" 
+"revert UnsupportedOrderTypeForAutoCancellation(uint256)" 
+"revert InvalidReceiver(address)" 
+"gasleft()" 
+"revert UnexpectedValidFromTime(uint256)" 
+"revert InsufficientWntAmountForExecutionFee(uint256,uint256)" 
+"revert InsufficientGasForAutoCancellation(uint256,uint256)" 
+"revert UnexpectedMarket()" 
+"revert OrderAlreadyFrozen()" 
+"revert OrderTypeCannotBeCreated(uint256)" 
+"keccak256(bytes)" 
+"revert InsufficientGasForCancellation(uint256,uint256)" 
+"122399_createOrder" -> "revert InsufficientWntAmountForExecutionFee(uint256,uint256)"
+"122399_createOrder" -> "revert InvalidReceiver(address)"
+"122399_validateTotalCallbackGasLimitForAutoCancelOrders" -> "revert MaxTotalCallbackGasLimitForAutoCancelOrdersExceeded(uint256,uint256)"
+"122399_cancelOrder" -> "revert UnsupportedOrderType(uint256)"
+"122399_cancelOrder" -> "revert UnsupportedOrderTypeForAutoCancellation(uint256)"
+"122399_freezeOrder" -> "gasleft()"
+"122399_getTotalCallbackGasLimitForAutoCancelOrders" -> "abi.encode()"
+"122399_cancelOrder" -> "gasleft()"
+"122399_cancelOrder" -> "revert InsufficientGasForAutoCancellation(uint256,uint256)"
+"122399_freezeOrder" -> "revert OrderAlreadyFrozen()"
+"122399_cancelOrder" -> "revert InsufficientGasForCancellation(uint256,uint256)"
+"122399_getTotalCallbackGasLimitForAutoCancelOrders" -> "keccak256(bytes)"
+"122399_createOrder" -> "revert OrderTypeCannotBeCreated(uint256)"
+"122399_createOrder" -> "revert UnexpectedMarket()"
+"122399_clearAutoCancelOrders" -> "gasleft()"
+"122399_createOrder" -> "revert UnexpectedValidFromTime(uint256)"
+}
+}

@@ -1,0 +1,27 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_111002_MultichainUtils {
+label = "MultichainUtils"
+"111002_getMultichainBalanceAmount" [label="getMultichainBalanceAmount"]
+"111002__increaseMultichainBalance" [label="_increaseMultichainBalance"]
+"111002_validateMultichainProvider" [label="validateMultichainProvider"]
+"111002_validateMultichainEndpoint" [label="validateMultichainEndpoint"]
+"111002_recordBridgeIn" [label="recordBridgeIn"]
+"111002_transferOut" [label="transferOut"]
+"111002_recordTransferIn" [label="recordTransferIn"]
+"111002_recordTransferIn" -> "111002__increaseMultichainBalance"
+"111002_recordBridgeIn" -> "111002__increaseMultichainBalance"
+"111002_transferOut" -> "111002_getMultichainBalanceAmount"
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"revert InvalidMultichainEndpoint(address)" 
+"revert InvalidMultichainProvider(address)" 
+"revert EmptyMultichainTransferInAmount(address,address)" 
+"revert InsufficientMultichainBalance(address,address,uint256,uint256)" 
+"111002_validateMultichainEndpoint" -> "revert InvalidMultichainEndpoint(address)"
+"111002_validateMultichainProvider" -> "revert InvalidMultichainProvider(address)"
+"111002_recordBridgeIn" -> "revert EmptyMultichainTransferInAmount(address,address)"
+"111002_transferOut" -> "revert InsufficientMultichainBalance(address,address,uint256,uint256)"
+}
+}

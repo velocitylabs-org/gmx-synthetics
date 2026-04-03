@@ -1,0 +1,31 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_141184_RoleModule {
+label = "RoleModule"
+"141184_constructor" [label="constructor"]
+"141184__validateRole" [label="_validateRole"]
+}subgraph cluster_152057_ISwapHandler {
+label = "ISwapHandler"
+"152057_swap" [label="swap"]
+}subgraph cluster_16579_ReentrancyGuard {
+label = "ReentrancyGuard"
+"16579__reentrancyGuardEntered" [label="_reentrancyGuardEntered"]
+"16579__nonReentrantBefore" [label="_nonReentrantBefore"]
+"16579__nonReentrantAfter" [label="_nonReentrantAfter"]
+"16579_constructor" [label="constructor"]
+}subgraph cluster_152152_SwapHandler {
+label = "SwapHandler"
+"152152_constructor" [label="constructor"]
+"152152_swap" [label="swap"]
+"152152_swap" -> "152152_nonReentrant"
+"152152_constructor" -> "152152_constructor"
+"152152_swap" -> "152152_onlyController"
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"require(bool,string)" 
+"revert Unauthorized(address,string)" 
+"16579__nonReentrantBefore" -> "require(bool,string)"
+"141184__validateRole" -> "revert Unauthorized(address,string)"
+}
+}

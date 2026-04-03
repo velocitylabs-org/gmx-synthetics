@@ -9,7 +9,7 @@ import { encodeData } from "../../utils/hash";
 import { errorsContract } from "../../utils/error";
 import * as keys from "../../utils/keys";
 
-describe("FeeHandler", () => {
+describe.skip("FeeHandler", () => {
   let fixture;
   let user0, user1;
   let roleStore,

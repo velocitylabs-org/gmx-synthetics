@@ -1,0 +1,50 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_141184_RoleModule {
+label = "RoleModule"
+"141184_constructor" [label="constructor"]
+"141184__validateRole" [label="_validateRole"]
+}subgraph cluster_26369_StrictBank {
+label = "StrictBank"
+"26369__recordTransferIn" [label="_recordTransferIn"]
+"26369__afterTransferOut" [label="_afterTransferOut"]
+"26369_constructor" [label="constructor"]
+"26369_recordTransferIn" [label="recordTransferIn"]
+"26369_syncTokenBalance" [label="syncTokenBalance"]
+"26369_syncTokenBalance" -> "26369_onlyController"
+"26369_constructor" -> "26369_constructor"
+"26369_recordTransferIn" -> "26369_onlyController"
+"26369_recordTransferIn" -> "26369__recordTransferIn"
+}subgraph cluster_161292_WithdrawalVault {
+label = "WithdrawalVault"
+"161292_constructor" [label="constructor"]
+"161292_constructor" -> "161292_constructor"
+}subgraph cluster_26238_Bank {
+label = "Bank"
+"26238_transferOutNativeToken" [label="transferOutNativeToken"]
+"26238__transferOutNativeToken" [label="_transferOutNativeToken"]
+"26238__transferOut" [label="_transferOut"]
+"26238_transferOut" [label="transferOut"]
+"26238_receive" [label="receive"]
+"26238_constructor" [label="constructor"]
+"26238__afterTransferOut" [label="_afterTransferOut"]
+"26238_transferOut" -> "26238__transferOutNativeToken"
+"26238_constructor" -> "26238_constructor"
+"26238__transferOut" -> "26238__afterTransferOut"
+"26238_transferOut" -> "26238__transferOut"
+"26238_transferOutNativeToken" -> "26238_onlyController"
+"26238_transferOutNativeToken" -> "26238__transferOutNativeToken"
+"26238__transferOutNativeToken" -> "26238__afterTransferOut"
+"26238_transferOut" -> "26238_onlyController"
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"revert InvalidNativeTokenSender(address)" 
+"revert Unauthorized(address,string)" 
+"revert SelfTransferNotSupported(address)" 
+"141184__validateRole" -> "revert Unauthorized(address,string)"
+"26238__transferOutNativeToken" -> "revert SelfTransferNotSupported(address)"
+"26238__transferOut" -> "revert SelfTransferNotSupported(address)"
+"26238_receive" -> "revert InvalidNativeTokenSender(address)"
+}
+}

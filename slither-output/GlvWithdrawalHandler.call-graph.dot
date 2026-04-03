@@ -1,0 +1,79 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_141184_RoleModule {
+label = "RoleModule"
+"141184_constructor" [label="constructor"]
+"141184__validateRole" [label="_validateRole"]
+}subgraph cluster_16579_ReentrancyGuard {
+label = "ReentrancyGuard"
+"16579__reentrancyGuardEntered" [label="_reentrancyGuardEntered"]
+"16579__nonReentrantBefore" [label="_nonReentrantBefore"]
+"16579__nonReentrantAfter" [label="_nonReentrantAfter"]
+"16579_constructor" [label="constructor"]
+}subgraph cluster_156387_GlobalReentrancyGuard {
+label = "GlobalReentrancyGuard"
+"156387__globalNonReentrantBefore" [label="_globalNonReentrantBefore"]
+"156387_constructor" [label="constructor"]
+"156387__globalNonReentrantAfter" [label="_globalNonReentrantAfter"]
+}subgraph cluster_54637_BaseHandler {
+label = "BaseHandler"
+"54637_validateDataListLength" [label="validateDataListLength"]
+"54637_receive" [label="receive"]
+"54637_validateRequestCancellation" [label="validateRequestCancellation"]
+"54637_validateNonKeeperError" [label="validateNonKeeperError"]
+"54637_constructor" [label="constructor"]
+"54637_constructor" -> "54637_constructor"
+}subgraph cluster_56659_GlvWithdrawalHandler {
+label = "GlvWithdrawalHandler"
+"56659_simulateExecuteGlvWithdrawal" [label="simulateExecuteGlvWithdrawal"]
+"56659_executeGlvWithdrawal" [label="executeGlvWithdrawal"]
+"56659_createGlvWithdrawal" [label="createGlvWithdrawal"]
+"56659_constructor" [label="constructor"]
+"56659__handleGlvWithdrawalError" [label="_handleGlvWithdrawalError"]
+"56659__executeGlvWithdrawal" [label="_executeGlvWithdrawal"]
+"56659_cancelGlvWithdrawal" [label="cancelGlvWithdrawal"]
+"56659_cancelGlvWithdrawal" -> "56659_validateRequestCancellation"
+"56659_simulateExecuteGlvWithdrawal" -> "56659_onlyController"
+"56659_simulateExecuteGlvWithdrawal" -> "56659_globalNonReentrant"
+"56659_executeGlvWithdrawal" -> "56659_withOraclePrices"
+"56659_createGlvWithdrawal" -> "56659_validateDataListLength"
+"56659__executeGlvWithdrawal" -> "56659_onlySelf"
+"56659_executeGlvWithdrawal" -> "56659_globalNonReentrant"
+"56659_simulateExecuteGlvWithdrawal" -> "56659_withSimulatedOraclePrices"
+"56659_createGlvWithdrawal" -> "56659_globalNonReentrant"
+"56659_cancelGlvWithdrawal" -> "56659_globalNonReentrant"
+"56659_executeGlvWithdrawal" -> "56659_onlyOrderKeeper"
+"56659_executeGlvWithdrawal" -> "56659__handleGlvWithdrawalError"
+"56659_cancelGlvWithdrawal" -> "56659_onlyController"
+"56659_createGlvWithdrawal" -> "56659_onlyController"
+"56659_constructor" -> "56659_constructor"
+"56659__handleGlvWithdrawalError" -> "56659_validateNonKeeperError"
+}subgraph cluster_114391_OracleModule {
+label = "OracleModule"
+"114391_constructor" [label="constructor"]
+}subgraph cluster_56762_IGlvWithdrawalHandler {
+label = "IGlvWithdrawalHandler"
+"56762_cancelGlvWithdrawal" [label="cancelGlvWithdrawal"]
+"56762_simulateExecuteGlvWithdrawal" [label="simulateExecuteGlvWithdrawal"]
+"56762_createGlvWithdrawal" [label="createGlvWithdrawal"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"revert MaxDataListLengthExceeded(uint256,uint256)" 
+"require(bool,string)" 
+"gasleft()" 
+"revert Unauthorized(address,string)" 
+"revert RequestNotYetCancellable(uint256,uint256,string)" 
+"revert InvalidNativeTokenSender(address)" 
+"56659_cancelGlvWithdrawal" -> "gasleft()"
+"141184__validateRole" -> "revert Unauthorized(address,string)"
+"16579__nonReentrantBefore" -> "require(bool,string)"
+"54637_validateDataListLength" -> "revert MaxDataListLengthExceeded(uint256,uint256)"
+"54637_validateRequestCancellation" -> "revert RequestNotYetCancellable(uint256,uint256,string)"
+"56659_executeGlvWithdrawal" -> "gasleft()"
+"156387__globalNonReentrantBefore" -> "require(bool,string)"
+"56659__executeGlvWithdrawal" -> "gasleft()"
+"54637_receive" -> "revert InvalidNativeTokenSender(address)"
+}"56659_executeGlvWithdrawal" -> "56659__executeGlvWithdrawal"
+"56659_simulateExecuteGlvWithdrawal" -> "56659__executeGlvWithdrawal"
+}

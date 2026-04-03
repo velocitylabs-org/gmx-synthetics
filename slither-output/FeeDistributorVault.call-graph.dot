@@ -1,0 +1,44 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_141184_RoleModule {
+label = "RoleModule"
+"141184_constructor" [label="constructor"]
+"141184__validateRole" [label="_validateRole"]
+}subgraph cluster_63568_FeeDistributorVault {
+label = "FeeDistributorVault"
+"63568_withdrawNativeToken" [label="withdrawNativeToken"]
+"63568_constructor" [label="constructor"]
+"63568_withdrawToken" [label="withdrawToken"]
+"63568_constructor" -> "63568_constructor"
+"63568_withdrawToken" -> "63568_onlyTimelockAdmin"
+"63568_withdrawNativeToken" -> "63568_onlyTimelockAdmin"
+"63568_withdrawToken" -> "63568__transferOut"
+}subgraph cluster_26238_Bank {
+label = "Bank"
+"26238_transferOutNativeToken" [label="transferOutNativeToken"]
+"26238__transferOutNativeToken" [label="_transferOutNativeToken"]
+"26238__transferOut" [label="_transferOut"]
+"26238_transferOut" [label="transferOut"]
+"26238_receive" [label="receive"]
+"26238_constructor" [label="constructor"]
+"26238__afterTransferOut" [label="_afterTransferOut"]
+"26238_transferOut" -> "26238__transferOutNativeToken"
+"26238_constructor" -> "26238_constructor"
+"26238__transferOut" -> "26238__afterTransferOut"
+"26238_transferOut" -> "26238__transferOut"
+"26238_transferOutNativeToken" -> "26238_onlyController"
+"26238_transferOutNativeToken" -> "26238__transferOutNativeToken"
+"26238__transferOutNativeToken" -> "26238__afterTransferOut"
+"26238_transferOut" -> "26238_onlyController"
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"revert InvalidNativeTokenSender(address)" 
+"revert Unauthorized(address,string)" 
+"revert SelfTransferNotSupported(address)" 
+"141184__validateRole" -> "revert Unauthorized(address,string)"
+"26238__transferOutNativeToken" -> "revert SelfTransferNotSupported(address)"
+"26238__transferOut" -> "revert SelfTransferNotSupported(address)"
+"26238_receive" -> "revert InvalidNativeTokenSender(address)"
+}
+}

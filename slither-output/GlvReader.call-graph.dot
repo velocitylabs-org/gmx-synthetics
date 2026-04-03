@@ -1,0 +1,25 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_135682_GlvReader {
+label = "GlvReader"
+"135682_getGlvs" [label="getGlvs"]
+"135682_getGlvTokenPrice" [label="getGlvTokenPrice"]
+"135682_getGlvShifts" [label="getGlvShifts"]
+"135682_getGlv" [label="getGlv"]
+"135682_getAccountGlvDeposits" [label="getAccountGlvDeposits"]
+"135682_getGlvWithdrawal" [label="getGlvWithdrawal"]
+"135682_getGlvValue" [label="getGlvValue"]
+"135682_getGlvDeposit" [label="getGlvDeposit"]
+"135682_getGlvWithdrawals" [label="getGlvWithdrawals"]
+"135682_getGlvBySalt" [label="getGlvBySalt"]
+"135682_getGlvDeposits" [label="getGlvDeposits"]
+"135682_getGlvShift" [label="getGlvShift"]
+"135682_getAccountGlvWithdrawals" [label="getAccountGlvWithdrawals"]
+"135682_getGlvInfo" [label="getGlvInfo"]
+"135682_getGlvInfoList" [label="getGlvInfoList"]
+"135682_getGlvInfoList" -> "135682_getGlvInfo"
+}subgraph cluster_solidity {
+label = "[Solidity]"
+}
+}

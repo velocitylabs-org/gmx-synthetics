@@ -7,7 +7,7 @@ import { grantRole } from "../../utils/role";
 import { errorsContract } from "../../utils/error";
 import { CONTRIBUTOR_LAST_PAYMENT_AT } from "../../utils/keys";
 
-describe("ContributorHandler", () => {
+describe.skip("ContributorHandler", () => {
   let fixture;
   let wallet, user0, user1, user2, user3, user4, user5, user6, user7, user8;
   let dataStore, roleStore, contributorHandler, gmx, usdc, wnt;

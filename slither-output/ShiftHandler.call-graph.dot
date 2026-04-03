@@ -1,0 +1,82 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_141184_RoleModule {
+label = "RoleModule"
+"141184_constructor" [label="constructor"]
+"141184__validateRole" [label="_validateRole"]
+}subgraph cluster_16579_ReentrancyGuard {
+label = "ReentrancyGuard"
+"16579__reentrancyGuardEntered" [label="_reentrancyGuardEntered"]
+"16579__nonReentrantBefore" [label="_nonReentrantBefore"]
+"16579__nonReentrantAfter" [label="_nonReentrantAfter"]
+"16579_constructor" [label="constructor"]
+}subgraph cluster_156387_GlobalReentrancyGuard {
+label = "GlobalReentrancyGuard"
+"156387__globalNonReentrantBefore" [label="_globalNonReentrantBefore"]
+"156387_constructor" [label="constructor"]
+"156387__globalNonReentrantAfter" [label="_globalNonReentrantAfter"]
+}subgraph cluster_56901_IShiftHandler {
+label = "IShiftHandler"
+"56901_cancelShift" [label="cancelShift"]
+"56901_simulateExecuteShift" [label="simulateExecuteShift"]
+"56901_createShift" [label="createShift"]
+"56901_executeShiftFromController" [label="executeShiftFromController"]
+}subgraph cluster_54637_BaseHandler {
+label = "BaseHandler"
+"54637_validateDataListLength" [label="validateDataListLength"]
+"54637_receive" [label="receive"]
+"54637_validateRequestCancellation" [label="validateRequestCancellation"]
+"54637_validateNonKeeperError" [label="validateNonKeeperError"]
+"54637_constructor" [label="constructor"]
+"54637_constructor" -> "54637_constructor"
+}subgraph cluster_114391_OracleModule {
+label = "OracleModule"
+"114391_constructor" [label="constructor"]
+}subgraph cluster_58972_ShiftHandler {
+label = "ShiftHandler"
+"58972__handleShiftError" [label="_handleShiftError"]
+"58972_simulateExecuteShift" [label="simulateExecuteShift"]
+"58972_cancelShift" [label="cancelShift"]
+"58972__executeShift" [label="_executeShift"]
+"58972_constructor" [label="constructor"]
+"58972_executeShiftFromController" [label="executeShiftFromController"]
+"58972_createShift" [label="createShift"]
+"58972_executeShift" [label="executeShift"]
+"58972_createShift" -> "58972_globalNonReentrant"
+"58972_executeShift" -> "58972__handleShiftError"
+"58972_simulateExecuteShift" -> "58972_withSimulatedOraclePrices"
+"58972_cancelShift" -> "58972_validateRequestCancellation"
+"58972_executeShiftFromController" -> "58972_onlyController"
+"58972_createShift" -> "58972_onlyController"
+"58972_executeShift" -> "58972_withOraclePrices"
+"58972_createShift" -> "58972_validateDataListLength"
+"58972_cancelShift" -> "58972_globalNonReentrant"
+"58972_executeShift" -> "58972_globalNonReentrant"
+"58972_executeShiftFromController" -> "58972_nonReentrant"
+"58972_simulateExecuteShift" -> "58972_globalNonReentrant"
+"58972__executeShift" -> "58972_onlySelf"
+"58972_executeShift" -> "58972_onlyOrderKeeper"
+"58972__handleShiftError" -> "58972_validateNonKeeperError"
+"58972_cancelShift" -> "58972_onlyController"
+"58972_constructor" -> "58972_constructor"
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"revert MaxDataListLengthExceeded(uint256,uint256)" 
+"require(bool,string)" 
+"gasleft()" 
+"revert Unauthorized(address,string)" 
+"revert RequestNotYetCancellable(uint256,uint256,string)" 
+"revert InvalidNativeTokenSender(address)" 
+"141184__validateRole" -> "revert Unauthorized(address,string)"
+"58972__executeShift" -> "gasleft()"
+"16579__nonReentrantBefore" -> "require(bool,string)"
+"54637_validateDataListLength" -> "revert MaxDataListLengthExceeded(uint256,uint256)"
+"54637_validateRequestCancellation" -> "revert RequestNotYetCancellable(uint256,uint256,string)"
+"58972_cancelShift" -> "gasleft()"
+"58972_executeShift" -> "gasleft()"
+"156387__globalNonReentrantBefore" -> "require(bool,string)"
+"54637_receive" -> "revert InvalidNativeTokenSender(address)"
+}"58972_executeShift" -> "58972__executeShift"
+"58972_simulateExecuteShift" -> "58972__executeShift"
+}

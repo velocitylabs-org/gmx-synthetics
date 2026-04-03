@@ -1,0 +1,20 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_5920_Transfer {
+label = "Transfer"
+"5920_slitherConstructorConstantVariables" [label="slitherConstructorConstantVariables"]
+"5920_nativeOrToken" [label="nativeOrToken"]
+"5920_native" [label="native"]
+"5920_token" [label="token"]
+"5920_nativeOrToken" -> "5920_native"
+"5920_nativeOrToken" -> "5920_token"
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"revert Transfer_NativeFailed(address,uint256)" 
+"revert Transfer_ToAddressIsZero()" 
+"5920_native" -> "revert Transfer_NativeFailed(address,uint256)"
+"5920_token" -> "revert Transfer_ToAddressIsZero()"
+"5920_native" -> "revert Transfer_ToAddressIsZero()"
+}
+}

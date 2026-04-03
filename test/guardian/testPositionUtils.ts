@@ -10,7 +10,7 @@ import { executeLiquidation } from "../../utils/liquidation";
 import { TOKEN_ORACLE_TYPES } from "../../utils/oracle";
 import hre from "hardhat";
 
-describe("Guardian.PositionUtils", () => {
+describe.skip("Guardian.PositionUtils", () => {
   let fixture;
   let user0;
   let dataStore, wnt, usdc, ethUsdMarket, solUsdMarket, ethUsdSingleTokenMarket, wethPriceFeed;

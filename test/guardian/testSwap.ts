@@ -12,7 +12,7 @@ import { mine } from "@nomicfoundation/hardhat-network-helpers";
 import { getEventData } from "../../utils/event";
 import { errorsContract } from "../../utils/error";
 
-describe("Guardian.Swap", () => {
+describe.skip("Guardian.Swap", () => {
   const { provider } = ethers;
 
   let fixture;

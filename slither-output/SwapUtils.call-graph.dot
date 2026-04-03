@@ -1,0 +1,28 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_153358_SwapUtils {
+label = "SwapUtils"
+"153358__swap" [label="_swap"]
+"153358_swap" [label="swap"]
+"153358_validateSwapOutputToken" [label="validateSwapOutputToken"]
+"153358_getOutputToken" [label="getOutputToken"]
+"153358_swap" -> "153358__swap"
+"153358_validateSwapOutputToken" -> "153358_getOutputToken"
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"revert InsufficientOutputAmount(uint256,uint256)" 
+"revert InsufficientSwapOutputAmount(uint256,uint256)" 
+"revert InvalidTokenIn(address,address)" 
+"revert InvalidSwapOutputToken(address,address)" 
+"revert DuplicatedMarketInSwapPath(address)" 
+"revert SwapPriceImpactExceedsAmountIn(uint256,int256)" 
+"153358_validateSwapOutputToken" -> "revert InvalidSwapOutputToken(address,address)"
+"153358_swap" -> "revert InsufficientSwapOutputAmount(uint256,uint256)"
+"153358_swap" -> "revert InvalidTokenIn(address,address)"
+"153358_swap" -> "revert DuplicatedMarketInSwapPath(address)"
+"153358__swap" -> "revert InvalidTokenIn(address,address)"
+"153358__swap" -> "revert SwapPriceImpactExceedsAmountIn(uint256,int256)"
+"153358_swap" -> "revert InsufficientOutputAmount(uint256,uint256)"
+}
+}

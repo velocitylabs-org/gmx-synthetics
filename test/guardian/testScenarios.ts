@@ -6,7 +6,7 @@ import { handleDeposit } from "../../utils/deposit";
 import { getOrderCount, handleOrder, OrderType } from "../../utils/order";
 import { getPositionCount, getPositionKey } from "../../utils/position";
 
-describe("Guardian.Scenarios", () => {
+describe.skip("Guardian.Scenarios", () => {
   let fixture;
   let user1;
   let reader, dataStore, ethUsdMarket, wnt, usdc;

@@ -1,0 +1,12 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_153730_GasUsageTestLib {
+label = "GasUsageTestLib"
+"153730_getGasLeft" [label="getGasLeft"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"gasleft()" 
+"153730_getGasLeft" -> "gasleft()"
+}
+}

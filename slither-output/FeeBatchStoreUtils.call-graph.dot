@@ -1,0 +1,27 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_60132_FeeBatchStoreUtils {
+label = "FeeBatchStoreUtils"
+"60132_get" [label="get"]
+"60132_slitherConstructorConstantVariables" [label="slitherConstructorConstantVariables"]
+"60132_getFeeBatchKeys" [label="getFeeBatchKeys"]
+"60132_set" [label="set"]
+"60132_getFeeBatchCount" [label="getFeeBatchCount"]
+"60132_remove" [label="remove"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"abi.encode()" 
+"revert FeeBatchNotFound(bytes32)" 
+"keccak256(bytes)" 
+"60132_remove" -> "abi.encode()"
+"60132_remove" -> "keccak256(bytes)"
+"60132_slitherConstructorConstantVariables" -> "abi.encode()"
+"60132_set" -> "abi.encode()"
+"60132_get" -> "abi.encode()"
+"60132_remove" -> "revert FeeBatchNotFound(bytes32)"
+"60132_slitherConstructorConstantVariables" -> "keccak256(bytes)"
+"60132_get" -> "keccak256(bytes)"
+"60132_set" -> "keccak256(bytes)"
+}
+}

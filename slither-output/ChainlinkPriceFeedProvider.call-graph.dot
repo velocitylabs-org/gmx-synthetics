@@ -1,0 +1,20 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_111681_ChainlinkPriceFeedProvider {
+label = "ChainlinkPriceFeedProvider"
+"111681_constructor" [label="constructor"]
+"111681_isChainlinkOnChainProvider" [label="isChainlinkOnChainProvider"]
+"111681_getOraclePrice" [label="getOraclePrice"]
+"111681_shouldAdjustTimestamp" [label="shouldAdjustTimestamp"]
+}subgraph cluster_113162_IOracleProvider {
+label = "IOracleProvider"
+"113162_isChainlinkOnChainProvider" [label="isChainlinkOnChainProvider"]
+"113162_shouldAdjustTimestamp" [label="shouldAdjustTimestamp"]
+"113162_getOraclePrice" [label="getOraclePrice"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"revert EmptyChainlinkPriceFeed(address)" 
+"111681_getOraclePrice" -> "revert EmptyChainlinkPriceFeed(address)"
+}
+}

@@ -1,0 +1,15 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_157144_IVaultV1 {
+label = "IVaultV1"
+"157144_getMaxPrice" [label="getMaxPrice"]
+"157144_withdrawFees" [label="withdrawFees"]
+"157144_allWhitelistedTokensLength" [label="allWhitelistedTokensLength"]
+"157144_gov" [label="gov"]
+"157144_allWhitelistedTokens" [label="allWhitelistedTokens"]
+"157144_feeReserves" [label="feeReserves"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+}
+}

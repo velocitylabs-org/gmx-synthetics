@@ -1,0 +1,79 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_141184_RoleModule {
+label = "RoleModule"
+"141184_constructor" [label="constructor"]
+"141184__validateRole" [label="_validateRole"]
+}subgraph cluster_16579_ReentrancyGuard {
+label = "ReentrancyGuard"
+"16579__reentrancyGuardEntered" [label="_reentrancyGuardEntered"]
+"16579__nonReentrantBefore" [label="_nonReentrantBefore"]
+"16579__nonReentrantAfter" [label="_nonReentrantAfter"]
+"16579_constructor" [label="constructor"]
+}subgraph cluster_156387_GlobalReentrancyGuard {
+label = "GlobalReentrancyGuard"
+"156387__globalNonReentrantBefore" [label="_globalNonReentrantBefore"]
+"156387_constructor" [label="constructor"]
+"156387__globalNonReentrantAfter" [label="_globalNonReentrantAfter"]
+}subgraph cluster_55820_GlvDepositHandler {
+label = "GlvDepositHandler"
+"55820_createGlvDeposit" [label="createGlvDeposit"]
+"55820_executeGlvDeposit" [label="executeGlvDeposit"]
+"55820_simulateExecuteGlvDeposit" [label="simulateExecuteGlvDeposit"]
+"55820_constructor" [label="constructor"]
+"55820__handleGlvDepositError" [label="_handleGlvDepositError"]
+"55820__executeGlvDeposit" [label="_executeGlvDeposit"]
+"55820_cancelGlvDeposit" [label="cancelGlvDeposit"]
+"55820_createGlvDeposit" -> "55820_globalNonReentrant"
+"55820__handleGlvDepositError" -> "55820_validateNonKeeperError"
+"55820_simulateExecuteGlvDeposit" -> "55820_globalNonReentrant"
+"55820_cancelGlvDeposit" -> "55820_validateRequestCancellation"
+"55820_cancelGlvDeposit" -> "55820_onlyController"
+"55820_cancelGlvDeposit" -> "55820_globalNonReentrant"
+"55820_constructor" -> "55820_constructor"
+"55820__executeGlvDeposit" -> "55820_onlySelf"
+"55820_simulateExecuteGlvDeposit" -> "55820_onlyController"
+"55820_createGlvDeposit" -> "55820_validateDataListLength"
+"55820_executeGlvDeposit" -> "55820_onlyOrderKeeper"
+"55820_simulateExecuteGlvDeposit" -> "55820_withSimulatedOraclePrices"
+"55820_executeGlvDeposit" -> "55820__handleGlvDepositError"
+"55820_executeGlvDeposit" -> "55820_withOraclePrices"
+"55820_executeGlvDeposit" -> "55820_globalNonReentrant"
+"55820_createGlvDeposit" -> "55820_onlyController"
+}subgraph cluster_54637_BaseHandler {
+label = "BaseHandler"
+"54637_validateDataListLength" [label="validateDataListLength"]
+"54637_receive" [label="receive"]
+"54637_validateRequestCancellation" [label="validateRequestCancellation"]
+"54637_validateNonKeeperError" [label="validateNonKeeperError"]
+"54637_constructor" [label="constructor"]
+"54637_constructor" -> "54637_constructor"
+}subgraph cluster_114391_OracleModule {
+label = "OracleModule"
+"114391_constructor" [label="constructor"]
+}subgraph cluster_56732_IGlvDepositHandler {
+label = "IGlvDepositHandler"
+"56732_simulateExecuteGlvDeposit" [label="simulateExecuteGlvDeposit"]
+"56732_createGlvDeposit" [label="createGlvDeposit"]
+"56732_cancelGlvDeposit" [label="cancelGlvDeposit"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"revert MaxDataListLengthExceeded(uint256,uint256)" 
+"require(bool,string)" 
+"gasleft()" 
+"revert Unauthorized(address,string)" 
+"revert RequestNotYetCancellable(uint256,uint256,string)" 
+"revert InvalidNativeTokenSender(address)" 
+"55820__executeGlvDeposit" -> "gasleft()"
+"141184__validateRole" -> "revert Unauthorized(address,string)"
+"55820_cancelGlvDeposit" -> "gasleft()"
+"16579__nonReentrantBefore" -> "require(bool,string)"
+"54637_validateDataListLength" -> "revert MaxDataListLengthExceeded(uint256,uint256)"
+"54637_validateRequestCancellation" -> "revert RequestNotYetCancellable(uint256,uint256,string)"
+"55820_executeGlvDeposit" -> "gasleft()"
+"156387__globalNonReentrantBefore" -> "require(bool,string)"
+"54637_receive" -> "revert InvalidNativeTokenSender(address)"
+}"55820_simulateExecuteGlvDeposit" -> "55820__executeGlvDeposit"
+"55820_executeGlvDeposit" -> "55820__executeGlvDeposit"
+}

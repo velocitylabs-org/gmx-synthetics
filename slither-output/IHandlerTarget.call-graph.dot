@@ -1,0 +1,11 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_102329_IHandlerTarget {
+label = "IHandlerTarget"
+"102329_isHandler" [label="isHandler"]
+"102329_setHandler" [label="setHandler"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+}
+}

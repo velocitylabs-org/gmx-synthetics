@@ -1,0 +1,32 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_59731_ExternalHandler {
+label = "ExternalHandler"
+"59731__makeExternalCall" [label="_makeExternalCall"]
+"59731_makeExternalCalls" [label="makeExternalCalls"]
+"59731_makeExternalCalls" -> "59731__makeExternalCall"
+"59731_makeExternalCalls" -> "59731_nonReentrant"
+}subgraph cluster_16579_ReentrancyGuard {
+label = "ReentrancyGuard"
+"16579__reentrancyGuardEntered" [label="_reentrancyGuardEntered"]
+"16579__nonReentrantBefore" [label="_nonReentrantBefore"]
+"16579__nonReentrantAfter" [label="_nonReentrantAfter"]
+"16579_constructor" [label="constructor"]
+}subgraph cluster_59749_IExternalHandler {
+label = "IExternalHandler"
+"59749_makeExternalCalls" [label="makeExternalCalls"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"revert ExternalCallFailed(bytes)" 
+"revert InvalidExternalCallInput(uint256,uint256)" 
+"require(bool,string)" 
+"revert InvalidExternalReceiversInput(uint256,uint256)" 
+"revert InvalidExternalCallTarget(address)" 
+"59731__makeExternalCall" -> "revert ExternalCallFailed(bytes)"
+"16579__nonReentrantBefore" -> "require(bool,string)"
+"59731__makeExternalCall" -> "revert InvalidExternalCallTarget(address)"
+"59731_makeExternalCalls" -> "revert InvalidExternalCallInput(uint256,uint256)"
+"59731_makeExternalCalls" -> "revert InvalidExternalReceiversInput(uint256,uint256)"
+}
+}

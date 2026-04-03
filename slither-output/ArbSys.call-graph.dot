@@ -1,0 +1,11 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_27826_ArbSys {
+label = "ArbSys"
+"27826_arbBlockNumber" [label="arbBlockNumber"]
+"27826_arbBlockHash" [label="arbBlockHash"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+}
+}

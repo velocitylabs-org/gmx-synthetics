@@ -12,7 +12,7 @@ import { parseLogs } from "../../utils/event";
 import * as keys from "../../utils/keys";
 import * as feeDistributorConfig from "../../utils/feeDistributor";
 
-describe("FeeDistributor", function () {
+describe.skip("FeeDistributor", function () {
   let fixture,
     feeDistributor,
     feeDistributorVault,

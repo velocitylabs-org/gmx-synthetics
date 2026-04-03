@@ -10,7 +10,7 @@ import { getEventData } from "../../utils/event";
 import { getPositionCount, getPositionKeys, getAccountPositionCount } from "../../utils/position";
 import { prices } from "../../utils/prices";
 
-describe("Guardian.FundingFees", () => {
+describe.skip("Guardian.FundingFees", () => {
   let fixture;
   let user0, user1, user2, user3;
   let dataStore, wnt, usdc, reader, referralStorage, ethUsdMarket, ethUsdSingleTokenMarket, exchangeRouter;

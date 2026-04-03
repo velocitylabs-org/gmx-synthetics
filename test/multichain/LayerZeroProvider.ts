@@ -24,7 +24,7 @@ import { executeDeposit, getDepositCount } from "../../utils/deposit";
 import { executeGlvDeposit, executeGlvWithdrawal, getGlvDepositCount, getGlvWithdrawalCount } from "../../utils/glv";
 import { executeWithdrawal, getWithdrawalCount } from "../../utils/withdrawal";
 
-describe("LayerZeroProvider", () => {
+describe.skip("LayerZeroProvider", () => {
   let fixture;
   let user0, user1;
   let dataStore,

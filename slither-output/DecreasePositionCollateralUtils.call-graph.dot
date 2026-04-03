@@ -1,0 +1,23 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_124685_DecreasePositionCollateralUtils {
+label = "DecreasePositionCollateralUtils"
+"124685__getProportionalPendingImpactValues" [label="_getProportionalPendingImpactValues"]
+"124685_getEmptyFees" [label="getEmptyFees"]
+"124685_payForCost" [label="payForCost"]
+"124685_handleEarlyReturn" [label="handleEarlyReturn"]
+"124685_processCollateral" [label="processCollateral"]
+"124685_processCollateral" -> "124685_getEmptyFees"
+"124685_handleEarlyReturn" -> "124685_getEmptyFees"
+"124685_processCollateral" -> "124685__getProportionalPendingImpactValues"
+"124685_processCollateral" -> "124685_payForCost"
+"124685_processCollateral" -> "124685_handleEarlyReturn"
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"revert InsufficientFundsToPayForCosts(uint256,string)" 
+"revert EmptyHoldingAddress()" 
+"124685_processCollateral" -> "revert EmptyHoldingAddress()"
+"124685_handleEarlyReturn" -> "revert InsufficientFundsToPayForCosts(uint256,string)"
+}
+}

@@ -1,0 +1,95 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_141184_RoleModule {
+label = "RoleModule"
+"141184_constructor" [label="constructor"]
+"141184__validateRole" [label="_validateRole"]
+}subgraph cluster_114259_Oracle {
+label = "Oracle"
+"114259_getPrimaryPrice" [label="getPrimaryPrice"]
+"114259_validatePrices" [label="validatePrices"]
+"114259__setPrices" [label="_setPrices"]
+"114259_setTimestamps" [label="setTimestamps"]
+"114259_setPricesForAtomicAction" [label="setPricesForAtomicAction"]
+"114259__validateRefPrice" [label="_validateRefPrice"]
+"114259_getTokensWithPrices" [label="getTokensWithPrices"]
+"114259_clearAllPrices" [label="clearAllPrices"]
+"114259_setPrices" [label="setPrices"]
+"114259_validateSequencerUp" [label="validateSequencerUp"]
+"114259__validatePrices" [label="_validatePrices"]
+"114259__setPrimaryPrice" [label="_setPrimaryPrice"]
+"114259__removePrimaryPrice" [label="_removePrimaryPrice"]
+"114259_constructor" [label="constructor"]
+"114259__emitOraclePriceUpdated" [label="_emitOraclePriceUpdated"]
+"114259_getTokensWithPricesCount" [label="getTokensWithPricesCount"]
+"114259_setPrimaryPrice" [label="setPrimaryPrice"]
+"114259_setPricesForAtomicAction" -> "114259__setPrices"
+"114259__setPrices" -> "114259__emitOraclePriceUpdated"
+"114259_setPrimaryPrice" -> "114259_onlyController"
+"114259_clearAllPrices" -> "114259__removePrimaryPrice"
+"114259_setPricesForAtomicAction" -> "114259_validateSequencerUp"
+"114259_constructor" -> "114259_constructor"
+"114259_setPrices" -> "114259__validatePrices"
+"114259_setPrimaryPrice" -> "114259__setPrimaryPrice"
+"114259_setTimestamps" -> "114259_onlyController"
+"114259__setPrices" -> "114259__setPrimaryPrice"
+"114259__validatePrices" -> "114259__validateRefPrice"
+"114259_setPricesForAtomicAction" -> "114259__validatePrices"
+"114259_setPrices" -> "114259__setPrices"
+"114259_clearAllPrices" -> "114259_onlyController"
+"114259_validatePrices" -> "114259_onlyController"
+"114259_validatePrices" -> "114259__validatePrices"
+"114259_setPricesForAtomicAction" -> "114259_onlyController"
+"114259_setPrices" -> "114259_onlyController"
+}subgraph cluster_113136_IOracle {
+label = "IOracle"
+"113136_setPrimaryPrice" [label="setPrimaryPrice"]
+"113136_getTokensWithPricesCount" [label="getTokensWithPricesCount"]
+"113136_dataStore" [label="dataStore"]
+"113136_getPrimaryPrice" [label="getPrimaryPrice"]
+"113136_getTokensWithPrices" [label="getTokensWithPrices"]
+"113136_eventEmitter" [label="eventEmitter"]
+"113136_validateSequencerUp" [label="validateSequencerUp"]
+"113136_setPrices" [label="setPrices"]
+"113136_setTimestamps" [label="setTimestamps"]
+"113136_primaryPrices" [label="primaryPrices"]
+"113136_validatePrices" [label="validatePrices"]
+"113136_minTimestamp" [label="minTimestamp"]
+"113136_clearAllPrices" [label="clearAllPrices"]
+"113136_setPricesForAtomicAction" [label="setPricesForAtomicAction"]
+"113136_maxTimestamp" [label="maxTimestamp"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"revert SequencerGraceDurationNotYetPassed(uint256,uint256)" 
+"revert PriceAlreadySet(address,uint256,uint256)" 
+"revert InvalidMinMaxForPrice(address,uint256,uint256)" 
+"revert MaxOracleTimestampRangeExceeded(uint256,uint256)" 
+"revert InvalidOracleSetPricesProvidersParam(uint256,uint256)" 
+"revert InvalidOracleSetPricesDataParam(uint256,uint256)" 
+"revert InvalidOracleProviderForToken(address,address)" 
+"revert MaxPriceAgeExceeded(uint256,uint256)" 
+"revert Unauthorized(address,string)" 
+"revert SequencerDown()" 
+"revert InvalidOracleProvider(address)" 
+"revert MaxRefPriceDeviationExceeded(address,uint256,uint256,uint256)" 
+"revert NonAtomicOracleProvider(address)" 
+"revert EmptyPrimaryPrice(address)" 
+"revert NonEmptyTokensWithPrices(uint256)" 
+"114259__setPrices" -> "revert NonEmptyTokensWithPrices(uint256)"
+"141184__validateRole" -> "revert Unauthorized(address,string)"
+"114259__setPrices" -> "revert MaxOracleTimestampRangeExceeded(uint256,uint256)"
+"114259__validatePrices" -> "revert NonAtomicOracleProvider(address)"
+"114259__validateRefPrice" -> "revert MaxRefPriceDeviationExceeded(address,uint256,uint256,uint256)"
+"114259_validateSequencerUp" -> "revert SequencerGraceDurationNotYetPassed(uint256,uint256)"
+"114259_getPrimaryPrice" -> "revert EmptyPrimaryPrice(address)"
+"114259__setPrimaryPrice" -> "revert InvalidMinMaxForPrice(address,uint256,uint256)"
+"114259__validatePrices" -> "revert InvalidOracleProvider(address)"
+"114259__validatePrices" -> "revert InvalidOracleSetPricesProvidersParam(uint256,uint256)"
+"114259__validatePrices" -> "revert InvalidOracleProviderForToken(address,address)"
+"114259__setPrimaryPrice" -> "revert PriceAlreadySet(address,uint256,uint256)"
+"114259__validatePrices" -> "revert InvalidOracleSetPricesDataParam(uint256,uint256)"
+"114259__validatePrices" -> "revert MaxPriceAgeExceeded(uint256,uint256)"
+"114259_validateSequencerUp" -> "revert SequencerDown()"
+}
+}

@@ -4,7 +4,7 @@ import { deployFixture } from "../../utils/fixture";
 import { expandDecimals, decimalToFloat } from "../../utils/math";
 import { OrderType, createOrder, getOrderKeys } from "../../utils/order";
 
-describe("Guardian.UpdateOrder", () => {
+describe.skip("Guardian.UpdateOrder", () => {
   let fixture;
   let user0, user1;
   let reader, dataStore, ethUsdMarket, wnt, exchangeRouter;

@@ -1,0 +1,16 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_126954_IncreasePositionUtils {
+label = "IncreasePositionUtils"
+"126954_increasePosition" [label="increasePosition"]
+"126954_processCollateral" [label="processCollateral"]
+"126954_increasePosition" -> "126954_processCollateral"
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"revert InsufficientCollateralAmount(uint256,int256)" 
+"revert InsufficientCollateralUsd(int256)" 
+"126954_increasePosition" -> "revert InsufficientCollateralUsd(int256)"
+"126954_increasePosition" -> "revert InsufficientCollateralAmount(uint256,int256)"
+}
+}

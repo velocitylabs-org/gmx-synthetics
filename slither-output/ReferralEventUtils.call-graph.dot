@@ -1,0 +1,11 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_140230_ReferralEventUtils {
+label = "ReferralEventUtils"
+"140230_emitAffiliateRewardClaimed" [label="emitAffiliateRewardClaimed"]
+"140230_emitAffiliateRewardUpdated" [label="emitAffiliateRewardUpdated"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+}
+}

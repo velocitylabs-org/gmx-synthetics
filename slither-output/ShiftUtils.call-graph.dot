@@ -1,0 +1,38 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_150954_ShiftUtils {
+label = "ShiftUtils"
+"150954_executeShift" [label="executeShift"]
+"150954_cancelShift" [label="cancelShift"]
+"150954_createShift" [label="createShift"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"revert ShiftFromAndToMarketAreEqual(address)" 
+"revert BridgeOutNotSupportedDuringShift()" 
+"keccak256(bytes)" 
+"abi.encode()" 
+"revert ShortTokensAreNotEqual(address,address)" 
+"gasleft()" 
+"revert LongTokensAreNotEqual(address,address)" 
+"revert InsufficientWntAmountForExecutionFee(uint256,uint256)" 
+"revert EmptyShiftAmount()" 
+"revert RemovalShouldNotBeSkipped(bytes32,bytes32)" 
+"revert EmptyShift()" 
+"150954_createShift" -> "revert BridgeOutNotSupportedDuringShift()"
+"150954_executeShift" -> "keccak256(bytes)"
+"150954_createShift" -> "revert ShiftFromAndToMarketAreEqual(address)"
+"150954_createShift" -> "revert InsufficientWntAmountForExecutionFee(uint256,uint256)"
+"150954_executeShift" -> "revert EmptyShift()"
+"150954_createShift" -> "revert EmptyShiftAmount()"
+"150954_executeShift" -> "revert EmptyShiftAmount()"
+"150954_cancelShift" -> "revert EmptyShiftAmount()"
+"150954_createShift" -> "revert LongTokensAreNotEqual(address,address)"
+"150954_executeShift" -> "abi.encode()"
+"150954_executeShift" -> "gasleft()"
+"150954_cancelShift" -> "gasleft()"
+"150954_createShift" -> "revert ShortTokensAreNotEqual(address,address)"
+"150954_cancelShift" -> "revert EmptyShift()"
+"150954_executeShift" -> "revert RemovalShouldNotBeSkipped(bytes32,bytes32)"
+}
+}

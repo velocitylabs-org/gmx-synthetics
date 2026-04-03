@@ -1,0 +1,29 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_3441_UlnOptions {
+label = "UlnOptions"
+"3441_decodeLegacyOptions" [label="decodeLegacyOptions"]
+"3441_slitherConstructorConstantVariables" [label="slitherConstructorConstantVariables"]
+"3441_decode" [label="decode"]
+"3441__insertWorkerOptions" [label="_insertWorkerOptions"]
+"3441_decode" -> "3441_decodeLegacyOptions"
+"3441_decode" -> "3441__insertWorkerOptions"
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"abi.encodePacked()" 
+"revert LZ_ULN_InvalidLegacyType1Option()" 
+"revert LZ_ULN_InvalidWorkerId(uint8)" 
+"revert LZ_ULN_UnsupportedOptionType(uint16)" 
+"revert LZ_ULN_InvalidLegacyType2Option()" 
+"revert LZ_ULN_InvalidWorkerOptions(uint256)" 
+"3441_decodeLegacyOptions" -> "revert LZ_ULN_UnsupportedOptionType(uint16)"
+"3441_decodeLegacyOptions" -> "revert LZ_ULN_InvalidLegacyType1Option()"
+"3441__insertWorkerOptions" -> "revert LZ_ULN_InvalidWorkerId(uint8)"
+"3441_decodeLegacyOptions" -> "revert LZ_ULN_InvalidLegacyType2Option()"
+"3441_decode" -> "revert LZ_ULN_InvalidWorkerOptions(uint256)"
+"3441__insertWorkerOptions" -> "abi.encodePacked()"
+"3441_decodeLegacyOptions" -> "abi.encodePacked()"
+"3441_decode" -> "revert LZ_ULN_InvalidWorkerId(uint8)"
+}
+}

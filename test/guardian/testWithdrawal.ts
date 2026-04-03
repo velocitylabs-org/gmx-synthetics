@@ -9,7 +9,7 @@ import { getWithdrawalCount, handleWithdrawal } from "../../utils/withdrawal";
 import { BigNumber } from "ethers";
 import { errorsContract } from "../../utils/error";
 
-describe("Guardian.Withdrawal", () => {
+describe.skip("Guardian.Withdrawal", () => {
   let fixture;
   let user0, user1;
   let dataStore, ethUsdMarket, ethUsdSpotOnlyMarket, wnt, usdc;

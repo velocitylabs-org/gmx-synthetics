@@ -1,0 +1,62 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_172215_BytesLib {
+label = "BytesLib"
+"172215_toUint32" [label="toUint32"]
+"172215_toUint16" [label="toUint16"]
+"172215_equal" [label="equal"]
+"172215_toUint64" [label="toUint64"]
+"172215_toUint96" [label="toUint96"]
+"172215_toAddress" [label="toAddress"]
+"172215_toUint256" [label="toUint256"]
+"172215_toBytes32" [label="toBytes32"]
+"172215_equalStorage" [label="equalStorage"]
+"172215_toUint8" [label="toUint8"]
+"172215_concat" [label="concat"]
+"172215_slice" [label="slice"]
+"172215_toUint128" [label="toUint128"]
+"172215_concatStorage" [label="concatStorage"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"require(bool,string)" 
+"mstore(uint256,uint256)" 
+"mload(uint256)" 
+"sload(uint256)" 
+"sstore(uint256,uint256)" 
+"keccak256(uint256,uint256)" 
+"172215_toUint256" -> "require(bool,string)"
+"172215_toBytes32" -> "require(bool,string)"
+"172215_toUint8" -> "require(bool,string)"
+"172215_equalStorage" -> "sload(uint256)"
+"172215_toAddress" -> "mload(uint256)"
+"172215_concat" -> "mstore(uint256,uint256)"
+"172215_concat" -> "mload(uint256)"
+"172215_toUint128" -> "mload(uint256)"
+"172215_toUint64" -> "mload(uint256)"
+"172215_concatStorage" -> "sload(uint256)"
+"172215_toUint96" -> "require(bool,string)"
+"172215_equalStorage" -> "keccak256(uint256,uint256)"
+"172215_equalStorage" -> "mload(uint256)"
+"172215_slice" -> "require(bool,string)"
+"172215_toUint64" -> "require(bool,string)"
+"172215_slice" -> "mstore(uint256,uint256)"
+"172215_toBytes32" -> "mload(uint256)"
+"172215_toUint8" -> "mload(uint256)"
+"172215_toUint256" -> "mload(uint256)"
+"172215_toUint96" -> "mload(uint256)"
+"172215_toUint32" -> "mload(uint256)"
+"172215_slice" -> "mload(uint256)"
+"172215_toUint32" -> "require(bool,string)"
+"172215_toUint16" -> "mload(uint256)"
+"172215_concatStorage" -> "keccak256(uint256,uint256)"
+"172215_concatStorage" -> "sstore(uint256,uint256)"
+"172215_toUint16" -> "require(bool,string)"
+"172215_toAddress" -> "require(bool,string)"
+"172215_concatStorage" -> "mload(uint256)"
+"172215_equalStorage" -> "mstore(uint256,uint256)"
+"172215_toUint128" -> "require(bool,string)"
+"172215_equal" -> "mload(uint256)"
+"172215_concatStorage" -> "mstore(uint256,uint256)"
+}
+}

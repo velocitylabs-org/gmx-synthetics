@@ -1,0 +1,189 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_141184_RoleModule {
+label = "RoleModule"
+"141184_constructor" [label="constructor"]
+"141184__validateRole" [label="_validateRole"]
+}subgraph cluster_16579_ReentrancyGuard {
+label = "ReentrancyGuard"
+"16579__reentrancyGuardEntered" [label="_reentrancyGuardEntered"]
+"16579__nonReentrantBefore" [label="_nonReentrantBefore"]
+"16579__nonReentrantAfter" [label="_nonReentrantAfter"]
+"16579_constructor" [label="constructor"]
+}subgraph cluster_62933_FeeDistributor {
+label = "FeeDistributor"
+"62933__calculateAndBridgeGmx" [label="_calculateAndBridgeGmx"]
+"62933__getAddressInfoForChain" [label="_getAddressInfoForChain"]
+"62933_withdrawNativeToken" [label="withdrawNativeToken"]
+"62933__setReadRequestInput" [label="_setReadRequestInput"]
+"62933__transferWntCosts" [label="_transferWntCosts"]
+"62933__removeDust" [label="_removeDust"]
+"62933__getUint" [label="_getUint"]
+"62933_initiateDistribute" [label="initiateDistribute"]
+"62933_receive" [label="receive"]
+"62933_constructor" [label="constructor"]
+"62933_depositReferralRewards" [label="depositReferralRewards"]
+"62933__getFeeDistributorVaultBalance" [label="_getFeeDistributorVaultBalance"]
+"62933_bridgedGmxReceived" [label="bridgedGmxReceived"]
+"62933_distribute" [label="distribute"]
+"62933__finalizeWntForTreasury" [label="_finalizeWntForTreasury"]
+"62933__getAddressInfo" [label="_getAddressInfo"]
+"62933__validateDistributionState" [label="_validateDistributionState"]
+"62933_processLzReceive" [label="processLzReceive"]
+"62933__bridgeGmx" [label="_bridgeGmx"]
+"62933_withdrawToken" [label="withdrawToken"]
+"62933__transferOut" [label="_transferOut"]
+"62933__setDistributionState" [label="_setDistributionState"]
+"62933__calculateWntForReferralRewards" [label="_calculateWntForReferralRewards"]
+"62933__calculateAndTransferWntCosts" [label="_calculateAndTransferWntCosts"]
+"62933__emitFeeDistributionEvent" [label="_emitFeeDistributionEvent"]
+"62933__createUintArray" [label="_createUintArray"]
+"62933__getOraclePrice" [label="_getOraclePrice"]
+"62933__validateDistributionNotCompleted" [label="_validateDistributionNotCompleted"]
+"62933__calculateChainlinkAndTreasuryAmounts" [label="_calculateChainlinkAndTreasuryAmounts"]
+"62933__createAddressArray" [label="_createAddressArray"]
+"62933__setTokenPrices" [label="_setTokenPrices"]
+"62933__getAddress" [label="_getAddress"]
+"62933__setUintItem" [label="_setUintItem"]
+"62933__setUint" [label="_setUint"]
+"62933__decodeReadData" [label="_decodeReadData"]
+"62933_slitherConstructorConstantVariables" [label="slitherConstructorConstantVariables"]
+"62933__validateReadResponseTimestamp" [label="_validateReadResponseTimestamp"]
+"62933__setDistributionState" -> "62933__setUint"
+"62933_initiateDistribute" -> "62933__getFeeDistributorVaultBalance"
+"62933_depositReferralRewards" -> "62933_onlyFeeDistributionKeeper"
+"62933_initiateDistribute" -> "62933_onlyFeeDistributionKeeper"
+"62933_depositReferralRewards" -> "62933__setUintItem"
+"62933_initiateDistribute" -> "62933__setReadRequestInput"
+"62933__calculateAndTransferWntCosts" -> "62933__calculateWntForReferralRewards"
+"62933_constructor" -> "62933_constructor"
+"62933__validateDistributionState" -> "62933__getUint"
+"62933_processLzReceive" -> "62933__decodeReadData"
+"62933_initiateDistribute" -> "62933__validateDistributionNotCompleted"
+"62933__calculateAndTransferWntCosts" -> "62933__calculateChainlinkAndTreasuryAmounts"
+"62933__setTokenPrices" -> "62933__setUint"
+"62933_processLzReceive" -> "62933__validateReadResponseTimestamp"
+"62933_bridgedGmxReceived" -> "62933__emitFeeDistributionEvent"
+"62933_depositReferralRewards" -> "62933_nonReentrant"
+"62933_initiateDistribute" -> "62933__setDistributionState"
+"62933_processLzReceive" -> "62933__setUintItem"
+"62933_bridgedGmxReceived" -> "62933__validateReadResponseTimestamp"
+"62933_initiateDistribute" -> "62933__getAddress"
+"62933_initiateDistribute" -> "62933__getAddressInfoForChain"
+"62933_bridgedGmxReceived" -> "62933__getFeeDistributorVaultBalance"
+"62933_distribute" -> "62933__validateDistributionNotCompleted"
+"62933_withdrawToken" -> "62933_onlyTimelockAdmin"
+"62933__validateReadResponseTimestamp" -> "62933__getUint"
+"62933_distribute" -> "62933_onlyFeeDistributionKeeper"
+"62933_distribute" -> "62933__getUint"
+"62933_initiateDistribute" -> "62933__setUintItem"
+"62933__finalizeWntForTreasury" -> "62933__getUint"
+"62933_initiateDistribute" -> "62933__getUint"
+"62933_bridgedGmxReceived" -> "62933__validateDistributionState"
+"62933__bridgeGmx" -> "62933__getUint"
+"62933_processLzReceive" -> "62933__validateDistributionState"
+"62933__transferWntCosts" -> "62933__getUint"
+"62933_distribute" -> "62933__setUint"
+"62933_depositReferralRewards" -> "62933__transferOut"
+"62933_processLzReceive" -> "62933__calculateAndBridgeGmx"
+"62933_bridgedGmxReceived" -> "62933__setUintItem"
+"62933__transferWntCosts" -> "62933__getAddressInfoForChain"
+"62933_processLzReceive" -> "62933_onlyMultichainReader"
+"62933_bridgedGmxReceived" -> "62933_onlyFeeDistributionKeeper"
+"62933_initiateDistribute" -> "62933__setUint"
+"62933__transferWntCosts" -> "62933__transferOut"
+"62933_distribute" -> "62933_nonReentrant"
+"62933_distribute" -> "62933__validateDistributionState"
+"62933_processLzReceive" -> "62933__createUintArray"
+"62933__getAddressInfo" -> "62933__getAddress"
+"62933_bridgedGmxReceived" -> "62933__validateDistributionNotCompleted"
+"62933_distribute" -> "62933__setDistributionState"
+"62933__validateDistributionNotCompleted" -> "62933__getUint"
+"62933_distribute" -> "62933__emitFeeDistributionEvent"
+"62933_depositReferralRewards" -> "62933__getFeeDistributorVaultBalance"
+"62933__finalizeWntForTreasury" -> "62933__getAddressInfo"
+"62933_processLzReceive" -> "62933__setUint"
+"62933__bridgeGmx" -> "62933__getAddressInfoForChain"
+"62933__calculateAndBridgeGmx" -> "62933__createUintArray"
+"62933_depositReferralRewards" -> "62933__setUint"
+"62933__setTokenPrices" -> "62933__getOraclePrice"
+"62933_processLzReceive" -> "62933__setDistributionState"
+"62933_distribute" -> "62933__validateReadResponseTimestamp"
+"62933_withdrawNativeToken" -> "62933_onlyTimelockAdmin"
+"62933_processLzReceive" -> "62933__setTokenPrices"
+"62933__calculateChainlinkAndTreasuryAmounts" -> "62933__getUint"
+"62933__calculateAndBridgeGmx" -> "62933__bridgeGmx"
+"62933_distribute" -> "62933__calculateAndTransferWntCosts"
+"62933_bridgedGmxReceived" -> "62933__getUint"
+"62933__calculateAndTransferWntCosts" -> "62933__finalizeWntForTreasury"
+"62933__getAddressInfoForChain" -> "62933__getAddress"
+"62933_bridgedGmxReceived" -> "62933__setUint"
+"62933__bridgeGmx" -> "62933__removeDust"
+"62933__calculateAndTransferWntCosts" -> "62933__transferWntCosts"
+"62933_bridgedGmxReceived" -> "62933_nonReentrant"
+"62933_depositReferralRewards" -> "62933__getUint"
+"62933_distribute" -> "62933__getAddressInfo"
+"62933_depositReferralRewards" -> "62933__validateDistributionState"
+"62933_processLzReceive" -> "62933__emitFeeDistributionEvent"
+"62933_distribute" -> "62933__setUintItem"
+"62933__calculateAndTransferWntCosts" -> "62933__getFeeDistributorVaultBalance"
+"62933__transferWntCosts" -> "62933__getAddressInfo"
+"62933_processLzReceive" -> "62933__getUint"
+"62933_depositReferralRewards" -> "62933__getAddressInfo"
+"62933__calculateWntForReferralRewards" -> "62933__getUint"
+"62933__bridgeGmx" -> "62933__getAddressInfo"
+"62933_initiateDistribute" -> "62933_nonReentrant"
+"62933_initiateDistribute" -> "62933__emitFeeDistributionEvent"
+"62933_bridgedGmxReceived" -> "62933__setDistributionState"
+"62933__bridgeGmx" -> "62933__transferOut"
+"62933_initiateDistribute" -> "62933__validateDistributionState"
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"revert ZeroTreasuryAddress()" 
+"revert BridgedAmountNotSufficient(uint256,uint256)" 
+"abi.decode()" 
+"abi.encode()" 
+"balance(address)" 
+"abi.encodeWithSelector()" 
+"revert KeeperAmountMismatch(uint256,uint256)" 
+"revert Unauthorized(address,string)" 
+"revert InvalidFeeReceiver(address)" 
+"revert AttemptedBridgeAmountTooHigh(uint256,uint256,uint256)" 
+"require(bool,string)" 
+"revert InvalidDistributionState(uint256)" 
+"revert MaxWntReferralRewardsInUsdAmountExceeded(uint256,uint256)" 
+"revert MaxWntReferralRewardsInUsdExceeded(uint256,uint256)" 
+"revert MaxReferralRewardsExceeded(address,uint256,uint256)" 
+"revert OutdatedReadResponse(uint256)" 
+"revert InvalidReferralRewardToken(address)" 
+"revert EmptyChainlinkPriceFeed(address)" 
+"revert FeeDistributionAlreadyCompleted(uint256,uint256)" 
+"revert MaxEsGmxReferralRewardsAmountExceeded(uint256,uint256)" 
+"revert MaxWntFromTreasuryExceeded(uint256,uint256)" 
+"keccak256(bytes)" 
+"62933_slitherConstructorConstantVariables" -> "keccak256(bytes)"
+"62933__finalizeWntForTreasury" -> "revert MaxWntFromTreasuryExceeded(uint256,uint256)"
+"62933__validateDistributionState" -> "revert InvalidDistributionState(uint256)"
+"62933_initiateDistribute" -> "abi.encodeWithSelector()"
+"62933__transferWntCosts" -> "balance(address)"
+"62933__transferWntCosts" -> "revert KeeperAmountMismatch(uint256,uint256)"
+"141184__validateRole" -> "revert Unauthorized(address,string)"
+"62933_depositReferralRewards" -> "revert InvalidReferralRewardToken(address)"
+"62933_processLzReceive" -> "revert AttemptedBridgeAmountTooHigh(uint256,uint256,uint256)"
+"62933_depositReferralRewards" -> "revert MaxReferralRewardsExceeded(address,uint256,uint256)"
+"62933__decodeReadData" -> "abi.decode()"
+"62933_slitherConstructorConstantVariables" -> "abi.encode()"
+"62933__calculateWntForReferralRewards" -> "revert MaxWntReferralRewardsInUsdExceeded(uint256,uint256)"
+"62933__calculateWntForReferralRewards" -> "revert MaxWntReferralRewardsInUsdAmountExceeded(uint256,uint256)"
+"62933__validateDistributionNotCompleted" -> "revert FeeDistributionAlreadyCompleted(uint256,uint256)"
+"62933_distribute" -> "revert ZeroTreasuryAddress()"
+"62933_initiateDistribute" -> "revert InvalidFeeReceiver(address)"
+"62933__getOraclePrice" -> "revert EmptyChainlinkPriceFeed(address)"
+"62933__validateReadResponseTimestamp" -> "revert OutdatedReadResponse(uint256)"
+"62933_depositReferralRewards" -> "revert MaxEsGmxReferralRewardsAmountExceeded(uint256,uint256)"
+"16579__nonReentrantBefore" -> "require(bool,string)"
+"62933_bridgedGmxReceived" -> "revert BridgedAmountNotSufficient(uint256,uint256)"
+"62933_processLzReceive" -> "abi.encode()"
+}
+}

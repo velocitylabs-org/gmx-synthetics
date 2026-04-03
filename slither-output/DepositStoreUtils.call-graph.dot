@@ -1,0 +1,29 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_47773_DepositStoreUtils {
+label = "DepositStoreUtils"
+"47773_remove" [label="remove"]
+"47773_get" [label="get"]
+"47773_getAccountDepositCount" [label="getAccountDepositCount"]
+"47773_slitherConstructorConstantVariables" [label="slitherConstructorConstantVariables"]
+"47773_getAccountDepositKeys" [label="getAccountDepositKeys"]
+"47773_getDepositKeys" [label="getDepositKeys"]
+"47773_set" [label="set"]
+"47773_getDepositCount" [label="getDepositCount"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"abi.encode()" 
+"revert DepositNotFound(bytes32)" 
+"keccak256(bytes)" 
+"47773_get" -> "keccak256(bytes)"
+"47773_remove" -> "keccak256(bytes)"
+"47773_remove" -> "revert DepositNotFound(bytes32)"
+"47773_set" -> "abi.encode()"
+"47773_get" -> "abi.encode()"
+"47773_remove" -> "abi.encode()"
+"47773_slitherConstructorConstantVariables" -> "keccak256(bytes)"
+"47773_slitherConstructorConstantVariables" -> "abi.encode()"
+"47773_set" -> "keccak256(bytes)"
+}
+}

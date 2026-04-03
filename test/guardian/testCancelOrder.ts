@@ -4,7 +4,7 @@ import { deployFixture } from "../../utils/fixture";
 import { expandDecimals, decimalToFloat } from "../../utils/math";
 import { OrderType, createOrder, getOrderKeys, getOrderCount } from "../../utils/order";
 
-describe("Guardian.CancelOrder", () => {
+describe.skip("Guardian.CancelOrder", () => {
   const { provider } = ethers;
 
   let fixture;

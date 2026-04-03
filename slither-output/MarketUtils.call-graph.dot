@@ -1,0 +1,328 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_92269_MarketUtils {
+label = "MarketUtils"
+"92269_validateSwapPath" [label="validateSwapPath"]
+"92269_isMarketCollateralToken" [label="isMarketCollateralToken"]
+"92269_applyDeltaToVirtualInventoryForSwaps" [label="applyDeltaToVirtualInventoryForSwaps"]
+"92269_getMaxLendableUsdAvailable" [label="getMaxLendableUsdAvailable"]
+"92269_getPoolValueInfo" [label="getPoolValueInfo"]
+"92269_incrementCumulativeBorrowingFactor" [label="incrementCumulativeBorrowingFactor"]
+"92269_getNextTotalBorrowing" [label="getNextTotalBorrowing"]
+"92269_validatePositionMarket" [label="validatePositionMarket"]
+"92269_getUiFeeFactor" [label="getUiFeeFactor"]
+"92269_validateMarketCollateralToken" [label="validateMarketCollateralToken"]
+"92269_getPositionImpactPoolAmount" [label="getPositionImpactPoolAmount"]
+"92269_getOpenInterest" [label="getOpenInterest"]
+"92269_marketTokenAmountToUsd" [label="marketTokenAmountToUsd"]
+"92269_getMaxPositionImpactFactor" [label="getMaxPositionImpactFactor"]
+"92269_getMinPnlFactorAfterAdl" [label="getMinPnlFactorAfterAdl"]
+"92269_validateSwapMarket" [label="validateSwapMarket"]
+"92269_getCappedPnl" [label="getCappedPnl"]
+"92269_applyDeltaToOpenInterest" [label="applyDeltaToOpenInterest"]
+"92269_getFundingFactor" [label="getFundingFactor"]
+"92269_getMinCollateralFactorForOpenInterest" [label="getMinCollateralFactorForOpenInterest"]
+"92269_getMarketTokenPrice" [label="getMarketTokenPrice"]
+"92269_applyDeltaToPositionImpactPool" [label="applyDeltaToPositionImpactPool"]
+"92269_getNextBorrowingFees" [label="getNextBorrowingFees"]
+"92269_getFundingFeeAmountPerSize" [label="getFundingFeeAmountPerSize"]
+"92269_applyDeltaToOpenInterestInTokens" [label="applyDeltaToOpenInterestInTokens"]
+"92269_getAdjustedPositionImpactExponentFactor" [label="getAdjustedPositionImpactExponentFactor"]
+"92269_getTotalBorrowing" [label="getTotalBorrowing"]
+"92269_getFundingExponentFactor" [label="getFundingExponentFactor"]
+"92269_updateTotalBorrowing" [label="updateTotalBorrowing"]
+"92269_validateEnabledMarket" [label="validateEnabledMarket"]
+"92269_applyDeltaToClaimableFundingAmountPerSize" [label="applyDeltaToClaimableFundingAmountPerSize"]
+"92269_getMaxPoolUsdForDeposit" [label="getMaxPoolUsdForDeposit"]
+"92269_capPositiveImpactUsdByMaxPositionImpact" [label="capPositiveImpactUsdByMaxPositionImpact"]
+"92269_getFundingAmount" [label="getFundingAmount"]
+"92269_getAdjustedSwapImpactFactor" [label="getAdjustedSwapImpactFactor"]
+"92269_capPositiveImpactUsdByPositionImpactPool" [label="capPositiveImpactUsdByPositionImpactPool"]
+"92269_getAdjustedSwapImpactFactors" [label="getAdjustedSwapImpactFactors"]
+"92269_updateFundingState" [label="updateFundingState"]
+"92269_applyDeltaToTotalPendingImpactAmount" [label="applyDeltaToTotalPendingImpactAmount"]
+"92269_isSwapOnlyMarket" [label="isSwapOnlyMarket"]
+"92269_getNextPositionImpactPoolAmount" [label="getNextPositionImpactPoolAmount"]
+"92269_getExpectedMinTokenBalance" [label="getExpectedMinTokenBalance"]
+"92269_validatePoolUsdForDeposit" [label="validatePoolUsdForDeposit"]
+"92269_getBorrowingFactorPerSecond" [label="getBorrowingFactorPerSecond"]
+"92269_getSecondsSincePositionImpactPoolDistributed" [label="getSecondsSincePositionImpactPoolDistributed"]
+"92269_getKinkBorrowingFactor" [label="getKinkBorrowingFactor"]
+"92269_getMaxOpenInterest" [label="getMaxOpenInterest"]
+"92269_getReservedUsd" [label="getReservedUsd"]
+"92269_getNextFundingAmountPerSize" [label="getNextFundingAmountPerSize"]
+"92269_distributePositionImpactPool" [label="distributePositionImpactPool"]
+"92269_getClaimableFundingAmountPerSize" [label="getClaimableFundingAmountPerSize"]
+"92269_getAdjustedPositionImpactExponentFactors" [label="getAdjustedPositionImpactExponentFactors"]
+"92269_getSwapImpactAmountWithCap" [label="getSwapImpactAmountWithCap"]
+"92269_getTotalPendingImpactAmount" [label="getTotalPendingImpactAmount"]
+"92269_setTotalBorrowing" [label="setTotalBorrowing"]
+"92269_applyDeltaToCollateralSum" [label="applyDeltaToCollateralSum"]
+"92269_getOpenInterestForBalance" [label="getOpenInterestForBalance"]
+"92269_getNetPnl" [label="getNetPnl"]
+"92269_getTotalPendingBorrowingFees" [label="getTotalPendingBorrowingFees"]
+"92269_incrementClaimableCollateralAmount" [label="incrementClaimableCollateralAmount"]
+"92269_getMaxPositionImpactFactors" [label="getMaxPositionImpactFactors"]
+"92269_applyDeltaToFundingFeeAmountPerSize" [label="applyDeltaToFundingFeeAmountPerSize"]
+"92269_getPoolAmount" [label="getPoolAmount"]
+"92269_claimCollateral" [label="claimCollateral"]
+"92269_getIsLongToken" [label="getIsLongToken"]
+"92269_validateMaxPnl" [label="validateMaxPnl"]
+"92269_getMarketPrices" [label="getMarketPrices"]
+"92269_getReserveFactor" [label="getReserveFactor"]
+"92269_setUiFeeFactor" [label="setUiFeeFactor"]
+"92269_getVirtualInventoryForSwaps" [label="getVirtualInventoryForSwaps"]
+"92269_getNextFundingFactorPerSecond" [label="getNextFundingFactorPerSecond"]
+"92269_getSecondsSinceFundingUpdated" [label="getSecondsSinceFundingUpdated"]
+"92269_incrementClaimableFundingAmount" [label="incrementClaimableFundingAmount"]
+"92269__getClaimableFactor" [label="_getClaimableFactor"]
+"92269_getOpenInterestInTokens" [label="getOpenInterestInTokens"]
+"92269_getOpenInterestWithPnl" [label="getOpenInterestWithPnl"]
+"92269_getBorrowingExponentFactor" [label="getBorrowingExponentFactor"]
+"92269_validateReserve" [label="validateReserve"]
+"92269_getMinCollateralFactor" [label="getMinCollateralFactor"]
+"92269_getBorrowingFees" [label="getBorrowingFees"]
+"92269_getSwapPathMarket" [label="getSwapPathMarket"]
+"92269_getMaxPositionImpactFactorForLiquidations" [label="getMaxPositionImpactFactorForLiquidations"]
+"92269_getAdjustedPositionImpactFactors" [label="getAdjustedPositionImpactFactors"]
+"92269_getMaxPnlFactor" [label="getMaxPnlFactor"]
+"92269_validateMarketTokenBalance" [label="validateMarketTokenBalance"]
+"92269_setSavedFundingFactorPerSecond" [label="setSavedFundingFactorPerSecond"]
+"92269_getCachedTokenPrice" [label="getCachedTokenPrice"]
+"92269_getOpenInterestReserveFactor" [label="getOpenInterestReserveFactor"]
+"92269_getCumulativeBorrowingFactor" [label="getCumulativeBorrowingFactor"]
+"92269_getMinCollateralFactorForOpenInterestMultiplier" [label="getMinCollateralFactorForOpenInterestMultiplier"]
+"92269_claimFundingFees" [label="claimFundingFees"]
+"92269_applyDeltaToVirtualInventoryForPositionsInTokens" [label="applyDeltaToVirtualInventoryForPositionsInTokens"]
+"92269_getMinCollateralFactorForLiquidation" [label="getMinCollateralFactorForLiquidation"]
+"92269_getPnl" [label="getPnl"]
+"92269_getBorrowingFactor" [label="getBorrowingFactor"]
+"92269_getPnlToPoolFactor" [label="getPnlToPoolFactor"]
+"92269_getCumulativeBorrowingFactorUpdatedAt" [label="getCumulativeBorrowingFactorUpdatedAt"]
+"92269_getOpenInterestInTokensInUsd" [label="getOpenInterestInTokensInUsd"]
+"92269_updateCumulativeBorrowingFactor" [label="updateCumulativeBorrowingFactor"]
+"92269_getProportionalAmounts" [label="getProportionalAmounts"]
+"92269_batchClaimCollateral" [label="batchClaimCollateral"]
+"92269_getSavedFundingFactorPerSecond" [label="getSavedFundingFactorPerSecond"]
+"92269_getVirtualInventoryForPositions" [label="getVirtualInventoryForPositions"]
+"92269_usdToMarketTokenAmount" [label="usdToMarketTokenAmount"]
+"92269_getCollateralSum" [label="getCollateralSum"]
+"92269_getUsageFactor" [label="getUsageFactor"]
+"92269_isPnlFactorExceeded" [label="isPnlFactorExceeded"]
+"92269_getNextCumulativeBorrowingFactor" [label="getNextCumulativeBorrowingFactor"]
+"92269_getOptimalUsageFactor" [label="getOptimalUsageFactor"]
+"92269_validateOpenInterest" [label="validateOpenInterest"]
+"92269_getSwapImpactPoolAmount" [label="getSwapImpactPoolAmount"]
+"92269_getPoolUsdWithoutPnl" [label="getPoolUsdWithoutPnl"]
+"92269_applyDeltaToSwapImpactPool" [label="applyDeltaToSwapImpactPool"]
+"92269_applyDeltaToVirtualInventoryForPositions" [label="applyDeltaToVirtualInventoryForPositions"]
+"92269_getAdjustedPositionImpactFactor" [label="getAdjustedPositionImpactFactor"]
+"92269_getFundingAmountPerSizeDelta" [label="getFundingAmountPerSizeDelta"]
+"92269_getPendingPositionImpactPoolDistributionAmount" [label="getPendingPositionImpactPoolDistributionAmount"]
+"92269_validateOpenInterestReserve" [label="validateOpenInterestReserve"]
+"92269_applySwapImpactWithCap" [label="applySwapImpactWithCap"]
+"92269_getSwapPathMarkets" [label="getSwapPathMarkets"]
+"92269_getMaxPoolAmount" [label="getMaxPoolAmount"]
+"92269_getOppositeToken" [label="getOppositeToken"]
+"92269_validatePoolAmount" [label="validatePoolAmount"]
+"92269_getMarketTokenSupply" [label="getMarketTokenSupply"]
+"92269_applyDeltaToPoolAmount" [label="applyDeltaToPoolAmount"]
+"92269_getVirtualInventoryForPositionsInTokens" [label="getVirtualInventoryForPositionsInTokens"]
+"92269_getEnabledMarket" [label="getEnabledMarket"]
+"92269_getSecondsSinceCumulativeBorrowingFactorUpdated" [label="getSecondsSinceCumulativeBorrowingFactorUpdated"]
+"92269_getPoolDivisor" [label="getPoolDivisor"]
+"92269_getPnlToPoolFactor" -> "92269_getPnlToPoolFactor"
+"92269_getOpenInterestInTokens" -> "92269_getPoolDivisor"
+"92269_batchClaimCollateral" -> "92269_claimCollateral"
+"92269_updateTotalBorrowing" -> "92269_setTotalBorrowing"
+"92269_getOpenInterestForBalance" -> "92269_getPoolDivisor"
+"92269_getExpectedMinTokenBalance" -> "92269_getSwapImpactPoolAmount"
+"92269_validateMarketTokenBalance" -> "92269_getExpectedMinTokenBalance"
+"92269_isPnlFactorExceeded" -> "92269_getMarketPrices"
+"92269_capPositiveImpactUsdByPositionImpactPool" -> "92269_getMaxLendableUsdAvailable"
+"92269_getPnl" -> "92269_getOpenInterestInTokens"
+"92269_capPositiveImpactUsdByPositionImpactPool" -> "92269_getPoolAmount"
+"92269_validateMarketTokenBalance" -> "92269_getEnabledMarket"
+"92269_capPositiveImpactUsdByPositionImpactPool" -> "92269_getPositionImpactPoolAmount"
+"92269_getSwapPathMarket" -> "92269_validateSwapMarket"
+"92269_updateCumulativeBorrowingFactor" -> "92269_getNextCumulativeBorrowingFactor"
+"92269_applySwapImpactWithCap" -> "92269_applyDeltaToSwapImpactPool"
+"92269_isPnlFactorExceeded" -> "92269_getPnlToPoolFactor"
+"92269_getNextCumulativeBorrowingFactor" -> "92269_getSecondsSinceCumulativeBorrowingFactorUpdated"
+"92269_getBorrowingFactorPerSecond" -> "92269_getBorrowingFactor"
+"92269_validateSwapMarket" -> "92269_validateEnabledMarket"
+"92269_updateFundingState" -> "92269_getNextFundingAmountPerSize"
+"92269_validateMarketTokenBalance" -> "92269_getCollateralSum"
+"92269_getPoolValueInfo" -> "92269_getPnl"
+"92269_getTotalPendingBorrowingFees" -> "92269_getOpenInterest"
+"92269_getMinCollateralFactorForOpenInterest" -> "92269_getOpenInterest"
+"92269_updateCumulativeBorrowingFactor" -> "92269_incrementCumulativeBorrowingFactor"
+"92269_getKinkBorrowingFactor" -> "92269_getUsageFactor"
+"92269_getReservedUsd" -> "92269_getOpenInterestInTokens"
+"92269_validateMarketCollateralToken" -> "92269_isMarketCollateralToken"
+"92269_getBorrowingFactorPerSecond" -> "92269_getKinkBorrowingFactor"
+"92269_distributePositionImpactPool" -> "92269_applyDeltaToPositionImpactPool"
+"92269_getEnabledMarket" -> "92269_validateEnabledMarket"
+"92269_validateOpenInterest" -> "92269_getMaxOpenInterest"
+"92269_validateReserve" -> "92269_getReserveFactor"
+"92269_getOpenInterestWithPnl" -> "92269_getOpenInterest"
+"92269_validateMaxPnl" -> "92269_isPnlFactorExceeded"
+"92269_applyDeltaToVirtualInventoryForSwaps" -> "92269_getIsLongToken"
+"92269_getBorrowingFactorPerSecond" -> "92269_getPoolUsdWithoutPnl"
+"92269_validatePoolAmount" -> "92269_getPoolAmount"
+"92269_getPnl" -> "92269_getPnl"
+"92269_getOpenInterestInTokens" -> "92269_getOpenInterestInTokens"
+"92269_getBorrowingFactorPerSecond" -> "92269_getOpenInterestForBalance"
+"92269_getOpenInterestForBalance" -> "92269_getOpenInterest"
+"92269_getPnlToPoolFactor" -> "92269_getPoolUsdWithoutPnl"
+"92269_getAdjustedPositionImpactFactor" -> "92269_getAdjustedPositionImpactFactors"
+"92269_getNextCumulativeBorrowingFactor" -> "92269_getCumulativeBorrowingFactor"
+"92269_getMinCollateralFactorForOpenInterest" -> "92269_getMinCollateralFactorForOpenInterestMultiplier"
+"92269_isPnlFactorExceeded" -> "92269_isPnlFactorExceeded"
+"92269_validatePoolAmount" -> "92269_getMaxPoolAmount"
+"92269_getSwapImpactAmountWithCap" -> "92269_getSwapImpactPoolAmount"
+"92269_validateOpenInterestReserve" -> "92269_getOpenInterestReserveFactor"
+"92269_getNextFundingFactorPerSecond" -> "92269_getFundingFactor"
+"92269_getNextFundingAmountPerSize" -> "92269_getNextFundingFactorPerSecond"
+"92269_getNextFundingAmountPerSize" -> "92269_getPoolDivisor"
+"92269_claimCollateral" -> "92269__getClaimableFactor"
+"92269_getAdjustedPositionImpactExponentFactor" -> "92269_getAdjustedPositionImpactExponentFactors"
+"92269_applySwapImpactWithCap" -> "92269_getSwapImpactAmountWithCap"
+"92269_getPendingPositionImpactPoolDistributionAmount" -> "92269_getPositionImpactPoolAmount"
+"92269_getPnlToPoolFactor" -> "92269_getPnl"
+"92269_claimCollateral" -> "92269_validateMarketTokenBalance"
+"92269_validatePositionMarket" -> "92269_isSwapOnlyMarket"
+"92269_updateFundingState" -> "92269_setSavedFundingFactorPerSecond"
+"92269_getPoolValueInfo" -> "92269_getPoolAmount"
+"92269_updateFundingState" -> "92269_applyDeltaToFundingFeeAmountPerSize"
+"92269_getUsageFactor" -> "92269_getOpenInterestReserveFactor"
+"92269_applyDeltaToOpenInterest" -> "92269_validateOpenInterest"
+"92269_getMarketTokenPrice" -> "92269_getPoolValueInfo"
+"92269_getOpenInterestForBalance" -> "92269_getOpenInterestInTokens"
+"92269_getPoolValueInfo" -> "92269_getNextPositionImpactPoolAmount"
+"92269_getPoolValueInfo" -> "92269_getCappedPnl"
+"92269_getPoolUsdWithoutPnl" -> "92269_getPoolAmount"
+"92269_applyDeltaToOpenInterest" -> "92269_applyDeltaToVirtualInventoryForPositions"
+"92269_validateOpenInterestReserve" -> "92269_getReservedUsd"
+"92269_getBorrowingFactorPerSecond" -> "92269_getOptimalUsageFactor"
+"92269_validateSwapMarket" -> "92269_validateSwapMarket"
+"92269_getBorrowingFactorPerSecond" -> "92269_getReservedUsd"
+"92269_getTotalPendingBorrowingFees" -> "92269_getNextCumulativeBorrowingFactor"
+"92269_validateEnabledMarket" -> "92269_validateEnabledMarket"
+"92269_getNextFundingAmountPerSize" -> "92269_getFundingAmountPerSizeDelta"
+"92269_validateOpenInterestReserve" -> "92269_getPoolUsdWithoutPnl"
+"92269_validateSwapPath" -> "92269_validateSwapMarket"
+"92269_getMaxPositionImpactFactor" -> "92269_getMaxPositionImpactFactors"
+"92269_getPoolValueInfo" -> "92269_getTotalPendingBorrowingFees"
+"92269_validatePositionMarket" -> "92269_validatePositionMarket"
+"92269_getNextFundingFactorPerSecond" -> "92269_getFundingExponentFactor"
+"92269_validateReserve" -> "92269_getPoolUsdWithoutPnl"
+"92269_getReservedUsd" -> "92269_getOpenInterest"
+"92269_validateReserve" -> "92269_getReservedUsd"
+"92269_validatePoolUsdForDeposit" -> "92269_getPoolAmount"
+"92269_getOpenInterestInTokensInUsd" -> "92269_getOpenInterestInTokens"
+"92269_applyDeltaToOpenInterestInTokens" -> "92269_applyDeltaToVirtualInventoryForPositionsInTokens"
+"92269_getPnl" -> "92269_getOpenInterest"
+"92269_getOpenInterest" -> "92269_getOpenInterest"
+"92269_distributePositionImpactPool" -> "92269_getPendingPositionImpactPoolDistributionAmount"
+"92269_getOpenInterest" -> "92269_getPoolDivisor"
+"92269_getNextFundingAmountPerSize" -> "92269_getSecondsSinceFundingUpdated"
+"92269_updateTotalBorrowing" -> "92269_getNextTotalBorrowing"
+"92269_getCappedPnl" -> "92269_getMaxPnlFactor"
+"92269_getBorrowingFactorPerSecond" -> "92269_getBorrowingExponentFactor"
+"92269_getPnlToPoolFactor" -> "92269_getEnabledMarket"
+"92269_getSwapPathMarkets" -> "92269_getSwapPathMarket"
+"92269_capPositiveImpactUsdByMaxPositionImpact" -> "92269_getMaxPositionImpactFactor"
+"92269_getBorrowingFees" -> "92269_getCumulativeBorrowingFactor"
+"92269_claimFundingFees" -> "92269_validateMarketTokenBalance"
+"92269_getPoolAmount" -> "92269_getPoolDivisor"
+"92269_getNextFundingFactorPerSecond" -> "92269_getSavedFundingFactorPerSecond"
+"92269_applyDeltaToPoolAmount" -> "92269_applyDeltaToVirtualInventoryForSwaps"
+"92269_getProportionalAmounts" -> "92269_getPoolAmount"
+"92269_getNextBorrowingFees" -> "92269_getNextCumulativeBorrowingFactor"
+"92269_getNextFundingFactorPerSecond" -> "92269_getOpenInterestForBalance"
+"92269_getNextCumulativeBorrowingFactor" -> "92269_getBorrowingFactorPerSecond"
+"92269_getNetPnl" -> "92269_getPnl"
+"92269_isPnlFactorExceeded" -> "92269_getEnabledMarket"
+"92269_getAdjustedSwapImpactFactor" -> "92269_getAdjustedSwapImpactFactors"
+"92269_validatePoolUsdForDeposit" -> "92269_getMaxPoolUsdForDeposit"
+"92269_getSecondsSinceCumulativeBorrowingFactorUpdated" -> "92269_getCumulativeBorrowingFactorUpdatedAt"
+"92269_getOpenInterestForBalance" -> "92269_getOpenInterestForBalance"
+"92269_validateMarketTokenBalance" -> "92269_validateMarketTokenBalance"
+"92269_isPnlFactorExceeded" -> "92269_getMaxPnlFactor"
+"92269_validateOpenInterest" -> "92269_getOpenInterest"
+"92269_getNextTotalBorrowing" -> "92269_getTotalBorrowing"
+"92269_updateFundingState" -> "92269_applyDeltaToClaimableFundingAmountPerSize"
+"92269_getNextFundingAmountPerSize" -> "92269_getOpenInterest"
+"92269_validatePositionMarket" -> "92269_validateEnabledMarket"
+"92269_getMarketTokenPrice" -> "92269_getMarketTokenSupply"
+"92269_getTotalPendingBorrowingFees" -> "92269_getTotalBorrowing"
+"92269_getNextPositionImpactPoolAmount" -> "92269_getPendingPositionImpactPoolDistributionAmount"
+"92269_getPendingPositionImpactPoolDistributionAmount" -> "92269_getSecondsSincePositionImpactPoolDistributed"
+"92269_getOpenInterestWithPnl" -> "92269_getPnl"
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"revert MaxPoolUsdForDepositExceeded(uint256,uint256)" 
+"revert UnexpectedTokenForVirtualInventory(address,address)" 
+"revert InvalidCollateralTokenForMarket(address,address)" 
+"revert EmptyMarketTokenSupply()" 
+"revert InvalidSwapMarket(address)" 
+"revert InvalidClaimableFactor(uint256)" 
+"revert PnlFactorExceededForShorts(int256,uint256)" 
+"revert InvalidMarketTokenBalanceForClaimableFunding(address,address,uint256,uint256)" 
+"revert OpenInterestCannotBeUpdatedForSwapOnlyMarket(address)" 
+"revert UnexpectedBorrowingFactor(uint256,uint256)" 
+"revert CollateralAlreadyClaimed(uint256,uint256)" 
+"revert InvalidUiFeeFactor(uint256,uint256)" 
+"revert DisabledMarket(address)" 
+"revert MaxOpenInterestExceeded(uint256,uint256)" 
+"revert PnlFactorExceededForLongs(int256,uint256)" 
+"revert UnableToGetCachedTokenPrice(address,address)" 
+"revert InvalidClaimCollateralInput(uint256,uint256,uint256)" 
+"revert InvalidMarketTokenBalanceForCollateralAmount(address,address,uint256,uint256)" 
+"revert EmptyAddressInMarketTokenBalanceValidation(address,address)" 
+"revert MaxPoolAmountExceeded(uint256,uint256)" 
+"revert UnableToGetOppositeToken(address,address)" 
+"revert InsufficientReserveForOpenInterest(uint256,uint256)" 
+"revert MaxSwapPathLengthExceeded(uint256,uint256)" 
+"revert EmptyMarket()" 
+"revert InvalidPositionMarket(address)" 
+"revert MaxCollateralSumExceeded(uint256,uint256)" 
+"revert UnableToGetFundingFactorEmptyOpenInterest()" 
+"revert InsufficientReserve(uint256,uint256)" 
+"revert UnableToGetBorrowingFactorEmptyPoolUsd()" 
+"revert InvalidMarketTokenBalance(address,address,uint256,uint256)" 
+"92269_claimCollateral" -> "revert CollateralAlreadyClaimed(uint256,uint256)"
+"92269_getNextFundingFactorPerSecond" -> "revert UnableToGetFundingFactorEmptyOpenInterest()"
+"92269_validateOpenInterest" -> "revert MaxOpenInterestExceeded(uint256,uint256)"
+"92269_applyDeltaToCollateralSum" -> "revert MaxCollateralSumExceeded(uint256,uint256)"
+"92269_validateMaxPnl" -> "revert PnlFactorExceededForShorts(int256,uint256)"
+"92269_validateEnabledMarket" -> "revert DisabledMarket(address)"
+"92269_validatePoolAmount" -> "revert MaxPoolAmountExceeded(uint256,uint256)"
+"92269_applyDeltaToOpenInterest" -> "revert OpenInterestCannotBeUpdatedForSwapOnlyMarket(address)"
+"92269_validateSwapMarket" -> "revert InvalidSwapMarket(address)"
+"92269_getBorrowingFactorPerSecond" -> "revert UnableToGetBorrowingFactorEmptyPoolUsd()"
+"92269_validateMarketTokenBalance" -> "revert InvalidMarketTokenBalanceForClaimableFunding(address,address,uint256,uint256)"
+"92269_getCachedTokenPrice" -> "revert UnableToGetCachedTokenPrice(address,address)"
+"92269_validateMarketCollateralToken" -> "revert InvalidCollateralTokenForMarket(address,address)"
+"92269_validateReserve" -> "revert InsufficientReserve(uint256,uint256)"
+"92269_claimCollateral" -> "revert InvalidClaimableFactor(uint256)"
+"92269_getBorrowingFees" -> "revert UnexpectedBorrowingFactor(uint256,uint256)"
+"92269_validatePoolUsdForDeposit" -> "revert MaxPoolUsdForDepositExceeded(uint256,uint256)"
+"92269_validateMarketTokenBalance" -> "revert InvalidMarketTokenBalanceForCollateralAmount(address,address,uint256,uint256)"
+"92269_getNextBorrowingFees" -> "revert UnexpectedBorrowingFactor(uint256,uint256)"
+"92269_validateOpenInterestReserve" -> "revert InsufficientReserveForOpenInterest(uint256,uint256)"
+"92269_validatePositionMarket" -> "revert InvalidPositionMarket(address)"
+"92269_validateMarketTokenBalance" -> "revert EmptyAddressInMarketTokenBalanceValidation(address,address)"
+"92269_setUiFeeFactor" -> "revert InvalidUiFeeFactor(uint256,uint256)"
+"92269_getOppositeToken" -> "revert UnableToGetOppositeToken(address,address)"
+"92269_getIsLongToken" -> "revert UnexpectedTokenForVirtualInventory(address,address)"
+"92269_validateSwapPath" -> "revert MaxSwapPathLengthExceeded(uint256,uint256)"
+"92269_validateMaxPnl" -> "revert PnlFactorExceededForLongs(int256,uint256)"
+"92269_validateMarketTokenBalance" -> "revert InvalidMarketTokenBalance(address,address,uint256,uint256)"
+"92269_batchClaimCollateral" -> "revert InvalidClaimCollateralInput(uint256,uint256,uint256)"
+"92269_validateEnabledMarket" -> "revert EmptyMarket()"
+"92269_marketTokenAmountToUsd" -> "revert EmptyMarketTokenSupply()"
+}
+}

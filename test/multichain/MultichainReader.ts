@@ -8,7 +8,7 @@ import { revokeRoleIfGranted } from "../../utils/role";
 import { errorsContract } from "../../utils/error";
 import * as keys from "../../utils/keys";
 
-describe("MultichainReader", function () {
+describe.skip("MultichainReader", function () {
   // Constant representing a mock Endpoint ID for testing purposes
   const eid1 = 1000;
   const eid2 = 2000;

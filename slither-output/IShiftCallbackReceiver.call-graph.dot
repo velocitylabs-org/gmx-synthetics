@@ -1,0 +1,11 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_27652_IShiftCallbackReceiver {
+label = "IShiftCallbackReceiver"
+"27652_afterShiftCancellation" [label="afterShiftCancellation"]
+"27652_afterShiftExecution" [label="afterShiftExecution"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+}
+}

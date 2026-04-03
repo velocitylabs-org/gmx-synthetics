@@ -1,0 +1,27 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_27952_ChainReader {
+label = "ChainReader"
+"27952_updateLatestBlockHash" [label="updateLatestBlockHash"]
+"27952_slitherConstructorConstantVariables" [label="slitherConstructorConstantVariables"]
+"27952_getBlockHashWithDelayAndLatestBlockNumber" [label="getBlockHashWithDelayAndLatestBlockNumber"]
+"27952_getBlockHashAndLatestBlockNumber" [label="getBlockHashAndLatestBlockNumber"]
+"27952_updateLatestBlockHashWithDelay" [label="updateLatestBlockHashWithDelay"]
+"27952_getBlockNumber" [label="getBlockNumber"]
+"27952_getBlockHash" [label="getBlockHash"]
+"27952_getBlockHashAndLatestBlockNumber" -> "27952_getBlockNumber"
+"27952_getBlockHashAndLatestBlockNumber" -> "27952_getBlockHash"
+"27952_updateLatestBlockHash" -> "27952_getBlockHash"
+"27952_updateLatestBlockHashWithDelay" -> "27952_updateLatestBlockHash"
+"27952_updateLatestBlockHashWithDelay" -> "27952_getBlockNumber"
+"27952_getBlockHashWithDelayAndLatestBlockNumber" -> "27952_getBlockNumber"
+"27952_updateLatestBlockHash" -> "27952_getBlockNumber"
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"revert(string)" 
+"string.concat()" 
+"27952_updateLatestBlockHash" -> "string.concat()"
+"27952_updateLatestBlockHash" -> "revert(string)"
+}
+}

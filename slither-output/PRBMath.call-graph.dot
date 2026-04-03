@@ -1,0 +1,28 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_171272_PRBMath {
+label = "PRBMath"
+"171272_sqrt" [label="sqrt"]
+"171272_mulDiv" [label="mulDiv"]
+"171272_slitherConstructorConstantVariables" [label="slitherConstructorConstantVariables"]
+"171272_mulDivSigned" [label="mulDivSigned"]
+"171272_mostSignificantBit" [label="mostSignificantBit"]
+"171272_mulDivFixedPoint" [label="mulDivFixedPoint"]
+"171272_exp2" [label="exp2"]
+"171272_mulDivSigned" -> "171272_mulDiv"
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"revert PRBMath__MulDivFixedPointOverflow(uint256)" 
+"revert PRBMath__MulDivSignedOverflow(uint256)" 
+"revert PRBMath__MulDivSignedInputTooSmall()" 
+"revert PRBMath__MulDivOverflow(uint256,uint256)" 
+"mulmod(uint256,uint256,uint256)" 
+"171272_mulDivFixedPoint" -> "mulmod(uint256,uint256,uint256)"
+"171272_mulDivSigned" -> "revert PRBMath__MulDivSignedInputTooSmall()"
+"171272_mulDivSigned" -> "revert PRBMath__MulDivSignedOverflow(uint256)"
+"171272_mulDivFixedPoint" -> "revert PRBMath__MulDivFixedPointOverflow(uint256)"
+"171272_mulDiv" -> "revert PRBMath__MulDivOverflow(uint256,uint256)"
+"171272_mulDiv" -> "mulmod(uint256,uint256,uint256)"
+}
+}

@@ -1,0 +1,20 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_27810_Chain {
+label = "Chain"
+"27810_currentTimestamp" [label="currentTimestamp"]
+"27810_getCurrentTxL1GasFees" [label="getCurrentTxL1GasFees"]
+"27810_shouldUseArbPrecompiles" [label="shouldUseArbPrecompiles"]
+"27810_currentBlockNumber" [label="currentBlockNumber"]
+"27810_getBlockHash" [label="getBlockHash"]
+"27810_slitherConstructorConstantVariables" [label="slitherConstructorConstantVariables"]
+"27810_currentBlockNumber" -> "27810_shouldUseArbPrecompiles"
+"27810_getCurrentTxL1GasFees" -> "27810_shouldUseArbPrecompiles"
+"27810_getBlockHash" -> "27810_shouldUseArbPrecompiles"
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"blockhash(uint256)" 
+"27810_getBlockHash" -> "blockhash(uint256)"
+}
+}

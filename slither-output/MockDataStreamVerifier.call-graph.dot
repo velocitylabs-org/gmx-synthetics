@@ -1,0 +1,17 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_94336_MockDataStreamVerifier {
+label = "MockDataStreamVerifier"
+"94336_verify" [label="verify"]
+}subgraph cluster_113031_IChainlinkDataStreamVerifier {
+label = "IChainlinkDataStreamVerifier"
+"113031_verify" [label="verify"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"require(bool,string)" 
+"abi.decode()" 
+"94336_verify" -> "abi.decode()"
+"94336_verify" -> "require(bool,string)"
+}
+}

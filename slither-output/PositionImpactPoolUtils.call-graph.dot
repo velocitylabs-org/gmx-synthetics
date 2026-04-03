@@ -1,0 +1,19 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_92772_PositionImpactPoolUtils {
+label = "PositionImpactPoolUtils"
+"92772_withdrawFromPositionImpactPool" [label="withdrawFromPositionImpactPool"]
+"92772_reduceLentAmount" [label="reduceLentAmount"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"revert ReductionExceedsLentAmount(uint256,uint256)" 
+"require(bool,string)" 
+"revert InsufficientImpactPoolValueForWithdrawal(uint256,uint256,int256)" 
+"revert InvalidPoolValueForWithdrawal(int256)" 
+"92772_withdrawFromPositionImpactPool" -> "revert InvalidPoolValueForWithdrawal(int256)"
+"92772_reduceLentAmount" -> "revert ReductionExceedsLentAmount(uint256,uint256)"
+"92772_withdrawFromPositionImpactPool" -> "require(bool,string)"
+"92772_withdrawFromPositionImpactPool" -> "revert InsufficientImpactPoolValueForWithdrawal(uint256,uint256,int256)"
+}
+}

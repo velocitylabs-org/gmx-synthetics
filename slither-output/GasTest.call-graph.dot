@@ -1,0 +1,23 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_153693_GasTest {
+label = "GasTest"
+"153693_revertIfTxOriginIsZero" [label="revertIfTxOriginIsZero"]
+"153693_test" [label="test"]
+"153693_slitherConstructorConstantVariables" [label="slitherConstructorConstantVariables"]
+"153693_getCurrentTxL1GasFees" [label="getCurrentTxL1GasFees"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"revert(string)" 
+"keccak256(bytes)" 
+"abi.encodePacked()" 
+"153693_test" -> "keccak256(bytes)"
+"153693_revertIfTxOriginIsZero" -> "revert(string)"
+"153693_getCurrentTxL1GasFees" -> "revert(string)"
+"153693_test" -> "abi.encodePacked()"
+"153693_getCurrentTxL1GasFees" -> "abi.encodePacked()"
+"153693_test" -> "revert(string)"
+"153693_getCurrentTxL1GasFees" -> "keccak256(bytes)"
+}
+}

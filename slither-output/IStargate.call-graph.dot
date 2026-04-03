@@ -1,0 +1,20 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_3964_IOFT {
+label = "IOFT"
+"3964_approvalRequired" [label="approvalRequired"]
+"3964_sharedDecimals" [label="sharedDecimals"]
+"3964_send" [label="send"]
+"3964_quoteOFT" [label="quoteOFT"]
+"3964_quoteSend" [label="quoteSend"]
+"3964_token" [label="token"]
+"3964_oftVersion" [label="oftVersion"]
+}subgraph cluster_25390_IStargate {
+label = "IStargate"
+"25390_stargateType" [label="stargateType"]
+"25390_sendToken" [label="sendToken"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+}
+}

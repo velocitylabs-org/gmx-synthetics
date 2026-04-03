@@ -1,0 +1,19 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_119438_OrderEventUtils {
+label = "OrderEventUtils"
+"119438_emitOrderSizeDeltaAutoUpdated" [label="emitOrderSizeDeltaAutoUpdated"]
+"119438_emitOrderCreated" [label="emitOrderCreated"]
+"119438_emitOrderExecuted" [label="emitOrderExecuted"]
+"119438_emitOrderCancelled" [label="emitOrderCancelled"]
+"119438_emitOrderUpdated" [label="emitOrderUpdated"]
+"119438_emitOrderFrozen" [label="emitOrderFrozen"]
+"119438_createEventData" [label="createEventData"]
+"119438_emitPositionCollateralUsedForExecutionFee" [label="emitPositionCollateralUsedForExecutionFee"]
+"119438_emitOrderCollateralDeltaAmountAutoUpdated" [label="emitOrderCollateralDeltaAmountAutoUpdated"]
+"119438_emitOrderCreated" -> "119438_createEventData"
+}subgraph cluster_solidity {
+label = "[Solidity]"
+}
+}

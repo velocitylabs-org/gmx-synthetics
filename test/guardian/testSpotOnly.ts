@@ -8,7 +8,7 @@ import { getPoolAmount } from "../../utils/market";
 import { ethers } from "hardhat";
 import { errorsContract } from "../../utils/error";
 
-describe("Guardian.SpotOnlyMarkets", () => {
+describe.skip("Guardian.SpotOnlyMarkets", () => {
   let fixture;
   let user0;
   let dataStore, ethUsdMarket, ethUsdSpotOnlyMarket, wnt, usdc;

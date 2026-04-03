@@ -1,0 +1,14 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_157042_Uint256Mask {
+label = "Uint256Mask"
+"157042_validateUniqueAndSetIndex" [label="validateUniqueAndSetIndex"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"revert DuplicatedIndex(uint256,string)" 
+"revert MaskIndexOutOfBounds(uint256,string)" 
+"157042_validateUniqueAndSetIndex" -> "revert DuplicatedIndex(uint256,string)"
+"157042_validateUniqueAndSetIndex" -> "revert MaskIndexOutOfBounds(uint256,string)"
+}
+}

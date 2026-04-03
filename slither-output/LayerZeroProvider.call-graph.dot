@@ -1,0 +1,82 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_141184_RoleModule {
+label = "RoleModule"
+"141184_constructor" [label="constructor"]
+"141184__validateRole" [label="_validateRole"]
+}subgraph cluster_106618_LayerZeroProvider {
+label = "LayerZeroProvider"
+"106618_lzCompose" [label="lzCompose"]
+"106618__validateGasLeft" [label="_validateGasLeft"]
+"106618__handleGlvDeposit" [label="_handleGlvDeposit"]
+"106618_constructor" [label="constructor"]
+"106618__handleRegisterCode" [label="_handleRegisterCode"]
+"106618__areValidTransferRequests" [label="_areValidTransferRequests"]
+"106618__decodeLzComposeMsg" [label="_decodeLzComposeMsg"]
+"106618__handleNativeTopUp" [label="_handleNativeTopUp"]
+"106618_receive" [label="receive"]
+"106618__handleGlvWithdrawal" [label="_handleGlvWithdrawal"]
+"106618__handleSetTraderReferralCode" [label="_handleSetTraderReferralCode"]
+"106618_withdrawTokens" [label="withdrawTokens"]
+"106618__handleDeposit" [label="_handleDeposit"]
+"106618__handleWithdrawal" [label="_handleWithdrawal"]
+"106618_prepareSend" [label="prepareSend"]
+"106618_bridgeOut" [label="bridgeOut"]
+"106618_lzCompose" -> "106618__handleWithdrawal"
+"106618__handleGlvWithdrawal" -> "106618__validateGasLeft"
+"106618_bridgeOut" -> "106618_onlyController"
+"106618__handleGlvWithdrawal" -> "106618__areValidTransferRequests"
+"106618__handleDeposit" -> "106618__validateGasLeft"
+"106618_lzCompose" -> "106618__handleRegisterCode"
+"106618__handleRegisterCode" -> "106618__validateGasLeft"
+"106618__handleSetTraderReferralCode" -> "106618__validateGasLeft"
+"106618_lzCompose" -> "106618__decodeLzComposeMsg"
+"106618_lzCompose" -> "106618__handleNativeTopUp"
+"106618_lzCompose" -> "106618__handleGlvWithdrawal"
+"106618__handleDeposit" -> "106618__areValidTransferRequests"
+"106618_bridgeOut" -> "106618_prepareSend"
+"106618_withdrawTokens" -> "106618_onlyController"
+"106618_lzCompose" -> "106618__handleDeposit"
+"106618__handleGlvDeposit" -> "106618__validateGasLeft"
+"106618__handleGlvDeposit" -> "106618__areValidTransferRequests"
+"106618_constructor" -> "106618_constructor"
+"106618_lzCompose" -> "106618__handleGlvDeposit"
+"106618__handleWithdrawal" -> "106618__areValidTransferRequests"
+"106618_lzCompose" -> "106618__handleSetTraderReferralCode"
+"106618__handleWithdrawal" -> "106618__validateGasLeft"
+}subgraph cluster_104891_IMultichainProvider {
+label = "IMultichainProvider"
+"104891_withdrawTokens" [label="withdrawTokens"]
+"104891_bridgeOut" [label="bridgeOut"]
+}subgraph cluster_4478_ILayerZeroComposer {
+label = "ILayerZeroComposer"
+"4478_lzCompose" [label="lzCompose"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"revert InvalidBridgeOutToken(address)" 
+"revert EmptyWithdrawalAmount()" 
+"abi.decode()" 
+"revert InvalidEid(uint256)" 
+"gasleft()" 
+"revert InsufficientNativeTokenAmount(uint256,uint256)" 
+"revert Unauthorized(address,string)" 
+"revert InsufficientGasLeft(uint256,uint256)" 
+"106618_lzCompose" -> "abi.decode()"
+"141184__validateRole" -> "revert Unauthorized(address,string)"
+"106618_bridgeOut" -> "abi.decode()"
+"106618__handleGlvDeposit" -> "abi.decode()"
+"106618__handleGlvWithdrawal" -> "abi.decode()"
+"106618__handleDeposit" -> "abi.decode()"
+"106618__decodeLzComposeMsg" -> "abi.decode()"
+"106618__handleRegisterCode" -> "abi.decode()"
+"106618__validateGasLeft" -> "revert InsufficientGasLeft(uint256,uint256)"
+"106618__validateGasLeft" -> "gasleft()"
+"106618__handleNativeTopUp" -> "revert InsufficientNativeTokenAmount(uint256,uint256)"
+"106618_withdrawTokens" -> "revert EmptyWithdrawalAmount()"
+"106618_bridgeOut" -> "revert InvalidBridgeOutToken(address)"
+"106618_bridgeOut" -> "revert InvalidEid(uint256)"
+"106618__handleWithdrawal" -> "abi.decode()"
+"106618__handleSetTraderReferralCode" -> "abi.decode()"
+}
+}

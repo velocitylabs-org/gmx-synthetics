@@ -1,0 +1,49 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_141184_RoleModule {
+label = "RoleModule"
+"141184_constructor" [label="constructor"]
+"141184__validateRole" [label="_validateRole"]
+}subgraph cluster_16579_ReentrancyGuard {
+label = "ReentrancyGuard"
+"16579__reentrancyGuardEntered" [label="_reentrancyGuardEntered"]
+"16579__nonReentrantBefore" [label="_nonReentrantBefore"]
+"16579__nonReentrantAfter" [label="_nonReentrantAfter"]
+"16579_constructor" [label="constructor"]
+}subgraph cluster_33340_ConfigSyncer {
+label = "ConfigSyncer"
+"33340__validateKey" [label="_validateKey"]
+"33340_constructor" [label="constructor"]
+"33340__validateMarketInData" [label="_validateMarketInData"]
+"33340__initAllowedBaseKeys" [label="_initAllowedBaseKeys"]
+"33340_sync" [label="sync"]
+"33340_constructor" -> "33340_constructor"
+"33340_sync" -> "33340_onlyLimitedConfigKeeper"
+"33340_sync" -> "33340__validateMarketInData"
+"33340_sync" -> "33340_nonReentrant"
+"33340_sync" -> "33340__validateKey"
+"33340_constructor" -> "33340__initAllowedBaseKeys"
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"revert SyncConfigInvalidInputLengths(uint256,uint256)" 
+"revert InvalidBaseKey(bytes32)" 
+"abi.decode()" 
+"revert SyncConfigInvalidMarketFromData(address,address)" 
+"revert SyncConfigUpdatesDisabledForParameter(string)" 
+"require(bool,string)" 
+"revert Unauthorized(address,string)" 
+"revert SyncConfigUpdatesDisabledForMarket(address)" 
+"revert SyncConfigUpdatesDisabledForMarketParameter(address,string)" 
+"141184__validateRole" -> "revert Unauthorized(address,string)"
+"33340__validateMarketInData" -> "abi.decode()"
+"33340__validateKey" -> "revert InvalidBaseKey(bytes32)"
+"33340_sync" -> "revert SyncConfigInvalidInputLengths(uint256,uint256)"
+"16579__nonReentrantBefore" -> "require(bool,string)"
+"33340_sync" -> "revert SyncConfigUpdatesDisabledForMarketParameter(address,string)"
+"33340_sync" -> "revert SyncConfigUpdatesDisabledForMarket(address)"
+"33340_sync" -> "revert SyncConfigUpdatesDisabledForParameter(string)"
+"33340_sync" -> "abi.decode()"
+"33340__validateMarketInData" -> "revert SyncConfigInvalidMarketFromData(address,address)"
+}
+}

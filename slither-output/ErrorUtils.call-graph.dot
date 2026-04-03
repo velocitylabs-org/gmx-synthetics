@@ -1,0 +1,24 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_49999_ErrorUtils {
+label = "ErrorUtils"
+"49999_revertWithParsedMessage" [label="revertWithParsedMessage"]
+"49999_revertWithCustomError" [label="revertWithCustomError"]
+"49999_getErrorSelectorFromData" [label="getErrorSelectorFromData"]
+"49999_getRevertMessage" [label="getRevertMessage"]
+"49999_revertWithParsedMessage" -> "49999_getRevertMessage"
+"49999_revertWithParsedMessage" -> "49999_revertWithCustomError"
+"49999_getRevertMessage" -> "49999_getErrorSelectorFromData"
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"revert(string)" 
+"revert(uint256,uint256)" 
+"mload(uint256)" 
+"abi.decode()" 
+"49999_getErrorSelectorFromData" -> "mload(uint256)"
+"49999_getRevertMessage" -> "abi.decode()"
+"49999_revertWithParsedMessage" -> "revert(string)"
+"49999_revertWithCustomError" -> "revert(uint256,uint256)"
+}
+}

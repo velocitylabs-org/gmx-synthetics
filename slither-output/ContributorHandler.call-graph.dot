@@ -1,0 +1,74 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_155480_BasicMulticall {
+label = "BasicMulticall"
+"155480_multicall" [label="multicall"]
+}subgraph cluster_38242_ContributorHandler {
+label = "ContributorHandler"
+"38242__validateMaxContributorTokenAmounts" [label="_validateMaxContributorTokenAmounts"]
+"38242_sendPayments" [label="sendPayments"]
+"38242_setContributorAmount" [label="setContributorAmount"]
+"38242_setCustomContributorFundingAccount" [label="setCustomContributorFundingAccount"]
+"38242_constructor" [label="constructor"]
+"38242_addContributorToken" [label="addContributorToken"]
+"38242_setMaxTotalContributorTokenAmount" [label="setMaxTotalContributorTokenAmount"]
+"38242_removeContributorAccount" [label="removeContributorAccount"]
+"38242_setMinContributorPaymentInterval" [label="setMinContributorPaymentInterval"]
+"38242_removeContributorToken" [label="removeContributorToken"]
+"38242_addContributorAccount" [label="addContributorAccount"]
+"38242_setContributorFundingAccount" [label="setContributorFundingAccount"]
+"38242_setMinContributorPaymentInterval" -> "38242_onlyController"
+"38242_setContributorFundingAccount" -> "38242_onlyContributorKeeper"
+"38242_removeContributorAccount" -> "38242_nonReentrant"
+"38242_setContributorAmount" -> "38242_onlyContributorKeeper"
+"38242_removeContributorToken" -> "38242_nonReentrant"
+"38242_setCustomContributorFundingAccount" -> "38242_onlyContributorKeeper"
+"38242_addContributorToken" -> "38242_onlyContributorKeeper"
+"38242_sendPayments" -> "38242_nonReentrant"
+"38242_sendPayments" -> "38242_onlyContributorDistributor"
+"38242_setCustomContributorFundingAccount" -> "38242_nonReentrant"
+"38242_removeContributorAccount" -> "38242_onlyContributorKeeper"
+"38242_constructor" -> "38242_constructor"
+"38242_setMaxTotalContributorTokenAmount" -> "38242_nonReentrant"
+"38242_removeContributorToken" -> "38242_onlyContributorKeeper"
+"38242_addContributorAccount" -> "38242_nonReentrant"
+"38242_setContributorAmount" -> "38242_nonReentrant"
+"38242_setContributorAmount" -> "38242__validateMaxContributorTokenAmounts"
+"38242_setMaxTotalContributorTokenAmount" -> "38242_onlyController"
+"38242_setMinContributorPaymentInterval" -> "38242_nonReentrant"
+"38242_addContributorAccount" -> "38242_onlyContributorKeeper"
+"38242_setContributorFundingAccount" -> "38242_nonReentrant"
+"38242_setMaxTotalContributorTokenAmount" -> "38242__validateMaxContributorTokenAmounts"
+"38242_addContributorToken" -> "38242_nonReentrant"
+}subgraph cluster_16579_ReentrancyGuard {
+label = "ReentrancyGuard"
+"16579__reentrancyGuardEntered" [label="_reentrancyGuardEntered"]
+"16579__nonReentrantBefore" [label="_nonReentrantBefore"]
+"16579__nonReentrantAfter" [label="_nonReentrantAfter"]
+"16579_constructor" [label="constructor"]
+}subgraph cluster_141184_RoleModule {
+label = "RoleModule"
+"141184_constructor" [label="constructor"]
+"141184__validateRole" [label="_validateRole"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"revert MinContributorPaymentIntervalNotYetPassed(uint256)" 
+"require(bool,string)" 
+"revert InvalidSetContributorPaymentInput(uint256,uint256)" 
+"revert InvalidContributorToken(address)" 
+"revert Unauthorized(address,string)" 
+"revert MaxTotalContributorTokenAmountExceeded(address,uint256,uint256)" 
+"revert MinContributorPaymentIntervalBelowAllowedRange(uint256)" 
+"revert InvalidSetMaxTotalContributorTokenAmountInput(uint256,uint256)" 
+"38242__validateMaxContributorTokenAmounts" -> "revert MaxTotalContributorTokenAmountExceeded(address,uint256,uint256)"
+"141184__validateRole" -> "revert Unauthorized(address,string)"
+"38242_sendPayments" -> "revert MinContributorPaymentIntervalNotYetPassed(uint256)"
+"38242_setContributorAmount" -> "revert InvalidSetContributorPaymentInput(uint256,uint256)"
+"16579__nonReentrantBefore" -> "require(bool,string)"
+"38242_setMinContributorPaymentInterval" -> "revert MinContributorPaymentIntervalBelowAllowedRange(uint256)"
+"38242_setContributorAmount" -> "revert InvalidContributorToken(address)"
+"38242_setMaxTotalContributorTokenAmount" -> "revert InvalidSetMaxTotalContributorTokenAmountInput(uint256,uint256)"
+"38242_setMaxTotalContributorTokenAmount" -> "revert InvalidContributorToken(address)"
+}
+}

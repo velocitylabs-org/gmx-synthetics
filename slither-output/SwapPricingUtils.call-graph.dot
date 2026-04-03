@@ -1,0 +1,22 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_134872_SwapPricingUtils {
+label = "SwapPricingUtils"
+"134872_getPriceImpactUsd" [label="getPriceImpactUsd"]
+"134872_emitSwapFeesCollected" [label="emitSwapFeesCollected"]
+"134872_getNextPoolAmountsParams" [label="getNextPoolAmountsParams"]
+"134872__getPriceImpactUsd" [label="_getPriceImpactUsd"]
+"134872_getNextPoolAmountsUsd" [label="getNextPoolAmountsUsd"]
+"134872_getSwapFees" [label="getSwapFees"]
+"134872_emitSwapInfo" [label="emitSwapInfo"]
+"134872_getPriceImpactUsd" -> "134872_getNextPoolAmountsParams"
+"134872_getNextPoolAmountsUsd" -> "134872_getNextPoolAmountsParams"
+"134872_getPriceImpactUsd" -> "134872_getNextPoolAmountsUsd"
+"134872_getPriceImpactUsd" -> "134872__getPriceImpactUsd"
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"revert UsdDeltaExceedsPoolValue(int256,uint256)" 
+"134872_getNextPoolAmountsParams" -> "revert UsdDeltaExceedsPoolValue(int256,uint256)"
+}
+}

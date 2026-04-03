@@ -1,0 +1,41 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_113162_IOracleProvider {
+label = "IOracleProvider"
+"113162_isChainlinkOnChainProvider" [label="isChainlinkOnChainProvider"]
+"113162_shouldAdjustTimestamp" [label="shouldAdjustTimestamp"]
+"113162_getOraclePrice" [label="getOraclePrice"]
+}subgraph cluster_111547_ChainlinkDataStreamProvider {
+label = "ChainlinkDataStreamProvider"
+"111547_isChainlinkOnChainProvider" [label="isChainlinkOnChainProvider"]
+"111547_getOraclePrice" [label="getOraclePrice"]
+"111547__getDataStreamMultiplier" [label="_getDataStreamMultiplier"]
+"111547_shouldAdjustTimestamp" [label="shouldAdjustTimestamp"]
+"111547__getDataStreamSpreadReductionFactor" [label="_getDataStreamSpreadReductionFactor"]
+"111547__getPayloadParameter" [label="_getPayloadParameter"]
+"111547_constructor" [label="constructor"]
+"111547_getOraclePrice" -> "111547_onlyOracle"
+"111547_getOraclePrice" -> "111547__getDataStreamSpreadReductionFactor"
+"111547_getOraclePrice" -> "111547__getDataStreamMultiplier"
+"111547_getOraclePrice" -> "111547__getPayloadParameter"
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"revert InvalidDataStreamBidAsk(address,int192,int192)" 
+"abi.decode()" 
+"abi.encode()" 
+"revert InvalidDataStreamPrices(address,int192,int192)" 
+"revert EmptyDataStreamFeedId(address)" 
+"revert InvalidDataStreamFeedId(address,bytes32,bytes32)" 
+"revert EmptyDataStreamMultiplier(address)" 
+"revert InvalidDataStreamSpreadReductionFactor(address,uint256)" 
+"111547_getOraclePrice" -> "revert InvalidDataStreamFeedId(address,bytes32,bytes32)"
+"111547_getOraclePrice" -> "revert EmptyDataStreamFeedId(address)"
+"111547__getDataStreamMultiplier" -> "revert EmptyDataStreamMultiplier(address)"
+"111547_getOraclePrice" -> "abi.decode()"
+"111547__getDataStreamSpreadReductionFactor" -> "revert InvalidDataStreamSpreadReductionFactor(address,uint256)"
+"111547_getOraclePrice" -> "revert InvalidDataStreamBidAsk(address,int192,int192)"
+"111547__getPayloadParameter" -> "abi.encode()"
+"111547_getOraclePrice" -> "revert InvalidDataStreamPrices(address,int192,int192)"
+}
+}

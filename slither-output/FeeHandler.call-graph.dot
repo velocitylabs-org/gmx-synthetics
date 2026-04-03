@@ -1,0 +1,96 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_141184_RoleModule {
+label = "RoleModule"
+"141184_constructor" [label="constructor"]
+"141184__validateRole" [label="_validateRole"]
+}subgraph cluster_16579_ReentrancyGuard {
+label = "ReentrancyGuard"
+"16579__reentrancyGuardEntered" [label="_reentrancyGuardEntered"]
+"16579__nonReentrantBefore" [label="_nonReentrantBefore"]
+"16579__nonReentrantAfter" [label="_nonReentrantAfter"]
+"16579_constructor" [label="constructor"]
+}subgraph cluster_64628_FeeHandler {
+label = "FeeHandler"
+"64628_buyback" [label="buyback"]
+"64628__incrementWithdrawableBuybackTokenAmount" [label="_incrementWithdrawableBuybackTokenAmount"]
+"64628__incrementAvailableFeeAmount" [label="_incrementAvailableFeeAmount"]
+"64628__getAvailableFeeAmount" [label="_getAvailableFeeAmount"]
+"64628__validateBuybackToken" [label="_validateBuybackToken"]
+"64628__incrementAvailableFeeAmounts" [label="_incrementAvailableFeeAmounts"]
+"64628__setAvailableFeeAmount" [label="_setAvailableFeeAmount"]
+"64628__getFeeAmounts" [label="_getFeeAmounts"]
+"64628__getUint" [label="_getUint"]
+"64628__getMaxFeeTokenAmount" [label="_getMaxFeeTokenAmount"]
+"64628_slitherConstructorConstantVariables" [label="slitherConstructorConstantVariables"]
+"64628_claimFees" [label="claimFees"]
+"64628__getBatchSize" [label="_getBatchSize"]
+"64628_getOutputAmount" [label="getOutputAmount"]
+"64628_withdrawFees" [label="withdrawFees"]
+"64628_constructor" [label="constructor"]
+"64628__validateMarket" [label="_validateMarket"]
+"64628__buybackFees" [label="_buybackFees"]
+"64628_getOutputAmount" -> "64628__getBatchSize"
+"64628_buyback" -> "64628__getMaxFeeTokenAmount"
+"64628_buyback" -> "64628_withOraclePrices"
+"64628__buybackFees" -> "64628__setAvailableFeeAmount"
+"64628__incrementAvailableFeeAmounts" -> "64628__getFeeAmounts"
+"64628_claimFees" -> "64628__validateMarket"
+"64628_buyback" -> "64628__buybackFees"
+"64628__incrementAvailableFeeAmount" -> "64628__getAvailableFeeAmount"
+"64628__getAvailableFeeAmount" -> "64628__getUint"
+"64628_getOutputAmount" -> "64628__getMaxFeeTokenAmount"
+"64628_buyback" -> "64628__getBatchSize"
+"64628_getOutputAmount" -> "64628__getUint"
+"64628_claimFees" -> "64628_nonReentrant"
+"64628_getOutputAmount" -> "64628__validateBuybackToken"
+"64628__getBatchSize" -> "64628__getUint"
+"64628_withdrawFees" -> "64628__getBatchSize"
+"64628__incrementAvailableFeeAmounts" -> "64628__incrementAvailableFeeAmount"
+"64628__incrementAvailableFeeAmount" -> "64628__incrementWithdrawableBuybackTokenAmount"
+"64628_buyback" -> "64628__validateBuybackToken"
+"64628_constructor" -> "64628_constructor"
+"64628__getMaxFeeTokenAmount" -> "64628__getUint"
+"64628_withdrawFees" -> "64628__validateBuybackToken"
+"64628_claimFees" -> "64628__incrementAvailableFeeAmounts"
+"64628_getOutputAmount" -> "64628__validateMarket"
+"64628__buybackFees" -> "64628__incrementWithdrawableBuybackTokenAmount"
+"64628__incrementAvailableFeeAmount" -> "64628__setAvailableFeeAmount"
+"64628_getOutputAmount" -> "64628__getAvailableFeeAmount"
+"64628_withdrawFees" -> "64628_onlyFeeKeeper"
+"64628_buyback" -> "64628_nonReentrant"
+"64628_withdrawFees" -> "64628_nonReentrant"
+"64628__getFeeAmounts" -> "64628__getUint"
+"64628__getMaxFeeTokenAmount" -> "64628__getMaxFeeTokenAmount"
+"64628_buyback" -> "64628__getAvailableFeeAmount"
+"64628_getOutputAmount" -> "64628__getFeeAmounts"
+}subgraph cluster_114391_OracleModule {
+label = "OracleModule"
+"114391_constructor" [label="constructor"]
+}subgraph cluster_155480_BasicMulticall {
+label = "BasicMulticall"
+"155480_multicall" [label="multicall"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"revert InvalidBuybackToken(address)" 
+"revert AvailableFeeAmountIsZero(address,address,uint256)" 
+"revert EmptyClaimFeesMarket()" 
+"require(bool,string)" 
+"revert BuybackAndFeeTokenAreEqual(address,address)" 
+"revert Unauthorized(address,string)" 
+"revert InsufficientBuybackOutputAmount(address,address,uint256,uint256)" 
+"revert InvalidVersion(uint256)" 
+"revert MaxBuybackPriceAgeExceeded(uint256,uint256,uint256)" 
+"64628__getMaxFeeTokenAmount" -> "revert MaxBuybackPriceAgeExceeded(uint256,uint256,uint256)"
+"141184__validateRole" -> "revert Unauthorized(address,string)"
+"64628_buyback" -> "revert AvailableFeeAmountIsZero(address,address,uint256)"
+"16579__nonReentrantBefore" -> "require(bool,string)"
+"64628_buyback" -> "revert BuybackAndFeeTokenAreEqual(address,address)"
+"64628_claimFees" -> "revert InvalidVersion(uint256)"
+"64628__validateMarket" -> "revert EmptyClaimFeesMarket()"
+"64628_getOutputAmount" -> "revert InvalidVersion(uint256)"
+"64628__validateBuybackToken" -> "revert InvalidBuybackToken(address)"
+"64628_buyback" -> "revert InsufficientBuybackOutputAmount(address,address,uint256,uint256)"
+}
+}

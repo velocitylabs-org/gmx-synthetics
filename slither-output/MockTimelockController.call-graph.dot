@@ -1,0 +1,148 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_11458_IAccessControl {
+label = "IAccessControl"
+"11458_renounceRole" [label="renounceRole"]
+"11458_grantRole" [label="grantRole"]
+"11458_getRoleAdmin" [label="getRoleAdmin"]
+"11458_hasRole" [label="hasRole"]
+"11458_revokeRole" [label="revokeRole"]
+}subgraph cluster_21861_ERC165 {
+label = "ERC165"
+"21861_supportsInterface" [label="supportsInterface"]
+}subgraph cluster_14438_TimelockController {
+label = "TimelockController"
+"14438_hashOperation" [label="hashOperation"]
+"14438_schedule" [label="schedule"]
+"14438__execute" [label="_execute"]
+"14438_isOperationDone" [label="isOperationDone"]
+"14438_cancel" [label="cancel"]
+"14438_onERC1155BatchReceived" [label="onERC1155BatchReceived"]
+"14438_receive" [label="receive"]
+"14438_onERC1155Received" [label="onERC1155Received"]
+"14438__schedule" [label="_schedule"]
+"14438__afterCall" [label="_afterCall"]
+"14438_hashOperationBatch" [label="hashOperationBatch"]
+"14438_getMinDelay" [label="getMinDelay"]
+"14438_isOperationReady" [label="isOperationReady"]
+"14438_execute" [label="execute"]
+"14438_constructor" [label="constructor"]
+"14438_isOperationPending" [label="isOperationPending"]
+"14438_getTimestamp" [label="getTimestamp"]
+"14438_supportsInterface" [label="supportsInterface"]
+"14438__beforeCall" [label="_beforeCall"]
+"14438_scheduleBatch" [label="scheduleBatch"]
+"14438_isOperation" [label="isOperation"]
+"14438_updateDelay" [label="updateDelay"]
+"14438_onERC721Received" [label="onERC721Received"]
+"14438_executeBatch" [label="executeBatch"]
+"14438_schedule" -> "14438_hashOperation"
+"14438__beforeCall" -> "14438_isOperationDone"
+"14438_execute" -> "14438_hashOperation"
+"14438_scheduleBatch" -> "14438_onlyRole"
+"14438_supportsInterface" -> "14438_supportsInterface"
+"14438_executeBatch" -> "14438__afterCall"
+"14438_isOperationReady" -> "14438_getTimestamp"
+"14438_executeBatch" -> "14438_onlyRoleOrOpenRole"
+"14438_cancel" -> "14438_isOperationPending"
+"14438__beforeCall" -> "14438_isOperationReady"
+"14438_constructor" -> "14438__setRoleAdmin"
+"14438_executeBatch" -> "14438__beforeCall"
+"14438_execute" -> "14438__beforeCall"
+"14438_executeBatch" -> "14438_hashOperationBatch"
+"14438_execute" -> "14438__execute"
+"14438_execute" -> "14438_onlyRoleOrOpenRole"
+"14438_constructor" -> "14438__setupRole"
+"14438_cancel" -> "14438_onlyRole"
+"14438_scheduleBatch" -> "14438__schedule"
+"14438_isOperationPending" -> "14438_getTimestamp"
+"14438__schedule" -> "14438_getMinDelay"
+"14438__afterCall" -> "14438_isOperationReady"
+"14438_executeBatch" -> "14438__execute"
+"14438_execute" -> "14438__afterCall"
+"14438__schedule" -> "14438_isOperation"
+"14438_schedule" -> "14438__schedule"
+"14438_schedule" -> "14438_onlyRole"
+"14438_scheduleBatch" -> "14438_hashOperationBatch"
+"14438_isOperationDone" -> "14438_getTimestamp"
+"14438_isOperation" -> "14438_getTimestamp"
+}subgraph cluster_102310_MockTimelockController {
+label = "MockTimelockController"
+"102310_constructor" [label="constructor"]
+"102310_slitherConstructorConstantVariables" [label="slitherConstructorConstantVariables"]
+"102310_constructor" -> "102310_constructor"
+}subgraph cluster_16620_IERC1155Receiver {
+label = "IERC1155Receiver"
+"16620_onERC1155Received" [label="onERC1155Received"]
+"16620_onERC1155BatchReceived" [label="onERC1155BatchReceived"]
+}subgraph cluster_21873_IERC165 {
+label = "IERC165"
+"21873_supportsInterface" [label="supportsInterface"]
+}subgraph cluster_18646_IERC721Receiver {
+label = "IERC721Receiver"
+"18646_onERC721Received" [label="onERC721Received"]
+}subgraph cluster_11385_AccessControl {
+label = "AccessControl"
+"11385__setupRole" [label="_setupRole"]
+"11385_revokeRole" [label="revokeRole"]
+"11385__setRoleAdmin" [label="_setRoleAdmin"]
+"11385_getRoleAdmin" [label="getRoleAdmin"]
+"11385__revokeRole" [label="_revokeRole"]
+"11385_supportsInterface" [label="supportsInterface"]
+"11385_renounceRole" [label="renounceRole"]
+"11385_hasRole" [label="hasRole"]
+"11385__checkRole" [label="_checkRole"]
+"11385_grantRole" [label="grantRole"]
+"11385__grantRole" [label="_grantRole"]
+"11385_renounceRole" -> "11385__revokeRole"
+"11385__setupRole" -> "11385__grantRole"
+"11385_grantRole" -> "11385_getRoleAdmin"
+"11385_revokeRole" -> "11385_getRoleAdmin"
+"11385_revokeRole" -> "11385__revokeRole"
+"11385__revokeRole" -> "11385__msgSender"
+"11385_grantRole" -> "11385__grantRole"
+"11385__checkRole" -> "11385__checkRole"
+"11385__grantRole" -> "11385__msgSender"
+"11385__revokeRole" -> "11385_hasRole"
+"11385__checkRole" -> "11385__msgSender"
+"11385_supportsInterface" -> "11385_supportsInterface"
+"11385_renounceRole" -> "11385__msgSender"
+"11385__checkRole" -> "11385_hasRole"
+"11385_revokeRole" -> "11385_onlyRole"
+"11385__setRoleAdmin" -> "11385_getRoleAdmin"
+"11385__grantRole" -> "11385_hasRole"
+"11385_grantRole" -> "11385_onlyRole"
+}subgraph cluster_20539_Context {
+label = "Context"
+"20539__msgSender" [label="_msgSender"]
+"20539__msgData" [label="_msgData"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"revert(string)" 
+"abi.encodePacked()" 
+"abi.encode()" 
+"type()" 
+"require(bool,string)" 
+"keccak256(bytes)" 
+"11385__checkRole" -> "abi.encodePacked()"
+"14438_hashOperationBatch" -> "abi.encode()"
+"14438__execute" -> "require(bool,string)"
+"14438_executeBatch" -> "require(bool,string)"
+"14438_supportsInterface" -> "type()"
+"14438_hashOperation" -> "keccak256(bytes)"
+"11385__checkRole" -> "revert(string)"
+"14438__beforeCall" -> "require(bool,string)"
+"14438_hashOperation" -> "abi.encode()"
+"11385_renounceRole" -> "require(bool,string)"
+"14438__afterCall" -> "require(bool,string)"
+"21861_supportsInterface" -> "type()"
+"14438_scheduleBatch" -> "require(bool,string)"
+"11385_supportsInterface" -> "type()"
+"14438__schedule" -> "require(bool,string)"
+"14438_updateDelay" -> "require(bool,string)"
+"14438_cancel" -> "require(bool,string)"
+"102310_slitherConstructorConstantVariables" -> "keccak256(bytes)"
+"14438_hashOperationBatch" -> "keccak256(bytes)"
+}
+}

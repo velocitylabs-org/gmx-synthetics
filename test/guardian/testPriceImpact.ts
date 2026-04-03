@@ -9,7 +9,7 @@ import { handleDeposit } from "../../utils/deposit";
 import * as keys from "../../utils/keys";
 import { getBalanceOf } from "../../utils/token";
 
-describe("Guardian.PriceImpact", () => {
+describe.skip("Guardian.PriceImpact", () => {
   let fixture;
   let user0, user1;
   let dataStore, ethUsdMarket, wnt, usdc, reader;

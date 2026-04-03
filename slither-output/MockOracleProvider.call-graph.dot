@@ -1,0 +1,17 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_113162_IOracleProvider {
+label = "IOracleProvider"
+"113162_isChainlinkOnChainProvider" [label="isChainlinkOnChainProvider"]
+"113162_shouldAdjustTimestamp" [label="shouldAdjustTimestamp"]
+"113162_getOraclePrice" [label="getOraclePrice"]
+}subgraph cluster_100933_MockOracleProvider {
+label = "MockOracleProvider"
+"100933_isChainlinkOnChainProvider" [label="isChainlinkOnChainProvider"]
+"100933_shouldAdjustTimestamp" [label="shouldAdjustTimestamp"]
+"100933_getOraclePrice" [label="getOraclePrice"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+}
+}

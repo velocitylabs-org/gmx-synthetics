@@ -1,0 +1,11 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_157161_IVester {
+label = "IVester"
+"157161_setBonusRewards" [label="setBonusRewards"]
+"157161_bonusRewards" [label="bonusRewards"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+}
+}

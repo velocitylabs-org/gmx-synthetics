@@ -1,0 +1,11 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_101308_MockRewardTrackerV1 {
+label = "MockRewardTrackerV1"
+"101308_constructor" [label="constructor"]
+"101308_setTotalSupply" [label="setTotalSupply"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+}
+}

@@ -1,0 +1,34 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_35093_ConfigUtils {
+label = "ConfigUtils"
+"35093_setClaimableCollateralReductionFactorForAccount" [label="setClaimableCollateralReductionFactorForAccount"]
+"35093_setClaimableCollateralFactorForAccount" [label="setClaimableCollateralFactorForAccount"]
+"35093_setClaimableCollateralFactorForTime" [label="setClaimableCollateralFactorForTime"]
+"35093_initOracleConfig" [label="initOracleConfig"]
+"35093_validateRange" [label="validateRange"]
+"35093_slitherConstructorConstantVariables" [label="slitherConstructorConstantVariables"]
+"35093_setPositionImpactDistributionRate" [label="setPositionImpactDistributionRate"]
+"35093_initOracleConfig" -> "35093_validateRange"
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"revert DataStreamIdAlreadyExistsForToken(address)" 
+"revert EdgeDataStreamIdAlreadyExistsForToken(address)" 
+"abi.encode()" 
+"revert InvalidPositionImpactPoolDistributionRate(uint256,uint256)" 
+"revert PriceFeedAlreadyExistsForToken(address)" 
+"revert InvalidClaimableReductionFactor(uint256)" 
+"revert ConfigValueExceedsAllowedRange(bytes32,uint256)" 
+"revert InvalidClaimableFactor(uint256)" 
+"35093_initOracleConfig" -> "abi.encode()"
+"35093_initOracleConfig" -> "revert DataStreamIdAlreadyExistsForToken(address)"
+"35093_initOracleConfig" -> "revert PriceFeedAlreadyExistsForToken(address)"
+"35093_setClaimableCollateralFactorForTime" -> "revert InvalidClaimableFactor(uint256)"
+"35093_initOracleConfig" -> "revert EdgeDataStreamIdAlreadyExistsForToken(address)"
+"35093_setPositionImpactDistributionRate" -> "revert InvalidPositionImpactPoolDistributionRate(uint256,uint256)"
+"35093_setClaimableCollateralReductionFactorForAccount" -> "revert InvalidClaimableReductionFactor(uint256)"
+"35093_setClaimableCollateralFactorForAccount" -> "revert InvalidClaimableFactor(uint256)"
+"35093_validateRange" -> "revert ConfigValueExceedsAllowedRange(bytes32,uint256)"
+}
+}

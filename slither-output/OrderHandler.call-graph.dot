@@ -1,0 +1,100 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_141184_RoleModule {
+label = "RoleModule"
+"141184_constructor" [label="constructor"]
+"141184__validateRole" [label="_validateRole"]
+}subgraph cluster_16579_ReentrancyGuard {
+label = "ReentrancyGuard"
+"16579__reentrancyGuardEntered" [label="_reentrancyGuardEntered"]
+"16579__nonReentrantBefore" [label="_nonReentrantBefore"]
+"16579__nonReentrantAfter" [label="_nonReentrantAfter"]
+"16579_constructor" [label="constructor"]
+}subgraph cluster_156387_GlobalReentrancyGuard {
+label = "GlobalReentrancyGuard"
+"156387__globalNonReentrantBefore" [label="_globalNonReentrantBefore"]
+"156387_constructor" [label="constructor"]
+"156387__globalNonReentrantAfter" [label="_globalNonReentrantAfter"]
+}subgraph cluster_58504_OrderHandler {
+label = "OrderHandler"
+"58504_simulateExecuteOrder" [label="simulateExecuteOrder"]
+"58504__handleOrderError" [label="_handleOrderError"]
+"58504_updateOrder" [label="updateOrder"]
+"58504_doExecuteOrder" [label="doExecuteOrder"]
+"58504_cancelOrder" [label="cancelOrder"]
+"58504_createOrder" [label="createOrder"]
+"58504__validateFrozenOrderKeeper" [label="_validateFrozenOrderKeeper"]
+"58504_executeOrder" [label="executeOrder"]
+"58504_getOrderExecutor" [label="getOrderExecutor"]
+"58504_constructor" [label="constructor"]
+"58504_executeOrder" -> "58504_onlyOrderKeeper"
+"58504_simulateExecuteOrder" -> "58504_withSimulatedOraclePrices"
+"58504_doExecuteOrder" -> "58504__getExecuteOrderParams"
+"58504_cancelOrder" -> "58504_onlyController"
+"58504_createOrder" -> "58504_validateDataListLength"
+"58504_doExecuteOrder" -> "58504__validateFrozenOrderKeeper"
+"58504_cancelOrder" -> "58504_validateRequestCancellation"
+"58504_doExecuteOrder" -> "58504_onlySelfOrController"
+"58504_doExecuteOrder" -> "58504_nonReentrant"
+"58504__handleOrderError" -> "58504_validateNonKeeperError"
+"58504_executeOrder" -> "58504_withOraclePrices"
+"58504_doExecuteOrder" -> "58504_getOrderExecutor"
+"58504_cancelOrder" -> "58504_globalNonReentrant"
+"58504_constructor" -> "58504_constructor"
+"58504_simulateExecuteOrder" -> "58504_globalNonReentrant"
+"58504_updateOrder" -> "58504_onlyController"
+"58504_createOrder" -> "58504_onlyController"
+"58504_executeOrder" -> "58504__handleOrderError"
+"58504_updateOrder" -> "58504_globalNonReentrant"
+"58504_createOrder" -> "58504_globalNonReentrant"
+"58504_executeOrder" -> "58504_globalNonReentrant"
+}subgraph cluster_54890_BaseOrderHandler {
+label = "BaseOrderHandler"
+"54890__getExecuteOrderParams" [label="_getExecuteOrderParams"]
+"54890_constructor" [label="constructor"]
+"54890_constructor" -> "54890_constructor"
+}subgraph cluster_54637_BaseHandler {
+label = "BaseHandler"
+"54637_validateDataListLength" [label="validateDataListLength"]
+"54637_receive" [label="receive"]
+"54637_validateRequestCancellation" [label="validateRequestCancellation"]
+"54637_validateNonKeeperError" [label="validateNonKeeperError"]
+"54637_constructor" [label="constructor"]
+"54637_constructor" -> "54637_constructor"
+}subgraph cluster_114391_OracleModule {
+label = "OracleModule"
+"114391_constructor" [label="constructor"]
+}subgraph cluster_56859_IOrderHandler {
+label = "IOrderHandler"
+"56859_simulateExecuteOrder" [label="simulateExecuteOrder"]
+"56859_cancelOrder" [label="cancelOrder"]
+"56859_createOrder" [label="createOrder"]
+"56859_updateOrder" [label="updateOrder"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"revert InvalidKeeperForFrozenOrder(address)" 
+"revert OrderNotUpdatable(uint256)" 
+"revert MaxDataListLengthExceeded(uint256,uint256)" 
+"require(bool,string)" 
+"gasleft()" 
+"revert Unauthorized(address,string)" 
+"revert RequestNotYetCancellable(uint256,uint256,string)" 
+"revert InvalidNativeTokenSender(address)" 
+"revert UnsupportedOrderType(uint256)" 
+"141184__validateRole" -> "revert Unauthorized(address,string)"
+"16579__nonReentrantBefore" -> "require(bool,string)"
+"58504_cancelOrder" -> "gasleft()"
+"54637_validateDataListLength" -> "revert MaxDataListLengthExceeded(uint256,uint256)"
+"58504_getOrderExecutor" -> "revert UnsupportedOrderType(uint256)"
+"54637_validateRequestCancellation" -> "revert RequestNotYetCancellable(uint256,uint256,string)"
+"58504__validateFrozenOrderKeeper" -> "revert InvalidKeeperForFrozenOrder(address)"
+"58504_doExecuteOrder" -> "gasleft()"
+"58504_updateOrder" -> "revert OrderNotUpdatable(uint256)"
+"156387__globalNonReentrantBefore" -> "require(bool,string)"
+"58504_executeOrder" -> "gasleft()"
+"54637_receive" -> "revert InvalidNativeTokenSender(address)"
+"58504_updateOrder" -> "revert UnsupportedOrderType(uint256)"
+}"58504_executeOrder" -> "58504_doExecuteOrder"
+"58504_simulateExecuteOrder" -> "58504_doExecuteOrder"
+}

@@ -1,0 +1,34 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_83209_MarketEventUtils {
+label = "MarketEventUtils"
+"83209_emitClaimableFundingAmountPerSizeUpdated" [label="emitClaimableFundingAmountPerSizeUpdated"]
+"83209_emitMarketPoolValueInfo" [label="emitMarketPoolValueInfo"]
+"83209_emitCollateralClaimed" [label="emitCollateralClaimed"]
+"83209_emitFundingFeeAmountPerSizeUpdated" [label="emitFundingFeeAmountPerSizeUpdated"]
+"83209_emitLentImpactAmountReduction" [label="emitLentImpactAmountReduction"]
+"83209_emitBorrowing" [label="emitBorrowing"]
+"83209_emitPositionImpactPoolWithdrawal" [label="emitPositionImpactPoolWithdrawal"]
+"83209_emitSwapImpactPoolAmountUpdated" [label="emitSwapImpactPoolAmountUpdated"]
+"83209_emitClaimableCollateralUpdated" [label="emitClaimableCollateralUpdated"]
+"83209_emitBorrowingFactorUpdated" [label="emitBorrowingFactorUpdated"]
+"83209_emitOpenInterestUpdated" [label="emitOpenInterestUpdated"]
+"83209_emitPoolAmountUpdated" [label="emitPoolAmountUpdated"]
+"83209_emitVirtualSwapInventoryUpdated" [label="emitVirtualSwapInventoryUpdated"]
+"83209_emitMarketPoolValueUpdated" [label="emitMarketPoolValueUpdated"]
+"83209_emitOpenInterestInTokensUpdated" [label="emitOpenInterestInTokensUpdated"]
+"83209_emitCollateralSumUpdated" [label="emitCollateralSumUpdated"]
+"83209_emitVirtualPositionInventoryUpdated" [label="emitVirtualPositionInventoryUpdated"]
+"83209_emitClaimableFundingUpdated" [label="emitClaimableFundingUpdated"]
+"83209_emitPositionImpactPoolDistributed" [label="emitPositionImpactPoolDistributed"]
+"83209_emitFundingFeesClaimed" [label="emitFundingFeesClaimed"]
+"83209_emitTotalPendingImpactAmountUpdated" [label="emitTotalPendingImpactAmountUpdated"]
+"83209_emitPositionImpactPoolAmountUpdated" [label="emitPositionImpactPoolAmountUpdated"]
+"83209_emitUiFeeFactorUpdated" [label="emitUiFeeFactorUpdated"]
+"83209_emitLentPositionImpactPoolAmountUpdated" [label="emitLentPositionImpactPoolAmountUpdated"]
+"83209_emitFunding" [label="emitFunding"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+}
+}

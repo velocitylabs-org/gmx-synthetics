@@ -1,0 +1,11 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_10103_IMintableBurnable {
+label = "IMintableBurnable"
+"10103_burn" [label="burn"]
+"10103_mint" [label="mint"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+}
+}

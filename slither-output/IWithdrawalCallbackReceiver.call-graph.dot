@@ -1,0 +1,11 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_27678_IWithdrawalCallbackReceiver {
+label = "IWithdrawalCallbackReceiver"
+"27678_afterWithdrawalCancellation" [label="afterWithdrawalCancellation"]
+"27678_afterWithdrawalExecution" [label="afterWithdrawalExecution"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+}
+}

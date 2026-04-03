@@ -1,0 +1,19 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_100637_MockMultichainReaderOriginator {
+label = "MockMultichainReaderOriginator"
+"100637_processLzReceive" [label="processLzReceive"]
+"100637_receive" [label="receive"]
+"100637_setmultichainReader" [label="setmultichainReader"]
+"100637_testRead" [label="testRead"]
+"100637_slitherConstructorVariables" [label="slitherConstructorVariables"]
+"100637_callQuoteReadFee" [label="callQuoteReadFee"]
+"100637_constructor" [label="constructor"]
+"100637_callSendReadRequests" [label="callSendReadRequests"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"abi.encode()" 
+"100637_slitherConstructorVariables" -> "abi.encode()"
+}
+}

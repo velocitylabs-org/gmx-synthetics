@@ -1,0 +1,29 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_102804_MockUnlimitedToken {
+label = "MockUnlimitedToken"
+"102804_allowance" [label="allowance"]
+"102804_symbol" [label="symbol"]
+"102804_decimals" [label="decimals"]
+"102804_transferFrom" [label="transferFrom"]
+"102804_approve" [label="approve"]
+"102804_name" [label="name"]
+"102804_totalSupply" [label="totalSupply"]
+"102804_balanceOf" [label="balanceOf"]
+"102804_transfer" [label="transfer"]
+"102804_transferFrom" -> "102804_balanceOf"
+"102804_transferFrom" -> "102804_allowance"
+"102804_transfer" -> "102804_balanceOf"
+}subgraph cluster_17285_IERC20 {
+label = "IERC20"
+"17285_allowance" [label="allowance"]
+"17285_transferFrom" [label="transferFrom"]
+"17285_balanceOf" [label="balanceOf"]
+"17285_totalSupply" [label="totalSupply"]
+"17285_transfer" [label="transfer"]
+"17285_approve" [label="approve"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+}
+}

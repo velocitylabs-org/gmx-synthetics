@@ -1,0 +1,20 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_147973_SubaccountRouterUtils {
+label = "SubaccountRouterUtils"
+"147973_handleSubaccountAction" [label="handleSubaccountAction"]
+"147973__handleSubaccountApproval" [label="_handleSubaccountApproval"]
+"147973_handleSubaccountAction" -> "147973__handleSubaccountApproval"
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"revert InvalidSubaccountApprovalNonce(uint256,uint256)" 
+"revert InvalidSubaccountApprovalDesChainId(uint256)" 
+"revert SubaccountApprovalDeadlinePassed(uint256,uint256)" 
+"revert InvalidSubaccountApprovalSubaccount()" 
+"147973__handleSubaccountApproval" -> "revert InvalidSubaccountApprovalNonce(uint256,uint256)"
+"147973__handleSubaccountApproval" -> "revert InvalidSubaccountApprovalSubaccount()"
+"147973__handleSubaccountApproval" -> "revert InvalidSubaccountApprovalDesChainId(uint256)"
+"147973__handleSubaccountApproval" -> "revert SubaccountApprovalDeadlinePassed(uint256,uint256)"
+}
+}

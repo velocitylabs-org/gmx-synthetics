@@ -1,0 +1,11 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_102966_MockVesterV1 {
+label = "MockVesterV1"
+"102966_setBonusRewards" [label="setBonusRewards"]
+"102966_constructor" [label="constructor"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+}
+}

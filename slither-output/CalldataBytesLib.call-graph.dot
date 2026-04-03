@@ -1,0 +1,17 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_5693_CalldataBytesLib {
+label = "CalldataBytesLib"
+"5693_toU8" [label="toU8"]
+"5693_toAddr" [label="toAddr"]
+"5693_toU64" [label="toU64"]
+"5693_toU128" [label="toU128"]
+"5693_toU16" [label="toU16"]
+"5693_toU256" [label="toU256"]
+"5693_toB32" [label="toB32"]
+"5693_toU32" [label="toU32"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+}
+}

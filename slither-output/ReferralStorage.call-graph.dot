@@ -1,0 +1,58 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_139954_IReferralStorage {
+label = "IReferralStorage"
+"139954_codeOwners" [label="codeOwners"]
+"139954_referrerDiscountShares" [label="referrerDiscountShares"]
+"139954_referrerTiers" [label="referrerTiers"]
+"139954_registerCode" [label="registerCode"]
+"139954_setTier" [label="setTier"]
+"139954_govSetCodeOwner" [label="govSetCodeOwner"]
+"139954_setTraderReferralCode" [label="setTraderReferralCode"]
+"139954_traderReferralCodes" [label="traderReferralCodes"]
+"139954_getTraderReferralInfo" [label="getTraderReferralInfo"]
+"139954_tiers" [label="tiers"]
+"139954_setReferrerTier" [label="setReferrerTier"]
+}subgraph cluster_103938_ReferralStorage {
+label = "ReferralStorage"
+"103938_setTier" [label="setTier"]
+"103938__setTraderReferralCode" [label="_setTraderReferralCode"]
+"103938_setHandler" [label="setHandler"]
+"103938_setTraderReferralCode" [label="setTraderReferralCode"]
+"103938_setTraderReferralCodeByUser" [label="setTraderReferralCodeByUser"]
+"103938_setReferrerDiscountShare" [label="setReferrerDiscountShare"]
+"103938_registerCode" [label="registerCode"]
+"103938_slitherConstructorConstantVariables" [label="slitherConstructorConstantVariables"]
+"103938_setCodeOwner" [label="setCodeOwner"]
+"103938_getTraderReferralInfo" [label="getTraderReferralInfo"]
+"103938_setReferrerTier" [label="setReferrerTier"]
+"103938_govSetCodeOwner" [label="govSetCodeOwner"]
+"103938_setReferrerTier" -> "103938_onlyGov"
+"103938_setTraderReferralCodeByUser" -> "103938__setTraderReferralCode"
+"103938_govSetCodeOwner" -> "103938_onlyGov"
+"103938_setTraderReferralCode" -> "103938_onlyHandler"
+"103938_setTier" -> "103938_onlyGov"
+"103938_setTraderReferralCode" -> "103938__setTraderReferralCode"
+"103938_setHandler" -> "103938_onlyGov"
+}subgraph cluster_94068_Governable {
+label = "Governable"
+"94068_acceptOwnership" [label="acceptOwnership"]
+"94068_transferOwnership" [label="transferOwnership"]
+"94068__setGov" [label="_setGov"]
+"94068_constructor" [label="constructor"]
+"94068_transferOwnership" -> "94068_onlyGov"
+"94068_constructor" -> "94068__setGov"
+"94068_acceptOwnership" -> "94068__setGov"
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"require(bool,string)" 
+"revert Unauthorized(address,string)" 
+"103938_govSetCodeOwner" -> "require(bool,string)"
+"103938_registerCode" -> "require(bool,string)"
+"94068_acceptOwnership" -> "revert Unauthorized(address,string)"
+"103938_setTier" -> "require(bool,string)"
+"103938_setReferrerDiscountShare" -> "require(bool,string)"
+"103938_setCodeOwner" -> "require(bool,string)"
+}
+}

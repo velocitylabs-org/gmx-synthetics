@@ -1,0 +1,78 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_141184_RoleModule {
+label = "RoleModule"
+"141184_constructor" [label="constructor"]
+"141184__validateRole" [label="_validateRole"]
+}subgraph cluster_156387_GlobalReentrancyGuard {
+label = "GlobalReentrancyGuard"
+"156387__globalNonReentrantBefore" [label="_globalNonReentrantBefore"]
+"156387_constructor" [label="constructor"]
+"156387__globalNonReentrantAfter" [label="_globalNonReentrantAfter"]
+}subgraph cluster_57383_JitOrderHandler {
+label = "JitOrderHandler"
+"57383__validateOrder" [label="_validateOrder"]
+"57383_simulateExecuteJitOrder" [label="simulateExecuteJitOrder"]
+"57383__executeJitOrder" [label="_executeJitOrder"]
+"57383__createGlvShift" [label="_createGlvShift"]
+"57383__processShifts" [label="_processShifts"]
+"57383_constructor" [label="constructor"]
+"57383_executeJitOrder" [label="executeJitOrder"]
+"57383__executeJitOrder" -> "57383__processShifts"
+"57383__processShifts" -> "57383__createGlvShift"
+"57383_executeJitOrder" -> "57383_withOraclePrices"
+"57383_executeJitOrder" -> "57383_globalNonReentrant"
+"57383_executeJitOrder" -> "57383__executeJitOrder"
+"57383_simulateExecuteJitOrder" -> "57383__executeJitOrder"
+"57383_simulateExecuteJitOrder" -> "57383_globalNonReentrant"
+"57383_executeJitOrder" -> "57383_onlyOrderKeeper"
+"57383_constructor" -> "57383_constructor"
+"57383_simulateExecuteJitOrder" -> "57383_withSimulatedOraclePrices"
+"57383__executeJitOrder" -> "57383__validateOrder"
+}subgraph cluster_54890_BaseOrderHandler {
+label = "BaseOrderHandler"
+"54890__getExecuteOrderParams" [label="_getExecuteOrderParams"]
+"54890_constructor" [label="constructor"]
+"54890_constructor" -> "54890_constructor"
+}subgraph cluster_54637_BaseHandler {
+label = "BaseHandler"
+"54637_validateDataListLength" [label="validateDataListLength"]
+"54637_receive" [label="receive"]
+"54637_validateRequestCancellation" [label="validateRequestCancellation"]
+"54637_validateNonKeeperError" [label="validateNonKeeperError"]
+"54637_constructor" [label="constructor"]
+"54637_constructor" -> "54637_constructor"
+}subgraph cluster_114391_OracleModule {
+label = "OracleModule"
+"114391_constructor" [label="constructor"]
+}subgraph cluster_56792_IJitOrderHandler {
+label = "IJitOrderHandler"
+"56792_simulateExecuteJitOrder" [label="simulateExecuteJitOrder"]
+"56792_executeJitOrder" [label="executeJitOrder"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"keccak256(bytes)" 
+"revert MaxDataListLengthExceeded(uint256,uint256)" 
+"abi.encode()" 
+"revert JitInvalidToMarket(address,address)" 
+"require(bool,string)" 
+"gasleft()" 
+"revert JitUnsupportedOrderType(uint256)" 
+"revert Unauthorized(address,string)" 
+"revert RequestNotYetCancellable(uint256,uint256,string)" 
+"revert InvalidNativeTokenSender(address)" 
+"revert JitEmptyShiftParams()" 
+"141184__validateRole" -> "revert Unauthorized(address,string)"
+"57383__createGlvShift" -> "abi.encode()"
+"54637_validateDataListLength" -> "revert MaxDataListLengthExceeded(uint256,uint256)"
+"57383__processShifts" -> "revert JitEmptyShiftParams()"
+"54637_validateRequestCancellation" -> "revert RequestNotYetCancellable(uint256,uint256,string)"
+"57383__executeJitOrder" -> "gasleft()"
+"57383__createGlvShift" -> "keccak256(bytes)"
+"57383__processShifts" -> "revert JitInvalidToMarket(address,address)"
+"156387__globalNonReentrantBefore" -> "require(bool,string)"
+"57383__validateOrder" -> "revert JitUnsupportedOrderType(uint256)"
+"54637_receive" -> "revert InvalidNativeTokenSender(address)"
+}
+}

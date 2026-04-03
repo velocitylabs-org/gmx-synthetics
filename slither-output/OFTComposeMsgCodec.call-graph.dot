@@ -1,0 +1,20 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_10416_OFTComposeMsgCodec {
+label = "OFTComposeMsgCodec"
+"10416_composeFrom" [label="composeFrom"]
+"10416_srcEid" [label="srcEid"]
+"10416_nonce" [label="nonce"]
+"10416_bytes32ToAddress" [label="bytes32ToAddress"]
+"10416_composeMsg" [label="composeMsg"]
+"10416_amountLD" [label="amountLD"]
+"10416_slitherConstructorConstantVariables" [label="slitherConstructorConstantVariables"]
+"10416_encode" [label="encode"]
+"10416_addressToBytes32" [label="addressToBytes32"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"abi.encodePacked()" 
+"10416_encode" -> "abi.encodePacked()"
+}
+}

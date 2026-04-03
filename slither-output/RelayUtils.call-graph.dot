@@ -1,0 +1,174 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_147332_RelayUtils {
+label = "RelayUtils"
+"147332__getCreateOrderNumbersStructHash" [label="_getCreateOrderNumbersStructHash"]
+"147332__getCreateOrderAddressesStructHash" [label="_getCreateOrderAddressesStructHash"]
+"147332_getCreateGlvWithdrawalStructHash" [label="getCreateGlvWithdrawalStructHash"]
+"147332__getRelayParamsHash" [label="_getRelayParamsHash"]
+"147332__getCreateDepositAdressesStructHash" [label="_getCreateDepositAdressesStructHash"]
+"147332__getCreateGlvWithdrawalAddressesStructHash" [label="_getCreateGlvWithdrawalAddressesStructHash"]
+"147332_getCreateDepositStructHash" [label="getCreateDepositStructHash"]
+"147332_slitherConstructorConstantVariables" [label="slitherConstructorConstantVariables"]
+"147332_getRemoveSubaccountStructHash" [label="getRemoveSubaccountStructHash"]
+"147332_validateSignature" [label="validateSignature"]
+"147332_getUpdateOrderStructHash" [label="getUpdateOrderStructHash"]
+"147332__getCreateOrderParamsListStructHash" [label="_getCreateOrderParamsListStructHash"]
+"147332__getCreateShiftAddressesStructHash" [label="_getCreateShiftAddressesStructHash"]
+"147332_getDomainSeparator" [label="getDomainSeparator"]
+"147332__getCreateGlvDepositAddressesStructHash" [label="_getCreateGlvDepositAddressesStructHash"]
+"147332_swapFeeTokens" [label="swapFeeTokens"]
+"147332_getRegisterCodeStructHash" [label="getRegisterCodeStructHash"]
+"147332_getClaimAffiliateRewardsStructHash" [label="getClaimAffiliateRewardsStructHash"]
+"147332__getCreateOrderParamsStructHash" [label="_getCreateOrderParamsStructHash"]
+"147332_getClaimFundingFeesStructHash" [label="getClaimFundingFeesStructHash"]
+"147332_getCreateShiftStructHash" [label="getCreateShiftStructHash"]
+"147332_getBridgeOutStructHash" [label="getBridgeOutStructHash"]
+"147332__getUpdateOrderStructHash" [label="_getUpdateOrderStructHash"]
+"147332_getCreateGlvDepositStructHash" [label="getCreateGlvDepositStructHash"]
+"147332__getCreateWithdrawalAddressesStructHash" [label="_getCreateWithdrawalAddressesStructHash"]
+"147332__getUpdateOrderParamsStructHash" [label="_getUpdateOrderParamsStructHash"]
+"147332__getBatchStructHash" [label="_getBatchStructHash"]
+"147332_getSubaccountApprovalStructHash" [label="getSubaccountApprovalStructHash"]
+"147332_getClaimCollateralStructHash" [label="getClaimCollateralStructHash"]
+"147332_getCancelOrderStructHash" [label="getCancelOrderStructHash"]
+"147332__getCancelOrderStructHash" [label="_getCancelOrderStructHash"]
+"147332__getUpdateOrderParamsListStructHash" [label="_getUpdateOrderParamsListStructHash"]
+"147332_getBatchStructHash" [label="getBatchStructHash"]
+"147332_getCreateWithdrawalStructHash" [label="getCreateWithdrawalStructHash"]
+"147332_getTraderReferralCodeStructHash" [label="getTraderReferralCodeStructHash"]
+"147332_getCreateOrderStructHash" [label="getCreateOrderStructHash"]
+"147332__getUpdateOrderStructHash" -> "147332__getRelayParamsHash"
+"147332_getCreateGlvDepositStructHash" -> "147332__getCreateGlvDepositAddressesStructHash"
+"147332__getBatchStructHash" -> "147332__getRelayParamsHash"
+"147332_getBatchStructHash" -> "147332__getBatchStructHash"
+"147332_getCreateOrderStructHash" -> "147332__getRelayParamsHash"
+"147332__getCreateOrderParamsStructHash" -> "147332__getCreateOrderNumbersStructHash"
+"147332__getCreateOrderParamsStructHash" -> "147332__getCreateOrderAddressesStructHash"
+"147332_getClaimCollateralStructHash" -> "147332__getRelayParamsHash"
+"147332_getTraderReferralCodeStructHash" -> "147332__getRelayParamsHash"
+"147332_getCancelOrderStructHash" -> "147332__getCancelOrderStructHash"
+"147332_getCreateGlvWithdrawalStructHash" -> "147332__getRelayParamsHash"
+"147332_getCreateDepositStructHash" -> "147332__getRelayParamsHash"
+"147332_getCreateOrderStructHash" -> "147332__getCreateOrderNumbersStructHash"
+"147332__getUpdateOrderStructHash" -> "147332__getUpdateOrderParamsStructHash"
+"147332_getRegisterCodeStructHash" -> "147332__getRelayParamsHash"
+"147332_getCreateWithdrawalStructHash" -> "147332__getRelayParamsHash"
+"147332__getUpdateOrderParamsListStructHash" -> "147332__getUpdateOrderParamsStructHash"
+"147332__getBatchStructHash" -> "147332__getUpdateOrderParamsListStructHash"
+"147332_getCreateGlvWithdrawalStructHash" -> "147332__getCreateGlvWithdrawalAddressesStructHash"
+"147332_getCreateDepositStructHash" -> "147332__getCreateDepositAdressesStructHash"
+"147332_getUpdateOrderStructHash" -> "147332__getUpdateOrderStructHash"
+"147332_getCreateShiftStructHash" -> "147332__getRelayParamsHash"
+"147332_getCreateShiftStructHash" -> "147332__getCreateShiftAddressesStructHash"
+"147332_getCreateOrderStructHash" -> "147332__getCreateOrderAddressesStructHash"
+"147332_getRemoveSubaccountStructHash" -> "147332__getRelayParamsHash"
+"147332_getClaimFundingFeesStructHash" -> "147332__getRelayParamsHash"
+"147332__getCreateOrderParamsListStructHash" -> "147332__getCreateOrderParamsStructHash"
+"147332__getBatchStructHash" -> "147332__getCreateOrderParamsListStructHash"
+"147332_getCreateWithdrawalStructHash" -> "147332__getCreateWithdrawalAddressesStructHash"
+"147332_getClaimAffiliateRewardsStructHash" -> "147332__getRelayParamsHash"
+"147332__getCancelOrderStructHash" -> "147332__getRelayParamsHash"
+"147332_getCreateGlvDepositStructHash" -> "147332__getRelayParamsHash"
+"147332_getBridgeOutStructHash" -> "147332__getRelayParamsHash"
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"revert InvalidRecoveredSigner(string,address,address,address)" 
+"revert InvalidSignature(string)" 
+"abi.encodePacked()" 
+"abi.encode()" 
+"revert UnexpectedRelayFeeTokenAfterSwap(address,address)" 
+"keccak256(bytes)" 
+"147332_getClaimAffiliateRewardsStructHash" -> "keccak256(bytes)"
+"147332_getCancelOrderStructHash" -> "keccak256(bytes)"
+"147332__getUpdateOrderParamsStructHash" -> "keccak256(bytes)"
+"147332__getCreateOrderNumbersStructHash" -> "abi.encode()"
+"147332__getRelayParamsHash" -> "abi.encode()"
+"147332_getUpdateOrderStructHash" -> "abi.encode()"
+"147332__getCreateOrderParamsStructHash" -> "abi.encodePacked()"
+"147332_getCreateGlvDepositStructHash" -> "abi.encode()"
+"147332_getCreateShiftStructHash" -> "keccak256(bytes)"
+"147332_getTraderReferralCodeStructHash" -> "keccak256(bytes)"
+"147332_swapFeeTokens" -> "revert UnexpectedRelayFeeTokenAfterSwap(address,address)"
+"147332__getBatchStructHash" -> "abi.encodePacked()"
+"147332__getCreateWithdrawalAddressesStructHash" -> "keccak256(bytes)"
+"147332__getUpdateOrderParamsStructHash" -> "abi.encode()"
+"147332_getClaimCollateralStructHash" -> "keccak256(bytes)"
+"147332__getCreateGlvDepositAddressesStructHash" -> "abi.encode()"
+"147332_getCreateDepositStructHash" -> "abi.encodePacked()"
+"147332__getUpdateOrderParamsListStructHash" -> "abi.encodePacked()"
+"147332_getCreateGlvWithdrawalStructHash" -> "abi.encode()"
+"147332__getCancelOrderStructHash" -> "keccak256(bytes)"
+"147332__getCreateDepositAdressesStructHash" -> "abi.encodePacked()"
+"147332_validateSignature" -> "revert InvalidSignature(string)"
+"147332__getCreateOrderParamsListStructHash" -> "abi.encodePacked()"
+"147332__getCreateShiftAddressesStructHash" -> "abi.encode()"
+"147332_getCreateWithdrawalStructHash" -> "abi.encode()"
+"147332_getBatchStructHash" -> "abi.encode()"
+"147332_getCancelOrderStructHash" -> "abi.encode()"
+"147332_getClaimFundingFeesStructHash" -> "keccak256(bytes)"
+"147332_getBridgeOutStructHash" -> "keccak256(bytes)"
+"147332_getClaimAffiliateRewardsStructHash" -> "abi.encodePacked()"
+"147332__getCreateOrderAddressesStructHash" -> "keccak256(bytes)"
+"147332__getCreateOrderNumbersStructHash" -> "keccak256(bytes)"
+"147332__getCancelOrderStructHash" -> "abi.encode()"
+"147332_getSubaccountApprovalStructHash" -> "abi.encode()"
+"147332_validateSignature" -> "revert InvalidRecoveredSigner(string,address,address,address)"
+"147332__getCreateOrderParamsStructHash" -> "keccak256(bytes)"
+"147332__getCreateGlvDepositAddressesStructHash" -> "abi.encodePacked()"
+"147332_getCreateOrderStructHash" -> "abi.encodePacked()"
+"147332_getCreateGlvDepositStructHash" -> "abi.encodePacked()"
+"147332_getUpdateOrderStructHash" -> "keccak256(bytes)"
+"147332__getCreateGlvWithdrawalAddressesStructHash" -> "abi.encode()"
+"147332_getRemoveSubaccountStructHash" -> "abi.encode()"
+"147332__getCreateOrderParamsListStructHash" -> "keccak256(bytes)"
+"147332__getUpdateOrderParamsListStructHash" -> "keccak256(bytes)"
+"147332_getCreateGlvWithdrawalStructHash" -> "abi.encodePacked()"
+"147332_getRegisterCodeStructHash" -> "abi.encode()"
+"147332__getCreateWithdrawalAddressesStructHash" -> "abi.encode()"
+"147332_getBridgeOutStructHash" -> "abi.encodePacked()"
+"147332__getCreateGlvWithdrawalAddressesStructHash" -> "keccak256(bytes)"
+"147332_getDomainSeparator" -> "abi.encode()"
+"147332__getBatchStructHash" -> "keccak256(bytes)"
+"147332_getCreateWithdrawalStructHash" -> "abi.encodePacked()"
+"147332__getCreateDepositAdressesStructHash" -> "abi.encode()"
+"147332__getCreateOrderParamsStructHash" -> "abi.encode()"
+"147332__getCreateOrderAddressesStructHash" -> "abi.encodePacked()"
+"147332_getDomainSeparator" -> "keccak256(bytes)"
+"147332_getClaimFundingFeesStructHash" -> "abi.encode()"
+"147332_getCreateGlvWithdrawalStructHash" -> "keccak256(bytes)"
+"147332__getCreateGlvWithdrawalAddressesStructHash" -> "abi.encodePacked()"
+"147332_getClaimAffiliateRewardsStructHash" -> "abi.encode()"
+"147332_getSubaccountApprovalStructHash" -> "keccak256(bytes)"
+"147332_getTraderReferralCodeStructHash" -> "abi.encode()"
+"147332__getCreateOrderAddressesStructHash" -> "abi.encode()"
+"147332__getCreateDepositAdressesStructHash" -> "keccak256(bytes)"
+"147332_getBatchStructHash" -> "keccak256(bytes)"
+"147332_getCreateGlvDepositStructHash" -> "keccak256(bytes)"
+"147332_getClaimFundingFeesStructHash" -> "abi.encodePacked()"
+"147332_slitherConstructorConstantVariables" -> "keccak256(bytes)"
+"147332_getClaimCollateralStructHash" -> "abi.encode()"
+"147332_getRegisterCodeStructHash" -> "keccak256(bytes)"
+"147332__getUpdateOrderStructHash" -> "keccak256(bytes)"
+"147332_validateSignature" -> "abi.encode()"
+"147332_slitherConstructorConstantVariables" -> "abi.encodePacked()"
+"147332_getClaimCollateralStructHash" -> "abi.encodePacked()"
+"147332__getCreateWithdrawalAddressesStructHash" -> "abi.encodePacked()"
+"147332_validateSignature" -> "keccak256(bytes)"
+"147332__getUpdateOrderStructHash" -> "abi.encode()"
+"147332_getCreateShiftStructHash" -> "abi.encode()"
+"147332_getRemoveSubaccountStructHash" -> "keccak256(bytes)"
+"147332_getCreateWithdrawalStructHash" -> "keccak256(bytes)"
+"147332__getBatchStructHash" -> "abi.encode()"
+"147332_getCreateOrderStructHash" -> "abi.encode()"
+"147332_getCreateOrderStructHash" -> "keccak256(bytes)"
+"147332_getCreateDepositStructHash" -> "keccak256(bytes)"
+"147332__getRelayParamsHash" -> "keccak256(bytes)"
+"147332__getCreateShiftAddressesStructHash" -> "keccak256(bytes)"
+"147332_getCreateShiftStructHash" -> "abi.encodePacked()"
+"147332_getBridgeOutStructHash" -> "abi.encode()"
+"147332_getCreateDepositStructHash" -> "abi.encode()"
+"147332__getCreateGlvDepositAddressesStructHash" -> "keccak256(bytes)"
+}
+}

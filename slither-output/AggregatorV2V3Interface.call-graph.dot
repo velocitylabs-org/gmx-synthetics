@@ -1,0 +1,21 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_104_AggregatorV3Interface {
+label = "AggregatorV3Interface"
+"104_latestRoundData" [label="latestRoundData"]
+"104_description" [label="description"]
+"104_version" [label="version"]
+"104_decimals" [label="decimals"]
+"104_getRoundData" [label="getRoundData"]
+}subgraph cluster_47_AggregatorInterface {
+label = "AggregatorInterface"
+"47_latestRound" [label="latestRound"]
+"47_getAnswer" [label="getAnswer"]
+"47_latestTimestamp" [label="latestTimestamp"]
+"47_getTimestamp" [label="getTimestamp"]
+"47_latestAnswer" [label="latestAnswer"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+}
+}

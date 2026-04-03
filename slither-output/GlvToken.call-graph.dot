@@ -1,0 +1,124 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_141184_RoleModule {
+label = "RoleModule"
+"141184_constructor" [label="constructor"]
+"141184__validateRole" [label="_validateRole"]
+}subgraph cluster_26369_StrictBank {
+label = "StrictBank"
+"26369__recordTransferIn" [label="_recordTransferIn"]
+"26369__afterTransferOut" [label="_afterTransferOut"]
+"26369_constructor" [label="constructor"]
+"26369_recordTransferIn" [label="recordTransferIn"]
+"26369_syncTokenBalance" [label="syncTokenBalance"]
+"26369_syncTokenBalance" -> "26369_onlyController"
+"26369_constructor" -> "26369_constructor"
+"26369_recordTransferIn" -> "26369_onlyController"
+"26369_recordTransferIn" -> "26369__recordTransferIn"
+}subgraph cluster_68836_GlvToken {
+label = "GlvToken"
+"68836_mint" [label="mint"]
+"68836_burn" [label="burn"]
+"68836_constructor" [label="constructor"]
+"68836_mint" -> "68836_onlyController"
+"68836_constructor" -> "68836_constructor"
+"68836_burn" -> "68836__burn"
+"68836_burn" -> "68836_onlyController"
+"68836_mint" -> "68836__mint"
+}subgraph cluster_17285_IERC20 {
+label = "IERC20"
+"17285_allowance" [label="allowance"]
+"17285_transferFrom" [label="transferFrom"]
+"17285_balanceOf" [label="balanceOf"]
+"17285_totalSupply" [label="totalSupply"]
+"17285_transfer" [label="transfer"]
+"17285_approve" [label="approve"]
+}subgraph cluster_18216_IERC20Metadata {
+label = "IERC20Metadata"
+"18216_name" [label="name"]
+"18216_decimals" [label="decimals"]
+"18216_symbol" [label="symbol"]
+}subgraph cluster_17207_ERC20 {
+label = "ERC20"
+"17207_increaseAllowance" [label="increaseAllowance"]
+"17207_balanceOf" [label="balanceOf"]
+"17207__mint" [label="_mint"]
+"17207__transfer" [label="_transfer"]
+"17207_constructor" [label="constructor"]
+"17207_allowance" [label="allowance"]
+"17207_decimals" [label="decimals"]
+"17207__approve" [label="_approve"]
+"17207__burn" [label="_burn"]
+"17207_totalSupply" [label="totalSupply"]
+"17207__afterTokenTransfer" [label="_afterTokenTransfer"]
+"17207_approve" [label="approve"]
+"17207_transferFrom" [label="transferFrom"]
+"17207_decreaseAllowance" [label="decreaseAllowance"]
+"17207_transfer" [label="transfer"]
+"17207_name" [label="name"]
+"17207__spendAllowance" [label="_spendAllowance"]
+"17207__beforeTokenTransfer" [label="_beforeTokenTransfer"]
+"17207_symbol" [label="symbol"]
+"17207_transferFrom" -> "17207__transfer"
+"17207__mint" -> "17207__afterTokenTransfer"
+"17207_approve" -> "17207__msgSender"
+"17207_decreaseAllowance" -> "17207__approve"
+"17207_approve" -> "17207__approve"
+"17207_transferFrom" -> "17207__spendAllowance"
+"17207_transfer" -> "17207__msgSender"
+"17207_increaseAllowance" -> "17207__msgSender"
+"17207_transferFrom" -> "17207__msgSender"
+"17207__burn" -> "17207__afterTokenTransfer"
+"17207__mint" -> "17207__beforeTokenTransfer"
+"17207_increaseAllowance" -> "17207_allowance"
+"17207_decreaseAllowance" -> "17207_allowance"
+"17207__spendAllowance" -> "17207_allowance"
+"17207__spendAllowance" -> "17207__approve"
+"17207__burn" -> "17207__beforeTokenTransfer"
+"17207_increaseAllowance" -> "17207__approve"
+"17207_transfer" -> "17207__transfer"
+"17207__transfer" -> "17207__afterTokenTransfer"
+"17207_decreaseAllowance" -> "17207__msgSender"
+"17207__transfer" -> "17207__beforeTokenTransfer"
+}subgraph cluster_20539_Context {
+label = "Context"
+"20539__msgSender" [label="_msgSender"]
+"20539__msgData" [label="_msgData"]
+}subgraph cluster_26238_Bank {
+label = "Bank"
+"26238_transferOutNativeToken" [label="transferOutNativeToken"]
+"26238__transferOutNativeToken" [label="_transferOutNativeToken"]
+"26238__transferOut" [label="_transferOut"]
+"26238_transferOut" [label="transferOut"]
+"26238_receive" [label="receive"]
+"26238_constructor" [label="constructor"]
+"26238__afterTransferOut" [label="_afterTransferOut"]
+"26238_transferOut" -> "26238__transferOutNativeToken"
+"26238_constructor" -> "26238_constructor"
+"26238__transferOut" -> "26238__afterTransferOut"
+"26238_transferOut" -> "26238__transferOut"
+"26238_transferOutNativeToken" -> "26238_onlyController"
+"26238_transferOutNativeToken" -> "26238__transferOutNativeToken"
+"26238__transferOutNativeToken" -> "26238__afterTransferOut"
+"26238_transferOut" -> "26238_onlyController"
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"revert InvalidNativeTokenSender(address)" 
+"revert Unauthorized(address,string)" 
+"require(bool,string)" 
+"revert SelfTransferNotSupported(address)" 
+"141184__validateRole" -> "revert Unauthorized(address,string)"
+"26238__transferOutNativeToken" -> "revert SelfTransferNotSupported(address)"
+"17207_decreaseAllowance" -> "require(bool,string)"
+"26238__transferOut" -> "revert SelfTransferNotSupported(address)"
+"26238_receive" -> "revert InvalidNativeTokenSender(address)"
+"17207__mint" -> "require(bool,string)"
+"17207__approve" -> "require(bool,string)"
+"17207__transfer" -> "require(bool,string)"
+"17207__burn" -> "require(bool,string)"
+"17207__spendAllowance" -> "require(bool,string)"
+}"26369__afterTransferOut" -> "17285_balanceOf"
+"26369__recordTransferIn" -> "17285_balanceOf"
+"26369_syncTokenBalance" -> "17285_balanceOf"
+}

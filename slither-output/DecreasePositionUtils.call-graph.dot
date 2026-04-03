@@ -1,0 +1,16 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_126097_DecreasePositionUtils {
+label = "DecreasePositionUtils"
+"126097_decreasePosition" [label="decreasePosition"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"revert UnableToWithdrawCollateral(int256)" 
+"revert InvalidDecreaseOrderSize(uint256,uint256)" 
+"revert PositionShouldNotBeLiquidated(string,int256,int256,int256)" 
+"126097_decreasePosition" -> "revert InvalidDecreaseOrderSize(uint256,uint256)"
+"126097_decreasePosition" -> "revert PositionShouldNotBeLiquidated(string,int256,int256,int256)"
+"126097_decreasePosition" -> "revert UnableToWithdrawCollateral(int256)"
+}
+}

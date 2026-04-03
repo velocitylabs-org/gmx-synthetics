@@ -1,0 +1,25 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_63512_FeeDistributorUtils {
+label = "FeeDistributorUtils"
+"63512_computeTransfers" [label="computeTransfers"]
+"63512_sort" [label="sort"]
+"63512_withdrawToken" [label="withdrawToken"]
+"63512_withdrawNativeToken" [label="withdrawNativeToken"]
+"63512_calculateKeeperCosts" [label="calculateKeeperCosts"]
+"63512_min" [label="min"]
+"63512_retrieveChainIds" [label="retrieveChainIds"]
+"63512_computeTransfers" -> "63512_min"
+"63512_retrieveChainIds" -> "63512_sort"
+"63512_sort" -> "63512_sort"
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"revert BridgingBalanceArrayMismatch(uint256,uint256)" 
+"revert KeeperArrayLengthMismatch(uint256,uint256,uint256)" 
+"balance(address)" 
+"63512_computeTransfers" -> "revert BridgingBalanceArrayMismatch(uint256,uint256)"
+"63512_calculateKeeperCosts" -> "revert KeeperArrayLengthMismatch(uint256,uint256,uint256)"
+"63512_calculateKeeperCosts" -> "balance(address)"
+}
+}

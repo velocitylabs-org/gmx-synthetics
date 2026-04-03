@@ -1,0 +1,75 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_20539_Context {
+label = "Context"
+"20539__msgSender" [label="_msgSender"]
+"20539__msgData" [label="_msgData"]
+}subgraph cluster_1658_SendLibBase {
+label = "SendLibBase"
+"1658__quoteTreasury" [label="_quoteTreasury"]
+"1658__splitOptions" [label="_splitOptions"]
+"1658_constructor" [label="constructor"]
+"1658__payTreasury" [label="_payTreasury"]
+"1658__debitFee" [label="_debitFee"]
+"1658__setTreasury" [label="_setTreasury"]
+"1658_setDefaultExecutorConfigs" [label="setDefaultExecutorConfigs"]
+"1658_slitherConstructorConstantVariables" [label="slitherConstructorConstantVariables"]
+"1658__quoteVerifier" [label="_quoteVerifier"]
+"1658__assertMessageSize" [label="_assertMessageSize"]
+"1658__quote" [label="_quote"]
+"1658__parseTreasuryResult" [label="_parseTreasuryResult"]
+"1658__payExecutor" [label="_payExecutor"]
+"1658_setTreasuryNativeFeeCap" [label="setTreasuryNativeFeeCap"]
+"1658_getExecutorConfig" [label="getExecutorConfig"]
+"1658__setExecutorConfig" [label="_setExecutorConfig"]
+"1658_setDefaultExecutorConfigs" -> "1658_onlyOwner"
+"1658__quoteTreasury" -> "1658__parseTreasuryResult"
+"1658__quote" -> "1658__assertMessageSize"
+"1658_constructor" -> "1658_constructor"
+"1658_setTreasuryNativeFeeCap" -> "1658_onlyOwner"
+"1658__quote" -> "1658__splitOptions"
+"1658__quote" -> "1658__quoteTreasury"
+"1658__quote" -> "1658__quoteVerifier"
+"1658__quote" -> "1658_getExecutorConfig"
+"1658__payTreasury" -> "1658__parseTreasuryResult"
+}subgraph cluster_11571_Ownable {
+label = "Ownable"
+"11571_owner" [label="owner"]
+"11571_transferOwnership" [label="transferOwnership"]
+"11571_renounceOwnership" [label="renounceOwnership"]
+"11571_constructor" [label="constructor"]
+"11571__transferOwnership" [label="_transferOwnership"]
+"11571__checkOwner" [label="_checkOwner"]
+"11571_renounceOwnership" -> "11571__transferOwnership"
+"11571_transferOwnership" -> "11571_onlyOwner"
+"11571_constructor" -> "11571__transferOwnership"
+"11571_transferOwnership" -> "11571__transferOwnership"
+"11571__checkOwner" -> "11571_owner"
+"11571_constructor" -> "11571__msgSender"
+"11571_renounceOwnership" -> "11571_onlyOwner"
+"11571__checkOwner" -> "11571__msgSender"
+}subgraph cluster_932_MessageLibBase {
+label = "MessageLibBase"
+"932_constructor" [label="constructor"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"revert LZ_MessageLib_InvalidMessageSize(uint256,uint256)" 
+"revert LZ_MessageLib_ZeroMessageSize()" 
+"abi.decode()" 
+"revert LZ_MessageLib_InvalidAmount(uint256,uint256)" 
+"revert LZ_MessageLib_InvalidExecutor()" 
+"require(bool,string)" 
+"abi.encodeCall()" 
+"1658_setDefaultExecutorConfigs" -> "revert LZ_MessageLib_InvalidExecutor()"
+"1658__parseTreasuryResult" -> "abi.decode()"
+"1658__assertMessageSize" -> "revert LZ_MessageLib_InvalidMessageSize(uint256,uint256)"
+"1658_setTreasuryNativeFeeCap" -> "revert LZ_MessageLib_InvalidAmount(uint256,uint256)"
+"11571_transferOwnership" -> "require(bool,string)"
+"1658__payTreasury" -> "abi.encodeCall()"
+"1658_setDefaultExecutorConfigs" -> "revert LZ_MessageLib_ZeroMessageSize()"
+"1658__quoteTreasury" -> "abi.encodeCall()"
+"1658__debitFee" -> "revert LZ_MessageLib_InvalidAmount(uint256,uint256)"
+"11571__checkOwner" -> "require(bool,string)"
+}
+}

@@ -1,0 +1,26 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_20829_ShortStrings {
+label = "ShortStrings"
+"20829_byteLength" [label="byteLength"]
+"20829_toStringWithFallback" [label="toStringWithFallback"]
+"20829_slitherConstructorConstantVariables" [label="slitherConstructorConstantVariables"]
+"20829_toShortString" [label="toShortString"]
+"20829_byteLengthWithFallback" [label="byteLengthWithFallback"]
+"20829_toString" [label="toString"]
+"20829_toShortStringWithFallback" [label="toShortStringWithFallback"]
+"20829_byteLengthWithFallback" -> "20829_byteLength"
+"20829_toStringWithFallback" -> "20829_toString"
+"20829_toString" -> "20829_byteLength"
+"20829_toShortStringWithFallback" -> "20829_toShortString"
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"revert InvalidShortString()" 
+"mstore(uint256,uint256)" 
+"revert StringTooLong(string)" 
+"20829_toShortString" -> "revert StringTooLong(string)"
+"20829_byteLength" -> "revert InvalidShortString()"
+"20829_toString" -> "mstore(uint256,uint256)"
+}
+}

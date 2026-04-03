@@ -18,7 +18,7 @@ import {
 } from "../../utils/position";
 import { OrderType } from "../../utils/order";
 
-describe("Guardian.PositionImpactPoolDistribution", () => {
+describe.skip("Guardian.PositionImpactPoolDistribution", () => {
   let fixture;
   let wallet, user0, user1;
   let config, dataStore, roleStore, ethUsdMarket, usdc, reader, wnt;

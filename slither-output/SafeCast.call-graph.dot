@@ -1,0 +1,138 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_24280_SafeCast {
+label = "SafeCast"
+"24280_toUint176" [label="toUint176"]
+"24280_toUint88" [label="toUint88"]
+"24280_toUint256" [label="toUint256"]
+"24280_toInt240" [label="toInt240"]
+"24280_toInt208" [label="toInt208"]
+"24280_toInt64" [label="toInt64"]
+"24280_toInt224" [label="toInt224"]
+"24280_toUint120" [label="toUint120"]
+"24280_toInt168" [label="toInt168"]
+"24280_toInt128" [label="toInt128"]
+"24280_toInt120" [label="toInt120"]
+"24280_toUint136" [label="toUint136"]
+"24280_toInt40" [label="toInt40"]
+"24280_toUint232" [label="toUint232"]
+"24280_toUint8" [label="toUint8"]
+"24280_toInt32" [label="toInt32"]
+"24280_toInt200" [label="toInt200"]
+"24280_toUint32" [label="toUint32"]
+"24280_toInt160" [label="toInt160"]
+"24280_toInt48" [label="toInt48"]
+"24280_toUint248" [label="toUint248"]
+"24280_toUint72" [label="toUint72"]
+"24280_toUint64" [label="toUint64"]
+"24280_toInt232" [label="toInt232"]
+"24280_toUint216" [label="toUint216"]
+"24280_toUint24" [label="toUint24"]
+"24280_toUint192" [label="toUint192"]
+"24280_toInt8" [label="toInt8"]
+"24280_toInt72" [label="toInt72"]
+"24280_toInt176" [label="toInt176"]
+"24280_toUint144" [label="toUint144"]
+"24280_toInt136" [label="toInt136"]
+"24280_toUint80" [label="toUint80"]
+"24280_toInt192" [label="toInt192"]
+"24280_toUint16" [label="toUint16"]
+"24280_toUint48" [label="toUint48"]
+"24280_toInt96" [label="toInt96"]
+"24280_toInt144" [label="toInt144"]
+"24280_toInt112" [label="toInt112"]
+"24280_toInt16" [label="toInt16"]
+"24280_toUint240" [label="toUint240"]
+"24280_toUint104" [label="toUint104"]
+"24280_toInt184" [label="toInt184"]
+"24280_toUint112" [label="toUint112"]
+"24280_toInt256" [label="toInt256"]
+"24280_toInt24" [label="toInt24"]
+"24280_toUint128" [label="toUint128"]
+"24280_toUint224" [label="toUint224"]
+"24280_toUint96" [label="toUint96"]
+"24280_toInt152" [label="toInt152"]
+"24280_toInt248" [label="toInt248"]
+"24280_toInt216" [label="toInt216"]
+"24280_toInt88" [label="toInt88"]
+"24280_toInt80" [label="toInt80"]
+"24280_toUint152" [label="toUint152"]
+"24280_toUint56" [label="toUint56"]
+"24280_toInt104" [label="toInt104"]
+"24280_toUint160" [label="toUint160"]
+"24280_toUint184" [label="toUint184"]
+"24280_toInt56" [label="toInt56"]
+"24280_toUint40" [label="toUint40"]
+"24280_toUint168" [label="toUint168"]
+"24280_toUint200" [label="toUint200"]
+"24280_toUint208" [label="toUint208"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"require(bool,string)" 
+"24280_toUint88" -> "require(bool,string)"
+"24280_toInt232" -> "require(bool,string)"
+"24280_toInt216" -> "require(bool,string)"
+"24280_toInt16" -> "require(bool,string)"
+"24280_toInt176" -> "require(bool,string)"
+"24280_toInt96" -> "require(bool,string)"
+"24280_toInt168" -> "require(bool,string)"
+"24280_toUint40" -> "require(bool,string)"
+"24280_toUint168" -> "require(bool,string)"
+"24280_toUint72" -> "require(bool,string)"
+"24280_toInt144" -> "require(bool,string)"
+"24280_toInt104" -> "require(bool,string)"
+"24280_toInt24" -> "require(bool,string)"
+"24280_toUint120" -> "require(bool,string)"
+"24280_toInt160" -> "require(bool,string)"
+"24280_toInt72" -> "require(bool,string)"
+"24280_toInt56" -> "require(bool,string)"
+"24280_toUint208" -> "require(bool,string)"
+"24280_toUint200" -> "require(bool,string)"
+"24280_toInt40" -> "require(bool,string)"
+"24280_toUint216" -> "require(bool,string)"
+"24280_toUint8" -> "require(bool,string)"
+"24280_toUint224" -> "require(bool,string)"
+"24280_toInt248" -> "require(bool,string)"
+"24280_toUint248" -> "require(bool,string)"
+"24280_toUint112" -> "require(bool,string)"
+"24280_toUint160" -> "require(bool,string)"
+"24280_toUint128" -> "require(bool,string)"
+"24280_toUint32" -> "require(bool,string)"
+"24280_toInt32" -> "require(bool,string)"
+"24280_toUint80" -> "require(bool,string)"
+"24280_toInt256" -> "require(bool,string)"
+"24280_toInt208" -> "require(bool,string)"
+"24280_toInt136" -> "require(bool,string)"
+"24280_toInt200" -> "require(bool,string)"
+"24280_toInt184" -> "require(bool,string)"
+"24280_toUint184" -> "require(bool,string)"
+"24280_toInt8" -> "require(bool,string)"
+"24280_toUint48" -> "require(bool,string)"
+"24280_toUint16" -> "require(bool,string)"
+"24280_toInt48" -> "require(bool,string)"
+"24280_toUint240" -> "require(bool,string)"
+"24280_toUint192" -> "require(bool,string)"
+"24280_toUint232" -> "require(bool,string)"
+"24280_toUint176" -> "require(bool,string)"
+"24280_toUint136" -> "require(bool,string)"
+"24280_toUint144" -> "require(bool,string)"
+"24280_toInt128" -> "require(bool,string)"
+"24280_toInt120" -> "require(bool,string)"
+"24280_toUint152" -> "require(bool,string)"
+"24280_toInt112" -> "require(bool,string)"
+"24280_toInt80" -> "require(bool,string)"
+"24280_toInt152" -> "require(bool,string)"
+"24280_toUint64" -> "require(bool,string)"
+"24280_toUint56" -> "require(bool,string)"
+"24280_toInt240" -> "require(bool,string)"
+"24280_toInt64" -> "require(bool,string)"
+"24280_toUint256" -> "require(bool,string)"
+"24280_toUint96" -> "require(bool,string)"
+"24280_toInt224" -> "require(bool,string)"
+"24280_toInt192" -> "require(bool,string)"
+"24280_toUint24" -> "require(bool,string)"
+"24280_toUint104" -> "require(bool,string)"
+"24280_toInt88" -> "require(bool,string)"
+}
+}

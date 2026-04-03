@@ -1,0 +1,14 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_46673_DepositEventUtils {
+label = "DepositEventUtils"
+"46673_createEventData" [label="createEventData"]
+"46673_emitDepositCancelled" [label="emitDepositCancelled"]
+"46673_emitDepositExecuted" [label="emitDepositExecuted"]
+"46673_emitDepositCreated" [label="emitDepositCreated"]
+"46673_emitDepositCreated" -> "46673_createEventData"
+}subgraph cluster_solidity {
+label = "[Solidity]"
+}
+}

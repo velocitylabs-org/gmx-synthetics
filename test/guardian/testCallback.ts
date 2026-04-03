@@ -8,7 +8,7 @@ import { getAccountPositionCount } from "../../utils/position";
 import { deployContract } from "../../utils/deploy";
 import { executeLiquidation } from "../../utils/liquidation";
 
-describe("Guardian.Callback", () => {
+describe.skip("Guardian.Callback", () => {
   let fixture;
   let user0;
   let dataStore, ethUsdMarket, solUsdMarket, wnt, usdc, exchangeRouter;

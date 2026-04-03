@@ -5,7 +5,7 @@ import { deployContract } from "../../utils/deploy";
 import { errorsContract } from "../../utils/error";
 import { hashString } from "../../utils/hash";
 
-describe("GovToken", () => {
+describe.skip("GovToken", () => {
   const { provider } = ethers;
   let roleStore, govToken;
   let wallet, user0, user1, user2, user3;

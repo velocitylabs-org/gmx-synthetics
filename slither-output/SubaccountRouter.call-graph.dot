@@ -1,0 +1,75 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_141184_RoleModule {
+label = "RoleModule"
+"141184_constructor" [label="constructor"]
+"141184__validateRole" [label="_validateRole"]
+}subgraph cluster_16579_ReentrancyGuard {
+label = "ReentrancyGuard"
+"16579__reentrancyGuardEntered" [label="_reentrancyGuardEntered"]
+"16579__nonReentrantBefore" [label="_nonReentrantBefore"]
+"16579__nonReentrantAfter" [label="_nonReentrantAfter"]
+"16579_constructor" [label="constructor"]
+}subgraph cluster_156456_PayableMulticall {
+label = "PayableMulticall"
+"156456_multicall" [label="multicall"]
+}subgraph cluster_143670_SubaccountRouter {
+label = "SubaccountRouter"
+"143670_removeSubaccount" [label="removeSubaccount"]
+"143670_setMaxAllowedSubaccountActionCount" [label="setMaxAllowedSubaccountActionCount"]
+"143670__autoTopUpSubaccount" [label="_autoTopUpSubaccount"]
+"143670_setSubaccountExpiresAt" [label="setSubaccountExpiresAt"]
+"143670_receive" [label="receive"]
+"143670_createOrder" [label="createOrder"]
+"143670_updateOrder" [label="updateOrder"]
+"143670_setSubaccountAutoTopUpAmount" [label="setSubaccountAutoTopUpAmount"]
+"143670_addSubaccount" [label="addSubaccount"]
+"143670_setIntegrationId" [label="setIntegrationId"]
+"143670_cancelOrder" [label="cancelOrder"]
+"143670_constructor" [label="constructor"]
+"143670__handleSubaccountAction" [label="_handleSubaccountAction"]
+"143670_createOrder" -> "143670__handleSubaccountAction"
+"143670_createOrder" -> "143670_nonReentrant"
+"143670_updateOrder" -> "143670_nonReentrant"
+"143670_setSubaccountExpiresAt" -> "143670_nonReentrant"
+"143670_cancelOrder" -> "143670_nonReentrant"
+"143670_constructor" -> "143670_constructor"
+"143670_setIntegrationId" -> "143670_nonReentrant"
+"143670_updateOrder" -> "143670__autoTopUpSubaccount"
+"143670_removeSubaccount" -> "143670_nonReentrant"
+"143670_cancelOrder" -> "143670__autoTopUpSubaccount"
+"143670_setMaxAllowedSubaccountActionCount" -> "143670_nonReentrant"
+"143670_updateOrder" -> "143670__handleSubaccountAction"
+"143670_addSubaccount" -> "143670_nonReentrant"
+"143670_cancelOrder" -> "143670__handleSubaccountAction"
+"143670_createOrder" -> "143670__autoTopUpSubaccount"
+"143670_setSubaccountAutoTopUpAmount" -> "143670_nonReentrant"
+}subgraph cluster_141594_BaseRouter {
+label = "BaseRouter"
+"141594_sendNativeToken" [label="sendNativeToken"]
+"141594_sendTokens" [label="sendTokens"]
+"141594_constructor" [label="constructor"]
+"141594_sendWnt" [label="sendWnt"]
+"141594_constructor" -> "141594_constructor"
+"141594_sendNativeToken" -> "141594_nonReentrant"
+"141594_sendWnt" -> "141594_nonReentrant"
+"141594_sendTokens" -> "141594_nonReentrant"
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"require(bool,string)" 
+"gasleft()" 
+"revert Unauthorized(address,string)" 
+"revert InvalidNativeTokenSender(address)" 
+"revert EmptyOrder()" 
+"141184__validateRole" -> "revert Unauthorized(address,string)"
+"143670__autoTopUpSubaccount" -> "gasleft()"
+"143670_updateOrder" -> "revert EmptyOrder()"
+"143670_receive" -> "revert InvalidNativeTokenSender(address)"
+"16579__nonReentrantBefore" -> "require(bool,string)"
+"143670_createOrder" -> "gasleft()"
+"143670_cancelOrder" -> "gasleft()"
+"143670_updateOrder" -> "gasleft()"
+"143670_cancelOrder" -> "revert EmptyOrder()"
+}
+}

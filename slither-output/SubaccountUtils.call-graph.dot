@@ -1,0 +1,39 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_152043_SubaccountUtils {
+label = "SubaccountUtils"
+"152043__validateSubaccountActionCountAndExpiresAt" [label="_validateSubaccountActionCountAndExpiresAt"]
+"152043_validateSubaccount" [label="validateSubaccount"]
+"152043_validateIntegrationId" [label="validateIntegrationId"]
+"152043_setSubaccountExpiresAt" [label="setSubaccountExpiresAt"]
+"152043_validateCreateOrderParams" [label="validateCreateOrderParams"]
+"152043_getSubaccountAutoTopUpAmount" [label="getSubaccountAutoTopUpAmount"]
+"152043_setMaxAllowedSubaccountActionCount" [label="setMaxAllowedSubaccountActionCount"]
+"152043_handleSubaccountApproval" [label="handleSubaccountApproval"]
+"152043_handleSubaccountAction" [label="handleSubaccountAction"]
+"152043_setSubaccountAutoTopUpAmount" [label="setSubaccountAutoTopUpAmount"]
+"152043_addSubaccount" [label="addSubaccount"]
+"152043_setSubaccountIntegrationId" [label="setSubaccountIntegrationId"]
+"152043_removeSubaccount" [label="removeSubaccount"]
+"152043_handleSubaccountAction" -> "152043_validateSubaccount"
+"152043_handleSubaccountApproval" -> "152043_setSubaccountExpiresAt"
+"152043_handleSubaccountApproval" -> "152043_addSubaccount"
+"152043_handleSubaccountApproval" -> "152043_setMaxAllowedSubaccountActionCount"
+"152043_handleSubaccountAction" -> "152043__validateSubaccountActionCountAndExpiresAt"
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"revert SubaccountNotAuthorized(address,address)" 
+"revert SubaccountIntegrationIdDisabled(bytes32)" 
+"revert InvalidCancellationReceiverForSubaccountOrder(address,address)" 
+"revert InvalidReceiverForSubaccountOrder(address,address)" 
+"revert MaxSubaccountActionCountExceeded(address,address,uint256,uint256)" 
+"revert SubaccountApprovalExpired(address,address,uint256,uint256)" 
+"152043_validateCreateOrderParams" -> "revert InvalidReceiverForSubaccountOrder(address,address)"
+"152043__validateSubaccountActionCountAndExpiresAt" -> "revert SubaccountApprovalExpired(address,address,uint256,uint256)"
+"152043_validateSubaccount" -> "revert SubaccountNotAuthorized(address,address)"
+"152043_validateIntegrationId" -> "revert SubaccountIntegrationIdDisabled(bytes32)"
+"152043__validateSubaccountActionCountAndExpiresAt" -> "revert MaxSubaccountActionCountExceeded(address,address,uint256,uint256)"
+"152043_validateCreateOrderParams" -> "revert InvalidCancellationReceiverForSubaccountOrder(address,address)"
+}
+}

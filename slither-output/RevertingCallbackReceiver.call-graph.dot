@@ -1,0 +1,18 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_103976_RevertingCallbackReceiver {
+label = "RevertingCallbackReceiver"
+"103976_afterDepositCancellation" [label="afterDepositCancellation"]
+"103976_afterDepositExecution" [label="afterDepositExecution"]
+}subgraph cluster_27524_IDepositCallbackReceiver {
+label = "IDepositCallbackReceiver"
+"27524_afterDepositCancellation" [label="afterDepositCancellation"]
+"27524_afterDepositExecution" [label="afterDepositExecution"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"revert(string)" 
+"103976_afterDepositExecution" -> "revert(string)"
+"103976_afterDepositCancellation" -> "revert(string)"
+}
+}

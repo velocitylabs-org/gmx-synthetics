@@ -1,0 +1,30 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_26019_AdlUtils {
+label = "AdlUtils"
+"26019_validateAdl" [label="validateAdl"]
+"26019_getIsAdlEnabled" [label="getIsAdlEnabled"]
+"26019_getLatestAdlTime" [label="getLatestAdlTime"]
+"26019_setLatestAdlAt" [label="setLatestAdlAt"]
+"26019_createAdlOrder" [label="createAdlOrder"]
+"26019_setIsAdlEnabled" [label="setIsAdlEnabled"]
+"26019_updateAdlState" [label="updateAdlState"]
+"26019_emitAdlStateUpdated" [label="emitAdlStateUpdated"]
+"26019_updateAdlState" -> "26019_emitAdlStateUpdated"
+"26019_updateAdlState" -> "26019_setIsAdlEnabled"
+"26019_updateAdlState" -> "26019_setLatestAdlAt"
+"26019_validateAdl" -> "26019_getLatestAdlTime"
+"26019_validateAdl" -> "26019_getIsAdlEnabled"
+"26019_updateAdlState" -> "26019_getLatestAdlTime"
+}subgraph cluster_solidity {
+label = "[Solidity]"
+"revert AdlNotEnabled()" 
+"revert InvalidSizeDeltaForAdl(uint256,uint256)" 
+"revert OracleTimestampsAreSmallerThanRequired(uint256,uint256)" 
+"26019_createAdlOrder" -> "revert InvalidSizeDeltaForAdl(uint256,uint256)"
+"26019_validateAdl" -> "revert OracleTimestampsAreSmallerThanRequired(uint256,uint256)"
+"26019_validateAdl" -> "revert AdlNotEnabled()"
+"26019_updateAdlState" -> "revert OracleTimestampsAreSmallerThanRequired(uint256,uint256)"
+}
+}

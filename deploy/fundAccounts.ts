@@ -6,8 +6,10 @@ const func = async ({ getNamedAccounts, deployments }: HardhatRuntimeEnvironment
   const { log } = deployments;
   const { deployer } = await getNamedAccounts();
   const balance = expandDecimals(1000, 18);
-  log("set deployer %s balance to %s", deployer, balance);
-  await setBalance(deployer, balance);
+  // Use lowercase so setBalance skips EIP-55 checksum (Hardhat chainId differs from mainnet)
+  const address = deployer.toLowerCase();
+  log("set deployer %s balance to %s", address, balance);
+  await setBalance(address, balance);
 };
 
 func.skip = async ({ network }) => {

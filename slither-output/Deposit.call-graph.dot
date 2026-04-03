@@ -1,0 +1,45 @@
+strict digraph {
+rankdir="LR"
+node [shape=box]
+subgraph cluster_46056_Deposit {
+label = "Deposit"
+"46056_setDataList" [label="setDataList"]
+"46056_receiver" [label="receiver"]
+"46056_setMarket" [label="setMarket"]
+"46056_minMarketTokens" [label="minMarketTokens"]
+"46056_updatedAtTime" [label="updatedAtTime"]
+"46056_initialShortTokenAmount" [label="initialShortTokenAmount"]
+"46056_setUiFeeReceiver" [label="setUiFeeReceiver"]
+"46056_market" [label="market"]
+"46056_initialShortToken" [label="initialShortToken"]
+"46056_setShortTokenSwapPath" [label="setShortTokenSwapPath"]
+"46056_setExecutionFee" [label="setExecutionFee"]
+"46056_dataList" [label="dataList"]
+"46056_callbackContract" [label="callbackContract"]
+"46056_setReceiver" [label="setReceiver"]
+"46056_setUpdatedAtTime" [label="setUpdatedAtTime"]
+"46056_setAccount" [label="setAccount"]
+"46056_setInitialShortTokenAmount" [label="setInitialShortTokenAmount"]
+"46056_setSrcChainId" [label="setSrcChainId"]
+"46056_initialLongTokenAmount" [label="initialLongTokenAmount"]
+"46056_srcChainId" [label="srcChainId"]
+"46056_setCallbackGasLimit" [label="setCallbackGasLimit"]
+"46056_setInitialLongTokenAmount" [label="setInitialLongTokenAmount"]
+"46056_uiFeeReceiver" [label="uiFeeReceiver"]
+"46056_callbackGasLimit" [label="callbackGasLimit"]
+"46056_account" [label="account"]
+"46056_setMinMarketTokens" [label="setMinMarketTokens"]
+"46056_setInitialLongToken" [label="setInitialLongToken"]
+"46056_setShouldUnwrapNativeToken" [label="setShouldUnwrapNativeToken"]
+"46056_setCallbackContract" [label="setCallbackContract"]
+"46056_shouldUnwrapNativeToken" [label="shouldUnwrapNativeToken"]
+"46056_executionFee" [label="executionFee"]
+"46056_shortTokenSwapPath" [label="shortTokenSwapPath"]
+"46056_setInitialShortToken" [label="setInitialShortToken"]
+"46056_setLongTokenSwapPath" [label="setLongTokenSwapPath"]
+"46056_longTokenSwapPath" [label="longTokenSwapPath"]
+"46056_initialLongToken" [label="initialLongToken"]
+}subgraph cluster_solidity {
+label = "[Solidity]"
+}
+}
