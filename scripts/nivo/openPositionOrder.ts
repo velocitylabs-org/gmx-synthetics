@@ -103,9 +103,11 @@ async function createOrder({
 }
 
 async function main() {
-  if (hre.network.name !== "baseSepolia") {
+  const NETWORKS = ["baseSepolia", "base"];
+  if (!NETWORKS.includes(hre.network.name)) {
     throw new Error(`Unsupported network: ${hre.network.name}`);
   }
+  const isBaseMainnet = hre.network.name === "base";
 
   const walletTesterPrivateKey = process.env.WALLET_TESTER_PRIVATE_KEY;
   if (!walletTesterPrivateKey) {
@@ -123,8 +125,12 @@ async function main() {
   const referralCode = ethers.constants.HashZero;
   const markets = await reader.getMarkets(dataStore.address, 0, 100);
 
-  const market: string = ethers.utils.getAddress("0x090aAF3eee5f64140e2F752a9f568a49A985ffD9"); // index: GBP  long: USDC  short: USDC
-  const USDC: string = ethers.utils.getAddress("0x036CbD53842c5426634e7929541eC2318f3dCF7e"); // USDC
+  const market: string = isBaseMainnet
+    ? ethers.utils.getAddress("0x577CBa4C306D02072880B8bfAe261864b97A46E6")
+    : ethers.utils.getAddress("0x090aAF3eee5f64140e2F752a9f568a49A985ffD9"); // index: GBP  long: USDC  short: USDC
+  const USDC: string = isBaseMainnet
+    ? ethers.utils.getAddress("0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913")
+    : ethers.utils.getAddress("0x036CbD53842c5426634e7929541eC2318f3dCF7e"); // USDC
 
   if (!markets.some((m) => m.marketToken === market)) {
     throw new Error(`${market} is not a valid market`);
