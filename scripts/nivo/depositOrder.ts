@@ -7,6 +7,7 @@ import { minMarketTokensForFirstDeposit } from "../../utils/keys";
 
 import { WNT, ExchangeRouter, MintableToken } from "../../typechain-types";
 import { IDepositUtils } from "../../typechain-types/contracts/exchange/DepositHandler";
+import { getDepositExecutionFee, SUPPORTED_NETWORKS } from "./utils";
 
 const { ethers } = hre;
 
@@ -26,7 +27,8 @@ async function getValues(
   collateralToken: MintableToken;
 }> {
   const tokens = await hre.gmx.getTokens();
-  if (hre.network.name === "baseSepolia") {
+
+  if (SUPPORTED_NETWORKS.includes(hre.network.name)) {
     if (!tokens[fx] || !tokens[fx].address) {
       throw new Error(`Invalid FX currency: ${fx}`);
     }
@@ -56,7 +58,7 @@ async function main() {
 
   const { wnt, syntheticFx, collateralToken } = await getValues("GBP", "USDC", wallet);
 
-  const executionFee = expandDecimals(6, 15); // 0.006 ETH (min is ~0.0051 ETH)
+  const executionFee = (await getDepositExecutionFee()) ?? expandDecimals(6, 15);
   const wntBalance = await wnt.balanceOf(wallet.address);
   const ethBalance = await ethers.provider.getBalance(wallet.address);
   console.log("WNT balance %s", wntBalance.toString());
@@ -167,7 +169,7 @@ async function main() {
 
   const tx = await exchangeRouter.connect(wallet).multicall(multicallArgs, {
     value: executionFee,
-    gasLimit: 2500000,
+    gasLimit: 1_500_000,
   });
 
   console.log("Transaction sent:", tx.hash);
