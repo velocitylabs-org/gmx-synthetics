@@ -5,6 +5,7 @@ import { OrderType, DecreasePositionSwapType } from "../../utils/order";
 import { contractAt } from "../../utils/deploy";
 import { DataStore, ExchangeRouter, Reader, Router } from "../../typechain-types";
 import { BigNumberish } from "ethers";
+import { SUPPORTED_NETWORKS } from "./utils";
 const { ethers } = hre;
 
 async function createOrder({
@@ -103,8 +104,7 @@ async function createOrder({
 }
 
 async function main() {
-  const NETWORKS = ["baseSepolia", "base"];
-  if (!NETWORKS.includes(hre.network.name)) {
+  if (!SUPPORTED_NETWORKS.includes(hre.network.name)) {
     throw new Error(`Unsupported network: ${hre.network.name}`);
   }
   const isBaseMainnet = hre.network.name === "base";

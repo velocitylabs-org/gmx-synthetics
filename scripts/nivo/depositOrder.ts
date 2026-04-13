@@ -7,7 +7,7 @@ import { minMarketTokensForFirstDeposit } from "../../utils/keys";
 
 import { WNT, ExchangeRouter, MintableToken } from "../../typechain-types";
 import { IDepositUtils } from "../../typechain-types/contracts/exchange/DepositHandler";
-import { getDepositExecutionFee } from "./utils";
+import { getDepositExecutionFee, SUPPORTED_NETWORKS } from "./utils";
 
 const { ethers } = hre;
 
@@ -26,10 +26,9 @@ async function getValues(
   syntheticFx: { address: string };
   collateralToken: MintableToken;
 }> {
-  const NETWORKS = ["baseSepolia", "base"];
   const tokens = await hre.gmx.getTokens();
 
-  if (NETWORKS.includes(hre.network.name)) {
+  if (SUPPORTED_NETWORKS.includes(hre.network.name)) {
     if (!tokens[fx] || !tokens[fx].address) {
       throw new Error(`Invalid FX currency: ${fx}`);
     }

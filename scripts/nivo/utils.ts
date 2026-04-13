@@ -10,6 +10,8 @@ import { BigNumber } from "ethers";
 
 const { ethers } = hre;
 
+export const SUPPORTED_NETWORKS = ["baseSepolia", "base"];
+
 export const getDepositExecutionFee = async (): Promise<BigNumber> => {
   const dataStore = await ethers.getContract("DataStore");
 
