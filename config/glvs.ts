@@ -259,7 +259,23 @@ export default async function ({ network }: HardhatRuntimeEnvironment) {
       },
     ],
     baseSepolia: [],
-    base: [],
+    base: [
+      {
+        name: "Nivo Liquidity Vault [USDC-USDC]",
+        symbol: "GLV [USDC-USDC]",
+        longToken: "USDC",
+        shortToken: "USDC",
+        address: "0xCE8330244e622EF40c3e8b30A56740fC5237AcA4",
+        shiftMaxLossFactor: percentageToFloat("0.025%"),
+        shiftMinInterval: 30 * 60, // 30 minutes
+        minTokensForFirstGlvDeposit: expandDecimals(1, 18),
+        markets: [
+          createGlvMarketConfig("GBP", 500_000, 1),
+          createGlvMarketConfig("BRL", 500_000, 1),
+          createGlvMarketConfig("COP", 500_000, 1),
+        ],
+      },
+    ],
   }[network.name]!;
 
   if (!config) {
