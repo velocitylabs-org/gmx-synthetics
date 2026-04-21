@@ -2,6 +2,7 @@ import hre from "hardhat";
 import { getDepositKeys } from "../../utils/deposit";
 import { fetchSignedPricesBaseSepolia } from "./chainlinkProvider/signedPricesBaseSepolia";
 import { hashString } from "../../utils/hash";
+import { withGasBuffer } from "./utils";
 
 const { ethers } = hre;
 
@@ -114,8 +115,9 @@ async function main() {
     dataLengths: oracleParams.data.map((d) => d.length),
   });
 
+  const estimatedGas = await depositHandler.connect(keeperWallet).estimateGas.executeDeposit(depositKey, oracleParams);
   const tx = await depositHandler.connect(keeperWallet).executeDeposit(depositKey, oracleParams, {
-    gasLimit: 25_000_000,
+    gasLimit: withGasBuffer(estimatedGas),
   });
 
   console.log("Transaction sent:", tx.hash);

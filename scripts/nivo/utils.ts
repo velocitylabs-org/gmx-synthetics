@@ -10,6 +10,10 @@ import { BigNumber } from "ethers";
 
 const { ethers } = hre;
 
+export const withGasBuffer = (estimatedGas: BigNumber): BigNumber => {
+  return estimatedGas.mul(120).div(100);
+};
+
 export const SUPPORTED_NETWORKS = ["baseSepolia", "base"];
 
 export const getDepositExecutionFee = async (): Promise<BigNumber> => {
