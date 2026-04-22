@@ -58,7 +58,7 @@ async function main() {
 
   const { wnt, syntheticFx, collateralToken } = await getValues("GBP", "USDC", wallet);
 
-  const executionFee = (await getDepositExecutionFee()) ?? expandDecimals(6, 15);
+  const executionFee = (await getDepositExecutionFee(dataStore)) ?? expandDecimals(6, 15);
   const wntBalance = await wnt.balanceOf(wallet.address);
   const ethBalance = await ethers.provider.getBalance(wallet.address);
   console.log("WNT balance %s", wntBalance.toString());
