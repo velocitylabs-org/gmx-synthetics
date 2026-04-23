@@ -72,6 +72,19 @@ git add deployments/baseSepolia/.version deployments/baseSepolia/
 git commit -m "chore: deploy baseSepolia v1.0.2"
 ```
 
+## How consumers are notified
+
+When `upsert-deployments` runs (locally or via CI), it flips the `version` field on the `contract_deployment_pointers` row for the target chain. This single write is the trigger for all downstream consumers.
+
+**nivo-api** subscribes to `UPDATE` events on `contract_deployment_pointers` via Supabase Realtime. On receiving a pointer flip it:
+1. Logs the old and new version.
+2. Fetches the new set of contracts from `contract_deployments`.
+3. Validates all required contracts are present.
+4. Atomically replaces the in-memory cache — subsequent requests are served from the new version within seconds.
+5. If the re-fetch or validation fails, the old cache is kept and the error is logged loudly (graceful degradation — the API keeps serving rather than crashing).
+
+**Manual testing:** To trigger a Realtime notification without a full deployment, edit the `version` field directly in the Supabase Table Editor (`contract_deployment_pointers` → `base-sepolia` row). Flip it to a non-existent version to test graceful degradation, or flip it back to the current version to test a clean reload.
+
 ## CI
 
 The workflow at `.github/workflows/deploy-sync.yml` triggers on any push to `main` that changes `deployments/**`. It runs with `--no-bump` — the version is read from the already-committed `.version` file and the upsert is idempotent.
