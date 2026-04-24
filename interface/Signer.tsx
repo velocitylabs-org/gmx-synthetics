@@ -25,6 +25,10 @@ function getTransactionLink(chainId, transactionHash) {
     return `https://botanixscan.io/tx/${transactionHash}`;
   }
 
+  if (chainId === 8453) {
+    return `https://basescan.org/tx/${transactionHash}`;
+  }
+
   console.log("unsupported chainId", chainId);
 }
 
