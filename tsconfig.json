@@ -16,6 +16,6 @@
     "rootDirs": ["./src", "./scripts", "./test"]
   },
   "exclude": ["dist", "node_modules"],
-  "include": ["./test", "./src", "./scripts", "./global.d.ts"],
+  "include": ["./test", "./src", "./scripts", "./global.d.ts", "ci/scripts/upsert-deployments.ts"],
   "files": ["./hardhat.config.ts"]
 }

@@ -22,7 +22,7 @@
     "slither:callgraph": "npx hardhat compile && ./scripts/slither-callgraph.sh --render",
     "docs:reboot-diagrams": "./scripts/reboot-call-routes-diagrams.sh",
     "docs:call-routes-html": "node scripts/call-routes-to-html.js",
-    "extract": "ts-node scripts/extract-deployment-addresses.ts"
+    "upsert-deployments": "ts-node ci/scripts/upsert-deployments.ts"
   },
   "author": "",
   "license": "ISC",
@@ -54,6 +54,7 @@
     "hardhat-gas-reporter": "^1.0.9",
     "husky": "^8.0.0",
     "prettier": "2.7.1",
+    "@supabase/supabase-js": "^2.49.4",
     "ts-node": "^10.9.1",
     "typechain": "^8.1.1",
     "typescript": "^4.8.4"

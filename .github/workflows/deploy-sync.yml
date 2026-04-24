@@ -1,0 +1,37 @@
+# Upserts contract deployment artifacts to Supabase and updates the chain version pointer.
+# Triggers on changes to deployments/** on main. See VELOCITY_DOCS/DEPLOYMENT_SYNC.md.
+name: Deploy Sync
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "deployments/**"
+
+jobs:
+  upsert:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - chain: baseSepolia
+            chain_label: base-sepolia
+          - chain: base
+            chain_label: base-mainnet
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20.x"
+
+      - uses: pnpm/action-setup@v4
+
+      - run: pnpm install --ignore-scripts
+
+      - name: Upsert deployments
+        run: pnpm run upsert-deployments --chain ${{ matrix.chain }} --chain-label ${{ matrix.chain_label }} --no-bump
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
