@@ -1,3 +1,5 @@
+// Reads deployment artifacts, bumps the chain version, and upserts to Supabase.
+// See VELOCITY_DOCS/DEPLOYMENT_SYNC.md for the full operator workflow.
 import { existsSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { basename, join, resolve } from "node:path";
 import { createClient } from "@supabase/supabase-js";

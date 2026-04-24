@@ -25,7 +25,7 @@ SUPABASE_SERVICE_ROLE_KEY=<service-role-key>
 ```
 1. Deploy contracts     → deployments/<chain>/ updated locally
 2. Dry-run              → preview next version and contracts, no writes
-3. Live local run       → bumps .version, upserts to dev Supabase
+3. Live local run       → bumps .version, upserts to Supabase
 4. Commit + push        → CI fires on deployments/** change,
                           upserts to prod Supabase (idempotent, no re-bump)
 ```
@@ -74,7 +74,7 @@ git commit -m "chore: deploy baseSepolia v1.0.2"
 
 ## How consumers are notified
 
-When `upsert-deployments` runs (locally or via CI), it flips the `version` field on the `contract_deployment_pointers` row for the target chain. This single write is the trigger for all downstream consumers.
+When `upsert-deployments` runs (locally or via CI), it updates the `version` field on the `contract_deployment_pointers` row for the target chain to the latest deployed version. This single write is the trigger for all downstream consumers.
 
 **nivo-api** subscribes to `UPDATE` events on `contract_deployment_pointers` via Supabase Realtime. On receiving a pointer flip it:
 1. Logs the old and new version.

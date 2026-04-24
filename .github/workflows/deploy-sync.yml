@@ -1,3 +1,5 @@
+# Upserts contract deployment artifacts to Supabase and updates the chain version pointer.
+# Triggers on changes to deployments/** on main. See VELOCITY_DOCS/DEPLOYMENT_SYNC.md.
 name: Deploy Sync
 
 on:
