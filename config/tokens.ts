@@ -113,18 +113,16 @@ const config: {
   baseSepolia: {
     // NIVO CURRENCIES
 
-    // TMP - Already available Chainlink Data Streams
     // Pound Sterling
     GBP: getCurrencyConfig("0x00080ca1eb3009703b00bfb3dd86ebae19a55631e20b18db633559e6175b1580"),
     // Japanese Yen
     JPY: getCurrencyConfig("0x0008e10fbb69e00a36425b9a462b17a715fb374b4959e6177214c8c0dd4998ca"),
-
     // Brazilian Real
-    BRL: getCurrencyConfig("0x0000000000000000000000000000000000000000000000000000000000000000"), // TODO: Update with the real Chainlink Data Stream ID
+    BRL: getCurrencyConfig("0x000878f7a7bab1641924c3de15d4af990df15e56dfdbe33bf86eee112fb4890f"),
     // Mexican Peso
-    MXN: getCurrencyConfig("0x0000000000000000000000000000000000000000000000000000000000000000"), // TODO: Update with the real Chainlink Data Stream ID
+    MXN: getCurrencyConfig("0x00085ec71b9d0b3a974147a48b886e78c9ac8fa619e2577e5e69b785b91f5b55"),
     // Colombian Peso
-    COP: getCurrencyConfig("0x0000000000000000000000000000000000000000000000000000000000000000"), // TODO: Update with the real Chainlink Data Stream ID
+    COP: getCurrencyConfig("0x00082a4031718674bbe7e68b6b272fb198ac65e9d01eb2ed9ca9091d415a9d27"),
     // Indonesian Rupiah
     IDR: getCurrencyConfig("0x0000000000000000000000000000000000000000000000000000000000000000"), // TODO: Update with the real Chainlink Data Stream ID
     // Philippine Peso
@@ -148,12 +146,6 @@ const config: {
       dataStreamFeedId: "0x0003dc85e8b01946bf9dfd8b0db860129181eb6105a8c8981d9f28e00b6f60d9",
       dataStreamFeedDecimals: 18,
       oracleTimestampAdjustment: 1,
-      // priceFeed: {
-      //   address: "0x0153002d20B96532C639313c2d54c3dA09109309",
-      //   decimals: 8,
-      //   heartbeatDuration: (24 + 1) * 60 * 60,
-      //   stablePriceUsd: decimalToFloat(1),
-      // },
       // buybackMaxPriceImpactFactor: LOW_BUYBACK_IMPACT,
     },
 
@@ -165,11 +157,6 @@ const config: {
       transferGasLimit: 200 * 1000,
       dataStreamFeedId: "0x000359843a543ee2fe414dc14c7e7920ef10f4372990b79d6361cdc0dd1ba782",
       dataStreamFeedDecimals: 18,
-      // priceFeed: {
-      //   address: "0xd30e2101a97dcbAeBCBC04F14C3f624E67A35165", // ETH / USD
-      //   decimals: 8,
-      //   heartbeatDuration: 144 * 60 * 60,
-      // },
     },
   },
   base: {
@@ -182,11 +169,11 @@ const config: {
     JPY: getCurrencyConfig("0x0008308e2aa7bfdc5e326f142a495da6dc8355e01d64015c68cbdc50ab2ae129"),
 
     // Brazilian Real
-    BRL: getCurrencyConfig("0x0000000000000000000000000000000000000000000000000000000000000000"), // TODO: Update with the real Chainlink Data Stream ID
+    BRL: getCurrencyConfig("0x0008d7ce83a4b9ebc4f4c4082c1273f3a87a75613c4a8ccd290a23f59d7c4f0e"),
     // Mexican Peso
-    MXN: getCurrencyConfig("0x0000000000000000000000000000000000000000000000000000000000000000"), // TODO: Update with the real Chainlink Data Stream ID
+    MXN: getCurrencyConfig("0x0008105549bd85f333e42ca54fe1e55460710026c9f35820631532fed0d03266"),
     // Colombian Peso
-    COP: getCurrencyConfig("0x0000000000000000000000000000000000000000000000000000000000000000"), // TODO: Update with the real Chainlink Data Stream ID
+    COP: getCurrencyConfig("0x0008e19bf7781603e3308e0f7b9f64dbe73c78db89f9856aaec8be1deb558562"),
     // Indonesian Rupiah
     IDR: getCurrencyConfig("0x0000000000000000000000000000000000000000000000000000000000000000"), // TODO: Update with the real Chainlink Data Stream ID
     // Philippine Peso
