@@ -484,6 +484,7 @@ describe("Config", () => {
         feedId: hashString("WNT"),
         multiplier: expandDecimals(1, 60 - 6 - 18),
         spreadReductionFactor: percentageToFloat("100%"),
+        inversionScale: BigInt(0),
       },
       edge: {
         feedId: hashString("WNT-EDGE"),
@@ -504,6 +505,9 @@ describe("Config", () => {
     expect(await dataStore.getUint(keys.dataStreamMultiplierKey(token.address))).eq(oracleConfig.dataStream.multiplier);
     expect(await dataStore.getUint(keys.dataStreamSpreadReductionFactorKey(token.address))).eq(
       oracleConfig.dataStream.spreadReductionFactor
+    );
+    expect(await dataStore.getUint(keys.dataStreamInversionScaleKey(token.address))).eq(
+      oracleConfig.dataStream.inversionScale
     );
     expect(await dataStore.getBytes32(keys.edgeDataStreamIdKey(token.address))).eq(oracleConfig.edge.feedId);
     expect(await dataStore.getUint(keys.edgeDataStreamTokenDecimalsKey(token.address))).eq(
