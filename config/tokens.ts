@@ -40,6 +40,7 @@ type BaseTokenConfig = {
   dataStreamFeedId?: string; // DataStream Feed ID for the currency
   dataStreamFeedDecimals?: number; // 18 (Default for each currency & token)
   dataStreamSpreadReductionFactor?: BigNumberish; // Spread reduction factor for Bid & Ask prices (100% = no spread, Bid = Ask)
+  dataStreamIsInverted?: boolean; // True for USD/FX feeds (eg: USD/COP) where the Oracle feed reports => FX per USD (instead of USD per FX)
   priceFeed?: OraclePriceFeed; // Chainlink price feed (not used anymore) - Not usable for Synthetics currencies
   edge?: OracleEdge; // Chaos labs Edge Oracle (unused)
 };
@@ -83,7 +84,7 @@ export type TokensConfig = { [tokenSymbol: string]: TokenConfig };
 const LOW_BUYBACK_IMPACT = percentageToFloat("0.20%");
 const MID_BUYBACK_IMPACT = percentageToFloat("0.40%");
 
-const getCurrencyConfig = (dataStreamFeedId: string): SyntheticTokenConfig => {
+const getCurrencyConfig = (dataStreamFeedId: string, isFeedInverted?: true): SyntheticTokenConfig => {
   return {
     dataStreamFeedId,
     synthetic: true,
@@ -91,10 +92,11 @@ const getCurrencyConfig = (dataStreamFeedId: string): SyntheticTokenConfig => {
     dataStreamFeedDecimals: 18,
     oracleTimestampAdjustment: 1,
     dataStreamSpreadReductionFactor: percentageToFloat("100%"),
+    ...(isFeedInverted && { dataStreamIsInverted: true }),
   };
 };
 
-const getCurrencyTestConfig = (dataStreamFeedId?: string): SyntheticTokenConfig => {
+const getCurrencyTestConfig = (dataStreamFeedId?: string, isFeedInverted?: true): SyntheticTokenConfig => {
   return {
     synthetic: true,
     decimals: 18,
@@ -103,6 +105,7 @@ const getCurrencyTestConfig = (dataStreamFeedId?: string): SyntheticTokenConfig 
       dataStreamFeedDecimals: 18,
       oracleTimestampAdjustment: 1,
       dataStreamSpreadReductionFactor: percentageToFloat("100%"),
+      ...(isFeedInverted && { dataStreamIsInverted: true }),
     }),
   };
 };

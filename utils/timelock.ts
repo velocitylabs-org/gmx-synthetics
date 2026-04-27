@@ -93,18 +93,23 @@ export async function setDataStreamPayload(
   token: string,
   feedId: string,
   dataStreamMultiplier: any,
-  dataStreamSpreadReductionFactor: any
+  dataStreamSpreadReductionFactor: any,
+  dataStreamInversionScale: any = 0
 ) {
   const dataStore = await hre.ethers.getContract("DataStore");
 
-  const targets = [dataStore.address, dataStore.address, dataStore.address];
-  const values = [0, 0, 0];
+  const targets = [dataStore.address, dataStore.address, dataStore.address, dataStore.address];
+  const values = [0, 0, 0, 0];
   const payloads = [
     dataStore.interface.encodeFunctionData("setBytes32", [keys.dataStreamIdKey(token), hashString(feedId)]),
     dataStore.interface.encodeFunctionData("setUint", [keys.dataStreamMultiplierKey(token), dataStreamMultiplier]),
     dataStore.interface.encodeFunctionData("setUint", [
       keys.dataStreamSpreadReductionFactorKey(token),
       dataStreamSpreadReductionFactor,
+    ]),
+    dataStore.interface.encodeFunctionData("setUint", [
+      keys.dataStreamInversionScaleKey(token),
+      dataStreamInversionScale,
     ]),
   ];
 

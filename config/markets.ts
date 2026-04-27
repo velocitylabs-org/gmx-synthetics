@@ -519,7 +519,7 @@ const getNivoMarketsConfig = (indexToken: string, collateralToken = "USDT"): Per
 const getNivoMarketsTestnetConfig = (indexToken: string, collateralToken = "USDC"): PerpMarketConfig => {
   return {
     tokens: { indexToken: indexToken, longToken: collateralToken, shortToken: collateralToken },
-    virtualTokenIdForIndexToken: hashString(`PERP:${indexToken}/USD`), // To be confirmed: Order FX/USD vs USD/FX
+    virtualTokenIdForIndexToken: hashString(`PERP:${indexToken}/USD`),
 
     ...nivoBaseMarketConfig,
     ...nivoFundingRateConfig,
@@ -530,7 +530,7 @@ const getNivoMarketsTestnetConfig = (indexToken: string, collateralToken = "USDC
 const getNivoMarketsLocalConfig = (indexToken: string, collateralToken = "USDT"): PerpMarketConfig => {
   return {
     tokens: { indexToken: indexToken, longToken: collateralToken, shortToken: collateralToken },
-    virtualTokenIdForIndexToken: hashString(`PERP:${indexToken}/USD`), // To be confirmed: Order FX/USD vs USD/FX
+    virtualTokenIdForIndexToken: hashString(`PERP:${indexToken}/USD`),
 
     maxCollateralSum: expandDecimals(10_000_000_000_000, 18), // 10 trillion with 18 decimals
 
