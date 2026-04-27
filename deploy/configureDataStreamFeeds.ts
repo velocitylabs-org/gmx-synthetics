@@ -38,6 +38,13 @@ const func = async ({ gmx }: HardhatRuntimeEnvironment) => {
       dataStreamMultiplier,
       `data stream feed multiplier for ${tokenSymbol} ${token.address}`
     );
+
+    const dataStreamInversionScale = token.dataStreamIsInverted ? expandDecimals(1, 2 * (30 - token.decimals)) : 0;
+    await setUintIfDifferent(
+      keys.dataStreamInversionScaleKey(token.address),
+      dataStreamInversionScale,
+      `data stream inversion scale for ${tokenSymbol} ${token.address}`
+    );
   }
 };
 
