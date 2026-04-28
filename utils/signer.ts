@@ -36,7 +36,7 @@ export async function createSigningServer() {
       }
     }, 1000);
 
-    subProcess = spawn("yarn", ["app", "--logLevel", "warn"], {
+    subProcess = spawn("pnpm", ["app", "--logLevel", "warn"], {
       stdio: "inherit", // Inherit stdout/stderr to see logs
       shell: true, // Use shell to allow command parsing
     });

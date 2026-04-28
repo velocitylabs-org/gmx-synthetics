@@ -17,7 +17,8 @@ import { handleInBatches } from "../utils/batch";
 
 const expectedPhases = ["signal", "finalize"];
 
-const isTestnet = hre.network.name === "arbitrumSepolia" || hre.network.name === "avalancheFuji";
+const isTestnet =
+  hre.network.name === "arbitrumSepolia" || hre.network.name === "avalancheFuji" || hre.network.name === "baseSepolia";
 
 export async function updateOracleConfigForTokens() {
   const tokens = await hre.gmx.getTokens();
@@ -260,6 +261,8 @@ export async function updateOracleConfigForTokens() {
             token.dataStreamFeedId,
             dataStreamMultiplier,
             dataStreamSpreadReductionFactor,
+            predecessor,
+            salt,
           ])
         );
       } else {
@@ -269,7 +272,9 @@ export async function updateOracleConfigForTokens() {
           dataStreamMultiplier,
           dataStreamSpreadReductionFactor
         );
-        multicallWriteParams.push(timelock.interface.encodeFunctionData("executeBatch", [targets, values, payloads]));
+        multicallWriteParams.push(
+          timelock.interface.encodeFunctionData("executeBatch", [targets, values, payloads, predecessor, salt])
+        );
       }
     }
 

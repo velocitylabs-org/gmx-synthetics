@@ -6,7 +6,7 @@ import "@rainbow-me/rainbowkit/styles.css";
 import { getDefaultWallets, RainbowKitProvider } from "@rainbow-me/rainbowkit";
 import { configureChains, createConfig, WagmiConfig } from "wagmi";
 import { publicProvider } from "wagmi/providers/public";
-import { arbitrum, avalanche } from "wagmi/chains";
+import { arbitrum, avalanche, base } from "wagmi/chains";
 
 const botanix = {
   id: 3637,
@@ -27,7 +27,7 @@ const botanix = {
   testnet: false,
 };
 
-const { chains, publicClient } = configureChains([arbitrum, avalanche, botanix], [publicProvider()]);
+const { chains, publicClient } = configureChains([arbitrum, avalanche, base, botanix], [publicProvider()]);
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
