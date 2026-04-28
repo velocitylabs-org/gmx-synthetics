@@ -452,7 +452,13 @@ describe("Timelock", () => {
       .connect(timelockAdmin)
       .signalSetDataStream(wnt.address, hashString("WNT"), expandDecimals(1, 34), p99, 0, constants.HashZero, salt);
 
-    const { targets, values, payloads } = await setDataStreamPayload(wnt.address, "WNT", expandDecimals(1, 34), p99, 0);
+    const { targets, values, payloads } = await setDataStreamPayload(
+      wnt.address,
+      hashString("WNT"),
+      expandDecimals(1, 34),
+      p99,
+      0
+    );
     await expect(timelockConfig.connect(user2).executeBatch(targets, values, payloads, constants.HashZero, salt))
       .to.be.revertedWithCustomError(errorsContract, "Unauthorized")
       .withArgs(user2.address, "TIMELOCK_ADMIN");
