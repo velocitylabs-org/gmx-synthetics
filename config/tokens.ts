@@ -121,11 +121,11 @@ const config: {
     // Japanese Yen
     JPY: getCurrencyConfig("0x0008e10fbb69e00a36425b9a462b17a715fb374b4959e6177214c8c0dd4998ca"),
     // Brazilian Real
-    BRL: getCurrencyConfig("0x000878f7a7bab1641924c3de15d4af990df15e56dfdbe33bf86eee112fb4890f"),
+    BRL: getCurrencyConfig("0x000878f7a7bab1641924c3de15d4af990df15e56dfdbe33bf86eee112fb4890f", true),
     // Mexican Peso
-    MXN: getCurrencyConfig("0x00085ec71b9d0b3a974147a48b886e78c9ac8fa619e2577e5e69b785b91f5b55"),
+    MXN: getCurrencyConfig("0x00085ec71b9d0b3a974147a48b886e78c9ac8fa619e2577e5e69b785b91f5b55", true),
     // Colombian Peso
-    COP: getCurrencyConfig("0x00082a4031718674bbe7e68b6b272fb198ac65e9d01eb2ed9ca9091d415a9d27"),
+    COP: getCurrencyConfig("0x00082a4031718674bbe7e68b6b272fb198ac65e9d01eb2ed9ca9091d415a9d27", true),
     // Indonesian Rupiah
     IDR: getCurrencyConfig("0x0000000000000000000000000000000000000000000000000000000000000000"), // TODO: Update with the real Chainlink Data Stream ID
     // Philippine Peso
@@ -172,11 +172,11 @@ const config: {
     JPY: getCurrencyConfig("0x0008308e2aa7bfdc5e326f142a495da6dc8355e01d64015c68cbdc50ab2ae129"),
 
     // Brazilian Real
-    BRL: getCurrencyConfig("0x0008d7ce83a4b9ebc4f4c4082c1273f3a87a75613c4a8ccd290a23f59d7c4f0e"),
+    BRL: getCurrencyConfig("0x0008d7ce83a4b9ebc4f4c4082c1273f3a87a75613c4a8ccd290a23f59d7c4f0e", true),
     // Mexican Peso
-    MXN: getCurrencyConfig("0x0008105549bd85f333e42ca54fe1e55460710026c9f35820631532fed0d03266"),
+    MXN: getCurrencyConfig("0x0008105549bd85f333e42ca54fe1e55460710026c9f35820631532fed0d03266", true),
     // Colombian Peso
-    COP: getCurrencyConfig("0x0008e19bf7781603e3308e0f7b9f64dbe73c78db89f9856aaec8be1deb558562"),
+    COP: getCurrencyConfig("0x0008e19bf7781603e3308e0f7b9f64dbe73c78db89f9856aaec8be1deb558562", true),
     // Indonesian Rupiah
     IDR: getCurrencyConfig("0x0000000000000000000000000000000000000000000000000000000000000000"), // TODO: Update with the real Chainlink Data Stream ID
     // Philippine Peso
@@ -1840,11 +1840,11 @@ const config: {
 
     // Emerging market currencies
     // Brazilian Real
-    BRL: getCurrencyTestConfig(),
+    BRL: getCurrencyTestConfig(undefined, true),
     // Mexican Peso
-    MXN: getCurrencyTestConfig(),
+    MXN: getCurrencyTestConfig(undefined, true),
     // Colombian Peso
-    COP: getCurrencyTestConfig(),
+    COP: getCurrencyTestConfig(undefined, true),
     // Indonesian Rupiah
     IDR: getCurrencyTestConfig(),
     // Philippine Peso
@@ -1932,11 +1932,11 @@ const config: {
 
     // Emerging market currencies (no Chainlink Data Stream feeds yet)
     // Brazilian Real
-    BRL: getCurrencyTestConfig(),
+    BRL: getCurrencyTestConfig(undefined, true),
     // Mexican Peso
-    MXN: getCurrencyTestConfig(),
+    MXN: getCurrencyTestConfig(undefined, true),
     // Colombian Peso
-    COP: getCurrencyTestConfig(),
+    COP: getCurrencyTestConfig(undefined, true),
     // Indonesian Rupiah
     IDR: getCurrencyTestConfig(),
     // Philippine Peso
