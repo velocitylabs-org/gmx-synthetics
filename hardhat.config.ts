@@ -144,14 +144,18 @@ const getEnvAccounts = (chainName?: string) => {
     ARBITRUM_ACCOUNT_KEY,
     BASE_ACCOUNT_KEY,
     BASE_SEPOLIA_ACCOUNT_KEY,
+    NIVO_KEEPER_PRIVATE_KEY,
   } = process.env;
 
-  if (chainName === "base" && BASE_ACCOUNT_KEY) {
-    return [BASE_ACCOUNT_KEY];
+  const baseAccountKey = BASE_ACCOUNT_KEY || NIVO_KEEPER_PRIVATE_KEY;
+  const baseSepoliaAccountKey = BASE_SEPOLIA_ACCOUNT_KEY || NIVO_KEEPER_PRIVATE_KEY;
+
+  if (chainName === "base" && baseAccountKey) {
+    return [baseAccountKey];
   }
 
-  if (chainName === "baseSepolia" && BASE_SEPOLIA_ACCOUNT_KEY) {
-    return [BASE_SEPOLIA_ACCOUNT_KEY];
+  if (chainName === "baseSepolia" && baseSepoliaAccountKey) {
+    return [baseSepoliaAccountKey];
   }
 
   if (chainName === "arbitrumSepolia" && ARBITRUM_SEPOLIA_ACCOUNT_KEY) {
