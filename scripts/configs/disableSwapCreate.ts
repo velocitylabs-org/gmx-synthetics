@@ -30,6 +30,16 @@ export async function runDisableSwapCreate() {
       data: encodeData(["address", "uint256"], [orderHandlerAddress, OrderType.StopLossDecrease]),
       label: "CREATE_ORDER_FEATURE_DISABLED StopLossDecrease",
     },
+    {
+      baseKey: keys.CREATE_ORDER_FEATURE_DISABLED,
+      data: encodeData(["address", "uint256"], [orderHandlerAddress, OrderType.LimitIncrease]),
+      label: "CREATE_ORDER_FEATURE_DISABLED LimitIncrease",
+    },
+    {
+      baseKey: keys.CREATE_ORDER_FEATURE_DISABLED,
+      data: encodeData(["address", "uint256"], [orderHandlerAddress, OrderType.LimitDecrease]),
+      label: "CREATE_ORDER_FEATURE_DISABLED LimitDecrease",
+    },
   ];
 
   const multicallWriteParams = featureKeys.map((f) =>

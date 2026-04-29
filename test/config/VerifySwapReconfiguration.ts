@@ -92,6 +92,14 @@ describe("Config.VerifySwapReconfiguration", function () {
         key: keys.createOrderFeatureDisabledKey(orderHandlerAddress, OrderType.StopLossDecrease),
       },
       {
+        label: "create LimitIncrease",
+        key: keys.createOrderFeatureDisabledKey(orderHandlerAddress, OrderType.LimitIncrease),
+      },
+      {
+        label: "create LimitDecrease",
+        key: keys.createOrderFeatureDisabledKey(orderHandlerAddress, OrderType.LimitDecrease),
+      },
+      {
         label: "execute MarketSwap",
         key: keys.executeOrderFeatureDisabledKey(orderHandlerAddress, OrderType.MarketSwap),
       },
@@ -102,6 +110,14 @@ describe("Config.VerifySwapReconfiguration", function () {
       {
         label: "execute StopLossDecrease",
         key: keys.executeOrderFeatureDisabledKey(orderHandlerAddress, OrderType.StopLossDecrease),
+      },
+      {
+        label: "execute LimitIncrease",
+        key: keys.executeOrderFeatureDisabledKey(orderHandlerAddress, OrderType.LimitIncrease),
+      },
+      {
+        label: "execute LimitDecrease",
+        key: keys.executeOrderFeatureDisabledKey(orderHandlerAddress, OrderType.LimitDecrease),
       },
     ];
 
