@@ -49,7 +49,8 @@
     "config:disable-swaps:mainnet:dryrun": "WRITE=false IS_DISABLED=true npx hardhat run scripts/configs/index.ts --network base",
     "config:disable-swaps:fork:all": "pnpm config:disable-swaps:create:fork && pnpm config:disable-swaps:execute:fork && pnpm config:disable-swaps:fork && pnpm test:config:verify-swap-reconfiguration:fork",
     "test:config:verify-swap-reconfiguration:fork": "FORK_ID=8453 RUN_FORK_CONFIG_TESTS=true npx hardhat test test/config/VerifySwapReconfiguration.ts --network anvil",
-    "archive:mainnet-configurations:scrum-225-226": "bash scripts/configs/archiveMainnetConfigurations.sh"
+    "archive:mainnet-configurations:scrum-225-226": "bash scripts/configs/archiveMainnetConfigurations.sh",
+    "verify:scrum225-226:mainnet": "npx hardhat run scripts/configs/verifyScrum225226State.ts --network base"
   },
   "author": "",
   "license": "ISC",
