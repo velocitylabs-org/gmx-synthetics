@@ -65,7 +65,9 @@ async function main() {
     const executeValue = await dataStore.getBool(keys.executeOrderFeatureDisabledKey(orderHandlerAddress, orderType));
     console.log(`orderType=${orderType} create=${createValue} execute=${executeValue}`);
 
-    if (!createValue) mismatches.push(`CREATE_ORDER_FEATURE_DISABLED orderType=${orderType} expected=true actual=false`);
+    if (!createValue) {
+      mismatches.push(`CREATE_ORDER_FEATURE_DISABLED orderType=${orderType} expected=true actual=false`);
+    }
     if (!executeValue) {
       mismatches.push(`EXECUTE_ORDER_FEATURE_DISABLED orderType=${orderType} expected=true actual=false`);
     }
