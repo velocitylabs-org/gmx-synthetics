@@ -62,6 +62,8 @@ export async function runApplyPoolRiskGuards() {
   const inactiveIndexTokens = getInactiveIndexTokens();
   const disableInactiveMarkets =
     process.env.DISABLE_INACTIVE_MARKETS === undefined ? true : isTruthy(process.env.DISABLE_INACTIVE_MARKETS);
+  // IS_DISABLED being `true` means the feature being configured would be disabled.
+  // Vice versa, if `IS_DISABLED = false` is passed in, the feature is therefore active/enabled.
   const inactiveDisableValue = process.env.IS_DISABLED === undefined ? true : process.env.IS_DISABLED === "true";
   const targetMarketToken = process.env.MARKET?.toLowerCase();
 
