@@ -14,7 +14,7 @@ type MarketPolicy = {
   minMarketTokensForFirstDeposit: string;
 };
 
-const DEFAULT_TARGET_INDEX_TOKENS = ["JPY", "GBP", "BRL", "MXN", "COP"];
+const DEFAULT_ACTIVE_INDEX_TOKENS = ["JPY", "GBP", "BRL", "MXN", "COP"];
 const DEFAULT_INACTIVE_INDEX_TOKENS = ["IDR", "PHP", "PEN", "NGN", "KES", "ZAR", "THB"];
 const DEFAULT_MIN_FIRST_DEPOSIT = "1000000000000000000";
 const MARKET_POLICY_BY_INDEX_SYMBOL: Record<string, MarketPolicy> = {};
@@ -22,7 +22,7 @@ const MARKET_POLICY_BY_INDEX_SYMBOL: Record<string, MarketPolicy> = {};
 function getTargetIndexTokens(): Set<string> {
   const override = process.env.TARGET_INDEX_TOKENS;
   if (!override) {
-    return new Set(DEFAULT_TARGET_INDEX_TOKENS);
+    return new Set(DEFAULT_ACTIVE_INDEX_TOKENS);
   }
 
   return new Set(
