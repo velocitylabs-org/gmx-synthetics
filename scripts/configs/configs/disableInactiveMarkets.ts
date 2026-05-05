@@ -7,7 +7,7 @@ import tokensConfig from "../../../config/tokens";
 import marketsConfig from "../../../config/markets";
 import { getDeployedContract } from "../helpers/getDeployedContract";
 import { getConfigKeeperSigner } from "../helpers/getConfigKeeperSigner";
-import { getConfigHre, isTruthy } from "../helpers/configRuntime";
+import { getConfigHre } from "../helpers/configRuntime";
 
 const DEFAULT_INACTIVE_INDEX_TOKENS = ["IDR", "PHP", "PEN", "NGN", "KES", "ZAR", "THB"];
 
@@ -26,7 +26,7 @@ function getInactiveIndexTokens(): Set<string> {
 }
 
 export async function runDisableInactiveMarkets() {
-  const write = isTruthy(process.env.WRITE);
+  const write = process.env.WRITE === "true";
   const disableValue = process.env.IS_DISABLED === undefined ? true : process.env.IS_DISABLED === "true";
   const inactiveIndexTokens = getInactiveIndexTokens();
   const targetMarketToken = process.env.MARKET?.toLowerCase();
