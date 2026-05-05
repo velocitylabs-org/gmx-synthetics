@@ -1,25 +1,33 @@
-import { runDisableSwapCreate } from "./disableSwapCreate";
-import { runDisableSwapExecute } from "./disableSwapExecute";
-import { runApplyPoolCapsAndFirstDeposit } from "./applyPoolCapsAndFirstDeposit";
+import { runDisableOrderCreateFeatures } from "./configs/disableOrderCreateFeatures";
+import { runDisableOrderExecuteFeatures } from "./configs/disableOrderExecuteFeatures";
+import { runApplyPoolRiskGuards } from "./configs/applyPoolRiskGuards";
+import { runInvariantChecks } from "./validations/runInvariantChecks";
 
 async function main() {
-  console.log("Running config patch scripts...");
+  console.log("Running config redaction scripts...");
 
-  // Toggle SCRUM workstreams here for local testing, or control via env vars:
-  // RUN_SCRUM225=true|false RUN_SCRUM226=true|false
-  const runScrum225 = process.env.RUN_SCRUM225 === undefined ? true : process.env.RUN_SCRUM225 === "true";
-  const runScrum226 = process.env.RUN_SCRUM226 === "true";
+  // Toggle workstreams here for local testing, or control via env vars:
+  // RUN_ORDER_FEATURE_REDACTION=true|false RUN_POOL_RISK_GUARDS=true|false RUN_INVARIANT_VALIDATIONS=true|false
+  const runOrderFeatureRedaction =
+    process.env.RUN_ORDER_FEATURE_REDACTION === undefined ? true : process.env.RUN_ORDER_FEATURE_REDACTION === "true";
+  const runPoolRiskGuards =
+    process.env.RUN_POOL_RISK_GUARDS === undefined ? true : process.env.RUN_POOL_RISK_GUARDS === "true";
+  const runInvariantValidations = process.env.RUN_INVARIANT_VALIDATIONS === "true";
 
-  if (runScrum225) {
-    await runDisableSwapCreate();
-    await runDisableSwapExecute();
+  if (runOrderFeatureRedaction) {
+    await runDisableOrderCreateFeatures();
+    await runDisableOrderExecuteFeatures();
   }
 
-  if (runScrum226) {
-    await runApplyPoolCapsAndFirstDeposit();
+  if (runPoolRiskGuards) {
+    await runApplyPoolRiskGuards();
   }
 
-  console.log("Completed config patch scripts.");
+  if (runInvariantValidations) {
+    await runInvariantChecks();
+  }
+
+  console.log("Completed config redaction scripts.");
 }
 
 if (require.main === module) {

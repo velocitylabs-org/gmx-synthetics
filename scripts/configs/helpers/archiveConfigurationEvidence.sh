@@ -2,7 +2,7 @@
 set -euo pipefail
 
 timestamp="$(date +%Y%m%d-%H%M%S)"
-base_dir="docs/mainnet-configurations/scrum-225-226/${timestamp}"
+base_dir="docs/mainnet-configurations/config-redaction/${timestamp}"
 mkdir -p "${base_dir}"
 
 run_and_log() {
@@ -17,7 +17,7 @@ run_and_log() {
 }
 
 {
-  echo "# SCRUM225-226 Mainnet Configuration Evidence"
+  echo "# Config Redaction Mainnet Evidence"
   echo
   echo "- Timestamp: ${timestamp}"
   echo "- Working directory: $(pwd)"
@@ -28,14 +28,14 @@ run_and_log() {
   echo "## Output files"
   echo "- \`01-mainnet-dryrun.log\`"
   echo "- \`02-mainnet-execute.log\` (only when EXECUTE_MAINNET_WRITE=true)"
-  echo "- \`03-post-verify-pool-caps-first-deposit.log\` (only when EXECUTE_MAINNET_WRITE=true)"
+  echo "- \`03-post-verify-pool-risk-guards.log\` (only when EXECUTE_MAINNET_WRITE=true)"
 } > "${base_dir}/README.md"
 
-run_and_log "01-mainnet-dryrun" pnpm config:scrum225-226:mainnet:dryrun
+run_and_log "01-mainnet-dryrun" pnpm config:redact-features:mainnet:dryrun
 
 if [[ "${EXECUTE_MAINNET_WRITE:-false}" == "true" ]]; then
-  run_and_log "02-mainnet-execute" npm run scrum-225-226-configurations-mainnet
-  run_and_log "03-post-verify-pool-caps-first-deposit" npx hardhat run scripts/configs/verifyPoolCapsAndFirstDeposit.ts --network base
+  run_and_log "02-mainnet-execute" pnpm config:redact-features:mainnet
+  run_and_log "03-post-verify-pool-risk-guards" npx hardhat run scripts/configs/validations/verifyPoolRiskGuards.ts --network base
 else
   echo "Skipping mainnet write and post-verify (set EXECUTE_MAINNET_WRITE=true to enable)" | tee -a "${base_dir}/README.md"
 fi

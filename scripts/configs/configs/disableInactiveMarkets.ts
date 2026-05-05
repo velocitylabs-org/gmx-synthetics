@@ -1,42 +1,15 @@
 import hre from "hardhat";
-import type { HardhatRuntimeEnvironment } from "hardhat/types";
 
-import { encodeData } from "../../utils/hash";
-import * as keys from "../../utils/keys";
-import { getMarketKey, getMarketTokenAddresses } from "../../utils/market";
-import tokensConfig from "../../config/tokens";
-import marketsConfig from "../../config/markets";
-import { getDeployedContract } from "./getDeployedContract";
-import { getConfigKeeperSigner } from "./getConfigKeeperSigner";
+import { encodeData } from "../../../utils/hash";
+import * as keys from "../../../utils/keys";
+import { getMarketKey, getMarketTokenAddresses } from "../../../utils/market";
+import tokensConfig from "../../../config/tokens";
+import marketsConfig from "../../../config/markets";
+import { getDeployedContract } from "../helpers/getDeployedContract";
+import { getConfigKeeperSigner } from "../helpers/getConfigKeeperSigner";
+import { getConfigHre, isTruthy } from "../helpers/configRuntime";
 
 const DEFAULT_INACTIVE_INDEX_TOKENS = ["IDR", "PHP", "PEN", "NGN", "KES", "ZAR", "THB"];
-
-function isTruthy(value?: string): boolean {
-  return value === "true";
-}
-
-function getConfigHre(sourceHre: HardhatRuntimeEnvironment): HardhatRuntimeEnvironment {
-  if (!["anvil", "localhost"].includes(sourceHre.network.name)) {
-    return sourceHre;
-  }
-
-  const patchedHre = {
-    ...sourceHre,
-    network: {
-      ...sourceHre.network,
-      name: "base",
-      live: true,
-      config: sourceHre.config.networks.base,
-    },
-  } as HardhatRuntimeEnvironment;
-
-  patchedHre.gmx = {
-    ...sourceHre.gmx,
-    getTokens: async () => tokensConfig(patchedHre),
-  };
-
-  return patchedHre;
-}
 
 function getInactiveIndexTokens(): Set<string> {
   const override = process.env.INACTIVE_INDEX_TOKENS;
@@ -52,7 +25,7 @@ function getInactiveIndexTokens(): Set<string> {
   );
 }
 
-export async function runDisableInactiveNivoMarkets() {
+export async function runDisableInactiveMarkets() {
   const write = isTruthy(process.env.WRITE);
   const disableValue = process.env.IS_DISABLED === undefined ? true : process.env.IS_DISABLED === "true";
   const inactiveIndexTokens = getInactiveIndexTokens();
@@ -137,7 +110,7 @@ export async function runDisableInactiveNivoMarkets() {
 }
 
 async function main() {
-  await runDisableInactiveNivoMarkets();
+  await runDisableInactiveMarkets();
 }
 
 if (require.main === module) {

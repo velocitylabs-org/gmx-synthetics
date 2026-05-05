@@ -1,44 +1,44 @@
 import hre from "hardhat";
 
-import { encodeData } from "../../utils/hash";
-import * as keys from "../../utils/keys";
-import { OrderType } from "../../utils/order";
-import { getDeployedContract } from "./getDeployedContract";
-import { getConfigKeeperSigner } from "./getConfigKeeperSigner";
+import { encodeData } from "../../../utils/hash";
+import * as keys from "../../../utils/keys";
+import { OrderType } from "../../../utils/order";
+import { getDeployedContract } from "../helpers/getDeployedContract";
+import { getConfigKeeperSigner } from "../helpers/getConfigKeeperSigner";
 
-export async function runDisableSwapCreate() {
+export async function runDisableOrderExecuteFeatures() {
   const config = await getDeployedContract(hre, "Config");
   const orderHandlerAddress =
     process.env.ORDER_HANDLER || (await getDeployedContract(hre, "OrderHandler")).address;
 
-  const disableValue = process.env.IS_DISABLED === undefined || process.env.IS_DISABLED === "true";
+  const disableValue = process.env.IS_DISABLED === undefined ? true : process.env.IS_DISABLED === "true";
   const write = process.env.WRITE === "true";
 
   const featureKeys = [
     {
-      baseKey: keys.CREATE_ORDER_FEATURE_DISABLED,
+      baseKey: keys.EXECUTE_ORDER_FEATURE_DISABLED,
       data: encodeData(["address", "uint256"], [orderHandlerAddress, OrderType.MarketSwap]),
-      label: "CREATE_ORDER_FEATURE_DISABLED MarketSwap",
+      label: "EXECUTE_ORDER_FEATURE_DISABLED MarketSwap",
     },
     {
-      baseKey: keys.CREATE_ORDER_FEATURE_DISABLED,
+      baseKey: keys.EXECUTE_ORDER_FEATURE_DISABLED,
       data: encodeData(["address", "uint256"], [orderHandlerAddress, OrderType.LimitSwap]),
-      label: "CREATE_ORDER_FEATURE_DISABLED LimitSwap",
+      label: "EXECUTE_ORDER_FEATURE_DISABLED LimitSwap",
     },
     {
-      baseKey: keys.CREATE_ORDER_FEATURE_DISABLED,
+      baseKey: keys.EXECUTE_ORDER_FEATURE_DISABLED,
       data: encodeData(["address", "uint256"], [orderHandlerAddress, OrderType.StopLossDecrease]),
-      label: "CREATE_ORDER_FEATURE_DISABLED StopLossDecrease",
+      label: "EXECUTE_ORDER_FEATURE_DISABLED StopLossDecrease",
     },
     {
-      baseKey: keys.CREATE_ORDER_FEATURE_DISABLED,
+      baseKey: keys.EXECUTE_ORDER_FEATURE_DISABLED,
       data: encodeData(["address", "uint256"], [orderHandlerAddress, OrderType.LimitIncrease]),
-      label: "CREATE_ORDER_FEATURE_DISABLED LimitIncrease",
+      label: "EXECUTE_ORDER_FEATURE_DISABLED LimitIncrease",
     },
     {
-      baseKey: keys.CREATE_ORDER_FEATURE_DISABLED,
+      baseKey: keys.EXECUTE_ORDER_FEATURE_DISABLED,
       data: encodeData(["address", "uint256"], [orderHandlerAddress, OrderType.LimitDecrease]),
-      label: "CREATE_ORDER_FEATURE_DISABLED LimitDecrease",
+      label: "EXECUTE_ORDER_FEATURE_DISABLED LimitDecrease",
     },
   ];
 
@@ -51,7 +51,7 @@ export async function runDisableSwapCreate() {
   console.log(`OrderHandler: ${orderHandlerAddress}`);
   console.log(`ConfigKeeper: ${configKeeperAddress}`);
   console.log(`Disable value: ${disableValue}`);
-  console.log(`Prepared ${multicallWriteParams.length} create-order feature updates`);
+  console.log(`Prepared ${multicallWriteParams.length} execute-order feature updates`);
   featureKeys.forEach((f) => console.log(`- ${f.label}`));
 
   await configAsKeeper.callStatic.multicall(multicallWriteParams);
@@ -69,7 +69,7 @@ export async function runDisableSwapCreate() {
 }
 
 async function main() {
-  await runDisableSwapCreate();
+  await runDisableOrderExecuteFeatures();
 }
 
 if (require.main === module) {

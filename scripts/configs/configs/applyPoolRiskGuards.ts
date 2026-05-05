@@ -1,35 +1,22 @@
 import hre from "hardhat";
 import { BigNumber } from "ethers";
-import type { HardhatRuntimeEnvironment } from "hardhat/types";
 
-import { encodeData } from "../../utils/hash";
-import * as keys from "../../utils/keys";
-import { getMarketKey, getMarketTokenAddresses } from "../../utils/market";
-import tokensConfig from "../../config/tokens";
-import marketsConfig from "../../config/markets";
-import { getDeployedContract } from "./getDeployedContract";
-import { getConfigKeeperSigner } from "./getConfigKeeperSigner";
+import { encodeData } from "../../../utils/hash";
+import * as keys from "../../../utils/keys";
+import { getMarketKey, getMarketTokenAddresses } from "../../../utils/market";
+import tokensConfig from "../../../config/tokens";
+import marketsConfig from "../../../config/markets";
+import { getDeployedContract } from "../helpers/getDeployedContract";
+import { getConfigKeeperSigner } from "../helpers/getConfigKeeperSigner";
+import { getConfigHre, isTruthy } from "../helpers/configRuntime";
 
 type MarketPolicy = {
-  // uint value for MIN_MARKET_TOKENS_FOR_FIRST_DEPOSIT
   minMarketTokensForFirstDeposit: string;
 };
 
-// Default SCRUM226 scope (Nivo FX-style markets)
-const DEFAULT_TARGET_INDEX_TOKENS = [
-  "JPY",
-  "GBP",
-  "BRL",
-  "MXN",
-  "COP",
-];
-
+const DEFAULT_TARGET_INDEX_TOKENS = ["JPY", "GBP", "BRL", "MXN", "COP"];
 const DEFAULT_INACTIVE_INDEX_TOKENS = ["IDR", "PHP", "PEN", "NGN", "KES", "ZAR", "THB"];
-
-// 1 market token (18 decimals), used as the default minimum first-deposit threshold.
 const DEFAULT_MIN_FIRST_DEPOSIT = "1000000000000000000";
-
-// Optional per-market overrides. Any symbol not listed falls back to DEFAULT_MIN_FIRST_DEPOSIT.
 const MARKET_POLICY_BY_INDEX_SYMBOL: Record<string, MarketPolicy> = {};
 
 function getTargetIndexTokens(): Set<string> {
@@ -69,38 +56,12 @@ function getMarketPolicy(indexTokenSymbol: string): MarketPolicy {
   );
 }
 
-function isTruthy(value?: string): boolean {
-  return value === "true";
-}
-
-function getConfigHre(sourceHre: HardhatRuntimeEnvironment): HardhatRuntimeEnvironment {
-  if (!["anvil", "localhost"].includes(sourceHre.network.name)) {
-    return sourceHre;
-  }
-
-  const patchedHre = {
-    ...sourceHre,
-    network: {
-      ...sourceHre.network,
-      name: "base",
-      live: true,
-      config: sourceHre.config.networks.base,
-    },
-  } as HardhatRuntimeEnvironment;
-
-  patchedHre.gmx = {
-    ...sourceHre.gmx,
-    getTokens: async () => tokensConfig(patchedHre),
-  };
-
-  return patchedHre;
-}
-
-export async function runApplyPoolCapsAndFirstDeposit() {
+export async function runApplyPoolRiskGuards() {
   const write = isTruthy(process.env.WRITE);
   const targetIndexTokens = getTargetIndexTokens();
   const inactiveIndexTokens = getInactiveIndexTokens();
-  const disableInactiveMarkets = process.env.DISABLE_INACTIVE_MARKETS === undefined ? true : isTruthy(process.env.DISABLE_INACTIVE_MARKETS);
+  const disableInactiveMarkets =
+    process.env.DISABLE_INACTIVE_MARKETS === undefined ? true : isTruthy(process.env.DISABLE_INACTIVE_MARKETS);
   const inactiveDisableValue = process.env.IS_DISABLED === undefined ? true : process.env.IS_DISABLED === "true";
   const targetMarketToken = process.env.MARKET?.toLowerCase();
 
@@ -159,7 +120,7 @@ export async function runApplyPoolCapsAndFirstDeposit() {
       const marketPolicy = getMarketPolicy(indexTokenUpper);
       const minFirstDeposit = BigNumber.from(marketPolicy.minMarketTokensForFirstDeposit);
 
-      console.log(`Preparing SCRUM226 cap/min updates for ${label}`);
+      console.log(`Preparing pool risk guard updates for ${label}`);
 
       multicallWriteParams.push(
         config.interface.encodeFunctionData("setUint", [
@@ -201,7 +162,7 @@ export async function runApplyPoolCapsAndFirstDeposit() {
 
     if (disableInactiveMarkets && inactiveIndexTokens.has(indexTokenUpper)) {
       selectedInactiveMarkets++;
-      console.log(`Preparing SCRUM226 inactive-market disable for ${label}`);
+      console.log(`Preparing inactive-market disable update for ${label}`);
       multicallWriteParams.push(
         config.interface.encodeFunctionData("setBool", [
           keys.IS_MARKET_DISABLED,
@@ -213,7 +174,7 @@ export async function runApplyPoolCapsAndFirstDeposit() {
   }
 
   if (selectedActiveMarkets === 0 && selectedInactiveMarkets === 0) {
-    throw new Error("No markets matched selection for SCRUM226 config update");
+    throw new Error("No markets matched selection for pool risk guard updates");
   }
 
   console.log(`ConfigKeeper: ${configKeeperAddress}`);
@@ -236,7 +197,7 @@ export async function runApplyPoolCapsAndFirstDeposit() {
 }
 
 async function main() {
-  await runApplyPoolCapsAndFirstDeposit();
+  await runApplyPoolRiskGuards();
 }
 
 if (require.main === module) {

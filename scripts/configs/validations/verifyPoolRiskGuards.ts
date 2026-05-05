@@ -1,8 +1,8 @@
 import hre from "hardhat";
 import { BigNumber } from "ethers";
 
-import * as keys from "../../utils/keys";
-import { getMarketKey, getMarketTokenAddresses, getOnchainMarkets } from "../../utils/market";
+import * as keys from "../../../utils/keys";
+import { getMarketKey, getMarketTokenAddresses, getOnchainMarkets } from "../../../utils/market";
 
 type Mismatch = {
   marketLabel: string;

@@ -1,13 +1,13 @@
 import hre from "hardhat";
-import type { HardhatRuntimeEnvironment } from "hardhat/types";
 import { BigNumber } from "ethers";
 
-import * as keys from "../../utils/keys";
-import { OrderType } from "../../utils/order";
-import { getMarketKey, getMarketTokenAddresses } from "../../utils/market";
-import tokensConfig from "../../config/tokens";
-import marketsConfig from "../../config/markets";
-import { getDeployedContract } from "./getDeployedContract";
+import * as keys from "../../../utils/keys";
+import { OrderType } from "../../../utils/order";
+import { getMarketKey, getMarketTokenAddresses } from "../../../utils/market";
+import tokensConfig from "../../../config/tokens";
+import marketsConfig from "../../../config/markets";
+import { getDeployedContract } from "../helpers/getDeployedContract";
+import { getConfigHre } from "../helpers/configRuntime";
 
 const ACTIVE_INDEX_TOKENS = ["JPY", "GBP", "BRL", "MXN", "COP"];
 const INACTIVE_INDEX_TOKENS = ["IDR", "PHP", "PEN", "NGN", "KES", "ZAR", "THB"];
@@ -19,29 +19,6 @@ const ORDER_TYPES_TO_VERIFY = [
   OrderType.LimitIncrease,
   OrderType.LimitDecrease,
 ];
-
-function getConfigHre(sourceHre: HardhatRuntimeEnvironment): HardhatRuntimeEnvironment {
-  if (!["anvil", "localhost"].includes(sourceHre.network.name)) {
-    return sourceHre;
-  }
-
-  const patchedHre = {
-    ...sourceHre,
-    network: {
-      ...sourceHre.network,
-      name: "base",
-      live: true,
-      config: sourceHre.config.networks.base,
-    },
-  } as HardhatRuntimeEnvironment;
-
-  patchedHre.gmx = {
-    ...sourceHre.gmx,
-    getTokens: async () => tokensConfig(patchedHre),
-  };
-
-  return patchedHre;
-}
 
 async function main() {
   const failOnMismatch = process.env.FAIL_ON_MISMATCH === "true";
@@ -59,7 +36,7 @@ async function main() {
   const mismatches: string[] = [];
   const orderHandlerAddress = orderHandler.address;
 
-  console.log("=== SCRUM225 flags (disabled=true expected) ===");
+  console.log("=== Feature flags (disabled=true expected) ===");
   for (const orderType of ORDER_TYPES_TO_VERIFY) {
     const createValue = await dataStore.getBool(keys.createOrderFeatureDisabledKey(orderHandlerAddress, orderType));
     const executeValue = await dataStore.getBool(keys.executeOrderFeatureDisabledKey(orderHandlerAddress, orderType));
@@ -73,7 +50,7 @@ async function main() {
     }
   }
 
-  console.log("\n=== SCRUM226 inactive markets (disabled=true expected) ===");
+  console.log("\n=== Inactive markets (disabled=true expected) ===");
   for (const marketConfig of markets) {
     const indexSymbol = marketConfig.tokens.indexToken;
     if (!indexSymbol || !INACTIVE_INDEX_TOKENS.includes(indexSymbol.toUpperCase())) continue;
@@ -88,7 +65,7 @@ async function main() {
     if (!disabled) mismatches.push(`IS_MARKET_DISABLED ${indexSymbol} expected=true actual=false`);
   }
 
-  console.log("\n=== SCRUM226 active markets min first deposit (1e18 expected) ===");
+  console.log("\n=== Active markets min first deposit (1e18 expected) ===");
   for (const marketConfig of markets) {
     const indexSymbol = marketConfig.tokens.indexToken;
     if (!indexSymbol || !ACTIVE_INDEX_TOKENS.includes(indexSymbol.toUpperCase())) continue;
@@ -114,7 +91,7 @@ async function main() {
       throw new Error(`Verification failed with ${mismatches.length} mismatches`);
     }
   } else {
-    console.log("\nVerification passed: all expected SCRUM225/226 states matched.");
+    console.log("\nVerification passed: all expected feature redaction and pool-risk states matched.");
   }
 }
 
