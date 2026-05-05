@@ -1928,7 +1928,7 @@ const config: {
 
     // G10 currencies (available on Chainlink Data Streams testnet)
     // Pound Sterling
-    GBP: getCurrencyTestConfig("0x00080ca1eb3009703b00bfb3dd86ebae19a55631e20b18db633559e6175b1580"),
+    GBP: getCurrencyTestConfig(),
 
     // Emerging market currencies (no Chainlink Data Stream feeds yet)
     // Brazilian Real
