@@ -1,13 +1,12 @@
 import fs from "fs";
 import path from "path";
+import type { Signer } from "ethers";
 import type { HardhatRuntimeEnvironment } from "hardhat/types";
-
-type SignerLike = any;
 
 export async function getDeployedContract(
   hre: HardhatRuntimeEnvironment,
   contractName: string,
-  signer?: SignerLike
+  signer?: Signer
 ) {
   try {
     if (signer) {
