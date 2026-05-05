@@ -3,9 +3,9 @@ import hre, { network } from "hardhat";
 
 import * as keys from "../../utils/keys";
 import { OrderType } from "../../utils/order";
-import { runDisableSwapCreate } from "../../scripts/configs/disableSwapCreate";
-import { runDisableSwapExecute } from "../../scripts/configs/disableSwapExecute";
-import { getDeployedContract } from "../../scripts/configs/getDeployedContract";
+import { runDisableOrderCreateFeatures } from "../../scripts/configs/configs/disableOrderCreateFeatures";
+import { runDisableOrderExecuteFeatures } from "../../scripts/configs/configs/disableOrderExecuteFeatures";
+import { getDeployedContract } from "../../scripts/configs/helpers/getDeployedContract";
 
 const DEFAULT_CONFIG_KEEPER = "0xAed31d3C8942B38eec87Fe5830a671C1A3D0d967";
 
@@ -71,8 +71,8 @@ describe("Config.VerifySwapReconfiguration", function () {
   });
 
   it("disables MarketSwap and LimitSwap for create + execute", async () => {
-    await runDisableSwapCreate();
-    await runDisableSwapExecute();
+    await runDisableOrderCreateFeatures();
+    await runDisableOrderExecuteFeatures();
 
     const dataStore = await getDeployedContract(hre, "DataStore");
     const orderHandler = await getDeployedContract(hre, "OrderHandler");
