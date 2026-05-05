@@ -144,11 +144,10 @@ const getEnvAccounts = (chainName?: string) => {
     ARBITRUM_ACCOUNT_KEY,
     BASE_ACCOUNT_KEY,
     BASE_SEPOLIA_ACCOUNT_KEY,
-    NIVO_KEEPER_PRIVATE_KEY,
   } = process.env;
 
-  const baseAccountKey = BASE_ACCOUNT_KEY || NIVO_KEEPER_PRIVATE_KEY;
-  const baseSepoliaAccountKey = BASE_SEPOLIA_ACCOUNT_KEY || NIVO_KEEPER_PRIVATE_KEY;
+  const baseAccountKey = BASE_ACCOUNT_KEY;
+  const baseSepoliaAccountKey = BASE_SEPOLIA_ACCOUNT_KEY;
 
   if (chainName === "base" && baseAccountKey) {
     return [baseAccountKey];
