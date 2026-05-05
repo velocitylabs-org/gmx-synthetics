@@ -10,6 +10,8 @@ export function getConfigHre(sourceHre: HardhatRuntimeEnvironment): HardhatRunti
     return sourceHre;
   }
 
+  // On local fork RPCs we still want Base market/token config resolution,
+  // since these scripts operate on forked Base state rather than local defaults.
   const patchedHre = {
     ...sourceHre,
     network: {
