@@ -19,7 +19,8 @@ import { errorsContract } from "../../utils/error";
 import * as keys from "../../utils/keys";
 import { increaseTo, latest } from "@nomicfoundation/hardhat-network-helpers/dist/src/helpers/time";
 
-describe("Exchange.LimitIncreaseOrder", () => {
+// NIVO: skipped - LimitIncrease is disabled by governance feature flags (SCRUM225/SCRUM227 scope).
+describe.skip("Exchange.LimitIncreaseOrder", () => {
   const { provider } = ethers;
 
   let fixture;
