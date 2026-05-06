@@ -1,5 +1,4 @@
 import { expect } from "chai";
-import { impersonateAccount, setBalance } from "@nomicfoundation/hardhat-network-helpers";
 import { expandDecimals } from "../../utils/math";
 import { deployFixture } from "../../utils/fixture";
 import { GELATO_RELAY_ADDRESS } from "../../utils/relay/addresses";
@@ -17,6 +16,7 @@ import { executeGlvDeposit, executeGlvWithdrawal, getGlvDepositCount, getGlvWith
 import { encodeBridgeOutDataList, bridgeInTokens } from "../../utils/multichain";
 import { errorsContract } from "../../utils/error";
 import { getRelayParams } from "../../utils/relay/helpers";
+import { impersonateAccount, setBalance } from "../utils/rpcAccountHelpers";
 
 describe("MultichainGlvRouter", () => {
   let fixture;

@@ -7,7 +7,7 @@ import * as keys from "../../utils/keys";
 import { getBridgeOutSignature, sendBridgeOut } from "../../utils/relay/multichain";
 import { GELATO_RELAY_ADDRESS } from "../../utils/relay/addresses";
 import { bridgeInTokens } from "../../utils/multichain";
-import { impersonateAccount, setBalance } from "@nomicfoundation/hardhat-network-helpers";
+import { impersonateAccount, setBalance } from "../utils/rpcAccountHelpers";
 import { parseLogs } from "../../utils/event";
 import { errorsContract } from "../../utils/error";
 import { getRelayParams } from "../../utils/relay/helpers";

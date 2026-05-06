@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import { impersonateAccount, setBalance, time } from "@nomicfoundation/hardhat-network-helpers";
+import { time } from "@nomicfoundation/hardhat-network-helpers";
 
 import { decimalToFloat, expandDecimals } from "../../utils/math";
 import { deployFixture } from "../../utils/fixture";
@@ -14,6 +14,7 @@ import { bridgeInTokens } from "../../utils/multichain";
 import { errorsContract } from "../../utils/error";
 import { getRelayParams } from "../../utils/relay/helpers";
 import { getClaimCollateralSignature, getClaimFundingFeesSignature } from "../../utils/relay/signatures";
+import { impersonateAccount, setBalance } from "../utils/rpcAccountHelpers";
 
 describe("MultichainClaimsRouter", () => {
   let fixture;
