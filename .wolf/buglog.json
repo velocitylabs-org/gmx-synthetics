@@ -1,4 +1,21 @@
 {
   "version": 1,
-  "bugs": []
+  "bugs": [
+    {
+      "id": "bug-001",
+      "timestamp": "2026-05-07T08:40:56.878Z",
+      "error_message": "Incorrect value in code",
+      "file": "deploy/deployChainlinkDataStreamProvider.ts",
+      "root_cause": "Had \"ChainlinkDataStreamProvider_6\"",
+      "fix": "Changed to \"ChainlinkDataStreamProvider_7\"",
+      "tags": [
+        "auto-detected",
+        "wrong-value",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-07T08:40:56.878Z"
+    }
+  ]
 }
