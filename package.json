@@ -22,7 +22,12 @@
     "slither:callgraph": "npx hardhat compile && ./scripts/slither-callgraph.sh --render",
     "docs:reboot-diagrams": "./scripts/reboot-call-routes-diagrams.sh",
     "docs:call-routes-html": "node scripts/call-routes-to-html.js",
-    "upsert-deployments": "ts-node ci/scripts/upsert-deployments.ts"
+    "upsert-deployments": "ts-node ci/scripts/upsert-deployments.ts",
+    "extract": "ts-node scripts/extract-deployment-addresses.ts",
+    "config:redact-features:fork:dryrun": "FORK_ID=8453 WRITE=false IS_DISABLED=true RUN_ORDER_FEATURE_REDACTION=true RUN_POOL_RISK_GUARDS=true npx hardhat run scripts/configs/index.ts --network anvil",
+    "config:redact-features:fork": "FORK_ID=8453 WRITE=true IS_DISABLED=true RUN_ORDER_FEATURE_REDACTION=true RUN_POOL_RISK_GUARDS=true npx hardhat run scripts/configs/index.ts --network anvil",
+    "config:redact-features:mainnet:dryrun": "WRITE=false IS_DISABLED=true RUN_ORDER_FEATURE_REDACTION=true RUN_POOL_RISK_GUARDS=true npx hardhat run scripts/configs/index.ts --network base",
+    "config:redact-features:mainnet": "WRITE=true IS_DISABLED=true RUN_ORDER_FEATURE_REDACTION=true RUN_POOL_RISK_GUARDS=true npx hardhat run scripts/configs/index.ts --network base"
   },
   "author": "",
   "license": "ISC",
