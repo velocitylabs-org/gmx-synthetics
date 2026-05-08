@@ -30,6 +30,7 @@ library ConfigUtils {
         bytes32 feedId;
         uint256 multiplier;
         uint256 spreadReductionFactor;
+        uint256 inversionScale;
     }
 
     struct InitOracleConfigEdgeParams {
@@ -90,6 +91,7 @@ library ConfigUtils {
         dataStore.setBytes32(Keys.dataStreamIdKey(params.token), params.dataStream.feedId);
         dataStore.setUint(Keys.dataStreamMultiplierKey(params.token), params.dataStream.multiplier);
         dataStore.setUint(Keys.dataStreamSpreadReductionFactorKey(params.token), params.dataStream.spreadReductionFactor);
+        dataStore.setUint(Keys.dataStreamInversionScaleKey(params.token), params.dataStream.inversionScale);
 
         dataStore.setBytes32(Keys.edgeDataStreamIdKey(params.token), params.edge.feedId);
         dataStore.setUint(Keys.edgeDataStreamTokenDecimalsKey(params.token), params.edge.tokenDecimals);
@@ -100,13 +102,14 @@ library ConfigUtils {
         eventData.addressItems.setItem(0, "token", params.token);
         eventData.addressItems.setItem(1, "priceFeedAddress", params.priceFeed.feedAddress);
 
-        eventData.uintItems.initItems(6);
+        eventData.uintItems.initItems(7);
         eventData.uintItems.setItem(0, "priceFeedMultiplier", params.priceFeed.multiplier);
         eventData.uintItems.setItem(1, "priceFeedHeartbeatDuration", params.priceFeed.heartbeatDuration);
         eventData.uintItems.setItem(2, "stablePrice", params.priceFeed.stablePrice);
         eventData.uintItems.setItem(3, "dataStreamMultiplier", params.dataStream.multiplier);
         eventData.uintItems.setItem(4, "dataStreamSpreadReductionFactor", params.dataStream.spreadReductionFactor);
         eventData.uintItems.setItem(5, "edgeDataStreamTokenDecimals", params.edge.tokenDecimals);
+        eventData.uintItems.setItem(6, "dataStreamInversionScale", params.dataStream.inversionScale);
 
         eventData.bytes32Items.initItems(2);
         eventData.bytes32Items.setItem(0, "dataStreamFeedId", params.dataStream.feedId);

@@ -429,7 +429,7 @@ describe("Timelock", () => {
     await expect(
       timelockConfig
         .connect(user2)
-        .signalSetDataStream(wnt.address, hashString("WNT"), expandDecimals(1, 34), p99, constants.HashZero, salt)
+        .signalSetDataStream(wnt.address, hashString("WNT"), expandDecimals(1, 34), p99, 0, constants.HashZero, salt)
     )
       .to.be.revertedWithCustomError(errorsContract, "Unauthorized")
       .withArgs(user2.address, "TIMELOCK_ADMIN");
@@ -442,6 +442,7 @@ describe("Timelock", () => {
           hashString("WNT"),
           expandDecimals(1, 34),
           percentageToFloat("101%"),
+          0,
           constants.HashZero,
           salt
         )
@@ -449,13 +450,14 @@ describe("Timelock", () => {
 
     await timelockConfig
       .connect(timelockAdmin)
-      .signalSetDataStream(wnt.address, hashString("WNT"), expandDecimals(1, 34), p99, constants.HashZero, salt);
+      .signalSetDataStream(wnt.address, hashString("WNT"), expandDecimals(1, 34), p99, 0, constants.HashZero, salt);
 
     const { targets, values, payloads } = await setDataStreamPayload(
       wnt.address,
       hashString("WNT"),
       expandDecimals(1, 34),
-      p99
+      p99,
+      0
     );
     await expect(timelockConfig.connect(user2).executeBatch(targets, values, payloads, constants.HashZero, salt))
       .to.be.revertedWithCustomError(errorsContract, "Unauthorized")
@@ -470,12 +472,14 @@ describe("Timelock", () => {
     expect(await dataStore.getBytes32(keys.dataStreamIdKey(wnt.address))).eq(ethers.constants.HashZero);
     expect(await dataStore.getUint(keys.dataStreamMultiplierKey(wnt.address))).eq(0);
     expect(await dataStore.getUint(keys.dataStreamSpreadReductionFactorKey(wnt.address))).eq(0);
+    expect(await dataStore.getUint(keys.dataStreamInversionScaleKey(wnt.address))).eq(0);
 
     await timelockConfig.connect(timelockAdmin).executeBatch(targets, values, payloads, constants.HashZero, salt);
 
     expect(await dataStore.getBytes32(keys.dataStreamIdKey(wnt.address))).eq(hashString("WNT"));
     expect(await dataStore.getUint(keys.dataStreamMultiplierKey(wnt.address))).eq(expandDecimals(1, 34));
     expect(await dataStore.getUint(keys.dataStreamSpreadReductionFactorKey(wnt.address))).eq(p99);
+    expect(await dataStore.getUint(keys.dataStreamInversionScaleKey(wnt.address))).eq(0);
   });
 
   it("signalSetEdgeDataStream", async () => {

@@ -106,11 +106,15 @@ export async function initOracleConfigForTokens({ write }) {
 
     const dataStreamMultiplier = expandDecimals(1, 60 - token.decimals - token.dataStreamFeedDecimals);
     const dataStreamSpreadReductionFactor = bigNumberify(token.dataStreamSpreadReductionFactor ?? 0);
+    const dataStreamInversionScale = token.dataStreamIsInverted
+      ? expandDecimals(1, 2 * (30 - token.decimals))
+      : bigNumberify(0);
 
     const initOracleConfigDataStreamParams = {
       feedId: token.dataStreamFeedId,
       multiplier: dataStreamMultiplier,
       spreadReductionFactor: dataStreamSpreadReductionFactor,
+      inversionScale: dataStreamInversionScale,
     };
 
     const initOracleConfigEdgeParams = {

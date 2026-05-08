@@ -244,6 +244,7 @@ library Errors {
     error EmptyDataStreamMultiplier(address token);
     error InvalidChainlinkFeeToken(address feeToken, address expectedFeeToken);
     error InvalidDataStreamSpreadReductionFactor(address token, uint256 spreadReductionFactor);
+    error InvalidInvertedPrice(address token);
     error InvalidFeedPrice(address token, int256 price);
     error ChainlinkPriceFeedNotUpdated(address token, uint256 timestamp, uint256 heartbeatDuration);
     error GmMaxSignerIndex(uint256 signerIndex, uint256 maxSignerIndex);

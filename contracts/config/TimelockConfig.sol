@@ -253,11 +253,13 @@ contract TimelockConfig is RoleModule, BasicMulticall {
     // @param feedId the ID of the data stream feed
     // @param dataStreamMultiplier the multiplier to apply to the data stream feed results
     // @param dataStreamSpreadReductionFactor the factor to apply to the data stream price spread
+    // @param dataStreamInversionScale non-zero for USD/FX inverted feeds (e.g. USD/COP); 0 for standard FX/USD feeds
     function signalSetDataStream(
         address token,
         bytes32 feedId,
         uint256 dataStreamMultiplier,
         uint256 dataStreamSpreadReductionFactor,
+        uint256 dataStreamInversionScale,
         bytes32 predecessor,
         bytes32 salt
     ) external onlyTimelockAdmin {
@@ -265,13 +267,15 @@ contract TimelockConfig is RoleModule, BasicMulticall {
             revert Errors.ConfigValueExceedsAllowedRange(Keys.DATA_STREAM_SPREAD_REDUCTION_FACTOR, dataStreamSpreadReductionFactor);
         }
 
-        bytes[] memory payloads = new bytes[](3);
+        bytes[] memory payloads = new bytes[](4);
         payloads[0] = abi.encodeWithSignature("setBytes32(bytes32,bytes32)",
             Keys.dataStreamIdKey(token), feedId);
         payloads[1] = abi.encodeWithSignature("setUint(bytes32,uint256)",
             Keys.dataStreamMultiplierKey(token), dataStreamMultiplier);
         payloads[2] = abi.encodeWithSignature("setUint(bytes32,uint256)",
             Keys.dataStreamSpreadReductionFactorKey(token), dataStreamSpreadReductionFactor);
+        payloads[3] = abi.encodeWithSignature("setUint(bytes32,uint256)",
+            Keys.dataStreamInversionScaleKey(token), dataStreamInversionScale);
 
         _scheduleBatch(dataStore, payloads, predecessor, salt);
 
@@ -280,9 +284,10 @@ contract TimelockConfig is RoleModule, BasicMulticall {
         eventData.addressItems.setItem(0, "token", token);
         eventData.bytes32Items.initItems(1);
         eventData.bytes32Items.setItem(0, "feedId", feedId);
-        eventData.uintItems.initItems(2);
+        eventData.uintItems.initItems(3);
         eventData.uintItems.setItem(0, "dataStreamMultiplier", dataStreamMultiplier);
         eventData.uintItems.setItem(1, "dataStreamSpreadReductionFactor", dataStreamSpreadReductionFactor);
+        eventData.uintItems.setItem(2, "dataStreamInversionScale", dataStreamInversionScale);
         _signalPendingAction(
             "SignalSetDataStream",
             eventData

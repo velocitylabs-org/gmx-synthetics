@@ -95,6 +95,14 @@ export async function updateOracleConfigForTokens() {
     multicallReadParams.push({
       target: dataStore.address,
       allowFailure: false,
+      callData: dataStore.interface.encodeFunctionData("getUint", [
+        getFullKey(keys.DATA_STREAM_INVERSION_SCALE, encodeData(["address"], [token.address])),
+      ]),
+    });
+
+    multicallReadParams.push({
+      target: dataStore.address,
+      allowFailure: false,
       callData: dataStore.interface.encodeFunctionData("getAddress", [
         getFullKey(keys.ORACLE_PROVIDER_FOR_TOKEN, encodeData(["address", "address"], [oracle.address, token.address])),
       ]),
@@ -119,7 +127,8 @@ export async function updateOracleConfigForTokens() {
       dataStreamId: result[i * paramsCount + 3].returnData,
       dataStreamMultiplier: defaultAbiCoder.decode(["uint"], result[i * paramsCount + 4].returnData)[0],
       dataStreamSpreadReductionFactor: defaultAbiCoder.decode(["uint"], result[i * paramsCount + 5].returnData)[0],
-      oracleProviderForToken: defaultAbiCoder.decode(["address"], result[i * paramsCount + 6].returnData)[0],
+      dataStreamInversionScale: defaultAbiCoder.decode(["uint"], result[i * paramsCount + 6].returnData)[0],
+      oracleProviderForToken: defaultAbiCoder.decode(["address"], result[i * paramsCount + 7].returnData)[0],
     };
   }
 
@@ -220,9 +229,17 @@ export async function updateOracleConfigForTokens() {
       }
     }
 
-    if (token.dataStreamFeedId && onchainConfig.dataStreamId !== token.dataStreamFeedId) {
+    const expectedDataStreamInversionScale = token.dataStreamIsInverted
+      ? expandDecimals(1, 2 * (30 - token.decimals))
+      : bigNumberify(0);
+    const inversionScaleChanged =
+      token.dataStreamFeedId !== undefined &&
+      !onchainConfig.dataStreamInversionScale.eq(expectedDataStreamInversionScale);
+
+    if (token.dataStreamFeedId && (onchainConfig.dataStreamId !== token.dataStreamFeedId || inversionScaleChanged)) {
       const dataStreamSpreadReductionFactor = bigNumberify(token.dataStreamSpreadReductionFactor ?? 0);
       const dataStreamMultiplier = expandDecimals(1, 60 - token.decimals - token.dataStreamFeedDecimals);
+      const dataStreamInversionScale = expectedDataStreamInversionScale;
 
       if (!onchainConfig.dataStreamMultiplier.eq(dataStreamMultiplier)) {
         throw new Error(
@@ -233,7 +250,7 @@ export async function updateOracleConfigForTokens() {
       console.log(
         `setDataStream(${tokenSymbol} ${
           token.dataStreamFeedId
-        }, ${dataStreamMultiplier.toString()}, ${dataStreamSpreadReductionFactor.toString()})`
+        }, ${dataStreamMultiplier.toString()}, ${dataStreamSpreadReductionFactor.toString()}, inversionScale=${dataStreamInversionScale.toString()})`
       );
 
       if (isTestnet) {
@@ -253,6 +270,10 @@ export async function updateOracleConfigForTokens() {
               dataStreamSpreadReductionFactor
             )
           );
+          printTxHash(
+            `set data stream inversion scale ${token.address}`,
+            await dataStore.setUint(keys.dataStreamInversionScaleKey(token.address), dataStreamInversionScale)
+          );
         });
       } else if (phase === "signal") {
         multicallWriteParams.push(
@@ -261,6 +282,7 @@ export async function updateOracleConfigForTokens() {
             token.dataStreamFeedId,
             dataStreamMultiplier,
             dataStreamSpreadReductionFactor,
+            dataStreamInversionScale,
             predecessor,
             salt,
           ])
@@ -270,7 +292,8 @@ export async function updateOracleConfigForTokens() {
           token.address,
           token.dataStreamFeedId,
           dataStreamMultiplier,
-          dataStreamSpreadReductionFactor
+          dataStreamSpreadReductionFactor,
+          dataStreamInversionScale
         );
         multicallWriteParams.push(
           timelock.interface.encodeFunctionData("executeBatch", [targets, values, payloads, predecessor, salt])

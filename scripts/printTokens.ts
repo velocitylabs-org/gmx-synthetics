@@ -20,6 +20,7 @@ async function main() {
     const buybackMaxPriceImpactFactor = await dataStore.getUint(keys.buybackMaxPriceImpactFactorKey(address));
     const priceFeed = await dataStore.getAddress(keys.priceFeedKey(address));
     const dataStreamId = await dataStore.getBytes32(keys.dataStreamIdKey(address));
+    const dataStreamInversionScale = await dataStore.getUint(keys.dataStreamInversionScaleKey(address));
 
     console.log(`${symbol} ${address}`);
     console.log(`    decimals: ${tokenConfig.decimals}`);
@@ -29,6 +30,7 @@ async function main() {
     console.log(`    buybackMaxPriceImpactFactor: ${buybackMaxPriceImpactFactor}`);
     console.log(`    priceFeed: ${priceFeed}`);
     console.log(`    dataStreamId: ${dataStreamId}`);
+    console.log(`    dataStreamInversionScale: ${dataStreamInversionScale}`);
   }
 }
 

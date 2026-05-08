@@ -128,6 +128,18 @@ contract ChainlinkDataStreamProvider is IOracleProvider {
             }
         }
 
+        uint256 inversionScale = dataStore.getUint(Keys.dataStreamInversionScaleKey(token));
+        if (inversionScale != 0) {
+            // Inversion swaps min/max: a higher raw rate means a lower USD value per token unit
+            uint256 invertedBidPrice = inversionScale / adjustedAskPrice;
+            uint256 invertedAskPrice = inversionScale / adjustedBidPrice;
+            if (invertedBidPrice == 0 || invertedAskPrice == 0) {
+                revert Errors.InvalidInvertedPrice(token);
+            }
+            adjustedBidPrice = invertedBidPrice;
+            adjustedAskPrice = invertedAskPrice;
+        }
+
         return OracleUtils.ValidatedPrice({
             token: token,
             min: adjustedBidPrice,
@@ -156,6 +168,14 @@ contract ChainlinkDataStreamProvider is IOracleProvider {
 
         uint256 precision = _getDataStreamMultiplier(token);
         uint256 adjustedPrice = Precision.mulDiv(uint256(uint192(report.midPrice)), precision, Precision.FLOAT_PRECISION);
+
+        uint256 inversionScale = dataStore.getUint(Keys.dataStreamInversionScaleKey(token));
+        if (inversionScale != 0) {
+            adjustedPrice = inversionScale / adjustedPrice;
+            if (adjustedPrice == 0) {
+                revert Errors.InvalidInvertedPrice(token);
+            }
+        }
 
         // V8 has no bid/ask spread midPrice used for both min and max
         return OracleUtils.ValidatedPrice({
