@@ -527,7 +527,7 @@ const getNivoMarketsTestnetConfig = (indexToken: string, collateralToken = "USDC
   };
 };
 
-const getNivoMarketsLocalConfig = (indexToken: string, collateralToken = "USDT"): PerpMarketConfig => {
+const getNivoMarketsLocalConfig = (indexToken: string, collateralToken = "USDC"): PerpMarketConfig => {
   return {
     tokens: { indexToken: indexToken, longToken: collateralToken, shortToken: collateralToken },
     virtualTokenIdForIndexToken: hashString(`PERP:${indexToken}/USD`),
@@ -574,7 +574,7 @@ const nivoMarketsConfig: {
     getNivoMarketsConfig("THB", "USDC"),
   ],
   hardhat: [
-    getNivoMarketsLocalConfig("GBP", "USDC"),
+    getNivoMarketsLocalConfig("GBP"),
     getNivoMarketsLocalConfig("BRL"),
     getNivoMarketsLocalConfig("MXN"),
     getNivoMarketsLocalConfig("COP"),
@@ -587,7 +587,7 @@ const nivoMarketsConfig: {
     getNivoMarketsLocalConfig("THB"),
   ],
   localhost: [
-    getNivoMarketsLocalConfig("GBP", "USDC"),
+    getNivoMarketsLocalConfig("GBP"),
     getNivoMarketsLocalConfig("BRL"),
     getNivoMarketsLocalConfig("MXN"),
     getNivoMarketsLocalConfig("COP"),
