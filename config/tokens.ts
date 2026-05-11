@@ -1833,18 +1833,21 @@ const config: {
   // token addresses are retrieved in runtime for hardhat and localhost networks
   hardhat: {
     // NIVO CURRENCIES
+    // Localhost reuses Chainlink testnet feed IDs — the off-chain leg
+    // (nivo-api) fetches from testnet Data Streams and the on-chain leg
+    // verifies via MockDataStreamVerifier on Hardhat.
 
     // G10 currencies (available on Chainlink Data Streams testnet)
     // Pound Sterling
-    GBP: getCurrencyTestConfig(),
+    GBP: getCurrencyTestConfig("0x00080ca1eb3009703b00bfb3dd86ebae19a55631e20b18db633559e6175b1580"),
 
     // Emerging market currencies
     // Brazilian Real
-    BRL: getCurrencyTestConfig(undefined, true),
+    BRL: getCurrencyTestConfig("0x000878f7a7bab1641924c3de15d4af990df15e56dfdbe33bf86eee112fb4890f", true),
     // Mexican Peso
-    MXN: getCurrencyTestConfig(undefined, true),
+    MXN: getCurrencyTestConfig("0x00085ec71b9d0b3a974147a48b886e78c9ac8fa619e2577e5e69b785b91f5b55", true),
     // Colombian Peso
-    COP: getCurrencyTestConfig(undefined, true),
+    COP: getCurrencyTestConfig("0x00082a4031718674bbe7e68b6b272fb198ac65e9d01eb2ed9ca9091d415a9d27", true),
     // Indonesian Rupiah
     IDR: getCurrencyTestConfig(),
     // Philippine Peso
@@ -1925,18 +1928,21 @@ const config: {
   },
   localhost: {
     // NIVO CURRENCIES
+    // Localhost reuses Chainlink testnet feed IDs — the off-chain leg
+    // (nivo-api) fetches from testnet Data Streams and the on-chain leg
+    // verifies via MockDataStreamVerifier on Hardhat.
 
     // G10 currencies (available on Chainlink Data Streams testnet)
     // Pound Sterling
-    GBP: getCurrencyTestConfig(),
+    GBP: getCurrencyTestConfig("0x00080ca1eb3009703b00bfb3dd86ebae19a55631e20b18db633559e6175b1580"),
 
-    // Emerging market currencies (no Chainlink Data Stream feeds yet)
+    // Emerging market currencies
     // Brazilian Real
-    BRL: getCurrencyTestConfig(undefined, true),
+    BRL: getCurrencyTestConfig("0x000878f7a7bab1641924c3de15d4af990df15e56dfdbe33bf86eee112fb4890f", true),
     // Mexican Peso
-    MXN: getCurrencyTestConfig(undefined, true),
+    MXN: getCurrencyTestConfig("0x00085ec71b9d0b3a974147a48b886e78c9ac8fa619e2577e5e69b785b91f5b55", true),
     // Colombian Peso
-    COP: getCurrencyTestConfig(undefined, true),
+    COP: getCurrencyTestConfig("0x00082a4031718674bbe7e68b6b272fb198ac65e9d01eb2ed9ca9091d415a9d27", true),
     // Indonesian Rupiah
     IDR: getCurrencyTestConfig(),
     // Philippine Peso
