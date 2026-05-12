@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import { impersonateAccount, setBalance } from "@nomicfoundation/hardhat-network-helpers";
+import { impersonateAccount, setBalance } from "../utils/rpcAccountHelpers";
 
 import { decimalToFloat, expandDecimals } from "../../utils/math";
 import { deployFixture } from "../../utils/fixture";

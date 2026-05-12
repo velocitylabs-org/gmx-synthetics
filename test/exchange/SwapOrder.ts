@@ -9,7 +9,8 @@ import { getPoolAmount } from "../../utils/market";
 import { getEventData } from "../../utils/event";
 import * as keys from "../../utils/keys";
 
-describe("Exchange.SwapOrder", () => {
+// NIVO: skipped - MarketSwap and LimitSwap are disabled by governance feature flags (SCRUM225/SCRUM227 scope).
+describe.skip("Exchange.SwapOrder", () => {
   let fixture;
   let user0;
   let dataStore, ethUsdMarket, ethUsdSpotOnlyMarket, wnt, usdc;

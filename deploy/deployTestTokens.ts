@@ -1,4 +1,3 @@
-import { setBalance } from "@nomicfoundation/hardhat-network-helpers";
 import { HardhatRuntimeEnvironment } from "hardhat/types";
 import { TokenConfig } from "../config/tokens";
 
@@ -39,7 +38,10 @@ const func = async ({ getNamedAccounts, deployments, gmx, network }: HardhatRunt
     tokens[tokenSymbol].address = address;
     if (newlyDeployed) {
       if (token.wrappedNative && !network.live) {
-        await setBalance(address, expandDecimals(1000, token.decimals));
+        await network.provider.request({
+          method: "hardhat_setBalance",
+          params: [address, expandDecimals(1000, token.decimals).toHexString()],
+        });
       }
 
       if (!token.wrappedNative) {

@@ -1,8 +1,5 @@
 import { expect } from "chai";
 import {
-  impersonateAccount,
-  stopImpersonatingAccount,
-  setBalance,
   time,
   setNextBlockBaseFeePerGas,
 } from "@nomicfoundation/hardhat-network-helpers";
@@ -30,6 +27,7 @@ import { handleDeposit } from "../../utils/deposit";
 import { deployContract } from "../../utils/deploy";
 import { parseLogs } from "../../utils/event";
 import { bridgeInTokens } from "../../utils/multichain";
+import { impersonateAccount, setBalance, stopImpersonatingAccount } from "../utils/rpcAccountHelpers";
 
 const BAD_SIGNATURE =
   "0x122e3efab9b46c82dc38adf4ea6cd2c753b00f95c217a0e3a0f4dd110839f07a08eb29c1cc414d551349510e23a75219cd70c8b88515ed2b83bbd88216ffdb051f";

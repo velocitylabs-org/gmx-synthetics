@@ -9,7 +9,8 @@ import { OrderType, createOrder, executeOrder, handleOrder } from "../../utils/o
 import { errorsContract } from "../../utils/error";
 import { usingResult } from "../../utils/use";
 
-describe("Exchange.LimitDecreaseOrder", () => {
+// NIVO: skipped - LimitDecrease is disabled by governance feature flags (SCRUM225/SCRUM227 scope).
+describe.skip("Exchange.LimitDecreaseOrder", () => {
   const { provider } = ethers;
   let fixture;
   let user0;

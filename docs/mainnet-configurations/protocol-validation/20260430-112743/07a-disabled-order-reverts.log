@@ -1,0 +1,44 @@
+
+
+
+
+  Config.DisabledOrderTypesReverts
+    1) "before each" hook for "reverts on create when disabled order types are flagged"
+
+
+  0 passing (7s)
+  1 failing
+
+  1) Config.DisabledOrderTypesReverts
+       "before each" hook for "reverts on create when disabled order types are flagged":
+     ERROR processing /Users/zuludykes/code/velocity-labs-gmx-synthetics/deploy/deployTestTokens.ts:
+HardhatNetworkHelpersError: Address 0x0DCd1Bf9A1b36cE34237eEaFef220932846BCD82 has an invalid checksum
+    at assertValidAddress (/Users/zuludykes/code/velocity-labs-gmx-synthetics/node_modules/@nomicfoundation/hardhat-network-helpers/src/utils.ts:91:11)
+    at setBalance (/Users/zuludykes/code/velocity-labs-gmx-synthetics/node_modules/@nomicfoundation/hardhat-network-helpers/src/helpers/setBalance.ts:20:21)
+    at async Object.func (/Users/zuludykes/code/velocity-labs-gmx-synthetics/deploy/deployTestTokens.ts:42:9)
+    at async DeploymentsManager.executeDeployScripts (/Users/zuludykes/code/velocity-labs-gmx-synthetics/node_modules/hardhat-deploy/src/DeploymentsManager.ts:1212:22)
+    at async DeploymentsManager.runDeploy (/Users/zuludykes/code/velocity-labs-gmx-synthetics/node_modules/hardhat-deploy/src/DeploymentsManager.ts:1061:5)
+    at async Object.fixture (/Users/zuludykes/code/velocity-labs-gmx-synthetics/node_modules/hardhat-deploy/src/DeploymentsManager.ts:316:9)
+    at async setup (/Users/zuludykes/code/velocity-labs-gmx-synthetics/utils/fixture.ts:11:3)
+    at async loadFixture (/Users/zuludykes/code/velocity-labs-gmx-synthetics/node_modules/@nomicfoundation/hardhat-network-helpers/src/loadFixture.ts:59:18)
+    at async Context.<anonymous> (/Users/zuludykes/code/velocity-labs-gmx-synthetics/test/config/DisabledOrderTypesReverts.ts:79:15)
+  Error: ERROR processing /Users/zuludykes/code/velocity-labs-gmx-synthetics/deploy/deployTestTokens.ts:
+  HardhatNetworkHelpersError: Address 0x0DCd1Bf9A1b36cE34237eEaFef220932846BCD82 has an invalid checksum
+      at assertValidAddress (node_modules/@nomicfoundation/hardhat-network-helpers/src/utils.ts:91:11)
+      at setBalance (node_modules/@nomicfoundation/hardhat-network-helpers/src/helpers/setBalance.ts:20:21)
+      at async Object.func (deploy/deployTestTokens.ts:42:9)
+      at async DeploymentsManager.executeDeployScripts (node_modules/hardhat-deploy/src/DeploymentsManager.ts:1212:22)
+      at async DeploymentsManager.runDeploy (node_modules/hardhat-deploy/src/DeploymentsManager.ts:1061:5)
+      at async Object.fixture (node_modules/hardhat-deploy/src/DeploymentsManager.ts:316:9)
+      at async setup (utils/fixture.ts:11:3)
+      at async loadFixture (node_modules/@nomicfoundation/hardhat-network-helpers/src/loadFixture.ts:59:18)
+      at async Context.<anonymous> (test/config/DisabledOrderTypesReverts.ts:79:15)
+      at DeploymentsManager.executeDeployScripts (node_modules/hardhat-deploy/src/DeploymentsManager.ts:1215:19)
+      at async DeploymentsManager.runDeploy (node_modules/hardhat-deploy/src/DeploymentsManager.ts:1061:5)
+      at async Object.fixture (node_modules/hardhat-deploy/src/DeploymentsManager.ts:316:9)
+      at async setup (utils/fixture.ts:11:3)
+      at async loadFixture (node_modules/@nomicfoundation/hardhat-network-helpers/src/loadFixture.ts:59:18)
+      at async Context.<anonymous> (test/config/DisabledOrderTypesReverts.ts:79:15)
+
+
+
