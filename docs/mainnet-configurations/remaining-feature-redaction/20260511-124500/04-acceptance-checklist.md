@@ -1,4 +1,4 @@
-# SCRUM275 Acceptance Checklist (Step 8)
+# Acceptance checklist — remaining feature redaction
 
 Status is based on pre-mainnet execution evidence in this bundle.
 
@@ -15,14 +15,15 @@ Status is based on pre-mainnet execution evidence in this bundle.
 - [x] Pre-mainnet evidence bundle archived.
   - Evidence: `01-compile.log`, `02-fork-dryrun.log`, `03-fork-write-and-validate.log`, this checklist, and `README.md`.
 
-## Pending for final production closeout
+## Production closeout
 
-- [x] Mainnet dry-run execution evidence — `../20260511-step8-production-evidence/01-mainnet-dryrun.log`
-- [x] Mainnet write execution evidence (if approved) — `../20260511-step8-production-evidence/02-mainnet-write.log` + tx index in that folder’s `README.md`
-- [x] Mainnet readback validation evidence — `../20260511-step8-production-evidence/03-mainnet-validate.log`
-- [x] Post-mainnet final note appended to this bundle or linked follow-up timestamp bundle — `../20260511-step8-production-evidence/07-post-mainnet-note.md`
+- [x] Mainnet dry-run execution evidence — `../20260511-production-evidence/01-mainnet-dryrun.log`
+- [x] Mainnet write execution evidence (if approved) — `../20260511-production-evidence/02-mainnet-write.log` + tx index in that folder’s `README.md`
+- [x] Mainnet readback validation evidence — `../20260511-production-evidence/03-mainnet-validate.log`
+- [x] Post-mainnet final note — `../20260511-production-evidence/07-post-mainnet-note.md`
 
 ## Conclusion
 
-SCRUM275 implementation is accepted for pre-mainnet readiness.
-**Step 8 (mainnet + Base Sepolia evidence):** see bundle `../20260511-step8-production-evidence/` (includes Sepolia dry-run + validate transcripts). Order redaction + pool risk explicit readback: follow-up ticket.
+Configuration implementation is accepted for pre-mainnet readiness.
+
+**Production evidence (mainnet + Base Sepolia):** see `../20260511-production-evidence/` (includes Sepolia dry-run + validate transcripts). Explicit archived readback for order create/execute redaction and pool risk guard keys beyond `verifyFeaturesState.ts` remains a follow-up.

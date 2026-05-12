@@ -1,6 +1,6 @@
-# Remaining Feature Redaction - Pre-mainnet Evidence (SCRUM275)
+# Remaining feature redaction — pre-mainnet evidence
 
-This bundle captures the pre-mainnet fork execution evidence for the SCRUM275 remaining-feature redaction flow.
+This bundle captures the pre-mainnet fork execution evidence for the remaining-feature redaction orchestrator (`scripts/configs/index.ts`).
 
 ## Environment
 
@@ -40,4 +40,4 @@ This bundle captures the pre-mainnet fork execution evidence for the SCRUM275 re
 ## Notes
 
 - This is pre-mainnet evidence only.
-- Mainnet + Base Sepolia Step 8 evidence: `../20260511-step8-production-evidence/`.
+- Production execution evidence (Base mainnet + Base Sepolia): `../20260511-production-evidence/`.

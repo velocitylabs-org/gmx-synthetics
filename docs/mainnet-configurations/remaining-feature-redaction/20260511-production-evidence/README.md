@@ -1,11 +1,11 @@
-# SCRUM275 Step 8 — Production evidence (Base mainnet + Base Sepolia)
+# Production evidence (Base mainnet + Base Sepolia)
 
-This bundle closes out **Step 8** from `../20260511-124500/04-acceptance-checklist.md`: mainnet dry-run / write / readback evidence, plus **Base Sepolia** execution evidence for the same orchestrator profile.
+This bundle archives mainnet dry-run / write / readback evidence and **Base Sepolia** execution evidence for the same feature-configuration orchestrator profile (`scripts/configs/index.ts`).
 
 ## Scope note
 
 - **Feature-flag readback** in `03-mainnet-validate.log` matches `scripts/configs/validations/verifyFeaturesState.ts` (shift, atomic withdrawal, JIT, subaccount, gasless).
-- **Order redaction + pool risk guards** explicit readback for this ticket is deferred to the follow-up ticket (team agreement).
+- **Order redaction + pool risk guards** explicit readback for this workstream is deferred per team agreement (follow-up).
 
 ## Networks and commands
 
@@ -17,15 +17,15 @@ This bundle closes out **Step 8** from `../20260511-124500/04-acceptance-checkli
 Reproduce full transcripts locally (Node 24 recommended):
 
 ```bash
-npm run config:features:mainnet:dryrun    2>&1 | tee docs/mainnet-configurations/remaining-feature-redaction/20260511-step8-production-evidence/01-mainnet-dryrun.log
-npm run config:features:basesepolia:dryrun 2>&1 | tee docs/mainnet-configurations/remaining-feature-redaction/20260511-step8-production-evidence/04-basesepolia-dryrun.log
+npm run config:features:mainnet:dryrun    2>&1 | tee docs/mainnet-configurations/remaining-feature-redaction/20260511-production-evidence/01-mainnet-dryrun.log
+npm run config:features:basesepolia:dryrun 2>&1 | tee docs/mainnet-configurations/remaining-feature-redaction/20260511-production-evidence/04-basesepolia-dryrun.log
 ```
 
 ## Base mainnet — write batch tx hashes (operator run)
 
 ConfigKeeper: `0xAed31d3C8942B38eec87Fe5830a671C1A3D0d967`
 
-| Step | Basescan (8453) |
+| Batch | Basescan (8453) |
 |------|-----------------|
 | Create-order disable batch | https://basescan.org/tx/0xabeeeb3c295384e0a1a5025decba228cfd2ec52c865e865d05ce4ff3f121f583 |
 | Execute-order disable batch | https://basescan.org/tx/0xcb411e783bcf389fd7155a01d915a05ba50e227d896c32fb04bd91d1ab79ac2f |
@@ -40,7 +40,7 @@ ConfigKeeper: `0xAed31d3C8942B38eec87Fe5830a671C1A3D0d967`
 
 ConfigKeeper: `0x6DdBBB0834084185BeF7Bd1567E835E44683600D`
 
-| Step | Sepolia Basescan |
+| Batch | Sepolia Basescan |
 |------|------------------|
 | Create-order disable batch | https://sepolia.basescan.org/tx/0xd50fc876e67d09b6004d00c4bfd7d10e8447fa59363683219bb49956bedaca55 |
 | Execute-order disable batch | https://sepolia.basescan.org/tx/0xe01d8af6fb0a3acbb2bb042491c34752c60507c6047c12ce893b259ea3e2c828 |
