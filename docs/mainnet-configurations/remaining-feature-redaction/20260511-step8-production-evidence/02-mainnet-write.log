@@ -1,0 +1,70 @@
+# Base mainnet — config:features:mainnet (WRITE=true) operator transcript (excerpt)
+# Network: base (chainId 8453). Captured from operator console 2026-05-11.
+#
+# Note: `npm run config:features:validate:mainnet` does NOT print write txs — it only readbacks
+# feature flags. To extend this file you need original scrollback or explorer history, not validate.
+#
+# Tx hashes below (create order → atomic withdrawal) match README.md mainnet table. Middle sections
+# omit repetitive "Preparing pool risk…" / gasless module lines for brevity.
+
+> gmx-synthetics@1.0.0 config:features:mainnet
+> WRITE=true ... npx hardhat run scripts/configs/index.ts --network base
+
+Running config orchestrator...
+Prepared 5 create-order feature updates
+callStatic passed
+tx sent: 0xabeeeb3c295384e0a1a5025decba228cfd2ec52c865e865d05ce4ff3f121f583
+tx mined
+Prepared 5 execute-order feature updates
+callStatic passed
+tx sent: 0xcb411e783bcf389fd7155a01d915a05ba50e227d896c32fb04bd91d1ab79ac2f
+tx mined
+Preparing pool risk guard updates for JPY [USDC-USDC] (0xbe4C4810f92d4b08672dc8f3E0f1d834e11d2681)
+[ ... pool risk prep lines ... ]
+ConfigKeeper: 0xAed31d3C8942B38eec87Fe5830a671C1A3D0d967
+Selected active markets for caps/min: 5
+Selected inactive markets for disable: 7
+Prepared config calls: 32
+callStatic passed
+tx sent: 0x17b9513d14fc369a1726144d8a19469123a08ed4d5b8d573dbabeef9868096a3
+tx mined
+ConfigKeeper: 0xAed31d3C8942B38eec87Fe5830a671C1A3D0d967
+TARGET_DISABLED_STATE (write true): true
+Prepared 3 config updates
+- Disable shift creation | ShiftHandler (0xA7D5D56a7D436380eA7F22EC2F265A1d7e2A75d7)
+- Disable shift cancellation | ShiftHandler (0xA7D5D56a7D436380eA7F22EC2F265A1d7e2A75d7)
+- Disable shift execution | ShiftHandler (0xA7D5D56a7D436380eA7F22EC2F265A1d7e2A75d7)
+callStatic passed
+tx sent: 0x57f897f4220a9fe53a59b60e6c46e38797bc3205e9fcd2429552825eba9d74fa
+tx mined
+ConfigKeeper: 0xAed31d3C8942B38eec87Fe5830a671C1A3D0d967
+TARGET_DISABLED_STATE (write true): true
+Prepared 1 config updates
+- Disable JIT execution path | JitOrderHandler (0x9Ec4C4fDA27649b827385AE04D49A64dE193FF0f)
+callStatic passed
+tx sent: 0x303d7c3b74885b6f42a4309092dcd4572d2e782249fd745d5beb69740b4c7e93
+tx mined
+ConfigKeeper: 0xAed31d3C8942B38eec87Fe5830a671C1A3D0d967
+TARGET_DISABLED_STATE (write true): true
+Prepared 3 config updates
+- Disable subaccount delegation flows | SubaccountRouter (0x5bb2c5497170C16D4D16F9bC32885104601c095f)
+- Disable subaccount delegation flows | SubaccountGelatoRelayRouter (0x202676dED4d7432825a2A2aaEe95E8b53DdD45c6)
+- Disable subaccount delegation flows | MultichainSubaccountRouter (0x4fc16A2b8E49d97418D334621412139389963AD6)
+callStatic passed
+tx sent: 0x6ec7eb0454df7e7bd2660a52be39e9e99ac766aee7fc3c827bf49fe79188176e
+tx mined
+ConfigKeeper: 0xAed31d3C8942B38eec87Fe5830a671C1A3D0d967
+TARGET_DISABLED_STATE (write true): true
+Prepared 8 config updates
+- Disable gasless relay flows | GelatoRelayRouter (0xDc4eabBc5cDadbe1d4956C803053787B519A3E6C)
+[ ... remaining gasless module lines ... ]
+callStatic passed
+tx sent: 0xf2d903b6272dcfb97af9c55a34553b99cc4d3c8678328db59b5107d54d1a36d3
+tx mined
+ConfigKeeper: 0xAed31d3C8942B38eec87Fe5830a671C1A3D0d967
+TARGET_DISABLED_STATE (write true): true
+Prepared 1 config updates
+- Disable atomic withdrawal execution | WithdrawalHandler (0xA27F558C80b664722dffA3f7375b7E9647D5fe00)
+callStatic passed
+tx sent: 0xf899af7767b4094f12a26e8cd47cf9482248096c6aebae36215fd1558f647fe7
+tx mined

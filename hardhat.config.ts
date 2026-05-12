@@ -148,13 +148,15 @@ const getEnvAccounts = (chainName?: string) => {
 
   const baseAccountKey = BASE_ACCOUNT_KEY;
   const baseSepoliaAccountKey = BASE_SEPOLIA_ACCOUNT_KEY;
+  // Base Sepolia uses BASE_SEPOLIA_ACCOUNT_KEY when set; otherwise the same key as Base mainnet.
+  const baseSepoliaResolvedKey = baseSepoliaAccountKey || baseAccountKey;
 
   if (chainName === "base" && baseAccountKey) {
     return [baseAccountKey];
   }
 
-  if (chainName === "baseSepolia" && baseSepoliaAccountKey) {
-    return [baseSepoliaAccountKey];
+  if (chainName === "baseSepolia" && baseSepoliaResolvedKey) {
+    return [baseSepoliaResolvedKey];
   }
 
   if (chainName === "arbitrumSepolia" && ARBITRUM_SEPOLIA_ACCOUNT_KEY) {

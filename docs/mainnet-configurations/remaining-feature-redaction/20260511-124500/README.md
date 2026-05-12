@@ -12,13 +12,11 @@ This bundle captures the pre-mainnet fork execution evidence for the SCRUM275 re
 ## Commands executed
 
 1. `pnpm -s hardhat compile`
-2. `pnpm -s config:features:fork:dryrun`
-3. `pnpm -s config:features:fork`
+2. `pnpm -s config:features:fork` (fork local testing only; use `config:features:mainnet:dryrun` / `config:features:basesepolia:dryrun` for live-network dry runs)
 
 ## Outcomes
 
 - Compile: success
-- Fork dry-run: success (expected validation mismatches pre-write)
 - Fork write + validate: success
 - Final verification status: `Verification passed: all feature flags matched expected state.`
 
@@ -36,10 +34,10 @@ This bundle captures the pre-mainnet fork execution evidence for the SCRUM275 re
 ## Files in this bundle
 
 - `01-compile.log`
-- `02-fork-dryrun.log`
+- `02-fork-dryrun.log` (archived from an earlier run when dry-run was captured separately; no longer a dedicated npm script)
 - `03-fork-write-and-validate.log`
 
 ## Notes
 
 - This is pre-mainnet evidence only.
-- Mainnet dry-run/write/readback evidence will be appended in a post-mainnet bundle.
+- Mainnet + Base Sepolia Step 8 evidence: `../20260511-step8-production-evidence/`.
