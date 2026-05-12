@@ -35,6 +35,22 @@ npm run lint
 
 `SKIP_AUTO_HANDLER_REDEPLOYMENT=true` is the standard flag for non-handler-changing deploys — it short-circuits the handler redeploy chain and is safe whenever you haven't modified `*Handler.sol`.
 
+## Doppler
+
+Doppler replaces `.env` files. It injects secrets as process environment variables at runtime, so they never touch disk. `doppler run -- <cmd>` uses the config pinned in `.doppler.yaml` (default: `loc`). Pass `-c stg` or `-c prd` to target a different environment. See [DOPPLER.md](../DOPPLER.md) for the full variable reference.
+
+`gmx-synthetics` uses [Doppler](https://doppler.com) for mainnet deploy secrets and Supabase credentials. Project: `nivo`.
+
+`.doppler.yaml` is checked in (config: `loc`). Run `doppler login` once per machine — no `doppler setup` needed.
+
+```bash
+doppler run -- npx hardhat node         # localhost with env injection
+npm run deploy:base:mainnet             # mainnet deploy (doppler prd baked in)
+npm run upsert-deployments              # push deployments to Supabase (doppler prd baked in)
+```
+
+Fork scripts use hardcoded Hardhat dev keys — those do not need Doppler.
+
 The `app`, `vite`, and React deps in `package.json` are a vestigial in-repo UI (`app.tsx`, `index.html`) — the production UI lives in `nivo-web-app/`. Don't extend the in-repo app.
 
 ## Architecture (GMX V2)
