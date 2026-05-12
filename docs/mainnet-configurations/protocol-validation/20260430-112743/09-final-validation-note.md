@@ -1,4 +1,4 @@
-# SCRUM227 Workstream 5 - Validation Note
+# Validation note (fork + test hygiene)
 
 ## Scope Executed
 - Fork post-config verification test:

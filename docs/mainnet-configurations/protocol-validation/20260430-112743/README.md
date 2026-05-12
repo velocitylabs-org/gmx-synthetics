@@ -1,47 +1,44 @@
-# SCRUM227 Baseline Evidence
+# Protocol validation evidence (`20260430-112743`)
 
 ## Metadata
+
 - Timestamp: `20260430-112743`
-- Branch: `SCRUM226`
-- Git SHA: `cc10325cbe72c16f4adff1b7b487f3413b2a262e`
+- Git SHA (capture): `cc10325cbe72c16f4adff1b7b487f3413b2a262e`
 - Remote: `git@github.com:velocitylabs-org/gmx-synthetics.git`
-- Network target: `base` (mainnet read + fork validation)
-- Fork ID: _not set in environment at capture time_
-- Operator list source: `config/roles.ts` plus approved governance/operator list document (to be attached during Workstream 2)
+- Networks: Base mainnet (read-only role export) + Base fork (`FORK_ID=8453` where noted)
+- Operator policy source: `config/roles.ts` plus the approved governance operator list used for role hygiene review
 
-## Baseline Working Tree Snapshot
-```text
-## SCRUM226...origin/SCRUM226
- M .wolf/anatomy.md
- M .wolf/hooks/_session.json
- M .wolf/memory.md
- M .wolf/token-ledger.json
-?? cache_forge/
-?? docs/mainnet-configurations/scrum-225-226/20260428-114212/
-?? scrum227.md
-?? scrums225-227.md
-```
+## Commands (representative)
 
-## Planned Command Log (Pre-Run)
-- Role export:
-  - `npx hardhat run scripts/printRoles.ts --network base`
-  - `FORK_ID=8453 npx hardhat run scripts/printRoles.ts --network anvil`
-- SCRUM225/226 state verification:
-  - `pnpm verify:scrum225-226:mainnet`
-- Same-token invariant check (script to add in this ticket):
-  - `FORK_ID=8453 npx hardhat run scripts/configs/<same-token-checker>.ts --network anvil`
-- Virtual ID linkage allowlist check (script to add in this ticket):
-  - `FORK_ID=8453 npx hardhat run scripts/configs/<virtual-id-checker>.ts --network anvil`
-- Call-path coverage matrix build:
-  - `pnpm test ...` (targeted + full suite commands to be finalized in Workstream 4/5)
+Role exports:
 
-## Artifact Plan
-- `01-roles-mainnet.log`
-- `02-roles-fork.log`
-- `03-role-diff.md`
-- `04-same-token-invariants.log`
-- `05-virtual-id-linkage.log`
-- `06-call-path-coverage-matrix.md`
-- `07-fork-test-summary.md`
-- `08-skip-accounting.json`
-- `09-final-validation-note.md`
+- `npx hardhat run scripts/printRoles.ts --network base`
+- `FORK_ID=8453 npx hardhat run scripts/printRoles.ts --network anvil`
+
+Invariant and virtual-ID checks (paths live under `scripts/configs/validations/` on the post-refactor mainline):
+
+- `FORK_ID=8453 npx hardhat run scripts/configs/validations/verifySameTokenInvariants.ts --network anvil`
+- `FORK_ID=8453 npx hardhat run scripts/configs/validations/verifyVirtualIdAllowlist.ts --network anvil`
+- Aggregate wrapper: `FORK_ID=8453 npx hardhat run scripts/configs/validations/runInvariantChecks.ts --network anvil`
+
+Feature / pool configuration was replayed on fork where needed using the combined `scripts/configs/index.ts` orchestrator (order redaction + pool risk guards); see `04b-workstream3-correction-note.md` for the correction pass.
+
+## Archived artifacts (this folder)
+
+| File | Description |
+|------|-------------|
+| `01-roles-mainnet.log` | Sorted role export against Base mainnet |
+| `02-roles-fork.log` | Sorted role export against the Base fork |
+| `03-role-diff.md` | Mainnet vs fork role comparison |
+| `04-same-token-invariants.log` | Same-token market invariant run |
+| `04a-fork-correction-feature-redaction.log` | Log from fork correction replay |
+| `04b-workstream3-correction-note.md` | Why correction was needed and outcome |
+| `05-virtual-id-linkage.log` | Virtual ID allowlist check |
+| `06-call-path-coverage-matrix.md` | Call-path A–E vs tests/scripts |
+| `07-fork-test-summary.log` | Fork test pass/skip summary |
+| `07a-disabled-order-reverts.log` | Disabled order-type revert harness |
+| `08-skip-accounting.md` | Skipped suites + rationale |
+| `09-final-validation-note.md` | Consolidated validation note |
+| `10-global-test-suite-anomalies.md` | Non-policy test anomalies |
+
+**Note:** Evidence logs use the `.log` extension and are force-tracked in git because `*.log` is gitignored by default.

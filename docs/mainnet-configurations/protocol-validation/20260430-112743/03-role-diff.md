@@ -1,4 +1,4 @@
-# SCRUM227 Workstream 2 - Role Diff
+# Role diff (protocol validation)
 
 ## Inputs
 - `01-roles-mainnet.log`
@@ -8,7 +8,7 @@
 ## Deterministic Export Status
 - Mainnet export: pass
 - Fork export: pass
-- Export format: deterministic (sorted roles + sorted members) via `scripts/configs/printRolesResolved.ts`
+- Export format: deterministic (sorted roles + sorted members) via `scripts/configs/validations/printRolesResolved.ts`
 
 ## Mainnet vs Fork
 - Result: no differences detected for exported role memberships.
@@ -28,7 +28,7 @@
 ### Explicitly Accepted Exceptions
 - `FEE_KEEPER` includes `FeeDistributor` contract address in addition to deployer/keeper EOA.
 - `ROLE_ADMIN` includes system timelock/config contracts (`ConfigTimelockController`, `TimelockConfig`) in addition to keeper EOA.
-- Additional unhashed role key `0xdb34a94d601aa170c498f99c1628bd6182669f4ea4522eb87795649193ee93f8` observed with `MultichainReader`; accepted as existing deployed-system role and not introduced by SCRUM225/226.
+- Additional unhashed role key `0xdb34a94d601aa170c498f99c1628bd6182669f4ea4522eb87795649193ee93f8` observed with `MultichainReader`; accepted as existing deployed-system role and not introduced by the order redaction / pool-risk configuration releases.
 
 ## Required Corrections
 - None required based on current base policy + observed on-chain state.
