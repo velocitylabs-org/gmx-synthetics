@@ -1,7 +1,7 @@
 # anatomy.md
 
-> Auto-maintained by OpenWolf. Last scanned: 2026-05-07T08:40:56.852Z
-> Files: 962 tracked | Anatomy hits: 0 | Misses: 0
+> Auto-maintained by OpenWolf. Last scanned: 2026-05-12T08:44:21.783Z
+> Files: 963 tracked | Anatomy hits: 0 | Misses: 0
 
 ## ./
 
@@ -956,11 +956,12 @@
 - `cancelDepositOrder.ts` — Cancel a deposit created with createDepositNivoMarket.ts, uses the WALLET_TESTER_PRIVATE_KEY. (~898 tok)
 - `cancelPositionOrder.ts` — Cancel a position order created with openPositionOrder.ts using WALLET_TESTER_PRIVATE_KEY. (~830 tok)
 - `closePositionOrder.ts` — createCloseOrder: main (~1580 tok)
-- `depositOrder.ts` — Create a deposit into a Nivo FX market (GBP/USDC). Uses the WALLET_TESTER_PRIVATE_KEY. (~2106 tok)
+- `depositOrder.ts` — Create a deposit into a Nivo FX market (FX/USDC). Uses the WALLET_TESTER_PRIVATE_KEY. (~2296 tok)
 - `executeClosePosition.ts` — Execute a close (MarketDecrease) order. Same flow as executeOpenPosition: (~1258 tok)
 - `executeDeposit.ts` — Execute a deposit into a Nivo FX market (GBP/USDC). Uses the NIVO_KEEPER_PRIVATE_KEY. (~1399 tok)
 - `executeOpenPosition.ts` — Declares main (~1282 tok)
-- `openPositionOrder.ts` — createOrder: main (~1987 tok)
+- `openPositionOrder.ts` — computeAcceptablePrice: createOrder, main (~2668 tok)
+- `printPositionInfo.ts` — applyInversion: main, toMarketTokenPrice (~2299 tok)
 - `utils.ts` — Exports withGasBuffer, SUPPORTED_NETWORKS, getDepositExecutionFee (~534 tok)
 
 ## scripts/nivo/chainlinkProvider/

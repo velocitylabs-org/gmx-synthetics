@@ -2,14 +2,14 @@
   "version": 1,
   "created_at": "2026-04-28T10:25:51.703Z",
   "lifetime": {
-    "total_tokens_estimated": 259306,
-    "total_reads": 264,
-    "total_writes": 13,
-    "total_sessions": 4,
-    "anatomy_hits": 223,
-    "anatomy_misses": 41,
-    "repeated_reads_blocked": 19,
-    "estimated_savings_vs_bare_cli": 52048
+    "total_tokens_estimated": 1323547,
+    "total_reads": 504,
+    "total_writes": 194,
+    "total_sessions": 9,
+    "anatomy_hits": 392,
+    "anatomy_misses": 112,
+    "repeated_reads_blocked": 120,
+    "estimated_savings_vs_bare_cli": 3004971
   },
   "sessions": [
     {
@@ -2120,6 +2120,3336 @@
         "writes_count": 1,
         "repeated_reads_blocked": 1,
         "anatomy_lookups": 10
+      }
+    },
+    {
+      "id": "session-2026-05-07-1606",
+      "started": "2026-05-07T14:06:48.839Z",
+      "ended": "2026-05-07T14:08:27.535Z",
+      "reads": [
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/printPoolData.ts",
+          "tokens_estimated": 378,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/printMarketInfo.ts",
+          "tokens_estimated": 4674,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        }
+      ],
+      "writes": [],
+      "totals": {
+        "input_tokens_estimated": 5052,
+        "output_tokens_estimated": 0,
+        "reads_count": 2,
+        "writes_count": 0,
+        "repeated_reads_blocked": 0,
+        "anatomy_lookups": 2
+      }
+    },
+    {
+      "id": "session-2026-05-07-1606",
+      "started": "2026-05-07T14:06:48.839Z",
+      "ended": "2026-05-07T14:10:14.778Z",
+      "reads": [
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/printPoolData.ts",
+          "tokens_estimated": 378,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/printMarketInfo.ts",
+          "tokens_estimated": 4674,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        }
+      ],
+      "writes": [
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/depositOrder.ts",
+          "tokens_estimated": 46,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/depositOrder.ts",
+          "tokens_estimated": 70,
+          "action": "edit"
+        }
+      ],
+      "totals": {
+        "input_tokens_estimated": 5052,
+        "output_tokens_estimated": 116,
+        "reads_count": 2,
+        "writes_count": 2,
+        "repeated_reads_blocked": 0,
+        "anatomy_lookups": 2
+      }
+    },
+    {
+      "id": "session-2026-05-07-1649",
+      "started": "2026-05-07T14:49:23.134Z",
+      "ended": "2026-05-07T14:51:22.649Z",
+      "reads": [
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/.wolf/memory.md",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/.wolf/anatomy.md",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/contracts/oracle/ChainlinkDataStreamProvider.sol",
+          "tokens_estimated": 2608,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        }
+      ],
+      "writes": [],
+      "totals": {
+        "input_tokens_estimated": 2608,
+        "output_tokens_estimated": 0,
+        "reads_count": 3,
+        "writes_count": 0,
+        "repeated_reads_blocked": 0,
+        "anatomy_lookups": 1
+      }
+    },
+    {
+      "id": "session-2026-05-07-1649",
+      "started": "2026-05-07T14:49:23.134Z",
+      "ended": "2026-05-07T14:56:56.697Z",
+      "reads": [
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/.wolf/memory.md",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/.wolf/anatomy.md",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/contracts/oracle/ChainlinkDataStreamProvider.sol",
+          "tokens_estimated": 2608,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        }
+      ],
+      "writes": [],
+      "totals": {
+        "input_tokens_estimated": 2608,
+        "output_tokens_estimated": 0,
+        "reads_count": 3,
+        "writes_count": 0,
+        "repeated_reads_blocked": 0,
+        "anatomy_lookups": 1
+      }
+    },
+    {
+      "id": "session-2026-05-07-1649",
+      "started": "2026-05-07T14:49:23.134Z",
+      "ended": "2026-05-07T15:01:36.821Z",
+      "reads": [
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/.wolf/memory.md",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/.wolf/anatomy.md",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/contracts/oracle/ChainlinkDataStreamProvider.sol",
+          "tokens_estimated": 2608,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        }
+      ],
+      "writes": [],
+      "totals": {
+        "input_tokens_estimated": 2608,
+        "output_tokens_estimated": 0,
+        "reads_count": 3,
+        "writes_count": 0,
+        "repeated_reads_blocked": 0,
+        "anatomy_lookups": 1
+      }
+    },
+    {
+      "id": "session-2026-05-07-1649",
+      "started": "2026-05-07T14:49:23.134Z",
+      "ended": "2026-05-07T15:18:07.767Z",
+      "reads": [
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/.wolf/memory.md",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/.wolf/anatomy.md",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/contracts/oracle/ChainlinkDataStreamProvider.sol",
+          "tokens_estimated": 2608,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/chainlinkProvider/chainlinkReportFetcher.ts",
+          "tokens_estimated": 512,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        }
+      ],
+      "writes": [],
+      "totals": {
+        "input_tokens_estimated": 3120,
+        "output_tokens_estimated": 0,
+        "reads_count": 4,
+        "writes_count": 0,
+        "repeated_reads_blocked": 0,
+        "anatomy_lookups": 2
+      }
+    },
+    {
+      "id": "session-2026-05-07-1649",
+      "started": "2026-05-07T14:49:23.134Z",
+      "ended": "2026-05-07T15:20:21.061Z",
+      "reads": [
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/.wolf/memory.md",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/.wolf/anatomy.md",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/contracts/oracle/ChainlinkDataStreamProvider.sol",
+          "tokens_estimated": 2608,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/chainlinkProvider/chainlinkReportFetcher.ts",
+          "tokens_estimated": 512,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        }
+      ],
+      "writes": [],
+      "totals": {
+        "input_tokens_estimated": 3120,
+        "output_tokens_estimated": 0,
+        "reads_count": 4,
+        "writes_count": 0,
+        "repeated_reads_blocked": 0,
+        "anatomy_lookups": 2
+      }
+    },
+    {
+      "id": "session-2026-05-07-1649",
+      "started": "2026-05-07T14:49:23.134Z",
+      "ended": "2026-05-07T15:25:41.127Z",
+      "reads": [
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/.wolf/memory.md",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/.wolf/anatomy.md",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/contracts/oracle/ChainlinkDataStreamProvider.sol",
+          "tokens_estimated": 2608,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/chainlinkProvider/chainlinkReportFetcher.ts",
+          "tokens_estimated": 512,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        }
+      ],
+      "writes": [],
+      "totals": {
+        "input_tokens_estimated": 3120,
+        "output_tokens_estimated": 0,
+        "reads_count": 4,
+        "writes_count": 0,
+        "repeated_reads_blocked": 0,
+        "anatomy_lookups": 2
+      }
+    },
+    {
+      "id": "session-2026-05-07-1649",
+      "started": "2026-05-07T14:49:23.134Z",
+      "ended": "2026-05-07T15:29:07.070Z",
+      "reads": [
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/.wolf/memory.md",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/.wolf/anatomy.md",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/contracts/oracle/ChainlinkDataStreamProvider.sol",
+          "tokens_estimated": 2608,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/chainlinkProvider/chainlinkReportFetcher.ts",
+          "tokens_estimated": 512,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        }
+      ],
+      "writes": [],
+      "totals": {
+        "input_tokens_estimated": 3120,
+        "output_tokens_estimated": 0,
+        "reads_count": 4,
+        "writes_count": 0,
+        "repeated_reads_blocked": 0,
+        "anatomy_lookups": 2
+      }
+    },
+    {
+      "id": "session-2026-05-07-1649",
+      "started": "2026-05-07T14:49:23.134Z",
+      "ended": "2026-05-08T07:44:16.812Z",
+      "reads": [
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/.wolf/memory.md",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/.wolf/anatomy.md",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/contracts/oracle/ChainlinkDataStreamProvider.sol",
+          "tokens_estimated": 2608,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/chainlinkProvider/chainlinkReportFetcher.ts",
+          "tokens_estimated": 512,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        }
+      ],
+      "writes": [],
+      "totals": {
+        "input_tokens_estimated": 3120,
+        "output_tokens_estimated": 0,
+        "reads_count": 4,
+        "writes_count": 0,
+        "repeated_reads_blocked": 0,
+        "anatomy_lookups": 2
+      }
+    },
+    {
+      "id": "session-2026-05-07-1649",
+      "started": "2026-05-07T14:49:23.134Z",
+      "ended": "2026-05-08T07:54:56.152Z",
+      "reads": [
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/.wolf/memory.md",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/.wolf/anatomy.md",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/contracts/oracle/ChainlinkDataStreamProvider.sol",
+          "tokens_estimated": 2608,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/chainlinkProvider/chainlinkReportFetcher.ts",
+          "tokens_estimated": 512,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        }
+      ],
+      "writes": [],
+      "totals": {
+        "input_tokens_estimated": 3120,
+        "output_tokens_estimated": 0,
+        "reads_count": 4,
+        "writes_count": 0,
+        "repeated_reads_blocked": 0,
+        "anatomy_lookups": 2
+      }
+    },
+    {
+      "id": "session-2026-05-07-1649",
+      "started": "2026-05-07T14:49:23.134Z",
+      "ended": "2026-05-08T08:03:39.759Z",
+      "reads": [
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/.wolf/memory.md",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/.wolf/anatomy.md",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/contracts/oracle/ChainlinkDataStreamProvider.sol",
+          "tokens_estimated": 2608,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/chainlinkProvider/chainlinkReportFetcher.ts",
+          "tokens_estimated": 512,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        }
+      ],
+      "writes": [],
+      "totals": {
+        "input_tokens_estimated": 3120,
+        "output_tokens_estimated": 0,
+        "reads_count": 4,
+        "writes_count": 0,
+        "repeated_reads_blocked": 0,
+        "anatomy_lookups": 2
+      }
+    },
+    {
+      "id": "session-2026-05-07-1649",
+      "started": "2026-05-07T14:49:23.134Z",
+      "ended": "2026-05-08T08:04:17.698Z",
+      "reads": [
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/.wolf/memory.md",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/.wolf/anatomy.md",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/contracts/oracle/ChainlinkDataStreamProvider.sol",
+          "tokens_estimated": 2608,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/chainlinkProvider/chainlinkReportFetcher.ts",
+          "tokens_estimated": 512,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        }
+      ],
+      "writes": [],
+      "totals": {
+        "input_tokens_estimated": 3120,
+        "output_tokens_estimated": 0,
+        "reads_count": 4,
+        "writes_count": 0,
+        "repeated_reads_blocked": 0,
+        "anatomy_lookups": 2
+      }
+    },
+    {
+      "id": "session-2026-05-07-1649",
+      "started": "2026-05-07T14:49:23.134Z",
+      "ended": "2026-05-08T08:04:31.540Z",
+      "reads": [
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/.wolf/memory.md",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/.wolf/anatomy.md",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/contracts/oracle/ChainlinkDataStreamProvider.sol",
+          "tokens_estimated": 2608,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/chainlinkProvider/chainlinkReportFetcher.ts",
+          "tokens_estimated": 512,
+          "was_repeated": true,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/chainlinkProvider/signedPricesBaseSepolia.ts",
+          "tokens_estimated": 441,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        }
+      ],
+      "writes": [],
+      "totals": {
+        "input_tokens_estimated": 3561,
+        "output_tokens_estimated": 0,
+        "reads_count": 5,
+        "writes_count": 0,
+        "repeated_reads_blocked": 1,
+        "anatomy_lookups": 3
+      }
+    },
+    {
+      "id": "session-2026-05-07-1649",
+      "started": "2026-05-07T14:49:23.134Z",
+      "ended": "2026-05-08T08:06:13.452Z",
+      "reads": [
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/.wolf/memory.md",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/.wolf/anatomy.md",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/contracts/oracle/ChainlinkDataStreamProvider.sol",
+          "tokens_estimated": 2608,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/chainlinkProvider/chainlinkReportFetcher.ts",
+          "tokens_estimated": 512,
+          "was_repeated": true,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/chainlinkProvider/signedPricesBaseSepolia.ts",
+          "tokens_estimated": 441,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        }
+      ],
+      "writes": [],
+      "totals": {
+        "input_tokens_estimated": 3561,
+        "output_tokens_estimated": 0,
+        "reads_count": 5,
+        "writes_count": 0,
+        "repeated_reads_blocked": 1,
+        "anatomy_lookups": 3
+      }
+    },
+    {
+      "id": "session-2026-05-07-1649",
+      "started": "2026-05-07T14:49:23.134Z",
+      "ended": "2026-05-08T08:20:51.694Z",
+      "reads": [
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/.wolf/memory.md",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/.wolf/anatomy.md",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/contracts/oracle/ChainlinkDataStreamProvider.sol",
+          "tokens_estimated": 2608,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/chainlinkProvider/chainlinkReportFetcher.ts",
+          "tokens_estimated": 512,
+          "was_repeated": true,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/chainlinkProvider/signedPricesBaseSepolia.ts",
+          "tokens_estimated": 441,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        }
+      ],
+      "writes": [],
+      "totals": {
+        "input_tokens_estimated": 3561,
+        "output_tokens_estimated": 0,
+        "reads_count": 5,
+        "writes_count": 0,
+        "repeated_reads_blocked": 1,
+        "anatomy_lookups": 3
+      }
+    },
+    {
+      "id": "session-2026-05-07-1649",
+      "started": "2026-05-07T14:49:23.134Z",
+      "ended": "2026-05-08T08:42:42.997Z",
+      "reads": [
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/.wolf/memory.md",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/.wolf/anatomy.md",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/contracts/oracle/ChainlinkDataStreamProvider.sol",
+          "tokens_estimated": 2608,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/chainlinkProvider/chainlinkReportFetcher.ts",
+          "tokens_estimated": 512,
+          "was_repeated": true,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/chainlinkProvider/signedPricesBaseSepolia.ts",
+          "tokens_estimated": 441,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/utils.ts",
+          "tokens_estimated": 534,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        }
+      ],
+      "writes": [],
+      "totals": {
+        "input_tokens_estimated": 4095,
+        "output_tokens_estimated": 0,
+        "reads_count": 6,
+        "writes_count": 0,
+        "repeated_reads_blocked": 1,
+        "anatomy_lookups": 4
+      }
+    },
+    {
+      "id": "session-2026-05-07-1649",
+      "started": "2026-05-07T14:49:23.134Z",
+      "ended": "2026-05-08T10:22:42.483Z",
+      "reads": [
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/.wolf/memory.md",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/.wolf/anatomy.md",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/contracts/oracle/ChainlinkDataStreamProvider.sol",
+          "tokens_estimated": 2608,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/chainlinkProvider/chainlinkReportFetcher.ts",
+          "tokens_estimated": 512,
+          "was_repeated": true,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/chainlinkProvider/signedPricesBaseSepolia.ts",
+          "tokens_estimated": 441,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/utils.ts",
+          "tokens_estimated": 534,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/depositOrder.ts",
+          "tokens_estimated": 2169,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        }
+      ],
+      "writes": [
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/depositOrder.ts",
+          "tokens_estimated": 28,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/depositOrder.ts",
+          "tokens_estimated": 78,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/depositOrder.ts",
+          "tokens_estimated": 32,
+          "action": "edit"
+        }
+      ],
+      "totals": {
+        "input_tokens_estimated": 6264,
+        "output_tokens_estimated": 138,
+        "reads_count": 7,
+        "writes_count": 3,
+        "repeated_reads_blocked": 1,
+        "anatomy_lookups": 5
+      }
+    },
+    {
+      "id": "session-2026-05-08-1616",
+      "started": "2026-05-08T14:16:23.568Z",
+      "ended": "2026-05-08T14:20:49.575Z",
+      "reads": [
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 1987,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        }
+      ],
+      "writes": [
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 72,
+          "action": "edit"
+        }
+      ],
+      "totals": {
+        "input_tokens_estimated": 1987,
+        "output_tokens_estimated": 72,
+        "reads_count": 1,
+        "writes_count": 1,
+        "repeated_reads_blocked": 0,
+        "anatomy_lookups": 1
+      }
+    },
+    {
+      "id": "session-2026-05-08-1616",
+      "started": "2026-05-08T14:16:23.568Z",
+      "ended": "2026-05-08T15:21:33.976Z",
+      "reads": [
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 1987,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        }
+      ],
+      "writes": [
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 72,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 2206,
+          "action": "edit"
+        }
+      ],
+      "totals": {
+        "input_tokens_estimated": 1987,
+        "output_tokens_estimated": 2278,
+        "reads_count": 1,
+        "writes_count": 2,
+        "repeated_reads_blocked": 0,
+        "anatomy_lookups": 1
+      }
+    },
+    {
+      "id": "session-2026-05-08-1616",
+      "started": "2026-05-08T14:16:23.568Z",
+      "ended": "2026-05-08T15:32:27.894Z",
+      "reads": [
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 1987,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/chainlinkProvider/signedPrices.ts",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/chainlinkProvider/chainlinkReportFetcher.ts",
+          "tokens_estimated": 512,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        }
+      ],
+      "writes": [
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 72,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 2206,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 250,
+          "action": "edit"
+        }
+      ],
+      "totals": {
+        "input_tokens_estimated": 2499,
+        "output_tokens_estimated": 2528,
+        "reads_count": 3,
+        "writes_count": 3,
+        "repeated_reads_blocked": 0,
+        "anatomy_lookups": 2
+      }
+    },
+    {
+      "id": "session-2026-05-08-1616",
+      "started": "2026-05-08T14:16:23.568Z",
+      "ended": "2026-05-08T15:36:54.718Z",
+      "reads": [
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 2235,
+          "was_repeated": true,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/chainlinkProvider/signedPrices.ts",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/chainlinkProvider/chainlinkReportFetcher.ts",
+          "tokens_estimated": 512,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        }
+      ],
+      "writes": [
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 72,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 2206,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 250,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 271,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 34,
+          "action": "edit"
+        }
+      ],
+      "totals": {
+        "input_tokens_estimated": 2747,
+        "output_tokens_estimated": 2833,
+        "reads_count": 3,
+        "writes_count": 5,
+        "repeated_reads_blocked": 1,
+        "anatomy_lookups": 2
+      }
+    },
+    {
+      "id": "session-2026-05-08-1616",
+      "started": "2026-05-08T14:16:23.568Z",
+      "ended": "2026-05-08T15:39:26.499Z",
+      "reads": [
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 2235,
+          "was_repeated": true,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/chainlinkProvider/signedPrices.ts",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/chainlinkProvider/chainlinkReportFetcher.ts",
+          "tokens_estimated": 512,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        }
+      ],
+      "writes": [
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 72,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 2206,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 250,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 271,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 34,
+          "action": "edit"
+        }
+      ],
+      "totals": {
+        "input_tokens_estimated": 2747,
+        "output_tokens_estimated": 2833,
+        "reads_count": 3,
+        "writes_count": 5,
+        "repeated_reads_blocked": 1,
+        "anatomy_lookups": 2
+      }
+    },
+    {
+      "id": "session-2026-05-08-1616",
+      "started": "2026-05-08T14:16:23.568Z",
+      "ended": "2026-05-08T15:43:07.637Z",
+      "reads": [
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 2235,
+          "was_repeated": true,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/chainlinkProvider/signedPrices.ts",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/chainlinkProvider/chainlinkReportFetcher.ts",
+          "tokens_estimated": 512,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/config/tokens.ts",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        }
+      ],
+      "writes": [
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 72,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 2206,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 250,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 271,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 34,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 361,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 74,
+          "action": "edit"
+        }
+      ],
+      "totals": {
+        "input_tokens_estimated": 2747,
+        "output_tokens_estimated": 3268,
+        "reads_count": 4,
+        "writes_count": 7,
+        "repeated_reads_blocked": 1,
+        "anatomy_lookups": 3
+      }
+    },
+    {
+      "id": "session-2026-05-11-1718",
+      "started": "2026-05-11T15:18:59.312Z",
+      "ended": "2026-05-11T15:26:46.863Z",
+      "reads": [
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 2425,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/contracts/oracle/ChainlinkDataStreamProvider.sol",
+          "tokens_estimated": 2608,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/deploy/configureDataStreamFeeds.ts",
+          "tokens_estimated": 413,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/chainlinkProvider/signedPrices.ts",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/chainlinkProvider/chainlinkReportFetcher.ts",
+          "tokens_estimated": 512,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        }
+      ],
+      "writes": [],
+      "totals": {
+        "input_tokens_estimated": 5958,
+        "output_tokens_estimated": 0,
+        "reads_count": 5,
+        "writes_count": 0,
+        "repeated_reads_blocked": 0,
+        "anatomy_lookups": 4
+      }
+    },
+    {
+      "id": "session-2026-05-11-1718",
+      "started": "2026-05-11T15:18:59.312Z",
+      "ended": "2026-05-11T15:27:45.517Z",
+      "reads": [
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 2425,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/contracts/oracle/ChainlinkDataStreamProvider.sol",
+          "tokens_estimated": 2608,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/deploy/configureDataStreamFeeds.ts",
+          "tokens_estimated": 413,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/chainlinkProvider/signedPrices.ts",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/chainlinkProvider/chainlinkReportFetcher.ts",
+          "tokens_estimated": 512,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        }
+      ],
+      "writes": [],
+      "totals": {
+        "input_tokens_estimated": 5958,
+        "output_tokens_estimated": 0,
+        "reads_count": 5,
+        "writes_count": 0,
+        "repeated_reads_blocked": 0,
+        "anatomy_lookups": 4
+      }
+    },
+    {
+      "id": "session-2026-05-12-0936",
+      "started": "2026-05-12T07:36:59.344Z",
+      "ended": "2026-05-12T07:42:02.197Z",
+      "reads": [
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/chainlinkProvider/signedPrices.ts",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/chainlinkProvider/chainlinkReportFetcher.ts",
+          "tokens_estimated": 512,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        }
+      ],
+      "writes": [
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 23,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 129,
+          "action": "edit"
+        }
+      ],
+      "totals": {
+        "input_tokens_estimated": 512,
+        "output_tokens_estimated": 152,
+        "reads_count": 2,
+        "writes_count": 2,
+        "repeated_reads_blocked": 0,
+        "anatomy_lookups": 1
+      }
+    },
+    {
+      "id": "session-2026-05-12-0936",
+      "started": "2026-05-12T07:36:59.344Z",
+      "ended": "2026-05-12T07:44:06.534Z",
+      "reads": [
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/chainlinkProvider/signedPrices.ts",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/chainlinkProvider/chainlinkReportFetcher.ts",
+          "tokens_estimated": 512,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        }
+      ],
+      "writes": [
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 23,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 129,
+          "action": "edit"
+        }
+      ],
+      "totals": {
+        "input_tokens_estimated": 512,
+        "output_tokens_estimated": 152,
+        "reads_count": 2,
+        "writes_count": 2,
+        "repeated_reads_blocked": 0,
+        "anatomy_lookups": 1
+      }
+    },
+    {
+      "id": "session-2026-05-12-0936",
+      "started": "2026-05-12T07:36:59.344Z",
+      "ended": "2026-05-12T07:45:34.864Z",
+      "reads": [
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/chainlinkProvider/signedPrices.ts",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/chainlinkProvider/chainlinkReportFetcher.ts",
+          "tokens_estimated": 512,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        }
+      ],
+      "writes": [
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 23,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 129,
+          "action": "edit"
+        }
+      ],
+      "totals": {
+        "input_tokens_estimated": 512,
+        "output_tokens_estimated": 152,
+        "reads_count": 2,
+        "writes_count": 2,
+        "repeated_reads_blocked": 0,
+        "anatomy_lookups": 1
+      }
+    },
+    {
+      "id": "session-2026-05-12-0936",
+      "started": "2026-05-12T07:36:59.344Z",
+      "ended": "2026-05-12T07:50:21.900Z",
+      "reads": [
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/chainlinkProvider/signedPrices.ts",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/chainlinkProvider/chainlinkReportFetcher.ts",
+          "tokens_estimated": 512,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        }
+      ],
+      "writes": [
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 23,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 129,
+          "action": "edit"
+        }
+      ],
+      "totals": {
+        "input_tokens_estimated": 512,
+        "output_tokens_estimated": 152,
+        "reads_count": 2,
+        "writes_count": 2,
+        "repeated_reads_blocked": 0,
+        "anatomy_lookups": 1
+      }
+    },
+    {
+      "id": "session-2026-05-12-0936",
+      "started": "2026-05-12T07:36:59.344Z",
+      "ended": "2026-05-12T07:53:19.175Z",
+      "reads": [
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/chainlinkProvider/signedPrices.ts",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/chainlinkProvider/chainlinkReportFetcher.ts",
+          "tokens_estimated": 512,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        }
+      ],
+      "writes": [
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 23,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 129,
+          "action": "edit"
+        }
+      ],
+      "totals": {
+        "input_tokens_estimated": 512,
+        "output_tokens_estimated": 152,
+        "reads_count": 2,
+        "writes_count": 2,
+        "repeated_reads_blocked": 0,
+        "anatomy_lookups": 1
+      }
+    },
+    {
+      "id": "session-2026-05-12-0936",
+      "started": "2026-05-12T07:36:59.344Z",
+      "ended": "2026-05-12T07:56:14.970Z",
+      "reads": [
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/chainlinkProvider/signedPrices.ts",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/chainlinkProvider/chainlinkReportFetcher.ts",
+          "tokens_estimated": 512,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        }
+      ],
+      "writes": [
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 23,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 129,
+          "action": "edit"
+        }
+      ],
+      "totals": {
+        "input_tokens_estimated": 512,
+        "output_tokens_estimated": 152,
+        "reads_count": 2,
+        "writes_count": 2,
+        "repeated_reads_blocked": 0,
+        "anatomy_lookups": 1
+      }
+    },
+    {
+      "id": "session-2026-05-12-0936",
+      "started": "2026-05-12T07:36:59.344Z",
+      "ended": "2026-05-12T07:58:08.696Z",
+      "reads": [
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/chainlinkProvider/signedPrices.ts",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/chainlinkProvider/chainlinkReportFetcher.ts",
+          "tokens_estimated": 512,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        }
+      ],
+      "writes": [
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 23,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 129,
+          "action": "edit"
+        }
+      ],
+      "totals": {
+        "input_tokens_estimated": 512,
+        "output_tokens_estimated": 152,
+        "reads_count": 2,
+        "writes_count": 2,
+        "repeated_reads_blocked": 0,
+        "anatomy_lookups": 1
+      }
+    },
+    {
+      "id": "session-2026-05-12-0936",
+      "started": "2026-05-12T07:36:59.344Z",
+      "ended": "2026-05-12T07:59:53.595Z",
+      "reads": [
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/chainlinkProvider/signedPrices.ts",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/chainlinkProvider/chainlinkReportFetcher.ts",
+          "tokens_estimated": 512,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        }
+      ],
+      "writes": [
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 23,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 129,
+          "action": "edit"
+        }
+      ],
+      "totals": {
+        "input_tokens_estimated": 512,
+        "output_tokens_estimated": 152,
+        "reads_count": 2,
+        "writes_count": 2,
+        "repeated_reads_blocked": 0,
+        "anatomy_lookups": 1
+      }
+    },
+    {
+      "id": "session-2026-05-12-0936",
+      "started": "2026-05-12T07:36:59.344Z",
+      "ended": "2026-05-12T08:01:43.285Z",
+      "reads": [
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/chainlinkProvider/signedPrices.ts",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/chainlinkProvider/chainlinkReportFetcher.ts",
+          "tokens_estimated": 512,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        }
+      ],
+      "writes": [
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 23,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 129,
+          "action": "edit"
+        }
+      ],
+      "totals": {
+        "input_tokens_estimated": 512,
+        "output_tokens_estimated": 152,
+        "reads_count": 2,
+        "writes_count": 2,
+        "repeated_reads_blocked": 0,
+        "anatomy_lookups": 1
+      }
+    },
+    {
+      "id": "session-2026-05-12-0936",
+      "started": "2026-05-12T07:36:59.344Z",
+      "ended": "2026-05-12T08:02:06.413Z",
+      "reads": [
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/chainlinkProvider/signedPrices.ts",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/chainlinkProvider/chainlinkReportFetcher.ts",
+          "tokens_estimated": 512,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        }
+      ],
+      "writes": [
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 23,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 129,
+          "action": "edit"
+        }
+      ],
+      "totals": {
+        "input_tokens_estimated": 512,
+        "output_tokens_estimated": 152,
+        "reads_count": 2,
+        "writes_count": 2,
+        "repeated_reads_blocked": 0,
+        "anatomy_lookups": 1
+      }
+    },
+    {
+      "id": "session-2026-05-12-0936",
+      "started": "2026-05-12T07:36:59.344Z",
+      "ended": "2026-05-12T08:04:01.751Z",
+      "reads": [
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/chainlinkProvider/signedPrices.ts",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/chainlinkProvider/chainlinkReportFetcher.ts",
+          "tokens_estimated": 512,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        }
+      ],
+      "writes": [
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 23,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 129,
+          "action": "edit"
+        }
+      ],
+      "totals": {
+        "input_tokens_estimated": 512,
+        "output_tokens_estimated": 152,
+        "reads_count": 2,
+        "writes_count": 2,
+        "repeated_reads_blocked": 0,
+        "anatomy_lookups": 1
+      }
+    },
+    {
+      "id": "session-2026-05-12-0936",
+      "started": "2026-05-12T07:36:59.344Z",
+      "ended": "2026-05-12T08:05:47.220Z",
+      "reads": [
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/chainlinkProvider/signedPrices.ts",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/chainlinkProvider/chainlinkReportFetcher.ts",
+          "tokens_estimated": 512,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 2682,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        }
+      ],
+      "writes": [
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 23,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 129,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 167,
+          "action": "edit"
+        }
+      ],
+      "totals": {
+        "input_tokens_estimated": 3194,
+        "output_tokens_estimated": 319,
+        "reads_count": 3,
+        "writes_count": 3,
+        "repeated_reads_blocked": 0,
+        "anatomy_lookups": 2
+      }
+    },
+    {
+      "id": "session-2026-05-12-0936",
+      "started": "2026-05-12T07:36:59.344Z",
+      "ended": "2026-05-12T08:07:05.509Z",
+      "reads": [
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/chainlinkProvider/signedPrices.ts",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/chainlinkProvider/chainlinkReportFetcher.ts",
+          "tokens_estimated": 512,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 2682,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        }
+      ],
+      "writes": [
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 23,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 129,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 167,
+          "action": "edit"
+        }
+      ],
+      "totals": {
+        "input_tokens_estimated": 3194,
+        "output_tokens_estimated": 319,
+        "reads_count": 3,
+        "writes_count": 3,
+        "repeated_reads_blocked": 0,
+        "anatomy_lookups": 2
+      }
+    },
+    {
+      "id": "session-2026-05-12-0936",
+      "started": "2026-05-12T07:36:59.344Z",
+      "ended": "2026-05-12T08:11:44.021Z",
+      "reads": [
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/chainlinkProvider/signedPrices.ts",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/chainlinkProvider/chainlinkReportFetcher.ts",
+          "tokens_estimated": 512,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 2682,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        }
+      ],
+      "writes": [
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 23,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 129,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 167,
+          "action": "edit"
+        }
+      ],
+      "totals": {
+        "input_tokens_estimated": 3194,
+        "output_tokens_estimated": 319,
+        "reads_count": 3,
+        "writes_count": 3,
+        "repeated_reads_blocked": 0,
+        "anatomy_lookups": 2
+      }
+    },
+    {
+      "id": "session-2026-05-12-0936",
+      "started": "2026-05-12T07:36:59.344Z",
+      "ended": "2026-05-12T08:16:53.593Z",
+      "reads": [
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/chainlinkProvider/signedPrices.ts",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/chainlinkProvider/chainlinkReportFetcher.ts",
+          "tokens_estimated": 512,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 2682,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        }
+      ],
+      "writes": [
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 23,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 129,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 167,
+          "action": "edit"
+        }
+      ],
+      "totals": {
+        "input_tokens_estimated": 3194,
+        "output_tokens_estimated": 319,
+        "reads_count": 3,
+        "writes_count": 3,
+        "repeated_reads_blocked": 0,
+        "anatomy_lookups": 2
+      }
+    },
+    {
+      "id": "session-2026-05-12-0936",
+      "started": "2026-05-12T07:36:59.344Z",
+      "ended": "2026-05-12T08:17:52.161Z",
+      "reads": [
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/chainlinkProvider/signedPrices.ts",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/chainlinkProvider/chainlinkReportFetcher.ts",
+          "tokens_estimated": 512,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 2668,
+          "was_repeated": true,
+          "anatomy_had_description": false
+        }
+      ],
+      "writes": [
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 23,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 129,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 167,
+          "action": "edit"
+        }
+      ],
+      "totals": {
+        "input_tokens_estimated": 3180,
+        "output_tokens_estimated": 319,
+        "reads_count": 3,
+        "writes_count": 3,
+        "repeated_reads_blocked": 2,
+        "anatomy_lookups": 2
+      }
+    },
+    {
+      "id": "session-2026-05-12-0936",
+      "started": "2026-05-12T07:36:59.344Z",
+      "ended": "2026-05-12T08:23:37.518Z",
+      "reads": [
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/chainlinkProvider/signedPrices.ts",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/chainlinkProvider/chainlinkReportFetcher.ts",
+          "tokens_estimated": 512,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 2668,
+          "was_repeated": true,
+          "anatomy_had_description": false
+        }
+      ],
+      "writes": [
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 23,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 129,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 167,
+          "action": "edit"
+        }
+      ],
+      "totals": {
+        "input_tokens_estimated": 3180,
+        "output_tokens_estimated": 319,
+        "reads_count": 3,
+        "writes_count": 3,
+        "repeated_reads_blocked": 2,
+        "anatomy_lookups": 2
+      }
+    },
+    {
+      "id": "session-2026-05-12-0936",
+      "started": "2026-05-12T07:36:59.344Z",
+      "ended": "2026-05-12T08:31:46.373Z",
+      "reads": [
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/chainlinkProvider/signedPrices.ts",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/chainlinkProvider/chainlinkReportFetcher.ts",
+          "tokens_estimated": 512,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 2668,
+          "was_repeated": true,
+          "anatomy_had_description": false
+        }
+      ],
+      "writes": [
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 23,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 129,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 167,
+          "action": "edit"
+        }
+      ],
+      "totals": {
+        "input_tokens_estimated": 3180,
+        "output_tokens_estimated": 319,
+        "reads_count": 3,
+        "writes_count": 3,
+        "repeated_reads_blocked": 2,
+        "anatomy_lookups": 2
+      }
+    },
+    {
+      "id": "session-2026-05-12-0936",
+      "started": "2026-05-12T07:36:59.344Z",
+      "ended": "2026-05-12T08:34:50.157Z",
+      "reads": [
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/chainlinkProvider/signedPrices.ts",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/chainlinkProvider/chainlinkReportFetcher.ts",
+          "tokens_estimated": 512,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 2668,
+          "was_repeated": true,
+          "anatomy_had_description": false
+        }
+      ],
+      "writes": [
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 23,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 129,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 167,
+          "action": "edit"
+        }
+      ],
+      "totals": {
+        "input_tokens_estimated": 3180,
+        "output_tokens_estimated": 319,
+        "reads_count": 3,
+        "writes_count": 3,
+        "repeated_reads_blocked": 2,
+        "anatomy_lookups": 2
+      }
+    },
+    {
+      "id": "session-2026-05-12-0936",
+      "started": "2026-05-12T07:36:59.344Z",
+      "ended": "2026-05-12T08:38:24.262Z",
+      "reads": [
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/chainlinkProvider/signedPrices.ts",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/chainlinkProvider/chainlinkReportFetcher.ts",
+          "tokens_estimated": 512,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 2668,
+          "was_repeated": true,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/closePositionOrder.ts",
+          "tokens_estimated": 1580,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/contracts/liquidation/LiquidationUtils.sol",
+          "tokens_estimated": 1122,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/contracts/position/PositionUtils.sol",
+          "tokens_estimated": 9145,
+          "was_repeated": true,
+          "anatomy_had_description": false
+        }
+      ],
+      "writes": [
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 23,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 129,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 167,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/printPositionInfo.ts",
+          "tokens_estimated": 2299,
+          "action": "create"
+        }
+      ],
+      "totals": {
+        "input_tokens_estimated": 15027,
+        "output_tokens_estimated": 2618,
+        "reads_count": 6,
+        "writes_count": 4,
+        "repeated_reads_blocked": 3,
+        "anatomy_lookups": 5
+      }
+    },
+    {
+      "id": "session-2026-05-12-0936",
+      "started": "2026-05-12T07:36:59.344Z",
+      "ended": "2026-05-12T08:43:23.789Z",
+      "reads": [
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/chainlinkProvider/signedPrices.ts",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/chainlinkProvider/chainlinkReportFetcher.ts",
+          "tokens_estimated": 512,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 2668,
+          "was_repeated": true,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/closePositionOrder.ts",
+          "tokens_estimated": 1580,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/contracts/liquidation/LiquidationUtils.sol",
+          "tokens_estimated": 1122,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/contracts/position/PositionUtils.sol",
+          "tokens_estimated": 9145,
+          "was_repeated": true,
+          "anatomy_had_description": false
+        }
+      ],
+      "writes": [
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 23,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 129,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 167,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/printPositionInfo.ts",
+          "tokens_estimated": 2299,
+          "action": "create"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/printPositionInfo.ts",
+          "tokens_estimated": 43,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/printPositionInfo.ts",
+          "tokens_estimated": 69,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/printPositionInfo.ts",
+          "tokens_estimated": 24,
+          "action": "edit"
+        }
+      ],
+      "totals": {
+        "input_tokens_estimated": 15027,
+        "output_tokens_estimated": 2754,
+        "reads_count": 6,
+        "writes_count": 7,
+        "repeated_reads_blocked": 3,
+        "anatomy_lookups": 5
+      }
+    },
+    {
+      "id": "session-2026-05-12-0936",
+      "started": "2026-05-12T07:36:59.344Z",
+      "ended": "2026-05-12T08:44:24.594Z",
+      "reads": [
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/chainlinkProvider/signedPrices.ts",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/chainlinkProvider/chainlinkReportFetcher.ts",
+          "tokens_estimated": 512,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 2668,
+          "was_repeated": true,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/closePositionOrder.ts",
+          "tokens_estimated": 1580,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/contracts/liquidation/LiquidationUtils.sol",
+          "tokens_estimated": 1122,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/contracts/position/PositionUtils.sol",
+          "tokens_estimated": 9145,
+          "was_repeated": true,
+          "anatomy_had_description": false
+        }
+      ],
+      "writes": [
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 23,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 129,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 167,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/printPositionInfo.ts",
+          "tokens_estimated": 2299,
+          "action": "create"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/printPositionInfo.ts",
+          "tokens_estimated": 43,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/printPositionInfo.ts",
+          "tokens_estimated": 69,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/printPositionInfo.ts",
+          "tokens_estimated": 24,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/printPositionInfo.ts",
+          "tokens_estimated": 50,
+          "action": "edit"
+        }
+      ],
+      "totals": {
+        "input_tokens_estimated": 15027,
+        "output_tokens_estimated": 2804,
+        "reads_count": 6,
+        "writes_count": 8,
+        "repeated_reads_blocked": 3,
+        "anatomy_lookups": 5
+      }
+    },
+    {
+      "id": "session-2026-05-12-0936",
+      "started": "2026-05-12T07:36:59.344Z",
+      "ended": "2026-05-12T08:45:07.303Z",
+      "reads": [
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/chainlinkProvider/signedPrices.ts",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/chainlinkProvider/chainlinkReportFetcher.ts",
+          "tokens_estimated": 512,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 2668,
+          "was_repeated": true,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/closePositionOrder.ts",
+          "tokens_estimated": 1580,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/contracts/liquidation/LiquidationUtils.sol",
+          "tokens_estimated": 1122,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/contracts/position/PositionUtils.sol",
+          "tokens_estimated": 9145,
+          "was_repeated": true,
+          "anatomy_had_description": false
+        }
+      ],
+      "writes": [
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 23,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 129,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 167,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/printPositionInfo.ts",
+          "tokens_estimated": 2299,
+          "action": "create"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/printPositionInfo.ts",
+          "tokens_estimated": 43,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/printPositionInfo.ts",
+          "tokens_estimated": 69,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/printPositionInfo.ts",
+          "tokens_estimated": 24,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/printPositionInfo.ts",
+          "tokens_estimated": 50,
+          "action": "edit"
+        }
+      ],
+      "totals": {
+        "input_tokens_estimated": 15027,
+        "output_tokens_estimated": 2804,
+        "reads_count": 6,
+        "writes_count": 8,
+        "repeated_reads_blocked": 3,
+        "anatomy_lookups": 5
+      }
+    },
+    {
+      "id": "session-2026-05-12-0936",
+      "started": "2026-05-12T07:36:59.344Z",
+      "ended": "2026-05-12T08:46:09.649Z",
+      "reads": [
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/chainlinkProvider/signedPrices.ts",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/chainlinkProvider/chainlinkReportFetcher.ts",
+          "tokens_estimated": 512,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 2668,
+          "was_repeated": true,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/closePositionOrder.ts",
+          "tokens_estimated": 1580,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/contracts/liquidation/LiquidationUtils.sol",
+          "tokens_estimated": 1122,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/contracts/position/PositionUtils.sol",
+          "tokens_estimated": 9145,
+          "was_repeated": true,
+          "anatomy_had_description": false
+        }
+      ],
+      "writes": [
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 23,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 129,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 167,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/printPositionInfo.ts",
+          "tokens_estimated": 2299,
+          "action": "create"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/printPositionInfo.ts",
+          "tokens_estimated": 43,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/printPositionInfo.ts",
+          "tokens_estimated": 69,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/printPositionInfo.ts",
+          "tokens_estimated": 24,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/printPositionInfo.ts",
+          "tokens_estimated": 50,
+          "action": "edit"
+        }
+      ],
+      "totals": {
+        "input_tokens_estimated": 15027,
+        "output_tokens_estimated": 2804,
+        "reads_count": 6,
+        "writes_count": 8,
+        "repeated_reads_blocked": 3,
+        "anatomy_lookups": 5
+      }
+    },
+    {
+      "id": "session-2026-05-12-0936",
+      "started": "2026-05-12T07:36:59.344Z",
+      "ended": "2026-05-12T08:49:46.613Z",
+      "reads": [
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/chainlinkProvider/signedPrices.ts",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/chainlinkProvider/chainlinkReportFetcher.ts",
+          "tokens_estimated": 512,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 2668,
+          "was_repeated": true,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/closePositionOrder.ts",
+          "tokens_estimated": 1580,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/contracts/liquidation/LiquidationUtils.sol",
+          "tokens_estimated": 1122,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/contracts/position/PositionUtils.sol",
+          "tokens_estimated": 9145,
+          "was_repeated": true,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/config/markets.ts",
+          "tokens_estimated": 62460,
+          "was_repeated": true,
+          "anatomy_had_description": false
+        }
+      ],
+      "writes": [
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 23,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 129,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 167,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/printPositionInfo.ts",
+          "tokens_estimated": 2299,
+          "action": "create"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/printPositionInfo.ts",
+          "tokens_estimated": 43,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/printPositionInfo.ts",
+          "tokens_estimated": 69,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/printPositionInfo.ts",
+          "tokens_estimated": 24,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/printPositionInfo.ts",
+          "tokens_estimated": 50,
+          "action": "edit"
+        }
+      ],
+      "totals": {
+        "input_tokens_estimated": 77487,
+        "output_tokens_estimated": 2804,
+        "reads_count": 7,
+        "writes_count": 8,
+        "repeated_reads_blocked": 7,
+        "anatomy_lookups": 6
+      }
+    },
+    {
+      "id": "session-2026-05-12-0936",
+      "started": "2026-05-12T07:36:59.344Z",
+      "ended": "2026-05-12T08:55:00.598Z",
+      "reads": [
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/chainlinkProvider/signedPrices.ts",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/chainlinkProvider/chainlinkReportFetcher.ts",
+          "tokens_estimated": 512,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 2668,
+          "was_repeated": true,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/closePositionOrder.ts",
+          "tokens_estimated": 1580,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/contracts/liquidation/LiquidationUtils.sol",
+          "tokens_estimated": 1122,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/contracts/position/PositionUtils.sol",
+          "tokens_estimated": 9145,
+          "was_repeated": true,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/config/markets.ts",
+          "tokens_estimated": 62460,
+          "was_repeated": true,
+          "anatomy_had_description": false
+        }
+      ],
+      "writes": [
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 23,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 129,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 167,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/printPositionInfo.ts",
+          "tokens_estimated": 2299,
+          "action": "create"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/printPositionInfo.ts",
+          "tokens_estimated": 43,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/printPositionInfo.ts",
+          "tokens_estimated": 69,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/printPositionInfo.ts",
+          "tokens_estimated": 24,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/printPositionInfo.ts",
+          "tokens_estimated": 50,
+          "action": "edit"
+        }
+      ],
+      "totals": {
+        "input_tokens_estimated": 77487,
+        "output_tokens_estimated": 2804,
+        "reads_count": 7,
+        "writes_count": 8,
+        "repeated_reads_blocked": 7,
+        "anatomy_lookups": 6
+      }
+    },
+    {
+      "id": "session-2026-05-12-0936",
+      "started": "2026-05-12T07:36:59.344Z",
+      "ended": "2026-05-12T14:08:03.917Z",
+      "reads": [
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/chainlinkProvider/signedPrices.ts",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/chainlinkProvider/chainlinkReportFetcher.ts",
+          "tokens_estimated": 512,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 2668,
+          "was_repeated": true,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/closePositionOrder.ts",
+          "tokens_estimated": 1580,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/contracts/liquidation/LiquidationUtils.sol",
+          "tokens_estimated": 1122,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/contracts/position/PositionUtils.sol",
+          "tokens_estimated": 9145,
+          "was_repeated": true,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/config/markets.ts",
+          "tokens_estimated": 62460,
+          "was_repeated": true,
+          "anatomy_had_description": false
+        }
+      ],
+      "writes": [
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 23,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 129,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 167,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/printPositionInfo.ts",
+          "tokens_estimated": 2299,
+          "action": "create"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/printPositionInfo.ts",
+          "tokens_estimated": 43,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/printPositionInfo.ts",
+          "tokens_estimated": 69,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/printPositionInfo.ts",
+          "tokens_estimated": 24,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/printPositionInfo.ts",
+          "tokens_estimated": 50,
+          "action": "edit"
+        }
+      ],
+      "totals": {
+        "input_tokens_estimated": 77487,
+        "output_tokens_estimated": 2804,
+        "reads_count": 7,
+        "writes_count": 8,
+        "repeated_reads_blocked": 8,
+        "anatomy_lookups": 6
+      }
+    },
+    {
+      "id": "session-2026-05-12-0936",
+      "started": "2026-05-12T07:36:59.344Z",
+      "ended": "2026-05-12T14:18:51.245Z",
+      "reads": [
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/chainlinkProvider/signedPrices.ts",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/chainlinkProvider/chainlinkReportFetcher.ts",
+          "tokens_estimated": 512,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 2668,
+          "was_repeated": true,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/closePositionOrder.ts",
+          "tokens_estimated": 1580,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/contracts/liquidation/LiquidationUtils.sol",
+          "tokens_estimated": 1122,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/contracts/position/PositionUtils.sol",
+          "tokens_estimated": 9145,
+          "was_repeated": true,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/config/markets.ts",
+          "tokens_estimated": 62460,
+          "was_repeated": true,
+          "anatomy_had_description": false
+        }
+      ],
+      "writes": [
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 23,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 129,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 167,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/printPositionInfo.ts",
+          "tokens_estimated": 2299,
+          "action": "create"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/printPositionInfo.ts",
+          "tokens_estimated": 43,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/printPositionInfo.ts",
+          "tokens_estimated": 69,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/printPositionInfo.ts",
+          "tokens_estimated": 24,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/printPositionInfo.ts",
+          "tokens_estimated": 50,
+          "action": "edit"
+        }
+      ],
+      "totals": {
+        "input_tokens_estimated": 77487,
+        "output_tokens_estimated": 2804,
+        "reads_count": 7,
+        "writes_count": 8,
+        "repeated_reads_blocked": 8,
+        "anatomy_lookups": 6
+      }
+    },
+    {
+      "id": "session-2026-05-12-0936",
+      "started": "2026-05-12T07:36:59.344Z",
+      "ended": "2026-05-12T14:20:05.933Z",
+      "reads": [
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/chainlinkProvider/signedPrices.ts",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/chainlinkProvider/chainlinkReportFetcher.ts",
+          "tokens_estimated": 512,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 2668,
+          "was_repeated": true,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/closePositionOrder.ts",
+          "tokens_estimated": 1580,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/contracts/liquidation/LiquidationUtils.sol",
+          "tokens_estimated": 1122,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/contracts/position/PositionUtils.sol",
+          "tokens_estimated": 9145,
+          "was_repeated": true,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/config/markets.ts",
+          "tokens_estimated": 62460,
+          "was_repeated": true,
+          "anatomy_had_description": false
+        }
+      ],
+      "writes": [
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 23,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 129,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 167,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/printPositionInfo.ts",
+          "tokens_estimated": 2299,
+          "action": "create"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/printPositionInfo.ts",
+          "tokens_estimated": 43,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/printPositionInfo.ts",
+          "tokens_estimated": 69,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/printPositionInfo.ts",
+          "tokens_estimated": 24,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/printPositionInfo.ts",
+          "tokens_estimated": 50,
+          "action": "edit"
+        }
+      ],
+      "totals": {
+        "input_tokens_estimated": 77487,
+        "output_tokens_estimated": 2804,
+        "reads_count": 7,
+        "writes_count": 8,
+        "repeated_reads_blocked": 8,
+        "anatomy_lookups": 6
+      }
+    },
+    {
+      "id": "session-2026-05-12-0936",
+      "started": "2026-05-12T07:36:59.344Z",
+      "ended": "2026-05-12T14:40:09.881Z",
+      "reads": [
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/chainlinkProvider/signedPrices.ts",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/chainlinkProvider/chainlinkReportFetcher.ts",
+          "tokens_estimated": 512,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 2668,
+          "was_repeated": true,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/closePositionOrder.ts",
+          "tokens_estimated": 1580,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/contracts/liquidation/LiquidationUtils.sol",
+          "tokens_estimated": 1122,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/contracts/position/PositionUtils.sol",
+          "tokens_estimated": 9145,
+          "was_repeated": true,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/config/markets.ts",
+          "tokens_estimated": 62460,
+          "was_repeated": true,
+          "anatomy_had_description": false
+        }
+      ],
+      "writes": [
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 23,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 129,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 167,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/printPositionInfo.ts",
+          "tokens_estimated": 2299,
+          "action": "create"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/printPositionInfo.ts",
+          "tokens_estimated": 43,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/printPositionInfo.ts",
+          "tokens_estimated": 69,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/printPositionInfo.ts",
+          "tokens_estimated": 24,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/printPositionInfo.ts",
+          "tokens_estimated": 50,
+          "action": "edit"
+        }
+      ],
+      "totals": {
+        "input_tokens_estimated": 77487,
+        "output_tokens_estimated": 2804,
+        "reads_count": 7,
+        "writes_count": 8,
+        "repeated_reads_blocked": 8,
+        "anatomy_lookups": 6
+      }
+    },
+    {
+      "id": "session-2026-05-12-0936",
+      "started": "2026-05-12T07:36:59.344Z",
+      "ended": "2026-05-12T14:47:39.172Z",
+      "reads": [
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/chainlinkProvider/signedPrices.ts",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/chainlinkProvider/chainlinkReportFetcher.ts",
+          "tokens_estimated": 512,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 2668,
+          "was_repeated": true,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/closePositionOrder.ts",
+          "tokens_estimated": 1580,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/contracts/liquidation/LiquidationUtils.sol",
+          "tokens_estimated": 1122,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/contracts/position/PositionUtils.sol",
+          "tokens_estimated": 9145,
+          "was_repeated": true,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/config/markets.ts",
+          "tokens_estimated": 62460,
+          "was_repeated": true,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/contracts/market/MarketUtils.sol",
+          "tokens_estimated": 37575,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        }
+      ],
+      "writes": [
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 23,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 129,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 167,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/printPositionInfo.ts",
+          "tokens_estimated": 2299,
+          "action": "create"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/printPositionInfo.ts",
+          "tokens_estimated": 43,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/printPositionInfo.ts",
+          "tokens_estimated": 69,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/printPositionInfo.ts",
+          "tokens_estimated": 24,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/printPositionInfo.ts",
+          "tokens_estimated": 50,
+          "action": "edit"
+        }
+      ],
+      "totals": {
+        "input_tokens_estimated": 115062,
+        "output_tokens_estimated": 2804,
+        "reads_count": 8,
+        "writes_count": 8,
+        "repeated_reads_blocked": 8,
+        "anatomy_lookups": 7
+      }
+    },
+    {
+      "id": "session-2026-05-12-0936",
+      "started": "2026-05-12T07:36:59.344Z",
+      "ended": "2026-05-12T15:46:42.779Z",
+      "reads": [
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/chainlinkProvider/signedPrices.ts",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/chainlinkProvider/chainlinkReportFetcher.ts",
+          "tokens_estimated": 512,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 2668,
+          "was_repeated": true,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/closePositionOrder.ts",
+          "tokens_estimated": 1580,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/contracts/liquidation/LiquidationUtils.sol",
+          "tokens_estimated": 1122,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/contracts/position/PositionUtils.sol",
+          "tokens_estimated": 9145,
+          "was_repeated": true,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/config/markets.ts",
+          "tokens_estimated": 62460,
+          "was_repeated": true,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/contracts/market/MarketUtils.sol",
+          "tokens_estimated": 37575,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        }
+      ],
+      "writes": [
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 23,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 129,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 167,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/printPositionInfo.ts",
+          "tokens_estimated": 2299,
+          "action": "create"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/printPositionInfo.ts",
+          "tokens_estimated": 43,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/printPositionInfo.ts",
+          "tokens_estimated": 69,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/printPositionInfo.ts",
+          "tokens_estimated": 24,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/printPositionInfo.ts",
+          "tokens_estimated": 50,
+          "action": "edit"
+        }
+      ],
+      "totals": {
+        "input_tokens_estimated": 115062,
+        "output_tokens_estimated": 2804,
+        "reads_count": 8,
+        "writes_count": 8,
+        "repeated_reads_blocked": 8,
+        "anatomy_lookups": 7
+      }
+    },
+    {
+      "id": "session-2026-05-12-0936",
+      "started": "2026-05-12T07:36:59.344Z",
+      "ended": "2026-05-13T07:30:32.740Z",
+      "reads": [
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/chainlinkProvider/signedPrices.ts",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/chainlinkProvider/chainlinkReportFetcher.ts",
+          "tokens_estimated": 512,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 2668,
+          "was_repeated": true,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/closePositionOrder.ts",
+          "tokens_estimated": 1580,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/contracts/liquidation/LiquidationUtils.sol",
+          "tokens_estimated": 1122,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/contracts/position/PositionUtils.sol",
+          "tokens_estimated": 9145,
+          "was_repeated": true,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/config/markets.ts",
+          "tokens_estimated": 62460,
+          "was_repeated": true,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/contracts/market/MarketUtils.sol",
+          "tokens_estimated": 37575,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        }
+      ],
+      "writes": [
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 23,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 129,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
+          "tokens_estimated": 167,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/printPositionInfo.ts",
+          "tokens_estimated": 2299,
+          "action": "create"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/printPositionInfo.ts",
+          "tokens_estimated": 43,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/printPositionInfo.ts",
+          "tokens_estimated": 69,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/printPositionInfo.ts",
+          "tokens_estimated": 24,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/printPositionInfo.ts",
+          "tokens_estimated": 50,
+          "action": "edit"
+        }
+      ],
+      "totals": {
+        "input_tokens_estimated": 115062,
+        "output_tokens_estimated": 2804,
+        "reads_count": 8,
+        "writes_count": 8,
+        "repeated_reads_blocked": 8,
+        "anatomy_lookups": 7
       }
     }
   ],
