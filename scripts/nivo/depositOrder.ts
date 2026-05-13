@@ -16,8 +16,8 @@ const { ethers } = hre;
  *
  * FX_CURRENCY=BRL npx hardhat run scripts/nivo/depositOrder.ts --network baseSepolia
  
- * By default LG_TOKEN_AMOUNT and SH_TOKEN_AMOUNT are set to 10 USDC
- * FX_CURRENCY=BRL LG_TOKEN_AMOUNT=5 SH_TOKEN_AMOUNT=5 npx hardhat run scripts/nivo/depositOrder.ts --network baseSepolia
+ * By default LG_TOKEN_AMOUNT and ST_TOKEN_AMOUNT are set to 10 USDC
+ * FX_CURRENCY=BRL LG_TOKEN_AMOUNT=5 ST_TOKEN_AMOUNT=5 npx hardhat run scripts/nivo/depositOrder.ts --network baseSepolia
  * 
  * Log deposits: npx hardhat run scripts/printDeposits.ts --network baseSepolia
  */
