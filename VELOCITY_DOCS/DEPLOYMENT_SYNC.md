@@ -12,12 +12,10 @@ Each chain has a `deployments/<chain>/.version` file containing a semver string 
 
 ## Prerequisites
 
-Supabase credentials are required for live runs (not dry-runs). Provide them via a `.env` file in the repo root or as exported shell variables:
+Live runs need `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY` in the environment. Locally these come from **Doppler (`-c stg`)** — operators wrap the npm invocation with `doppler run`. In CI they come from GitHub Actions secrets. No `.env` file is required.
 
 ```sh
-# .env or shell export
-SUPABASE_URL=https://<project>.supabase.co
-SUPABASE_SERVICE_ROLE_KEY=<service-role-key>
+doppler login   # once per machine
 ```
 
 ## Operator workflow
@@ -25,20 +23,33 @@ SUPABASE_SERVICE_ROLE_KEY=<service-role-key>
 ```
 1. Deploy contracts     → deployments/<chain>/ updated locally
 2. Dry-run              → preview next version and contracts, no writes
-3. Live local run       → bumps .version, upserts to Supabase
-4. Commit + push        → CI fires on deployments/** change,
-                          upserts to prod Supabase (idempotent, no re-bump)
+3. Live local run       → wrap with `doppler run -p nivo -c stg --`,
+                          bumps .version, upserts to STAGING Supabase
+4. Commit + push        → deploy-sync.yml fires on deployments/** change,
+                          upserts to PROD Supabase via GitHub Actions
+                          secrets (idempotent, no re-bump)
 ```
+
+**Two Supabase targets, same schema.** Staging and production both expose `contract_deployments` + `contract_deployment_pointers`. The `upsert-deployments` npm script is intentionally a bare `ts-node` invocation. Credentials are supplied externally to the script:
+
+- **Locally:** `doppler run -p nivo -c stg -- pnpm run upsert-deployments --chain <folder> --chain-label <label>` — Doppler injects the staging Supabase creds.
+- **In CI:** `.github/workflows/deploy-sync.yml` sets `SUPABASE_URL`/`SUPABASE_SERVICE_ROLE_KEY` as step env from GitHub Actions secrets (prod creds), then calls `pnpm run upsert-deployments`.
+
+Operators never write to prod from a laptop — prod writes only happen via the workflow. **Do not wrap this npm script with `doppler run` inside `package.json` — `doppler` is not installed on the GitHub Actions runner and CI will break.** The `doppler run` wrapper belongs on the operator's command line, not in the script definition.
 
 ## Usage
 
+All local runs must be prefixed with `doppler run -p nivo -c stg --` so the staging Supabase credentials are injected. The CLI flags after `pnpm run upsert-deployments` are:
+
 ```sh
-pnpm run upsert-deployments \
+doppler run -p nivo -c stg -- pnpm run upsert-deployments \
   --chain <folder>       \  # deployment folder under deployments/ (e.g. baseSepolia, base)
   --chain-label <label>     # DB chain identifier (e.g. base-sepolia, base-mainnet)
 ```
 
 ### Dry-run (no credentials needed, no writes)
+
+Doppler is not required for a dry-run — the script exits before touching Supabase:
 
 ```sh
 pnpm run upsert-deployments --chain baseSepolia --chain-label base-sepolia --dry-run
@@ -49,17 +60,17 @@ Shows the next version and all contracts that would be upserted without touching
 ### Local, pre-commit run — patch bump (default)
 
 ```sh
-pnpm run upsert-deployments --chain baseSepolia --chain-label base-sepolia
+doppler run -p nivo -c stg -- pnpm run upsert-deployments --chain baseSepolia --chain-label base-sepolia
 # 1.0.1 → 1.0.2
 ```
 
 ### Minor or major bump
 
 ```sh
-pnpm run upsert-deployments --chain baseSepolia --chain-label base-sepolia --bump minor
+doppler run -p nivo -c stg -- pnpm run upsert-deployments --chain baseSepolia --chain-label base-sepolia --bump minor
 # 1.0.1 → 1.1.0
 
-pnpm run upsert-deployments --chain baseSepolia --chain-label base-sepolia --bump major
+doppler run -p nivo -c stg -- pnpm run upsert-deployments --chain baseSepolia --chain-label base-sepolia --bump major
 # 1.0.1 → 2.0.0
 ```
 

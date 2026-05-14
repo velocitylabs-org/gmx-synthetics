@@ -45,8 +45,10 @@ Doppler replaces `.env` files. It injects secrets as process environment variabl
 
 ```bash
 doppler run -- npx hardhat node         # localhost with env injection
-npm run deploy:base:mainnet             # mainnet deploy (doppler prd baked in)
-npm run upsert-deployments              # push deployments to Supabase (doppler prd baked in)
+npm run deploy:base:mainnet             # mainnet deploy (doppler prd baked into the script)
+doppler run -p nivo -c stg -- npm run upsert-deployments --chain baseSepolia --chain-label base-sepolia
+                                        # upsert to staging Supabase. Bare npm script + external doppler wrapper.
+                                        # CI handles prod via .github/workflows/deploy-sync.yml — do NOT bake doppler into this script.
 ```
 
 Fork scripts use hardcoded Hardhat dev keys — those do not need Doppler.
