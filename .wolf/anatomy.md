@@ -41,7 +41,7 @@
 
 ## .github/workflows/
 
-- `deploy-sync.yml` — on main. See VELOCITY_DOCS/DEPLOYMENT_SYNC.md. (~294 tok)
+- `deploy-sync.yml` — on push to main with `deployments/**` changes; calls the bare `upsert-deployments` npm script with `SUPABASE_URL`/`SUPABASE_SERVICE_ROLE_KEY` from GitHub Actions secrets (writes to **prod** Supabase). No Doppler CLI on the runner. See VELOCITY_DOCS/DEPLOYMENT_SYNC.md. (~294 tok)
 - `main.yml` — CI: CI (~203 tok)
 
 ## .husky/
@@ -83,7 +83,7 @@
 
 ## ci/scripts/
 
-- `upsert-deployments.ts` — Reads deployment artifacts, bumps the chain version, and upserts to Supabase. (~1678 tok)
+- `upsert-deployments.ts` — Reads deployment artifacts, bumps the chain version, and upserts to Supabase. The `upsert-deployments` npm script is intentionally **bare** (no `doppler run` wrapper). Operators wrap on the CLI: `doppler run -p nivo -c stg -- pnpm run upsert-deployments ...` (staging). CI (`deploy-sync.yml`) supplies creds via GitHub Actions secrets (prod). NEVER bake `doppler run` into the npm script — the GH runner has no Doppler CLI. (~1678 tok)
 
 ## config/
 

@@ -121,4 +121,4 @@ The `VELOCITY_DOCS/` directory contains the Nivo team's protocol notes — read 
 
 ## OpenWolf
 
-The parent repo uses OpenWolf (`.wolf/` files). The `OPENWOLF.md` and `.claude/rules/openwolf.md` rules apply here too: check `.wolf/anatomy.md` before reading project files, `.wolf/cerebrum.md` before generating code, and log bugs to `.wolf/buglog.json`. Note that `.wolf/` lives in the parent `nivo/` directory, not in this submodule.
+This repo has its **own** `.wolf/` directory (`gmx-synthetics/.wolf/`) — separate from the parent `nivo/.wolf/`. The `OPENWOLF.md` and `.claude/rules/openwolf.md` rules apply: check `gmx-synthetics/.wolf/anatomy.md` before reading project files, `gmx-synthetics/.wolf/cerebrum.md` before generating code, and log bugs to `gmx-synthetics/.wolf/buglog.json`. When working on gmx-synthetics-specific behavior, prefer this submodule's `.wolf/` over the parent's.
