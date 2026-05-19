@@ -51,7 +51,7 @@ async function main() {
   // Use private key from environment variable
   const walletTesterPrivateKey = process.env.WALLET_TESTER_PRIVATE_KEY;
   const lgTokenAmount = process.env.LG_TOKEN_AMOUNT ? Number(process.env.LG_TOKEN_AMOUNT) : 10;
-  const stTokenAmount = process.env.ST_TOKEN_AMOUNT ? Number(process.env.ST_TOKEN_AMOUNT) : 10;
+  const stTokenAmount = Number(process.env.ST_TOKEN_AMOUNT || 10);
 
   const fxCurrency = process.env.FX_CURRENCY;
   if (!walletTesterPrivateKey) {
