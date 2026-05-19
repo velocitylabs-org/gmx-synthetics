@@ -141,7 +141,7 @@ async function main() {
   const positionCollateralAmount = process.env.POSITION_COLLATERAL_AMOUNT
     ? Number(process.env.POSITION_COLLATERAL_AMOUNT)
     : 2;
-  const positionSizeAmount = process.env.POSITION_SIZE_USD ? Number(process.env.POSITION_SIZE_USD) : 10;
+  const positionSizeAmount = Number(process.env.POSITION_SIZE_USD || 10);
 
   const router = await hre.ethers.getContract<Router>("Router");
   const reader = await hre.ethers.getContract<Reader>("Reader");
