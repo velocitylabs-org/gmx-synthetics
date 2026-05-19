@@ -138,9 +138,7 @@ async function main() {
 
   const wallet = new ethers.Wallet(walletTesterPrivateKey, ethers.provider);
 
-  const positionCollateralAmount = process.env.POSITION_COLLATERAL_AMOUNT
-    ? Number(process.env.POSITION_COLLATERAL_AMOUNT)
-    : 2;
+  const positionCollateralAmount = Number(process.env.POSITION_COLLATERAL_AMOUNT || 2);
   const positionSizeAmount = Number(process.env.POSITION_SIZE_USD || 10);
 
   const router = await hre.ethers.getContract<Router>("Router");
