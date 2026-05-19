@@ -54,11 +54,12 @@ async function main() {
   const stTokenAmount = Number(process.env.ST_TOKEN_AMOUNT || 10);
 
   const fxCurrency = process.env.FX_CURRENCY;
-  if (!walletTesterPrivateKey) {
-    throw new Error("WALLET_TESTER_PRIVATE_KEY is not set");
-  }
   if (!fxCurrency || !SUPPORTED_FX_CURRENCIES.includes(fxCurrency)) {
     throw new Error("FX_CURRENCY is not set or not supported");
+  }
+
+  if (!walletTesterPrivateKey) {
+    throw new Error("WALLET_TESTER_PRIVATE_KEY is not set");
   }
   const wallet = new ethers.Wallet(walletTesterPrivateKey, ethers.provider);
 
