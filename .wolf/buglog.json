@@ -16,6 +16,118 @@
       "related_bugs": [],
       "occurrences": 1,
       "last_seen": "2026-05-07T08:40:56.878Z"
+    },
+    {
+      "id": "bug-002",
+      "timestamp": "2026-05-07T14:10:10.972Z",
+      "error_message": "Missing await",
+      "file": "scripts/nivo/depositOrder.ts",
+      "root_cause": "Async call without await — returned Promise instead of value",
+      "fix": "Added await to async call",
+      "tags": [
+        "auto-detected",
+        "async-fix",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-07T14:10:10.972Z"
+    },
+    {
+      "id": "bug-003",
+      "timestamp": "2026-05-08T10:21:55.983Z",
+      "error_message": "Incorrect value in code",
+      "file": "scripts/nivo/depositOrder.ts",
+      "root_cause": "Had \"Collateral token balance %s\"",
+      "fix": "Changed to \"Collateral token balance (USDC): %s\"",
+      "tags": [
+        "auto-detected",
+        "wrong-value",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-08T10:21:55.983Z"
+    },
+    {
+      "id": "bug-004",
+      "timestamp": "2026-05-08T15:32:20.649Z",
+      "error_message": "Missing guard clause",
+      "file": "scripts/nivo/openPositionOrder.ts",
+      "root_cause": "No early return/throw for edge case: !priceData",
+      "fix": "Added guard clause: if (!priceData)",
+      "tags": [
+        "auto-detected",
+        "guard-clause",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 2,
+      "last_seen": "2026-05-08T15:36:40.827Z"
+    },
+    {
+      "id": "bug-005",
+      "timestamp": "2026-05-08T15:42:29.426Z",
+      "error_message": "Significant refactor of ",
+      "file": "scripts/nivo/openPositionOrder.ts",
+      "root_cause": "2 lines replaced/restructured",
+      "fix": "Rewrote 17→33 lines (2 removed)",
+      "tags": [
+        "auto-detected",
+        "refactor",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-08T15:42:29.426Z"
+    },
+    {
+      "id": "bug-006",
+      "timestamp": "2026-05-08T15:42:56.940Z",
+      "error_message": "Null/undefined access in ",
+      "file": "scripts/nivo/openPositionOrder.ts",
+      "root_cause": "Property access on potentially null/undefined value",
+      "fix": "Added null safety (optional chaining or null check)",
+      "tags": [
+        "auto-detected",
+        "null-safety",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-08T15:42:56.940Z"
+    },
+    {
+      "id": "bug-007",
+      "timestamp": "2026-05-12T07:41:57.779Z",
+      "error_message": "Type error",
+      "file": "scripts/nivo/openPositionOrder.ts",
+      "root_cause": "Missing or incorrect type annotation",
+      "fix": "Added type assertion/annotation",
+      "tags": [
+        "auto-detected",
+        "type-fix",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-12T07:41:57.779Z"
+    },
+    {
+      "id": "bug-008",
+      "timestamp": "2026-05-12T08:42:59.311Z",
+      "error_message": "Incorrect value in code",
+      "file": "scripts/nivo/printPositionInfo.ts",
+      "root_cause": "Had \"./utils\"",
+      "fix": "Changed to \"../../utils/hash\"",
+      "tags": [
+        "auto-detected",
+        "wrong-value",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 2,
+      "last_seen": "2026-05-12T08:44:21.814Z"
     }
   ]
 }

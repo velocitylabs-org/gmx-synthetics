@@ -1,6 +1,6 @@
 import hre from "hardhat";
 import { getDepositKeys } from "../../utils/deposit";
-import { fetchSignedPricesBaseSepolia } from "./chainlinkProvider/signedPricesBaseSepolia";
+import { fetchOracleSignedPrices } from "./chainlinkProvider/signedPrices";
 import { hashString } from "../../utils/hash";
 import { withGasBuffer } from "./utils";
 
@@ -82,7 +82,7 @@ async function main() {
     longToken.toLowerCase() === shortToken.toLowerCase()
       ? [indexToken, longToken]
       : [indexToken, longToken, shortToken];
-  const signedPrices = await fetchSignedPricesBaseSepolia(tokens);
+  const signedPrices = await fetchOracleSignedPrices(tokens);
 
   // Get prices for all required tokens (indexToken, longToken, shortToken)
   const providers: string[] = [];

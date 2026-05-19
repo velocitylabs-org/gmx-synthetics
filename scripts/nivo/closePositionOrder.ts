@@ -3,7 +3,7 @@ import hre from "hardhat";
 import { OrderType, DecreasePositionSwapType } from "../../utils/order";
 import { DataStore, ExchangeRouter, Reader } from "../../typechain-types";
 import { BigNumber, BigNumberish } from "ethers";
-import { fetchSignedPricesBaseSepolia } from "./chainlinkProvider/signedPricesBaseSepolia";
+import { fetchOracleSignedPrices } from "./chainlinkProvider/signedPrices";
 import { expandDecimals } from "../../utils/math";
 const { ethers } = hre;
 
@@ -129,7 +129,7 @@ async function main() {
 
   // Acceptable price for market orders (wide slippage to avoid stale-price failures):
   // GBP is an 18-decimal token → on-chain price has 12 decimals (30 - 18)
-  const signedPrices = await fetchSignedPricesBaseSepolia([GBP.toLowerCase()]);
+  const signedPrices = await fetchOracleSignedPrices([GBP.toLowerCase()]);
   const price = signedPrices[GBP.toLowerCase()];
   const acceptablePrice = isLong
     ? BigNumber.from(price.min).mul(95).div(100) // ~0.95

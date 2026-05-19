@@ -2,19 +2,23 @@ import hre from "hardhat";
 import { Signer } from "ethers";
 
 import { fetchMarketAddress, DEFAULT_MARKET_TYPE } from "../../utils/market";
-import { bigNumberify, expandDecimals } from "../../utils/math";
-import { minMarketTokensForFirstDeposit } from "../../utils/keys";
+import { bigNumberify, expandDecimals, formatAmount } from "../../utils/math";
+import { minMarketTokensForFirstDeposit, poolAmountKey } from "../../utils/keys";
 
 import { WNT, ExchangeRouter, MintableToken } from "../../typechain-types";
 import { IDepositUtils } from "../../typechain-types/contracts/exchange/DepositHandler";
-import { getDepositExecutionFee, SUPPORTED_NETWORKS } from "./utils";
+import { getDepositExecutionFee, SUPPORTED_FX_CURRENCIES, SUPPORTED_NETWORKS, withGasBuffer } from "./utils";
 
 const { ethers } = hre;
 
 /**
- * Create a deposit into a Nivo FX market (GBP/USDC). Uses the WALLET_TESTER_PRIVATE_KEY.
+ * Create a deposit into a Nivo FX market (FX/USDC). Uses the WALLET_TESTER_PRIVATE_KEY.
  *
- * npx hardhat run scripts/nivo/depositOrder.ts --network baseSepolia
+ * FX_CURRENCY=BRL npx hardhat run scripts/nivo/depositOrder.ts --network baseSepolia
+ 
+ * By default LG_TOKEN_AMOUNT and ST_TOKEN_AMOUNT are set to 10 USDC
+ * FX_CURRENCY=BRL LG_TOKEN_AMOUNT=5 ST_TOKEN_AMOUNT=5 npx hardhat run scripts/nivo/depositOrder.ts --network baseSepolia
+ * 
  * Log deposits: npx hardhat run scripts/printDeposits.ts --network baseSepolia
  */
 async function getValues(
@@ -46,6 +50,14 @@ async function getValues(
 async function main() {
   // Use private key from environment variable
   const walletTesterPrivateKey = process.env.WALLET_TESTER_PRIVATE_KEY;
+  const lgTokenAmount = process.env.LG_TOKEN_AMOUNT ? Number(process.env.LG_TOKEN_AMOUNT) : 10;
+  const stTokenAmount = Number(process.env.ST_TOKEN_AMOUNT || 10);
+
+  const fxCurrency = process.env.FX_CURRENCY;
+  if (!fxCurrency || !SUPPORTED_FX_CURRENCIES.includes(fxCurrency)) {
+    throw new Error("FX_CURRENCY is not set or not supported");
+  }
+
   if (!walletTesterPrivateKey) {
     throw new Error("WALLET_TESTER_PRIVATE_KEY is not set");
   }
@@ -56,13 +68,13 @@ async function main() {
   const exchangeRouter: ExchangeRouter = await ethers.getContract("ExchangeRouter");
   const router = await ethers.getContract("Router");
 
-  const { wnt, syntheticFx, collateralToken } = await getValues("GBP", "USDC", wallet);
+  const { wnt, syntheticFx, collateralToken } = await getValues(fxCurrency, "USDC", wallet);
 
   const executionFee = (await getDepositExecutionFee()) ?? expandDecimals(6, 15);
   const wntBalance = await wnt.balanceOf(wallet.address);
   const ethBalance = await ethers.provider.getBalance(wallet.address);
-  console.log("WNT balance %s", wntBalance.toString());
-  console.log("ETH balance %s", ethBalance.toString());
+  console.log("WNT balance (ETH): %s", formatAmount(wntBalance, 18, 4, true));
+  console.log("ETH balance (ETH): %s", formatAmount(ethBalance, 18, 4, true));
 
   // If WNT balance is insufficient, try to wrap ETH to WNT
   if (wntBalance.lt(executionFee)) {
@@ -83,8 +95,8 @@ async function main() {
   }
 
   // For Nivo FX markets, both longToken and shortToken are the same collateral token (USDC)
-  const longTokenAmount = expandDecimals(10, 6); // 10 USDC
-  const shortTokenAmount = expandDecimals(10, 6); // 10 USDC
+  const longTokenAmount = expandDecimals(lgTokenAmount, 6); // Default 10 USDC
+  const shortTokenAmount = expandDecimals(stTokenAmount, 6); // Default 10 USDC
 
   const collateralTokenAllowance = await collateralToken.allowance(wallet.address, router.address);
   console.log("Collateral token address %s", collateralToken.address);
@@ -96,7 +108,7 @@ async function main() {
     await collateralToken.approve(router.address, bigNumberify(2).pow(256).sub(1));
   }
   const collateralBalance = await collateralToken.balanceOf(wallet.address);
-  console.log("Collateral token balance %s", collateralBalance.toString());
+  console.log("Collateral token balance (USDC): %s", formatAmount(collateralBalance, 6, 2, true));
 
   // On Base Sepolia, USDC is a real token, not mintable
   if (collateralBalance.lt(totalCollateralTokenNeeded)) {
@@ -105,7 +117,7 @@ async function main() {
     );
   }
 
-  // For Nivo FX markets: indexToken = FX currency (GBP), longToken = USDC, shortToken = USDC
+  // For Nivo FX markets: indexToken = FX currency, longToken = USDC, shortToken = USDC
   const syntheticMarketAddress = await fetchMarketAddress(
     syntheticFx.address,
     collateralToken.address,
@@ -113,9 +125,12 @@ async function main() {
     DEFAULT_MARKET_TYPE
   );
   if (!syntheticMarketAddress || syntheticMarketAddress === ethers.constants.AddressZero) {
-    throw new Error(`Market not found in DataStore for GBP/USDC.`);
+    throw new Error(`Market not found in DataStore for ${fxCurrency}/USDC.`);
   }
   console.log("market %s", syntheticMarketAddress);
+
+  const poolAmount = await dataStore.getUint(poolAmountKey(syntheticMarketAddress, collateralToken.address));
+  console.log("pool liquidity (USDC): %s", formatAmount(poolAmount, 6, 2, true));
 
   // First deposit: when market token supply is 0, the protocol may require receiver = address(1) and a minimum mint.
   let receiver = wallet.address;
@@ -146,7 +161,7 @@ async function main() {
     },
     minMarketTokens,
     shouldUnwrapNativeToken: false,
-    executionFee: executionFee,
+    executionFee,
     callbackGasLimit: 0,
     dataList: [],
   };
@@ -167,9 +182,12 @@ async function main() {
   ];
   console.log("multicall args", multicallArgs);
 
+  const estimatedGas = await exchangeRouter
+    .connect(wallet)
+    .estimateGas.multicall(multicallArgs, { value: executionFee });
   const tx = await exchangeRouter.connect(wallet).multicall(multicallArgs, {
     value: executionFee,
-    gasLimit: 1_500_000,
+    gasLimit: withGasBuffer(estimatedGas),
   });
 
   console.log("Transaction sent:", tx.hash);
