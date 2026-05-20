@@ -1,18 +1,9 @@
 import type { HardhatRuntimeEnvironment } from "hardhat/types";
 
 import type { ManagedFeatureSpec } from "./featureFlagSpecs";
-import { encodeFeatureData, resolveModuleContractNames } from "./featureFlagSpecs";
+import { encodeFeatureData, resolveModuleAddress, resolveModuleContractNames } from "./featureFlagSpecs";
 import { getDeployedContract } from "./getDeployedContract";
 import { getConfigKeeperSigner } from "./getConfigKeeperSigner";
-
-async function resolveModuleAddress(hre: HardhatRuntimeEnvironment, contractName: string): Promise<string> {
-  if (contractName === "OrderHandler" && process.env.ORDER_HANDLER) {
-    return process.env.ORDER_HANDLER;
-  }
-
-  const contract = await getDeployedContract(hre, contractName);
-  return contract.address;
-}
 
 /**
  * Writes Config.setBool entries for the provided feature specs (dry-run unless WRITE=true).
@@ -22,7 +13,7 @@ export async function applyFeatureFlagWrites(hre: HardhatRuntimeEnvironment, spe
   const config = await getDeployedContract(hre, "Config");
   const write = process.env.WRITE === "true";
   const targetDisabled =
-    process.env.TARGET_DISABLED_STATE === undefined ? true : process.env.TARGET_DISABLED_STATE === "true";
+    process.env.TARGET_DISABLED_STATE === undefined || process.env.TARGET_DISABLED_STATE === "true";
 
   const rows: { label: string; module: string; address: string }[] = [];
   const multicallWriteParams: string[] = [];

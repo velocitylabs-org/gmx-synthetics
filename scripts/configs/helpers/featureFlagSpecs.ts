@@ -1,6 +1,8 @@
 import { encodeData, hashData, hashString } from "../../../utils/hash";
 import * as keys from "../../../utils/keys";
 import { OrderType } from "../../../utils/order";
+import { HardhatRuntimeEnvironment } from 'hardhat/types';
+import { getDeployedContract } from "./getDeployedContract";
 
 export type ManagedFeatureId =
   | "CREATE_ORDER_FEATURE_DISABLED_MARKET_SWAP"
@@ -276,4 +278,14 @@ export function resolveModuleContractNames(spec: ManagedFeatureSpec, env = proce
     .filter(Boolean);
 
   return parsed.length > 0 ? parsed : spec.defaultModuleContractNames;
+}
+
+
+export async function resolveModuleAddress(hre: HardhatRuntimeEnvironment, contractName: string): Promise<string> {
+  if (contractName === "OrderHandler" && process.env.ORDER_HANDLER) {
+    return process.env.ORDER_HANDLER;
+  }
+
+  const contract = await getDeployedContract(hre, contractName);
+  return contract.address;
 }

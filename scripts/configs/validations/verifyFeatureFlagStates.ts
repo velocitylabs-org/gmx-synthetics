@@ -1,22 +1,14 @@
 import hre from "hardhat";
 
 import type { ManagedFeatureSpec } from "../helpers/featureFlagSpecs";
-import { getFeatureFlagStorageKeyForSpec, resolveModuleContractNames } from "../helpers/featureFlagSpecs";
+import { getFeatureFlagStorageKeyForSpec, resolveModuleAddress, resolveModuleContractNames } from "../helpers/featureFlagSpecs";
 import { getDeployedContract } from "../helpers/getDeployedContract";
-
-async function resolveModuleAddress(contractName: string): Promise<string> {
-  if (contractName === "OrderHandler" && process.env.ORDER_HANDLER) {
-    return process.env.ORDER_HANDLER;
-  }
-
-  const contract = await getDeployedContract(hre, contractName);
-  return contract.address;
-}
 
 export async function verifyFeatureFlagStates(specs: ManagedFeatureSpec[]) {
   const dataStore = await getDeployedContract(hre, "DataStore");
   const targetDisabled =
-    process.env.TARGET_DISABLED_STATE === undefined ? true : process.env.TARGET_DISABLED_STATE === "true";
+    process.env.TARGET_DISABLED_STATE === undefined || process.env.TARGET_DISABLED_STATE === "true";
+
   const failOnMismatch = process.env.FAIL_ON_MISMATCH === "true";
 
   const mismatches: string[] = [];
@@ -27,7 +19,7 @@ export async function verifyFeatureFlagStates(specs: ManagedFeatureSpec[]) {
     const moduleNames = resolveModuleContractNames(spec);
 
     for (const moduleName of moduleNames) {
-      const moduleAddress = await resolveModuleAddress(moduleName);
+      const moduleAddress = await resolveModuleAddress(hre, moduleName);
       const storageKey = getFeatureFlagStorageKeyForSpec(spec, moduleAddress);
       const actual = await dataStore.getBool(storageKey);
 
