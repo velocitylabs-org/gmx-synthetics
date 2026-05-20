@@ -6,8 +6,10 @@ import { getDeployedContract } from "./getDeployedContract";
 import { getConfigKeeperSigner } from "./getConfigKeeperSigner";
 
 /**
- * Writes Config.setBool entries for the provided feature specs (dry-run unless WRITE=true).
- * TARGET_DISABLED_STATE=true means the feature flag should read as disabled (bool true in DataStore).
+ * 
+ * Writes Config.setBool entries for the provided feature specs (dry-run unless WRITE=true is specified).
+ * TARGET_DISABLED_STATE=true → disable the feature (write true to the DataStore)
+ * TARGET_DISABLED_STATE=false → enable the feature (write false to the DataStore)
  */
 export async function applyFeatureFlagWrites(hre: HardhatRuntimeEnvironment, specs: ManagedFeatureSpec[]) {
   const config = await getDeployedContract(hre, "Config");
