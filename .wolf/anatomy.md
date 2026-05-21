@@ -1,7 +1,7 @@
 # anatomy.md
 
-> Auto-maintained by OpenWolf. Last scanned: 2026-05-21T11:46:08.120Z
-> Files: 970 tracked | Anatomy hits: 0 | Misses: 0
+> Auto-maintained by OpenWolf. Last scanned: 2026-05-21T11:50:01.070Z
+> Files: 971 tracked | Anatomy hits: 0 | Misses: 0
 
 ## ./
 
@@ -934,6 +934,7 @@
 ## scripts/configs/helpers/
 
 - `applyFeatureFlagWrites.ts` — * Writes Config.setBool entries for the provided feature specs (dry-run unless WRITE=true is specifi (~704 tok)
+- `featureFlagSpecs.ts` — Exports ManagedFeatureId, ModuleFeatureSpec, OrderTypeFeatureSpec, ManagedFeatureSpec + 12 more (~3218 tok)
 - `getConfigKeeperSigner.ts` — Exports getConfigKeeperRoleSigner (~1087 tok)
 
 ## scripts/incentives/
@@ -1251,7 +1252,7 @@
 - `gov.ts` — Exports TIMELOCK_ADMIN_ROLE, PROPOSER_ROLE, EXECUTOR_ROLE, CANCELLER_ROLE + 2 more (~144 tok)
 - `hash.ts` — Exports encodeData, decodeData, hashData, hashString + 2 more (~263 tok)
 - `jit.ts` — Exports executeJitOrder (~1154 tok)
-- `keys.ts` — Exports WNT, NONCE, FEE_RECEIVER, HOLDING_ADDRESS + 149 more (~13642 tok)
+- `keys.ts` — Exports WNT, NONCE, FEE_RECEIVER, HOLDING_ADDRESS + 148 more (~13732 tok)
 - `liquidation.ts` — Exports executeLiquidation (~516 tok)
 - `market.ts` — Exports DEFAULT_MARKET_TYPE, getMarketCount, getMarketKeys, getPoolAmount + 9 more (~1572 tok)
 - `math.ts` — Exports MAX_UINT8, MAX_UINT32, MAX_UINT64, PRECISION + 12 more (~1247 tok)

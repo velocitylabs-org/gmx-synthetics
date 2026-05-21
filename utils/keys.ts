@@ -43,6 +43,7 @@ export const ORDER_LIST = hashString("ORDER_LIST");
 export const ACCOUNT_ORDER_LIST = hashString("ACCOUNT_ORDER_LIST");
 
 export const SUBACCOUNT_LIST = hashString("SUBACCOUNT_LIST");
+export const SUBACCOUNT_FEATURE_DISABLED = hashString("SUBACCOUNT_FEATURE_DISABLED");
 
 export const AUTO_CANCEL_ORDER_LIST = hashString("AUTO_CANCEL_ORDER_LIST");
 

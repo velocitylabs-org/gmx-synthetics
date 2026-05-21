@@ -1,7 +1,7 @@
-import { encodeData, hashData, hashString } from "../../../utils/hash";
+import { encodeData, hashData } from "../../../utils/hash";
 import * as keys from "../../../utils/keys";
 import { OrderType } from "../../../utils/order";
-import { HardhatRuntimeEnvironment } from 'hardhat/types';
+import { HardhatRuntimeEnvironment } from "hardhat/types";
 import { getDeployedContract } from "./getDeployedContract";
 
 export type ManagedFeatureId =
@@ -44,9 +44,6 @@ export type OrderTypeFeatureSpec = ManagedFeatureSpecBase & {
 };
 
 export type ManagedFeatureSpec = ModuleFeatureSpec | OrderTypeFeatureSpec;
-
-// `SUBACCOUNT_FEATURE_DISABLED` exists in on-chain Keys but is not currently exported in utils/keys.ts.
-const SUBACCOUNT_FEATURE_DISABLED = hashString("SUBACCOUNT_FEATURE_DISABLED");
 
 export const FEATURE_FLAG_SPECS: Record<ManagedFeatureId, ManagedFeatureSpec> = {
   CREATE_ORDER_FEATURE_DISABLED_MARKET_SWAP: {
@@ -182,7 +179,7 @@ export const FEATURE_FLAG_SPECS: Record<ManagedFeatureId, ManagedFeatureSpec> = 
   SUBACCOUNT_FEATURE_DISABLED: {
     id: "SUBACCOUNT_FEATURE_DISABLED",
     label: "Disable subaccount delegation flows",
-    baseKey: SUBACCOUNT_FEATURE_DISABLED,
+    baseKey: keys.SUBACCOUNT_FEATURE_DISABLED,
     scope: "module",
     defaultModuleContractNames: ["SubaccountRouter", "SubaccountGelatoRelayRouter", "MultichainSubaccountRouter"],
     moduleContractsEnvVar: "SUBACCOUNT_FEATURE_MODULES",
@@ -233,10 +230,16 @@ export const NON_SHIFT_FEATURE_SPECS: ManagedFeatureSpec[] = [
 ];
 
 // Remaining redaction set (this ticket scope only).
-export const REMAINING_REDACTION_FEATURE_SPECS: ManagedFeatureSpec[] = [...SHIFT_FEATURE_SPECS, ...NON_SHIFT_FEATURE_SPECS];
+export const REMAINING_REDACTION_FEATURE_SPECS: ManagedFeatureSpec[] = [
+  ...SHIFT_FEATURE_SPECS,
+  ...NON_SHIFT_FEATURE_SPECS,
+];
 
 // Canonical superset across SCRUM225 + remaining redaction feature set.
-export const ALL_MANAGED_FEATURE_SPECS: ManagedFeatureSpec[] = [...ORDER_FEATURE_SPECS, ...REMAINING_REDACTION_FEATURE_SPECS];
+export const ALL_MANAGED_FEATURE_SPECS: ManagedFeatureSpec[] = [
+  ...ORDER_FEATURE_SPECS,
+  ...REMAINING_REDACTION_FEATURE_SPECS,
+];
 
 export function encodeFeatureModuleData(moduleAddress: string): string {
   return encodeData(["address"], [moduleAddress]);
@@ -279,7 +282,6 @@ export function resolveModuleContractNames(spec: ManagedFeatureSpec, env = proce
 
   return parsed.length > 0 ? parsed : spec.defaultModuleContractNames;
 }
-
 
 export async function resolveModuleAddress(hre: HardhatRuntimeEnvironment, contractName: string): Promise<string> {
   if (contractName === "OrderHandler" && process.env.ORDER_HANDLER) {

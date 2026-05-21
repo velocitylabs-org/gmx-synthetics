@@ -368,6 +368,22 @@
       "related_bugs": [],
       "occurrences": 1,
       "last_seen": "2026-05-21T11:46:08.132Z"
+    },
+    {
+      "id": "bug-024",
+      "timestamp": "2026-05-21T11:50:01.083Z",
+      "error_message": "Wrong reference: SUBACCOUNT_FEATURE_DISABLED should be keys",
+      "file": "scripts/configs/helpers/featureFlagSpecs.ts",
+      "root_cause": "Used \"SUBACCOUNT_FEATURE_DISABLED\" instead of \"keys\"",
+      "fix": "Changed SUBACCOUNT_FEATURE_DISABLED → keys",
+      "tags": [
+        "auto-detected",
+        "wrong-reference",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-21T11:50:01.083Z"
     }
   ]
 }
