@@ -27,7 +27,7 @@ function getInactiveIndexTokens(): Set<string> {
 
 export async function runDisableInactiveMarkets() {
   const write = process.env.WRITE === "true";
-  const disableValue = process.env.IS_DISABLED === undefined ? true : process.env.IS_DISABLED === "true";
+  const disableValue = process.env.IS_DISABLED === undefined || process.env.IS_DISABLED === "true";
   const inactiveIndexTokens = getInactiveIndexTokens();
   const targetMarketToken = process.env.MARKET?.toLowerCase();
 

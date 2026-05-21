@@ -10,7 +10,7 @@ export async function runDisableOrderExecuteFeatures() {
   const config = await getDeployedContract(hre, "Config");
   const orderHandlerAddress = process.env.ORDER_HANDLER || (await getDeployedContract(hre, "OrderHandler")).address;
 
-  const disableValue = process.env.IS_DISABLED === undefined ? true : process.env.IS_DISABLED === "true";
+  const disableValue = process.env.IS_DISABLED === undefined || process.env.IS_DISABLED === "true";
   const write = process.env.WRITE === "true";
 
   const featureKeys = [

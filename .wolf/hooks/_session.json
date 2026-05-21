@@ -1,32 +1,51 @@
 {
-  "session_id": "session-2026-05-21-1210",
-  "started": "2026-05-21T10:10:04.422Z",
+  "session_id": "session-2026-05-21-1340",
+  "started": "2026-05-21T11:40:09.848Z",
   "files_read": {
-    "/Users/n/code/gmx-synthetics/.eslintrc": {
+    "/Users/n/code/gmx-synthetics/scripts/configs/configs/disableInactiveMarkets.ts": {
       "count": 1,
-      "tokens": 0,
-      "first_read": "2026-05-21T10:10:41.388Z"
+      "tokens": 1196,
+      "first_read": "2026-05-21T11:41:16.824Z"
     },
-    "/Users/n/code/gmx-synthetics/.eslintrc.json": {
+    "/Users/n/code/gmx-synthetics/scripts/configs/configs/applyPoolRiskGuards.ts": {
       "count": 1,
-      "tokens": 206,
-      "first_read": "2026-05-21T10:10:46.098Z"
+      "tokens": 2193,
+      "first_read": "2026-05-21T11:41:17.864Z"
+    },
+    "/Users/n/code/gmx-synthetics/scripts/configs/configs/disableOrderExecuteFeatures.ts": {
+      "count": 1,
+      "tokens": 877,
+      "first_read": "2026-05-21T11:41:18.385Z"
     }
   },
   "files_written": [
     {
-      "file": "/Users/n/code/gmx-synthetics/.eslintrc.json",
+      "file": "/Users/n/code/gmx-synthetics/scripts/configs/configs/disableInactiveMarkets.ts",
       "action": "edit",
-      "tokens": 36,
-      "at": "2026-05-21T10:10:49.330Z"
+      "tokens": 29,
+      "at": "2026-05-21T11:41:29.363Z"
+    },
+    {
+      "file": "/Users/n/code/gmx-synthetics/scripts/configs/configs/applyPoolRiskGuards.ts",
+      "action": "edit",
+      "tokens": 31,
+      "at": "2026-05-21T11:41:30.450Z"
+    },
+    {
+      "file": "/Users/n/code/gmx-synthetics/scripts/configs/configs/disableOrderExecuteFeatures.ts",
+      "action": "edit",
+      "tokens": 29,
+      "at": "2026-05-21T11:41:31.572Z"
     }
   ],
   "edit_counts": {
-    ".eslintrc.json": 1
+    "scripts/configs/configs/disableInactiveMarkets.ts": 1,
+    "scripts/configs/configs/applyPoolRiskGuards.ts": 1,
+    "scripts/configs/configs/disableOrderExecuteFeatures.ts": 1
   },
-  "anatomy_hits": 1,
-  "anatomy_misses": 1,
+  "anatomy_hits": 3,
+  "anatomy_misses": 0,
   "repeated_reads_warned": 0,
   "cerebrum_warnings": 0,
-  "stop_count": 1
+  "stop_count": 2
 }

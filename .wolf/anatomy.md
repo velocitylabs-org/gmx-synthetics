@@ -1,6 +1,6 @@
 # anatomy.md
 
-> Auto-maintained by OpenWolf. Last scanned: 2026-05-21T10:10:49.315Z
+> Auto-maintained by OpenWolf. Last scanned: 2026-05-21T11:41:31.562Z
 > Files: 970 tracked | Anatomy hits: 0 | Misses: 0
 
 ## ./
@@ -926,10 +926,10 @@
 
 ## scripts/configs/configs/
 
-- `applyPoolRiskGuards.ts` — Exports runApplyPoolRiskGuards (~2193 tok)
-- `disableInactiveMarkets.ts` — Exports runDisableInactiveMarkets (~1196 tok)
+- `applyPoolRiskGuards.ts` — Exports runApplyPoolRiskGuards (~2191 tok)
+- `disableInactiveMarkets.ts` — Exports runDisableInactiveMarkets (~1194 tok)
 - `disableOrderCreateFeatures.ts` — Exports runDisableOrderCreateFeatures (~871 tok)
-- `disableOrderExecuteFeatures.ts` — Exports runDisableOrderExecuteFeatures (~877 tok)
+- `disableOrderExecuteFeatures.ts` — Exports runDisableOrderExecuteFeatures (~874 tok)
 
 ## scripts/configs/helpers/
 
