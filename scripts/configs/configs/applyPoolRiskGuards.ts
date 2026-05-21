@@ -7,7 +7,7 @@ import { getMarketKey, getMarketTokenAddresses } from "../../../utils/market";
 import tokensConfig from "../../../config/tokens";
 import marketsConfig from "../../../config/markets";
 import { getDeployedContract } from "../helpers/getDeployedContract";
-import { getConfigKeeperSigner } from "../helpers/getConfigKeeperSigner";
+import { getConfigKeeperRoleSigner } from "../helpers/getConfigKeeperRoleSigner";
 import { getConfigHre, isTruthy } from "../helpers/configRuntime";
 
 type MarketPolicy = {
@@ -64,7 +64,7 @@ export async function runApplyPoolRiskGuards() {
     process.env.DISABLE_INACTIVE_MARKETS === undefined ? true : isTruthy(process.env.DISABLE_INACTIVE_MARKETS);
   // IS_DISABLED being `true` means the feature being configured would be disabled.
   // Vice versa, if `IS_DISABLED = false` is passed in, the feature is therefore active/enabled.
-  const inactiveDisableValue = process.env.IS_DISABLED === undefined ? true : process.env.IS_DISABLED === "true";
+  const inactiveDisableValue = process.env.IS_DISABLED === undefined || process.env.IS_DISABLED === "true";
   const targetMarketToken = process.env.MARKET?.toLowerCase();
 
   const config = await getDeployedContract(hre, "Config");
@@ -81,8 +81,8 @@ export async function runApplyPoolRiskGuards() {
     })
   );
 
-  const { configKeeperAddress, configKeeperSigner } = await getConfigKeeperSigner(hre);
-  const configAsKeeper = config.connect(configKeeperSigner);
+  const { configKeeperRoleAddress, configKeeperRoleSigner } = await getConfigKeeperRoleSigner(hre);
+  const signedConfig = config.connect(configKeeperRoleSigner);
 
   const multicallWriteParams: string[] = [];
   let selectedActiveMarkets = 0;
@@ -179,12 +179,12 @@ export async function runApplyPoolRiskGuards() {
     throw new Error("No markets matched selection for pool risk guard updates");
   }
 
-  console.log(`ConfigKeeper: ${configKeeperAddress}`);
+  console.log(`Config keeper role address: ${configKeeperRoleAddress}`);
   console.log(`Selected active markets for caps/min: ${selectedActiveMarkets}`);
   console.log(`Selected inactive markets for disable: ${selectedInactiveMarkets}`);
   console.log(`Prepared config calls: ${multicallWriteParams.length}`);
 
-  await configAsKeeper.callStatic.multicall(multicallWriteParams);
+  await signedConfig.callStatic.multicall(multicallWriteParams);
   console.log("callStatic passed");
 
   if (!write) {
@@ -192,7 +192,7 @@ export async function runApplyPoolRiskGuards() {
     return;
   }
 
-  const tx = await configAsKeeper.multicall(multicallWriteParams);
+  const tx = await signedConfig.multicall(multicallWriteParams);
   console.log(`tx sent: ${tx.hash}`);
   await tx.wait();
   console.log("tx mined");

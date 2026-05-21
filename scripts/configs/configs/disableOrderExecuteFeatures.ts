@@ -4,14 +4,13 @@ import { encodeData } from "../../../utils/hash";
 import * as keys from "../../../utils/keys";
 import { OrderType } from "../../../utils/order";
 import { getDeployedContract } from "../helpers/getDeployedContract";
-import { getConfigKeeperSigner } from "../helpers/getConfigKeeperSigner";
+import { getConfigKeeperRoleSigner } from "../helpers/getConfigKeeperRoleSigner";
 
 export async function runDisableOrderExecuteFeatures() {
   const config = await getDeployedContract(hre, "Config");
-  const orderHandlerAddress =
-    process.env.ORDER_HANDLER || (await getDeployedContract(hre, "OrderHandler")).address;
+  const orderHandlerAddress = process.env.ORDER_HANDLER || (await getDeployedContract(hre, "OrderHandler")).address;
 
-  const disableValue = process.env.IS_DISABLED === undefined ? true : process.env.IS_DISABLED === "true";
+  const disableValue = process.env.IS_DISABLED === undefined || process.env.IS_DISABLED === "true";
   const write = process.env.WRITE === "true";
 
   const featureKeys = [
@@ -45,16 +44,16 @@ export async function runDisableOrderExecuteFeatures() {
   const multicallWriteParams = featureKeys.map((f) =>
     config.interface.encodeFunctionData("setBool", [f.baseKey, f.data, disableValue])
   );
-  const { configKeeperAddress, configKeeperSigner } = await getConfigKeeperSigner(hre);
-  const configAsKeeper = config.connect(configKeeperSigner);
+  const { configKeeperRoleAddress, configKeeperRoleSigner } = await getConfigKeeperRoleSigner(hre);
+  const signedConfig = config.connect(configKeeperRoleSigner);
 
   console.log(`OrderHandler: ${orderHandlerAddress}`);
-  console.log(`ConfigKeeper: ${configKeeperAddress}`);
+  console.log(`Config keeper role address: ${configKeeperRoleAddress}`);
   console.log(`Disable value: ${disableValue}`);
   console.log(`Prepared ${multicallWriteParams.length} execute-order feature updates`);
   featureKeys.forEach((f) => console.log(`- ${f.label}`));
 
-  await configAsKeeper.callStatic.multicall(multicallWriteParams);
+  await signedConfig.callStatic.multicall(multicallWriteParams);
   console.log("callStatic passed");
 
   if (!write) {
@@ -62,7 +61,7 @@ export async function runDisableOrderExecuteFeatures() {
     return;
   }
 
-  const tx = await configAsKeeper.multicall(multicallWriteParams);
+  const tx = await signedConfig.multicall(multicallWriteParams);
   console.log(`tx sent: ${tx.hash}`);
   await tx.wait();
   console.log("tx mined");

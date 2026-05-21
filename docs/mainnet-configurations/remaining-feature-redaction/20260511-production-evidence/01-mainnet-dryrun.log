@@ -1,0 +1,109 @@
+
+> gmx-synthetics@1.0.0 config:features:mainnet:dryrun
+> WRITE=false IS_DISABLED=true TARGET_DISABLED_STATE=true RUN_ORDER_FEATURE_REDACTION=true RUN_POOL_RISK_GUARDS=true RUN_SHIFT_FEATURES=true RUN_JIT_FEATURE=true RUN_SUBACCOUNT_FEATURE=true RUN_GASLESS_FEATURE=true RUN_ATOMIC_WITHDRAWAL_FEATURE=true RUN_FEATURE_VALIDATIONS=true npx hardhat run scripts/configs/index.ts --network base
+
+WARNING: You are currently using Node.js v16.20.1, which is not supported by Hardhat. This can lead to unexpected behavior. See https://v2.hardhat.org/nodejs-versions
+
+
+Running config orchestrator...
+OrderHandler: 0xf9Fa21efa2DA62Fed82c32A218f886bC626bD116
+ConfigKeeper: 0xAed31d3C8942B38eec87Fe5830a671C1A3D0d967
+Disable value: true
+Prepared 5 create-order feature updates
+- CREATE_ORDER_FEATURE_DISABLED MarketSwap
+- CREATE_ORDER_FEATURE_DISABLED LimitSwap
+- CREATE_ORDER_FEATURE_DISABLED StopLossDecrease
+- CREATE_ORDER_FEATURE_DISABLED LimitIncrease
+- CREATE_ORDER_FEATURE_DISABLED LimitDecrease
+callStatic passed
+NOTE: executed in read-only mode, no transactions were sent
+OrderHandler: 0xf9Fa21efa2DA62Fed82c32A218f886bC626bD116
+ConfigKeeper: 0xAed31d3C8942B38eec87Fe5830a671C1A3D0d967
+Disable value: true
+Prepared 5 execute-order feature updates
+- EXECUTE_ORDER_FEATURE_DISABLED MarketSwap
+- EXECUTE_ORDER_FEATURE_DISABLED LimitSwap
+- EXECUTE_ORDER_FEATURE_DISABLED StopLossDecrease
+- EXECUTE_ORDER_FEATURE_DISABLED LimitIncrease
+- EXECUTE_ORDER_FEATURE_DISABLED LimitDecrease
+callStatic passed
+NOTE: executed in read-only mode, no transactions were sent
+Preparing pool risk guard updates for JPY [USDC-USDC] (0xbe4C4810f92d4b08672dc8f3E0f1d834e11d2681)
+Preparing pool risk guard updates for GBP [USDC-USDC] (0x577CBa4C306D02072880B8bfAe261864b97A46E6)
+Preparing pool risk guard updates for BRL [USDC-USDC] (0x8B5921433B1c9449724F5485dE3C63C48b24E602)
+Preparing pool risk guard updates for MXN [USDC-USDC] (0x180e086dA4fB0db9bd747DA8Acf76C7499B8Fe1e)
+Preparing pool risk guard updates for COP [USDC-USDC] (0x6eF9142c73b0304087ac45f9474dda131E3D0Caf)
+Preparing inactive-market disable update for IDR [USDC-USDC] (0x8097AABdFA1d57205154Ba9923b13D192630Fc3D)
+Preparing inactive-market disable update for PHP [USDC-USDC] (0xF61fc53E860bd1F631a9f51d374083016879AE03)
+Preparing inactive-market disable update for PEN [USDC-USDC] (0x7cc5eeD605e2D0D49d39882D2177332Db4675d09)
+Preparing inactive-market disable update for NGN [USDC-USDC] (0xe393f40fd3dC0ae6219131c93396dF5FbbDF037a)
+Preparing inactive-market disable update for KES [USDC-USDC] (0x82fA10F1Fa46c3C85A50834AB360154529f23cd6)
+Preparing inactive-market disable update for ZAR [USDC-USDC] (0x875CA56e0498eb4BA4421bee2843E1185e92813F)
+Preparing inactive-market disable update for THB [USDC-USDC] (0x4F8e6412eb14834ee64826358ba9c4112F47f5ee)
+ConfigKeeper: 0xAed31d3C8942B38eec87Fe5830a671C1A3D0d967
+Selected active markets for caps/min: 5
+Selected inactive markets for disable: 7
+Prepared config calls: 32
+callStatic passed
+NOTE: executed in read-only mode, no transactions were sent
+ConfigKeeper: 0xAed31d3C8942B38eec87Fe5830a671C1A3D0d967
+TARGET_DISABLED_STATE (write true): true
+Prepared 3 config updates
+- Disable shift creation | ShiftHandler (0xA7D5D56a7D436380eA7F22EC2F265A1d7e2A75d7)
+- Disable shift cancellation | ShiftHandler (0xA7D5D56a7D436380eA7F22EC2F265A1d7e2A75d7)
+- Disable shift execution | ShiftHandler (0xA7D5D56a7D436380eA7F22EC2F265A1d7e2A75d7)
+callStatic passed
+NOTE: executed in read-only mode, no transactions were sent
+ConfigKeeper: 0xAed31d3C8942B38eec87Fe5830a671C1A3D0d967
+TARGET_DISABLED_STATE (write true): true
+Prepared 1 config updates
+- Disable JIT execution path | JitOrderHandler (0x9Ec4C4fDA27649b827385AE04D49A64dE193FF0f)
+callStatic passed
+NOTE: executed in read-only mode, no transactions were sent
+ConfigKeeper: 0xAed31d3C8942B38eec87Fe5830a671C1A3D0d967
+TARGET_DISABLED_STATE (write true): true
+Prepared 3 config updates
+- Disable subaccount delegation flows | SubaccountRouter (0x5bb2c5497170C16D4D16F9bC32885104601c095f)
+- Disable subaccount delegation flows | SubaccountGelatoRelayRouter (0x202676dED4d7432825a2A2aaEe95E8b53DdD45c6)
+- Disable subaccount delegation flows | MultichainSubaccountRouter (0x4fc16A2b8E49d97418D334621412139389963AD6)
+callStatic passed
+NOTE: executed in read-only mode, no transactions were sent
+ConfigKeeper: 0xAed31d3C8942B38eec87Fe5830a671C1A3D0d967
+TARGET_DISABLED_STATE (write true): true
+Prepared 8 config updates
+- Disable gasless relay flows | GelatoRelayRouter (0xDc4eabBc5cDadbe1d4956C803053787B519A3E6C)
+- Disable gasless relay flows | SubaccountGelatoRelayRouter (0x202676dED4d7432825a2A2aaEe95E8b53DdD45c6)
+- Disable gasless relay flows | MultichainClaimsRouter (0x787c099ACcC4789270252BC9c8ee667d9F0D125F)
+- Disable gasless relay flows | MultichainTransferRouter (0x6b5bcfFC8f45C648371Ed3c363589375d8Da4147)
+- Disable gasless relay flows | MultichainOrderRouter (0xA1CE56655beA534afaF0F74C70A1C73Ed845Eb7C)
+- Disable gasless relay flows | MultichainGmRouter (0x385A9cd4Db69FC59fc2823831aBf08AaA98c9859)
+- Disable gasless relay flows | MultichainGlvRouter (0x7517099A2a98a17C7154185a361b7F42c14DA4D4)
+- Disable gasless relay flows | MultichainSubaccountRouter (0x4fc16A2b8E49d97418D334621412139389963AD6)
+callStatic passed
+NOTE: executed in read-only mode, no transactions were sent
+ConfigKeeper: 0xAed31d3C8942B38eec87Fe5830a671C1A3D0d967
+TARGET_DISABLED_STATE (write true): true
+Prepared 1 config updates
+- Disable atomic withdrawal execution | WithdrawalHandler (0xA27F558C80b664722dffA3f7375b7E9647D5fe00)
+callStatic passed
+NOTE: executed in read-only mode, no transactions were sent
+TARGET_DISABLED_STATE (expected bool): true
+CREATE_SHIFT_FEATURE_DISABLED module=ShiftHandler (0xA7D5D56a7D436380eA7F22EC2F265A1d7e2A75d7) expected=true actual=true
+CANCEL_SHIFT_FEATURE_DISABLED module=ShiftHandler (0xA7D5D56a7D436380eA7F22EC2F265A1d7e2A75d7) expected=true actual=true
+EXECUTE_SHIFT_FEATURE_DISABLED module=ShiftHandler (0xA7D5D56a7D436380eA7F22EC2F265A1d7e2A75d7) expected=true actual=true
+EXECUTE_ATOMIC_WITHDRAWAL_FEATURE_DISABLED module=WithdrawalHandler (0xA27F558C80b664722dffA3f7375b7E9647D5fe00) expected=true actual=true
+JIT_FEATURE_DISABLED module=JitOrderHandler (0x9Ec4C4fDA27649b827385AE04D49A64dE193FF0f) expected=true actual=true
+SUBACCOUNT_FEATURE_DISABLED module=SubaccountRouter (0x5bb2c5497170C16D4D16F9bC32885104601c095f) expected=true actual=true
+SUBACCOUNT_FEATURE_DISABLED module=SubaccountGelatoRelayRouter (0x202676dED4d7432825a2A2aaEe95E8b53DdD45c6) expected=true actual=true
+SUBACCOUNT_FEATURE_DISABLED module=MultichainSubaccountRouter (0x4fc16A2b8E49d97418D334621412139389963AD6) expected=true actual=true
+GASLESS_FEATURE_DISABLED module=GelatoRelayRouter (0xDc4eabBc5cDadbe1d4956C803053787B519A3E6C) expected=true actual=true
+GASLESS_FEATURE_DISABLED module=SubaccountGelatoRelayRouter (0x202676dED4d7432825a2A2aaEe95E8b53DdD45c6) expected=true actual=true
+GASLESS_FEATURE_DISABLED module=MultichainClaimsRouter (0x787c099ACcC4789270252BC9c8ee667d9F0D125F) expected=true actual=true
+GASLESS_FEATURE_DISABLED module=MultichainTransferRouter (0x6b5bcfFC8f45C648371Ed3c363589375d8Da4147) expected=true actual=true
+GASLESS_FEATURE_DISABLED module=MultichainOrderRouter (0xA1CE56655beA534afaF0F74C70A1C73Ed845Eb7C) expected=true actual=true
+GASLESS_FEATURE_DISABLED module=MultichainGmRouter (0x385A9cd4Db69FC59fc2823831aBf08AaA98c9859) expected=true actual=true
+GASLESS_FEATURE_DISABLED module=MultichainGlvRouter (0x7517099A2a98a17C7154185a361b7F42c14DA4D4) expected=true actual=true
+GASLESS_FEATURE_DISABLED module=MultichainSubaccountRouter (0x4fc16A2b8E49d97418D334621412139389963AD6) expected=true actual=true
+
+Verification passed: all feature flags matched expected state.
+Completed config orchestrator.

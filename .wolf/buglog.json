@@ -128,6 +128,294 @@
       "related_bugs": [],
       "occurrences": 2,
       "last_seen": "2026-05-12T08:44:21.814Z"
+    },
+    {
+      "id": "bug-009",
+      "timestamp": "2026-05-21T10:03:07.051Z",
+      "error_message": "Wrong reference: getConfigKeeperSigner should be getConfigKeeperRoleSigner",
+      "file": "scripts/configs/helpers/applyFeatureFlagWrites.ts",
+      "root_cause": "Used \"getConfigKeeperSigner\" instead of \"getConfigKeeperRoleSigner\"",
+      "fix": "Changed getConfigKeeperSigner → getConfigKeeperRoleSigner",
+      "tags": [
+        "auto-detected",
+        "wrong-reference",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 2,
+      "last_seen": "2026-05-21T10:03:27.201Z"
+    },
+    {
+      "id": "bug-010",
+      "timestamp": "2026-05-21T10:03:37.977Z",
+      "error_message": "Wrong reference: getConfigKeeperSigner should be getConfigKeeperRoleSigner",
+      "file": "scripts/configs/configs/disableInactiveMarkets.ts",
+      "root_cause": "Used \"getConfigKeeperSigner\" instead of \"getConfigKeeperRoleSigner\"",
+      "fix": "Changed getConfigKeeperSigner → getConfigKeeperRoleSigner",
+      "tags": [
+        "auto-detected",
+        "wrong-reference",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 3,
+      "last_seen": "2026-05-21T10:05:27.251Z"
+    },
+    {
+      "id": "bug-011",
+      "timestamp": "2026-05-21T10:03:41.317Z",
+      "error_message": "Wrong reference: getConfigKeeperSigner should be getConfigKeeperRoleSigner",
+      "file": "scripts/configs/configs/applyPoolRiskGuards.ts",
+      "root_cause": "Used \"getConfigKeeperSigner\" instead of \"getConfigKeeperRoleSigner\"",
+      "fix": "Changed getConfigKeeperSigner → getConfigKeeperRoleSigner",
+      "tags": [
+        "auto-detected",
+        "wrong-reference",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 3,
+      "last_seen": "2026-05-21T10:05:29.424Z"
+    },
+    {
+      "id": "bug-012",
+      "timestamp": "2026-05-21T10:03:44.930Z",
+      "error_message": "Wrong reference: getConfigKeeperSigner should be getConfigKeeperRoleSigner",
+      "file": "scripts/configs/configs/disableOrderExecuteFeatures.ts",
+      "root_cause": "Used \"getConfigKeeperSigner\" instead of \"getConfigKeeperRoleSigner\"",
+      "fix": "Changed getConfigKeeperSigner → getConfigKeeperRoleSigner",
+      "tags": [
+        "auto-detected",
+        "wrong-reference",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 3,
+      "last_seen": "2026-05-21T10:05:31.611Z"
+    },
+    {
+      "id": "bug-013",
+      "timestamp": "2026-05-21T10:03:47.056Z",
+      "error_message": "Wrong reference: getConfigKeeperSigner should be getConfigKeeperRoleSigner",
+      "file": "scripts/configs/configs/disableOrderCreateFeatures.ts",
+      "root_cause": "Used \"getConfigKeeperSigner\" instead of \"getConfigKeeperRoleSigner\"",
+      "fix": "Changed getConfigKeeperSigner → getConfigKeeperRoleSigner",
+      "tags": [
+        "auto-detected",
+        "wrong-reference",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 3,
+      "last_seen": "2026-05-21T10:05:34.842Z"
+    },
+    {
+      "id": "bug-014",
+      "timestamp": "2026-05-21T10:05:50.082Z",
+      "error_message": "Incorrect value in code",
+      "file": "scripts/configs/configs/applyPoolRiskGuards.ts",
+      "root_cause": "Had `ConfigKeeper: ${configKeeperRoleAddress}`",
+      "fix": "Changed to `Config keeper role address: ${configKeeperRoleAdd",
+      "tags": [
+        "auto-detected",
+        "wrong-value",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-21T10:05:50.082Z"
+    },
+    {
+      "id": "bug-015",
+      "timestamp": "2026-05-21T10:05:51.166Z",
+      "error_message": "Incorrect value in code",
+      "file": "scripts/configs/configs/disableOrderExecuteFeatures.ts",
+      "root_cause": "Had `ConfigKeeper: ${configKeeperRoleAddress}`",
+      "fix": "Changed to `Config keeper role address: ${configKeeperRoleAdd",
+      "tags": [
+        "auto-detected",
+        "wrong-value",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-21T10:05:51.166Z"
+    },
+    {
+      "id": "bug-016",
+      "timestamp": "2026-05-21T10:05:52.255Z",
+      "error_message": "Incorrect value in code",
+      "file": "scripts/configs/configs/disableOrderCreateFeatures.ts",
+      "root_cause": "Had `ConfigKeeper: ${configKeeperRoleAddress}`",
+      "fix": "Changed to `Config keeper role address: ${configKeeperRoleAdd",
+      "tags": [
+        "auto-detected",
+        "wrong-value",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-21T10:05:52.255Z"
+    },
+    {
+      "id": "bug-017",
+      "timestamp": "2026-05-21T10:05:53.348Z",
+      "error_message": "Wrong reference: configKeeper should be configKeeperRoleAddress",
+      "file": "test/config/VerifySwapReconfiguration.ts",
+      "root_cause": "Used \"configKeeper\" instead of \"configKeeperRoleAddress\"",
+      "fix": "Changed configKeeper → configKeeperRoleAddress",
+      "tags": [
+        "auto-detected",
+        "wrong-reference",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 2,
+      "last_seen": "2026-05-21T10:06:02.300Z"
+    },
+    {
+      "id": "bug-018",
+      "timestamp": "2026-05-21T10:06:01.129Z",
+      "error_message": "Incorrect value in code",
+      "file": "scripts/configs/configs/disableInactiveMarkets.ts",
+      "root_cause": "Had `ConfigKeeper: ${configKeeperRoleAddress}`",
+      "fix": "Changed to `Config keeper role address: ${configKeeperRoleAdd",
+      "tags": [
+        "auto-detected",
+        "wrong-value",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-21T10:06:01.129Z"
+    },
+    {
+      "id": "bug-019",
+      "timestamp": "2026-05-21T11:46:03.740Z",
+      "error_message": "Incorrect value in code",
+      "file": "scripts/configs/configs/disableOrderCreateFeatures.ts",
+      "root_cause": "Had \"../helpers/getConfigKeeperSigner\"",
+      "fix": "Changed to \"../helpers/getConfigKeeperRoleSigner\"",
+      "tags": [
+        "auto-detected",
+        "wrong-value",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-21T11:46:03.740Z"
+    },
+    {
+      "id": "bug-020",
+      "timestamp": "2026-05-21T11:46:04.828Z",
+      "error_message": "Incorrect value in code",
+      "file": "scripts/configs/configs/applyPoolRiskGuards.ts",
+      "root_cause": "Had \"../helpers/getConfigKeeperSigner\"",
+      "fix": "Changed to \"../helpers/getConfigKeeperRoleSigner\"",
+      "tags": [
+        "auto-detected",
+        "wrong-value",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-21T11:46:04.828Z"
+    },
+    {
+      "id": "bug-021",
+      "timestamp": "2026-05-21T11:46:05.964Z",
+      "error_message": "Incorrect value in code",
+      "file": "scripts/configs/helpers/applyFeatureFlagWrites.ts",
+      "root_cause": "Had \"./getConfigKeeperSigner\"",
+      "fix": "Changed to \"./getConfigKeeperRoleSigner\"",
+      "tags": [
+        "auto-detected",
+        "wrong-value",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-21T11:46:05.964Z"
+    },
+    {
+      "id": "bug-022",
+      "timestamp": "2026-05-21T11:46:07.033Z",
+      "error_message": "Incorrect value in code",
+      "file": "scripts/configs/configs/disableInactiveMarkets.ts",
+      "root_cause": "Had \"../helpers/getConfigKeeperSigner\"",
+      "fix": "Changed to \"../helpers/getConfigKeeperRoleSigner\"",
+      "tags": [
+        "auto-detected",
+        "wrong-value",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-21T11:46:07.033Z"
+    },
+    {
+      "id": "bug-023",
+      "timestamp": "2026-05-21T11:46:08.132Z",
+      "error_message": "Incorrect value in code",
+      "file": "scripts/configs/configs/disableOrderExecuteFeatures.ts",
+      "root_cause": "Had \"../helpers/getConfigKeeperSigner\"",
+      "fix": "Changed to \"../helpers/getConfigKeeperRoleSigner\"",
+      "tags": [
+        "auto-detected",
+        "wrong-value",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-21T11:46:08.132Z"
+    },
+    {
+      "id": "bug-024",
+      "timestamp": "2026-05-21T11:50:01.083Z",
+      "error_message": "Wrong reference: SUBACCOUNT_FEATURE_DISABLED should be keys",
+      "file": "scripts/configs/helpers/featureFlagSpecs.ts",
+      "root_cause": "Used \"SUBACCOUNT_FEATURE_DISABLED\" instead of \"keys\"",
+      "fix": "Changed SUBACCOUNT_FEATURE_DISABLED → keys",
+      "tags": [
+        "auto-detected",
+        "wrong-reference",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-21T11:50:01.083Z"
+    },
+    {
+      "id": "bug-025",
+      "timestamp": "2026-05-21T12:16:18.986Z",
+      "error_message": "Incorrect value in code",
+      "file": "scripts/configs/helpers/applyFeatureFlagWrites.ts",
+      "root_cause": "Had `TARGET_DISABLED_STATE (write ${targetDisabled}): ",
+      "fix": "Changed to `IS_DISABLED (write ${targetDisabled}): ${targetDi",
+      "tags": [
+        "auto-detected",
+        "wrong-value",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-21T12:16:18.986Z"
+    },
+    {
+      "id": "bug-026",
+      "timestamp": "2026-05-21T12:16:35.285Z",
+      "error_message": "Wrong reference: trueRUN_ should be true",
+      "file": "package.json",
+      "root_cause": "Used \"trueRUN_\" instead of \"true\"",
+      "fix": "Changed trueRUN_ → true",
+      "tags": [
+        "auto-detected",
+        "wrong-reference",
+        "json"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-21T12:16:35.285Z"
     }
   ]
 }

@@ -6,7 +6,7 @@ import { getMarketKey, getMarketTokenAddresses } from "../../../utils/market";
 import tokensConfig from "../../../config/tokens";
 import marketsConfig from "../../../config/markets";
 import { getDeployedContract } from "../helpers/getDeployedContract";
-import { getConfigKeeperSigner } from "../helpers/getConfigKeeperSigner";
+import { getConfigKeeperRoleSigner } from "../helpers/getConfigKeeperRoleSigner";
 import { getConfigHre } from "../helpers/configRuntime";
 
 const DEFAULT_INACTIVE_INDEX_TOKENS = ["IDR", "PHP", "PEN", "NGN", "KES", "ZAR", "THB"];
@@ -27,7 +27,7 @@ function getInactiveIndexTokens(): Set<string> {
 
 export async function runDisableInactiveMarkets() {
   const write = process.env.WRITE === "true";
-  const disableValue = process.env.IS_DISABLED === undefined ? true : process.env.IS_DISABLED === "true";
+  const disableValue = process.env.IS_DISABLED === undefined || process.env.IS_DISABLED === "true";
   const inactiveIndexTokens = getInactiveIndexTokens();
   const targetMarketToken = process.env.MARKET?.toLowerCase();
 
@@ -45,8 +45,8 @@ export async function runDisableInactiveMarkets() {
     })
   );
 
-  const { configKeeperAddress, configKeeperSigner } = await getConfigKeeperSigner(hre);
-  const configAsKeeper = config.connect(configKeeperSigner);
+  const { configKeeperRoleAddress, configKeeperRoleSigner } = await getConfigKeeperRoleSigner(hre);
+  const signedConfig = config.connect(configKeeperRoleSigner);
 
   const multicallWriteParams: string[] = [];
   let selectedMarkets = 0;
@@ -90,12 +90,12 @@ export async function runDisableInactiveMarkets() {
     throw new Error("No markets matched selection for inactive market updates");
   }
 
-  console.log(`ConfigKeeper: ${configKeeperAddress}`);
+  console.log(`Config keeper role address: ${configKeeperRoleAddress}`);
   console.log(`Disable value: ${disableValue}`);
   console.log(`Selected markets: ${selectedMarkets}`);
   console.log(`Prepared setBool calls: ${multicallWriteParams.length}`);
 
-  await configAsKeeper.callStatic.multicall(multicallWriteParams);
+  await signedConfig.callStatic.multicall(multicallWriteParams);
   console.log("callStatic passed");
 
   if (!write) {
@@ -103,7 +103,7 @@ export async function runDisableInactiveMarkets() {
     return;
   }
 
-  const tx = await configAsKeeper.multicall(multicallWriteParams);
+  const tx = await signedConfig.multicall(multicallWriteParams);
   console.log(`tx sent: ${tx.hash}`);
   await tx.wait();
   console.log("tx mined");

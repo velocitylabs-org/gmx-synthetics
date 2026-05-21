@@ -1,13 +1,13 @@
 # anatomy.md
 
-> Auto-maintained by OpenWolf. Last scanned: 2026-05-12T08:44:21.783Z
-> Files: 963 tracked | Anatomy hits: 0 | Misses: 0
+> Auto-maintained by OpenWolf. Last scanned: 2026-05-21T12:16:35.267Z
+> Files: 971 tracked | Anatomy hits: 0 | Misses: 0
 
 ## ./
 
 - `.DS_Store` (~2728 tok)
 - `.editorconfig` — Editor configuration (~57 tok)
-- `.eslintrc.json` — ESLint configuration (~206 tok)
+- `.eslintrc.json` (~224 tok)
 - `.gitignore` — Git ignore rules (~92 tok)
 - `.gitmodules` (~62 tok)
 - `.nvmrc` (~1 tok)
@@ -24,7 +24,7 @@
 - `index.html` — GMX Synthetics (~64 tok)
 - `LICENSE` — Project license (~1140 tok)
 - `metrics.ts` — options: run (~859 tok)
-- `package.json` — Node.js package manifest (~1521 tok)
+- `package.json` — Node.js package manifest (~2170 tok)
 - `pnpm-lock.yaml` — pnpm lock file (~163901 tok)
 - `README.md` — Project documentation (~12369 tok)
 - `tenderly.yaml` (~24 tok)
@@ -924,6 +924,19 @@
 - `withdrawFromPositionImpactPool.ts` — expectedTimelockMethods: fetchChainlinkPriceFeedInfo, fetchChainlinkDataStreamInfo, fetchOracleParams, main (~2787 tok)
 - `wrapNativeToken.ts` — value: main (~404 tok)
 
+## scripts/configs/configs/
+
+- `applyPoolRiskGuards.ts` — Exports runApplyPoolRiskGuards (~2192 tok)
+- `disableInactiveMarkets.ts` — Exports runDisableInactiveMarkets (~1195 tok)
+- `disableOrderCreateFeatures.ts` — Exports runDisableOrderCreateFeatures (~871 tok)
+- `disableOrderExecuteFeatures.ts` — Exports runDisableOrderExecuteFeatures (~875 tok)
+
+## scripts/configs/helpers/
+
+- `applyFeatureFlagWrites.ts` — * Writes Config.setBool entries for the provided feature specs (dry-run unless WRITE=true is specifi (~688 tok)
+- `featureFlagSpecs.ts` — Exports ManagedFeatureId, ModuleFeatureSpec, OrderTypeFeatureSpec, ManagedFeatureSpec + 12 more (~3218 tok)
+- `getConfigKeeperSigner.ts` — Exports getConfigKeeperRoleSigner (~1087 tok)
+
 ## scripts/incentives/
 
 - `.batchesInProgress.json` (~1 tok)
@@ -1001,6 +1014,7 @@
 - `Config.ts` — Declares keys (~6898 tok)
 - `ConfigSyncer.ts` — Declares referenceIds (~5810 tok)
 - `Timelock.ts` — Declares orderKeeperRole (~10087 tok)
+- `VerifySwapReconfiguration.ts` — DEFAULT_CONFIG_KEEPER: tryRpc, impersonateAccount, stopImpersonateAccount, setAccountBalance (~1261 tok)
 
 ## test/contributor/
 
@@ -1238,7 +1252,7 @@
 - `gov.ts` — Exports TIMELOCK_ADMIN_ROLE, PROPOSER_ROLE, EXECUTOR_ROLE, CANCELLER_ROLE + 2 more (~144 tok)
 - `hash.ts` — Exports encodeData, decodeData, hashData, hashString + 2 more (~263 tok)
 - `jit.ts` — Exports executeJitOrder (~1154 tok)
-- `keys.ts` — Exports WNT, NONCE, FEE_RECEIVER, HOLDING_ADDRESS + 149 more (~13642 tok)
+- `keys.ts` — Exports WNT, NONCE, FEE_RECEIVER, HOLDING_ADDRESS + 148 more (~13732 tok)
 - `liquidation.ts` — Exports executeLiquidation (~516 tok)
 - `market.ts` — Exports DEFAULT_MARKET_TYPE, getMarketCount, getMarketKeys, getPoolAmount + 9 more (~1572 tok)
 - `math.ts` — Exports MAX_UINT8, MAX_UINT32, MAX_UINT64, PRECISION + 12 more (~1247 tok)

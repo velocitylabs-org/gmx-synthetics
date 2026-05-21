@@ -1,0 +1,28 @@
+
+> gmx-synthetics@1.0.0 config:features:validate:mainnet
+> bash scripts/configs/run-feature-validation.sh base
+
+WARNING: You are currently using Node.js v16.20.1, which is not supported by Hardhat. This can lead to unexpected behavior. See https://v2.hardhat.org/nodejs-versions
+
+
+Running config orchestrator...
+TARGET_DISABLED_STATE (expected bool): true
+CREATE_SHIFT_FEATURE_DISABLED module=ShiftHandler (0xA7D5D56a7D436380eA7F22EC2F265A1d7e2A75d7) expected=true actual=true
+CANCEL_SHIFT_FEATURE_DISABLED module=ShiftHandler (0xA7D5D56a7D436380eA7F22EC2F265A1d7e2A75d7) expected=true actual=true
+EXECUTE_SHIFT_FEATURE_DISABLED module=ShiftHandler (0xA7D5D56a7D436380eA7F22EC2F265A1d7e2A75d7) expected=true actual=true
+EXECUTE_ATOMIC_WITHDRAWAL_FEATURE_DISABLED module=WithdrawalHandler (0xA27F558C80b664722dffA3f7375b7E9647D5fe00) expected=true actual=true
+JIT_FEATURE_DISABLED module=JitOrderHandler (0x9Ec4C4fDA27649b827385AE04D49A64dE193FF0f) expected=true actual=true
+SUBACCOUNT_FEATURE_DISABLED module=SubaccountRouter (0x5bb2c5497170C16D4D16F9bC32885104601c095f) expected=true actual=true
+SUBACCOUNT_FEATURE_DISABLED module=SubaccountGelatoRelayRouter (0x202676dED4d7432825a2A2aaEe95E8b53DdD45c6) expected=true actual=true
+SUBACCOUNT_FEATURE_DISABLED module=MultichainSubaccountRouter (0x4fc16A2b8E49d97418D334621412139389963AD6) expected=true actual=true
+GASLESS_FEATURE_DISABLED module=GelatoRelayRouter (0xDc4eabBc5cDadbe1d4956C803053787B519A3E6C) expected=true actual=true
+GASLESS_FEATURE_DISABLED module=SubaccountGelatoRelayRouter (0x202676dED4d7432825a2A2aaEe95E8b53DdD45c6) expected=true actual=true
+GASLESS_FEATURE_DISABLED module=MultichainClaimsRouter (0x787c099ACcC4789270252BC9c8ee667d9F0D125F) expected=true actual=true
+GASLESS_FEATURE_DISABLED module=MultichainTransferRouter (0x6b5bcfFC8f45C648371Ed3c363589375d8Da4147) expected=true actual=true
+GASLESS_FEATURE_DISABLED module=MultichainOrderRouter (0xA1CE56655beA534afaF0F74C70A1C73Ed845Eb7C) expected=true actual=true
+GASLESS_FEATURE_DISABLED module=MultichainGmRouter (0x385A9cd4Db69FC59fc2823831aBf08AaA98c9859) expected=true actual=true
+GASLESS_FEATURE_DISABLED module=MultichainGlvRouter (0x7517099A2a98a17C7154185a361b7F42c14DA4D4) expected=true actual=true
+GASLESS_FEATURE_DISABLED module=MultichainSubaccountRouter (0x4fc16A2b8E49d97418D334621412139389963AD6) expected=true actual=true
+
+Verification passed: all feature flags matched expected state.
+Completed config orchestrator.

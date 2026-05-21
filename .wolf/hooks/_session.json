@@ -1,105 +1,28 @@
 {
-  "session_id": "session-2026-05-12-0936",
-  "started": "2026-05-12T07:36:59.344Z",
+  "session_id": "session-2026-05-21-2220",
+  "started": "2026-05-21T20:20:20.448Z",
   "files_read": {
-    "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/chainlinkProvider/signedPrices.ts": {
+    "/Users/n/code/gmx-synthetics/scripts/configs/helpers/featureFlagSpecs.ts": {
+      "count": 1,
+      "tokens": 3218,
+      "first_read": "2026-05-21T20:20:50.958Z"
+    },
+    "/Users/n/code/gmx-synthetics/scripts/configs/index.ts": {
       "count": 1,
       "tokens": 0,
-      "first_read": "2026-05-12T07:40:04.213Z"
+      "first_read": "2026-05-21T20:20:51.549Z"
     },
-    "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/chainlinkProvider/chainlinkReportFetcher.ts": {
+    "/Users/n/code/gmx-synthetics/scripts/configs/validations/verifyFeaturesState.ts": {
       "count": 1,
-      "tokens": 512,
-      "first_read": "2026-05-12T07:40:07.541Z"
-    },
-    "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts": {
-      "count": 3,
-      "tokens": 2668,
-      "first_read": "2026-05-12T08:05:35.231Z"
-    },
-    "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/closePositionOrder.ts": {
-      "count": 1,
-      "tokens": 1580,
-      "first_read": "2026-05-12T08:35:27.257Z"
-    },
-    "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/contracts/liquidation/LiquidationUtils.sol": {
-      "count": 1,
-      "tokens": 1122,
-      "first_read": "2026-05-12T08:35:45.942Z"
-    },
-    "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/contracts/position/PositionUtils.sol": {
-      "count": 2,
-      "tokens": 9145,
-      "first_read": "2026-05-12T08:37:07.460Z"
-    },
-    "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/config/markets.ts": {
-      "count": 6,
-      "tokens": 62460,
-      "first_read": "2026-05-12T08:48:08.825Z"
-    },
-    "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/contracts/market/MarketUtils.sol": {
-      "count": 1,
-      "tokens": 37575,
-      "first_read": "2026-05-12T14:46:52.638Z"
+      "tokens": 0,
+      "first_read": "2026-05-21T20:20:51.638Z"
     }
   },
-  "files_written": [
-    {
-      "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
-      "action": "edit",
-      "tokens": 23,
-      "at": "2026-05-12T07:41:17.883Z"
-    },
-    {
-      "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
-      "action": "edit",
-      "tokens": 129,
-      "at": "2026-05-12T07:41:57.777Z"
-    },
-    {
-      "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
-      "action": "edit",
-      "tokens": 167,
-      "at": "2026-05-12T08:05:44.652Z"
-    },
-    {
-      "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/printPositionInfo.ts",
-      "action": "create",
-      "tokens": 2299,
-      "at": "2026-05-12T08:38:16.418Z"
-    },
-    {
-      "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/printPositionInfo.ts",
-      "action": "edit",
-      "tokens": 43,
-      "at": "2026-05-12T08:42:59.309Z"
-    },
-    {
-      "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/printPositionInfo.ts",
-      "action": "edit",
-      "tokens": 69,
-      "at": "2026-05-12T08:43:12.577Z"
-    },
-    {
-      "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/printPositionInfo.ts",
-      "action": "edit",
-      "tokens": 24,
-      "at": "2026-05-12T08:43:20.614Z"
-    },
-    {
-      "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/printPositionInfo.ts",
-      "action": "edit",
-      "tokens": 50,
-      "at": "2026-05-12T08:44:21.812Z"
-    }
-  ],
-  "edit_counts": {
-    "scripts/nivo/openPositionOrder.ts": 3,
-    "scripts/nivo/printPositionInfo.ts": 5
-  },
-  "anatomy_hits": 7,
-  "anatomy_misses": 1,
-  "repeated_reads_warned": 8,
+  "files_written": [],
+  "edit_counts": {},
+  "anatomy_hits": 1,
+  "anatomy_misses": 2,
+  "repeated_reads_warned": 0,
   "cerebrum_warnings": 0,
-  "stop_count": 33
+  "stop_count": 0
 }

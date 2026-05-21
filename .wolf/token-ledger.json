@@ -2,14 +2,14 @@
   "version": 1,
   "created_at": "2026-04-28T10:25:51.703Z",
   "lifetime": {
-    "total_tokens_estimated": 1323547,
-    "total_reads": 504,
-    "total_writes": 194,
-    "total_sessions": 9,
-    "anatomy_hits": 392,
-    "anatomy_misses": 112,
-    "repeated_reads_blocked": 120,
-    "estimated_savings_vs_bare_cli": 3004971
+    "total_tokens_estimated": 1411492,
+    "total_reads": 588,
+    "total_writes": 259,
+    "total_sessions": 18,
+    "anatomy_hits": 438,
+    "anatomy_misses": 149,
+    "repeated_reads_blocked": 135,
+    "estimated_savings_vs_bare_cli": 3027051
   },
   "sessions": [
     {
@@ -5450,6 +5450,1036 @@
         "writes_count": 8,
         "repeated_reads_blocked": 8,
         "anatomy_lookups": 7
+      }
+    },
+    {
+      "id": "session-2026-05-21-1156",
+      "started": "2026-05-21T09:56:05.491Z",
+      "ended": "2026-05-21T09:59:19.749Z",
+      "reads": [
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/configs/disableInactiveMarkets.ts",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/configs/applyPoolRiskGuards.ts",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/helpers/getConfigKeeperSigner.ts",
+          "tokens_estimated": 0,
+          "was_repeated": true,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/test/config/VerifySwapReconfiguration.ts",
+          "tokens_estimated": 0,
+          "was_repeated": true,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/configs/disableOrderCreateFeatures.ts",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/configs/disableOrderExecuteFeatures.ts",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/helpers/applyFeatureFlagWrites.ts",
+          "tokens_estimated": 0,
+          "was_repeated": true,
+          "anatomy_had_description": false
+        }
+      ],
+      "writes": [],
+      "totals": {
+        "input_tokens_estimated": 0,
+        "output_tokens_estimated": 0,
+        "reads_count": 7,
+        "writes_count": 0,
+        "repeated_reads_blocked": 3,
+        "anatomy_lookups": 0
+      }
+    },
+    {
+      "id": "session-2026-05-21-1156",
+      "started": "2026-05-21T09:56:05.491Z",
+      "ended": "2026-05-21T10:06:12.336Z",
+      "reads": [
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/configs/disableInactiveMarkets.ts",
+          "tokens_estimated": 0,
+          "was_repeated": true,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/configs/applyPoolRiskGuards.ts",
+          "tokens_estimated": 0,
+          "was_repeated": true,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/helpers/getConfigKeeperSigner.ts",
+          "tokens_estimated": 0,
+          "was_repeated": true,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/test/config/VerifySwapReconfiguration.ts",
+          "tokens_estimated": 0,
+          "was_repeated": true,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/configs/disableOrderCreateFeatures.ts",
+          "tokens_estimated": 0,
+          "was_repeated": true,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/configs/disableOrderExecuteFeatures.ts",
+          "tokens_estimated": 0,
+          "was_repeated": true,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/helpers/applyFeatureFlagWrites.ts",
+          "tokens_estimated": 0,
+          "was_repeated": true,
+          "anatomy_had_description": false
+        }
+      ],
+      "writes": [
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/helpers/getConfigKeeperSigner.ts",
+          "tokens_estimated": 796,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/helpers/applyFeatureFlagWrites.ts",
+          "tokens_estimated": 20,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/helpers/applyFeatureFlagWrites.ts",
+          "tokens_estimated": 68,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/helpers/applyFeatureFlagWrites.ts",
+          "tokens_estimated": 4,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/configs/disableInactiveMarkets.ts",
+          "tokens_estimated": 22,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/configs/applyPoolRiskGuards.ts",
+          "tokens_estimated": 22,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/configs/disableOrderExecuteFeatures.ts",
+          "tokens_estimated": 22,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/configs/disableOrderCreateFeatures.ts",
+          "tokens_estimated": 22,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/configs/disableInactiveMarkets.ts",
+          "tokens_estimated": 47,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/configs/applyPoolRiskGuards.ts",
+          "tokens_estimated": 47,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/configs/disableOrderExecuteFeatures.ts",
+          "tokens_estimated": 47,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/configs/disableOrderCreateFeatures.ts",
+          "tokens_estimated": 47,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/configs/disableInactiveMarkets.ts",
+          "tokens_estimated": 7,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/configs/applyPoolRiskGuards.ts",
+          "tokens_estimated": 7,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/configs/disableOrderExecuteFeatures.ts",
+          "tokens_estimated": 7,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/configs/disableOrderCreateFeatures.ts",
+          "tokens_estimated": 7,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/configs/disableInactiveMarkets.ts",
+          "tokens_estimated": 4,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/configs/applyPoolRiskGuards.ts",
+          "tokens_estimated": 4,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/configs/disableOrderExecuteFeatures.ts",
+          "tokens_estimated": 4,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/configs/disableOrderCreateFeatures.ts",
+          "tokens_estimated": 4,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/configs/applyPoolRiskGuards.ts",
+          "tokens_estimated": 20,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/configs/disableOrderExecuteFeatures.ts",
+          "tokens_estimated": 20,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/configs/disableOrderCreateFeatures.ts",
+          "tokens_estimated": 20,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/test/config/VerifySwapReconfiguration.ts",
+          "tokens_estimated": 25,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/configs/disableInactiveMarkets.ts",
+          "tokens_estimated": 20,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/test/config/VerifySwapReconfiguration.ts",
+          "tokens_estimated": 7,
+          "action": "edit"
+        }
+      ],
+      "totals": {
+        "input_tokens_estimated": 0,
+        "output_tokens_estimated": 1320,
+        "reads_count": 7,
+        "writes_count": 26,
+        "repeated_reads_blocked": 7,
+        "anatomy_lookups": 0
+      }
+    },
+    {
+      "id": "session-2026-05-21-1210",
+      "started": "2026-05-21T10:10:04.422Z",
+      "ended": "2026-05-21T10:10:53.685Z",
+      "reads": [
+        {
+          "file": "/Users/n/code/gmx-synthetics/.eslintrc",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/.eslintrc.json",
+          "tokens_estimated": 206,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        }
+      ],
+      "writes": [
+        {
+          "file": "/Users/n/code/gmx-synthetics/.eslintrc.json",
+          "tokens_estimated": 36,
+          "action": "edit"
+        }
+      ],
+      "totals": {
+        "input_tokens_estimated": 206,
+        "output_tokens_estimated": 36,
+        "reads_count": 2,
+        "writes_count": 1,
+        "repeated_reads_blocked": 0,
+        "anatomy_lookups": 1
+      }
+    },
+    {
+      "id": "session-2026-05-21-1340",
+      "started": "2026-05-21T11:40:09.848Z",
+      "ended": "2026-05-21T11:41:37.444Z",
+      "reads": [
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/configs/disableInactiveMarkets.ts",
+          "tokens_estimated": 1196,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/configs/applyPoolRiskGuards.ts",
+          "tokens_estimated": 2193,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/configs/disableOrderExecuteFeatures.ts",
+          "tokens_estimated": 877,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        }
+      ],
+      "writes": [
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/configs/disableInactiveMarkets.ts",
+          "tokens_estimated": 29,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/configs/applyPoolRiskGuards.ts",
+          "tokens_estimated": 31,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/configs/disableOrderExecuteFeatures.ts",
+          "tokens_estimated": 29,
+          "action": "edit"
+        }
+      ],
+      "totals": {
+        "input_tokens_estimated": 4266,
+        "output_tokens_estimated": 89,
+        "reads_count": 3,
+        "writes_count": 3,
+        "repeated_reads_blocked": 0,
+        "anatomy_lookups": 3
+      }
+    },
+    {
+      "id": "session-2026-05-21-1340",
+      "started": "2026-05-21T11:40:09.848Z",
+      "ended": "2026-05-21T11:43:16.223Z",
+      "reads": [
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/configs/disableInactiveMarkets.ts",
+          "tokens_estimated": 1196,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/configs/applyPoolRiskGuards.ts",
+          "tokens_estimated": 2193,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/configs/disableOrderExecuteFeatures.ts",
+          "tokens_estimated": 877,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        }
+      ],
+      "writes": [
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/configs/disableInactiveMarkets.ts",
+          "tokens_estimated": 29,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/configs/applyPoolRiskGuards.ts",
+          "tokens_estimated": 31,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/configs/disableOrderExecuteFeatures.ts",
+          "tokens_estimated": 29,
+          "action": "edit"
+        }
+      ],
+      "totals": {
+        "input_tokens_estimated": 4266,
+        "output_tokens_estimated": 89,
+        "reads_count": 3,
+        "writes_count": 3,
+        "repeated_reads_blocked": 0,
+        "anatomy_lookups": 3
+      }
+    },
+    {
+      "id": "session-2026-05-21-1344",
+      "started": "2026-05-21T11:44:04.616Z",
+      "ended": "2026-05-21T11:46:17.396Z",
+      "reads": [
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/helpers/getConfigKeeperSigner.ts",
+          "tokens_estimated": 1087,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/configs/disableOrderCreateFeatures.ts",
+          "tokens_estimated": 871,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/configs/applyPoolRiskGuards.ts",
+          "tokens_estimated": 2191,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/helpers/applyFeatureFlagWrites.ts",
+          "tokens_estimated": 703,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/configs/disableInactiveMarkets.ts",
+          "tokens_estimated": 1194,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/configs/disableOrderExecuteFeatures.ts",
+          "tokens_estimated": 874,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        }
+      ],
+      "writes": [
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/configs/disableOrderCreateFeatures.ts",
+          "tokens_estimated": 24,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/configs/applyPoolRiskGuards.ts",
+          "tokens_estimated": 24,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/helpers/applyFeatureFlagWrites.ts",
+          "tokens_estimated": 21,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/configs/disableInactiveMarkets.ts",
+          "tokens_estimated": 24,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/configs/disableOrderExecuteFeatures.ts",
+          "tokens_estimated": 24,
+          "action": "edit"
+        }
+      ],
+      "totals": {
+        "input_tokens_estimated": 6920,
+        "output_tokens_estimated": 117,
+        "reads_count": 6,
+        "writes_count": 5,
+        "repeated_reads_blocked": 0,
+        "anatomy_lookups": 6
+      }
+    },
+    {
+      "id": "session-2026-05-21-1344",
+      "started": "2026-05-21T11:44:04.616Z",
+      "ended": "2026-05-21T11:46:29.884Z",
+      "reads": [
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/helpers/getConfigKeeperSigner.ts",
+          "tokens_estimated": 1087,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/configs/disableOrderCreateFeatures.ts",
+          "tokens_estimated": 871,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/configs/applyPoolRiskGuards.ts",
+          "tokens_estimated": 2191,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/helpers/applyFeatureFlagWrites.ts",
+          "tokens_estimated": 703,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/configs/disableInactiveMarkets.ts",
+          "tokens_estimated": 1194,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/configs/disableOrderExecuteFeatures.ts",
+          "tokens_estimated": 874,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        }
+      ],
+      "writes": [
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/configs/disableOrderCreateFeatures.ts",
+          "tokens_estimated": 24,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/configs/applyPoolRiskGuards.ts",
+          "tokens_estimated": 24,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/helpers/applyFeatureFlagWrites.ts",
+          "tokens_estimated": 21,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/configs/disableInactiveMarkets.ts",
+          "tokens_estimated": 24,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/configs/disableOrderExecuteFeatures.ts",
+          "tokens_estimated": 24,
+          "action": "edit"
+        }
+      ],
+      "totals": {
+        "input_tokens_estimated": 6920,
+        "output_tokens_estimated": 117,
+        "reads_count": 6,
+        "writes_count": 5,
+        "repeated_reads_blocked": 0,
+        "anatomy_lookups": 6
+      }
+    },
+    {
+      "id": "session-2026-05-21-1344",
+      "started": "2026-05-21T11:44:04.616Z",
+      "ended": "2026-05-21T11:50:05.052Z",
+      "reads": [
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/helpers/getConfigKeeperSigner.ts",
+          "tokens_estimated": 1087,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/configs/disableOrderCreateFeatures.ts",
+          "tokens_estimated": 871,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/configs/applyPoolRiskGuards.ts",
+          "tokens_estimated": 2191,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/helpers/applyFeatureFlagWrites.ts",
+          "tokens_estimated": 703,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/configs/disableInactiveMarkets.ts",
+          "tokens_estimated": 1194,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/configs/disableOrderExecuteFeatures.ts",
+          "tokens_estimated": 874,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/utils/keys.ts",
+          "tokens_estimated": 13642,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/helpers/featureFlagSpecs.ts",
+          "tokens_estimated": 3220,
+          "was_repeated": true,
+          "anatomy_had_description": false
+        }
+      ],
+      "writes": [
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/configs/disableOrderCreateFeatures.ts",
+          "tokens_estimated": 24,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/configs/applyPoolRiskGuards.ts",
+          "tokens_estimated": 24,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/helpers/applyFeatureFlagWrites.ts",
+          "tokens_estimated": 21,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/configs/disableInactiveMarkets.ts",
+          "tokens_estimated": 24,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/configs/disableOrderExecuteFeatures.ts",
+          "tokens_estimated": 24,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/utils/keys.ts",
+          "tokens_estimated": 42,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/helpers/featureFlagSpecs.ts",
+          "tokens_estimated": 1,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/helpers/featureFlagSpecs.ts",
+          "tokens_estimated": 17,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/helpers/featureFlagSpecs.ts",
+          "tokens_estimated": 14,
+          "action": "edit"
+        }
+      ],
+      "totals": {
+        "input_tokens_estimated": 23782,
+        "output_tokens_estimated": 191,
+        "reads_count": 8,
+        "writes_count": 9,
+        "repeated_reads_blocked": 2,
+        "anatomy_lookups": 7
+      }
+    },
+    {
+      "id": "session-2026-05-21-1344",
+      "started": "2026-05-21T11:44:04.616Z",
+      "ended": "2026-05-21T11:50:20.329Z",
+      "reads": [
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/helpers/getConfigKeeperSigner.ts",
+          "tokens_estimated": 1087,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/configs/disableOrderCreateFeatures.ts",
+          "tokens_estimated": 871,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/configs/applyPoolRiskGuards.ts",
+          "tokens_estimated": 2191,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/helpers/applyFeatureFlagWrites.ts",
+          "tokens_estimated": 703,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/configs/disableInactiveMarkets.ts",
+          "tokens_estimated": 1194,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/configs/disableOrderExecuteFeatures.ts",
+          "tokens_estimated": 874,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/utils/keys.ts",
+          "tokens_estimated": 13642,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/helpers/featureFlagSpecs.ts",
+          "tokens_estimated": 3220,
+          "was_repeated": true,
+          "anatomy_had_description": false
+        }
+      ],
+      "writes": [
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/configs/disableOrderCreateFeatures.ts",
+          "tokens_estimated": 24,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/configs/applyPoolRiskGuards.ts",
+          "tokens_estimated": 24,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/helpers/applyFeatureFlagWrites.ts",
+          "tokens_estimated": 21,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/configs/disableInactiveMarkets.ts",
+          "tokens_estimated": 24,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/configs/disableOrderExecuteFeatures.ts",
+          "tokens_estimated": 24,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/utils/keys.ts",
+          "tokens_estimated": 42,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/helpers/featureFlagSpecs.ts",
+          "tokens_estimated": 1,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/helpers/featureFlagSpecs.ts",
+          "tokens_estimated": 17,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/helpers/featureFlagSpecs.ts",
+          "tokens_estimated": 14,
+          "action": "edit"
+        }
+      ],
+      "totals": {
+        "input_tokens_estimated": 23782,
+        "output_tokens_estimated": 191,
+        "reads_count": 8,
+        "writes_count": 9,
+        "repeated_reads_blocked": 2,
+        "anatomy_lookups": 7
+      }
+    },
+    {
+      "id": "session-2026-05-21-1414",
+      "started": "2026-05-21T12:14:43.277Z",
+      "ended": "2026-05-21T12:15:33.457Z",
+      "reads": [
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/helpers/applyFeatureFlagWrites.ts",
+          "tokens_estimated": 704,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/configs/disableOrderCreateFeatures.ts",
+          "tokens_estimated": 871,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/configs/disableOrderExecuteFeatures.ts",
+          "tokens_estimated": 875,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        }
+      ],
+      "writes": [],
+      "totals": {
+        "input_tokens_estimated": 2450,
+        "output_tokens_estimated": 0,
+        "reads_count": 3,
+        "writes_count": 0,
+        "repeated_reads_blocked": 0,
+        "anatomy_lookups": 3
+      }
+    },
+    {
+      "id": "session-2026-05-21-1414",
+      "started": "2026-05-21T12:14:43.277Z",
+      "ended": "2026-05-21T12:16:41.911Z",
+      "reads": [
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/helpers/applyFeatureFlagWrites.ts",
+          "tokens_estimated": 704,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/configs/disableOrderCreateFeatures.ts",
+          "tokens_estimated": 871,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/configs/disableOrderExecuteFeatures.ts",
+          "tokens_estimated": 875,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/package.json",
+          "tokens_estimated": 1521,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        }
+      ],
+      "writes": [
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/helpers/applyFeatureFlagWrites.ts",
+          "tokens_estimated": 165,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/helpers/applyFeatureFlagWrites.ts",
+          "tokens_estimated": 22,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/package.json",
+          "tokens_estimated": 0,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/package.json",
+          "tokens_estimated": 6,
+          "action": "edit"
+        }
+      ],
+      "totals": {
+        "input_tokens_estimated": 3971,
+        "output_tokens_estimated": 193,
+        "reads_count": 4,
+        "writes_count": 4,
+        "repeated_reads_blocked": 0,
+        "anatomy_lookups": 4
+      }
+    },
+    {
+      "id": "session-2026-05-21-2151",
+      "started": "2026-05-21T19:51:02.293Z",
+      "ended": "2026-05-21T19:55:46.463Z",
+      "reads": [
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/configs/setGaslessFeatureState.ts",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/configs/setJitFeatureState.ts",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/configs/setSubaccountFeatureState.ts",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/configs/applyPoolRiskGuards.ts",
+          "tokens_estimated": 2192,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/validations/verifyGaslessFeatureState.ts",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/validations/verifyJitFeatureState.ts",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/validations/verifySubaccountFeatureState.ts",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/validations/verifyPoolRiskGuards.ts",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/helpers/applyFeatureFlagWrites.ts",
+          "tokens_estimated": 688,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/helpers/featureFlagSpecs.ts",
+          "tokens_estimated": 3218,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/validations/verifyFeatureFlagStates.ts",
+          "tokens_estimated": 0,
+          "was_repeated": true,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/validations/runInvariantChecks.ts",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/configs/disableOrderCreateFeatures.ts",
+          "tokens_estimated": 871,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/configs/disableOrderExecuteFeatures.ts",
+          "tokens_estimated": 875,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/validations/verifyFeaturesState.ts",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/configs/setShiftFeaturesState.ts",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/validations/printRolesResolved.ts",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/validations/verifyVirtualIdAllowlist.ts",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/configs/disableInactiveMarkets.ts",
+          "tokens_estimated": 1195,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/helpers/configRuntime.ts",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/helpers/getConfigKeeperRoleSigner.ts",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/helpers/getDeployedContract.ts",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/validations/verifyAtomicWithdrawalFeatureState.ts",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/validations/verifyShiftCreateFeatureState.ts",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/validations/verifySameTokenInvariants.ts",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/validations/verifyFeatureValidationProfile.ts",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/validations/verifyRedactionState.ts",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        }
+      ],
+      "writes": [],
+      "totals": {
+        "input_tokens_estimated": 9039,
+        "output_tokens_estimated": 0,
+        "reads_count": 27,
+        "writes_count": 0,
+        "repeated_reads_blocked": 1,
+        "anatomy_lookups": 6
       }
     }
   ],

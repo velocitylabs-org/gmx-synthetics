@@ -30,7 +30,7 @@ async function impersonateIfNeeded(hre: HardhatRuntimeEnvironment, address: stri
   }
 }
 
-async function resolveConfigKeeperAddress(hre: HardhatRuntimeEnvironment): Promise<string> {
+async function resolveConfigKeeperRoleAddress(hre: HardhatRuntimeEnvironment): Promise<string> {
   if (process.env.CONFIG_KEEPER) {
     return process.env.CONFIG_KEEPER;
   }
@@ -44,7 +44,7 @@ async function resolveConfigKeeperAddress(hre: HardhatRuntimeEnvironment): Promi
   );
 }
 
-export async function getConfigKeeperSigner(hre: HardhatRuntimeEnvironment) {
+export async function getConfigKeeperRoleSigner(hre: HardhatRuntimeEnvironment) {
   const roleStore = await getDeployedContract(hre, "RoleStore");
   const configKeeperRoleKey = ethers.utils.keccak256(
     ethers.utils.defaultAbiCoder.encode(["string"], ["CONFIG_KEEPER"])
@@ -62,7 +62,7 @@ export async function getConfigKeeperSigner(hre: HardhatRuntimeEnvironment) {
     ).find(Boolean);
 
     if (signerWithRole) {
-      return { configKeeperAddress: signerWithRole.address, configKeeperSigner: signerWithRole };
+      return { configKeeperRoleAddress: signerWithRole.address, configKeeperRoleSigner: signerWithRole };
     }
 
     throw new Error(
@@ -70,8 +70,8 @@ export async function getConfigKeeperSigner(hre: HardhatRuntimeEnvironment) {
     );
   }
 
-  const configKeeperAddress = await resolveConfigKeeperAddress(hre);
-  const directSigner = signers.find((signer) => signer.address.toLowerCase() === configKeeperAddress.toLowerCase());
+  const configKeeperRoleAddress = await resolveConfigKeeperRoleAddress(hre);
+  const directSigner = signers.find((signer) => signer.address.toLowerCase() === configKeeperRoleAddress.toLowerCase());
 
   if (directSigner) {
     const hasConfigKeeperRole = await roleStore.hasRole(directSigner.address, configKeeperRoleKey);
@@ -81,26 +81,26 @@ export async function getConfigKeeperSigner(hre: HardhatRuntimeEnvironment) {
           `Use a wallet with full CONFIG_KEEPER or set CONFIG_KEEPER and load the matching private key.`
       );
     }
-    return { configKeeperAddress, configKeeperSigner: directSigner };
+    return { configKeeperRoleAddress, configKeeperRoleSigner: directSigner };
   }
 
-  await impersonateIfNeeded(hre, configKeeperAddress);
-  const configKeeperSigner = await hre.ethers.getSigner(configKeeperAddress);
+  await impersonateIfNeeded(hre, configKeeperRoleAddress);
+  const configKeeperRoleSigner = await hre.ethers.getSigner(configKeeperRoleAddress);
 
   if (!isLocalForkNetwork(hre)) {
     throw new Error(
-      `No signer available for CONFIG_KEEPER ${configKeeperAddress}. Ensure the keeper key is loaded in your network account config.`
+      `No signer available for CONFIG_KEEPER ${configKeeperRoleAddress}. Ensure the keeper key is loaded in your network account config.`
     );
   }
 
-  const hasConfigKeeperRole = await roleStore.hasRole(configKeeperSigner.address, configKeeperRoleKey);
+  const hasConfigKeeperRole = await roleStore.hasRole(configKeeperRoleSigner.address, configKeeperRoleKey);
 
   if (!hasConfigKeeperRole) {
     throw new Error(
-      `Selected signer ${configKeeperSigner.address} is not CONFIG_KEEPER on-chain. ` +
+      `Selected signer ${configKeeperRoleSigner.address} is not CONFIG_KEEPER on-chain. ` +
         `Set CONFIG_KEEPER to a full CONFIG_KEEPER address and run with the matching private key loaded.`
     );
   }
 
-  return { configKeeperAddress, configKeeperSigner };
+  return { configKeeperRoleAddress, configKeeperRoleSigner };
 }
