@@ -1,6 +1,6 @@
 # anatomy.md
 
-> Auto-maintained by OpenWolf. Last scanned: 2026-05-21T11:50:01.070Z
+> Auto-maintained by OpenWolf. Last scanned: 2026-05-21T12:16:35.267Z
 > Files: 971 tracked | Anatomy hits: 0 | Misses: 0
 
 ## ./
@@ -24,7 +24,7 @@
 - `index.html` — GMX Synthetics (~64 tok)
 - `LICENSE` — Project license (~1140 tok)
 - `metrics.ts` — options: run (~859 tok)
-- `package.json` — Node.js package manifest (~1521 tok)
+- `package.json` — Node.js package manifest (~2170 tok)
 - `pnpm-lock.yaml` — pnpm lock file (~163901 tok)
 - `README.md` — Project documentation (~12369 tok)
 - `tenderly.yaml` (~24 tok)
@@ -933,7 +933,7 @@
 
 ## scripts/configs/helpers/
 
-- `applyFeatureFlagWrites.ts` — * Writes Config.setBool entries for the provided feature specs (dry-run unless WRITE=true is specifi (~704 tok)
+- `applyFeatureFlagWrites.ts` — * Writes Config.setBool entries for the provided feature specs (dry-run unless WRITE=true is specifi (~688 tok)
 - `featureFlagSpecs.ts` — Exports ManagedFeatureId, ModuleFeatureSpec, OrderTypeFeatureSpec, ManagedFeatureSpec + 12 more (~3218 tok)
 - `getConfigKeeperSigner.ts` — Exports getConfigKeeperRoleSigner (~1087 tok)
 

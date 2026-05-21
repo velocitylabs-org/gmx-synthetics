@@ -204,3 +204,13 @@
 | 13:50 | Edited scripts/configs/helpers/featureFlagSpecs.ts | inline fix | ~14 |
 | 13:50 | Session end: 9 writes across 7 files (disableOrderCreateFeatures.ts, applyPoolRiskGuards.ts, applyFeatureFlagWrites.ts, disableInactiveMarkets.ts, disableOrderExecuteFeatures.ts) | 8 reads | ~23973 tok |
 | 13:50 | Session end: 9 writes across 7 files (disableOrderCreateFeatures.ts, applyPoolRiskGuards.ts, applyFeatureFlagWrites.ts, disableInactiveMarkets.ts, disableOrderExecuteFeatures.ts) | 8 reads | ~23973 tok |
+
+## Session: 2026-05-21 14:14
+
+| Time | Action | File(s) | Outcome | ~Tokens |
+|------|--------|---------|---------|--------|
+| 14:16 | Edited scripts/configs/helpers/applyFeatureFlagWrites.ts | modified applyFeatureFlagWrites() | ~165 |
+| 14:16 | Edited scripts/configs/helpers/applyFeatureFlagWrites.ts | "TARGET_DISABLED_STATE (wr" → "IS_DISABLED (write ${targ" | ~22 |
+| 14:16 | Edited package.json | — | ~0 |
+| 14:16 | Edited package.json | inline fix | ~6 |
+| 14:16 | Session end: 4 writes across 2 files (applyFeatureFlagWrites.ts, package.json) | 4 reads | ~4164 tok |

@@ -8,14 +8,13 @@ import { getConfigKeeperRoleSigner } from "./getConfigKeeperRoleSigner";
 /**
  *
  * Writes Config.setBool entries for the provided feature specs (dry-run unless WRITE=true is specified).
- * TARGET_DISABLED_STATE=true → disable the feature (write true to the DataStore)
- * TARGET_DISABLED_STATE=false → enable the feature (write false to the DataStore)
+ * IS_DISABLED=true → disable the feature (write true to the DataStore)
+ * IS_DISABLED=false → enable the feature (write false to the DataStore)
  */
 export async function applyFeatureFlagWrites(hre: HardhatRuntimeEnvironment, specs: ManagedFeatureSpec[]) {
   const config = await getDeployedContract(hre, "Config");
   const write = process.env.WRITE === "true";
-  const targetDisabled =
-    process.env.TARGET_DISABLED_STATE === undefined || process.env.TARGET_DISABLED_STATE === "true";
+  const targetDisabled = process.env.IS_DISABLED === undefined || process.env.IS_DISABLED === "true";
 
   const rows: { label: string; module: string; address: string }[] = [];
   const multicallWriteParams: string[] = [];
@@ -38,7 +37,7 @@ export async function applyFeatureFlagWrites(hre: HardhatRuntimeEnvironment, spe
   const signedConfig = config.connect(configKeeperRoleSigner);
 
   console.log(`Config keeper role address: ${configKeeperRoleAddress}`);
-  console.log(`TARGET_DISABLED_STATE (write ${targetDisabled}): ${targetDisabled}`);
+  console.log(`IS_DISABLED (write ${targetDisabled}): ${targetDisabled}`);
   console.log(`Prepared ${multicallWriteParams.length} config updates`);
   rows.forEach((r) => console.log(`- ${r.label} | ${r.module} (${r.address})`));
 
