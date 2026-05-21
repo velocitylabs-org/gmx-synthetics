@@ -1,7 +1,7 @@
 # anatomy.md
 
-> Auto-maintained by OpenWolf. Last scanned: 2026-05-07T08:40:56.852Z
-> Files: 962 tracked | Anatomy hits: 0 | Misses: 0
+> Auto-maintained by OpenWolf. Last scanned: 2026-05-12T08:44:21.783Z
+> Files: 963 tracked | Anatomy hits: 0 | Misses: 0
 
 ## ./
 
@@ -41,7 +41,7 @@
 
 ## .github/workflows/
 
-- `deploy-sync.yml` — on main. See VELOCITY_DOCS/DEPLOYMENT_SYNC.md. (~294 tok)
+- `deploy-sync.yml` — on push to main with `deployments/**` changes; calls the bare `upsert-deployments` npm script with `SUPABASE_URL`/`SUPABASE_SERVICE_ROLE_KEY` from GitHub Actions secrets (writes to **prod** Supabase). No Doppler CLI on the runner. See VELOCITY_DOCS/DEPLOYMENT_SYNC.md. (~294 tok)
 - `main.yml` — CI: CI (~203 tok)
 
 ## .husky/
@@ -83,7 +83,7 @@
 
 ## ci/scripts/
 
-- `upsert-deployments.ts` — Reads deployment artifacts, bumps the chain version, and upserts to Supabase. (~1678 tok)
+- `upsert-deployments.ts` — Reads deployment artifacts, bumps the chain version, and upserts to Supabase. The `upsert-deployments` npm script is intentionally **bare** (no `doppler run` wrapper). Operators wrap on the CLI: `doppler run -p nivo -c stg -- pnpm run upsert-deployments ...` (staging). CI (`deploy-sync.yml`) supplies creds via GitHub Actions secrets (prod). NEVER bake `doppler run` into the npm script — the GH runner has no Doppler CLI. (~1678 tok)
 
 ## config/
 
@@ -956,11 +956,12 @@
 - `cancelDepositOrder.ts` — Cancel a deposit created with createDepositNivoMarket.ts, uses the WALLET_TESTER_PRIVATE_KEY. (~898 tok)
 - `cancelPositionOrder.ts` — Cancel a position order created with openPositionOrder.ts using WALLET_TESTER_PRIVATE_KEY. (~830 tok)
 - `closePositionOrder.ts` — createCloseOrder: main (~1580 tok)
-- `depositOrder.ts` — Create a deposit into a Nivo FX market (GBP/USDC). Uses the WALLET_TESTER_PRIVATE_KEY. (~2106 tok)
+- `depositOrder.ts` — Create a deposit into a Nivo FX market (FX/USDC). Uses the WALLET_TESTER_PRIVATE_KEY. (~2296 tok)
 - `executeClosePosition.ts` — Execute a close (MarketDecrease) order. Same flow as executeOpenPosition: (~1258 tok)
 - `executeDeposit.ts` — Execute a deposit into a Nivo FX market (GBP/USDC). Uses the NIVO_KEEPER_PRIVATE_KEY. (~1399 tok)
 - `executeOpenPosition.ts` — Declares main (~1282 tok)
-- `openPositionOrder.ts` — createOrder: main (~1987 tok)
+- `openPositionOrder.ts` — computeAcceptablePrice: createOrder, main (~2668 tok)
+- `printPositionInfo.ts` — applyInversion: main, toMarketTokenPrice (~2299 tok)
 - `utils.ts` — Exports withGasBuffer, SUPPORTED_NETWORKS, getDepositExecutionFee (~534 tok)
 
 ## scripts/nivo/chainlinkProvider/

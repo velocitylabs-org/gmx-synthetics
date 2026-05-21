@@ -35,6 +35,24 @@ npm run lint
 
 `SKIP_AUTO_HANDLER_REDEPLOYMENT=true` is the standard flag for non-handler-changing deploys — it short-circuits the handler redeploy chain and is safe whenever you haven't modified `*Handler.sol`.
 
+## Doppler
+
+Doppler replaces `.env` files. It injects secrets as process environment variables at runtime, so they never touch disk. `doppler run -- <cmd>` uses the config pinned in `.doppler.yaml` (default: `loc`). Pass `-c stg` or `-c prd` to target a different environment. See [DOPPLER.md](../DOPPLER.md) for the full variable reference.
+
+`gmx-synthetics` uses [Doppler](https://doppler.com) for mainnet deploy secrets and Supabase credentials. Project: `nivo`.
+
+`.doppler.yaml` is checked in (config: `loc`). Run `doppler login` once per machine — no `doppler setup` needed.
+
+```bash
+doppler run -- npx hardhat node         # localhost with env injection
+npm run deploy:base:mainnet             # mainnet deploy (doppler prd baked into the script)
+doppler run -p nivo -c stg -- npm run upsert-deployments --chain baseSepolia --chain-label base-sepolia
+                                        # upsert to staging Supabase. Bare npm script + external doppler wrapper.
+                                        # CI handles prod via .github/workflows/deploy-sync.yml — do NOT bake doppler into this script.
+```
+
+Fork scripts use hardcoded Hardhat dev keys — those do not need Doppler.
+
 The `app`, `vite`, and React deps in `package.json` are a vestigial in-repo UI (`app.tsx`, `index.html`) — the production UI lives in `nivo-web-app/`. Don't extend the in-repo app.
 
 ## Architecture (GMX V2)
@@ -103,4 +121,4 @@ The `VELOCITY_DOCS/` directory contains the Nivo team's protocol notes — read 
 
 ## OpenWolf
 
-The parent repo uses OpenWolf (`.wolf/` files). The `OPENWOLF.md` and `.claude/rules/openwolf.md` rules apply here too: check `.wolf/anatomy.md` before reading project files, `.wolf/cerebrum.md` before generating code, and log bugs to `.wolf/buglog.json`. Note that `.wolf/` lives in the parent `nivo/` directory, not in this submodule.
+This repo has its **own** `.wolf/` directory (`gmx-synthetics/.wolf/`) — separate from the parent `nivo/.wolf/`. The `OPENWOLF.md` and `.claude/rules/openwolf.md` rules apply: check `gmx-synthetics/.wolf/anatomy.md` before reading project files, `gmx-synthetics/.wolf/cerebrum.md` before generating code, and log bugs to `gmx-synthetics/.wolf/buglog.json`. When working on gmx-synthetics-specific behavior, prefer this submodule's `.wolf/` over the parent's.

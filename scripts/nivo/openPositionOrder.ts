@@ -1,13 +1,29 @@
 import hre from "hardhat";
 
-import { expandDecimals, decimalToFloat } from "../../utils/math";
+import { expandDecimals, decimalToFloat, formatAmount } from "../../utils/math";
 import { OrderType, DecreasePositionSwapType } from "../../utils/order";
 import { contractAt } from "../../utils/deploy";
 import { DataStore, ExchangeRouter, Reader, Router } from "../../typechain-types";
 import { BigNumberish } from "ethers";
-import { SUPPORTED_NETWORKS } from "./utils";
+import { SUPPORTED_FX_CURRENCIES, SUPPORTED_NETWORKS } from "./utils";
+import { DEFAULT_MARKET_TYPE, fetchMarketAddress } from "../../utils/market";
+import { fetchOracleSignedPrices } from "./chainlinkProvider/signedPrices";
+import { computeAcceptablePrice } from "./utils";
 const { ethers } = hre;
 
+/**
+ * Create a position order into a Nivo FX market (FX/USDC). Uses the WALLET_TESTER_PRIVATE_KEY.
+ *
+ * FX_CURRENCY=BRL npx hardhat run scripts/nivo/openPositionOrder.ts --network baseSepolia
+ *
+ * By default POSITION_COLLATERAL_AMOUNT and POSITION_SIZE_USD are set to 2 USDC and $10 (x5 leverage)
+ * FX_CURRENCY=BRL POSITION_COLLATERAL_AMOUNT=2 POSITION_SIZE_USD=10 npx hardhat run scripts/nivo/openPositionOrder.ts --network baseSepolia
+ *
+ * Use the order TX hash to print the events: TX=0x... npx hardhat run scripts/parseTransactionEvents.ts --network baseSepolia
+ *
+ * Execute the position order: npx hardhat run scripts/nivo/executeOpenPosition.ts --network baseSepolia
+ * Use the keeper execution TX hash to print the events: TX=0x... npx hardhat run scripts/parseTransactionEvents.ts --network baseSepolia
+ */
 async function createOrder({
   router, // the router instance
   exchangeRouter, // the exchangeRouter instance
@@ -83,13 +99,15 @@ async function createOrder({
 
   const multicallArgs = [
     exchangeRouter.interface.encodeFunctionData("sendWnt", [orderVault.address, executionFee]),
-    ...(isIncreaseOrder && [
-      exchangeRouter.interface.encodeFunctionData("sendTokens", [
-        initialCollateralToken,
-        orderVault.address,
-        initialCollateralDeltaAmount,
-      ]),
-    ]),
+    ...(isIncreaseOrder
+      ? [
+          exchangeRouter.interface.encodeFunctionData("sendTokens", [
+            initialCollateralToken,
+            orderVault.address,
+            initialCollateralDeltaAmount,
+          ]),
+        ]
+      : []),
     exchangeRouter.interface.encodeFunctionData("createOrder", [orderParams]),
   ];
 
@@ -107,7 +125,11 @@ async function main() {
   if (!SUPPORTED_NETWORKS.includes(hre.network.name)) {
     throw new Error(`Unsupported network: ${hre.network.name}`);
   }
-  const isBaseMainnet = hre.network.name === "base";
+
+  const fxCurrency = process.env.FX_CURRENCY;
+  if (!fxCurrency || !SUPPORTED_FX_CURRENCIES.includes(fxCurrency)) {
+    throw new Error("FX_CURRENCY is not set or not supported");
+  }
 
   const walletTesterPrivateKey = process.env.WALLET_TESTER_PRIVATE_KEY;
   if (!walletTesterPrivateKey) {
@@ -116,6 +138,9 @@ async function main() {
 
   const wallet = new ethers.Wallet(walletTesterPrivateKey, ethers.provider);
 
+  const positionCollateralAmount = Number(process.env.POSITION_COLLATERAL_AMOUNT || 2);
+  const positionSizeAmount = Number(process.env.POSITION_SIZE_USD || 10);
+
   const router = await hre.ethers.getContract<Router>("Router");
   const reader = await hre.ethers.getContract<Reader>("Reader");
   const dataStore = await hre.ethers.getContract<DataStore>("DataStore");
@@ -123,54 +148,67 @@ async function main() {
   const exchangeRouterConnected = exchangeRouter.connect(wallet);
   const receiver = await wallet.getAddress();
   const referralCode = ethers.constants.HashZero;
-  const markets = await reader.getMarkets(dataStore.address, 0, 100);
-
-  const market: string = isBaseMainnet
-    ? ethers.utils.getAddress("0x577CBa4C306D02072880B8bfAe261864b97A46E6")
-    : ethers.utils.getAddress("0x090aAF3eee5f64140e2F752a9f568a49A985ffD9"); // index: GBP  long: USDC  short: USDC
-  const USDC: string = isBaseMainnet
-    ? ethers.utils.getAddress("0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913")
-    : ethers.utils.getAddress("0x036CbD53842c5426634e7929541eC2318f3dCF7e"); // USDC
-
-  if (!markets.some((m) => m.marketToken === market)) {
-    throw new Error(`${market} is not a valid market`);
-  }
 
   const tokens = await hre.gmx.getTokens();
-  if (!Object.values(tokens).some((t) => t.address === USDC)) {
-    throw new Error(`${USDC} is not a valid token`);
+
+  const syntheticFx = ethers.utils.getAddress(tokens[fxCurrency].address);
+  if (!tokens[fxCurrency] || !tokens[fxCurrency].address || !syntheticFx) {
+    throw new Error(`Invalid FX currency: ${fxCurrency}`);
   }
+  const collateralToken = ethers.utils.getAddress(tokens["USDC"].address);
+  if (!collateralToken || !tokens["USDC"] || !tokens["USDC"].address) {
+    throw new Error(`${collateralToken} is not a valid token`);
+  }
+
+  const syntheticMarketAddress = await fetchMarketAddress(
+    syntheticFx,
+    collateralToken,
+    collateralToken,
+    DEFAULT_MARKET_TYPE
+  );
+  if (!syntheticMarketAddress || syntheticMarketAddress === ethers.constants.AddressZero) {
+    throw new Error(`Market not found in DataStore for ${fxCurrency}/USDC.`);
+  }
+  const syntheticMarketInfo = await reader.getMarket(dataStore.address, syntheticMarketAddress);
+
+  const syntheticFxPrice = await fetchOracleSignedPrices([syntheticMarketInfo.indexToken]);
+  const pricePrecision = 30 - tokens[fxCurrency].decimals; // protocol stores prices at 10^(30-decimals)
+  const priceData = syntheticFxPrice[syntheticMarketInfo.indexToken.toLowerCase()];
+  console.log(`signedPrices [${fxCurrency}]: min=${formatAmount(priceData.min, pricePrecision, 4, true)}`);
+  console.log(`signedPrices [${fxCurrency}]: max=${formatAmount(priceData.max, pricePrecision, 4, true)}`);
 
   // --- Configuration ---
   const isLong = false;
   const orderType = OrderType.MarketIncrease; // MarketIncrease (open) or MarketDecrease (close)
-  const collateralAmountUsdc = 2500000; // 2.5 USDC (6 decimals)
-  const sizeUsd = decimalToFloat(10); // $10 position
+  const collateralAmountUsdc = expandDecimals(positionCollateralAmount, 6); // 2 USDC (6 decimals)
+  const sizeUsd = decimalToFloat(positionSizeAmount); // $10 position
 
-  // Acceptable price for market orders (wide slippage to avoid stale-price failures):
-  // GBP is an 18-decimal token → on-chain price has 12 decimals (30 - 18)
-  //
-  // Increase: Long wants executionPrice <= acceptable (buy low), Short wants >= acceptable (sell high)
-  // Decrease: Long wants executionPrice >= acceptable (sell high), Short wants <= acceptable (buy low)
-  const isIncreaseOrder = orderType === OrderType.MarketIncrease;
-  const wantsHighPrice = (isLong && isIncreaseOrder) || (!isLong && !isIncreaseOrder);
-  const acceptablePrice = wantsHighPrice
-    ? expandDecimals(200, 12) // $200 ceiling (way above any GBP price)
-    : 0; // $0 floor
+  const fxTokenConfig = tokens[fxCurrency];
+  const acceptablePrice = computeAcceptablePrice(
+    syntheticFxPrice,
+    syntheticMarketInfo.indexToken,
+    isLong,
+    orderType,
+    fxTokenConfig.dataStreamIsInverted ?? false,
+    fxTokenConfig.decimals
+  );
+  console.log(
+    `acceptablePrice [${fxCurrency}]: ${formatAmount(acceptablePrice, pricePrecision, 6, true)} USD/${fxCurrency}`
+  );
 
   const tx = await createOrder({
     router,
     exchangeRouter: exchangeRouterConnected,
     receiver,
     referralCode,
-    market,
-    initialCollateralToken: USDC,
+    market: syntheticMarketAddress,
+    initialCollateralToken: collateralToken,
     initialCollateralDeltaAmount: collateralAmountUsdc,
     sizeDeltaUsd: sizeUsd,
     triggerPrice: 0,
     acceptablePrice,
     isLong,
-    orderType: OrderType.MarketIncrease,
+    orderType,
     decreasePositionSwapType: DecreasePositionSwapType.NoSwap,
   });
 
