@@ -203,7 +203,8 @@ export const FEATURE_FLAG_SPECS: Record<ManagedFeatureId, ManagedFeatureSpec> = 
   },
 };
 
-export const ORDER_FEATURE_SPECS: OrderTypeFeatureSpec[] = [
+export const ALL_MANAGED_FEATURE_SPECS: OrderTypeFeatureSpec[] = [
+  // ORDER Specs
   FEATURE_FLAG_SPECS.CREATE_ORDER_FEATURE_DISABLED_MARKET_SWAP,
   FEATURE_FLAG_SPECS.CREATE_ORDER_FEATURE_DISABLED_LIMIT_SWAP,
   FEATURE_FLAG_SPECS.CREATE_ORDER_FEATURE_DISABLED_STOP_LOSS_DECREASE,
@@ -214,31 +215,17 @@ export const ORDER_FEATURE_SPECS: OrderTypeFeatureSpec[] = [
   FEATURE_FLAG_SPECS.EXECUTE_ORDER_FEATURE_DISABLED_STOP_LOSS_DECREASE,
   FEATURE_FLAG_SPECS.EXECUTE_ORDER_FEATURE_DISABLED_LIMIT_INCREASE,
   FEATURE_FLAG_SPECS.EXECUTE_ORDER_FEATURE_DISABLED_LIMIT_DECREASE,
-];
 
-export const SHIFT_FEATURE_SPECS: ManagedFeatureSpec[] = [
+  // SHIT Specs
   FEATURE_FLAG_SPECS.CREATE_SHIFT_FEATURE_DISABLED,
   FEATURE_FLAG_SPECS.CANCEL_SHIFT_FEATURE_DISABLED,
   FEATURE_FLAG_SPECS.EXECUTE_SHIFT_FEATURE_DISABLED,
-];
 
-export const NON_SHIFT_FEATURE_SPECS: ManagedFeatureSpec[] = [
+  // Other
   FEATURE_FLAG_SPECS.EXECUTE_ATOMIC_WITHDRAWAL_FEATURE_DISABLED,
   FEATURE_FLAG_SPECS.JIT_FEATURE_DISABLED,
   FEATURE_FLAG_SPECS.SUBACCOUNT_FEATURE_DISABLED,
   FEATURE_FLAG_SPECS.GASLESS_FEATURE_DISABLED,
-];
-
-// Remaining redaction set (this ticket scope only).
-export const REMAINING_REDACTION_FEATURE_SPECS: ManagedFeatureSpec[] = [
-  ...SHIFT_FEATURE_SPECS,
-  ...NON_SHIFT_FEATURE_SPECS,
-];
-
-// Canonical superset across SCRUM225 + remaining redaction feature set.
-export const ALL_MANAGED_FEATURE_SPECS: ManagedFeatureSpec[] = [
-  ...ORDER_FEATURE_SPECS,
-  ...REMAINING_REDACTION_FEATURE_SPECS,
 ];
 
 function encodeFeatureModuleData(moduleAddress: string): string {
@@ -284,6 +271,7 @@ export function resolveModuleContractNames(spec: ManagedFeatureSpec, env = proce
 }
 
 export async function resolveModuleAddress(hre: HardhatRuntimeEnvironment, contractName: string): Promise<string> {
+  // todo(nuno/victor): do we really need this edge case?
   if (contractName === "OrderHandler" && process.env.ORDER_HANDLER) {
     return process.env.ORDER_HANDLER;
   }

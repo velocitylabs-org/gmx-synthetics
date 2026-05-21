@@ -18,12 +18,9 @@ function envFlag(name: string, defaultValue: boolean) {
 async function main() {
   console.log("Running config orchestrator...");
 
-  // Existing workstreams
   const runOrderFeatureRedaction = envFlag("RUN_ORDER_FEATURE_REDACTION", true);
   const runPoolRiskGuards = envFlag("RUN_POOL_RISK_GUARDS", true);
   const runInvariantValidations = envFlag("RUN_INVARIANT_VALIDATIONS", false);
-
-  // New remaining-redaction feature workstreams
   const runShiftFeatures = envFlag("RUN_SHIFT_FEATURES", false);
   const runJitFeature = envFlag("RUN_JIT_FEATURE", false);
   const runSubaccountFeature = envFlag("RUN_SUBACCOUNT_FEATURE", false);

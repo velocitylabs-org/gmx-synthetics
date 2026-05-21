@@ -1,61 +1,28 @@
 {
-  "session_id": "session-2026-05-21-1414",
-  "started": "2026-05-21T12:14:43.277Z",
+  "session_id": "session-2026-05-21-2220",
+  "started": "2026-05-21T20:20:20.448Z",
   "files_read": {
-    "/Users/n/code/gmx-synthetics/scripts/configs/helpers/applyFeatureFlagWrites.ts": {
+    "/Users/n/code/gmx-synthetics/scripts/configs/helpers/featureFlagSpecs.ts": {
       "count": 1,
-      "tokens": 704,
-      "first_read": "2026-05-21T12:15:13.449Z"
+      "tokens": 3218,
+      "first_read": "2026-05-21T20:20:50.958Z"
     },
-    "/Users/n/code/gmx-synthetics/scripts/configs/configs/disableOrderCreateFeatures.ts": {
+    "/Users/n/code/gmx-synthetics/scripts/configs/index.ts": {
       "count": 1,
-      "tokens": 871,
-      "first_read": "2026-05-21T12:15:13.932Z"
-    },
-    "/Users/n/code/gmx-synthetics/scripts/configs/configs/disableOrderExecuteFeatures.ts": {
-      "count": 1,
-      "tokens": 875,
-      "first_read": "2026-05-21T12:15:13.988Z"
-    },
-    "/Users/n/code/gmx-synthetics/package.json": {
-      "count": 1,
-      "tokens": 1521,
-      "first_read": "2026-05-21T12:16:22.540Z"
-    }
-  },
-  "files_written": [
-    {
-      "file": "/Users/n/code/gmx-synthetics/scripts/configs/helpers/applyFeatureFlagWrites.ts",
-      "action": "edit",
-      "tokens": 165,
-      "at": "2026-05-21T12:16:14.688Z"
-    },
-    {
-      "file": "/Users/n/code/gmx-synthetics/scripts/configs/helpers/applyFeatureFlagWrites.ts",
-      "action": "edit",
-      "tokens": 22,
-      "at": "2026-05-21T12:16:18.985Z"
-    },
-    {
-      "file": "/Users/n/code/gmx-synthetics/package.json",
-      "action": "edit",
       "tokens": 0,
-      "at": "2026-05-21T12:16:25.198Z"
+      "first_read": "2026-05-21T20:20:51.549Z"
     },
-    {
-      "file": "/Users/n/code/gmx-synthetics/package.json",
-      "action": "edit",
-      "tokens": 6,
-      "at": "2026-05-21T12:16:35.283Z"
+    "/Users/n/code/gmx-synthetics/scripts/configs/validations/verifyFeaturesState.ts": {
+      "count": 1,
+      "tokens": 0,
+      "first_read": "2026-05-21T20:20:51.638Z"
     }
-  ],
-  "edit_counts": {
-    "scripts/configs/helpers/applyFeatureFlagWrites.ts": 2,
-    "package.json": 2
   },
-  "anatomy_hits": 4,
-  "anatomy_misses": 0,
+  "files_written": [],
+  "edit_counts": {},
+  "anatomy_hits": 1,
+  "anatomy_misses": 2,
   "repeated_reads_warned": 0,
   "cerebrum_warnings": 0,
-  "stop_count": 2
+  "stop_count": 0
 }
