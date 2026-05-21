@@ -7,7 +7,7 @@ import { getMarketKey, getMarketTokenAddresses } from "../../../utils/market";
 import tokensConfig from "../../../config/tokens";
 import marketsConfig from "../../../config/markets";
 import { getDeployedContract } from "../helpers/getDeployedContract";
-import { getConfigKeeperRoleSigner } from "../helpers/getConfigKeeperSigner";
+import { getConfigKeeperRoleSigner } from "../helpers/getConfigKeeperRoleSigner";
 import { getConfigHre, isTruthy } from "../helpers/configRuntime";
 
 type MarketPolicy = {

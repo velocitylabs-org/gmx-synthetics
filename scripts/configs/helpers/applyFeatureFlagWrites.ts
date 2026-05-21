@@ -3,7 +3,7 @@ import type { HardhatRuntimeEnvironment } from "hardhat/types";
 import type { ManagedFeatureSpec } from "./featureFlagSpecs";
 import { encodeFeatureData, resolveModuleAddress, resolveModuleContractNames } from "./featureFlagSpecs";
 import { getDeployedContract } from "./getDeployedContract";
-import { getConfigKeeperRoleSigner } from "./getConfigKeeperSigner";
+import { getConfigKeeperRoleSigner } from "./getConfigKeeperRoleSigner";
 
 /**
  *

@@ -6,7 +6,7 @@ import { getMarketKey, getMarketTokenAddresses } from "../../../utils/market";
 import tokensConfig from "../../../config/tokens";
 import marketsConfig from "../../../config/markets";
 import { getDeployedContract } from "../helpers/getDeployedContract";
-import { getConfigKeeperRoleSigner } from "../helpers/getConfigKeeperSigner";
+import { getConfigKeeperRoleSigner } from "../helpers/getConfigKeeperRoleSigner";
 import { getConfigHre } from "../helpers/configRuntime";
 
 const DEFAULT_INACTIVE_INDEX_TOKENS = ["IDR", "PHP", "PEN", "NGN", "KES", "ZAR", "THB"];

@@ -4,7 +4,7 @@ import { encodeData } from "../../../utils/hash";
 import * as keys from "../../../utils/keys";
 import { OrderType } from "../../../utils/order";
 import { getDeployedContract } from "../helpers/getDeployedContract";
-import { getConfigKeeperRoleSigner } from "../helpers/getConfigKeeperSigner";
+import { getConfigKeeperRoleSigner } from "../helpers/getConfigKeeperRoleSigner";
 
 export async function runDisableOrderCreateFeatures() {
   const config = await getDeployedContract(hre, "Config");

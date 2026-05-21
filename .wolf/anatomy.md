@@ -1,6 +1,6 @@
 # anatomy.md
 
-> Auto-maintained by OpenWolf. Last scanned: 2026-05-21T11:41:31.562Z
+> Auto-maintained by OpenWolf. Last scanned: 2026-05-21T11:46:08.120Z
 > Files: 970 tracked | Anatomy hits: 0 | Misses: 0
 
 ## ./
@@ -926,14 +926,14 @@
 
 ## scripts/configs/configs/
 
-- `applyPoolRiskGuards.ts` — Exports runApplyPoolRiskGuards (~2191 tok)
-- `disableInactiveMarkets.ts` — Exports runDisableInactiveMarkets (~1194 tok)
+- `applyPoolRiskGuards.ts` — Exports runApplyPoolRiskGuards (~2192 tok)
+- `disableInactiveMarkets.ts` — Exports runDisableInactiveMarkets (~1195 tok)
 - `disableOrderCreateFeatures.ts` — Exports runDisableOrderCreateFeatures (~871 tok)
-- `disableOrderExecuteFeatures.ts` — Exports runDisableOrderExecuteFeatures (~874 tok)
+- `disableOrderExecuteFeatures.ts` — Exports runDisableOrderExecuteFeatures (~875 tok)
 
 ## scripts/configs/helpers/
 
-- `applyFeatureFlagWrites.ts` — * Writes Config.setBool entries for the provided feature specs (dry-run unless WRITE=true is specifi (~703 tok)
+- `applyFeatureFlagWrites.ts` — * Writes Config.setBool entries for the provided feature specs (dry-run unless WRITE=true is specifi (~704 tok)
 - `getConfigKeeperSigner.ts` — Exports getConfigKeeperRoleSigner (~1087 tok)
 
 ## scripts/incentives/

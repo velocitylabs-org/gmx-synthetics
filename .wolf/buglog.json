@@ -288,6 +288,86 @@
       "related_bugs": [],
       "occurrences": 1,
       "last_seen": "2026-05-21T10:06:01.129Z"
+    },
+    {
+      "id": "bug-019",
+      "timestamp": "2026-05-21T11:46:03.740Z",
+      "error_message": "Incorrect value in code",
+      "file": "scripts/configs/configs/disableOrderCreateFeatures.ts",
+      "root_cause": "Had \"../helpers/getConfigKeeperSigner\"",
+      "fix": "Changed to \"../helpers/getConfigKeeperRoleSigner\"",
+      "tags": [
+        "auto-detected",
+        "wrong-value",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-21T11:46:03.740Z"
+    },
+    {
+      "id": "bug-020",
+      "timestamp": "2026-05-21T11:46:04.828Z",
+      "error_message": "Incorrect value in code",
+      "file": "scripts/configs/configs/applyPoolRiskGuards.ts",
+      "root_cause": "Had \"../helpers/getConfigKeeperSigner\"",
+      "fix": "Changed to \"../helpers/getConfigKeeperRoleSigner\"",
+      "tags": [
+        "auto-detected",
+        "wrong-value",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-21T11:46:04.828Z"
+    },
+    {
+      "id": "bug-021",
+      "timestamp": "2026-05-21T11:46:05.964Z",
+      "error_message": "Incorrect value in code",
+      "file": "scripts/configs/helpers/applyFeatureFlagWrites.ts",
+      "root_cause": "Had \"./getConfigKeeperSigner\"",
+      "fix": "Changed to \"./getConfigKeeperRoleSigner\"",
+      "tags": [
+        "auto-detected",
+        "wrong-value",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-21T11:46:05.964Z"
+    },
+    {
+      "id": "bug-022",
+      "timestamp": "2026-05-21T11:46:07.033Z",
+      "error_message": "Incorrect value in code",
+      "file": "scripts/configs/configs/disableInactiveMarkets.ts",
+      "root_cause": "Had \"../helpers/getConfigKeeperSigner\"",
+      "fix": "Changed to \"../helpers/getConfigKeeperRoleSigner\"",
+      "tags": [
+        "auto-detected",
+        "wrong-value",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-21T11:46:07.033Z"
+    },
+    {
+      "id": "bug-023",
+      "timestamp": "2026-05-21T11:46:08.132Z",
+      "error_message": "Incorrect value in code",
+      "file": "scripts/configs/configs/disableOrderExecuteFeatures.ts",
+      "root_cause": "Had \"../helpers/getConfigKeeperSigner\"",
+      "fix": "Changed to \"../helpers/getConfigKeeperRoleSigner\"",
+      "tags": [
+        "auto-detected",
+        "wrong-value",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-21T11:46:08.132Z"
     }
   ]
 }
