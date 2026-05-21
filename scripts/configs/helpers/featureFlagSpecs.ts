@@ -241,7 +241,7 @@ export const ALL_MANAGED_FEATURE_SPECS: ManagedFeatureSpec[] = [
   ...REMAINING_REDACTION_FEATURE_SPECS,
 ];
 
-export function encodeFeatureModuleData(moduleAddress: string): string {
+function encodeFeatureModuleData(moduleAddress: string): string {
   return encodeData(["address"], [moduleAddress]);
 }
 
