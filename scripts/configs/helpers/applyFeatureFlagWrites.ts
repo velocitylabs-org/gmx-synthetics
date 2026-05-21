@@ -3,10 +3,10 @@ import type { HardhatRuntimeEnvironment } from "hardhat/types";
 import type { ManagedFeatureSpec } from "./featureFlagSpecs";
 import { encodeFeatureData, resolveModuleAddress, resolveModuleContractNames } from "./featureFlagSpecs";
 import { getDeployedContract } from "./getDeployedContract";
-import { getConfigKeeperSigner } from "./getConfigKeeperSigner";
+import { getConfigKeeperRoleSigner } from "./getConfigKeeperSigner";
 
 /**
- * 
+ *
  * Writes Config.setBool entries for the provided feature specs (dry-run unless WRITE=true is specified).
  * TARGET_DISABLED_STATE=true → disable the feature (write true to the DataStore)
  * TARGET_DISABLED_STATE=false → enable the feature (write false to the DataStore)
@@ -34,15 +34,15 @@ export async function applyFeatureFlagWrites(hre: HardhatRuntimeEnvironment, spe
     }
   }
 
-  const { configKeeperAddress, configKeeperSigner } = await getConfigKeeperSigner(hre);
-  const configAsKeeper = config.connect(configKeeperSigner);
+  const { configKeeperRoleAddress, configKeeperRoleSigner } = await getConfigKeeperRoleSigner(hre);
+  const signedConfig = config.connect(configKeeperRoleSigner);
 
-  console.log(`ConfigKeeper: ${configKeeperAddress}`);
+  console.log(`Config keeper role address: ${configKeeperRoleAddress}`);
   console.log(`TARGET_DISABLED_STATE (write ${targetDisabled}): ${targetDisabled}`);
   console.log(`Prepared ${multicallWriteParams.length} config updates`);
   rows.forEach((r) => console.log(`- ${r.label} | ${r.module} (${r.address})`));
 
-  await configAsKeeper.callStatic.multicall(multicallWriteParams);
+  await signedConfig.callStatic.multicall(multicallWriteParams);
   console.log("callStatic passed");
 
   if (!write) {
@@ -50,7 +50,7 @@ export async function applyFeatureFlagWrites(hre: HardhatRuntimeEnvironment, spe
     return;
   }
 
-  const tx = await configAsKeeper.multicall(multicallWriteParams);
+  const tx = await signedConfig.multicall(multicallWriteParams);
   console.log(`tx sent: ${tx.hash}`);
   await tx.wait();
   console.log("tx mined");

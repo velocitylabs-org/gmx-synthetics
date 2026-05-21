@@ -42,7 +42,7 @@ async function setAccountBalance(address: string, hexWei: string) {
 }
 
 describe("Config.VerifySwapReconfiguration", function () {
-  const configKeeper = process.env.CONFIG_KEEPER || DEFAULT_CONFIG_KEEPER;
+  const configKeeperRoleAddress = process.env.CONFIG_KEEPER || DEFAULT_CONFIG_KEEPER;
   const previousEnv: Record<string, string | undefined> = {};
 
   before(async function () {
@@ -50,14 +50,14 @@ describe("Config.VerifySwapReconfiguration", function () {
       this.skip();
     }
 
-    await impersonateAccount(configKeeper);
-    await setAccountBalance(configKeeper, "0x56BC75E2D63100000"); // 100 ETH
+    await impersonateAccount(configKeeperRoleAddress);
+    await setAccountBalance(configKeeperRoleAddress, "0x56BC75E2D63100000"); // 100 ETH
 
     previousEnv.CONFIG_KEEPER = process.env.CONFIG_KEEPER;
     previousEnv.IS_DISABLED = process.env.IS_DISABLED;
     previousEnv.WRITE = process.env.WRITE;
 
-    process.env.CONFIG_KEEPER = configKeeper;
+    process.env.CONFIG_KEEPER = configKeeperRoleAddress;
     process.env.IS_DISABLED = "true";
     process.env.WRITE = "true";
   });
@@ -67,7 +67,7 @@ describe("Config.VerifySwapReconfiguration", function () {
     process.env.IS_DISABLED = previousEnv.IS_DISABLED;
     process.env.WRITE = previousEnv.WRITE;
 
-    await stopImpersonateAccount(configKeeper);
+    await stopImpersonateAccount(configKeeperRoleAddress);
   });
 
   it("disables MarketSwap and LimitSwap for create + execute", async () => {

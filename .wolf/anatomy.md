@@ -1,13 +1,13 @@
 # anatomy.md
 
-> Auto-maintained by OpenWolf. Last scanned: 2026-05-12T08:44:21.783Z
-> Files: 963 tracked | Anatomy hits: 0 | Misses: 0
+> Auto-maintained by OpenWolf. Last scanned: 2026-05-21T10:10:49.315Z
+> Files: 970 tracked | Anatomy hits: 0 | Misses: 0
 
 ## ./
 
 - `.DS_Store` (~2728 tok)
 - `.editorconfig` — Editor configuration (~57 tok)
-- `.eslintrc.json` — ESLint configuration (~206 tok)
+- `.eslintrc.json` (~224 tok)
 - `.gitignore` — Git ignore rules (~92 tok)
 - `.gitmodules` (~62 tok)
 - `.nvmrc` (~1 tok)
@@ -924,6 +924,18 @@
 - `withdrawFromPositionImpactPool.ts` — expectedTimelockMethods: fetchChainlinkPriceFeedInfo, fetchChainlinkDataStreamInfo, fetchOracleParams, main (~2787 tok)
 - `wrapNativeToken.ts` — value: main (~404 tok)
 
+## scripts/configs/configs/
+
+- `applyPoolRiskGuards.ts` — Exports runApplyPoolRiskGuards (~2193 tok)
+- `disableInactiveMarkets.ts` — Exports runDisableInactiveMarkets (~1196 tok)
+- `disableOrderCreateFeatures.ts` — Exports runDisableOrderCreateFeatures (~871 tok)
+- `disableOrderExecuteFeatures.ts` — Exports runDisableOrderExecuteFeatures (~877 tok)
+
+## scripts/configs/helpers/
+
+- `applyFeatureFlagWrites.ts` — * Writes Config.setBool entries for the provided feature specs (dry-run unless WRITE=true is specifi (~703 tok)
+- `getConfigKeeperSigner.ts` — Exports getConfigKeeperRoleSigner (~1087 tok)
+
 ## scripts/incentives/
 
 - `.batchesInProgress.json` (~1 tok)
@@ -1001,6 +1013,7 @@
 - `Config.ts` — Declares keys (~6898 tok)
 - `ConfigSyncer.ts` — Declares referenceIds (~5810 tok)
 - `Timelock.ts` — Declares orderKeeperRole (~10087 tok)
+- `VerifySwapReconfiguration.ts` — DEFAULT_CONFIG_KEEPER: tryRpc, impersonateAccount, stopImpersonateAccount, setAccountBalance (~1261 tok)
 
 ## test/contributor/
 

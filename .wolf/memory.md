@@ -127,3 +127,52 @@
 | 16:47 | Session end: 8 writes across 2 files (openPositionOrder.ts, printPositionInfo.ts) | 8 reads | ~117866 tok |
 | 17:46 | Session end: 8 writes across 2 files (openPositionOrder.ts, printPositionInfo.ts) | 8 reads | ~117866 tok |
 | 09:30 | Session end: 8 writes across 2 files (openPositionOrder.ts, printPositionInfo.ts) | 8 reads | ~117866 tok |
+
+## Session: 2026-05-21 11:55
+
+| Time | Action | File(s) | Outcome | ~Tokens |
+|------|--------|---------|---------|--------|
+
+## Session: 2026-05-21 11:55
+
+| Time | Action | File(s) | Outcome | ~Tokens |
+|------|--------|---------|---------|--------|
+
+## Session: 2026-05-21 11:56
+
+| Time | Action | File(s) | Outcome | ~Tokens |
+|------|--------|---------|---------|--------|
+| 12:03 | Edited scripts/configs/helpers/getConfigKeeperSigner.ts | modified resolveConfigKeeperRoleAddress() | ~796 |
+| 12:03 | Edited scripts/configs/helpers/applyFeatureFlagWrites.ts | inline fix | ~20 |
+| 12:03 | Edited scripts/configs/helpers/applyFeatureFlagWrites.ts | getConfigKeeperSigner() → getConfigKeeperRoleSigner() | ~68 |
+| 12:03 | Edited scripts/configs/helpers/applyFeatureFlagWrites.ts | inline fix | ~4 |
+| 12:03 | Edited scripts/configs/configs/disableInactiveMarkets.ts | inline fix | ~22 |
+| 12:03 | Edited scripts/configs/configs/applyPoolRiskGuards.ts | inline fix | ~22 |
+| 12:03 | Edited scripts/configs/configs/disableOrderExecuteFeatures.ts | inline fix | ~22 |
+| 12:03 | Edited scripts/configs/configs/disableOrderCreateFeatures.ts | inline fix | ~22 |
+| 12:03 | Edited scripts/configs/configs/disableInactiveMarkets.ts | getConfigKeeperSigner() → getConfigKeeperRoleSigner() | ~47 |
+| 12:03 | Edited scripts/configs/configs/applyPoolRiskGuards.ts | getConfigKeeperSigner() → getConfigKeeperRoleSigner() | ~47 |
+| 12:03 | Edited scripts/configs/configs/disableOrderExecuteFeatures.ts | getConfigKeeperSigner() → getConfigKeeperRoleSigner() | ~47 |
+| 12:04 | Edited scripts/configs/configs/disableOrderCreateFeatures.ts | getConfigKeeperSigner() → getConfigKeeperRoleSigner() | ~47 |
+| 12:04 | Edited scripts/configs/configs/disableInactiveMarkets.ts | inline fix | ~7 |
+| 12:04 | Edited scripts/configs/configs/applyPoolRiskGuards.ts | inline fix | ~7 |
+| 12:05 | Edited scripts/configs/configs/disableOrderExecuteFeatures.ts | inline fix | ~7 |
+| 12:05 | Edited scripts/configs/configs/disableOrderCreateFeatures.ts | inline fix | ~7 |
+| 12:05 | Edited scripts/configs/configs/disableInactiveMarkets.ts | inline fix | ~4 |
+| 12:05 | Edited scripts/configs/configs/applyPoolRiskGuards.ts | inline fix | ~4 |
+| 12:05 | Edited scripts/configs/configs/disableOrderExecuteFeatures.ts | inline fix | ~4 |
+| 12:05 | Edited scripts/configs/configs/disableOrderCreateFeatures.ts | inline fix | ~4 |
+| 12:05 | Edited scripts/configs/configs/applyPoolRiskGuards.ts | "ConfigKeeper: ${configKee" → "Config keeper role addres" | ~20 |
+| 12:05 | Edited scripts/configs/configs/disableOrderExecuteFeatures.ts | "ConfigKeeper: ${configKee" → "Config keeper role addres" | ~20 |
+| 12:05 | Edited scripts/configs/configs/disableOrderCreateFeatures.ts | "ConfigKeeper: ${configKee" → "Config keeper role addres" | ~20 |
+| 12:05 | Edited test/config/VerifySwapReconfiguration.ts | inline fix | ~25 |
+| 12:06 | Edited scripts/configs/configs/disableInactiveMarkets.ts | "ConfigKeeper: ${configKee" → "Config keeper role addres" | ~20 |
+| 12:06 | Edited test/config/VerifySwapReconfiguration.ts | inline fix | ~7 |
+| 12:06 | Session end: 26 writes across 7 files (getConfigKeeperSigner.ts, applyFeatureFlagWrites.ts, disableInactiveMarkets.ts, applyPoolRiskGuards.ts, disableOrderExecuteFeatures.ts) | 7 reads | ~1320 tok |
+
+## Session: 2026-05-21 12:10
+
+| Time | Action | File(s) | Outcome | ~Tokens |
+|------|--------|---------|---------|--------|
+| 12:10 | Edited .eslintrc.json | 3→6 lines | ~36 |
+| 12:10 | Session end: 1 writes across 1 files (.eslintrc.json) | 2 reads | ~242 tok |
