@@ -8,25 +8,22 @@ import { runSetGaslessFeatureState } from "./configs/setGaslessFeatureState";
 import { runSetAtomicWithdrawalFeatureState } from "./configs/setAtomicWithdrawalFeatureState";
 import { runInvariantChecks } from "./validations/runInvariantChecks";
 import { runVerifyFeaturesState } from "./validations/verifyFeaturesState";
-
-function envFlag(name: string, defaultValue: boolean) {
-  const value = process.env[name];
-  if (value === undefined) return defaultValue;
-  return value === "true";
-}
+import { loadProfile } from "./profiles";
 
 async function main() {
   console.log("Running config orchestrator...");
 
-  const runOrderFeatureRedaction = envFlag("RUN_ORDER_FEATURE_REDACTION", true);
-  const runPoolRiskGuards = envFlag("RUN_POOL_RISK_GUARDS", true);
-  const runInvariantValidations = envFlag("RUN_INVARIANT_VALIDATIONS", false);
-  const runShiftFeatures = envFlag("RUN_SHIFT_FEATURES", false);
-  const runJitFeature = envFlag("RUN_JIT_FEATURE", false);
-  const runSubaccountFeature = envFlag("RUN_SUBACCOUNT_FEATURE", false);
-  const runGaslessFeature = envFlag("RUN_GASLESS_FEATURE", false);
-  const runAtomicWithdrawalFeature = envFlag("RUN_ATOMIC_WITHDRAWAL_FEATURE", false);
-  const runFeatureValidations = envFlag("RUN_FEATURE_VALIDATIONS", false);
+  const profile = loadProfile(process.env.PROFILE);
+
+  const runOrderFeatureRedaction = profile.RUN_ORDER_FEATURE_REDACTION;
+  const runPoolRiskGuards = profile.RUN_POOL_RISK_GUARDS;
+  const runInvariantValidations = profile.RUN_INVARIANT_VALIDATIONS;
+  const runShiftFeatures = profile.RUN_SHIFT_FEATURES;
+  const runJitFeature = profile.RUN_JIT_FEATURE;
+  const runSubaccountFeature = profile.RUN_SUBACCOUNT_FEATURE;
+  const runGaslessFeature = profile.RUN_GASLESS_FEATURE;
+  const runAtomicWithdrawalFeature = profile.RUN_ATOMIC_WITHDRAWAL_FEATURE;
+  const runFeatureValidations = profile.RUN_FEATURE_VALIDATIONS;
 
   if (runOrderFeatureRedaction) {
     await runDisableOrderCreateFeatures();
@@ -76,7 +73,7 @@ async function main() {
     !runAtomicWithdrawalFeature &&
     !runFeatureValidations
   ) {
-    console.log("No workstreams selected. Set RUN_* env vars to execute setters or validations.");
+    console.log("No workstreams selected. Check the active profile's feature flags.");
   }
 
   console.log("Completed config orchestrator.");
