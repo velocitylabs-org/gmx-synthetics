@@ -224,3 +224,23 @@
 
 | Time | Action | File(s) | Outcome | ~Tokens |
 |------|--------|---------|---------|--------|
+
+## Session: 2026-05-22 13:07
+
+| Time | Action | File(s) | Outcome | ~Tokens |
+|------|--------|---------|---------|--------|
+| 13:43 | Created ops/config-changes/2026-05-11-feature-redaction/README.md | — | ~867 |
+| 13:43 | Session end: 1 writes across 1 files (README.md) | 6 reads | ~25666 tok |
+| 13:53 | Edited ops/config-changes/2026-05-11-feature-redaction/README.md | 8→8 lines | ~128 |
+| 13:53 | Session end: 2 writes across 1 files (README.md) | 6 reads | ~25804 tok |
+| 13:54 | Edited ops/config-changes/2026-05-11-feature-redaction/README.md | — | ~0 |
+| 13:54 | Session end: 3 writes across 1 files (README.md) | 6 reads | ~25804 tok |
+| 13:56 | Edited ops/config-changes/2026-05-11-feature-redaction/README.md | 2→2 lines | ~42 |
+| 13:56 | Session end: 4 writes across 1 files (README.md) | 6 reads | ~25849 tok |
+| 13:58 | Edited ops/config-changes/2026-05-11-feature-redaction/README.md | 2→2 lines | ~38 |
+| 13:58 | Session end: 5 writes across 1 files (README.md) | 6 reads | ~25890 tok |
+| 14:00 | Session end: 5 writes across 1 files (README.md) | 6 reads | ~25890 tok |
+| 14:01 | Session end: 5 writes across 1 files (README.md) | 6 reads | ~25890 tok |
+| 14:02 | Session end: 5 writes across 1 files (README.md) | 6 reads | ~25890 tok |
+| 14:04 | Edited ops/config-changes/2026-05-11-feature-redaction/README.md | expanded (+6 lines) | ~137 |
+| 14:04 | Session end: 6 writes across 1 files (README.md) | 7 reads | ~38406 tok |

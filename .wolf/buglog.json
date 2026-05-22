@@ -416,6 +416,22 @@
       "related_bugs": [],
       "occurrences": 1,
       "last_seen": "2026-05-21T12:16:35.285Z"
+    },
+    {
+      "id": "bug-027",
+      "timestamp": "2026-05-22T11:56:09.016Z",
+      "error_message": "Incorrect value in code",
+      "file": "ops/config-changes/2026-05-11-feature-redaction/README.md",
+      "root_cause": "Had `production/mainnet-write.log`",
+      "fix": "Changed to `mainnet/write.log`",
+      "tags": [
+        "auto-detected",
+        "wrong-value",
+        "md"
+      ],
+      "related_bugs": [],
+      "occurrences": 2,
+      "last_seen": "2026-05-22T11:58:30.786Z"
     }
   ]
 }
