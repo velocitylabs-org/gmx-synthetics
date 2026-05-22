@@ -1,7 +1,7 @@
 # anatomy.md
 
-> Auto-maintained by OpenWolf. Last scanned: 2026-05-22T12:04:50.179Z
-> Files: 972 tracked | Anatomy hits: 0 | Misses: 0
+> Auto-maintained by OpenWolf. Last scanned: 2026-05-22T12:25:30.810Z
+> Files: 973 tracked | Anatomy hits: 0 | Misses: 0
 
 ## ./
 
@@ -780,6 +780,10 @@
 - `SignerButton.tsx` — SignerButton (~325 tok)
 - `Style.css` — Styles: 4 rules (~121 tok)
 - `Toast.ts` — Declares toastConfig (~119 tok)
+
+## ops/
+
+- `RUNBOOK.md` — Ops Runbook — Mainnet Config Changes (~1119 tok)
 
 ## ops/config-changes/2026-05-11-feature-redaction/
 

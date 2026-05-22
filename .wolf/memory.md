@@ -244,3 +244,12 @@
 | 14:02 | Session end: 5 writes across 1 files (README.md) | 6 reads | ~25890 tok |
 | 14:04 | Edited ops/config-changes/2026-05-11-feature-redaction/README.md | expanded (+6 lines) | ~137 |
 | 14:04 | Session end: 6 writes across 1 files (README.md) | 7 reads | ~38406 tok |
+| 14:22 | Session end: 6 writes across 1 files (README.md) | 7 reads | ~38406 tok |
+| 14:24 | Created ops/RUNBOOK.md | — | ~1217 |
+| 14:24 | Session end: 7 writes across 2 files (README.md, RUNBOOK.md) | 7 reads | ~39710 tok |
+| 14:24 | Session end: 7 writes across 2 files (README.md, RUNBOOK.md) | 7 reads | ~39710 tok |
+| 14:25 | Edited ops/RUNBOOK.md | 9→9 lines | ~48 |
+| 14:25 | Edited ops/RUNBOOK.md | inline fix | ~5 |
+| 14:25 | Edited ops/RUNBOOK.md | inline fix | ~8 |
+| 14:25 | Edited ops/RUNBOOK.md | "ops/config-changes/2026-0" → "ops/2026-05-11-feature-re" | ~18 |
+| 14:25 | Session end: 11 writes across 2 files (README.md, RUNBOOK.md) | 7 reads | ~39795 tok |

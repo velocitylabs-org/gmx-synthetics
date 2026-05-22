@@ -74,14 +74,45 @@
       "action": "edit",
       "tokens": 147,
       "at": "2026-05-22T12:04:50.198Z"
+    },
+    {
+      "file": "/Users/n/code/gmx-synthetics/ops/RUNBOOK.md",
+      "action": "create",
+      "tokens": 1304,
+      "at": "2026-05-22T12:24:02.963Z"
+    },
+    {
+      "file": "/Users/n/code/gmx-synthetics/ops/RUNBOOK.md",
+      "action": "edit",
+      "tokens": 52,
+      "at": "2026-05-22T12:25:19.026Z"
+    },
+    {
+      "file": "/Users/n/code/gmx-synthetics/ops/RUNBOOK.md",
+      "action": "edit",
+      "tokens": 5,
+      "at": "2026-05-22T12:25:22.453Z"
+    },
+    {
+      "file": "/Users/n/code/gmx-synthetics/ops/RUNBOOK.md",
+      "action": "edit",
+      "tokens": 9,
+      "at": "2026-05-22T12:25:26.594Z"
+    },
+    {
+      "file": "/Users/n/code/gmx-synthetics/ops/RUNBOOK.md",
+      "action": "edit",
+      "tokens": 19,
+      "at": "2026-05-22T12:25:30.820Z"
     }
   ],
   "edit_counts": {
-    "ops/config-changes/2026-05-11-feature-redaction/README.md": 6
+    "ops/config-changes/2026-05-11-feature-redaction/README.md": 6,
+    "ops/RUNBOOK.md": 5
   },
   "anatomy_hits": 3,
   "anatomy_misses": 3,
   "repeated_reads_warned": 0,
   "cerebrum_warnings": 0,
-  "stop_count": 11
+  "stop_count": 15
 }
