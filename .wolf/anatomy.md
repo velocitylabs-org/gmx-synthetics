@@ -1,7 +1,7 @@
 # anatomy.md
 
-> Auto-maintained by OpenWolf. Last scanned: 2026-05-22T12:25:30.810Z
-> Files: 973 tracked | Anatomy hits: 0 | Misses: 0
+> Auto-maintained by OpenWolf. Last scanned: 2026-05-22T15:12:01.245Z
+> Files: 979 tracked | Anatomy hits: 0 | Misses: 0
 
 ## ./
 
@@ -24,7 +24,7 @@
 - `index.html` — GMX Synthetics (~64 tok)
 - `LICENSE` — Project license (~1140 tok)
 - `metrics.ts` — options: run (~859 tok)
-- `package.json` — Node.js package manifest (~2170 tok)
+- `package.json` — Node.js package manifest (~1873 tok)
 - `pnpm-lock.yaml` — pnpm lock file (~163901 tok)
 - `README.md` — Project documentation (~12369 tok)
 - `tenderly.yaml` (~24 tok)
@@ -932,6 +932,10 @@
 - `withdrawFromPositionImpactPool.ts` — expectedTimelockMethods: fetchChainlinkPriceFeedInfo, fetchChainlinkDataStreamInfo, fetchOracleParams, main (~2787 tok)
 - `wrapNativeToken.ts` — value: main (~404 tok)
 
+## scripts/configs/
+
+- `index.ts` — Declares main (~801 tok)
+
 ## scripts/configs/configs/
 
 - `applyPoolRiskGuards.ts` — Exports runApplyPoolRiskGuards (~2192 tok)
@@ -944,6 +948,14 @@
 - `applyFeatureFlagWrites.ts` — * Writes Config.setBool entries for the provided feature specs (dry-run unless WRITE=true is specifi (~688 tok)
 - `featureFlagSpecs.ts` — Exports ManagedFeatureId, ModuleFeatureSpec, OrderTypeFeatureSpec, ManagedFeatureSpec + 12 more (~3218 tok)
 - `getConfigKeeperSigner.ts` — Exports getConfigKeeperRoleSigner (~1087 tok)
+
+## scripts/configs/profiles/
+
+- `all.ts` — Exports allProfile (~105 tok)
+- `index.ts` — Exports PROFILES, loadProfile (~156 tok)
+- `README.md` — Project documentation (~540 tok)
+- `redact-all.ts` — Exports redactAllProfile (~106 tok)
+- `types.ts` — Exports RunFeatureKey, Profile (~146 tok)
 
 ## scripts/incentives/
 

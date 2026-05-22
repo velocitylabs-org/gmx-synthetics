@@ -1,6 +1,6 @@
 import { Profile } from "./types";
 
-export const redactAllProfile: Profile = {
+export const allProfile: Profile = {
   RUN_ORDER_FEATURE_REDACTION: true,
   RUN_POOL_RISK_GUARDS: true,
   RUN_INVARIANT_VALIDATIONS: false,

@@ -253,3 +253,23 @@
 | 14:25 | Edited ops/RUNBOOK.md | inline fix | ~8 |
 | 14:25 | Edited ops/RUNBOOK.md | "ops/config-changes/2026-0" → "ops/2026-05-11-feature-re" | ~18 |
 | 14:25 | Session end: 11 writes across 2 files (README.md, RUNBOOK.md) | 7 reads | ~39795 tok |
+
+## Session: 2026-05-22 16:49
+
+| Time | Action | File(s) | Outcome | ~Tokens |
+|------|--------|---------|---------|--------|
+| 16:58 | Created scripts/configs/profiles/types.ts | — | ~146 |
+| 16:58 | Created scripts/configs/profiles/redact-all.ts | — | ~106 |
+| 16:58 | Created scripts/configs/profiles/index.ts | — | ~163 |
+| 16:58 | Edited scripts/configs/index.ts | envFlag() → loadProfile() | ~438 |
+| 16:58 | Edited scripts/configs/index.ts | "No workstreams selected. " → "No workstreams selected. " | ~25 |
+| 16:59 | Edited package.json | 3→3 lines | ~152 |
+| 16:59 | Edited package.json | 2→2 lines | ~104 |
+| 16:59 | Created scripts/configs/profiles/README.md | — | ~598 |
+| 17:06 | Session end: 8 writes across 5 files (types.ts, redact-all.ts, index.ts, package.json, README.md) | 4 reads | ~4745 tok |
+| 17:11 | Edited scripts/configs/profiles/index.ts | modified loadProfile() | ~156 |
+| 17:11 | Edited scripts/configs/profiles/all.ts | inline fix | ~11 |
+| 17:11 | Edited scripts/configs/index.ts | inline fix | ~15 |
+| 17:11 | Edited package.json | inline fix | ~4 |
+| 17:12 | Created scripts/configs/profiles/README.md | — | ~576 |
+| 17:12 | Session end: 13 writes across 6 files (types.ts, redact-all.ts, index.ts, package.json, README.md) | 5 reads | ~5548 tok |

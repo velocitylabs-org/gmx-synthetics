@@ -2,14 +2,14 @@
   "version": 1,
   "created_at": "2026-04-28T10:25:51.703Z",
   "lifetime": {
-    "total_tokens_estimated": 1863678,
-    "total_reads": 679,
-    "total_writes": 326,
-    "total_sessions": 19,
-    "anatomy_hits": 473,
-    "anatomy_misses": 192,
-    "repeated_reads_blocked": 135,
-    "estimated_savings_vs_bare_cli": 3034051
+    "total_tokens_estimated": 1873971,
+    "total_reads": 691,
+    "total_writes": 347,
+    "total_sessions": 20,
+    "anatomy_hits": 475,
+    "anatomy_misses": 202,
+    "repeated_reads_blocked": 137,
+    "estimated_savings_vs_bare_cli": 3036053
   },
   "sessions": [
     {
@@ -7614,6 +7614,233 @@
         "writes_count": 11,
         "repeated_reads_blocked": 0,
         "anatomy_lookups": 3
+      }
+    },
+    {
+      "id": "session-2026-05-22-1649",
+      "started": "2026-05-22T14:49:17.464Z",
+      "ended": "2026-05-22T14:52:06.436Z",
+      "reads": [
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/index.ts",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/profiles/feature-validation.env",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/run-feature-validation.sh",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        }
+      ],
+      "writes": [],
+      "totals": {
+        "input_tokens_estimated": 0,
+        "output_tokens_estimated": 0,
+        "reads_count": 3,
+        "writes_count": 0,
+        "repeated_reads_blocked": 0,
+        "anatomy_lookups": 0
+      }
+    },
+    {
+      "id": "session-2026-05-22-1649",
+      "started": "2026-05-22T14:49:17.464Z",
+      "ended": "2026-05-22T15:06:08.496Z",
+      "reads": [
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/index.ts",
+          "tokens_estimated": 801,
+          "was_repeated": true,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/profiles/feature-validation.env",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/run-feature-validation.sh",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/package.json",
+          "tokens_estimated": 2170,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        }
+      ],
+      "writes": [
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/profiles/types.ts",
+          "tokens_estimated": 146,
+          "action": "create"
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/profiles/redact-all.ts",
+          "tokens_estimated": 106,
+          "action": "create"
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/profiles/index.ts",
+          "tokens_estimated": 163,
+          "action": "create"
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/index.ts",
+          "tokens_estimated": 438,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/index.ts",
+          "tokens_estimated": 25,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/package.json",
+          "tokens_estimated": 152,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/package.json",
+          "tokens_estimated": 104,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/profiles/README.md",
+          "tokens_estimated": 640,
+          "action": "create"
+        }
+      ],
+      "totals": {
+        "input_tokens_estimated": 2971,
+        "output_tokens_estimated": 1774,
+        "reads_count": 4,
+        "writes_count": 8,
+        "repeated_reads_blocked": 1,
+        "anatomy_lookups": 1
+      }
+    },
+    {
+      "id": "session-2026-05-22-1649",
+      "started": "2026-05-22T14:49:17.464Z",
+      "ended": "2026-05-22T15:12:12.924Z",
+      "reads": [
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/index.ts",
+          "tokens_estimated": 801,
+          "was_repeated": true,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/profiles/feature-validation.env",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/run-feature-validation.sh",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/package.json",
+          "tokens_estimated": 2170,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/profiles/all.ts",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        }
+      ],
+      "writes": [
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/profiles/types.ts",
+          "tokens_estimated": 146,
+          "action": "create"
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/profiles/redact-all.ts",
+          "tokens_estimated": 106,
+          "action": "create"
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/profiles/index.ts",
+          "tokens_estimated": 163,
+          "action": "create"
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/index.ts",
+          "tokens_estimated": 438,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/index.ts",
+          "tokens_estimated": 25,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/package.json",
+          "tokens_estimated": 152,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/package.json",
+          "tokens_estimated": 104,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/profiles/README.md",
+          "tokens_estimated": 640,
+          "action": "create"
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/profiles/index.ts",
+          "tokens_estimated": 156,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/profiles/all.ts",
+          "tokens_estimated": 11,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/index.ts",
+          "tokens_estimated": 15,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/package.json",
+          "tokens_estimated": 4,
+          "action": "edit"
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/profiles/README.md",
+          "tokens_estimated": 617,
+          "action": "create"
+        }
+      ],
+      "totals": {
+        "input_tokens_estimated": 2971,
+        "output_tokens_estimated": 2577,
+        "reads_count": 5,
+        "writes_count": 13,
+        "repeated_reads_blocked": 1,
+        "anatomy_lookups": 1
       }
     }
   ],

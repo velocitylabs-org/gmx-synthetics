@@ -13,7 +13,7 @@ import { loadProfile } from "./profiles";
 async function main() {
   console.log("Running config orchestrator...");
 
-  const profile = loadProfile(process.env.PROFILE);
+  const profile = loadProfile(process.env.FEATURES);
 
   const runOrderFeatureRedaction = profile.RUN_ORDER_FEATURE_REDACTION;
   const runPoolRiskGuards = profile.RUN_POOL_RISK_GUARDS;
