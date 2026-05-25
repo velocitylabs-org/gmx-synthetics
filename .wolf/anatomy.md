@@ -1,7 +1,7 @@
 # anatomy.md
 
-> Auto-maintained by OpenWolf. Last scanned: 2026-05-25T12:58:59.805Z
-> Files: 990 tracked | Anatomy hits: 0 | Misses: 0
+> Auto-maintained by OpenWolf. Last scanned: 2026-05-25T14:58:00.469Z
+> Files: 987 tracked | Anatomy hits: 0 | Misses: 0
 
 ## ./
 
@@ -934,7 +934,7 @@
 
 ## scripts/configs/
 
-- `index.ts` — Declares main (~797 tok)
+- `index.ts` — Declares main (~599 tok)
 - `README.md` — Project documentation (~1488 tok)
 - `run-feature-validation.sh` (~88 tok)
 

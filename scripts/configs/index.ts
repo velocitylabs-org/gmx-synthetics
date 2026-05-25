@@ -15,64 +15,44 @@ async function main() {
 
   const preset = loadPreset(process.env.FEATURES);
 
-  const runOrderFeatureRedaction = preset.RUN_ORDER_FEATURE_REDACTION;
-  const runPoolRiskGuards = preset.RUN_POOL_RISK_GUARDS;
-  const runInvariantValidations = preset.RUN_INVARIANT_VALIDATIONS;
-  const runShiftFeatures = preset.RUN_SHIFT_FEATURES;
-  const runJitFeature = preset.RUN_JIT_FEATURE;
-  const runSubaccountFeature = preset.RUN_SUBACCOUNT_FEATURE;
-  const runGaslessFeature = preset.RUN_GASLESS_FEATURE;
-  const runAtomicWithdrawalFeature = preset.RUN_ATOMIC_WITHDRAWAL_FEATURE;
-  const runFeatureValidations = preset.RUN_FEATURE_VALIDATIONS;
-
-  if (runOrderFeatureRedaction) {
+  if (preset.RUN_ORDER_FEATURE_REDACTION) {
     await runDisableOrderCreateFeatures();
     await runDisableOrderExecuteFeatures();
   }
 
-  if (runPoolRiskGuards) {
+  if (preset.RUN_POOL_RISK_GUARDS) {
     await runApplyPoolRiskGuards();
   }
 
-  if (runInvariantValidations) {
+  if (preset.RUN_INVARIANT_VALIDATIONS) {
     await runInvariantChecks();
   }
 
-  if (runShiftFeatures) {
+  if (preset.RUN_SHIFT_FEATURES) {
     await runSetShiftFeaturesState();
   }
 
-  if (runJitFeature) {
+  if (preset.RUN_JIT_FEATURE) {
     await runSetJitFeatureState();
   }
 
-  if (runSubaccountFeature) {
+  if (preset.RUN_SUBACCOUNT_FEATURE) {
     await runSetSubaccountFeatureState();
   }
 
-  if (runGaslessFeature) {
+  if (preset.RUN_GASLESS_FEATURE) {
     await runSetGaslessFeatureState();
   }
 
-  if (runAtomicWithdrawalFeature) {
+  if (preset.RUN_ATOMIC_WITHDRAWAL_FEATURE) {
     await runSetAtomicWithdrawalFeatureState();
   }
 
-  if (runFeatureValidations) {
+  if (preset.RUN_FEATURE_VALIDATIONS) {
     await runVerifyFeaturesState();
   }
 
-  if (
-    !runOrderFeatureRedaction &&
-    !runPoolRiskGuards &&
-    !runInvariantValidations &&
-    !runShiftFeatures &&
-    !runJitFeature &&
-    !runSubaccountFeature &&
-    !runGaslessFeature &&
-    !runAtomicWithdrawalFeature &&
-    !runFeatureValidations
-  ) {
+  if (Object.values(preset).every((v) => !v)) {
     console.log("No workstreams selected. Check the active preset's feature flags.");
   }
 
