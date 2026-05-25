@@ -33,13 +33,13 @@
       "first_read": "2026-05-25T12:26:34.804Z"
     },
     "/Users/n/code/gmx-synthetics/scripts/configs/presets/index.ts": {
-      "count": 2,
-      "tokens": 156,
+      "count": 3,
+      "tokens": 182,
       "first_read": "2026-05-25T12:26:34.870Z"
     },
     "/Users/n/code/gmx-synthetics/scripts/configs/index.ts": {
-      "count": 1,
-      "tokens": 801,
+      "count": 2,
+      "tokens": 797,
       "first_read": "2026-05-25T12:26:55.662Z"
     },
     "/Users/n/code/gmx-synthetics/package.json": {
@@ -302,7 +302,7 @@
   },
   "anatomy_hits": 8,
   "anatomy_misses": 5,
-  "repeated_reads_warned": 6,
+  "repeated_reads_warned": 8,
   "cerebrum_warnings": 0,
-  "stop_count": 16
+  "stop_count": 17
 }
