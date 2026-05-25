@@ -2,14 +2,14 @@
   "version": 1,
   "created_at": "2026-04-28T10:25:51.703Z",
   "lifetime": {
-    "total_tokens_estimated": 1873971,
-    "total_reads": 691,
-    "total_writes": 347,
-    "total_sessions": 20,
-    "anatomy_hits": 475,
-    "anatomy_misses": 202,
+    "total_tokens_estimated": 1886904,
+    "total_reads": 695,
+    "total_writes": 351,
+    "total_sessions": 21,
+    "anatomy_hits": 476,
+    "anatomy_misses": 204,
     "repeated_reads_blocked": 137,
-    "estimated_savings_vs_bare_cli": 3036053
+    "estimated_savings_vs_bare_cli": 3036253
   },
   "sessions": [
     {
@@ -7840,6 +7840,84 @@
         "reads_count": 5,
         "writes_count": 13,
         "repeated_reads_blocked": 1,
+        "anatomy_lookups": 1
+      }
+    },
+    {
+      "id": "session-2026-05-25-1406",
+      "started": "2026-05-25T12:06:32.616Z",
+      "ended": "2026-05-25T12:07:05.707Z",
+      "reads": [
+        {
+          "file": "/Users/n/.claude/projects/-Users-n-code-gmx-synthetics/memory/MEMORY.md",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        }
+      ],
+      "writes": [
+        {
+          "file": "/Users/n/.claude/projects/-Users-n-code-gmx-synthetics/memory/feedback_no_git_commits.md",
+          "tokens_estimated": 170,
+          "action": "create"
+        },
+        {
+          "file": "/Users/n/.claude/projects/-Users-n-code-gmx-synthetics/memory/MEMORY.md",
+          "tokens_estimated": 39,
+          "action": "create"
+        }
+      ],
+      "totals": {
+        "input_tokens_estimated": 0,
+        "output_tokens_estimated": 209,
+        "reads_count": 1,
+        "writes_count": 2,
+        "repeated_reads_blocked": 0,
+        "anatomy_lookups": 0
+      }
+    },
+    {
+      "id": "session-2026-05-25-1406",
+      "started": "2026-05-25T12:06:32.616Z",
+      "ended": "2026-05-25T12:08:19.639Z",
+      "reads": [
+        {
+          "file": "/Users/n/.claude/projects/-Users-n-code-gmx-synthetics/memory/MEMORY.md",
+          "tokens_estimated": 0,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/profiles/README.md",
+          "tokens_estimated": 12369,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        },
+        {
+          "file": "/Users/n/code/gmx-synthetics/scripts/configs/profiles/types.ts",
+          "tokens_estimated": 146,
+          "was_repeated": false,
+          "anatomy_had_description": false
+        }
+      ],
+      "writes": [
+        {
+          "file": "/Users/n/.claude/projects/-Users-n-code-gmx-synthetics/memory/feedback_no_git_commits.md",
+          "tokens_estimated": 170,
+          "action": "create"
+        },
+        {
+          "file": "/Users/n/.claude/projects/-Users-n-code-gmx-synthetics/memory/MEMORY.md",
+          "tokens_estimated": 39,
+          "action": "create"
+        }
+      ],
+      "totals": {
+        "input_tokens_estimated": 12515,
+        "output_tokens_estimated": 209,
+        "reads_count": 3,
+        "writes_count": 2,
+        "repeated_reads_blocked": 0,
         "anatomy_lookups": 1
       }
     }

@@ -1,125 +1,44 @@
 {
-  "session_id": "session-2026-05-22-1649",
-  "started": "2026-05-22T14:49:17.464Z",
+  "session_id": "session-2026-05-25-1406",
+  "started": "2026-05-25T12:06:32.616Z",
   "files_read": {
-    "/Users/n/code/gmx-synthetics/scripts/configs/index.ts": {
-      "count": 2,
-      "tokens": 801,
-      "first_read": "2026-05-22T14:49:24.116Z"
-    },
-    "/Users/n/code/gmx-synthetics/scripts/configs/profiles/feature-validation.env": {
+    "/Users/n/.claude/projects/-Users-n-code-gmx-synthetics/memory/MEMORY.md": {
       "count": 1,
       "tokens": 0,
-      "first_read": "2026-05-22T14:49:39.118Z"
+      "first_read": "2026-05-25T12:06:49.734Z"
     },
-    "/Users/n/code/gmx-synthetics/scripts/configs/run-feature-validation.sh": {
+    "/Users/n/code/gmx-synthetics/scripts/configs/profiles/README.md": {
       "count": 1,
-      "tokens": 0,
-      "first_read": "2026-05-22T14:49:39.880Z"
+      "tokens": 12369,
+      "first_read": "2026-05-25T12:08:02.169Z"
     },
-    "/Users/n/code/gmx-synthetics/package.json": {
+    "/Users/n/code/gmx-synthetics/scripts/configs/profiles/types.ts": {
       "count": 1,
-      "tokens": 2170,
-      "first_read": "2026-05-22T14:59:01.116Z"
-    },
-    "/Users/n/code/gmx-synthetics/scripts/configs/profiles/all.ts": {
-      "count": 1,
-      "tokens": 0,
-      "first_read": "2026-05-22T15:11:35.323Z"
+      "tokens": 146,
+      "first_read": "2026-05-25T12:08:02.252Z"
     }
   },
   "files_written": [
     {
-      "file": "/Users/n/code/gmx-synthetics/scripts/configs/profiles/types.ts",
+      "file": "/Users/n/.claude/projects/-Users-n-code-gmx-synthetics/memory/feedback_no_git_commits.md",
       "action": "create",
-      "tokens": 146,
-      "at": "2026-05-22T14:58:24.938Z"
+      "tokens": 170,
+      "at": "2026-05-25T12:06:55.354Z"
     },
     {
-      "file": "/Users/n/code/gmx-synthetics/scripts/configs/profiles/redact-all.ts",
+      "file": "/Users/n/.claude/projects/-Users-n-code-gmx-synthetics/memory/MEMORY.md",
       "action": "create",
-      "tokens": 106,
-      "at": "2026-05-22T14:58:30.364Z"
-    },
-    {
-      "file": "/Users/n/code/gmx-synthetics/scripts/configs/profiles/index.ts",
-      "action": "create",
-      "tokens": 163,
-      "at": "2026-05-22T14:58:35.500Z"
-    },
-    {
-      "file": "/Users/n/code/gmx-synthetics/scripts/configs/index.ts",
-      "action": "edit",
-      "tokens": 438,
-      "at": "2026-05-22T14:58:49.556Z"
-    },
-    {
-      "file": "/Users/n/code/gmx-synthetics/scripts/configs/index.ts",
-      "action": "edit",
-      "tokens": 25,
-      "at": "2026-05-22T14:58:54.499Z"
-    },
-    {
-      "file": "/Users/n/code/gmx-synthetics/package.json",
-      "action": "edit",
-      "tokens": 152,
-      "at": "2026-05-22T14:59:10.496Z"
-    },
-    {
-      "file": "/Users/n/code/gmx-synthetics/package.json",
-      "action": "edit",
-      "tokens": 104,
-      "at": "2026-05-22T14:59:17.923Z"
-    },
-    {
-      "file": "/Users/n/code/gmx-synthetics/scripts/configs/profiles/README.md",
-      "action": "create",
-      "tokens": 640,
-      "at": "2026-05-22T14:59:35.332Z"
-    },
-    {
-      "file": "/Users/n/code/gmx-synthetics/scripts/configs/profiles/index.ts",
-      "action": "edit",
-      "tokens": 156,
-      "at": "2026-05-22T15:11:29.736Z"
-    },
-    {
-      "file": "/Users/n/code/gmx-synthetics/scripts/configs/profiles/all.ts",
-      "action": "edit",
-      "tokens": 11,
-      "at": "2026-05-22T15:11:37.882Z"
-    },
-    {
-      "file": "/Users/n/code/gmx-synthetics/scripts/configs/index.ts",
-      "action": "edit",
-      "tokens": 15,
-      "at": "2026-05-22T15:11:41.624Z"
-    },
-    {
-      "file": "/Users/n/code/gmx-synthetics/package.json",
-      "action": "edit",
-      "tokens": 4,
-      "at": "2026-05-22T15:11:45.612Z"
-    },
-    {
-      "file": "/Users/n/code/gmx-synthetics/scripts/configs/profiles/README.md",
-      "action": "create",
-      "tokens": 617,
-      "at": "2026-05-22T15:12:01.255Z"
+      "tokens": 39,
+      "at": "2026-05-25T12:06:59.198Z"
     }
   ],
   "edit_counts": {
-    "scripts/configs/profiles/types.ts": 1,
-    "scripts/configs/profiles/redact-all.ts": 1,
-    "scripts/configs/profiles/index.ts": 2,
-    "scripts/configs/index.ts": 3,
-    "package.json": 3,
-    "scripts/configs/profiles/README.md": 2,
-    "scripts/configs/profiles/all.ts": 1
+    "../../.claude/projects/-Users-n-code-gmx-synthetics/memory/feedback_no_git_commits.md": 1,
+    "../../.claude/projects/-Users-n-code-gmx-synthetics/memory/MEMORY.md": 1
   },
   "anatomy_hits": 1,
-  "anatomy_misses": 4,
-  "repeated_reads_warned": 1,
+  "anatomy_misses": 1,
+  "repeated_reads_warned": 0,
   "cerebrum_warnings": 0,
-  "stop_count": 3
+  "stop_count": 2
 }
