@@ -253,3 +253,96 @@
 | 14:25 | Edited ops/RUNBOOK.md | inline fix | ~8 |
 | 14:25 | Edited ops/RUNBOOK.md | "ops/config-changes/2026-0" → "ops/2026-05-11-feature-re" | ~18 |
 | 14:25 | Session end: 11 writes across 2 files (README.md, RUNBOOK.md) | 7 reads | ~39795 tok |
+
+## Session: 2026-05-22 16:49
+
+| Time | Action | File(s) | Outcome | ~Tokens |
+|------|--------|---------|---------|--------|
+| 16:58 | Created scripts/configs/profiles/types.ts | — | ~146 |
+| 16:58 | Created scripts/configs/profiles/redact-all.ts | — | ~106 |
+| 16:58 | Created scripts/configs/profiles/index.ts | — | ~163 |
+| 16:58 | Edited scripts/configs/index.ts | envFlag() → loadProfile() | ~438 |
+| 16:58 | Edited scripts/configs/index.ts | "No workstreams selected. " → "No workstreams selected. " | ~25 |
+| 16:59 | Edited package.json | 3→3 lines | ~152 |
+| 16:59 | Edited package.json | 2→2 lines | ~104 |
+| 16:59 | Created scripts/configs/profiles/README.md | — | ~598 |
+| 17:06 | Session end: 8 writes across 5 files (types.ts, redact-all.ts, index.ts, package.json, README.md) | 4 reads | ~4745 tok |
+| 17:11 | Edited scripts/configs/profiles/index.ts | modified loadProfile() | ~156 |
+| 17:11 | Edited scripts/configs/profiles/all.ts | inline fix | ~11 |
+| 17:11 | Edited scripts/configs/index.ts | inline fix | ~15 |
+| 17:11 | Edited package.json | inline fix | ~4 |
+| 17:12 | Created scripts/configs/profiles/README.md | — | ~576 |
+| 17:12 | Session end: 13 writes across 6 files (types.ts, redact-all.ts, index.ts, package.json, README.md) | 5 reads | ~5548 tok |
+
+## Session: 2026-05-25 14:06
+
+| Time | Action | File(s) | Outcome | ~Tokens |
+|------|--------|---------|---------|--------|
+| 14:06 | Created Claude memory files (outside repo) | — | ~194 |
+| 14:07 | Session end: 2 writes across 2 files (feedback_no_git_commits.md, MEMORY.md) | 1 reads | ~209 tok |
+| 14:08 | Session end: 2 writes across 2 files (feedback_no_git_commits.md, MEMORY.md) | 3 reads | ~12724 tok |
+| 14:20 | Session end: 2 writes across 2 files (feedback_no_git_commits.md, MEMORY.md) | 5 reads | ~12985 tok |
+| 14:22 | Session end: 2 writes across 2 files (feedback_no_git_commits.md, MEMORY.md) | 5 reads | ~12985 tok |
+| 14:26 | Edited scripts/configs/presets/types.ts | 3→3 lines | ~64 |
+| 14:26 | Created scripts/configs/presets/default.ts | — | ~122 |
+| 14:26 | Edited scripts/configs/presets/index.ts | loadProfile() → loadPreset() | ~162 |
+| 14:27 | Edited scripts/configs/index.ts | loadProfile() → loadPreset() | ~206 |
+| 14:27 | Edited scripts/configs/index.ts | "No workstreams selected. " → "No workstreams selected. " | ~25 |
+| 14:27 | Edited package.json | inline fix | ~5 |
+| 14:27 | Created scripts/configs/presets/README.md | — | ~578 |
+| 14:27 | Edited scripts/configs/README.md | 23→23 lines | ~208 |
+| 14:27 | Edited scripts/configs/validations/verifyFeatureValidationProfile.ts | inline fix | ~25 |
+| 14:28 | Session end: 11 writes across 8 files (feedback_no_git_commits.md, MEMORY.md, types.ts, default.ts, index.ts) | 12 reads | ~41849 tok |
+| 14:28 | Edited scripts/configs/presets/index.ts | inline fix | ~2 |
+| 14:28 | Session end: 12 writes across 8 files (feedback_no_git_commits.md, MEMORY.md, types.ts, default.ts, index.ts) | 12 reads | ~41851 tok |
+| 14:29 | Edited scripts/configs/presets/types.ts | inline fix | ~15 |
+| 14:29 | Edited scripts/configs/presets/index.ts | inline fix | ~2 |
+| 14:29 | Edited scripts/configs/presets/default.ts | inline fix | ~2 |
+| 14:30 | Edited scripts/configs/presets/README.md | inline fix | ~2 |
+| 14:30 | Session end: 16 writes across 8 files (feedback_no_git_commits.md, MEMORY.md, types.ts, default.ts, index.ts) | 12 reads | ~41872 tok |
+| 14:31 | Edited scripts/configs/presets/default.ts | inline fix | ~4 |
+| 14:31 | Edited scripts/configs/presets/types.ts | 3→4 lines | ~79 |
+| 14:31 | Edited scripts/configs/presets/index.ts | modified loadPreset() | ~64 |
+| 14:32 | Created scripts/configs/presets/README.md | — | ~572 |
+| 14:32 | Session end: 20 writes across 8 files (feedback_no_git_commits.md, MEMORY.md, types.ts, default.ts, index.ts) | 12 reads | ~42934 tok |
+| 14:33 | Session end: 20 writes across 8 files (feedback_no_git_commits.md, MEMORY.md, types.ts, default.ts, index.ts) | 12 reads | ~42934 tok |
+| 14:34 | Edited scripts/configs/presets/types.ts | 2→1 lines | ~17 |
+| 14:34 | Edited scripts/configs/presets/index.ts | modified loadPreset() | ~68 |
+| 14:34 | Edited scripts/configs/presets/README.md | inline fix | ~15 |
+| 14:34 | Session end: 23 writes across 8 files (feedback_no_git_commits.md, MEMORY.md, types.ts, default.ts, index.ts) | 12 reads | ~43035 tok |
+| 14:35 | Updated Claude memory files (outside repo) | — | ~230 |
+| 14:35 | Session end: 25 writes across 9 files (feedback_no_git_commits.md, MEMORY.md, types.ts, default.ts, index.ts) | 12 reads | ~43281 tok |
+| 14:38 | Edited scripts/configs/presets/default.ts | inline fix | ~13 |
+| 14:38 | Session end: 26 writes across 9 files (feedback_no_git_commits.md, MEMORY.md, types.ts, default.ts, index.ts) | 13 reads | ~43418 tok |
+| 14:40 | Session end: 26 writes across 9 files (feedback_no_git_commits.md, MEMORY.md, types.ts, default.ts, index.ts) | 13 reads | ~43418 tok |
+| 14:52 | Session end: 26 writes across 9 files (feedback_no_git_commits.md, MEMORY.md, types.ts, default.ts, index.ts) | 14 reads | ~43418 tok |
+| 14:54 | Created scripts/configs/presets/validate.ts | — | ~111 |
+| 14:54 | Edited scripts/configs/presets/index.ts | added 1 import(s) | ~69 |
+| 14:54 | Created scripts/configs/run-feature-validation.sh | — | ~88 |
+| 14:55 | Edited scripts/configs/README.md | reduced (-6 lines) | ~204 |
+| 14:55 | Edited scripts/configs/presets/README.md | reduced (-6 lines) | ~77 |
+| 14:55 | Session end: 31 writes across 11 files (feedback_no_git_commits.md, MEMORY.md, types.ts, default.ts, index.ts) | 14 reads | ~44522 tok |
+| 14:58 | Edited package.json | inline fix | ~66 |
+| 14:58 | Edited package.json | inline fix | ~62 |
+| 14:58 | Edited scripts/configs/README.md | 4→4 lines | ~86 |
+| 14:58 | Edited scripts/configs/presets/README.md | inline fix | ~42 |
+| 14:59 | Session end: 35 writes across 11 files (feedback_no_git_commits.md, MEMORY.md, types.ts, default.ts, index.ts) | 14 reads | ~44793 tok |
+| 15:09 | Session end: 35 writes across 11 files (feedback_no_git_commits.md, MEMORY.md, types.ts, default.ts, index.ts) | 14 reads | ~44815 tok |
+| 15:12 | Session end: 35 writes across 11 files (feedback_no_git_commits.md, MEMORY.md, types.ts, default.ts, index.ts) | 14 reads | ~44815 tok |
+
+## Session: 2026-05-25 15:32
+
+| Time | Action | File(s) | Outcome | ~Tokens |
+|------|--------|---------|---------|--------|
+
+## Session: 2026-05-25 16:51
+
+| Time | Action | File(s) | Outcome | ~Tokens |
+|------|--------|---------|---------|--------|
+
+## Session: 2026-05-25 16:56
+
+| Time | Action | File(s) | Outcome | ~Tokens |
+|------|--------|---------|---------|--------|
+| 16:58 | Edited scripts/configs/index.ts | modified if() | ~280 |
+| 16:58 | Session end: 1 writes across 1 files (index.ts) | 1 reads | ~1077 tok |

@@ -8,75 +8,52 @@ import { runSetGaslessFeatureState } from "./configs/setGaslessFeatureState";
 import { runSetAtomicWithdrawalFeatureState } from "./configs/setAtomicWithdrawalFeatureState";
 import { runInvariantChecks } from "./validations/runInvariantChecks";
 import { runVerifyFeaturesState } from "./validations/verifyFeaturesState";
-
-function envFlag(name: string, defaultValue: boolean) {
-  const value = process.env[name];
-  if (value === undefined) return defaultValue;
-  return value === "true";
-}
+import { loadPreset } from "./presets";
 
 async function main() {
   console.log("Running config orchestrator...");
 
-  const runOrderFeatureRedaction = envFlag("RUN_ORDER_FEATURE_REDACTION", true);
-  const runPoolRiskGuards = envFlag("RUN_POOL_RISK_GUARDS", true);
-  const runInvariantValidations = envFlag("RUN_INVARIANT_VALIDATIONS", false);
-  const runShiftFeatures = envFlag("RUN_SHIFT_FEATURES", false);
-  const runJitFeature = envFlag("RUN_JIT_FEATURE", false);
-  const runSubaccountFeature = envFlag("RUN_SUBACCOUNT_FEATURE", false);
-  const runGaslessFeature = envFlag("RUN_GASLESS_FEATURE", false);
-  const runAtomicWithdrawalFeature = envFlag("RUN_ATOMIC_WITHDRAWAL_FEATURE", false);
-  const runFeatureValidations = envFlag("RUN_FEATURE_VALIDATIONS", false);
+  const preset = loadPreset(process.env.FEATURES);
 
-  if (runOrderFeatureRedaction) {
+  if (preset.RUN_ORDER_FEATURE_REDACTION) {
     await runDisableOrderCreateFeatures();
     await runDisableOrderExecuteFeatures();
   }
 
-  if (runPoolRiskGuards) {
+  if (preset.RUN_POOL_RISK_GUARDS) {
     await runApplyPoolRiskGuards();
   }
 
-  if (runInvariantValidations) {
+  if (preset.RUN_INVARIANT_VALIDATIONS) {
     await runInvariantChecks();
   }
 
-  if (runShiftFeatures) {
+  if (preset.RUN_SHIFT_FEATURES) {
     await runSetShiftFeaturesState();
   }
 
-  if (runJitFeature) {
+  if (preset.RUN_JIT_FEATURE) {
     await runSetJitFeatureState();
   }
 
-  if (runSubaccountFeature) {
+  if (preset.RUN_SUBACCOUNT_FEATURE) {
     await runSetSubaccountFeatureState();
   }
 
-  if (runGaslessFeature) {
+  if (preset.RUN_GASLESS_FEATURE) {
     await runSetGaslessFeatureState();
   }
 
-  if (runAtomicWithdrawalFeature) {
+  if (preset.RUN_ATOMIC_WITHDRAWAL_FEATURE) {
     await runSetAtomicWithdrawalFeatureState();
   }
 
-  if (runFeatureValidations) {
+  if (preset.RUN_FEATURE_VALIDATIONS) {
     await runVerifyFeaturesState();
   }
 
-  if (
-    !runOrderFeatureRedaction &&
-    !runPoolRiskGuards &&
-    !runInvariantValidations &&
-    !runShiftFeatures &&
-    !runJitFeature &&
-    !runSubaccountFeature &&
-    !runGaslessFeature &&
-    !runAtomicWithdrawalFeature &&
-    !runFeatureValidations
-  ) {
-    console.log("No workstreams selected. Set RUN_* env vars to execute setters or validations.");
+  if (Object.values(preset).every((v) => !v)) {
+    console.log("No workstreams selected. Check the active preset's feature flags.");
   }
 
   console.log("Completed config orchestrator.");

@@ -1,118 +1,27 @@
 {
-  "session_id": "session-2026-05-22-1307",
-  "started": "2026-05-22T11:07:38.242Z",
+  "session_id": "session-2026-05-25-1656",
+  "started": "2026-05-25T14:56:54.499Z",
   "files_read": {
-    "/Users/n/code/gmx-synthetics/docs/mainnet-configurations/remaining-feature-redaction/20260511-production-evidence/README.md": {
+    "/Users/n/code/gmx-synthetics/scripts/configs/index.ts": {
       "count": 1,
-      "tokens": 12369,
-      "first_read": "2026-05-22T11:11:15.774Z"
-    },
-    "/Users/n/code/gmx-synthetics/docs/mainnet-configurations/remaining-feature-redaction/20260511-124500/README.md": {
-      "count": 1,
-      "tokens": 12369,
-      "first_read": "2026-05-22T11:11:16.090Z"
-    },
-    "/Users/n/code/gmx-synthetics/docs/mainnet-configurations/remaining-feature-redaction/20260511-production-evidence/07-post-mainnet-note.md": {
-      "count": 1,
-      "tokens": 0,
-      "first_read": "2026-05-22T11:11:19.160Z"
-    },
-    "/Users/n/code/gmx-synthetics/docs/mainnet-configurations/remaining-feature-redaction/20260511-124500/04-acceptance-checklist.md": {
-      "count": 1,
-      "tokens": 0,
-      "first_read": "2026-05-22T11:11:19.667Z"
-    },
-    "/Users/n/code/gmx-synthetics/docs/mainnet-configurations/remaining-feature-redaction/20260511-production-evidence/03-mainnet-validate.log": {
-      "count": 1,
-      "tokens": 0,
-      "first_read": "2026-05-22T11:42:00.981Z"
-    },
-    "/Users/n/code/gmx-synthetics/docs/mainnet-configurations/remaining-feature-redaction/20260511-production-evidence/02-mainnet-write.log": {
-      "count": 1,
-      "tokens": 0,
-      "first_read": "2026-05-22T11:42:01.047Z"
-    },
-    "/Users/n/code/gmx-synthetics/ops/config-changes/2026-05-11-feature-redaction/README.md": {
-      "count": 1,
-      "tokens": 12369,
-      "first_read": "2026-05-22T12:04:43.483Z"
+      "tokens": 797,
+      "first_read": "2026-05-25T14:57:49.340Z"
     }
   },
   "files_written": [
     {
-      "file": "/Users/n/code/gmx-synthetics/ops/config-changes/2026-05-11-feature-redaction/README.md",
-      "action": "create",
-      "tokens": 928,
-      "at": "2026-05-22T11:43:12.091Z"
-    },
-    {
-      "file": "/Users/n/code/gmx-synthetics/ops/config-changes/2026-05-11-feature-redaction/README.md",
+      "file": "/Users/n/code/gmx-synthetics/scripts/configs/index.ts",
       "action": "edit",
-      "tokens": 138,
-      "at": "2026-05-22T11:53:39.009Z"
-    },
-    {
-      "file": "/Users/n/code/gmx-synthetics/ops/config-changes/2026-05-11-feature-redaction/README.md",
-      "action": "edit",
-      "tokens": 0,
-      "at": "2026-05-22T11:54:18.564Z"
-    },
-    {
-      "file": "/Users/n/code/gmx-synthetics/ops/config-changes/2026-05-11-feature-redaction/README.md",
-      "action": "edit",
-      "tokens": 45,
-      "at": "2026-05-22T11:56:09.015Z"
-    },
-    {
-      "file": "/Users/n/code/gmx-synthetics/ops/config-changes/2026-05-11-feature-redaction/README.md",
-      "action": "edit",
-      "tokens": 41,
-      "at": "2026-05-22T11:58:30.785Z"
-    },
-    {
-      "file": "/Users/n/code/gmx-synthetics/ops/config-changes/2026-05-11-feature-redaction/README.md",
-      "action": "edit",
-      "tokens": 147,
-      "at": "2026-05-22T12:04:50.198Z"
-    },
-    {
-      "file": "/Users/n/code/gmx-synthetics/ops/RUNBOOK.md",
-      "action": "create",
-      "tokens": 1304,
-      "at": "2026-05-22T12:24:02.963Z"
-    },
-    {
-      "file": "/Users/n/code/gmx-synthetics/ops/RUNBOOK.md",
-      "action": "edit",
-      "tokens": 52,
-      "at": "2026-05-22T12:25:19.026Z"
-    },
-    {
-      "file": "/Users/n/code/gmx-synthetics/ops/RUNBOOK.md",
-      "action": "edit",
-      "tokens": 5,
-      "at": "2026-05-22T12:25:22.453Z"
-    },
-    {
-      "file": "/Users/n/code/gmx-synthetics/ops/RUNBOOK.md",
-      "action": "edit",
-      "tokens": 9,
-      "at": "2026-05-22T12:25:26.594Z"
-    },
-    {
-      "file": "/Users/n/code/gmx-synthetics/ops/RUNBOOK.md",
-      "action": "edit",
-      "tokens": 19,
-      "at": "2026-05-22T12:25:30.820Z"
+      "tokens": 280,
+      "at": "2026-05-25T14:58:00.491Z"
     }
   ],
   "edit_counts": {
-    "ops/config-changes/2026-05-11-feature-redaction/README.md": 6,
-    "ops/RUNBOOK.md": 5
+    "scripts/configs/index.ts": 1
   },
-  "anatomy_hits": 3,
-  "anatomy_misses": 3,
+  "anatomy_hits": 1,
+  "anatomy_misses": 0,
   "repeated_reads_warned": 0,
   "cerebrum_warnings": 0,
-  "stop_count": 15
+  "stop_count": 1
 }

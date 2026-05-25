@@ -448,6 +448,262 @@
       "related_bugs": [],
       "occurrences": 1,
       "last_seen": "2026-05-22T12:25:30.821Z"
+    },
+    {
+      "id": "bug-029",
+      "timestamp": "2026-05-22T14:58:54.500Z",
+      "error_message": "Incorrect value in code",
+      "file": "scripts/configs/index.ts",
+      "root_cause": "Had \"No workstreams selected. Set RUN_* env vars to ex",
+      "fix": "Changed to \"No workstreams selected. Check the active profile",
+      "tags": [
+        "auto-detected",
+        "wrong-value",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-22T14:58:54.500Z"
+    },
+    {
+      "id": "bug-030",
+      "timestamp": "2026-05-22T14:59:10.497Z",
+      "error_message": "Incorrect value in code",
+      "file": "package.json",
+      "root_cause": "Had \"FORK_ID=8453 WRITE=true IS_DISABLED=true RUN_ORDE",
+      "fix": "Changed to \"FORK_ID=8453 WRITE=true IS_DISABLED=true PROFILE=",
+      "tags": [
+        "auto-detected",
+        "wrong-value",
+        "json"
+      ],
+      "related_bugs": [],
+      "occurrences": 2,
+      "last_seen": "2026-05-22T14:59:17.923Z"
+    },
+    {
+      "id": "bug-031",
+      "timestamp": "2026-05-22T15:11:37.883Z",
+      "error_message": "Wrong reference: redactAllProfile should be allProfile",
+      "file": "scripts/configs/profiles/all.ts",
+      "root_cause": "Used \"redactAllProfile\" instead of \"allProfile\"",
+      "fix": "Changed redactAllProfile → allProfile",
+      "tags": [
+        "auto-detected",
+        "wrong-reference",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-22T15:11:37.883Z"
+    },
+    {
+      "id": "bug-032",
+      "timestamp": "2026-05-22T15:11:41.625Z",
+      "error_message": "Wrong reference: PROFILE should be FEATURES",
+      "file": "scripts/configs/index.ts",
+      "root_cause": "Used \"PROFILE\" instead of \"FEATURES\"",
+      "fix": "Changed PROFILE → FEATURES",
+      "tags": [
+        "auto-detected",
+        "wrong-reference",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-22T15:11:41.625Z"
+    },
+    {
+      "id": "bug-033",
+      "timestamp": "2026-05-25T12:26:38.339Z",
+      "error_message": "Wrong reference: Profile should be FeatureFlags",
+      "file": "scripts/configs/presets/types.ts",
+      "root_cause": "Used \"Profile\" instead of \"FeatureFlags\"",
+      "fix": "Changed Profile → FeatureFlags",
+      "tags": [
+        "auto-detected",
+        "wrong-reference",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 2,
+      "last_seen": "2026-05-25T12:29:50.487Z"
+    },
+    {
+      "id": "bug-034",
+      "timestamp": "2026-05-25T12:27:10.292Z",
+      "error_message": "Incorrect value in code",
+      "file": "scripts/configs/index.ts",
+      "root_cause": "Had \"No workstreams selected. Check the active profile",
+      "fix": "Changed to \"No workstreams selected. Check the active preset'",
+      "tags": [
+        "auto-detected",
+        "wrong-value",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-25T12:27:10.292Z"
+    },
+    {
+      "id": "bug-035",
+      "timestamp": "2026-05-25T12:27:16.385Z",
+      "error_message": "Wrong reference: all should be default",
+      "file": "package.json",
+      "root_cause": "Used \"all\" instead of \"default\"",
+      "fix": "Changed all → default",
+      "tags": [
+        "auto-detected",
+        "wrong-reference",
+        "json"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-25T12:27:16.385Z"
+    },
+    {
+      "id": "bug-036",
+      "timestamp": "2026-05-25T12:27:51.762Z",
+      "error_message": "Incorrect value in code",
+      "file": "scripts/configs/validations/verifyFeatureValidationProfile.ts",
+      "root_cause": "Had \"profiles\"",
+      "fix": "Changed to \"presets\"",
+      "tags": [
+        "auto-detected",
+        "wrong-value",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-25T12:27:51.762Z"
+    },
+    {
+      "id": "bug-037",
+      "timestamp": "2026-05-25T12:28:46.096Z",
+      "error_message": "Wrong reference: PRESETS should be PRESET",
+      "file": "scripts/configs/presets/index.ts",
+      "root_cause": "Used \"PRESETS\" instead of \"PRESET\"",
+      "fix": "Changed PRESETS → PRESET",
+      "tags": [
+        "auto-detected",
+        "wrong-reference",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 2,
+      "last_seen": "2026-05-25T12:29:54.193Z"
+    },
+    {
+      "id": "bug-038",
+      "timestamp": "2026-05-25T12:29:57.593Z",
+      "error_message": "Wrong reference: FeatureFlags should be Preset",
+      "file": "scripts/configs/presets/default.ts",
+      "root_cause": "Used \"FeatureFlags\" instead of \"Preset\"",
+      "fix": "Changed FeatureFlags → Preset",
+      "tags": [
+        "auto-detected",
+        "wrong-reference",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 2,
+      "last_seen": "2026-05-25T12:31:24.801Z"
+    },
+    {
+      "id": "bug-039",
+      "timestamp": "2026-05-25T12:30:02.787Z",
+      "error_message": "Wrong reference: FeatureFlags should be Preset",
+      "file": "scripts/configs/presets/README.md",
+      "root_cause": "Used \"FeatureFlags\" instead of \"Preset\"",
+      "fix": "Changed FeatureFlags → Preset",
+      "tags": [
+        "auto-detected",
+        "wrong-reference",
+        "md"
+      ],
+      "related_bugs": [],
+      "occurrences": 2,
+      "last_seen": "2026-05-25T12:34:13.046Z"
+    },
+    {
+      "id": "bug-040",
+      "timestamp": "2026-05-25T12:38:10.731Z",
+      "error_message": "Wrong reference: defaultFeatureFlags should be defaultPreset",
+      "file": "scripts/configs/presets/default.ts",
+      "root_cause": "Used \"defaultFeatureFlags\" instead of \"defaultPreset\"",
+      "fix": "Changed defaultFeatureFlags → defaultPreset",
+      "tags": [
+        "auto-detected",
+        "wrong-reference",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-25T12:38:10.731Z"
+    },
+    {
+      "id": "bug-041",
+      "timestamp": "2026-05-25T12:55:12.094Z",
+      "error_message": "Significant refactor of ",
+      "file": "scripts/configs/presets/README.md",
+      "root_cause": "5 lines replaced/restructured",
+      "fix": "Rewrote 12→6 lines (5 removed)",
+      "tags": [
+        "auto-detected",
+        "refactor",
+        "md"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-25T12:55:12.094Z"
+    },
+    {
+      "id": "bug-042",
+      "timestamp": "2026-05-25T12:58:41.433Z",
+      "error_message": "Incorrect value in code",
+      "file": "package.json",
+      "root_cause": "Had \"doppler run -p nivo -c stg -- bash scripts/config",
+      "fix": "Changed to \"doppler run -p nivo -c stg -- sh -c \\\"",
+      "tags": [
+        "auto-detected",
+        "wrong-value",
+        "json"
+      ],
+      "related_bugs": [],
+      "occurrences": 2,
+      "last_seen": "2026-05-25T12:58:45.630Z"
+    },
+    {
+      "id": "bug-043",
+      "timestamp": "2026-05-25T12:58:59.817Z",
+      "error_message": "Incorrect value in code",
+      "file": "scripts/configs/presets/README.md",
+      "root_cause": "Had `run-feature-validation.sh`",
+      "fix": "Changed to `config:features:*:validate`",
+      "tags": [
+        "auto-detected",
+        "wrong-value",
+        "md"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-25T12:58:59.817Z"
+    },
+    {
+      "id": "bug-044",
+      "timestamp": "2026-05-25T14:58:00.493Z",
+      "error_message": "Significant refactor of ",
+      "file": "scripts/configs/index.ts",
+      "root_cause": "29 lines replaced/restructured",
+      "fix": "Rewrote 62→42 lines (29 removed)",
+      "tags": [
+        "auto-detected",
+        "refactor",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-25T14:58:00.494Z"
     }
   ]
 }

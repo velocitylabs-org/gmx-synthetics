@@ -135,26 +135,20 @@ This evidence model supports change review, incident response, and rollback plan
 
 Following this structure keeps feature governance deterministic, reversible, and easy to operate across future protocol hardening cycles.
 
-## CI validation profile endpoint
+## CI validation preset endpoint
 
-The canonical validation-only profile for remaining feature checks lives in:
-
-- `scripts/configs/profiles/feature-validation.env`
-
-This profile is consumed by:
-
-- `scripts/configs/run-feature-validation.sh`
+The validation-only preset (`FEATURES=validate`) runs only `RUN_FEATURE_VALIDATIONS` with all
+other workstreams disabled. The safety-critical flags (`WRITE=false`, `TARGET_DISABLED_STATE=true`,
+`FAIL_ON_MISMATCH=true`) are set explicitly in the package.json commands, as they are intentionally
+absent from the preset type.
 
 Package endpoints:
 
-- `pnpm config:features:validate:mainnet` (runs index orchestrator on `base` using profile)
+- `npm run config:features:basesepolia:validate`
+- `npm run config:features:mainnet:validate`
 
 ### Maintenance rules
 
-When adding/removing feature toggles in `scripts/configs/index.ts`:
-
-1. Update `scripts/configs/profiles/feature-validation.env`.
-2. Update `scripts/configs/validations/verifyFeatureValidationProfile.ts` required key list.
-3. Run `npx ts-node scripts/configs/validations/verifyFeatureValidationProfile.ts` before committing.
-
-This prevents CI drift where the profile silently misses newly introduced toggles.
+When adding/removing feature toggles in `scripts/configs/index.ts`, update
+`scripts/configs/presets/validate.ts` to include the new key. The TypeScript compiler
+will reject a partial `FeatureFlags` object, so drift is caught at compile time.
