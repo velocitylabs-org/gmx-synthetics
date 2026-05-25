@@ -1,6 +1,6 @@
 # anatomy.md
 
-> Auto-maintained by OpenWolf. Last scanned: 2026-05-25T12:35:08.803Z
+> Auto-maintained by OpenWolf. Last scanned: 2026-05-25T12:38:10.713Z
 > Files: 988 tracked | Anatomy hits: 0 | Misses: 0
 
 ## ../../.claude/projects/-Users-n-code-gmx-synthetics/memory/
@@ -958,7 +958,7 @@
 
 ## scripts/configs/presets/
 
-- `default.ts` — Exports defaultFeatureFlags (~124 tok)
+- `default.ts` — Exports defaultPreset (~122 tok)
 - `index.ts` — Exports PRESET, loadPreset (~161 tok)
 - `README.md` — Project documentation (~542 tok)
 - `types.ts` — Exports RunFeatureKey, FeatureFlags (~148 tok)

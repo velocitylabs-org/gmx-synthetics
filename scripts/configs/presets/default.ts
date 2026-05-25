@@ -1,6 +1,6 @@
 import { FeatureFlags } from "./types";
 
-export const defaultFeatureFlags: FeatureFlags = {
+export const defaultPreset: FeatureFlags = {
   // Feature Redaction
   RUN_ORDER_FEATURE_REDACTION: true,
   RUN_POOL_RISK_GUARDS: true,

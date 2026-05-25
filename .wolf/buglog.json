@@ -624,6 +624,22 @@
       "related_bugs": [],
       "occurrences": 2,
       "last_seen": "2026-05-25T12:34:13.046Z"
+    },
+    {
+      "id": "bug-040",
+      "timestamp": "2026-05-25T12:38:10.731Z",
+      "error_message": "Wrong reference: defaultFeatureFlags should be defaultPreset",
+      "file": "scripts/configs/presets/default.ts",
+      "root_cause": "Used \"defaultFeatureFlags\" instead of \"defaultPreset\"",
+      "fix": "Changed defaultFeatureFlags → defaultPreset",
+      "tags": [
+        "auto-detected",
+        "wrong-reference",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-25T12:38:10.731Z"
     }
   ]
 }

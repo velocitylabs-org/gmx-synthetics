@@ -61,6 +61,11 @@
       "count": 1,
       "tokens": 0,
       "first_read": "2026-05-25T12:27:48.376Z"
+    },
+    "/Users/n/code/gmx-synthetics/scripts/configs/presets/default.ts": {
+      "count": 1,
+      "tokens": 124,
+      "first_read": "2026-05-25T12:38:03.900Z"
     }
   },
   "files_written": [
@@ -213,13 +218,19 @@
       "action": "edit",
       "tokens": 73,
       "at": "2026-05-25T12:35:08.816Z"
+    },
+    {
+      "file": "/Users/n/code/gmx-synthetics/scripts/configs/presets/default.ts",
+      "action": "edit",
+      "tokens": 13,
+      "at": "2026-05-25T12:38:10.728Z"
     }
   ],
   "edit_counts": {
     "../../.claude/projects/-Users-n-code-gmx-synthetics/memory/feedback_no_git_commits.md": 1,
     "../../.claude/projects/-Users-n-code-gmx-synthetics/memory/MEMORY.md": 2,
     "scripts/configs/presets/types.ts": 4,
-    "scripts/configs/presets/default.ts": 3,
+    "scripts/configs/presets/default.ts": 4,
     "scripts/configs/presets/index.ts": 5,
     "scripts/configs/index.ts": 2,
     "package.json": 1,
@@ -228,9 +239,9 @@
     "scripts/configs/validations/verifyFeatureValidationProfile.ts": 1,
     "../../.claude/projects/-Users-n-code-gmx-synthetics/memory/feedback_strict_renames.md": 1
   },
-  "anatomy_hits": 7,
+  "anatomy_hits": 8,
   "anatomy_misses": 4,
   "repeated_reads_warned": 3,
   "cerebrum_warnings": 0,
-  "stop_count": 11
+  "stop_count": 13
 }
