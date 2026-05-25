@@ -137,24 +137,18 @@ Following this structure keeps feature governance deterministic, reversible, and
 
 ## CI validation preset endpoint
 
-The canonical validation-only preset for remaining feature checks lives in:
-
-- `scripts/configs/presets/feature-validation.env`
-
-This preset is consumed by:
-
-- `scripts/configs/run-feature-validation.sh`
+The validation-only preset (`FEATURES=validate`) runs only `RUN_FEATURE_VALIDATIONS` with all
+other workstreams disabled. It is invoked by `scripts/configs/run-feature-validation.sh`, which
+also sets the safety-critical flags (`WRITE=false`, `TARGET_DISABLED_STATE=true`, `FAIL_ON_MISMATCH=true`)
+that are intentionally absent from the preset type.
 
 Package endpoints:
 
-- `pnpm config:features:validate:mainnet` (runs index orchestrator on `base` using preset)
+- `npm run config:features:basesepolia:validate`
+- `npm run config:features:mainnet:validate`
 
 ### Maintenance rules
 
-When adding/removing feature toggles in `scripts/configs/index.ts`:
-
-1. Update `scripts/configs/presets/feature-validation.env`.
-2. Update `scripts/configs/validations/verifyFeatureValidationProfile.ts` required key list.
-3. Run `npx ts-node scripts/configs/validations/verifyFeatureValidationProfile.ts` before committing.
-
-This prevents CI drift where the preset silently misses newly introduced toggles.
+When adding/removing feature toggles in `scripts/configs/index.ts`, update
+`scripts/configs/presets/validate.ts` to include the new key. The TypeScript compiler
+will reject a partial `FeatureFlags` object, so drift is caught at compile time.

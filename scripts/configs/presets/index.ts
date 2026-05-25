@@ -1,8 +1,10 @@
 import { FeatureFlags } from "./types";
 import { defaultPreset } from "./default";
+import { validatePreset } from "./validate";
 
 export const PRESET: Record<string, FeatureFlags> = {
   default: defaultPreset,
+  validate: validatePreset,
 };
 
 export function loadPreset(name: string | undefined): FeatureFlags {

@@ -61,10 +61,4 @@ visible on the npm-script command line.
 | Name | Description |
 |---|---|
 | `default` | Standard run — all feature setters and post-redaction verification enabled. |
-
-## The `feature-validation.env` file
-
-`feature-validation.env` is a legacy `.env`-format file consumed by
-`run-feature-validation.sh` (SCRUM-303). Its `RUN_*` flags map directly to
-the `FeatureFlags` type — it can be expressed as a TypeScript preset without
-any changes to the mechanism.
+| `validate` | Validation-only run — all feature setters disabled, post-redaction verification enabled. Used by `run-feature-validation.sh`. |

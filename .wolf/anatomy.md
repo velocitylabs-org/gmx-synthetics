@@ -1,7 +1,7 @@
 # anatomy.md
 
-> Auto-maintained by OpenWolf. Last scanned: 2026-05-25T12:38:10.713Z
-> Files: 988 tracked | Anatomy hits: 0 | Misses: 0
+> Auto-maintained by OpenWolf. Last scanned: 2026-05-25T12:55:12.081Z
+> Files: 990 tracked | Anatomy hits: 0 | Misses: 0
 
 ## ../../.claude/projects/-Users-n-code-gmx-synthetics/memory/
 
@@ -941,7 +941,8 @@
 ## scripts/configs/
 
 - `index.ts` — Declares main (~797 tok)
-- `README.md` — Project documentation (~1499 tok)
+- `README.md` — Project documentation (~1495 tok)
+- `run-feature-validation.sh` (~88 tok)
 
 ## scripts/configs/configs/
 
@@ -959,9 +960,10 @@
 ## scripts/configs/presets/
 
 - `default.ts` — Exports defaultPreset (~122 tok)
-- `index.ts` — Exports PRESET, loadPreset (~161 tok)
-- `README.md` — Project documentation (~542 tok)
+- `index.ts` — Exports PRESET, loadPreset (~182 tok)
+- `README.md` — Project documentation (~505 tok)
 - `types.ts` — Exports RunFeatureKey, FeatureFlags (~148 tok)
+- `validate.ts` — Exports validatePreset (~111 tok)
 
 ## scripts/configs/profiles/
 

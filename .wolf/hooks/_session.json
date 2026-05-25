@@ -53,19 +53,24 @@
       "first_read": "2026-05-25T12:27:19.644Z"
     },
     "/Users/n/code/gmx-synthetics/scripts/configs/README.md": {
-      "count": 1,
+      "count": 2,
       "tokens": 12369,
       "first_read": "2026-05-25T12:27:30.986Z"
     },
     "/Users/n/code/gmx-synthetics/scripts/configs/validations/verifyFeatureValidationProfile.ts": {
-      "count": 1,
-      "tokens": 0,
+      "count": 2,
+      "tokens": 529,
       "first_read": "2026-05-25T12:27:48.376Z"
     },
     "/Users/n/code/gmx-synthetics/scripts/configs/presets/default.ts": {
       "count": 1,
       "tokens": 124,
       "first_read": "2026-05-25T12:38:03.900Z"
+    },
+    "/Users/n/code/gmx-synthetics/scripts/configs/presets/feature-validation.env": {
+      "count": 1,
+      "tokens": 0,
+      "first_read": "2026-05-25T12:52:06.434Z"
     }
   },
   "files_written": [
@@ -224,6 +229,36 @@
       "action": "edit",
       "tokens": 13,
       "at": "2026-05-25T12:38:10.728Z"
+    },
+    {
+      "file": "/Users/n/code/gmx-synthetics/scripts/configs/presets/validate.ts",
+      "action": "create",
+      "tokens": 111,
+      "at": "2026-05-25T12:54:43.912Z"
+    },
+    {
+      "file": "/Users/n/code/gmx-synthetics/scripts/configs/presets/index.ts",
+      "action": "edit",
+      "tokens": 69,
+      "at": "2026-05-25T12:54:48.822Z"
+    },
+    {
+      "file": "/Users/n/code/gmx-synthetics/scripts/configs/run-feature-validation.sh",
+      "action": "create",
+      "tokens": 94,
+      "at": "2026-05-25T12:54:52.926Z"
+    },
+    {
+      "file": "/Users/n/code/gmx-synthetics/scripts/configs/README.md",
+      "action": "edit",
+      "tokens": 218,
+      "at": "2026-05-25T12:55:05.105Z"
+    },
+    {
+      "file": "/Users/n/code/gmx-synthetics/scripts/configs/presets/README.md",
+      "action": "edit",
+      "tokens": 83,
+      "at": "2026-05-25T12:55:12.093Z"
     }
   ],
   "edit_counts": {
@@ -231,17 +266,19 @@
     "../../.claude/projects/-Users-n-code-gmx-synthetics/memory/MEMORY.md": 2,
     "scripts/configs/presets/types.ts": 4,
     "scripts/configs/presets/default.ts": 4,
-    "scripts/configs/presets/index.ts": 5,
+    "scripts/configs/presets/index.ts": 6,
     "scripts/configs/index.ts": 2,
     "package.json": 1,
-    "scripts/configs/presets/README.md": 4,
-    "scripts/configs/README.md": 1,
+    "scripts/configs/presets/README.md": 5,
+    "scripts/configs/README.md": 2,
     "scripts/configs/validations/verifyFeatureValidationProfile.ts": 1,
-    "../../.claude/projects/-Users-n-code-gmx-synthetics/memory/feedback_strict_renames.md": 1
+    "../../.claude/projects/-Users-n-code-gmx-synthetics/memory/feedback_strict_renames.md": 1,
+    "scripts/configs/presets/validate.ts": 1,
+    "scripts/configs/run-feature-validation.sh": 1
   },
   "anatomy_hits": 8,
-  "anatomy_misses": 4,
-  "repeated_reads_warned": 3,
+  "anatomy_misses": 5,
+  "repeated_reads_warned": 5,
   "cerebrum_warnings": 0,
-  "stop_count": 13
+  "stop_count": 15
 }

@@ -640,6 +640,22 @@
       "related_bugs": [],
       "occurrences": 1,
       "last_seen": "2026-05-25T12:38:10.731Z"
+    },
+    {
+      "id": "bug-041",
+      "timestamp": "2026-05-25T12:55:12.094Z",
+      "error_message": "Significant refactor of ",
+      "file": "scripts/configs/presets/README.md",
+      "root_cause": "5 lines replaced/restructured",
+      "fix": "Rewrote 12→6 lines (5 removed)",
+      "tags": [
+        "auto-detected",
+        "refactor",
+        "md"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-25T12:55:12.094Z"
     }
   ]
 }
