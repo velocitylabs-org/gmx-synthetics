@@ -512,6 +512,118 @@
       "related_bugs": [],
       "occurrences": 1,
       "last_seen": "2026-05-22T15:11:41.625Z"
+    },
+    {
+      "id": "bug-033",
+      "timestamp": "2026-05-25T12:26:38.339Z",
+      "error_message": "Wrong reference: Profile should be FeatureFlags",
+      "file": "scripts/configs/presets/types.ts",
+      "root_cause": "Used \"Profile\" instead of \"FeatureFlags\"",
+      "fix": "Changed Profile → FeatureFlags",
+      "tags": [
+        "auto-detected",
+        "wrong-reference",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 2,
+      "last_seen": "2026-05-25T12:29:50.487Z"
+    },
+    {
+      "id": "bug-034",
+      "timestamp": "2026-05-25T12:27:10.292Z",
+      "error_message": "Incorrect value in code",
+      "file": "scripts/configs/index.ts",
+      "root_cause": "Had \"No workstreams selected. Check the active profile",
+      "fix": "Changed to \"No workstreams selected. Check the active preset'",
+      "tags": [
+        "auto-detected",
+        "wrong-value",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-25T12:27:10.292Z"
+    },
+    {
+      "id": "bug-035",
+      "timestamp": "2026-05-25T12:27:16.385Z",
+      "error_message": "Wrong reference: all should be default",
+      "file": "package.json",
+      "root_cause": "Used \"all\" instead of \"default\"",
+      "fix": "Changed all → default",
+      "tags": [
+        "auto-detected",
+        "wrong-reference",
+        "json"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-25T12:27:16.385Z"
+    },
+    {
+      "id": "bug-036",
+      "timestamp": "2026-05-25T12:27:51.762Z",
+      "error_message": "Incorrect value in code",
+      "file": "scripts/configs/validations/verifyFeatureValidationProfile.ts",
+      "root_cause": "Had \"profiles\"",
+      "fix": "Changed to \"presets\"",
+      "tags": [
+        "auto-detected",
+        "wrong-value",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-25T12:27:51.762Z"
+    },
+    {
+      "id": "bug-037",
+      "timestamp": "2026-05-25T12:28:46.096Z",
+      "error_message": "Wrong reference: PRESETS should be PRESET",
+      "file": "scripts/configs/presets/index.ts",
+      "root_cause": "Used \"PRESETS\" instead of \"PRESET\"",
+      "fix": "Changed PRESETS → PRESET",
+      "tags": [
+        "auto-detected",
+        "wrong-reference",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 2,
+      "last_seen": "2026-05-25T12:29:54.193Z"
+    },
+    {
+      "id": "bug-038",
+      "timestamp": "2026-05-25T12:29:57.593Z",
+      "error_message": "Wrong reference: FeatureFlags should be Preset",
+      "file": "scripts/configs/presets/default.ts",
+      "root_cause": "Used \"FeatureFlags\" instead of \"Preset\"",
+      "fix": "Changed FeatureFlags → Preset",
+      "tags": [
+        "auto-detected",
+        "wrong-reference",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 2,
+      "last_seen": "2026-05-25T12:31:24.801Z"
+    },
+    {
+      "id": "bug-039",
+      "timestamp": "2026-05-25T12:30:02.787Z",
+      "error_message": "Wrong reference: FeatureFlags should be Preset",
+      "file": "scripts/configs/presets/README.md",
+      "root_cause": "Used \"FeatureFlags\" instead of \"Preset\"",
+      "fix": "Changed FeatureFlags → Preset",
+      "tags": [
+        "auto-detected",
+        "wrong-reference",
+        "md"
+      ],
+      "related_bugs": [],
+      "occurrences": 2,
+      "last_seen": "2026-05-25T12:34:13.046Z"
     }
   ]
 }

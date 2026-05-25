@@ -8,22 +8,22 @@ import { runSetGaslessFeatureState } from "./configs/setGaslessFeatureState";
 import { runSetAtomicWithdrawalFeatureState } from "./configs/setAtomicWithdrawalFeatureState";
 import { runInvariantChecks } from "./validations/runInvariantChecks";
 import { runVerifyFeaturesState } from "./validations/verifyFeaturesState";
-import { loadProfile } from "./profiles";
+import { loadPreset } from "./presets";
 
 async function main() {
   console.log("Running config orchestrator...");
 
-  const profile = loadProfile(process.env.FEATURES);
+  const preset = loadPreset(process.env.FEATURES);
 
-  const runOrderFeatureRedaction = profile.RUN_ORDER_FEATURE_REDACTION;
-  const runPoolRiskGuards = profile.RUN_POOL_RISK_GUARDS;
-  const runInvariantValidations = profile.RUN_INVARIANT_VALIDATIONS;
-  const runShiftFeatures = profile.RUN_SHIFT_FEATURES;
-  const runJitFeature = profile.RUN_JIT_FEATURE;
-  const runSubaccountFeature = profile.RUN_SUBACCOUNT_FEATURE;
-  const runGaslessFeature = profile.RUN_GASLESS_FEATURE;
-  const runAtomicWithdrawalFeature = profile.RUN_ATOMIC_WITHDRAWAL_FEATURE;
-  const runFeatureValidations = profile.RUN_FEATURE_VALIDATIONS;
+  const runOrderFeatureRedaction = preset.RUN_ORDER_FEATURE_REDACTION;
+  const runPoolRiskGuards = preset.RUN_POOL_RISK_GUARDS;
+  const runInvariantValidations = preset.RUN_INVARIANT_VALIDATIONS;
+  const runShiftFeatures = preset.RUN_SHIFT_FEATURES;
+  const runJitFeature = preset.RUN_JIT_FEATURE;
+  const runSubaccountFeature = preset.RUN_SUBACCOUNT_FEATURE;
+  const runGaslessFeature = preset.RUN_GASLESS_FEATURE;
+  const runAtomicWithdrawalFeature = preset.RUN_ATOMIC_WITHDRAWAL_FEATURE;
+  const runFeatureValidations = preset.RUN_FEATURE_VALIDATIONS;
 
   if (runOrderFeatureRedaction) {
     await runDisableOrderCreateFeatures();
@@ -73,7 +73,7 @@ async function main() {
     !runAtomicWithdrawalFeature &&
     !runFeatureValidations
   ) {
-    console.log("No workstreams selected. Check the active profile's feature flags.");
+    console.log("No workstreams selected. Check the active preset's feature flags.");
   }
 
   console.log("Completed config orchestrator.");

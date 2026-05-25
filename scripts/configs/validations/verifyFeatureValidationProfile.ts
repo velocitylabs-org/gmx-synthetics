@@ -2,7 +2,7 @@ import fs from "fs";
 import path from "path";
 import dotenv from "dotenv";
 
-const PROFILE_PATH = path.join(__dirname, "..", "profiles", "feature-validation.env");
+const PROFILE_PATH = path.join(__dirname, "..", "presets", "feature-validation.env");
 
 const REQUIRED_KEYS = [
   "WRITE",
@@ -28,7 +28,7 @@ function main() {
   const keys = Object.keys(env);
 
   const missing = REQUIRED_KEYS.filter((key) => env[key] === undefined);
-  const unknown = keys.filter((key) => !REQUIRED_KEYS.includes(key as (typeof REQUIRED_KEYS)[number]));
+  const unknown = keys.filter((key) => !REQUIRED_KEYS.includes(key as typeof REQUIRED_KEYS[number]));
   const invalidBooleans = REQUIRED_KEYS.filter((key) => !["true", "false"].includes(env[key]));
 
   console.log(`Validating profile: ${PROFILE_PATH}`);

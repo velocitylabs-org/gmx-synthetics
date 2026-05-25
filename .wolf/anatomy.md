@@ -1,7 +1,7 @@
 # anatomy.md
 
-> Auto-maintained by OpenWolf. Last scanned: 2026-05-25T12:06:59.188Z
-> Files: 981 tracked | Anatomy hits: 0 | Misses: 0
+> Auto-maintained by OpenWolf. Last scanned: 2026-05-25T12:34:13.033Z
+> Files: 987 tracked | Anatomy hits: 0 | Misses: 0
 
 ## ../../.claude/projects/-Users-n-code-gmx-synthetics/memory/
 
@@ -29,7 +29,7 @@
 - `index.html` — GMX Synthetics (~64 tok)
 - `LICENSE` — Project license (~1140 tok)
 - `metrics.ts` — options: run (~859 tok)
-- `package.json` — Node.js package manifest (~1873 tok)
+- `package.json` — Node.js package manifest (~1879 tok)
 - `pnpm-lock.yaml` — pnpm lock file (~163901 tok)
 - `README.md` — Project documentation (~12369 tok)
 - `tenderly.yaml` (~24 tok)
@@ -939,7 +939,8 @@
 
 ## scripts/configs/
 
-- `index.ts` — Declares main (~801 tok)
+- `index.ts` — Declares main (~797 tok)
+- `README.md` — Project documentation (~1499 tok)
 
 ## scripts/configs/configs/
 
@@ -954,6 +955,13 @@
 - `featureFlagSpecs.ts` — Exports ManagedFeatureId, ModuleFeatureSpec, OrderTypeFeatureSpec, ManagedFeatureSpec + 12 more (~3218 tok)
 - `getConfigKeeperSigner.ts` — Exports getConfigKeeperRoleSigner (~1087 tok)
 
+## scripts/configs/presets/
+
+- `default.ts` — Exports defaultFeatureFlags (~124 tok)
+- `index.ts` — Exports PRESET, loadPreset (~161 tok)
+- `README.md` — Project documentation (~542 tok)
+- `types.ts` — Exports RunFeatureKey, FeatureFlags (~148 tok)
+
 ## scripts/configs/profiles/
 
 - `all.ts` — Exports allProfile (~105 tok)
@@ -961,6 +969,10 @@
 - `README.md` — Project documentation (~540 tok)
 - `redact-all.ts` — Exports redactAllProfile (~106 tok)
 - `types.ts` — Exports RunFeatureKey, Profile (~146 tok)
+
+## scripts/configs/validations/
+
+- `verifyFeatureValidationProfile.ts` — PROFILE_PATH: main (~529 tok)
 
 ## scripts/incentives/
 

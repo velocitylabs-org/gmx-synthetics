@@ -135,26 +135,26 @@ This evidence model supports change review, incident response, and rollback plan
 
 Following this structure keeps feature governance deterministic, reversible, and easy to operate across future protocol hardening cycles.
 
-## CI validation profile endpoint
+## CI validation preset endpoint
 
-The canonical validation-only profile for remaining feature checks lives in:
+The canonical validation-only preset for remaining feature checks lives in:
 
-- `scripts/configs/profiles/feature-validation.env`
+- `scripts/configs/presets/feature-validation.env`
 
-This profile is consumed by:
+This preset is consumed by:
 
 - `scripts/configs/run-feature-validation.sh`
 
 Package endpoints:
 
-- `pnpm config:features:validate:mainnet` (runs index orchestrator on `base` using profile)
+- `pnpm config:features:validate:mainnet` (runs index orchestrator on `base` using preset)
 
 ### Maintenance rules
 
 When adding/removing feature toggles in `scripts/configs/index.ts`:
 
-1. Update `scripts/configs/profiles/feature-validation.env`.
+1. Update `scripts/configs/presets/feature-validation.env`.
 2. Update `scripts/configs/validations/verifyFeatureValidationProfile.ts` required key list.
 3. Run `npx ts-node scripts/configs/validations/verifyFeatureValidationProfile.ts` before committing.
 
-This prevents CI drift where the profile silently misses newly introduced toggles.
+This prevents CI drift where the preset silently misses newly introduced toggles.

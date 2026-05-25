@@ -1,6 +1,6 @@
-import { Profile } from "./types";
+import { FeatureFlags } from "./types";
 
-export const allProfile: Profile = {
+export const defaultFeatureFlags: FeatureFlags = {
   // Feature Redaction
   RUN_ORDER_FEATURE_REDACTION: true,
   RUN_POOL_RISK_GUARDS: true,

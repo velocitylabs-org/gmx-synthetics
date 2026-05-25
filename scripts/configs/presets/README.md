@@ -1,23 +1,23 @@
-# Feature Sets
+# Feature Presets
 
-A feature set is a named collection of `RUN_*_FEATURE` toggles that tells the
+A feature preset is a named collection of `RUN_*_FEATURE` toggles that tells the
 config orchestrator (`scripts/configs/index.ts`) which workstreams to run.
 
-## How the orchestrator consumes a feature set
+## How the orchestrator consumes a preset
 
 The orchestrator reads `process.env.FEATURES`, looks it up in the registry
-(`scripts/configs/profiles/index.ts`), and uses the resulting object instead
+(`scripts/configs/presets/index.ts`), and uses the resulting object instead
 of individual `RUN_*` env vars. If `FEATURES` is missing or unknown, the
 orchestrator exits with code 1 and lists available names.
 
-## Adding a feature set
+## Adding a preset
 
-1. Create `scripts/configs/profiles/<name>.ts`:
+1. Create `scripts/configs/presets/<name>.ts`:
 
    ```typescript
-   import { Profile } from "./types";
+   import { FeatureFlags } from "./types";
 
-   export const myProfile: Profile = {
+   export const myPreset: FeatureFlags = {
      RUN_ORDER_FEATURE_REDACTION: false,
      RUN_POOL_RISK_GUARDS: false,
      RUN_INVARIANT_VALIDATIONS: false,
@@ -30,17 +30,17 @@ orchestrator exits with code 1 and lists available names.
    };
    ```
 
-   Every key in `Profile` is required — the TypeScript compiler will reject
+   Every key in `FeatureFlags` is required — the TypeScript compiler will reject
    a partial object.
 
-2. Register it in `scripts/configs/profiles/index.ts`:
+2. Register it in `scripts/configs/presets/index.ts`:
 
    ```typescript
-   import { myProfile } from "./my-name";
+   import { myPreset } from "./my-name";
 
-   export const PROFILES: Record<string, Profile> = {
-     all: allProfile,
-     "my-name": myProfile,  // ← add here
+   export const PRESET: Record<string, FeatureFlags> = {
+     default: defaultPreset,
+     "my-name": myPreset,  // ← add here
    };
    ```
 
@@ -50,21 +50,21 @@ orchestrator exits with code 1 and lists available names.
    FEATURES=my-name WRITE=false npx hardhat run scripts/configs/index.ts --network anvil
    ```
 
-## What feature sets must NOT contain
+## What presets must NOT contain
 
 `WRITE`, `IS_DISABLED`, and `TARGET_DISABLED_STATE` are intentionally absent
-from the `Profile` type. They are safety-critical flags and must remain
+from the `FeatureFlags` type. They are safety-critical flags and must remain
 visible on the npm-script command line.
 
-## Existing feature sets
+## Existing presets
 
 | Name | Description |
 |---|---|
-| `all` | Full redaction run — all feature setters and post-redaction verification enabled. |
+| `default` | Standard run — all feature setters and post-redaction verification enabled. |
 
 ## The `feature-validation.env` file
 
 `feature-validation.env` is a legacy `.env`-format file consumed by
 `run-feature-validation.sh` (SCRUM-303). Its `RUN_*` flags map directly to
-the `Profile` type — it can be expressed as a TypeScript feature set without
+the `FeatureFlags` type — it can be expressed as a TypeScript preset without
 any changes to the mechanism.

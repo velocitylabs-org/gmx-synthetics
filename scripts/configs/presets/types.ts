@@ -11,4 +11,4 @@ export type RunFeatureKey =
 
 // WRITE, IS_DISABLED, and TARGET_DISABLED_STATE are intentionally absent —
 // those are safety-critical flags that must stay visible on the npm-script command line.
-export type Profile = Record<RunFeatureKey, boolean>;
+export type FeatureFlags = Record<RunFeatureKey, boolean>;
