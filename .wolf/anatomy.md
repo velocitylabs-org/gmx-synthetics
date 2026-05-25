@@ -1,12 +1,13 @@
 # anatomy.md
 
-> Auto-maintained by OpenWolf. Last scanned: 2026-05-25T12:34:13.033Z
-> Files: 987 tracked | Anatomy hits: 0 | Misses: 0
+> Auto-maintained by OpenWolf. Last scanned: 2026-05-25T12:35:08.803Z
+> Files: 988 tracked | Anatomy hits: 0 | Misses: 0
 
 ## ../../.claude/projects/-Users-n-code-gmx-synthetics/memory/
 
 - `feedback_no_git_commits.md` (~168 tok)
-- `MEMORY.md` — Memory Index (~34 tok)
+- `feedback_strict_renames.md` — Declares that (~171 tok)
+- `MEMORY.md` — Memory Index (~68 tok)
 
 ## ./
 
