@@ -1,6 +1,6 @@
 # anatomy.md
 
-> Auto-maintained by OpenWolf. Last scanned: 2026-05-25T12:55:12.081Z
+> Auto-maintained by OpenWolf. Last scanned: 2026-05-25T12:58:59.805Z
 > Files: 990 tracked | Anatomy hits: 0 | Misses: 0
 
 ## ../../.claude/projects/-Users-n-code-gmx-synthetics/memory/
@@ -30,7 +30,7 @@
 - `index.html` — GMX Synthetics (~64 tok)
 - `LICENSE` — Project license (~1140 tok)
 - `metrics.ts` — options: run (~859 tok)
-- `package.json` — Node.js package manifest (~1879 tok)
+- `package.json` — Node.js package manifest (~1932 tok)
 - `pnpm-lock.yaml` — pnpm lock file (~163901 tok)
 - `README.md` — Project documentation (~12369 tok)
 - `tenderly.yaml` (~24 tok)
@@ -941,7 +941,7 @@
 ## scripts/configs/
 
 - `index.ts` — Declares main (~797 tok)
-- `README.md` — Project documentation (~1495 tok)
+- `README.md` — Project documentation (~1488 tok)
 - `run-feature-validation.sh` (~88 tok)
 
 ## scripts/configs/configs/
@@ -961,7 +961,7 @@
 
 - `default.ts` — Exports defaultPreset (~122 tok)
 - `index.ts` — Exports PRESET, loadPreset (~182 tok)
-- `README.md` — Project documentation (~505 tok)
+- `README.md` — Project documentation (~509 tok)
 - `types.ts` — Exports RunFeatureKey, FeatureFlags (~148 tok)
 - `validate.ts` — Exports validatePreset (~111 tok)
 

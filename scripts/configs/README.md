@@ -138,9 +138,9 @@ Following this structure keeps feature governance deterministic, reversible, and
 ## CI validation preset endpoint
 
 The validation-only preset (`FEATURES=validate`) runs only `RUN_FEATURE_VALIDATIONS` with all
-other workstreams disabled. It is invoked by `scripts/configs/run-feature-validation.sh`, which
-also sets the safety-critical flags (`WRITE=false`, `TARGET_DISABLED_STATE=true`, `FAIL_ON_MISMATCH=true`)
-that are intentionally absent from the preset type.
+other workstreams disabled. The safety-critical flags (`WRITE=false`, `TARGET_DISABLED_STATE=true`,
+`FAIL_ON_MISMATCH=true`) are set explicitly in the package.json commands, as they are intentionally
+absent from the preset type.
 
 Package endpoints:
 

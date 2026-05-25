@@ -61,4 +61,4 @@ visible on the npm-script command line.
 | Name | Description |
 |---|---|
 | `default` | Standard run — all feature setters and post-redaction verification enabled. |
-| `validate` | Validation-only run — all feature setters disabled, post-redaction verification enabled. Used by `run-feature-validation.sh`. |
+| `validate` | Validation-only run — all feature setters disabled, post-redaction verification enabled. Used by `config:features:*:validate` npm scripts. |

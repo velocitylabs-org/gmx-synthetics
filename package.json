@@ -27,10 +27,10 @@
     "config:features:fork": "FORK_ID=8453 WRITE=true IS_DISABLED=true FEATURES=default npx hardhat run scripts/configs/index.ts --network anvil",
     "config:features:basesepolia": "doppler run -p nivo -c stg -- sh -c \"WRITE=true IS_DISABLED=true FEATURES=default npx hardhat run scripts/configs/index.ts --network baseSepolia\"",
     "config:features:basesepolia:dryrun": "doppler run -p nivo -c stg -- sh -c \"WRITE=false IS_DISABLED=true FEATURES=default npx hardhat run scripts/configs/index.ts --network baseSepolia\"",
-    "config:features:basesepolia:validate": "doppler run -p nivo -c stg -- bash scripts/configs/run-feature-validation.sh baseSepolia",
+    "config:features:basesepolia:validate": "doppler run -p nivo -c stg -- sh -c \"WRITE=false TARGET_DISABLED_STATE=true FAIL_ON_MISMATCH=true FEATURES=validate npx hardhat run scripts/configs/index.ts --network baseSepolia\"",
     "config:features:mainnet": "doppler run -p nivo -c prd -- sh -c \"WRITE=true IS_DISABLED=true FEATURES=default npx hardhat run scripts/configs/index.ts --network base\"",
     "config:features:mainnet:dryrun": "doppler run -p nivo -c prd -- sh -c \"WRITE=false IS_DISABLED=true FEATURES=default npx hardhat run scripts/configs/index.ts --network base\"",
-    "config:features:mainnet:validate": "doppler run -p nivo -c prd -- bash scripts/configs/run-feature-validation.sh base"
+    "config:features:mainnet:validate": "doppler run -p nivo -c prd -- sh -c \"WRITE=false TARGET_DISABLED_STATE=true FAIL_ON_MISMATCH=true FEATURES=validate npx hardhat run scripts/configs/index.ts --network base\""
   },
   "author": "",
   "license": "ISC",
