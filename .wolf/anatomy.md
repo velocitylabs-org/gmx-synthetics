@@ -3,12 +3,6 @@
 > Auto-maintained by OpenWolf. Last scanned: 2026-05-25T12:58:59.805Z
 > Files: 990 tracked | Anatomy hits: 0 | Misses: 0
 
-## ../../.claude/projects/-Users-n-code-gmx-synthetics/memory/
-
-- `feedback_no_git_commits.md` (~168 tok)
-- `feedback_strict_renames.md` — Declares that (~171 tok)
-- `MEMORY.md` — Memory Index (~68 tok)
-
 ## ./
 
 - `.DS_Store` (~2728 tok)

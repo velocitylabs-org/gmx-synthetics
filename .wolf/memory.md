@@ -278,8 +278,7 @@
 
 | Time | Action | File(s) | Outcome | ~Tokens |
 |------|--------|---------|---------|--------|
-| 14:06 | Created ../../.claude/projects/-Users-n-code-gmx-synthetics/memory/feedback_no_git_commits.md | — | ~158 |
-| 14:06 | Created ../../.claude/projects/-Users-n-code-gmx-synthetics/memory/MEMORY.md | — | ~36 |
+| 14:06 | Created Claude memory files (outside repo) | — | ~194 |
 | 14:07 | Session end: 2 writes across 2 files (feedback_no_git_commits.md, MEMORY.md) | 1 reads | ~209 tok |
 | 14:08 | Session end: 2 writes across 2 files (feedback_no_git_commits.md, MEMORY.md) | 3 reads | ~12724 tok |
 | 14:20 | Session end: 2 writes across 2 files (feedback_no_git_commits.md, MEMORY.md) | 5 reads | ~12985 tok |
@@ -311,8 +310,7 @@
 | 14:34 | Edited scripts/configs/presets/index.ts | modified loadPreset() | ~68 |
 | 14:34 | Edited scripts/configs/presets/README.md | inline fix | ~15 |
 | 14:34 | Session end: 23 writes across 8 files (feedback_no_git_commits.md, MEMORY.md, types.ts, default.ts, index.ts) | 12 reads | ~43035 tok |
-| 14:35 | Created ../../.claude/projects/-Users-n-code-gmx-synthetics/memory/feedback_strict_renames.md | — | ~162 |
-| 14:35 | Edited ../../.claude/projects/-Users-n-code-gmx-synthetics/memory/MEMORY.md | 1→2 lines | ~68 |
+| 14:35 | Updated Claude memory files (outside repo) | — | ~230 |
 | 14:35 | Session end: 25 writes across 9 files (feedback_no_git_commits.md, MEMORY.md, types.ts, default.ts, index.ts) | 12 reads | ~43281 tok |
 | 14:38 | Edited scripts/configs/presets/default.ts | inline fix | ~13 |
 | 14:38 | Session end: 26 writes across 9 files (feedback_no_git_commits.md, MEMORY.md, types.ts, default.ts, index.ts) | 13 reads | ~43418 tok |
@@ -333,6 +331,11 @@
 | 15:12 | Session end: 35 writes across 11 files (feedback_no_git_commits.md, MEMORY.md, types.ts, default.ts, index.ts) | 14 reads | ~44815 tok |
 
 ## Session: 2026-05-25 15:32
+
+| Time | Action | File(s) | Outcome | ~Tokens |
+|------|--------|---------|---------|--------|
+
+## Session: 2026-05-25 16:51
 
 | Time | Action | File(s) | Outcome | ~Tokens |
 |------|--------|---------|---------|--------|
