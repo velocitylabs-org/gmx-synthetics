@@ -1,6 +1,6 @@
 # anatomy.md
 
-> Auto-maintained by OpenWolf. Last scanned: 2026-05-26T09:39:04.607Z
+> Auto-maintained by OpenWolf. Last scanned: 2026-05-26T09:42:02.130Z
 > Files: 1012 tracked | Anatomy hits: 0 | Misses: 0
 
 ## ../../.claude/projects/-Users-n-code-gmx-synthetics/memory/
@@ -942,7 +942,7 @@
 ## scripts/configs/
 
 - `configRuntime.ts` — Exports isTruthy, getConfigHre, getWriteMode, getIsDisabled + 2 more (~394 tok)
-- `index.ts` — Declares main (~797 tok)
+- `index.ts` — Declares main (~785 tok)
 - `README.md` — Project documentation (~1488 tok)
 - `run-feature-validation.sh` (~88 tok)
 

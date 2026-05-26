@@ -131,6 +131,11 @@
       "count": 1,
       "tokens": 0,
       "first_read": "2026-05-26T09:37:39.584Z"
+    },
+    "/Users/n/code/gmx-synthetics/scripts/configs/index.ts": {
+      "count": 1,
+      "tokens": 797,
+      "first_read": "2026-05-26T09:41:41.161Z"
     }
   },
   "files_written": [
@@ -421,6 +426,18 @@
       "action": "edit",
       "tokens": 23,
       "at": "2026-05-26T09:39:04.615Z"
+    },
+    {
+      "file": "/Users/n/code/gmx-synthetics/scripts/configs/index.ts",
+      "action": "edit",
+      "tokens": 26,
+      "at": "2026-05-26T09:41:57.474Z"
+    },
+    {
+      "file": "/Users/n/code/gmx-synthetics/scripts/configs/index.ts",
+      "action": "edit",
+      "tokens": 17,
+      "at": "2026-05-26T09:42:02.140Z"
     }
   ],
   "edit_counts": {
@@ -451,11 +468,12 @@
     "scripts/configs/validations/verifyShiftCancelFeatureState.ts": 1,
     "scripts/configs/validations/verifyShiftCreateFeatureState.ts": 1,
     "scripts/configs/validations/verifyShiftExecuteFeatureState.ts": 1,
-    "scripts/configs/validations/verifySubaccountFeatureState.ts": 1
+    "scripts/configs/validations/verifySubaccountFeatureState.ts": 1,
+    "scripts/configs/index.ts": 2
   },
-  "anatomy_hits": 5,
+  "anatomy_hits": 6,
   "anatomy_misses": 21,
   "repeated_reads_warned": 7,
   "cerebrum_warnings": 0,
-  "stop_count": 2
+  "stop_count": 4
 }

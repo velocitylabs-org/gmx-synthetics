@@ -9,6 +9,7 @@ import { runSetAtomicWithdrawalFeatureState } from "./configs/setAtomicWithdrawa
 import { runInvariantChecks } from "./validations/runInvariantChecks";
 import { runVerifyFeaturesState } from "./validations/verifyFeaturesState";
 import { loadPreset } from "./presets";
+import { runConfigScript } from "./configRuntime";
 
 async function main() {
   console.log("Running config orchestrator...");
@@ -80,10 +81,5 @@ async function main() {
 }
 
 if (require.main === module) {
-  main()
-    .then(() => process.exit(0))
-    .catch((ex) => {
-      console.error(ex);
-      process.exit(1);
-    });
+  runConfigScript(main);
 }
