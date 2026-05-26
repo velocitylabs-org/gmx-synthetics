@@ -35,11 +35,11 @@ export function getWriteMode(): boolean {
 }
 
 export function getIsDisabled(): boolean {
-  return process.env.IS_DISABLED === undefined || process.env.IS_DISABLED === "true";
+  return process.env.IS_DISABLED === undefined || isTruthy(process.env.IS_DISABLED);
 }
 
 export function getFailOnMismatch(): boolean {
-  return process.env.FAIL_ON_MISMATCH === "true";
+  return isTruthy(process.env.FAIL_ON_MISMATCH);
 }
 
 export function runConfigScript(fn: () => Promise<void>): void {
