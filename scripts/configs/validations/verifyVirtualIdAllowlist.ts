@@ -6,7 +6,7 @@ import { getMarketKey, getMarketTokenAddresses } from "../../../utils/market";
 import tokensConfig from "../../../config/tokens";
 import marketsConfig from "../../../config/markets";
 import { getDeployedContract } from "../helpers/getDeployedContract";
-import { getConfigHre } from "../helpers/configRuntime";
+import { getConfigHre } from "../configRuntime";
 
 const TARGET_INDEX_TOKENS = ["JPY", "GBP", "BRL", "MXN", "COP", "IDR", "PHP", "PEN", "NGN", "KES", "ZAR", "THB"];
 const TARGET_INDEX_SET = new Set(TARGET_INDEX_TOKENS);
@@ -41,13 +41,17 @@ export async function runVerifyVirtualIdAllowlist() {
 
     checkedMarkets++;
 
-    const expectedVirtualTokenId = (marketConfig.virtualTokenIdForIndexToken ?? ethers.constants.HashZero).toLowerCase();
+    const expectedVirtualTokenId = (
+      marketConfig.virtualTokenIdForIndexToken ?? ethers.constants.HashZero
+    ).toLowerCase();
     const expectedVirtualMarketId = (marketConfig.virtualMarketId ?? ethers.constants.HashZero).toLowerCase();
     allowlistedVirtualTokenIds.add(expectedVirtualTokenId);
     allowlistedVirtualMarketIds.add(expectedVirtualMarketId);
 
     const actualVirtualTokenId = (await dataStore.getBytes32(keys.virtualTokenIdKey(indexToken))).toLowerCase();
-    const actualVirtualMarketId = (await dataStore.getBytes32(keys.virtualMarketIdKey(market.marketToken))).toLowerCase();
+    const actualVirtualMarketId = (
+      await dataStore.getBytes32(keys.virtualMarketIdKey(market.marketToken))
+    ).toLowerCase();
 
     console.log(
       `${indexSymbol} (${market.marketToken}) virtualTokenId=${actualVirtualTokenId} virtualMarketId=${actualVirtualMarketId}`

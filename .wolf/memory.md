@@ -336,3 +336,25 @@
 
 | Time | Action | File(s) | Outcome | ~Tokens |
 |------|--------|---------|---------|--------|
+| 11:13 | Created ../../.claude/projects/-Users-n-code-gmx-synthetics/memory/feedback_no_wolf_paths.md | — | ~185 |
+| 11:14 | Edited ../../.claude/projects/-Users-n-code-gmx-synthetics/memory/MEMORY.md | 1→2 lines | ~75 |
+| 11:15 | Created scripts/configs/configRuntime.ts | — | ~394 |
+| 11:15 | Edited scripts/configs/configs/disableInactiveMarkets.ts | "../helpers/configRuntime" → "../configRuntime" | ~14 |
+| 11:16 | Edited scripts/configs/validations/verifySameTokenInvariants.ts | "../helpers/configRuntime" → "../configRuntime" | ~14 |
+| 11:16 | Edited scripts/configs/validations/verifyVirtualIdAllowlist.ts | "../helpers/configRuntime" → "../configRuntime" | ~14 |
+| 11:16 | Edited scripts/configs/validations/verifyRedactionState.ts | "../helpers/configRuntime" → "../configRuntime" | ~14 |
+| 11:16 | Edited scripts/configs/configs/applyPoolRiskGuards.ts | "../helpers/configRuntime" → "../configRuntime" | ~21 |
+| 11:16 | Edited scripts/configs/configs/applyPoolRiskGuards.ts | inline fix | ~9 |
+| 11:16 | Edited scripts/configs/helpers/applyFeatureFlagWrites.ts | added 1 import(s) | ~55 |
+| 11:16 | Edited scripts/configs/helpers/applyFeatureFlagWrites.ts | 2→2 lines | ~21 |
+| 11:16 | Edited scripts/configs/validations/verifyFeatureFlagStates.ts | added 1 import(s) | ~44 |
+| 11:16 | Edited scripts/configs/validations/verifyFeatureFlagStates.ts | inline fix | ~13 |
+| 11:16 | Edited scripts/configs/validations/verifyPoolRiskGuards.ts | added 1 import(s) | ~39 |
+| 11:16 | Edited scripts/configs/validations/verifyPoolRiskGuards.ts | modified runVerifyPoolRiskGuards() | ~28 |
+| 11:17 | Edited scripts/configs/validations/verifyPoolRiskGuards.ts | added 1 condition(s) | ~22 |
+| 11:17 | Edited scripts/configs/validations/verifyRedactionState.ts | inline fix | ~24 |
+| 11:17 | Edited scripts/configs/validations/verifyRedactionState.ts | modified runVerifyRedactionState() | ~28 |
+| 11:17 | Edited scripts/configs/validations/verifyRedactionState.ts | added 1 condition(s) | ~22 |
+| 11:17 | Edited scripts/configs/validations/printRolesResolved.ts | added 1 import(s) | ~35 |
+| 11:17 | Edited scripts/configs/validations/printRolesResolved.ts | modified if() | ~53 |
+| 11:17 | Session end: 21 writes across 12 files (feedback_no_wolf_paths.md, MEMORY.md, configRuntime.ts, disableInactiveMarkets.ts, verifySameTokenInvariants.ts) | 11 reads | ~5218 tok |

@@ -6,7 +6,7 @@ import { getMarketKey, getMarketTokenAddresses } from "../../../utils/market";
 import tokensConfig from "../../../config/tokens";
 import marketsConfig from "../../../config/markets";
 import { getDeployedContract } from "../helpers/getDeployedContract";
-import { getConfigHre } from "../helpers/configRuntime";
+import { getConfigHre } from "../configRuntime";
 
 const ACTIVE_INDEX_TOKENS = ["JPY", "GBP", "BRL", "MXN", "COP"];
 const INACTIVE_INDEX_TOKENS = ["IDR", "PHP", "PEN", "NGN", "KES", "ZAR", "THB"];

@@ -1,7 +1,12 @@
 import hre from "hardhat";
 
+import { getFailOnMismatch } from "../configRuntime";
 import type { ManagedFeatureSpec } from "../helpers/featureFlagSpecs";
-import { getFeatureFlagStorageKeyForSpec, resolveModuleAddress, resolveModuleContractNames } from "../helpers/featureFlagSpecs";
+import {
+  getFeatureFlagStorageKeyForSpec,
+  resolveModuleAddress,
+  resolveModuleContractNames,
+} from "../helpers/featureFlagSpecs";
 import { getDeployedContract } from "../helpers/getDeployedContract";
 
 export async function verifyFeatureFlagStates(specs: ManagedFeatureSpec[]) {
@@ -9,7 +14,7 @@ export async function verifyFeatureFlagStates(specs: ManagedFeatureSpec[]) {
   const targetDisabled =
     process.env.TARGET_DISABLED_STATE === undefined || process.env.TARGET_DISABLED_STATE === "true";
 
-  const failOnMismatch = process.env.FAIL_ON_MISMATCH === "true";
+  const failOnMismatch = getFailOnMismatch();
 
   const mismatches: string[] = [];
 

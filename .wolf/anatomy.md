@@ -1,13 +1,14 @@
 # anatomy.md
 
-> Auto-maintained by OpenWolf. Last scanned: 2026-05-25T12:58:59.805Z
-> Files: 990 tracked | Anatomy hits: 0 | Misses: 0
+> Auto-maintained by OpenWolf. Last scanned: 2026-05-26T09:17:25.386Z
+> Files: 998 tracked | Anatomy hits: 0 | Misses: 0
 
 ## ../../.claude/projects/-Users-n-code-gmx-synthetics/memory/
 
 - `feedback_no_git_commits.md` (~168 tok)
+- `feedback_no_wolf_paths.md` (~193 tok)
 - `feedback_strict_renames.md` — Declares that (~171 tok)
-- `MEMORY.md` — Memory Index (~68 tok)
+- `MEMORY.md` — Memory Index (~105 tok)
 
 ## ./
 
@@ -940,20 +941,21 @@
 
 ## scripts/configs/
 
+- `configRuntime.ts` — Exports isTruthy, getConfigHre, getWriteMode, getIsDisabled + 2 more (~394 tok)
 - `index.ts` — Declares main (~797 tok)
 - `README.md` — Project documentation (~1488 tok)
 - `run-feature-validation.sh` (~88 tok)
 
 ## scripts/configs/configs/
 
-- `applyPoolRiskGuards.ts` — Exports runApplyPoolRiskGuards (~2192 tok)
-- `disableInactiveMarkets.ts` — Exports runDisableInactiveMarkets (~1195 tok)
+- `applyPoolRiskGuards.ts` — Exports runApplyPoolRiskGuards (~2190 tok)
+- `disableInactiveMarkets.ts` — Exports runDisableInactiveMarkets (~1193 tok)
 - `disableOrderCreateFeatures.ts` — Exports runDisableOrderCreateFeatures (~871 tok)
 - `disableOrderExecuteFeatures.ts` — Exports runDisableOrderExecuteFeatures (~875 tok)
 
 ## scripts/configs/helpers/
 
-- `applyFeatureFlagWrites.ts` — * Writes Config.setBool entries for the provided feature specs (dry-run unless WRITE=true is specifi (~688 tok)
+- `applyFeatureFlagWrites.ts` — * Writes Config.setBool entries for the provided feature specs (dry-run unless WRITE=true is specifi (~685 tok)
 - `featureFlagSpecs.ts` — Exports ManagedFeatureId, ModuleFeatureSpec, OrderTypeFeatureSpec, ManagedFeatureSpec + 12 more (~3218 tok)
 - `getConfigKeeperSigner.ts` — Exports getConfigKeeperRoleSigner (~1087 tok)
 
@@ -975,7 +977,13 @@
 
 ## scripts/configs/validations/
 
+- `printRolesResolved.ts` — Exports runPrintRolesResolved (~876 tok)
+- `verifyFeatureFlagStates.ts` — Exports verifyFeatureFlagStates (~526 tok)
 - `verifyFeatureValidationProfile.ts` — PROFILE_PATH: main (~529 tok)
+- `verifyPoolRiskGuards.ts` — Exports runVerifyPoolRiskGuards (~1452 tok)
+- `verifyRedactionState.ts` — Exports runVerifyRedactionState (~1309 tok)
+- `verifySameTokenInvariants.ts` — Exports runVerifySameTokenInvariants (~1116 tok)
+- `verifyVirtualIdAllowlist.ts` — Exports runVerifyVirtualIdAllowlist (~1177 tok)
 
 ## scripts/incentives/
 

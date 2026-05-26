@@ -1,5 +1,6 @@
 import type { HardhatRuntimeEnvironment } from "hardhat/types";
 
+import { getWriteMode, getIsDisabled } from "../configRuntime";
 import type { ManagedFeatureSpec } from "./featureFlagSpecs";
 import { encodeFeatureData, resolveModuleAddress, resolveModuleContractNames } from "./featureFlagSpecs";
 import { getDeployedContract } from "./getDeployedContract";
@@ -13,8 +14,8 @@ import { getConfigKeeperRoleSigner } from "./getConfigKeeperRoleSigner";
  */
 export async function applyFeatureFlagWrites(hre: HardhatRuntimeEnvironment, specs: ManagedFeatureSpec[]) {
   const config = await getDeployedContract(hre, "Config");
-  const write = process.env.WRITE === "true";
-  const targetDisabled = process.env.IS_DISABLED === undefined || process.env.IS_DISABLED === "true";
+  const write = getWriteMode();
+  const targetDisabled = getIsDisabled();
 
   const rows: { label: string; module: string; address: string }[] = [];
   const multicallWriteParams: string[] = [];
