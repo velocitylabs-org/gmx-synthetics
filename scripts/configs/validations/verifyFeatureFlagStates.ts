@@ -9,6 +9,11 @@ import {
 } from "../helpers/featureFlagSpecs";
 import { getDeployedContract } from "../helpers/getDeployedContract";
 
+export function makeVerifyFeatureFlagRunner(specs: ManagedFeatureSpec | ManagedFeatureSpec[]): () => Promise<void> {
+  const arr = Array.isArray(specs) ? specs : [specs];
+  return () => verifyFeatureFlagStates(arr);
+}
+
 export async function verifyFeatureFlagStates(specs: ManagedFeatureSpec[]) {
   const dataStore = await getDeployedContract(hre, "DataStore");
   const targetDisabled =

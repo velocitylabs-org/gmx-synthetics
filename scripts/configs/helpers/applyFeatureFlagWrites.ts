@@ -1,3 +1,4 @@
+import hre from "hardhat";
 import type { HardhatRuntimeEnvironment } from "hardhat/types";
 
 import { getWriteMode, getIsDisabled } from "../configRuntime";
@@ -5,6 +6,11 @@ import type { ManagedFeatureSpec } from "./featureFlagSpecs";
 import { encodeFeatureData, resolveModuleAddress, resolveModuleContractNames } from "./featureFlagSpecs";
 import { getDeployedContract } from "./getDeployedContract";
 import { getConfigKeeperRoleSigner } from "./getConfigKeeperRoleSigner";
+
+export function makeSetFeatureFlagRunner(specs: ManagedFeatureSpec | ManagedFeatureSpec[]): () => Promise<void> {
+  const arr = Array.isArray(specs) ? specs : [specs];
+  return () => applyFeatureFlagWrites(hre, arr);
+}
 
 /**
  *

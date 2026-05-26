@@ -387,3 +387,27 @@
 | 11:42 | Session end: 50 writes across 29 files (feedback_no_wolf_paths.md, MEMORY.md, configRuntime.ts, disableInactiveMarkets.ts, verifySameTokenInvariants.ts) | 27 reads | ~14056 tok |
 | 11:42 | Session end: 50 writes across 29 files (feedback_no_wolf_paths.md, MEMORY.md, configRuntime.ts, disableInactiveMarkets.ts, verifySameTokenInvariants.ts) | 27 reads | ~14056 tok |
 | 11:53 | Session end: 50 writes across 29 files (feedback_no_wolf_paths.md, MEMORY.md, configRuntime.ts, disableInactiveMarkets.ts, verifySameTokenInvariants.ts) | 27 reads | ~14056 tok |
+
+## Session: 2026-05-26 12:02
+
+| Time | Action | File(s) | Outcome | ~Tokens |
+|------|--------|---------|---------|--------|
+| 12:11 | Edited scripts/configs/helpers/featureFlagSpecs.ts | expanded (+6 lines) | ~82 |
+| 12:12 | Edited scripts/configs/helpers/applyFeatureFlagWrites.ts | added 1 import(s) | ~62 |
+| 12:12 | Edited scripts/configs/helpers/applyFeatureFlagWrites.ts | modified makeSetFeatureFlagRunner() | ~169 |
+| 12:12 | Edited scripts/configs/validations/verifyFeatureFlagStates.ts | modified makeVerifyFeatureFlagRunner() | ~85 |
+| 12:12 | Created scripts/configs/configs/setGaslessFeatureState.ts | — | ~112 |
+| 12:12 | Created scripts/configs/configs/setJitFeatureState.ts | — | ~108 |
+| 12:12 | Created scripts/configs/configs/setSubaccountFeatureState.ts | — | ~114 |
+| 12:12 | Created scripts/configs/configs/setAtomicWithdrawalFeatureState.ts | — | ~123 |
+| 12:12 | Created scripts/configs/configs/setShiftFeaturesState.ts | — | ~104 |
+| 12:12 | Created scripts/configs/validations/verifyGaslessFeatureState.ts | — | ~113 |
+| 12:12 | Created scripts/configs/validations/verifyJitFeatureState.ts | — | ~109 |
+| 12:12 | Created scripts/configs/validations/verifySubaccountFeatureState.ts | — | ~116 |
+| 12:12 | Created scripts/configs/validations/verifyAtomicWithdrawalFeatureState.ts | — | ~124 |
+| 12:12 | Created scripts/configs/validations/verifyShiftCreateFeatureState.ts | — | ~118 |
+| 12:12 | Created scripts/configs/validations/verifyShiftCancelFeatureState.ts | — | ~118 |
+| 12:12 | Created scripts/configs/validations/verifyShiftExecuteFeatureState.ts | — | ~118 |
+| 12:13 | Created FOLLOWUPS.md | — | ~205 |
+| 12:14 | Session end: 17 writes across 16 files (featureFlagSpecs.ts, applyFeatureFlagWrites.ts, verifyFeatureFlagStates.ts, setGaslessFeatureState.ts, setJitFeatureState.ts) | 16 reads | ~8362 tok |
+| 12:16 | Session end: 17 writes across 16 files (featureFlagSpecs.ts, applyFeatureFlagWrites.ts, verifyFeatureFlagStates.ts, setGaslessFeatureState.ts, setJitFeatureState.ts) | 16 reads | ~8362 tok |
