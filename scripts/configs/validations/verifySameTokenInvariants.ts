@@ -6,7 +6,7 @@ import { getMarketKey, getMarketTokenAddresses } from "../../../utils/market";
 import tokensConfig from "../../../config/tokens";
 import marketsConfig from "../../../config/markets";
 import { getDeployedContract } from "../helpers/getDeployedContract";
-import { getConfigHre } from "../configRuntime";
+import { getConfigHre, getFailOnMismatch, runConfigScript } from "../configRuntime";
 
 const ACTIVE_INDEX_TOKENS = ["JPY", "GBP", "BRL", "MXN", "COP"];
 const INACTIVE_INDEX_TOKENS = ["IDR", "PHP", "PEN", "NGN", "KES", "ZAR", "THB"];
@@ -14,7 +14,7 @@ const TARGET_INDEX_TOKENS = new Set([...ACTIVE_INDEX_TOKENS, ...INACTIVE_INDEX_T
 const ZERO = BigNumber.from(0);
 
 export async function runVerifySameTokenInvariants() {
-  const failOnMismatch = process.env.FAIL_ON_MISMATCH === "true";
+  const failOnMismatch = getFailOnMismatch();
   const dataStore = await getDeployedContract(hre, "DataStore");
   const reader = await getDeployedContract(hre, "Reader");
 
@@ -82,15 +82,6 @@ export async function runVerifySameTokenInvariants() {
   }
 }
 
-async function main() {
-  await runVerifySameTokenInvariants();
-}
-
 if (require.main === module) {
-  main()
-    .then(() => process.exit(0))
-    .catch((ex) => {
-      console.error(ex);
-      process.exit(1);
-    });
+  runConfigScript(runVerifySameTokenInvariants);
 }

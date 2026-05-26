@@ -8,7 +8,7 @@ import tokensConfig from "../../../config/tokens";
 import marketsConfig from "../../../config/markets";
 import { getDeployedContract } from "../helpers/getDeployedContract";
 import { getConfigKeeperRoleSigner } from "../helpers/getConfigKeeperRoleSigner";
-import { getConfigHre, getWriteMode, isTruthy } from "../configRuntime";
+import { getConfigHre, getWriteMode, isTruthy, runConfigScript } from "../configRuntime";
 
 type MarketPolicy = {
   minMarketTokensForFirstDeposit: string;
@@ -198,15 +198,6 @@ export async function runApplyPoolRiskGuards() {
   console.log("tx mined");
 }
 
-async function main() {
-  await runApplyPoolRiskGuards();
-}
-
 if (require.main === module) {
-  main()
-    .then(() => process.exit(0))
-    .catch((ex) => {
-      console.error(ex);
-      process.exit(1);
-    });
+  runConfigScript(runApplyPoolRiskGuards);
 }

@@ -1,7 +1,7 @@
 # anatomy.md
 
-> Auto-maintained by OpenWolf. Last scanned: 2026-05-26T09:17:25.386Z
-> Files: 998 tracked | Anatomy hits: 0 | Misses: 0
+> Auto-maintained by OpenWolf. Last scanned: 2026-05-26T09:39:04.607Z
+> Files: 1012 tracked | Anatomy hits: 0 | Misses: 0
 
 ## ../../.claude/projects/-Users-n-code-gmx-synthetics/memory/
 
@@ -948,10 +948,15 @@
 
 ## scripts/configs/configs/
 
-- `applyPoolRiskGuards.ts` — Exports runApplyPoolRiskGuards (~2190 tok)
-- `disableInactiveMarkets.ts` — Exports runDisableInactiveMarkets (~1193 tok)
-- `disableOrderCreateFeatures.ts` — Exports runDisableOrderCreateFeatures (~871 tok)
-- `disableOrderExecuteFeatures.ts` — Exports runDisableOrderExecuteFeatures (~875 tok)
+- `applyPoolRiskGuards.ts` — Exports runApplyPoolRiskGuards (~2156 tok)
+- `disableInactiveMarkets.ts` — Exports runDisableInactiveMarkets (~1146 tok)
+- `disableOrderCreateFeatures.ts` — Exports runDisableOrderCreateFeatures (~834 tok)
+- `disableOrderExecuteFeatures.ts` — Exports runDisableOrderExecuteFeatures (~838 tok)
+- `setAtomicWithdrawalFeatureState.ts` — Exports runSetAtomicWithdrawalFeatureState (~137 tok)
+- `setGaslessFeatureState.ts` — Exports runSetGaslessFeatureState (~126 tok)
+- `setJitFeatureState.ts` — Exports runSetJitFeatureState (~123 tok)
+- `setShiftFeaturesState.ts` — Exports runSetShiftFeaturesState (~119 tok)
+- `setSubaccountFeatureState.ts` — Exports runSetSubaccountFeatureState (~129 tok)
 
 ## scripts/configs/helpers/
 
@@ -978,12 +983,21 @@
 ## scripts/configs/validations/
 
 - `printRolesResolved.ts` — Exports runPrintRolesResolved (~876 tok)
+- `runInvariantChecks.ts` — Exports runInvariantChecks (~169 tok)
+- `verifyAtomicWithdrawalFeatureState.ts` — Exports runVerifyAtomicWithdrawalFeatureState (~127 tok)
 - `verifyFeatureFlagStates.ts` — Exports verifyFeatureFlagStates (~526 tok)
+- `verifyFeaturesState.ts` — Exports runVerifyFeaturesState (~406 tok)
 - `verifyFeatureValidationProfile.ts` — PROFILE_PATH: main (~529 tok)
+- `verifyGaslessFeatureState.ts` — Exports runVerifyGaslessFeatureState (~117 tok)
+- `verifyJitFeatureState.ts` — Exports runVerifyJitFeatureState (~114 tok)
 - `verifyPoolRiskGuards.ts` — Exports runVerifyPoolRiskGuards (~1452 tok)
 - `verifyRedactionState.ts` — Exports runVerifyRedactionState (~1309 tok)
-- `verifySameTokenInvariants.ts` — Exports runVerifySameTokenInvariants (~1116 tok)
-- `verifyVirtualIdAllowlist.ts` — Exports runVerifyVirtualIdAllowlist (~1177 tok)
+- `verifySameTokenInvariants.ts` — Exports runVerifySameTokenInvariants (~1081 tok)
+- `verifyShiftCancelFeatureState.ts` — Exports runVerifyShiftCancelFeatureState (~121 tok)
+- `verifyShiftCreateFeatureState.ts` — Exports runVerifyShiftCreateFeatureState (~121 tok)
+- `verifyShiftExecuteFeatureState.ts` — Exports runVerifyShiftExecuteFeatureState (~122 tok)
+- `verifySubaccountFeatureState.ts` — Exports runVerifySubaccountFeatureState (~120 tok)
+- `verifyVirtualIdAllowlist.ts` — Exports runVerifyVirtualIdAllowlist (~1150 tok)
 
 ## scripts/incentives/
 

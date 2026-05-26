@@ -6,13 +6,13 @@ import { getMarketKey, getMarketTokenAddresses } from "../../../utils/market";
 import tokensConfig from "../../../config/tokens";
 import marketsConfig from "../../../config/markets";
 import { getDeployedContract } from "../helpers/getDeployedContract";
-import { getConfigHre } from "../configRuntime";
+import { getConfigHre, getFailOnMismatch, runConfigScript } from "../configRuntime";
 
 const TARGET_INDEX_TOKENS = ["JPY", "GBP", "BRL", "MXN", "COP", "IDR", "PHP", "PEN", "NGN", "KES", "ZAR", "THB"];
 const TARGET_INDEX_SET = new Set(TARGET_INDEX_TOKENS);
 
 export async function runVerifyVirtualIdAllowlist() {
-  const failOnMismatch = process.env.FAIL_ON_MISMATCH === "true";
+  const failOnMismatch = getFailOnMismatch();
   const dataStore = await getDeployedContract(hre, "DataStore");
   const reader = await getDeployedContract(hre, "Reader");
   const configHre = getConfigHre(hre);
@@ -90,15 +90,6 @@ export async function runVerifyVirtualIdAllowlist() {
   }
 }
 
-async function main() {
-  await runVerifyVirtualIdAllowlist();
-}
-
 if (require.main === module) {
-  main()
-    .then(() => process.exit(0))
-    .catch((ex) => {
-      console.error(ex);
-      process.exit(1);
-    });
+  runConfigScript(runVerifyVirtualIdAllowlist);
 }

@@ -848,6 +848,102 @@
       "related_bugs": [],
       "occurrences": 1,
       "last_seen": "2026-05-26T09:17:25.395Z"
+    },
+    {
+      "id": "bug-054",
+      "timestamp": "2026-05-26T09:37:01.288Z",
+      "error_message": "Significant refactor of ",
+      "file": "scripts/configs/configs/applyPoolRiskGuards.ts",
+      "root_cause": "8 lines replaced/restructured",
+      "fix": "Rewrote 12→3 lines (8 removed)",
+      "tags": [
+        "auto-detected",
+        "refactor",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-26T09:37:01.288Z"
+    },
+    {
+      "id": "bug-055",
+      "timestamp": "2026-05-26T09:37:16.436Z",
+      "error_message": "Significant refactor of ",
+      "file": "scripts/configs/configs/disableInactiveMarkets.ts",
+      "root_cause": "8 lines replaced/restructured",
+      "fix": "Rewrote 12→3 lines (8 removed)",
+      "tags": [
+        "auto-detected",
+        "refactor",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-26T09:37:16.436Z"
+    },
+    {
+      "id": "bug-056",
+      "timestamp": "2026-05-26T09:38:52.014Z",
+      "error_message": "Wrong reference: process should be getFailOnMismatch",
+      "file": "scripts/configs/validations/verifySameTokenInvariants.ts",
+      "root_cause": "Used \"process\" instead of \"getFailOnMismatch\"",
+      "fix": "Changed process → getFailOnMismatch",
+      "tags": [
+        "auto-detected",
+        "wrong-reference",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-26T09:38:52.014Z"
+    },
+    {
+      "id": "bug-057",
+      "timestamp": "2026-05-26T09:38:58.428Z",
+      "error_message": "Significant refactor of ",
+      "file": "scripts/configs/validations/verifySameTokenInvariants.ts",
+      "root_cause": "8 lines replaced/restructured",
+      "fix": "Rewrote 12→3 lines (8 removed)",
+      "tags": [
+        "auto-detected",
+        "refactor",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-26T09:38:58.428Z"
+    },
+    {
+      "id": "bug-058",
+      "timestamp": "2026-05-26T09:38:59.495Z",
+      "error_message": "Wrong reference: process should be getFailOnMismatch",
+      "file": "scripts/configs/validations/verifyVirtualIdAllowlist.ts",
+      "root_cause": "Used \"process\" instead of \"getFailOnMismatch\"",
+      "fix": "Changed process → getFailOnMismatch",
+      "tags": [
+        "auto-detected",
+        "wrong-reference",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-26T09:38:59.495Z"
+    },
+    {
+      "id": "bug-059",
+      "timestamp": "2026-05-26T09:39:04.616Z",
+      "error_message": "Significant refactor of ",
+      "file": "scripts/configs/validations/verifyVirtualIdAllowlist.ts",
+      "root_cause": "8 lines replaced/restructured",
+      "fix": "Rewrote 12→3 lines (8 removed)",
+      "tags": [
+        "auto-detected",
+        "refactor",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-05-26T09:39:04.616Z"
     }
   ]
 }
