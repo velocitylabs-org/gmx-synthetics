@@ -8,7 +8,7 @@ import tokensConfig from "../../../config/tokens";
 import marketsConfig from "../../../config/markets";
 import { getDeployedContract } from "../helpers/getDeployedContract";
 import { getConfigKeeperRoleSigner } from "../helpers/getConfigKeeperRoleSigner";
-import { getConfigHre, isTruthy } from "../helpers/configRuntime";
+import { getConfigHre, getWriteMode, isTruthy, runConfigScript } from "../configRuntime";
 
 type MarketPolicy = {
   minMarketTokensForFirstDeposit: string;
@@ -57,7 +57,7 @@ function getMarketPolicy(indexTokenSymbol: string): MarketPolicy {
 }
 
 export async function runApplyPoolRiskGuards() {
-  const write = isTruthy(process.env.WRITE);
+  const write = getWriteMode();
   const targetIndexTokens = getTargetIndexTokens();
   const inactiveIndexTokens = getInactiveIndexTokens();
   const disableInactiveMarkets =
@@ -198,15 +198,6 @@ export async function runApplyPoolRiskGuards() {
   console.log("tx mined");
 }
 
-async function main() {
-  await runApplyPoolRiskGuards();
-}
-
 if (require.main === module) {
-  main()
-    .then(() => process.exit(0))
-    .catch((ex) => {
-      console.error(ex);
-      process.exit(1);
-    });
+  runConfigScript(runApplyPoolRiskGuards);
 }

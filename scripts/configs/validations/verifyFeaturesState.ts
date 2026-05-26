@@ -1,3 +1,4 @@
+import { runConfigScript } from "../configRuntime";
 import { FEATURE_FLAG_SPECS } from "../helpers/featureFlagSpecs";
 import { verifyFeatureFlagStates } from "./verifyFeatureFlagStates";
 
@@ -23,15 +24,6 @@ export async function runVerifyFeaturesState() {
   ]);
 }
 
-async function main() {
-  await runVerifyFeaturesState();
-}
-
 if (require.main === module) {
-  main()
-    .then(() => process.exit(0))
-    .catch((ex) => {
-      console.error(ex);
-      process.exit(1);
-    });
+  runConfigScript(runVerifyFeaturesState);
 }

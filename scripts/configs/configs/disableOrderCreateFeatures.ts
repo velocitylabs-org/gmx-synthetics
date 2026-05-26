@@ -5,13 +5,14 @@ import * as keys from "../../../utils/keys";
 import { OrderType } from "../../../utils/order";
 import { getDeployedContract } from "../helpers/getDeployedContract";
 import { getConfigKeeperRoleSigner } from "../helpers/getConfigKeeperRoleSigner";
+import { getIsDisabled, getWriteMode, runConfigScript } from "../configRuntime";
 
 export async function runDisableOrderCreateFeatures() {
   const config = await getDeployedContract(hre, "Config");
   const orderHandlerAddress = process.env.ORDER_HANDLER || (await getDeployedContract(hre, "OrderHandler")).address;
 
-  const disableValue = process.env.IS_DISABLED === undefined || process.env.IS_DISABLED === "true";
-  const write = process.env.WRITE === "true";
+  const disableValue = getIsDisabled();
+  const write = getWriteMode();
 
   const featureKeys = [
     {
@@ -67,15 +68,6 @@ export async function runDisableOrderCreateFeatures() {
   console.log("tx mined");
 }
 
-async function main() {
-  await runDisableOrderCreateFeatures();
-}
-
 if (require.main === module) {
-  main()
-    .then(() => process.exit(0))
-    .catch((ex) => {
-      console.error(ex);
-      process.exit(1);
-    });
+  runConfigScript(runDisableOrderCreateFeatures);
 }

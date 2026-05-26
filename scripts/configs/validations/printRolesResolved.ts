@@ -3,6 +3,7 @@ import path from "path";
 import hre from "hardhat";
 
 import { hashString } from "../../../utils/hash";
+import { runConfigScript } from "../configRuntime";
 import { getDeployedContract } from "../helpers/getDeployedContract";
 
 const knownRoles = Object.fromEntries(
@@ -90,20 +91,10 @@ export async function runPrintRolesResolved() {
     const roleData = sortedMembers.map((m) => (addressToName[m] ? `${m} (${addressToName[m]})` : m));
     console.log("%s:\n\t%s", knownRoles[role] || role, roleData.join("\n\t"));
   }
-}
 
-async function main() {
-  await runPrintRolesResolved();
+  console.log("done");
 }
 
 if (require.main === module) {
-  main()
-    .then(() => {
-      console.log("done");
-      process.exit(0);
-    })
-    .catch((ex) => {
-      console.error(ex);
-      process.exit(1);
-    });
+  runConfigScript(runPrintRolesResolved);
 }
