@@ -1,213 +1,85 @@
 {
-  "session_id": "session-2026-05-26-1202",
-  "started": "2026-05-26T10:02:28.639Z",
+  "session_id": "session-2026-05-26-1222",
+  "started": "2026-05-26T10:22:28.791Z",
   "files_read": {
-    "/Users/n/code/gmx-synthetics/scripts/configs/configs/setGaslessFeatureState.ts": {
+    "/Users/n/code/gmx-synthetics/scripts/configs/configs/disableOrderCreateFeatures.ts": {
       "count": 1,
-      "tokens": 126,
-      "first_read": "2026-05-26T10:09:48.477Z"
+      "tokens": 834,
+      "first_read": "2026-05-26T10:22:40.192Z"
     },
-    "/Users/n/code/gmx-synthetics/scripts/configs/configs/setJitFeatureState.ts": {
+    "/Users/n/code/gmx-synthetics/scripts/configs/configs/disableOrderExecuteFeatures.ts": {
       "count": 1,
-      "tokens": 123,
-      "first_read": "2026-05-26T10:09:48.895Z"
+      "tokens": 838,
+      "first_read": "2026-05-26T10:22:40.681Z"
     },
-    "/Users/n/code/gmx-synthetics/scripts/configs/configs/setSubaccountFeatureState.ts": {
+    "/Users/n/code/gmx-synthetics/scripts/configs/helpers/getDeployedContract.ts": {
       "count": 1,
-      "tokens": 129,
-      "first_read": "2026-05-26T10:09:49.381Z"
+      "tokens": 0,
+      "first_read": "2026-05-26T10:22:55.173Z"
     },
-    "/Users/n/code/gmx-synthetics/scripts/configs/configs/setAtomicWithdrawalFeatureState.ts": {
+    "/Users/n/code/gmx-synthetics/scripts/configs/index.ts": {
       "count": 1,
-      "tokens": 137,
-      "first_read": "2026-05-26T10:09:49.942Z"
+      "tokens": 785,
+      "first_read": "2026-05-26T10:22:58.163Z"
     },
-    "/Users/n/code/gmx-synthetics/scripts/configs/configs/setShiftFeaturesState.ts": {
+    "/Users/n/code/gmx-synthetics/scripts/configs/configRuntime.ts": {
       "count": 1,
-      "tokens": 119,
-      "first_read": "2026-05-26T10:09:50.114Z"
-    },
-    "/Users/n/code/gmx-synthetics/scripts/configs/validations/verifyGaslessFeatureState.ts": {
-      "count": 1,
-      "tokens": 117,
-      "first_read": "2026-05-26T10:09:52.543Z"
-    },
-    "/Users/n/code/gmx-synthetics/scripts/configs/validations/verifyJitFeatureState.ts": {
-      "count": 1,
-      "tokens": 114,
-      "first_read": "2026-05-26T10:09:53.036Z"
-    },
-    "/Users/n/code/gmx-synthetics/scripts/configs/validations/verifyAtomicWithdrawalFeatureState.ts": {
-      "count": 1,
-      "tokens": 127,
-      "first_read": "2026-05-26T10:09:53.539Z"
-    },
-    "/Users/n/code/gmx-synthetics/scripts/configs/validations/verifyShiftCreateFeatureState.ts": {
-      "count": 1,
-      "tokens": 121,
-      "first_read": "2026-05-26T10:09:54.032Z"
-    },
-    "/Users/n/code/gmx-synthetics/scripts/configs/validations/verifyShiftCancelFeatureState.ts": {
-      "count": 1,
-      "tokens": 121,
-      "first_read": "2026-05-26T10:09:54.526Z"
-    },
-    "/Users/n/code/gmx-synthetics/scripts/configs/validations/verifyShiftExecuteFeatureState.ts": {
-      "count": 1,
-      "tokens": 122,
-      "first_read": "2026-05-26T10:09:54.871Z"
+      "tokens": 394,
+      "first_read": "2026-05-26T10:24:19.433Z"
     },
     "/Users/n/code/gmx-synthetics/scripts/configs/helpers/applyFeatureFlagWrites.ts": {
       "count": 1,
-      "tokens": 685,
-      "first_read": "2026-05-26T10:09:57.732Z"
+      "tokens": 756,
+      "first_read": "2026-05-26T10:40:41.624Z"
     },
-    "/Users/n/code/gmx-synthetics/scripts/configs/validations/verifyFeatureFlagStates.ts": {
+    "/Users/n/.claude/projects/-Users-n-code-gmx-synthetics/memory/MEMORY.md": {
       "count": 1,
-      "tokens": 526,
-      "first_read": "2026-05-26T10:09:58.254Z"
-    },
-    "/Users/n/code/gmx-synthetics/scripts/configs/helpers/featureFlagSpecs.ts": {
-      "count": 1,
-      "tokens": 3218,
-      "first_read": "2026-05-26T10:09:58.407Z"
-    },
-    "/Users/n/code/gmx-synthetics/scripts/configs/validations/verifyFeaturesState.ts": {
-      "count": 1,
-      "tokens": 406,
-      "first_read": "2026-05-26T10:10:47.639Z"
-    },
-    "/Users/n/code/gmx-synthetics/tsconfig.json": {
-      "count": 1,
-      "tokens": 176,
-      "first_read": "2026-05-26T10:11:03.695Z"
+      "tokens": 0,
+      "first_read": "2026-05-26T10:48:24.682Z"
     }
   },
   "files_written": [
     {
-      "file": "/Users/n/code/gmx-synthetics/scripts/configs/helpers/featureFlagSpecs.ts",
-      "action": "edit",
-      "tokens": 82,
-      "at": "2026-05-26T10:11:56.351Z"
-    },
-    {
-      "file": "/Users/n/code/gmx-synthetics/scripts/configs/helpers/applyFeatureFlagWrites.ts",
-      "action": "edit",
-      "tokens": 62,
-      "at": "2026-05-26T10:12:01.516Z"
-    },
-    {
-      "file": "/Users/n/code/gmx-synthetics/scripts/configs/helpers/applyFeatureFlagWrites.ts",
-      "action": "edit",
-      "tokens": 169,
-      "at": "2026-05-26T10:12:08.773Z"
-    },
-    {
-      "file": "/Users/n/code/gmx-synthetics/scripts/configs/validations/verifyFeatureFlagStates.ts",
-      "action": "edit",
-      "tokens": 85,
-      "at": "2026-05-26T10:12:14.966Z"
-    },
-    {
-      "file": "/Users/n/code/gmx-synthetics/scripts/configs/configs/setGaslessFeatureState.ts",
+      "file": "/Users/n/code/gmx-synthetics/scripts/configs/helpers/disableOrderFeatures.ts",
       "action": "create",
-      "tokens": 112,
-      "at": "2026-05-26T10:12:20.876Z"
+      "tokens": 726,
+      "at": "2026-05-26T10:41:38.608Z"
     },
     {
-      "file": "/Users/n/code/gmx-synthetics/scripts/configs/configs/setJitFeatureState.ts",
+      "file": "/Users/n/code/gmx-synthetics/scripts/configs/configs/disableOrderCreateFeatures.ts",
       "action": "create",
-      "tokens": 108,
-      "at": "2026-05-26T10:12:22.288Z"
+      "tokens": 122,
+      "at": "2026-05-26T10:41:43.776Z"
     },
     {
-      "file": "/Users/n/code/gmx-synthetics/scripts/configs/configs/setSubaccountFeatureState.ts",
-      "action": "create",
-      "tokens": 114,
-      "at": "2026-05-26T10:12:23.783Z"
-    },
-    {
-      "file": "/Users/n/code/gmx-synthetics/scripts/configs/configs/setAtomicWithdrawalFeatureState.ts",
-      "action": "create",
-      "tokens": 123,
-      "at": "2026-05-26T10:12:25.778Z"
-    },
-    {
-      "file": "/Users/n/code/gmx-synthetics/scripts/configs/configs/setShiftFeaturesState.ts",
-      "action": "create",
-      "tokens": 104,
-      "at": "2026-05-26T10:12:27.265Z"
-    },
-    {
-      "file": "/Users/n/code/gmx-synthetics/scripts/configs/validations/verifyGaslessFeatureState.ts",
-      "action": "create",
-      "tokens": 113,
-      "at": "2026-05-26T10:12:33.675Z"
-    },
-    {
-      "file": "/Users/n/code/gmx-synthetics/scripts/configs/validations/verifyJitFeatureState.ts",
-      "action": "create",
-      "tokens": 109,
-      "at": "2026-05-26T10:12:34.759Z"
-    },
-    {
-      "file": "/Users/n/code/gmx-synthetics/scripts/configs/validations/verifySubaccountFeatureState.ts",
-      "action": "create",
-      "tokens": 116,
-      "at": "2026-05-26T10:12:35.839Z"
-    },
-    {
-      "file": "/Users/n/code/gmx-synthetics/scripts/configs/validations/verifyAtomicWithdrawalFeatureState.ts",
+      "file": "/Users/n/code/gmx-synthetics/scripts/configs/configs/disableOrderExecuteFeatures.ts",
       "action": "create",
       "tokens": 124,
-      "at": "2026-05-26T10:12:37.462Z"
+      "at": "2026-05-26T10:41:47.978Z"
     },
     {
-      "file": "/Users/n/code/gmx-synthetics/scripts/configs/validations/verifyShiftCreateFeatureState.ts",
+      "file": "/Users/n/.claude/projects/-Users-n-code-gmx-synthetics/memory/feedback_pr_description_format.md",
       "action": "create",
-      "tokens": 118,
-      "at": "2026-05-26T10:12:39.028Z"
+      "tokens": 158,
+      "at": "2026-05-26T10:48:17.113Z"
     },
     {
-      "file": "/Users/n/code/gmx-synthetics/scripts/configs/validations/verifyShiftCancelFeatureState.ts",
-      "action": "create",
-      "tokens": 118,
-      "at": "2026-05-26T10:12:40.931Z"
-    },
-    {
-      "file": "/Users/n/code/gmx-synthetics/scripts/configs/validations/verifyShiftExecuteFeatureState.ts",
-      "action": "create",
-      "tokens": 118,
-      "at": "2026-05-26T10:12:42.346Z"
-    },
-    {
-      "file": "/Users/n/code/gmx-synthetics/FOLLOWUPS.md",
-      "action": "create",
-      "tokens": 220,
-      "at": "2026-05-26T10:13:16.293Z"
+      "file": "/Users/n/.claude/projects/-Users-n-code-gmx-synthetics/memory/MEMORY.md",
+      "action": "edit",
+      "tokens": 77,
+      "at": "2026-05-26T10:48:27.988Z"
     }
   ],
   "edit_counts": {
-    "scripts/configs/helpers/featureFlagSpecs.ts": 1,
-    "scripts/configs/helpers/applyFeatureFlagWrites.ts": 2,
-    "scripts/configs/validations/verifyFeatureFlagStates.ts": 1,
-    "scripts/configs/configs/setGaslessFeatureState.ts": 1,
-    "scripts/configs/configs/setJitFeatureState.ts": 1,
-    "scripts/configs/configs/setSubaccountFeatureState.ts": 1,
-    "scripts/configs/configs/setAtomicWithdrawalFeatureState.ts": 1,
-    "scripts/configs/configs/setShiftFeaturesState.ts": 1,
-    "scripts/configs/validations/verifyGaslessFeatureState.ts": 1,
-    "scripts/configs/validations/verifyJitFeatureState.ts": 1,
-    "scripts/configs/validations/verifySubaccountFeatureState.ts": 1,
-    "scripts/configs/validations/verifyAtomicWithdrawalFeatureState.ts": 1,
-    "scripts/configs/validations/verifyShiftCreateFeatureState.ts": 1,
-    "scripts/configs/validations/verifyShiftCancelFeatureState.ts": 1,
-    "scripts/configs/validations/verifyShiftExecuteFeatureState.ts": 1,
-    "FOLLOWUPS.md": 1
+    "scripts/configs/helpers/disableOrderFeatures.ts": 1,
+    "scripts/configs/configs/disableOrderCreateFeatures.ts": 1,
+    "scripts/configs/configs/disableOrderExecuteFeatures.ts": 1,
+    "../../.claude/projects/-Users-n-code-gmx-synthetics/memory/feedback_pr_description_format.md": 1,
+    "../../.claude/projects/-Users-n-code-gmx-synthetics/memory/MEMORY.md": 1
   },
-  "anatomy_hits": 16,
-  "anatomy_misses": 0,
+  "anatomy_hits": 5,
+  "anatomy_misses": 2,
   "repeated_reads_warned": 0,
   "cerebrum_warnings": 0,
-  "stop_count": 3
+  "stop_count": 7
 }

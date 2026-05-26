@@ -1,14 +1,15 @@
 # anatomy.md
 
-> Auto-maintained by OpenWolf. Last scanned: 2026-05-26T10:13:16.282Z
-> Files: 1013 tracked | Anatomy hits: 0 | Misses: 0
+> Auto-maintained by OpenWolf. Last scanned: 2026-05-26T10:48:27.981Z
+> Files: 1015 tracked | Anatomy hits: 0 | Misses: 0
 
 ## ../../.claude/projects/-Users-n-code-gmx-synthetics/memory/
 
 - `feedback_no_git_commits.md` (~168 tok)
 - `feedback_no_wolf_paths.md` (~193 tok)
+- `feedback_pr_description_format.md` (~158 tok)
 - `feedback_strict_renames.md` — Declares that (~171 tok)
-- `MEMORY.md` — Memory Index (~105 tok)
+- `MEMORY.md` — Memory Index (~135 tok)
 
 ## ./
 
@@ -951,8 +952,8 @@
 
 - `applyPoolRiskGuards.ts` — Exports runApplyPoolRiskGuards (~2156 tok)
 - `disableInactiveMarkets.ts` — Exports runDisableInactiveMarkets (~1146 tok)
-- `disableOrderCreateFeatures.ts` — Exports runDisableOrderCreateFeatures (~834 tok)
-- `disableOrderExecuteFeatures.ts` — Exports runDisableOrderExecuteFeatures (~838 tok)
+- `disableOrderCreateFeatures.ts` — Exports runDisableOrderCreateFeatures (~122 tok)
+- `disableOrderExecuteFeatures.ts` — Exports runDisableOrderExecuteFeatures (~124 tok)
 - `setAtomicWithdrawalFeatureState.ts` — Exports runSetAtomicWithdrawalFeatureState (~123 tok)
 - `setGaslessFeatureState.ts` — Exports runSetGaslessFeatureState (~112 tok)
 - `setJitFeatureState.ts` — Exports runSetJitFeatureState (~108 tok)
@@ -962,6 +963,7 @@
 ## scripts/configs/helpers/
 
 - `applyFeatureFlagWrites.ts` — * Writes Config.setBool entries for the provided feature specs (dry-run unless WRITE=true is specifi (~756 tok)
+- `disableOrderFeatures.ts` — Exports disableOrderFeatures (~726 tok)
 - `featureFlagSpecs.ts` — Exports ManagedFeatureId, ModuleFeatureSpec, OrderTypeFeatureSpec, ManagedFeatureSpec + 8 more (~3164 tok)
 - `getConfigKeeperSigner.ts` — Exports getConfigKeeperRoleSigner (~1087 tok)
 

@@ -411,3 +411,17 @@
 | 12:13 | Created FOLLOWUPS.md | — | ~205 |
 | 12:14 | Session end: 17 writes across 16 files (featureFlagSpecs.ts, applyFeatureFlagWrites.ts, verifyFeatureFlagStates.ts, setGaslessFeatureState.ts, setJitFeatureState.ts) | 16 reads | ~8362 tok |
 | 12:16 | Session end: 17 writes across 16 files (featureFlagSpecs.ts, applyFeatureFlagWrites.ts, verifyFeatureFlagStates.ts, setGaslessFeatureState.ts, setJitFeatureState.ts) | 16 reads | ~8362 tok |
+
+## Session: 2026-05-26 12:22
+
+| Time | Action | File(s) | Outcome | ~Tokens |
+|------|--------|---------|---------|--------|
+| 12:41 | Created scripts/configs/helpers/disableOrderFeatures.ts | — | ~726 |
+| 12:41 | Created scripts/configs/configs/disableOrderCreateFeatures.ts | — | ~122 |
+| 12:41 | Created scripts/configs/configs/disableOrderExecuteFeatures.ts | — | ~124 |
+| 12:43 | Session end: 3 writes across 3 files (disableOrderFeatures.ts, disableOrderCreateFeatures.ts, disableOrderExecuteFeatures.ts) | 6 reads | ~4579 tok |
+| 12:46 | Session end: 3 writes across 3 files (disableOrderFeatures.ts, disableOrderCreateFeatures.ts, disableOrderExecuteFeatures.ts) | 6 reads | ~4579 tok |
+| 12:47 | Session end: 3 writes across 3 files (disableOrderFeatures.ts, disableOrderCreateFeatures.ts, disableOrderExecuteFeatures.ts) | 6 reads | ~4579 tok |
+| 12:48 | Created ../../.claude/projects/-Users-n-code-gmx-synthetics/memory/feedback_pr_description_format.md | — | ~148 |
+| 12:48 | Edited ../../.claude/projects/-Users-n-code-gmx-synthetics/memory/MEMORY.md | 1→2 lines | ~72 |
+| 12:48 | Session end: 5 writes across 5 files (disableOrderFeatures.ts, disableOrderCreateFeatures.ts, disableOrderExecuteFeatures.ts, feedback_pr_description_format.md, MEMORY.md) | 7 reads | ~4814 tok |
