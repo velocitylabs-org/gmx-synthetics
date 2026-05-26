@@ -1,12 +1,8 @@
-import hre from "hardhat";
-
 import { FEATURE_FLAG_SPECS } from "../helpers/featureFlagSpecs";
-import { applyFeatureFlagWrites } from "../helpers/applyFeatureFlagWrites";
+import { makeSetFeatureFlagRunner } from "../helpers/applyFeatureFlagWrites";
 import { runConfigScript } from "../configRuntime";
 
-export async function runSetGaslessFeatureState() {
-  await applyFeatureFlagWrites(hre, [FEATURE_FLAG_SPECS.GASLESS_FEATURE_DISABLED]);
-}
+export const runSetGaslessFeatureState = makeSetFeatureFlagRunner(FEATURE_FLAG_SPECS.GASLESS_FEATURE_DISABLED);
 
 if (require.main === module) {
   runConfigScript(runSetGaslessFeatureState);
