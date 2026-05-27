@@ -1,105 +1,85 @@
 {
-  "session_id": "session-2026-05-12-0936",
-  "started": "2026-05-12T07:36:59.344Z",
+  "session_id": "session-2026-05-26-1222",
+  "started": "2026-05-26T10:22:28.791Z",
   "files_read": {
-    "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/chainlinkProvider/signedPrices.ts": {
+    "/Users/n/code/gmx-synthetics/scripts/configs/configs/disableOrderCreateFeatures.ts": {
+      "count": 1,
+      "tokens": 834,
+      "first_read": "2026-05-26T10:22:40.192Z"
+    },
+    "/Users/n/code/gmx-synthetics/scripts/configs/configs/disableOrderExecuteFeatures.ts": {
+      "count": 1,
+      "tokens": 838,
+      "first_read": "2026-05-26T10:22:40.681Z"
+    },
+    "/Users/n/code/gmx-synthetics/scripts/configs/helpers/getDeployedContract.ts": {
       "count": 1,
       "tokens": 0,
-      "first_read": "2026-05-12T07:40:04.213Z"
+      "first_read": "2026-05-26T10:22:55.173Z"
     },
-    "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/chainlinkProvider/chainlinkReportFetcher.ts": {
+    "/Users/n/code/gmx-synthetics/scripts/configs/index.ts": {
       "count": 1,
-      "tokens": 512,
-      "first_read": "2026-05-12T07:40:07.541Z"
+      "tokens": 785,
+      "first_read": "2026-05-26T10:22:58.163Z"
     },
-    "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts": {
-      "count": 3,
-      "tokens": 2668,
-      "first_read": "2026-05-12T08:05:35.231Z"
-    },
-    "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/closePositionOrder.ts": {
+    "/Users/n/code/gmx-synthetics/scripts/configs/configRuntime.ts": {
       "count": 1,
-      "tokens": 1580,
-      "first_read": "2026-05-12T08:35:27.257Z"
+      "tokens": 394,
+      "first_read": "2026-05-26T10:24:19.433Z"
     },
-    "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/contracts/liquidation/LiquidationUtils.sol": {
+    "/Users/n/code/gmx-synthetics/scripts/configs/helpers/applyFeatureFlagWrites.ts": {
       "count": 1,
-      "tokens": 1122,
-      "first_read": "2026-05-12T08:35:45.942Z"
+      "tokens": 756,
+      "first_read": "2026-05-26T10:40:41.624Z"
     },
-    "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/contracts/position/PositionUtils.sol": {
-      "count": 2,
-      "tokens": 9145,
-      "first_read": "2026-05-12T08:37:07.460Z"
-    },
-    "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/config/markets.ts": {
-      "count": 6,
-      "tokens": 62460,
-      "first_read": "2026-05-12T08:48:08.825Z"
-    },
-    "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/contracts/market/MarketUtils.sol": {
+    "/Users/n/.claude/projects/-Users-n-code-gmx-synthetics/memory/MEMORY.md": {
       "count": 1,
-      "tokens": 37575,
-      "first_read": "2026-05-12T14:46:52.638Z"
+      "tokens": 0,
+      "first_read": "2026-05-26T10:48:24.682Z"
     }
   },
   "files_written": [
     {
-      "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
-      "action": "edit",
-      "tokens": 23,
-      "at": "2026-05-12T07:41:17.883Z"
-    },
-    {
-      "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
-      "action": "edit",
-      "tokens": 129,
-      "at": "2026-05-12T07:41:57.777Z"
-    },
-    {
-      "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/openPositionOrder.ts",
-      "action": "edit",
-      "tokens": 167,
-      "at": "2026-05-12T08:05:44.652Z"
-    },
-    {
-      "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/printPositionInfo.ts",
+      "file": "/Users/n/code/gmx-synthetics/scripts/configs/helpers/disableOrderFeatures.ts",
       "action": "create",
-      "tokens": 2299,
-      "at": "2026-05-12T08:38:16.418Z"
+      "tokens": 726,
+      "at": "2026-05-26T10:41:38.608Z"
     },
     {
-      "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/printPositionInfo.ts",
-      "action": "edit",
-      "tokens": 43,
-      "at": "2026-05-12T08:42:59.309Z"
+      "file": "/Users/n/code/gmx-synthetics/scripts/configs/configs/disableOrderCreateFeatures.ts",
+      "action": "create",
+      "tokens": 122,
+      "at": "2026-05-26T10:41:43.776Z"
     },
     {
-      "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/printPositionInfo.ts",
-      "action": "edit",
-      "tokens": 69,
-      "at": "2026-05-12T08:43:12.577Z"
+      "file": "/Users/n/code/gmx-synthetics/scripts/configs/configs/disableOrderExecuteFeatures.ts",
+      "action": "create",
+      "tokens": 124,
+      "at": "2026-05-26T10:41:47.978Z"
     },
     {
-      "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/printPositionInfo.ts",
-      "action": "edit",
-      "tokens": 24,
-      "at": "2026-05-12T08:43:20.614Z"
+      "file": "/Users/n/.claude/projects/-Users-n-code-gmx-synthetics/memory/feedback_pr_description_format.md",
+      "action": "create",
+      "tokens": 158,
+      "at": "2026-05-26T10:48:17.113Z"
     },
     {
-      "file": "/Users/victor/Desktop/VELOCITY_LBS/nivo/gmx-synthetics/scripts/nivo/printPositionInfo.ts",
+      "file": "/Users/n/.claude/projects/-Users-n-code-gmx-synthetics/memory/MEMORY.md",
       "action": "edit",
-      "tokens": 50,
-      "at": "2026-05-12T08:44:21.812Z"
+      "tokens": 77,
+      "at": "2026-05-26T10:48:27.988Z"
     }
   ],
   "edit_counts": {
-    "scripts/nivo/openPositionOrder.ts": 3,
-    "scripts/nivo/printPositionInfo.ts": 5
+    "scripts/configs/helpers/disableOrderFeatures.ts": 1,
+    "scripts/configs/configs/disableOrderCreateFeatures.ts": 1,
+    "scripts/configs/configs/disableOrderExecuteFeatures.ts": 1,
+    "../../.claude/projects/-Users-n-code-gmx-synthetics/memory/feedback_pr_description_format.md": 1,
+    "../../.claude/projects/-Users-n-code-gmx-synthetics/memory/MEMORY.md": 1
   },
-  "anatomy_hits": 7,
-  "anatomy_misses": 1,
-  "repeated_reads_warned": 8,
+  "anatomy_hits": 5,
+  "anatomy_misses": 2,
+  "repeated_reads_warned": 0,
   "cerebrum_warnings": 0,
-  "stop_count": 33
+  "stop_count": 7
 }

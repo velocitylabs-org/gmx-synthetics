@@ -1,6 +1,8 @@
 import hre from "hardhat";
 import { BigNumber } from "ethers";
 
+import { getFailOnMismatch, runConfigScript } from "../configRuntime";
+
 import * as keys from "../../../utils/keys";
 import { getMarketKey, getMarketTokenAddresses, getOnchainMarkets } from "../../../utils/market";
 
@@ -16,8 +18,8 @@ function toStr(value: BigNumber): string {
   return value.toString();
 }
 
-async function main() {
-  const failOnMismatch = process.env.FAIL_ON_MISMATCH === "true";
+export async function runVerifyPoolRiskGuards() {
+  const failOnMismatch = getFailOnMismatch();
   const requireNonZeroFirstDeposit = process.env.REQUIRE_NONZERO_FIRST_DEPOSIT === "true";
   const showMatches = process.env.SHOW_MATCHES === "true";
 
@@ -46,7 +48,9 @@ async function main() {
     checked++;
 
     const marketToken = onchainMarket.marketToken;
-    const marketLabel = `${market.tokens.indexToken || "SWAP-ONLY"} [${market.tokens.longToken}-${market.tokens.shortToken}]`;
+    const marketLabel = `${market.tokens.indexToken || "SWAP-ONLY"} [${market.tokens.longToken}-${
+      market.tokens.shortToken
+    }]`;
 
     const expectedMaxLongPoolAmount = BigNumber.from(market.maxLongTokenPoolAmount);
     const expectedMaxShortPoolAmount = BigNumber.from(market.maxShortTokenPoolAmount);
@@ -55,8 +59,12 @@ async function main() {
 
     const actualMaxLongPoolAmount = await dataStore.getUint(keys.maxPoolAmountKey(marketToken, longToken));
     const actualMaxShortPoolAmount = await dataStore.getUint(keys.maxPoolAmountKey(marketToken, shortToken));
-    const actualMaxLongPoolUsdForDeposit = await dataStore.getUint(keys.maxPoolUsdForDepositKey(marketToken, longToken));
-    const actualMaxShortPoolUsdForDeposit = await dataStore.getUint(keys.maxPoolUsdForDepositKey(marketToken, shortToken));
+    const actualMaxLongPoolUsdForDeposit = await dataStore.getUint(
+      keys.maxPoolUsdForDepositKey(marketToken, longToken)
+    );
+    const actualMaxShortPoolUsdForDeposit = await dataStore.getUint(
+      keys.maxPoolUsdForDepositKey(marketToken, shortToken)
+    );
 
     const minFirstDeposit = await dataStore.getUint(keys.minMarketTokensForFirstDeposit(marketToken));
 
@@ -126,11 +134,6 @@ async function main() {
   }
 }
 
-main()
-  .then(() => {
-    process.exit(0);
-  })
-  .catch((ex) => {
-    console.error(ex);
-    process.exit(1);
-  });
+if (require.main === module) {
+  runConfigScript(runVerifyPoolRiskGuards);
+}

@@ -1,40 +1,65 @@
 import { runDisableOrderCreateFeatures } from "./configs/disableOrderCreateFeatures";
 import { runDisableOrderExecuteFeatures } from "./configs/disableOrderExecuteFeatures";
 import { runApplyPoolRiskGuards } from "./configs/applyPoolRiskGuards";
+import { runSetShiftFeaturesState } from "./configs/setShiftFeaturesState";
+import { runSetJitFeatureState } from "./configs/setJitFeatureState";
+import { runSetSubaccountFeatureState } from "./configs/setSubaccountFeatureState";
+import { runSetGaslessFeatureState } from "./configs/setGaslessFeatureState";
+import { runSetAtomicWithdrawalFeatureState } from "./configs/setAtomicWithdrawalFeatureState";
 import { runInvariantChecks } from "./validations/runInvariantChecks";
+import { runVerifyFeaturesState } from "./validations/verifyFeaturesState";
+import { loadPreset } from "./presets";
+import { runConfigScript } from "./configRuntime";
 
 async function main() {
-  console.log("Running config redaction scripts...");
+  console.log("Running config orchestrator...");
 
-  // Toggle workstreams here for local testing, or control via env vars:
-  // RUN_ORDER_FEATURE_REDACTION=true|false RUN_POOL_RISK_GUARDS=true|false RUN_INVARIANT_VALIDATIONS=true|false
-  const runOrderFeatureRedaction =
-    process.env.RUN_ORDER_FEATURE_REDACTION === undefined ? true : process.env.RUN_ORDER_FEATURE_REDACTION === "true";
-  const runPoolRiskGuards =
-    process.env.RUN_POOL_RISK_GUARDS === undefined ? true : process.env.RUN_POOL_RISK_GUARDS === "true";
-  const runInvariantValidations = process.env.RUN_INVARIANT_VALIDATIONS === "true";
+  const preset = loadPreset(process.env.FEATURES);
 
-  if (runOrderFeatureRedaction) {
+  if (preset.RUN_ORDER_FEATURE_REDACTION) {
     await runDisableOrderCreateFeatures();
     await runDisableOrderExecuteFeatures();
   }
 
-  if (runPoolRiskGuards) {
+  if (preset.RUN_POOL_RISK_GUARDS) {
     await runApplyPoolRiskGuards();
   }
 
-  if (runInvariantValidations) {
+  if (preset.RUN_INVARIANT_VALIDATIONS) {
     await runInvariantChecks();
   }
 
-  console.log("Completed config redaction scripts.");
+  if (preset.RUN_SHIFT_FEATURES) {
+    await runSetShiftFeaturesState();
+  }
+
+  if (preset.RUN_JIT_FEATURE) {
+    await runSetJitFeatureState();
+  }
+
+  if (preset.RUN_SUBACCOUNT_FEATURE) {
+    await runSetSubaccountFeatureState();
+  }
+
+  if (preset.RUN_GASLESS_FEATURE) {
+    await runSetGaslessFeatureState();
+  }
+
+  if (preset.RUN_ATOMIC_WITHDRAWAL_FEATURE) {
+    await runSetAtomicWithdrawalFeatureState();
+  }
+
+  if (preset.RUN_FEATURE_VALIDATIONS) {
+    await runVerifyFeaturesState();
+  }
+
+  if (Object.values(preset).every((v) => !v)) {
+    console.log("No workstreams selected. Check the active preset's feature flags.");
+  }
+
+  console.log("Completed config orchestrator.");
 }
 
 if (require.main === module) {
-  main()
-    .then(() => process.exit(0))
-    .catch((ex) => {
-      console.error(ex);
-      process.exit(1);
-    });
+  runConfigScript(main);
 }

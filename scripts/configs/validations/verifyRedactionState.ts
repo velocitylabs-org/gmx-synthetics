@@ -7,9 +7,9 @@ import { getMarketKey, getMarketTokenAddresses } from "../../../utils/market";
 import tokensConfig from "../../../config/tokens";
 import marketsConfig from "../../../config/markets";
 import { getDeployedContract } from "../helpers/getDeployedContract";
-import { getConfigHre } from "../helpers/configRuntime";
+import { getConfigHre, getFailOnMismatch, runConfigScript } from "../configRuntime";
 
-const ACTIVE_INDEX_TOKENS = ["JPY", "GBP", "BRL", "MXN", "COP"];
+const ACTIVE_INDEX_TOKENS = ["GBP", "BRL", "MXN", "COP"];
 const INACTIVE_INDEX_TOKENS = ["IDR", "PHP", "PEN", "NGN", "KES", "ZAR", "THB"];
 const EXPECTED_MIN_FIRST_DEPOSIT = BigNumber.from("1000000000000000000");
 const ORDER_TYPES_TO_VERIFY = [
@@ -20,8 +20,8 @@ const ORDER_TYPES_TO_VERIFY = [
   OrderType.LimitDecrease,
 ];
 
-async function main() {
-  const failOnMismatch = process.env.FAIL_ON_MISMATCH === "true";
+export async function runVerifyRedactionState() {
+  const failOnMismatch = getFailOnMismatch();
   const dataStore = await getDeployedContract(hre, "DataStore");
   const orderHandler = await getDeployedContract(hre, "OrderHandler");
   const reader = await getDeployedContract(hre, "Reader");
@@ -95,9 +95,6 @@ async function main() {
   }
 }
 
-main()
-  .then(() => process.exit(0))
-  .catch((ex) => {
-    console.error(ex);
-    process.exit(1);
-  });
+if (require.main === module) {
+  runConfigScript(runVerifyRedactionState);
+}

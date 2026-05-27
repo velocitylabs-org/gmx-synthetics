@@ -7,14 +7,14 @@ import { getMarketKey, getMarketTokenAddresses } from "../../../utils/market";
 import tokensConfig from "../../../config/tokens";
 import marketsConfig from "../../../config/markets";
 import { getDeployedContract } from "../helpers/getDeployedContract";
-import { getConfigKeeperSigner } from "../helpers/getConfigKeeperSigner";
-import { getConfigHre, isTruthy } from "../helpers/configRuntime";
+import { getConfigKeeperRoleSigner } from "../helpers/getConfigKeeperRoleSigner";
+import { getConfigHre, getWriteMode, isTruthy, runConfigScript } from "../configRuntime";
 
 type MarketPolicy = {
   minMarketTokensForFirstDeposit: string;
 };
 
-const DEFAULT_ACTIVE_INDEX_TOKENS = ["JPY", "GBP", "BRL", "MXN", "COP"];
+const DEFAULT_ACTIVE_INDEX_TOKENS = ["GBP", "BRL", "MXN", "COP"];
 const DEFAULT_INACTIVE_INDEX_TOKENS = ["IDR", "PHP", "PEN", "NGN", "KES", "ZAR", "THB"];
 const DEFAULT_MIN_FIRST_DEPOSIT = "1000000000000000000";
 const MARKET_POLICY_BY_INDEX_SYMBOL: Record<string, MarketPolicy> = {};
@@ -57,14 +57,14 @@ function getMarketPolicy(indexTokenSymbol: string): MarketPolicy {
 }
 
 export async function runApplyPoolRiskGuards() {
-  const write = isTruthy(process.env.WRITE);
+  const write = getWriteMode();
   const targetIndexTokens = getTargetIndexTokens();
   const inactiveIndexTokens = getInactiveIndexTokens();
   const disableInactiveMarkets =
     process.env.DISABLE_INACTIVE_MARKETS === undefined ? true : isTruthy(process.env.DISABLE_INACTIVE_MARKETS);
   // IS_DISABLED being `true` means the feature being configured would be disabled.
   // Vice versa, if `IS_DISABLED = false` is passed in, the feature is therefore active/enabled.
-  const inactiveDisableValue = process.env.IS_DISABLED === undefined ? true : process.env.IS_DISABLED === "true";
+  const inactiveDisableValue = process.env.IS_DISABLED === undefined || process.env.IS_DISABLED === "true";
   const targetMarketToken = process.env.MARKET?.toLowerCase();
 
   const config = await getDeployedContract(hre, "Config");
@@ -81,8 +81,8 @@ export async function runApplyPoolRiskGuards() {
     })
   );
 
-  const { configKeeperAddress, configKeeperSigner } = await getConfigKeeperSigner(hre);
-  const configAsKeeper = config.connect(configKeeperSigner);
+  const { configKeeperRoleAddress, configKeeperRoleSigner } = await getConfigKeeperRoleSigner(hre);
+  const signedConfig = config.connect(configKeeperRoleSigner);
 
   const multicallWriteParams: string[] = [];
   let selectedActiveMarkets = 0;
@@ -179,12 +179,12 @@ export async function runApplyPoolRiskGuards() {
     throw new Error("No markets matched selection for pool risk guard updates");
   }
 
-  console.log(`ConfigKeeper: ${configKeeperAddress}`);
+  console.log(`Config keeper role address: ${configKeeperRoleAddress}`);
   console.log(`Selected active markets for caps/min: ${selectedActiveMarkets}`);
   console.log(`Selected inactive markets for disable: ${selectedInactiveMarkets}`);
   console.log(`Prepared config calls: ${multicallWriteParams.length}`);
 
-  await configAsKeeper.callStatic.multicall(multicallWriteParams);
+  await signedConfig.callStatic.multicall(multicallWriteParams);
   console.log("callStatic passed");
 
   if (!write) {
@@ -192,21 +192,12 @@ export async function runApplyPoolRiskGuards() {
     return;
   }
 
-  const tx = await configAsKeeper.multicall(multicallWriteParams);
+  const tx = await signedConfig.multicall(multicallWriteParams);
   console.log(`tx sent: ${tx.hash}`);
   await tx.wait();
   console.log("tx mined");
 }
 
-async function main() {
-  await runApplyPoolRiskGuards();
-}
-
 if (require.main === module) {
-  main()
-    .then(() => process.exit(0))
-    .catch((ex) => {
-      console.error(ex);
-      process.exit(1);
-    });
+  runConfigScript(runApplyPoolRiskGuards);
 }

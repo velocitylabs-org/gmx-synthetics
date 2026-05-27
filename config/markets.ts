@@ -544,7 +544,6 @@ const nivoMarketsConfig: {
   [network: string]: PerpMarketConfig[];
 } = {
   baseSepolia: [
-    getNivoMarketsTestnetConfig("JPY"),
     getNivoMarketsTestnetConfig("GBP"),
     getNivoMarketsTestnetConfig("BRL"),
     getNivoMarketsTestnetConfig("MXN"),
@@ -560,7 +559,6 @@ const nivoMarketsConfig: {
   // Base mainnet markets use the same Nivo market set as baseSepolia, but we build
   // them via the mainnet market config helper to keep the collateral token explicit.
   base: [
-    getNivoMarketsConfig("JPY", "USDC"),
     getNivoMarketsConfig("GBP", "USDC"),
     getNivoMarketsConfig("BRL", "USDC"),
     getNivoMarketsConfig("MXN", "USDC"),

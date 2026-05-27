@@ -1,13 +1,21 @@
 # anatomy.md
 
-> Auto-maintained by OpenWolf. Last scanned: 2026-05-12T08:44:21.783Z
-> Files: 963 tracked | Anatomy hits: 0 | Misses: 0
+> Auto-maintained by OpenWolf. Last scanned: 2026-05-26T10:48:27.981Z
+> Files: 1015 tracked | Anatomy hits: 0 | Misses: 0
+
+## ../../.claude/projects/-Users-n-code-gmx-synthetics/memory/
+
+- `feedback_no_git_commits.md` (~168 tok)
+- `feedback_no_wolf_paths.md` (~193 tok)
+- `feedback_pr_description_format.md` (~158 tok)
+- `feedback_strict_renames.md` — Declares that (~171 tok)
+- `MEMORY.md` — Memory Index (~135 tok)
 
 ## ./
 
 - `.DS_Store` (~2728 tok)
 - `.editorconfig` — Editor configuration (~57 tok)
-- `.eslintrc.json` — ESLint configuration (~206 tok)
+- `.eslintrc.json` (~224 tok)
 - `.gitignore` — Git ignore rules (~92 tok)
 - `.gitmodules` (~62 tok)
 - `.nvmrc` (~1 tok)
@@ -17,6 +25,7 @@
 - `CLAUDE.md` — CLAUDE.md (~1563 tok)
 - `CONTRIBUTOR.md` — Contributing (~178 tok)
 - `deploy-avax.txt` (~1640 tok)
+- `FOLLOWUPS.md` — Follow-ups (~192 tok)
 - `foundry.toml` (~35 tok)
 - `global.d.ts` — Declares extendEnvironment (~81 tok)
 - `hardhat.config.tenderly.ts` — Hardhat config WITH Tenderly enabled (~194 tok)
@@ -24,7 +33,7 @@
 - `index.html` — GMX Synthetics (~64 tok)
 - `LICENSE` — Project license (~1140 tok)
 - `metrics.ts` — options: run (~859 tok)
-- `package.json` — Node.js package manifest (~1521 tok)
+- `package.json` — Node.js package manifest (~1932 tok)
 - `pnpm-lock.yaml` — pnpm lock file (~163901 tok)
 - `README.md` — Project documentation (~12369 tok)
 - `tenderly.yaml` (~24 tok)
@@ -781,6 +790,14 @@
 - `Style.css` — Styles: 4 rules (~121 tok)
 - `Toast.ts` — Declares toastConfig (~119 tok)
 
+## ops/
+
+- `RUNBOOK.md` — Ops Runbook — Mainnet Config Changes (~1119 tok)
+
+## ops/config-changes/2026-05-11-feature-redaction/
+
+- `README.md` — Project documentation (~848 tok)
+
 ## scripts/
 
 - `bridgedGmxReceivedLocalhost.ts` — Declares main (~4695 tok)
@@ -924,6 +941,67 @@
 - `withdrawFromPositionImpactPool.ts` — expectedTimelockMethods: fetchChainlinkPriceFeedInfo, fetchChainlinkDataStreamInfo, fetchOracleParams, main (~2787 tok)
 - `wrapNativeToken.ts` — value: main (~404 tok)
 
+## scripts/configs/
+
+- `configRuntime.ts` — Exports isTruthy, getConfigHre, getWriteMode, getIsDisabled + 2 more (~394 tok)
+- `index.ts` — Declares main (~785 tok)
+- `README.md` — Project documentation (~1488 tok)
+- `run-feature-validation.sh` (~88 tok)
+
+## scripts/configs/configs/
+
+- `applyPoolRiskGuards.ts` — Exports runApplyPoolRiskGuards (~2156 tok)
+- `disableInactiveMarkets.ts` — Exports runDisableInactiveMarkets (~1146 tok)
+- `disableOrderCreateFeatures.ts` — Exports runDisableOrderCreateFeatures (~122 tok)
+- `disableOrderExecuteFeatures.ts` — Exports runDisableOrderExecuteFeatures (~124 tok)
+- `setAtomicWithdrawalFeatureState.ts` — Exports runSetAtomicWithdrawalFeatureState (~123 tok)
+- `setGaslessFeatureState.ts` — Exports runSetGaslessFeatureState (~112 tok)
+- `setJitFeatureState.ts` — Exports runSetJitFeatureState (~108 tok)
+- `setShiftFeaturesState.ts` — Exports runSetShiftFeaturesState (~104 tok)
+- `setSubaccountFeatureState.ts` — Exports runSetSubaccountFeatureState (~114 tok)
+
+## scripts/configs/helpers/
+
+- `applyFeatureFlagWrites.ts` — * Writes Config.setBool entries for the provided feature specs (dry-run unless WRITE=true is specifi (~756 tok)
+- `disableOrderFeatures.ts` — Exports disableOrderFeatures (~726 tok)
+- `featureFlagSpecs.ts` — Exports ManagedFeatureId, ModuleFeatureSpec, OrderTypeFeatureSpec, ManagedFeatureSpec + 8 more (~3164 tok)
+- `getConfigKeeperSigner.ts` — Exports getConfigKeeperRoleSigner (~1087 tok)
+
+## scripts/configs/presets/
+
+- `default.ts` — Exports defaultPreset (~122 tok)
+- `index.ts` — Exports PRESET, loadPreset (~182 tok)
+- `README.md` — Project documentation (~509 tok)
+- `types.ts` — Exports RunFeatureKey, FeatureFlags (~148 tok)
+- `validate.ts` — Exports validatePreset (~111 tok)
+
+## scripts/configs/profiles/
+
+- `all.ts` — Exports allProfile (~105 tok)
+- `index.ts` — Exports PROFILES, loadProfile (~156 tok)
+- `README.md` — Project documentation (~540 tok)
+- `redact-all.ts` — Exports redactAllProfile (~106 tok)
+- `types.ts` — Exports RunFeatureKey, Profile (~146 tok)
+
+## scripts/configs/validations/
+
+- `printRolesResolved.ts` — Exports runPrintRolesResolved (~876 tok)
+- `runInvariantChecks.ts` — Exports runInvariantChecks (~169 tok)
+- `verifyAtomicWithdrawalFeatureState.ts` — Exports runVerifyAtomicWithdrawalFeatureState (~124 tok)
+- `verifyFeatureFlagStates.ts` — Exports makeVerifyFeatureFlagRunner, verifyFeatureFlagStates (~591 tok)
+- `verifyFeaturesState.ts` — Exports runVerifyFeaturesState (~406 tok)
+- `verifyFeatureValidationProfile.ts` — PROFILE_PATH: main (~529 tok)
+- `verifyGaslessFeatureState.ts` — Exports runVerifyGaslessFeatureState (~113 tok)
+- `verifyJitFeatureState.ts` — Exports runVerifyJitFeatureState (~109 tok)
+- `verifyPoolRiskGuards.ts` — Exports runVerifyPoolRiskGuards (~1452 tok)
+- `verifyRedactionState.ts` — Exports runVerifyRedactionState (~1309 tok)
+- `verifySameTokenInvariants.ts` — Exports runVerifySameTokenInvariants (~1081 tok)
+- `verifyShiftCancelFeatureState.ts` — Exports runVerifyShiftCancelFeatureState (~118 tok)
+- `verifyShiftCreateFeatureState.ts` — Exports runVerifyShiftCreateFeatureState (~118 tok)
+- `verifyShiftExecuteFeatureState.ts` — Exports runVerifyShiftExecuteFeatureState (~118 tok)
+- `verifySubaccountFeatureState.ts` — Exports runVerifySubaccountFeatureState (~116 tok)
+- `verifyVirtualIdAllowlist.ts` — Exports runVerifyVirtualIdAllowlist (~1150 tok)
+
 ## scripts/incentives/
 
 - `.batchesInProgress.json` (~1 tok)
@@ -1001,6 +1079,7 @@
 - `Config.ts` — Declares keys (~6898 tok)
 - `ConfigSyncer.ts` — Declares referenceIds (~5810 tok)
 - `Timelock.ts` — Declares orderKeeperRole (~10087 tok)
+- `VerifySwapReconfiguration.ts` — DEFAULT_CONFIG_KEEPER: tryRpc, impersonateAccount, stopImpersonateAccount, setAccountBalance (~1261 tok)
 
 ## test/contributor/
 
@@ -1238,7 +1317,7 @@
 - `gov.ts` — Exports TIMELOCK_ADMIN_ROLE, PROPOSER_ROLE, EXECUTOR_ROLE, CANCELLER_ROLE + 2 more (~144 tok)
 - `hash.ts` — Exports encodeData, decodeData, hashData, hashString + 2 more (~263 tok)
 - `jit.ts` — Exports executeJitOrder (~1154 tok)
-- `keys.ts` — Exports WNT, NONCE, FEE_RECEIVER, HOLDING_ADDRESS + 149 more (~13642 tok)
+- `keys.ts` — Exports WNT, NONCE, FEE_RECEIVER, HOLDING_ADDRESS + 148 more (~13732 tok)
 - `liquidation.ts` — Exports executeLiquidation (~516 tok)
 - `market.ts` — Exports DEFAULT_MARKET_TYPE, getMarketCount, getMarketKeys, getPoolAmount + 9 more (~1572 tok)
 - `math.ts` — Exports MAX_UINT8, MAX_UINT32, MAX_UINT64, PRECISION + 12 more (~1247 tok)
