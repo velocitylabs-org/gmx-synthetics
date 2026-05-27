@@ -39,6 +39,11 @@ export async function disableOrderFeatures(baseKey: string, keyName: string, act
       data: encodeData(["address", "uint256"], [orderHandlerAddress, OrderType.LimitDecrease]),
       label: `${keyName} LimitDecrease`,
     },
+    {
+      baseKey,
+      data: encodeData(["address", "uint256"], [orderHandlerAddress, OrderType.StopIncrease]),
+      label: `${keyName} StopIncrease`,
+    },
   ];
 
   const multicallWriteParams = featureKeys.map((f) =>
