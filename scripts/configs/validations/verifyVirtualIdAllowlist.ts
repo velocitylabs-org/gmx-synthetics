@@ -8,7 +8,7 @@ import marketsConfig from "../../../config/markets";
 import { getDeployedContract } from "../helpers/getDeployedContract";
 import { getConfigHre, getFailOnMismatch, runConfigScript } from "../configRuntime";
 
-const TARGET_INDEX_TOKENS = ["JPY", "GBP", "BRL", "MXN", "COP", "IDR", "PHP", "PEN", "NGN", "KES", "ZAR", "THB"];
+const TARGET_INDEX_TOKENS = ["GBP", "BRL", "MXN", "COP", "IDR", "PHP", "PEN", "NGN", "KES", "ZAR", "THB"];
 const TARGET_INDEX_SET = new Set(TARGET_INDEX_TOKENS);
 
 export async function runVerifyVirtualIdAllowlist() {

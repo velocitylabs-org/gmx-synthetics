@@ -9,7 +9,7 @@ import marketsConfig from "../../../config/markets";
 import { getDeployedContract } from "../helpers/getDeployedContract";
 import { getConfigHre, getFailOnMismatch, runConfigScript } from "../configRuntime";
 
-const ACTIVE_INDEX_TOKENS = ["JPY", "GBP", "BRL", "MXN", "COP"];
+const ACTIVE_INDEX_TOKENS = ["GBP", "BRL", "MXN", "COP"];
 const INACTIVE_INDEX_TOKENS = ["IDR", "PHP", "PEN", "NGN", "KES", "ZAR", "THB"];
 const EXPECTED_MIN_FIRST_DEPOSIT = BigNumber.from("1000000000000000000");
 const ORDER_TYPES_TO_VERIFY = [
