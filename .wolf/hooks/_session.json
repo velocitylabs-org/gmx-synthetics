@@ -1,85 +1,12 @@
 {
-  "session_id": "session-2026-05-26-1222",
-  "started": "2026-05-26T10:22:28.791Z",
-  "files_read": {
-    "/Users/n/code/gmx-synthetics/scripts/configs/configs/disableOrderCreateFeatures.ts": {
-      "count": 1,
-      "tokens": 834,
-      "first_read": "2026-05-26T10:22:40.192Z"
-    },
-    "/Users/n/code/gmx-synthetics/scripts/configs/configs/disableOrderExecuteFeatures.ts": {
-      "count": 1,
-      "tokens": 838,
-      "first_read": "2026-05-26T10:22:40.681Z"
-    },
-    "/Users/n/code/gmx-synthetics/scripts/configs/helpers/getDeployedContract.ts": {
-      "count": 1,
-      "tokens": 0,
-      "first_read": "2026-05-26T10:22:55.173Z"
-    },
-    "/Users/n/code/gmx-synthetics/scripts/configs/index.ts": {
-      "count": 1,
-      "tokens": 785,
-      "first_read": "2026-05-26T10:22:58.163Z"
-    },
-    "/Users/n/code/gmx-synthetics/scripts/configs/configRuntime.ts": {
-      "count": 1,
-      "tokens": 394,
-      "first_read": "2026-05-26T10:24:19.433Z"
-    },
-    "/Users/n/code/gmx-synthetics/scripts/configs/helpers/applyFeatureFlagWrites.ts": {
-      "count": 1,
-      "tokens": 756,
-      "first_read": "2026-05-26T10:40:41.624Z"
-    },
-    "/Users/n/.claude/projects/-Users-n-code-gmx-synthetics/memory/MEMORY.md": {
-      "count": 1,
-      "tokens": 0,
-      "first_read": "2026-05-26T10:48:24.682Z"
-    }
-  },
-  "files_written": [
-    {
-      "file": "/Users/n/code/gmx-synthetics/scripts/configs/helpers/disableOrderFeatures.ts",
-      "action": "create",
-      "tokens": 726,
-      "at": "2026-05-26T10:41:38.608Z"
-    },
-    {
-      "file": "/Users/n/code/gmx-synthetics/scripts/configs/configs/disableOrderCreateFeatures.ts",
-      "action": "create",
-      "tokens": 122,
-      "at": "2026-05-26T10:41:43.776Z"
-    },
-    {
-      "file": "/Users/n/code/gmx-synthetics/scripts/configs/configs/disableOrderExecuteFeatures.ts",
-      "action": "create",
-      "tokens": 124,
-      "at": "2026-05-26T10:41:47.978Z"
-    },
-    {
-      "file": "/Users/n/.claude/projects/-Users-n-code-gmx-synthetics/memory/feedback_pr_description_format.md",
-      "action": "create",
-      "tokens": 158,
-      "at": "2026-05-26T10:48:17.113Z"
-    },
-    {
-      "file": "/Users/n/.claude/projects/-Users-n-code-gmx-synthetics/memory/MEMORY.md",
-      "action": "edit",
-      "tokens": 77,
-      "at": "2026-05-26T10:48:27.988Z"
-    }
-  ],
-  "edit_counts": {
-    "scripts/configs/helpers/disableOrderFeatures.ts": 1,
-    "scripts/configs/configs/disableOrderCreateFeatures.ts": 1,
-    "scripts/configs/configs/disableOrderExecuteFeatures.ts": 1,
-    "../../.claude/projects/-Users-n-code-gmx-synthetics/memory/feedback_pr_description_format.md": 1,
-    "../../.claude/projects/-Users-n-code-gmx-synthetics/memory/MEMORY.md": 1
-  },
-  "anatomy_hits": 5,
-  "anatomy_misses": 2,
+  "session_id": "session-2026-06-02-1422",
+  "started": "2026-06-02T12:22:47.433Z",
+  "files_read": {},
+  "files_written": [],
+  "edit_counts": {},
+  "anatomy_hits": 0,
+  "anatomy_misses": 0,
   "repeated_reads_warned": 0,
   "cerebrum_warnings": 0,
-  "stop_count": 7
+  "stop_count": 9
 }
