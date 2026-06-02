@@ -26,5 +26,6 @@
   "ClaimVault_1": 1774870503,
   "FeeDistributorVault_1": 1774871754,
   "FeeHandler_1": 1774871761,
-  "FeeDistributor_1": 1774872524
+  "FeeDistributor_1": 1774872524,
+  "ChainlinkDataStreamProvider_7": 1780407411
 }
