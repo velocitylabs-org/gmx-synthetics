@@ -4,22 +4,28 @@ This guide explains all the configuration parameters when creating a GMX V2 Synt
 
 ---
 
-## Table of Contents
+## Nivo Active Configuration
 
-1. [The Game Theory / Economics](#the-game-theory--economics)
-2. [Pool Limits](#1-pool-limits---how-big-can-this-market-get)
-3. [Reserve Factors](#2-reserve-factors---safety-buffer)
-4. [PnL Factors](#3-pnl-factors---max-trader-profits)
-5. [Position Fees](#4-position-fees---revenue-for-lps)
-6. [Position Impact](#5-position-impact---price-slippage-for-large-trades)
-7. [Swap Fees & Impact](#6-swap-fees--impact---for-pool-deposits)
-8. [Funding Rate](#7-funding-rate---balancing-longshort)
-9. [Borrowing Rate](#8-borrowing-rate---cost-to-hold-positions)
-10. [Collateral Requirements](#9-collateral-requirements)
-11. [Recommended Full Config](#recommended-full-config-for-brlusd)
-12. [Revenue Flow Summary](#summary-how-revenue-flows)
+The active Nivo market configuration is defined in `config/markets.ts`.
+Key elements:
+
+**Active markets (Base mainnet & Base Sepolia):**
+GBP, BRL, MXN, COP, IDR, PHP, PEN, NGN, KES, ZAR, THB — all single-token
+pools using USDC as collateral.
+
+**Nivo config presets (defined in config/markets.ts):**
+- `nivoBaseMarketConfig` — base config for all Nivo markets
+- `nivoFundingRateConfig` — max 4% APR funding rate (conservative vs GMX default of 90%)
+- `nivoBorrowingRateConfig` — 5% base borrowing rate, 15% above optimal
+- `getNivoMarketsConfig(indexToken)` — factory for Base mainnet (USDC collateral)
+- `getNivoMarketsTestnetConfig(indexToken)` — factory for Base Sepolia
+- `getNivoMarketsLocalConfig(indexToken)` — factory for localhost/hardhat
+
+**What to ignore in config/markets.ts:** sections under `arbitrum:`, `avalanche:`, `arbitrumSepolia:`,
+`arbitrumGoerli:`, `botanix:`, `avalancheFuji:` — GMX legacy networks, not used by Nivo.
 
 ---
+
 
 ## The Game Theory / Economics
 
@@ -295,15 +301,6 @@ negativeSwapImpactFactor: bigNumberify(0),
 positiveSwapImpactFactor: bigNumberify(0),
 ```
 
-### For Dual-Token Pools (ETH/USD, BTC/USD)
-
-| Parameter | Plain English | Typical Value |
-|-----------|---------------|---------------|
-| `swapFeeFactorForPositiveImpact` | Fee for swaps that balance the pool | 0.02% - 0.05% |
-| `swapFeeFactorForNegativeImpact` | Fee for swaps that unbalance the pool | 0.05% - 0.07% |
-| `negativeSwapImpactFactor` | Slippage for unbalancing swaps | varies |
-| `positiveSwapImpactFactor` | Bonus for balancing swaps | varies |
-
 ---
 
 ## 7. Funding Rate - Balancing Long/Short
@@ -458,7 +455,7 @@ minPositionSizeUsd: decimalToFloat(1, 0),                  // $1 minimum positio
 
 ## Recommended Full Config for BRL/USD
 
-Here's a complete configuration for a BRL/USD forex market on Arbitrum:
+Here's a complete configuration for a BRL/USD forex market on Base:
 
 ```typescript
 {

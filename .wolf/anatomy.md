@@ -1,7 +1,7 @@
 # anatomy.md
 
-> Auto-maintained by OpenWolf. Last scanned: 2026-05-26T10:48:27.981Z
-> Files: 1015 tracked | Anatomy hits: 0 | Misses: 0
+> Auto-maintained by OpenWolf. Last scanned: 2026-06-25T14:24:13.519Z
+> Files: 1016 tracked | Anatomy hits: 0 | Misses: 0
 
 ## ../../.claude/projects/-Users-n-code-gmx-synthetics/memory/
 
@@ -16,13 +16,13 @@
 - `.DS_Store` (~2728 tok)
 - `.editorconfig` — Editor configuration (~57 tok)
 - `.eslintrc.json` (~224 tok)
-- `.gitignore` — Git ignore rules (~92 tok)
+- `.gitignore` — Git ignore rules (~98 tok)
 - `.gitmodules` (~62 tok)
 - `.nvmrc` (~1 tok)
 - `.prettierrc.json` — Prettier configuration (~26 tok)
 - `.solcover.js` (~100 tok)
 - `app.tsx` — botanix (~584 tok)
-- `CLAUDE.md` — CLAUDE.md (~1563 tok)
+- `CLAUDE.md` — Repository Purpose (~1861 tok)
 - `CONTRIBUTOR.md` — Contributing (~178 tok)
 - `deploy-avax.txt` (~1640 tok)
 - `FOLLOWUPS.md` — Follow-ups (~192 tok)
@@ -50,7 +50,7 @@
 
 ## .github/workflows/
 
-- `deploy-sync.yml` — on push to main with `deployments/**` changes; calls the bare `upsert-deployments` npm script with `SUPABASE_URL`/`SUPABASE_SERVICE_ROLE_KEY` from GitHub Actions secrets (writes to **prod** Supabase). No Doppler CLI on the runner. See VELOCITY_DOCS/DEPLOYMENT_SYNC.md. (~294 tok)
+- `deploy-sync.yml` — on push to main with `deployments/**` changes; calls the bare `upsert-deployments` npm script with `SUPABASE_URL`/`SUPABASE_SERVICE_ROLE_KEY` from GitHub Actions secrets (writes to **prod** Supabase). No Doppler CLI on the runner. See VELOCITY_DOCS/deployments/DEPLOYMENT_SYNC.md. (~294 tok)
 - `main.yml` — CI: CI (~203 tok)
 
 ## .husky/
@@ -65,17 +65,16 @@
 
 ## VELOCITY_DOCS/
 
-- `CONTRACT_ARCHITECTURE.md` — GMX V2 Contract Architecture (~7146 tok)
+- `CONTRACT_ARCHITECTURE.md` — GMX V2 Contract Architecture (~7235 tok)
+- `KEEPER_AND_ORACLE.md` — Keeper & Oracle Reference (~1559 tok)
+- `MARKET_CONFIGURATION.md` — Market Configuration Guide (~6031 tok)
+- `SETUP_GUIDE.md` — gmx-synthetics Setup Guide (~845 tok)
+
+## VELOCITY_DOCS/deployments/
+
 - `DEPLOYING_NIVO_IN_BASE_SEPOLIA.md` — Deploying Nivo protocol on Base Sepolia (~742 tok)
 - `DEPLOYMENT_SYNC.md` — Deployment Sync (~1106 tok)
-- `GLV_VS_GM_POOLS.md` — GLV Vaults vs GM Pools (~4784 tok)
-- `KEEPER.md` — Keepers (~4517 tok)
-- `LIQUIDITY_POOLS.md` — Liquidity Pools - Already Set Up (~3198 tok)
-- `MARKET_CONFIGURATION.md` — Market Configuration Guide (~6094 tok)
-- `ORACLE_AND_KEEPERS.md` — Oracle System & Keepers Explained (~6705 tok)
 - `REDEPLOYING_CHAINLINK_ORACLE_PROVIDER.md` — Re-Deploying Chainlink DataStream Provider on Base Sepolia (~404 tok)
-- `SETUP_GUIDE.md` — Nivo Protocol Setup Guide (~1702 tok)
-- `SOLIDITY_REFERENCE.md` — Essential Concepts for Reading GMX V2 Contracts (~9415 tok)
 - `TEST_NIVO_ON_BASE_SEPOLIA.md` — Testing Nivo protocol on Base Sepolia (~486 tok)
 
 ## audits/abdk/

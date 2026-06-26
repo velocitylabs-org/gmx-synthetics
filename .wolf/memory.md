@@ -435,3 +435,83 @@
 
 | Time | Action | File(s) | Outcome | ~Tokens |
 |------|--------|---------|---------|--------|
+
+## Session: 2026-06-23 15:29
+
+| Time | Action | File(s) | Outcome | ~Tokens |
+|------|--------|---------|---------|--------|
+
+## Session: 2026-06-23 17:57
+
+| Time | Action | File(s) | Outcome | ~Tokens |
+|------|--------|---------|---------|--------|
+
+## Session: 2026-06-24 11:36
+
+| Time | Action | File(s) | Outcome | ~Tokens |
+|------|--------|---------|---------|--------|
+
+## Session: 2026-06-24 14:38
+
+| Time | Action | File(s) | Outcome | ~Tokens |
+|------|--------|---------|---------|--------|
+| 14:40 | Edited .gitignore | 3→4 lines | ~9 |
+| 14:41 | Session end: 1 writes across 1 files (.gitignore) | 2 reads | ~136 tok |
+| 14:42 | Session end: 1 writes across 1 files (.gitignore) | 3 reads | ~3120 tok |
+| 14:42 | Session end: 1 writes across 1 files (.gitignore) | 3 reads | ~3120 tok |
+| 14:43 | Session end: 1 writes across 1 files (.gitignore) | 3 reads | ~3120 tok |
+| 14:46 | Session end: 1 writes across 1 files (.gitignore) | 3 reads | ~3120 tok |
+| 14:47 | Edited .gitignore | 2→3 lines | ~7 |
+| 14:47 | Session end: 2 writes across 1 files (.gitignore) | 3 reads | ~3128 tok |
+| 16:32 | Session end: 2 writes across 1 files (.gitignore) | 3 reads | ~3128 tok |
+| 16:32 | Session end: 2 writes across 1 files (.gitignore) | 3 reads | ~3128 tok |
+| 16:39 | Session end: 2 writes across 1 files (.gitignore) | 3 reads | ~3128 tok |
+| 16:54 | Session end: 2 writes across 1 files (.gitignore) | 4 reads | ~3228 tok |
+| 16:54 | Session end: 2 writes across 1 files (.gitignore) | 4 reads | ~3228 tok |
+| 16:56 | Session end: 2 writes across 1 files (.gitignore) | 4 reads | ~3228 tok |
+
+## Session: 2026-06-25 10:23
+
+| Time | Action | File(s) | Outcome | ~Tokens |
+|------|--------|---------|---------|--------|
+| 10:39 | Edited CLAUDE.md | "npm" → "pnpm" | ~22 |
+| 10:40 | Edited CLAUDE.md | 22→22 lines | ~252 |
+| 10:40 | Edited CLAUDE.md | 7→7 lines | ~141 |
+| 10:40 | Edited .nvmrc | 20 → 22 | ~1 |
+| 10:40 | Session end: 4 writes across 2 files (CLAUDE.md, .nvmrc) | 2 reads | ~2009 tok |
+| 10:41 | Session end: 4 writes across 2 files (CLAUDE.md, .nvmrc) | 2 reads | ~2009 tok |
+| 11:03 | Session end: 4 writes across 2 files (CLAUDE.md, .nvmrc) | 14 reads | ~48308 tok |
+| 11:31 | Edited VELOCITY_DOCS/CONTRACT_ARCHITECTURE.md | 3→8 lines | ~112 |
+| 11:31 | Edited VELOCITY_DOCS/CONTRACT_ARCHITECTURE.md | 4→4 lines | ~86 |
+| 11:31 | Edited VELOCITY_DOCS/CONTRACT_ARCHITECTURE.md | inline fix | ~44 |
+| 11:32 | Session end: 7 writes across 3 files (CLAUDE.md, .nvmrc, CONTRACT_ARCHITECTURE.md) | 14 reads | ~48567 tok |
+
+## Session: 2026-06-25 13:38
+
+| Time | Action | File(s) | Outcome | ~Tokens |
+|------|--------|---------|---------|--------|
+| 15:29 | Created VELOCITY_DOCS/SETUP_GUIDE.md | — | ~901 |
+
+## Session: 2026-06-25 15:32
+
+| Time | Action | File(s) | Outcome | ~Tokens |
+|------|--------|---------|---------|--------|
+| 15:44 | Edited VELOCITY_DOCS/MARKET_CONFIGURATION.md | modified markets() | ~267 |
+| 15:44 | Session end: 1 writes across 1 files (MARKET_CONFIGURATION.md) | 1 reads | ~6380 tok |
+| 15:46 | Edited VELOCITY_DOCS/MARKET_CONFIGURATION.md | inline fix | ~18 |
+| 15:46 | Edited VELOCITY_DOCS/MARKET_CONFIGURATION.md | removed 18 lines | ~1 |
+| 15:47 | Edited VELOCITY_DOCS/MARKET_CONFIGURATION.md | removed 10 lines | ~1 |
+| 15:47 | Session end: 4 writes across 1 files (MARKET_CONFIGURATION.md) | 1 reads | ~6402 tok |
+| 16:05 | Created VELOCITY_DOCS/KEEPER_AND_ORACLE.md | — | ~1426 |
+| 16:05 | Session end: 5 writes across 2 files (MARKET_CONFIGURATION.md, KEEPER_AND_ORACLE.md) | 3 reads | ~19151 tok |
+| 16:10 | Edited VELOCITY_DOCS/KEEPER_AND_ORACLE.md | modified key() | ~767 |
+| 16:11 | Session end: 6 writes across 2 files (MARKET_CONFIGURATION.md, KEEPER_AND_ORACLE.md) | 4 reads | ~21309 tok |
+| 16:21 | Session end: 6 writes across 2 files (MARKET_CONFIGURATION.md, KEEPER_AND_ORACLE.md) | 5 reads | ~23204 tok |
+| 16:23 | Edited CLAUDE.md | inline fix | ~25 |
+| 16:24 | Edited CLAUDE.md | 4→5 lines | ~114 |
+| 16:25 | Session end: 8 writes across 3 files (MARKET_CONFIGURATION.md, KEEPER_AND_ORACLE.md, CLAUDE.md) | 5 reads | ~23353 tok |
+
+## Session: 2026-06-26 09:45
+
+| Time | Action | File(s) | Outcome | ~Tokens |
+|------|--------|---------|---------|--------|
