@@ -17,11 +17,8 @@ interface NetworkDeployments {
 
 // Networks here must be in sync with getBlockExplorerUrl() from hardhat.config.ts
 const NETWORK_INFO = {
-  arbitrum: { type: "mainnet", chainId: 42161, name: "Arbitrum One" },
-  avalanche: { type: "mainnet", chainId: 43114, name: "Avalanche C-Chain" },
-  botanix: { type: "mainnet", chainId: 3637, name: "Botanix" },
-  arbitrumSepolia: { type: "testnet", chainId: 421614, name: "Arbitrum Sepolia" },
-  avalancheFuji: { type: "testnet", chainId: 43113, name: "Avalanche Fuji" },
+  base: { type: "mainnet", chainId: 8453, name: "Base" },
+  baseSepolia: { type: "testnet", chainId: 84532, name: "Base Sepolia" },
 };
 
 // All networks to document (derived from NETWORK_INFO)

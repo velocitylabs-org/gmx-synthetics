@@ -1,7 +1,8 @@
-import { EXISTING_MAINNET_DEPLOYMENTS } from "../config/chains";
 import { readJsonFile, writeJsonFile } from "../utils/file";
 import path from "path";
 import fs from "fs";
+
+const DOCUMENTED_NETWORKS = ["base", "baseSepolia"];
 
 interface Deployment {
   contractAddress: string;
@@ -11,7 +12,7 @@ interface Deployment {
 
 export async function collectDeployments() {
   const deployments = {};
-  for (const network of EXISTING_MAINNET_DEPLOYMENTS) {
+  for (const network of DOCUMENTED_NETWORKS) {
     let networkInfo: Deployment[] = [];
     const dir = path.join(__dirname, `../deployments/${network}/`);
     const files = await fs.promises.readdir(dir);
