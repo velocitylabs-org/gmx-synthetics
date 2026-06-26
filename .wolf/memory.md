@@ -436,82 +436,169 @@
 | Time | Action | File(s) | Outcome | ~Tokens |
 |------|--------|---------|---------|--------|
 
-## Session: 2026-06-23 15:29
+## Session: 2026-06-15 14:46
 
 | Time | Action | File(s) | Outcome | ~Tokens |
 |------|--------|---------|---------|--------|
 
-## Session: 2026-06-23 17:57
+## Session: 2026-06-16 10:24
+
+| Time | Action | File(s) | Outcome | ~Tokens |
+|------|--------|---------|---------|--------|
+| 15:04 | Created VELOCITY_DOCS/UNIQUE_POSITIONS_SPIKE.md | — | ~2422 |
+| 15:04 | Session end: 1 writes across 1 files (UNIQUE_POSITIONS_SPIKE.md) | 6 reads | ~19578 tok |
+| 15:46 | Session end: 1 writes across 1 files (UNIQUE_POSITIONS_SPIKE.md) | 8 reads | ~24136 tok |
+| 16:11 | Session end: 1 writes across 1 files (UNIQUE_POSITIONS_SPIKE.md) | 9 reads | ~24406 tok |
+| 16:24 | Edited VELOCITY_DOCS/UNIQUE_POSITIONS_SPIKE.md | modified getPositionKey() | ~944 |
+| 16:29 | Edited VELOCITY_DOCS/UNIQUE_POSITIONS_SPIKE.md | modified getPositionKey() | ~429 |
+| 16:30 | Session end: 3 writes across 1 files (UNIQUE_POSITIONS_SPIKE.md) | 10 reads | ~28148 tok |
+| 16:35 | Session end: 3 writes across 1 files (UNIQUE_POSITIONS_SPIKE.md) | 10 reads | ~28148 tok |
+| 17:04 | Session end: 3 writes across 1 files (UNIQUE_POSITIONS_SPIKE.md) | 10 reads | ~28148 tok |
+| 17:07 | Session end: 3 writes across 1 files (UNIQUE_POSITIONS_SPIKE.md) | 10 reads | ~28148 tok |
+| 17:14 | Session end: 3 writes across 1 files (UNIQUE_POSITIONS_SPIKE.md) | 10 reads | ~28148 tok |
+| 17:23 | Edited VELOCITY_DOCS/UNIQUE_POSITIONS_SPIKE.md | expanded (+53 lines) | ~916 |
+| 17:24 | Session end: 4 writes across 1 files (UNIQUE_POSITIONS_SPIKE.md) | 10 reads | ~29879 tok |
+| 17:50 | Session end: 4 writes across 1 files (UNIQUE_POSITIONS_SPIKE.md) | 10 reads | ~29879 tok |
+| 17:56 | Session end: 4 writes across 1 files (UNIQUE_POSITIONS_SPIKE.md) | 10 reads | ~29879 tok |
+| 17:59 | Edited VELOCITY_DOCS/UNIQUE_POSITIONS_SPIKE.md | modified generatePositionId() | ~670 |
+| 18:00 | Edited VELOCITY_DOCS/UNIQUE_POSITIONS_SPIKE.md | modified generatePositionId() | ~654 |
+| 18:01 | Session end: 6 writes across 1 files (UNIQUE_POSITIONS_SPIKE.md) | 10 reads | ~32149 tok |
+| 09:59 | Session end: 6 writes across 1 files (UNIQUE_POSITIONS_SPIKE.md) | 10 reads | ~32149 tok |
+| 10:01 | Edited VELOCITY_DOCS/UNIQUE_POSITIONS_SPIKE.md | added 1 condition(s) | ~257 |
+| 10:02 | Edited VELOCITY_DOCS/UNIQUE_POSITIONS_SPIKE.md | expanded (+6 lines) | ~260 |
+| 10:02 | Session end: 8 writes across 1 files (UNIQUE_POSITIONS_SPIKE.md) | 10 reads | ~32704 tok |
+| 10:04 | Session end: 8 writes across 1 files (UNIQUE_POSITIONS_SPIKE.md) | 15 reads | ~52797 tok |
+| 10:06 | Edited VELOCITY_DOCS/UNIQUE_POSITIONS_SPIKE.md | modified generatePositionId() | ~820 |
+| 10:06 | Session end: 9 writes across 1 files (UNIQUE_POSITIONS_SPIKE.md) | 15 reads | ~53676 tok |
+| 10:08 | Edited VELOCITY_DOCS/UNIQUE_POSITIONS_SPIKE.md | expanded (+57 lines) | ~981 |
+| 10:08 | Session end: 10 writes across 1 files (UNIQUE_POSITIONS_SPIKE.md) | 15 reads | ~55719 tok |
+| 10:14 | Session end: 10 writes across 1 files (UNIQUE_POSITIONS_SPIKE.md) | 15 reads | ~55719 tok |
+| 10:15 | Session end: 10 writes across 1 files (UNIQUE_POSITIONS_SPIKE.md) | 15 reads | ~55719 tok |
+| 10:16 | Edited VELOCITY_DOCS/UNIQUE_POSITIONS_SPIKE.md | expanded (+18 lines) | ~173 |
+| 10:16 | Session end: 11 writes across 1 files (UNIQUE_POSITIONS_SPIKE.md) | 15 reads | ~55904 tok |
+| 14:10 | Session end: 11 writes across 1 files (UNIQUE_POSITIONS_SPIKE.md) | 15 reads | ~55904 tok |
+| 14:14 | Session end: 11 writes across 1 files (UNIQUE_POSITIONS_SPIKE.md) | 15 reads | ~56912 tok |
+| 14:18 | Edited VELOCITY_DOCS/UNIQUE_POSITIONS_SPIKE.md | 4→5 lines | ~159 |
+| 14:19 | Session end: 12 writes across 1 files (UNIQUE_POSITIONS_SPIKE.md) | 15 reads | ~57082 tok |
+| 17:16 | Session end: 12 writes across 1 files (UNIQUE_POSITIONS_SPIKE.md) | 15 reads | ~57082 tok |
+
+## Session: 2026-06-17 20:22
 
 | Time | Action | File(s) | Outcome | ~Tokens |
 |------|--------|---------|---------|--------|
 
-## Session: 2026-06-24 11:36
+## Session: 2026-06-17 20:22
 
 | Time | Action | File(s) | Outcome | ~Tokens |
 |------|--------|---------|---------|--------|
 
-## Session: 2026-06-24 14:38
+## Session: 2026-06-17 20:27
 
 | Time | Action | File(s) | Outcome | ~Tokens |
 |------|--------|---------|---------|--------|
-| 14:40 | Edited .gitignore | 3→4 lines | ~9 |
-| 14:41 | Session end: 1 writes across 1 files (.gitignore) | 2 reads | ~136 tok |
-| 14:42 | Session end: 1 writes across 1 files (.gitignore) | 3 reads | ~3120 tok |
-| 14:42 | Session end: 1 writes across 1 files (.gitignore) | 3 reads | ~3120 tok |
-| 14:43 | Session end: 1 writes across 1 files (.gitignore) | 3 reads | ~3120 tok |
-| 14:46 | Session end: 1 writes across 1 files (.gitignore) | 3 reads | ~3120 tok |
-| 14:47 | Edited .gitignore | 2→3 lines | ~7 |
-| 14:47 | Session end: 2 writes across 1 files (.gitignore) | 3 reads | ~3128 tok |
-| 16:32 | Session end: 2 writes across 1 files (.gitignore) | 3 reads | ~3128 tok |
-| 16:32 | Session end: 2 writes across 1 files (.gitignore) | 3 reads | ~3128 tok |
-| 16:39 | Session end: 2 writes across 1 files (.gitignore) | 3 reads | ~3128 tok |
-| 16:54 | Session end: 2 writes across 1 files (.gitignore) | 4 reads | ~3228 tok |
-| 16:54 | Session end: 2 writes across 1 files (.gitignore) | 4 reads | ~3228 tok |
-| 16:56 | Session end: 2 writes across 1 files (.gitignore) | 4 reads | ~3228 tok |
 
-## Session: 2026-06-25 10:23
+## Session: 2026-06-17 20:27
 
 | Time | Action | File(s) | Outcome | ~Tokens |
 |------|--------|---------|---------|--------|
-| 10:39 | Edited CLAUDE.md | "npm" → "pnpm" | ~22 |
-| 10:40 | Edited CLAUDE.md | 22→22 lines | ~252 |
-| 10:40 | Edited CLAUDE.md | 7→7 lines | ~141 |
-| 10:40 | Edited .nvmrc | 20 → 22 | ~1 |
-| 10:40 | Session end: 4 writes across 2 files (CLAUDE.md, .nvmrc) | 2 reads | ~2009 tok |
-| 10:41 | Session end: 4 writes across 2 files (CLAUDE.md, .nvmrc) | 2 reads | ~2009 tok |
-| 11:03 | Session end: 4 writes across 2 files (CLAUDE.md, .nvmrc) | 14 reads | ~48308 tok |
-| 11:31 | Edited VELOCITY_DOCS/CONTRACT_ARCHITECTURE.md | 3→8 lines | ~112 |
-| 11:31 | Edited VELOCITY_DOCS/CONTRACT_ARCHITECTURE.md | 4→4 lines | ~86 |
-| 11:31 | Edited VELOCITY_DOCS/CONTRACT_ARCHITECTURE.md | inline fix | ~44 |
-| 11:32 | Session end: 7 writes across 3 files (CLAUDE.md, .nvmrc, CONTRACT_ARCHITECTURE.md) | 14 reads | ~48567 tok |
 
-## Session: 2026-06-25 13:38
+## Session: 2026-06-18 14:36
 
 | Time | Action | File(s) | Outcome | ~Tokens |
 |------|--------|---------|---------|--------|
-| 15:29 | Created VELOCITY_DOCS/SETUP_GUIDE.md | — | ~901 |
 
-## Session: 2026-06-25 15:32
+## Session: 2026-06-18 14:36
 
 | Time | Action | File(s) | Outcome | ~Tokens |
 |------|--------|---------|---------|--------|
-| 15:44 | Edited VELOCITY_DOCS/MARKET_CONFIGURATION.md | modified markets() | ~267 |
-| 15:44 | Session end: 1 writes across 1 files (MARKET_CONFIGURATION.md) | 1 reads | ~6380 tok |
-| 15:46 | Edited VELOCITY_DOCS/MARKET_CONFIGURATION.md | inline fix | ~18 |
-| 15:46 | Edited VELOCITY_DOCS/MARKET_CONFIGURATION.md | removed 18 lines | ~1 |
-| 15:47 | Edited VELOCITY_DOCS/MARKET_CONFIGURATION.md | removed 10 lines | ~1 |
-| 15:47 | Session end: 4 writes across 1 files (MARKET_CONFIGURATION.md) | 1 reads | ~6402 tok |
-| 16:05 | Created VELOCITY_DOCS/KEEPER_AND_ORACLE.md | — | ~1426 |
-| 16:05 | Session end: 5 writes across 2 files (MARKET_CONFIGURATION.md, KEEPER_AND_ORACLE.md) | 3 reads | ~19151 tok |
-| 16:10 | Edited VELOCITY_DOCS/KEEPER_AND_ORACLE.md | modified key() | ~767 |
-| 16:11 | Session end: 6 writes across 2 files (MARKET_CONFIGURATION.md, KEEPER_AND_ORACLE.md) | 4 reads | ~21309 tok |
-| 16:21 | Session end: 6 writes across 2 files (MARKET_CONFIGURATION.md, KEEPER_AND_ORACLE.md) | 5 reads | ~23204 tok |
-| 16:23 | Edited CLAUDE.md | inline fix | ~25 |
-| 16:24 | Edited CLAUDE.md | 4→5 lines | ~114 |
-| 16:25 | Session end: 8 writes across 3 files (MARKET_CONFIGURATION.md, KEEPER_AND_ORACLE.md, CLAUDE.md) | 5 reads | ~23353 tok |
+| 14:41 | Edited VELOCITY_DOCS/UNIQUE_POSITIONS_SPIKE.md | 13 → 18 | ~8 |
+| 14:42 | Edited VELOCITY_DOCS/UNIQUE_POSITIONS_SPIKE.md | modified 1() | ~849 |
+| 14:42 | Edited VELOCITY_DOCS/UNIQUE_POSITIONS_SPIKE.md | 2→1 lines | ~48 |
+| 14:43 | Edited VELOCITY_DOCS/UNIQUE_POSITIONS_SPIKE.md | expanded (+27 lines) | ~485 |
+| 14:44 | Session end: 4 writes across 1 files (UNIQUE_POSITIONS_SPIKE.md) | 1 reads | ~7464 tok |
+| 14:45 | Session end: 4 writes across 1 files (UNIQUE_POSITIONS_SPIKE.md) | 1 reads | ~7464 tok |
+| 11:13 | Session end: 4 writes across 1 files (UNIQUE_POSITIONS_SPIKE.md) | 1 reads | ~7464 tok |
+| 11:17 | Session end: 4 writes across 1 files (UNIQUE_POSITIONS_SPIKE.md) | 6 reads | ~25807 tok |
+| 11:20 | Edited VELOCITY_DOCS/UNIQUE_POSITIONS_SPIKE.md | 5→10 lines | ~189 |
+| 11:21 | Edited VELOCITY_DOCS/UNIQUE_POSITIONS_SPIKE.md | 5→6 lines | ~115 |
+| 11:21 | Edited VELOCITY_DOCS/UNIQUE_POSITIONS_SPIKE.md | 3→8 lines | ~194 |
+| 11:22 | Edited VELOCITY_DOCS/UNIQUE_POSITIONS_SPIKE.md | expanded (+75 lines) | ~1057 |
+| 11:22 | Session end: 8 writes across 1 files (UNIQUE_POSITIONS_SPIKE.md) | 6 reads | ~27472 tok |
 
-## Session: 2026-06-26 09:45
+## Session: 2026-06-19 11:31
+
+| Time | Action | File(s) | Outcome | ~Tokens |
+|------|--------|---------|---------|--------|
+| 11:33 | Edited VELOCITY_DOCS/UNIQUE_POSITIONS_SPIKE.md | modified _getCreateOrderParamsStructHash() | ~951 |
+| 11:33 | Session end: 1 writes across 1 files (UNIQUE_POSITIONS_SPIKE.md) | 4 reads | ~18461 tok |
+| 11:51 | Edited VELOCITY_DOCS/UNIQUE_POSITIONS_SPIKE.md | inline fix | ~23 |
+| 11:52 | Edited VELOCITY_DOCS/UNIQUE_POSITIONS_SPIKE.md | inline fix | ~80 |
+| 11:52 | Session end: 3 writes across 1 files (UNIQUE_POSITIONS_SPIKE.md) | 4 reads | ~18571 tok |
+| 12:03 | Session end: 3 writes across 1 files (UNIQUE_POSITIONS_SPIKE.md) | 4 reads | ~18571 tok |
+
+## Session: 2026-06-22 08:48
+
+| Time | Action | File(s) | Outcome | ~Tokens |
+|------|--------|---------|---------|--------|
+| 10:05 | Edited VELOCITY_DOCS/UNIQUE_POSITIONS_SPIKE.md | inline fix | ~100 |
+| 10:06 | Edited VELOCITY_DOCS/UNIQUE_POSITIONS_SPIKE.md | modified struct() | ~82 |
+| 10:06 | Edited VELOCITY_DOCS/UNIQUE_POSITIONS_SPIKE.md | modified struct() | ~172 |
+| 10:06 | Edited VELOCITY_DOCS/UNIQUE_POSITIONS_SPIKE.md | 1→2 lines | ~84 |
+| 10:06 | Edited VELOCITY_DOCS/UNIQUE_POSITIONS_SPIKE.md | 14→12 lines | ~208 |
+| 10:07 | Edited VELOCITY_DOCS/UNIQUE_POSITIONS_SPIKE.md | Keys() → PositionIdentity() | ~48 |
+| 10:07 | Edited VELOCITY_DOCS/UNIQUE_POSITIONS_SPIKE.md | reduced (-6 lines) | ~110 |
+| 10:07 | Edited VELOCITY_DOCS/UNIQUE_POSITIONS_SPIKE.md | 3→5 lines | ~221 |
+| 10:07 | Edited VELOCITY_DOCS/UNIQUE_POSITIONS_SPIKE.md | added 3 condition(s) | ~467 |
+| 10:08 | Edited VELOCITY_DOCS/UNIQUE_POSITIONS_SPIKE.md | 11→13 lines | ~231 |
+| 10:08 | Edited VELOCITY_DOCS/UNIQUE_POSITIONS_SPIKE.md | 6→6 lines | ~266 |
+| 10:08 | Edited VELOCITY_DOCS/UNIQUE_POSITIONS_SPIKE.md | 3→3 lines | ~26 |
+| 10:08 | Edited VELOCITY_DOCS/UNIQUE_POSITIONS_SPIKE.md | 3→7 lines | ~251 |
+| 10:08 | Session end: 13 writes across 1 files (UNIQUE_POSITIONS_SPIKE.md) | 18 reads | ~23132 tok |
+| 10:10 | Edited VELOCITY_DOCS/UNIQUE_POSITIONS_SPIKE.md | 3→3 lines | ~136 |
+| 10:10 | Session end: 14 writes across 1 files (UNIQUE_POSITIONS_SPIKE.md) | 18 reads | ~23278 tok |
+| 10:10 | Edited VELOCITY_DOCS/UNIQUE_POSITIONS_SPIKE.md | inline fix | ~59 |
+| 10:10 | Session end: 15 writes across 1 files (UNIQUE_POSITIONS_SPIKE.md) | 18 reads | ~23341 tok |
+| 11:30 | Session end: 15 writes across 1 files (UNIQUE_POSITIONS_SPIKE.md) | 22 reads | ~32706 tok |
+| 11:43 | Created ../../../../.claude/plans/memoized-moseying-turtle.md | — | ~2588 |
+| 11:44 | Session end: 16 writes across 2 files (UNIQUE_POSITIONS_SPIKE.md, memoized-moseying-turtle.md) | 44 reads | ~82198 tok |
+
+## Session: 2026-06-22 11:44
+
+| Time | Action | File(s) | Outcome | ~Tokens |
+|------|--------|---------|---------|--------|
+| 11:46 | Edited contracts/position/Position.sol | 3→4 lines | ~28 |
+| 11:47 | Edited contracts/position/Position.sol | modified setDecreasedAtTime() | ~114 |
+| 11:47 | Edited contracts/order/Order.sol | 4→5 lines | ~34 |
+| 11:47 | Edited contracts/order/Order.sol | modified validFromTime() | ~148 |
+| 11:47 | Edited contracts/order/IBaseOrderUtils.sol | 5→6 lines | ~37 |
+| 11:47 | Edited contracts/position/PositionStoreUtils.sol | 2→3 lines | ~73 |
+| 11:47 | Edited contracts/position/PositionStoreUtils.sol | 5→9 lines | ~79 |
+| 11:47 | Edited contracts/position/PositionStoreUtils.sol | 7→12 lines | ~93 |
+| 11:47 | Edited contracts/position/PositionStoreUtils.sol | 7→11 lines | ~77 |
+| 11:47 | Edited contracts/order/OrderStoreUtils.sol | 2→3 lines | ~71 |
+| 11:48 | Edited contracts/order/OrderStoreUtils.sol | 5→9 lines | ~77 |
+| 11:48 | Edited contracts/order/OrderStoreUtils.sol | 7→12 lines | ~92 |
+| 11:48 | Edited contracts/order/OrderStoreUtils.sol | 7→11 lines | ~78 |
+| 11:48 | Edited contracts/order/OrderUtils.sol | 2→3 lines | ~45 |
+| 11:48 | Edited contracts/position/IncreasePositionUtils.sol | added 1 condition(s) | ~103 |
+| 11:48 | Edited contracts/position/PositionEventUtils.sol | 16 → 17 | ~12 |
+| 11:48 | Edited contracts/position/PositionEventUtils.sol | 1→2 lines | ~55 |
+| 11:48 | Edited contracts/liquidation/LiquidationUtils.sol | 3→4 lines | ~45 |
+| 11:48 | Edited contracts/adl/AdlUtils.sol | 3→4 lines | ~42 |
+| 11:48 | Edited contracts/role/Role.sol | 1→5 lines | ~65 |
+| 11:48 | Edited contracts/role/RoleModule.sol | modified onlyLiquidationKeeper() | ~128 |
+| 11:48 | Edited contracts/error/Errors.sol | 2→6 lines | ~65 |
+| 11:49 | Created contracts/expiration/ExpirationUtils.sol | — | ~968 |
+| 11:51 | Session end: 23 writes across 14 files (Position.sol, Order.sol, IBaseOrderUtils.sol, PositionStoreUtils.sol, OrderStoreUtils.sol) | 18 reads | ~55530 tok |
+| 11:53 | Created VELOCITY_DOCS/EXPIRATION_FEATURE_PLAN.md | — | ~2923 |
+| 11:54 | Session end: 24 writes across 15 files (Position.sol, Order.sol, IBaseOrderUtils.sol, PositionStoreUtils.sol, OrderStoreUtils.sol) | 18 reads | ~58662 tok |
+
+## Session: 2026-06-23 11:01
+
+| Time | Action | File(s) | Outcome | ~Tokens |
+|------|--------|---------|---------|--------|
+
+## Session: 2026-06-23 15:24
 
 | Time | Action | File(s) | Outcome | ~Tokens |
 |------|--------|---------|---------|--------|

@@ -1,7 +1,11 @@
 # anatomy.md
 
-> Auto-maintained by OpenWolf. Last scanned: 2026-06-25T14:24:13.519Z
-> Files: 1016 tracked | Anatomy hits: 0 | Misses: 0
+> Auto-maintained by OpenWolf. Last scanned: 2026-06-22T09:53:58.148Z
+> Files: 1019 tracked | Anatomy hits: 0 | Misses: 0
+
+## ../../../../.claude/plans/
+
+- `memoized-moseying-turtle.md` — Expiration (End-Date) Feature — Implementation Plan (~2426 tok)
 
 ## ../../.claude/projects/-Users-n-code-gmx-synthetics/memory/
 
@@ -16,13 +20,13 @@
 - `.DS_Store` (~2728 tok)
 - `.editorconfig` — Editor configuration (~57 tok)
 - `.eslintrc.json` (~224 tok)
-- `.gitignore` — Git ignore rules (~98 tok)
+- `.gitignore` — Git ignore rules (~92 tok)
 - `.gitmodules` (~62 tok)
 - `.nvmrc` (~1 tok)
 - `.prettierrc.json` — Prettier configuration (~26 tok)
 - `.solcover.js` (~100 tok)
 - `app.tsx` — botanix (~584 tok)
-- `CLAUDE.md` — Repository Purpose (~1861 tok)
+- `CLAUDE.md` — CLAUDE.md (~1563 tok)
 - `CONTRIBUTOR.md` — Contributing (~178 tok)
 - `deploy-avax.txt` (~1640 tok)
 - `FOLLOWUPS.md` — Follow-ups (~192 tok)
@@ -50,7 +54,7 @@
 
 ## .github/workflows/
 
-- `deploy-sync.yml` — on push to main with `deployments/**` changes; calls the bare `upsert-deployments` npm script with `SUPABASE_URL`/`SUPABASE_SERVICE_ROLE_KEY` from GitHub Actions secrets (writes to **prod** Supabase). No Doppler CLI on the runner. See VELOCITY_DOCS/deployments/DEPLOYMENT_SYNC.md. (~294 tok)
+- `deploy-sync.yml` — on push to main with `deployments/**` changes; calls the bare `upsert-deployments` npm script with `SUPABASE_URL`/`SUPABASE_SERVICE_ROLE_KEY` from GitHub Actions secrets (writes to **prod** Supabase). No Doppler CLI on the runner. See VELOCITY_DOCS/DEPLOYMENT_SYNC.md. (~294 tok)
 - `main.yml` — CI: CI (~203 tok)
 
 ## .husky/
@@ -65,17 +69,20 @@
 
 ## VELOCITY_DOCS/
 
-- `CONTRACT_ARCHITECTURE.md` — GMX V2 Contract Architecture (~7235 tok)
-- `KEEPER_AND_ORACLE.md` — Keeper & Oracle Reference (~1559 tok)
-- `MARKET_CONFIGURATION.md` — Market Configuration Guide (~6031 tok)
-- `SETUP_GUIDE.md` — gmx-synthetics Setup Guide (~845 tok)
-
-## VELOCITY_DOCS/deployments/
-
+- `CONTRACT_ARCHITECTURE.md` — GMX V2 Contract Architecture (~7146 tok)
 - `DEPLOYING_NIVO_IN_BASE_SEPOLIA.md` — Deploying Nivo protocol on Base Sepolia (~742 tok)
 - `DEPLOYMENT_SYNC.md` — Deployment Sync (~1106 tok)
+- `EXPIRATION_FEATURE_PLAN.md` — Expiration (End-Date) Feature — Implementation Plan (~2741 tok)
+- `GLV_VS_GM_POOLS.md` — GLV Vaults vs GM Pools (~4784 tok)
+- `KEEPER.md` — Keepers (~4517 tok)
+- `LIQUIDITY_POOLS.md` — Liquidity Pools - Already Set Up (~3198 tok)
+- `MARKET_CONFIGURATION.md` — Market Configuration Guide (~6094 tok)
+- `ORACLE_AND_KEEPERS.md` — Oracle System & Keepers Explained (~6705 tok)
 - `REDEPLOYING_CHAINLINK_ORACLE_PROVIDER.md` — Re-Deploying Chainlink DataStream Provider on Base Sepolia (~404 tok)
+- `SETUP_GUIDE.md` — Nivo Protocol Setup Guide (~1702 tok)
+- `SOLIDITY_REFERENCE.md` — Essential Concepts for Reading GMX V2 Contracts (~9415 tok)
 - `TEST_NIVO_ON_BASE_SEPOLIA.md` — Testing Nivo protocol on Base Sepolia (~486 tok)
+- `UNIQUE_POSITIONS_SPIKE.md` — Key Concepts (~8696 tok)
 
 ## audits/abdk/
 
@@ -120,7 +127,7 @@
 
 ## contracts/adl/
 
-- `AdlUtils.sol` — SPDX-License-Identifier: BUSL-1.1 (~3436 tok)
+- `AdlUtils.sol` — SPDX-License-Identifier: BUSL-1.1 (~3445 tok)
 
 ## contracts/bank/
 
@@ -185,7 +192,7 @@
 
 ## contracts/error/
 
-- `Errors.sol` — SPDX-License-Identifier: BUSL-1.1 (~7448 tok)
+- `Errors.sol` — SPDX-License-Identifier: BUSL-1.1 (~7506 tok)
 - `ErrorUtils.sol` — SPDX-License-Identifier: BUSL-1.1 (~477 tok)
 
 ## contracts/event/
@@ -215,6 +222,10 @@
 - `OrderHandler.sol` — SPDX-License-Identifier: BUSL-1.1 (~4588 tok)
 - `ShiftHandler.sol` — SPDX-License-Identifier: BUSL-1.1 (~1507 tok)
 - `WithdrawalHandler.sol` — SPDX-License-Identifier: BUSL-1.1 (~2448 tok)
+
+## contracts/expiration/
+
+- `ExpirationUtils.sol` — SPDX-License-Identifier: BUSL-1.1 (~968 tok)
 
 ## contracts/external/
 
@@ -284,7 +295,7 @@
 
 ## contracts/liquidation/
 
-- `LiquidationUtils.sol` — SPDX-License-Identifier: BUSL-1.1 (~1122 tok)
+- `LiquidationUtils.sol` — SPDX-License-Identifier: BUSL-1.1 (~1131 tok)
 
 ## contracts/market/
 
@@ -401,13 +412,13 @@
 - `DecreaseOrderExecutor.sol` — SPDX-License-Identifier: BUSL-1.1 (~148 tok)
 - `DecreaseOrderUtils.sol` — SPDX-License-Identifier: BUSL-1.1 (~3885 tok)
 - `ExecuteOrderUtils.sol` — SPDX-License-Identifier: BUSL-1.1 (~1306 tok)
-- `IBaseOrderUtils.sol` — SPDX-License-Identifier: BUSL-1.1 (~595 tok)
+- `IBaseOrderUtils.sol` — SPDX-License-Identifier: BUSL-1.1 (~604 tok)
 - `IncreaseOrderExecutor.sol` — SPDX-License-Identifier: BUSL-1.1 (~148 tok)
 - `IncreaseOrderUtils.sol` — SPDX-License-Identifier: BUSL-1.1 (~1007 tok)
-- `Order.sol` — SPDX-License-Identifier: BUSL-1.1 (~5251 tok)
+- `Order.sol` — SPDX-License-Identifier: BUSL-1.1 (~5331 tok)
 - `OrderEventUtils.sol` — SPDX-License-Identifier: BUSL-1.1 (~2494 tok)
-- `OrderStoreUtils.sol` — SPDX-License-Identifier: BUSL-1.1 (~3487 tok)
-- `OrderUtils.sol` — SPDX-License-Identifier: BUSL-1.1 (~4780 tok)
+- `OrderStoreUtils.sol` — SPDX-License-Identifier: BUSL-1.1 (~3603 tok)
+- `OrderUtils.sol` — SPDX-License-Identifier: BUSL-1.1 (~4798 tok)
 - `OrderVault.sol` — SPDX-License-Identifier: BUSL-1.1 (~75 tok)
 - `SwapOrderExecutor.sol` — SPDX-License-Identifier: BUSL-1.1 (~144 tok)
 - `SwapOrderUtils.sol` — SPDX-License-Identifier: BUSL-1.1 (~962 tok)
@@ -417,10 +428,10 @@
 - `DecreasePositionCollateralUtils.sol` — SPDX-License-Identifier: BUSL-1.1 (~8918 tok)
 - `DecreasePositionSwapUtils.sol` — SPDX-License-Identifier: BUSL-1.1 (~1177 tok)
 - `DecreasePositionUtils.sol` — SPDX-License-Identifier: BUSL-1.1 (~4606 tok)
-- `IncreasePositionUtils.sol` — SPDX-License-Identifier: BUSL-1.1 (~3549 tok)
-- `Position.sol` — SPDX-License-Identifier: BUSL-1.1 (~2191 tok)
-- `PositionEventUtils.sol` — SPDX-License-Identifier: BUSL-1.1 (~4393 tok)
-- `PositionStoreUtils.sol` — SPDX-License-Identifier: BUSL-1.1 (~2319 tok)
+- `IncreasePositionUtils.sol` — SPDX-License-Identifier: BUSL-1.1 (~3586 tok)
+- `Position.sol` — SPDX-License-Identifier: BUSL-1.1 (~2272 tok)
+- `PositionEventUtils.sol` — SPDX-License-Identifier: BUSL-1.1 (~4420 tok)
+- `PositionStoreUtils.sol` — SPDX-License-Identifier: BUSL-1.1 (~2437 tok)
 - `PositionUtils.sol` — SPDX-License-Identifier: BUSL-1.1 (~9145 tok)
 
 ## contracts/price/
@@ -456,8 +467,8 @@
 
 ## contracts/role/
 
-- `Role.sol` — SPDX-License-Identifier: BUSL-1.1 (~1228 tok)
-- `RoleModule.sol` — SPDX-License-Identifier: BUSL-1.1 (~1452 tok)
+- `Role.sol` — SPDX-License-Identifier: BUSL-1.1 (~1268 tok)
+- `RoleModule.sol` — SPDX-License-Identifier: BUSL-1.1 (~1513 tok)
 - `RoleStore.sol` — SPDX-License-Identifier: BUSL-1.1 (~1150 tok)
 
 ## contracts/router/
