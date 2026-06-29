@@ -28,6 +28,11 @@ This diagram shows the **three main actors** in GMX V2:
 
 ![GMX V2 Contract Architecture](./assets/gmx_v2_contracts.png)
 
+> **Note:** This diagram reflects upstream GMX v2 architecture. In Nivo's fork,
+> `GlvHandler` is split into `GlvDepositHandler`, `GlvWithdrawalHandler`, and
+> `GlvShiftHandler`. Market tokens show GMX pairs (ETH, BTC, GMX, DOGE) —
+> Nivo uses EMFX pairs (BRL, MXN, COP, IDR, PHP) with USDC as single collateral.
+
 This diagram shows how contracts connect. The architecture is organized into **layers**:
 
 | Layer | Contracts | Purpose |
@@ -138,9 +143,9 @@ Step 2: Keeper EXECUTES the request with oracle prices
 │  TOKENS (Liquidity Representations)                                         │
 │  ┌───────────────────────────────┐  ┌───────────────────────────────────┐   │
 │  │ MarketToken (GM)              │  │ GlvToken (GLV)                    │   │
-│  │ - ETH/USD pool shares         │  │ - Basket of multiple GM tokens    │   │
-│  │ - BTC/USD pool shares         │  │ - WETH-USDC GLV                   │   │
-│  │ - GMX/USD pool shares         │  │ - WBTC-USDC GLV                   │   │
+│  │ - BRL/USD pool shares         │  │ - Basket of multiple GM tokens    │   │
+│  │ - MXN/USD pool shares         │  │ - WETH-USDC GLV                   │   │
+│  │ - COP/USD pool shares         │  │ - WBTC-USDC GLV                   │   │
 │  └───────────────────────────────┘  └───────────────────────────────────┘   │
 └─────────────────────────────────────────────────────────────────────────────┘
 ```
@@ -290,7 +295,7 @@ Each major struct has a `*StoreUtils` contract for serializing/deserializing to 
 
 | Contract | Purpose |
 |----------|---------|
-| [MarketToken.sol](contracts/market/MarketToken.sol) | LP token for GM pools (minted on deposit, burned on withdrawal) |
+| [MarketToken.sol](contracts/market/MarketToken.sol) | LP token for GM pools — in Nivo: BRL/USD, MXN/USD, COP/USD pools (minted on deposit, burned on withdrawal) |
 | [GlvToken.sol](contracts/glv/GlvToken.sol) | LP token for GLV pools (basket of GM tokens) |
 
 ---

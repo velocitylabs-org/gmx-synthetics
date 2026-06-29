@@ -602,3 +602,24 @@
 
 | Time | Action | File(s) | Outcome | ~Tokens |
 |------|--------|---------|---------|--------|
+
+## Session: 2026-06-26 10:03
+
+| Time | Action | File(s) | Outcome | ~Tokens |
+|------|--------|---------|---------|--------|
+| 10:07 | Edited docs/README.md | removed 18 lines | ~42 |
+| 10:08 | Edited scripts/generateDeploymentDocs.sh | "deployments/(arbitrum|ava" → "deployments/(base|baseSep" | ~29 |
+| 10:08 | Session end: 2 writes across 2 files (README.md, generateDeploymentDocs.sh) | 2 reads | ~12746 tok |
+| 10:11 | Edited scripts/generateDeploymentDocs.ts | 8→5 lines | ~69 |
+| 10:11 | Session end: 3 writes across 3 files (README.md, generateDeploymentDocs.sh, generateDeploymentDocs.ts) | 3 reads | ~15999 tok |
+| 10:12 | Session end: 3 writes across 3 files (README.md, generateDeploymentDocs.sh, generateDeploymentDocs.ts) | 3 reads | ~15999 tok |
+| 10:19 | Session end: 3 writes across 3 files (README.md, generateDeploymentDocs.sh, generateDeploymentDocs.ts) | 5 reads | ~16512 tok |
+| 10:21 | Edited scripts/collectDeployments.ts | modified collectDeployments() | ~107 |
+| 10:21 | Session end: 4 writes across 4 files (README.md, generateDeploymentDocs.sh, generateDeploymentDocs.ts, collectDeployments.ts) | 5 reads | ~16619 tok |
+| 10:23 | Session end: 4 writes across 4 files (README.md, generateDeploymentDocs.sh, generateDeploymentDocs.ts, collectDeployments.ts) | 5 reads | ~16619 tok |
+| 10:26 | Session end: 4 writes across 4 files (README.md, generateDeploymentDocs.sh, generateDeploymentDocs.ts, collectDeployments.ts) | 5 reads | ~16619 tok |
+| 10:28 | Session end: 4 writes across 4 files (README.md, generateDeploymentDocs.sh, generateDeploymentDocs.ts, collectDeployments.ts) | 5 reads | ~16619 tok |
+| 10:29 | Session end: 4 writes across 4 files (README.md, generateDeploymentDocs.sh, generateDeploymentDocs.ts, collectDeployments.ts) | 5 reads | ~16619 tok |
+| 10:32 | Session end: 4 writes across 4 files (README.md, generateDeploymentDocs.sh, generateDeploymentDocs.ts, collectDeployments.ts) | 5 reads | ~16619 tok |
+| 10:33 | Session end: 4 writes across 4 files (README.md, generateDeploymentDocs.sh, generateDeploymentDocs.ts, collectDeployments.ts) | 5 reads | ~16619 tok |
+| 10:34 | Session end: 4 writes across 4 files (README.md, generateDeploymentDocs.sh, generateDeploymentDocs.ts, collectDeployments.ts) | 5 reads | ~16619 tok |

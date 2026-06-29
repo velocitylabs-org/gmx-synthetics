@@ -18,13 +18,10 @@ The documentation is generated from the deployment artifacts in `/deployments/` 
 
 | Network | Contracts | Documentation | Last Updated |
 |---------|-----------|---------------|-------------|
-| Arbitrum One | 139 | [View](./arbitrum-deployments.md) | Nov 17, 2025, 08:12 AM UTC |
-| Avalanche C-Chain | 137 | [View](./avalanche-deployments.md) | Nov 17, 2025, 08:12 AM UTC |
-| Botanix | 132 | [View](./botanix-deployments.md) | Nov 17, 2025, 08:12 AM UTC |
+| Base | 130 | [View](./base-deployments.md) | Jun 2, 2026, 02:18 PM UTC |
 
 ### Testnet
 
 | Network | Contracts | Documentation | Last Updated |
 |---------|-----------|---------------|-------------|
-| Arbitrum Sepolia | 135 | [View](./arbitrumSepolia-deployments.md) | Nov 17, 2025, 08:47 AM UTC |
-| Avalanche Fuji | 142 | [View](./avalancheFuji-deployments.md) | Aug 21, 2025, 11:02 AM UTC |
+| Base Sepolia | 128 | [View](./baseSepolia-deployments.md) | May 7, 2026, 09:56 AM UTC |

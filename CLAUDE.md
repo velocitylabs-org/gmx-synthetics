@@ -1,36 +1,33 @@
-# CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+# Repository Purpose
 
-## Repository Purpose
+Fork of GMX V2 Synthetics, used as the on-chain layer for the Nivo forex insurance protocol on Base (Base Sepolia Testnet). This repo contains the Solidity contracts, Hardhat deploy scripts, and the local/testnet/mainnet deployment workflow. The runtime services that drive these contracts (API, keeper, dashboard, web app) live in sibling repos under `nivo/`.
 
-Fork of GMX V2 Synthetics, used as the on-chain layer for the Nivo forex insurance protocol on Base. This repo contains the Solidity contracts, Hardhat deploy scripts, and the local/testnet/mainnet deployment workflow. The runtime services that drive these contracts (API, keeper, dashboard, web app) live in sibling repos under `nivo/` — see `../CLAUDE.md` for the cross-repo overview.
-
-Use `npm` (not pnpm/yarn) inside this repo. Node 24 LTS is required (`.nvmrc`).
+Use `pnpm` (not npm/yarn) inside this repo.
 
 ## Commands
 
 ```bash
-npm install
-npx hardhat compile
-npm test                                   # full hardhat test suite (ramps node memory to 8GB)
-npx hardhat test test/path/to/File.ts      # single test file
-npx hardhat test --grep "pattern"          # filter by describe/it name
+pnpm install
+pnpm hardhat compile
+pnpm test                                  # full hardhat test suite (ramps node memory to 8GB)
+pnpm hardhat test test/path/to/File.ts      # single test file
+pnpm hardhat test --grep "pattern"          # filter by describe/it name
 
 # Local node + deploy (two terminals)
-npx hardhat node                           # forks state and runs full deploy on startup (~3 min)
-SKIP_AUTO_HANDLER_REDEPLOYMENT=true npx hardhat deploy --network localhost
+pnpm hardhat node                     # forks state and runs full deploy on startup (~3 min)
+SKIP_AUTO_HANDLER_REDEPLOYMENT=true pnpm hardhat deploy --network localhost
 
 # Forks
-npm run fork:base                          # hardhat fork of Base mainnet
-npm run hardhat:fork                       # anvil fork of Base, chain-id 8453
+pnpm fork:base                             # hardhat fork of Base mainnet
+pnpm hardhat:fork                          # anvil fork of Base, chain-id 8453
 
 # Mainnet deploy
-npm run deploy:base:fork                   # validates configs then deploys to a Base fork
-npm run deploy:base:mainnet                # validates configs then deploys to Base mainnet
+pnpm deploy:base:fork                      # validates configs then deploys to a Base fork
+pnpm deploy:base:mainnet                   # validates configs then deploys to Base mainnet
 
 # Lint (only runs on staged TS files via husky pre-commit)
-npm run lint
+pnpm lint
 ```
 
 `SKIP_AUTO_HANDLER_REDEPLOYMENT=true` is the standard flag for non-handler-changing deploys — it short-circuits the handler redeploy chain and is safe whenever you haven't modified `*Handler.sol`.
@@ -44,10 +41,9 @@ Doppler replaces `.env` files. It injects secrets as process environment variabl
 `.doppler.yaml` is checked in (config: `loc`). Run `doppler login` once per machine — no `doppler setup` needed.
 
 ```bash
-doppler run -- npx hardhat node         # localhost with env injection
-npm run deploy:base:mainnet             # mainnet deploy (doppler prd baked into the script)
-doppler run -p nivo -c stg -- npm run upsert-deployments --chain baseSepolia --chain-label base-sepolia
-                                        # upsert to staging Supabase. Bare npm script + external doppler wrapper.
+doppler run -- pnpm hardhat node   # localhost with env injection
+doppler run -p nivo -c stg -- pnpm upsert-deployments --chain baseSepolia --chain-label base-sepolia
+                                        # upsert to staging Supabase. Bare pnpm script + external doppler wrapper.
                                         # CI handles prod via .github/workflows/deploy-sync.yml — do NOT bake doppler into this script.
 ```
 
@@ -94,8 +90,6 @@ Key invariants when modifying contracts:
 - `EnumerableSet`-backed lists (orders, positions) are intentional: they're queried directly by keepers/UI to avoid indexer lag.
 - The Router/Handler/Util split exists for gradual upgradeability — preserve it. Don't move state into handlers or logic into vaults.
 
-Read `VELOCITY_DOCS/CONTRACT_ARCHITECTURE.md` for diagrams and `VELOCITY_DOCS/SOLIDITY_REFERENCE.md` for per-contract notes before doing significant changes.
-
 ## Deployments and Config
 
 - `deploy/` — `hardhat-deploy` scripts; numerous (`160+`) and order-sensitive. Handler redeploys cascade — hence `SKIP_AUTO_HANDLER_REDEPLOYMENT`.
@@ -107,10 +101,9 @@ Read `VELOCITY_DOCS/CONTRACT_ARCHITECTURE.md` for diagrams and `VELOCITY_DOCS/SO
 
 The `VELOCITY_DOCS/` directory contains the Nivo team's protocol notes — read these instead of upstream GMX docs when working on Nivo concerns:
 
-- `SETUP_GUIDE.md` — full multi-repo dev loop
-- `DEPLOYING_NIVO_IN_BASE_SEPOLIA.md`, `DEPLOYMENT_SYNC.md` — testnet/mainnet deploy procedures
-- `KEEPER.md`, `ORACLE_AND_KEEPERS.md` — off-chain expectations the contracts assume
-- `MARKET_CONFIGURATION.md`, `LIQUIDITY_POOLS.md`, `GLV_VS_GM_POOLS.md` — domain config
+- `SETUP_GUIDE.md` — gmx-synthetics dev setup
+- `KEEPER_AND_ORACLE.md` — off-chain keeper roles and oracle price flow
+- `MARKET_CONFIGURATION.md` — domain config
 
 ## Conventions
 
