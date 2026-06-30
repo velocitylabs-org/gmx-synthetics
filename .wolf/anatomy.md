@@ -1,7 +1,7 @@
 # anatomy.md
 
-> Auto-maintained by OpenWolf. Last scanned: 2026-06-26T08:21:17.577Z
-> Files: 1011 tracked | Anatomy hits: 0 | Misses: 0
+> Auto-maintained by OpenWolf. Last scanned: 2026-06-30T14:05:22.658Z
+> Files: 1014 tracked | Anatomy hits: 0 | Misses: 0
 
 ## ../../.claude/projects/-Users-n-code-gmx-synthetics/memory/
 
@@ -16,7 +16,7 @@
 - `.DS_Store` (~2728 tok)
 - `.editorconfig` — Editor configuration (~57 tok)
 - `.eslintrc.json` (~224 tok)
-- `.gitignore` — Git ignore rules (~98 tok)
+- `.gitignore` — Git ignore rules (~101 tok)
 - `.gitmodules` (~62 tok)
 - `.nvmrc` (~1 tok)
 - `.prettierrc.json` — Prettier configuration (~26 tok)
@@ -33,7 +33,7 @@
 - `index.html` — GMX Synthetics (~64 tok)
 - `LICENSE` — Project license (~1140 tok)
 - `metrics.ts` — options: run (~859 tok)
-- `package.json` — Node.js package manifest (~1932 tok)
+- `package.json` — Node.js package manifest (~1592 tok)
 - `pnpm-lock.yaml` — pnpm lock file (~163901 tok)
 - `README.md` — Project documentation (~12369 tok)
 - `tenderly.yaml` (~24 tok)
@@ -68,10 +68,11 @@
 - `CONTRACT_ARCHITECTURE.md` — GMX V2 Contract Architecture (~7235 tok)
 - `KEEPER_AND_ORACLE.md` — Keeper & Oracle Reference (~1559 tok)
 - `MARKET_CONFIGURATION.md` — Market Configuration Guide (~6031 tok)
-- `SETUP_GUIDE.md` — gmx-synthetics Setup Guide (~845 tok)
+- `SETUP_GUIDE.md` — gmx-synthetics Setup Guide (~691 tok)
 
 ## VELOCITY_DOCS/deployments/
 
+- `base-mainnet-notes.md` — Base Mainnet Notes (~272 tok)
 - `DEPLOYING_NIVO_IN_BASE_SEPOLIA.md` — Deploying Nivo protocol on Base Sepolia (~742 tok)
 - `DEPLOYMENT_SYNC.md` — Deployment Sync (~1106 tok)
 - `REDEPLOYING_CHAINLINK_ORACLE_PROVIDER.md` — Re-Deploying Chainlink DataStream Provider on Base Sepolia (~404 tok)
@@ -87,7 +88,7 @@
 
 ## changelogs/
 
-- `v2.2.md` — Function signature changes (Breaking) (~2984 tok)
+- `v2.2.md` — Function signature changes (Breaking) (~3051 tok)
 
 ## ci/scripts/
 
@@ -740,7 +741,6 @@
 - `arbitrumSepolia-deployments.md` — Arbitrum Sepolia Deployments (~5756 tok)
 - `avalanche-deployments.md` — Avalanche C-Chain Deployments (~5590 tok)
 - `avalancheFuji-deployments.md` — Avalanche Fuji Deployments (~6058 tok)
-- `base-mainnet-notes.md` — Base Mainnet Notes (~1770 tok)
 - `botanix-deployments.md` — Botanix Deployments (~5456 tok)
 - `contracts.json` (~24563 tok)
 - `deploymentInfo.html` — Grouped Contracts Table (~750 tok)
@@ -791,7 +791,13 @@
 
 ## ops/
 
+- `RUNBOOK-FEATURE-CONFIG.md` — Ops Runbook — Mainnet Config Changes (~1395 tok)
 - `RUNBOOK.md` — Ops Runbook — Mainnet Config Changes (~1119 tok)
+
+## ops/2026-05-11-feature-redaction/
+
+- `README.md` — Project documentation (~853 tok)
+- `validate-retroactive-2026-06-30.log` — Retroactive validation run — 2026-06-30 (~1671 tok)
 
 ## ops/config-changes/2026-05-11-feature-redaction/
 
@@ -944,7 +950,7 @@
 
 - `configRuntime.ts` — Exports isTruthy, getConfigHre, getWriteMode, getIsDisabled + 2 more (~394 tok)
 - `index.ts` — Declares main (~785 tok)
-- `README.md` — Project documentation (~1488 tok)
+- `README.md` — Project documentation (~2061 tok)
 - `run-feature-validation.sh` (~88 tok)
 
 ## scripts/configs/configs/
@@ -970,7 +976,7 @@
 
 - `default.ts` — Exports defaultPreset (~122 tok)
 - `index.ts` — Exports PRESET, loadPreset (~182 tok)
-- `README.md` — Project documentation (~509 tok)
+- `README.md` — Project documentation (~510 tok)
 - `types.ts` — Exports RunFeatureKey, FeatureFlags (~148 tok)
 - `validate.ts` — Exports validatePreset (~111 tok)
 
