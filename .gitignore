@@ -26,6 +26,7 @@ edr-cache
 /deployments/localhost
 /deployments.txt
 *.log
+!ops/**/*.log
 .cursorignore*
 
 /validation/

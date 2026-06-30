@@ -1,154 +1,155 @@
-# Feature Management Architecture (Maintenance Guide)
+# scripts/configs — Feature Flag & Config Management
 
-This document explains how feature configuration is organized and maintained in this repository, with a focus on long-term operations rather than one-time ticket implementation details.
+This folder contains scripts to **enable or disable protocol features** on-chain, **apply pool risk parameters**, and **verify that on-chain state matches what the config files say it should be**. Nothing here modifies Solidity contracts — it only writes values to the `DataStore`.
 
-It is intended for engineers who need to:
-- disable or re-enable protocol features safely
-- add new feature flags in a maintainable way
-- run consistent verification and evidence capture workflows
+Features you can control from here:
+- **Order creation & Order execution** — disable/enable creating market swap, limit swap, limit increase/decrease, stop-loss orders
+- **Gasless relay** — disable/enable gasless transaction flows (Gelato relay routers)
+- **JIT execution** — disable/enable just-in-time order execution path
+- **Subaccount delegation** — disable/enable subaccount router flows
+- **Atomic withdrawals** — disable/enable atomic withdrawal execution
+- **Shift operations** — disable/enable shift create, cancel, and execute
 
-## Goals of this architecture
+Pool risk parameters you can apply:
+- Max pool token amounts and max pool USD caps per market
+- Minimum market tokens required for first deposit
+- Marking inactive markets as disabled
 
-- Keep feature management centralized under one orchestrator entrypoint.
-- Separate mutation scripts from verification scripts.
-- Use neutral naming so scripts remain useful beyond a single ticket.
-- Make all changes reversible (`disable` and `enable` paths).
-- Support deterministic evidence generation for audits and operations.
+---
 
-## Directory structure and responsibilities
+## Directory structure
 
-Feature management lives under `scripts/configs/` and is split by concern.
+| Path | What it is |
+|---|---|
+| `index.ts` | The main script. Reads a preset name from `FEATURES` env var and runs whichever modules the preset enables. This is the normal way to run everything. |
+| `configRuntime.ts` | Utility functions shared by all scripts: reads `WRITE`, `IS_DISABLED`, `FAIL_ON_MISMATCH` env vars, and wraps scripts in a `process.exit` handler. |
+| `configs/` | Scripts that **write** state to the DataStore. |
+| `validations/` | Scripts that **read** state from the DataStore and check it against expectations. No writes. |
+| `helpers/` | Shared infrastructure used by both `configs/` and `validations/`: spec definitions, the write/verify engines, contract resolution, signer resolution. |
+| `presets/` | Named flag bundles. A preset is a TypeScript object that says which modules `index.ts` should run. Add one when you need a new named run mode. |
 
-### `scripts/configs/index.ts`
-- Primary orchestrator entrypoint.
-- Reads environment toggles and decides which config/validation modules to run.
-- Should remain the single composition layer for feature flows.
+---
 
-### `scripts/configs/helpers/`
-- Shared runtime and contract access helpers.
-- Typical responsibilities:
-  - network/runtime adaptation for fork contexts
-  - deployment-aware contract resolution
-  - config-keeper signer resolution
-- Keep these helpers generic and reusable; avoid feature-specific logic here.
+## Scripts that write state (`configs/`)
 
-### `scripts/configs/configs/`
-- Mutation scripts only.
-- These scripts write config state (or dry-run write intent).
-- Prefer feature-focused modules (for example, order features vs pool risk guards).
-- Each script should support reversible state where applicable.
+Each script supports dry-run mode (`WRITE=false`) and write mode (`WRITE=true`). All scripts use `IS_DISABLED` to control the target state: `true` = disable the feature, `false` = re-enable it.
 
-### `scripts/configs/validations/`
-- Readback and assertion scripts only.
-- No writes in validation modules.
-- Should be CI-friendly:
-  - clear per-check output
-  - non-zero exit on mismatch when configured (`FAIL_ON_MISMATCH=true`)
+| Script | What it writes |
+|---|---|
+| `disableOrderCreateFeatures.ts` | Sets `CREATE_ORDER_FEATURE_DISABLED` for MarketSwap, LimitSwap, LimitIncrease, LimitDecrease, StopLossDecrease order types |
+| `disableOrderExecuteFeatures.ts` | Sets `EXECUTE_ORDER_FEATURE_DISABLED` for the same order types |
+| `setShiftFeaturesState.ts` | Sets `CREATE_SHIFT_FEATURE_DISABLED`, `CANCEL_SHIFT_FEATURE_DISABLED`, `EXECUTE_SHIFT_FEATURE_DISABLED` |
+| `setJitFeatureState.ts` | Sets `JIT_FEATURE_DISABLED` for `JitOrderHandler` |
+| `setSubaccountFeatureState.ts` | Sets `SUBACCOUNT_FEATURE_DISABLED` for subaccount routers |
+| `setGaslessFeatureState.ts` | Sets `GASLESS_FEATURE_DISABLED` for Gelato relay routers |
+| `setAtomicWithdrawalFeatureState.ts` | Sets `EXECUTE_ATOMIC_WITHDRAWAL_FEATURE_DISABLED` for `WithdrawalHandler` |
+| `applyPoolRiskGuards.ts` | Sets `MAX_POOL_AMOUNT`, `MAX_POOL_USD_FOR_DEPOSIT`, `MIN_MARKET_TOKENS_FOR_FIRST_DEPOSIT` for active markets; sets `IS_MARKET_DISABLED` for inactive markets |
 
-## Design conventions for future feature sets
+---
 
-When adding new managed features, follow this pattern.
+## Scripts that verify state (`validations/`)
 
-1. Add or extend a typed feature spec module in helpers (single source of truth).
-2. Add feature-specific state setters in `configs/`.
-3. Add matching readback validators in `validations/`.
-4. Wire modules in `index.ts` behind neutral environment toggles.
-5. Keep package scripts minimal and stable; avoid ticket IDs in command names.
+Each script reads from the DataStore and reports mismatches. Pass `FAIL_ON_MISMATCH=true` to make a script exit non-zero on any mismatch (required for CI).
 
-## Naming standards
+| Script | What it checks |
+|---|---|
+| `verifyFeaturesState.ts` | All 17 feature flags — checks each one matches `TARGET_DISABLED_STATE` |
+| `verifyPoolRiskGuards.ts` | Pool caps and min first deposit — checks DataStore values match `config/markets.ts` |
+| `runInvariantChecks.ts` | Runs three sub-checks in sequence: role assignments, same-token market invariants, virtual ID allowlist |
+| `printRolesResolved.ts` | Prints every role and its current holder addresses (used inside `runInvariantChecks`) |
+| `verifySameTokenInvariants.ts` | Checks that same-token markets have zero swap impact factors and correct disabled state |
+| `verifyVirtualIdAllowlist.ts` | Checks that `virtualTokenId` and `virtualMarketId` in DataStore match the values in `config/markets.ts` |
 
-- Avoid ticket-specific names in:
-  - script filenames
-  - env vars
-  - package scripts
-- Prefer lifecycle-oriented names:
-  - `set...FeatureState`
-  - `verify...FeatureState`
-  - `config:features:*` commands
+> **Behavioral test (not a script in this folder):**
+> [`test/config/DisabledOrderTypesReverts.ts`](../../test/config/DisabledOrderTypesReverts.ts)
+> verifies that disabled order types actually revert with `DisabledFeature`
+> when create/execute is attempted — a stronger guarantee than the DataStore
+> flag check alone. Run with `pnpm hardhat test test/config/DisabledOrderTypesReverts.ts`.
 
-This keeps maintenance intuitive when features are later re-enabled or further constrained.
+---
 
-## Operational modes
+## How to run
 
-All feature operations should support two modes:
+See [CLAUDE.md](../../CLAUDE.md) for Doppler setup. All mainnet/testnet commands below need `doppler run --` to inject secrets.
 
-- Dry-run mode (`WRITE=false`)
-  - prints intended writes
-  - no on-chain mutation
-- Write mode (`WRITE=true`)
-  - executes config writes
-  - logs transaction outputs for evidence
+**Dry-run everything (no transactions sent)**
+```bash
+DOPPLER_CONFIG=stg NETWORK=baseSepolia pnpm run config:features:dryrun
+DOPPLER_CONFIG=prd NETWORK=base pnpm run config:features:dryrun
+```
 
-Feature state intent should also be explicit (for example, disabled vs enabled target state), so engineers can run both redaction and rollback workflows from the same architecture.
+**Write everything (sends transactions)**
+```bash
+DOPPLER_CONFIG=stg NETWORK=baseSepolia pnpm run config:features:write
+DOPPLER_CONFIG=prd NETWORK=base pnpm run config:features:write
+```
 
-## Validation model
+**Validate only — check that all feature flags are in the expected state**
+```bash
+DOPPLER_CONFIG=stg NETWORK=baseSepolia pnpm run config:features:status
+DOPPLER_CONFIG=prd NETWORK=base pnpm run config:features:status
+```
 
-Validation should be layered and explicit:
+**Run a single validator directly (useful for spot-checking)**
+```bash
+DOPPLER_CONFIG=prd doppler run -p nivo -c $DOPPLER_CONFIG -- pnpm hardhat run scripts/configs/validations/verifyPoolRiskGuards.ts --network base
+DOPPLER_CONFIG=prd doppler run -p nivo -c $DOPPLER_CONFIG -- pnpm hardhat run scripts/configs/validations/runInvariantChecks.ts --network base
+```
 
-- Per-feature readback validations (state-level correctness).
-- Invariant validations (system-level consistency).
-- Targeted smoke tests for still-enabled paths.
-- Expected-fail tests for intentionally disabled paths.
+**Test on a local fork before mainnet (recommended before any write)**
 
-Validation scripts should produce output that can be consumed both by engineers and CI jobs.
+1. Start the fork:
+```bash
+pnpm run hardhat:fork
+```
 
-## Test policy after redaction
+2. In a separate terminal, run the config script against it:
+```bash
+pnpm run config:features:fork
+```
 
-Maintain three clear categories in docs and run artifacts:
+This forks Base mainnet (chain ID 8453) locally via Anvil and applies the config change against the fork — showing exactly what would happen on mainnet with zero risk.
 
-- Must pass: invariant/state/guardrail checks for enabled paths.
-- Must fail (expected-fail): disabled features revert correctly.
-- Must skip (intentional): legacy behavior suites for intentionally removed functionality.
+---
 
-Always publish skip-accounting details (`what was skipped` + `why`) and final pass/skip/fail counts.
+## Adding a new feature flag
 
-## Evidence and audit trail
+1. Add a new `ManagedFeatureId` string to the union in `helpers/featureFlagSpecs.ts`
+2. Add a matching `ManagedFeatureSpec` entry to `FEATURE_FLAG_SPECS` in the same file — set `baseKey`, `scope`, `defaultModuleContractNames`
+3. Create `configs/set<Feature>FeatureState.ts` — call `makeSetFeatureFlagRunner(FEATURE_FLAG_SPECS.<your_id>)`
+4. Add the new spec to the spec array in `validations/verifyFeaturesState.ts`
+5. Add a `RUN_<FEATURE>` key to the `RunFeatureKey` union in `presets/types.ts`
+6. Add the key to `presets/default.ts` and `presets/validate.ts` — TypeScript will error if you miss either one
+7. Wire the setter in `index.ts`: add the import and a `if (preset.RUN_<FEATURE>)` block
 
-Archive outputs for each run in a timestamped folder:
+---
 
-- `docs/mainnet-configurations/<workstream-or-ticket>/<timestamp>/`
+## Pre/post-deploy checklist
 
-Recommended contents:
-- dry-run logs
-- write logs and tx hashes
-- validation outputs
-- invariant outputs
-- short `README.md` with exact commands and run summary
+Before a mainnet config change:
+- Run on a fork first (see "Test on a local fork before mainnet" above)
+- Run `runInvariantChecks.ts` for role/invariant checks
+- Run `test/config/DisabledOrderTypesReverts.ts` if disabled-path behavior is affected
 
-This evidence model supports change review, incident response, and rollback planning.
+After a mainnet config change:
+- Run `config:features:status` to confirm on-chain state matches expectations
+- Archive the run (see "Evidence" below)
 
-## What this architecture does not do
+---
 
-- It does not remove deployed contracts from bytecode history.
-- It does not replace role hygiene and governance controls.
-- It does not make deployment-surface decisions by itself (that belongs to deployment policy and release governance).
+## Rollback
 
-## Maintenance checklist for adding a new feature flag
+**Order feature redaction:**
+- Set `CREATE_ORDER_FEATURE_DISABLED=false` and `EXECUTE_ORDER_FEATURE_DISABLED=false` for the targeted order types (use `config:features:write` with `IS_DISABLED=false`)
+- Verify with `config:features:status`
 
-- Add typed spec entry for the feature key and resolver inputs.
-- Add setter script in `configs/` with dry-run/write support.
-- Add validator script in `validations/` with mismatch fail mode.
-- Add orchestrator toggle wiring in `index.ts`.
-- Confirm package command surface stays concise and neutral.
-- Add evidence output for dry-run/write/verify.
-- Update guardrail docs if CI behavior changes.
+**Pool risk guards:**
+- Restore prior values for `MAX_POOL_AMOUNT`, `MAX_POOL_USD_FOR_DEPOSIT`, `MIN_MARKET_TOKENS_FOR_FIRST_DEPOSIT`, `IS_MARKET_DISABLED` using the archived evidence from the original change
+- Re-run verification and archive a rollback evidence note
 
-Following this structure keeps feature governance deterministic, reversible, and easy to operate across future protocol hardening cycles.
+---
 
-## CI validation preset endpoint
+## Evidence
 
-The validation-only preset (`FEATURES=validate`) runs only `RUN_FEATURE_VALIDATIONS` with all
-other workstreams disabled. The safety-critical flags (`WRITE=false`, `TARGET_DISABLED_STATE=true`,
-`FAIL_ON_MISMATCH=true`) are set explicitly in the package.json commands, as they are intentionally
-absent from the preset type.
-
-Package endpoints:
-
-- `npm run config:features:basesepolia:validate`
-- `npm run config:features:mainnet:validate`
-
-### Maintenance rules
-
-When adding/removing feature toggles in `scripts/configs/index.ts`, update
-`scripts/configs/presets/validate.ts` to include the new key. The TypeScript compiler
-will reject a partial `FeatureFlags` object, so drift is caught at compile time.
+After every mainnet run, follow [ops/RUNBOOK-FEATURE-CONFIG.md](../../ops/RUNBOOK-FEATURE-CONFIG.md) 
+to archive the dry-run, write, and validation output, and document the change.

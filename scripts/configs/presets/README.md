@@ -47,7 +47,7 @@ orchestrator exits with code 1 and lists available names.
 3. Use it in an npm script:
 
    ```
-   FEATURES=my-name WRITE=false npx hardhat run scripts/configs/index.ts --network anvil
+   FEATURES=my-name WRITE=false pnpm hardhat run scripts/configs/index.ts --network anvil
    ```
 
 ## What presets must NOT contain

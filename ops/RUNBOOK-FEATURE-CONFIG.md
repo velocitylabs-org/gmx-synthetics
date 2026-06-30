@@ -4,6 +4,8 @@ This runbook defines when and how to archive evidence for mainnet configuration 
 
 It applies to any operation that writes protocol state via the config keeper role — feature flag changes, market parameter updates, risk guard adjustments, or similar. It is not required for read-only operations, testnet-only runs, or local fork testing.
 
+For technical details on the underlying scripts (directory structure, how to add a new feature flag, fork testing), see [scripts/configs/README.md](../scripts/configs/README.md).
+
 ---
 
 ## When an evidence bundle is required
@@ -20,19 +22,19 @@ Run these in order. Do not skip to the write step without a passing dryrun.
 
 ### 1. Dryrun
 ```bash
-npm run config:features:mainnet:dryrun
+DOPPLER_CONFIG=prd NETWORK=base pnpm run config:features:dryrun
 ```
 Review the output. Confirm the intended operations match what is about to be executed. Do not proceed if anything looks unexpected.
 
 ### 2. Write
 ```bash
-npm run config:features:mainnet 2>&1 | tee ops/<bundle-dir>/write.log
+DOPPLER_CONFIG=prd NETWORK=base pnpm run config:features:write 2>&1 | tee ops/<bundle-dir>/write.log
 ```
 Each transaction hash will appear in the terminal output and be captured in `write.log`.
 
 ### 3. Validate
 ```bash
-npm run config:features:validate:mainnet 2>&1 | tee ops/<bundle-dir>/validate.log
+DOPPLER_CONFIG=prd NETWORK=base pnpm run config:features:status 2>&1 | tee ops/<bundle-dir>/validate.log
 ```
 The transcript must end with `Verification passed: all feature flags matched expected state.`
 
@@ -65,7 +67,31 @@ Every bundle must include a `README.md` with:
 - Transaction hash table (one row per batch, with Basescan links)
 - Any validation coverage gaps (see below)
 
-Use `ops/2026-05-11-feature-redaction/README.md` as a reference.
+Use `ops/2026-05-11-feature-redaction/README.md` as a reference, or copy this template:
+
+```markdown
+# YYYY-MM-DD — <short description>
+
+<One-sentence summary of what changed and why.>
+
+## Config keeper
+<address used>
+
+## Transaction hashes
+| Batch | Basescan |
+|-------|----------|
+| <batch name> | <link> |
+
+## Validation coverage gaps
+<List any written keys not covered by the validate script, or write
+"None — all written keys are covered by validate.log." if fully covered.>
+
+## Evidence files
+| File | Contents |
+|------|----------|
+| `write.log` | Write transcript — tx sent / mined confirmation |
+| `validate.log` | Readback transcript — all flags matched expected state |
+```
 
 ---
 
@@ -73,7 +99,7 @@ Use `ops/2026-05-11-feature-redaction/README.md` as a reference.
 
 The standard validate script (`verifyFeaturesState.ts`) does not cover all writable keys. If `write.log` includes transactions for keys that `validate.log` does not read back, add a **Validation coverage gap** section to the bundle README explicitly listing what is and is not covered.
 
-Do not leave this implicit. A reader who sees only `validate.log` ending with "Verification passed" should not be left to assume it covers the full write.
+Do not leave this implicit. A reader who sees only `validate.log` ending with "Verification passed" should not be left to assume it covers the full write. As of this writing, `verifyFeaturesState.ts` covers all order create/execute feature flags in addition to shift/JIT/subaccount/gasless/atomic withdrawal — the historical gap from the May 2026 redaction bundle has been resolved.
 
 ---
 
