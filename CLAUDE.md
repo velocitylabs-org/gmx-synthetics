@@ -1,55 +1,62 @@
 
-# Repository Purpose
+## What this repo is
 
-Fork of GMX V2 Synthetics, used as the on-chain layer for the Nivo forex insurance protocol on Base (Base Sepolia Testnet). This repo contains the Solidity contracts, Hardhat deploy scripts, and the local/testnet/mainnet deployment workflow. The runtime services that drive these contracts (API, keeper, dashboard, web app) live in sibling repos under `nivo/`.
+Fork of GMX v2. On-chain layer for Nivo — a synthetic single-collateral perpetuals protocol for emerging market FX pairs (EMFX) on Base. Collateral: USDC only. Use `pnpm` (not npm/yarn).
 
-Use `pnpm` (not npm/yarn) inside this repo.
+## Active markets
 
-## Commands
+- Active (Base mainnet + Base Sepolia): BRL, MXN, COP
+- Legacy/reference only: GBP — kept as an example of a non-inverted Chainlink Data Stream feed, not a core Nivo target market
+- Inactive (no Chainlink Data Stream available yet): IDR, PHP, PEN, NGN, KES, ZAR, THB — deployed on-chain but disabled
 
-```bash
-pnpm install
-pnpm hardhat compile
-pnpm test                                  # full hardhat test suite (ramps node memory to 8GB)
-pnpm hardhat test test/path/to/File.ts      # single test file
-pnpm hardhat test --grep "pattern"          # filter by describe/it name
+## Disabled features
 
-# Local node + deploy (two terminals)
-pnpm hardhat node                     # forks state and runs full deploy on startup (~3 min)
-SKIP_AUTO_HANDLER_REDEPLOYMENT=true pnpm hardhat deploy --network localhost
+These are disabled via feature flags in `scripts/configs/` — do not assume they work without checking feature state first:
 
-# Forks
-pnpm fork:base                             # hardhat fork of Base mainnet
-pnpm hardhat:fork                          # anvil fork of Base, chain-id 8453
+- Swap orders (MarketSwap, LimitSwap)
+- Limit orders (LimitIncrease, LimitDecrease)
+- Stop-loss orders (StopLossDecrease)
+- Gasless relay (Gelato)
+- Subaccounts
+- Shift operations
+- JIT orders (just-in-time liquidity)
 
-# Mainnet deploy
-pnpm deploy:base:fork                      # validates configs then deploys to a Base fork
-pnpm deploy:base:mainnet                   # validates configs then deploys to Base mainnet
+Not implemented / not used by Nivo:
 
-# Lint (only runs on staged TS files via husky pre-commit)
-pnpm lint
-```
+- GLV: in active development, not yet live
+- FeeDistributor: not yet designed — all fee factors are 0, fees go entirely to LPs
+- Referral system, incentives, GMX token, esGmx
+- Multichain / LayerZero
 
-`SKIP_AUTO_HANDLER_REDEPLOYMENT=true` is the standard flag for non-handler-changing deploys — it short-circuits the handler redeploy chain and is safe whenever you haven't modified `*Handler.sol`.
+## Oracle
 
-## Doppler
+- Active provider: `ChainlinkDataStreamProvider.sol` only
+- BRL, MXN, COP: feeds arrive in USD/FX convention — inverted automatically via `DATA_STREAM_INVERSION_SCALE` (`10^24`) in `ChainlinkDataStreamProvider._processV8Report()`
+- GBP: non-inverted (legacy, reference only)
+- Out of scope — do not use:
+  - `ChainlinkPriceFeedProvider.sol` (legacy)
+  - `EdgeDataStreamProvider.sol` (Chaos Labs, not deployed)
+  - `GmOracleProvider.sol` (Hardhat local only)
+- IDR, PHP, PEN, NGN, KES, ZAR, THB: `HashZero` feedId, awaiting Chainlink Data Stream availability
 
-Doppler replaces `.env` files. It injects secrets as process environment variables at runtime, so they never touch disk. `doppler run -- <cmd>` uses the config pinned in `.doppler.yaml` (default: `loc`). Pass `-c stg` or `-c prd` to target a different environment. See [DOPPLER.md](../DOPPLER.md) for the full variable reference.
+## Networks
 
-`gmx-synthetics` uses [Doppler](https://doppler.com) for mainnet deploy secrets and Supabase credentials. Project: `nivo`.
+Base mainnet (`base`) and Base Sepolia (`baseSepolia`) only. Arbitrum and Avalanche configs exist in the codebase (GMX upstream) but are not used by Nivo. No multichain.
 
-`.doppler.yaml` is checked in (config: `loc`). Run `doppler login` once per machine — no `doppler setup` needed.
+## Docs
 
-```bash
-doppler run -- pnpm hardhat node   # localhost with env injection
-doppler run -p nivo -c stg -- pnpm upsert-deployments --chain baseSepolia --chain-label base-sepolia
-                                        # upsert to staging Supabase. Bare pnpm script + external doppler wrapper.
-                                        # CI handles prod via .github/workflows/deploy-sync.yml — do NOT bake doppler into this script.
-```
+`VELOCITY_DOCS/` contains the Nivo team's protocol notes — read these instead of upstream GMX docs:
 
-Fork scripts use hardcoded Hardhat dev keys — those do not need Doppler.
-
-The `app`, `vite`, and React deps in `package.json` are a vestigial in-repo UI (`app.tsx`, `index.html`) — the production UI lives in `nivo-web-app/`. Don't extend the in-repo app.
+- `SETUP_GUIDE.md` — dev setup
+- `KEEPER_AND_ORACLE.md` — keeper roles and oracle price flow
+- `MARKET_CONFIGURATION.md` — market and pool config
+- `CONTRACT_ARCHITECTURE.md` — contract structure
+- `deployments/DEPLOYING_NIVO_IN_BASE_SEPOLIA.md` — full deploy guide
+- `deployments/DEPLOYMENT_SYNC.md` — deployment sync to Supabase
+- `deployments/REDEPLOYING_CHAINLINK_ORACLE_PROVIDER.md`
+- `deployments/TEST_NIVO_ON_BASE_SEPOLIA.md`
+- `deployments/DEPOSIT_LIQUIDITY.md` — how to add liquidity to a pool
+- `deployments/base-mainnet-notes.md` — current mainnet operational state
 
 ## Architecture (GMX V2)
 
@@ -97,13 +104,15 @@ Key invariants when modifying contracts:
 - `config/` — protocol parameters (`markets.ts`, `tokens.ts`, `oracle.ts`, `roles.ts`, …). `scripts/validateMarketConfigs.ts` runs before mainnet deploys and must pass.
 - `ci/scripts/upsert-deployments.ts` pushes deployment metadata to Supabase (used by the API/dashboard) — only run intentionally.
 
-## Velocity / Nivo-specific docs
+## Doppler
 
-The `VELOCITY_DOCS/` directory contains the Nivo team's protocol notes — read these instead of upstream GMX docs when working on Nivo concerns:
+Replaces `.env` files. See [VELOCITY_DOCS/SETUP_GUIDE.md](VELOCITY_DOCS/SETUP_GUIDE.md) 
+for setup and usage. Fork scripts use hardcoded Hardhat dev keys — no Doppler needed.
 
-- `SETUP_GUIDE.md` — gmx-synthetics dev setup
-- `KEEPER_AND_ORACLE.md` — off-chain keeper roles and oracle price flow
-- `MARKET_CONFIGURATION.md` — domain config
+For the upsert-deployments workflow, see 
+[VELOCITY_DOCS/deployments/DEPLOYMENT_SYNC.md](VELOCITY_DOCS/deployments/DEPLOYMENT_SYNC.md).
+
+The `app`, `vite`, and React deps in `package.json` are a vestigial in-repo UI (`app.tsx`, `index.html`) used for local Timelock signing. Do not extend it — the production UI lives in a separate repo.
 
 ## Conventions
 

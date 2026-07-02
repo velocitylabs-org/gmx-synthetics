@@ -1,6 +1,8 @@
-# GMX Synthetics
+# Nivo Protocol — gmx-synthetics
 
-Contracts for GMX Synthetics.
+Nivo is a synthetic single-collateral perpetuals protocol for emerging market FX pairs (EMFX), built on GMX v2 and deployed on Base. Liquidity providers deposit USDC, traders hedge FX exposure via long/short positions on FX/USD synthetic markets.
+
+Active markets: BRL, MXN, COP (Base mainnet + Base Sepolia)
 
 # General Overview
 
@@ -10,30 +12,26 @@ For a Technical Overview, please see the section further below.
 
 ## Markets
 
-Markets support both spot and perp trading, they are created by specifying a long collateral token, short collateral token and index token.
+Markets are perps-only and use USDC as the single collateral token. Each market is created by specifying an index token (the FX pair being tracked), with USDC backing both long and short positions.
 
 Examples:
+- BRL/USD market with USDC collateral, index token as BRL
+- MXN/USD market with USDC collateral, index token as MXN
+- COP/USD market with USDC collateral, index token as COP
 
-- ETH/USD market with long collateral as ETH, short collateral as a stablecoin, index token as ETH
-- BTC/USD market with long collateral as WBTC, short collateral as a stablecoin, index token as BTC
-- SOL/USD market with long collateral as ETH, short collateral as a stablecoin, index token as SOL
-
-Liquidity providers can deposit either the long or short collateral token or both to mint liquidity tokens.
-
-The long collateral token is used to back long positions, while the short collateral token is used to back short positions.
+Liquidity providers deposit USDC to mint liquidity tokens. The deposited USDC backs both long and short positions in the market.
 
 Liquidity providers take on the profits and losses of traders for the market that they provide liquidity for.
 
-Having separate markets allows for risk isolation, liquidity providers are only exposed to the markets that they deposit into, this potentially allow for permissionless listings.
+Having separate markets allows for risk isolation, liquidity providers are only exposed to the markets that they deposit into, this potentially allows for permissionless listings.
 
-Traders can use either the long or short token as collateral for the market.
+Traders use USDC as collateral for the market.
 
 ## Features
 
 The contracts support the following main features:
 
 - Deposit and withdrawal of liquidity
-- Spot Trading (Swaps)
 - Leverage Trading (Perps, Long / Short)
 - Market orders, limit orders, stop-loss, take-profit orders
 
@@ -62,11 +60,10 @@ Funding fees and price impact keep longs / shorts balanced while reducing the ri
 
 ## Keepers
 
-There are a few keepers and nodes in the system:
-
-- Oracle keepers: pull prices from reference exchanges, sign the information and publish it to Archive nodes
-- Archive nodes: receives oracle keeper signatures and allows querying of this information
-- Order keepers: checks for deposit / withdraw liquidity requests, order requests, bundles the signed oracle prices with the requests and executes them
+Nivo runs a single keeper service (`nivo-keeper`) that:
+- Fetches signed oracle prices from `nivo-api` (which sources from Chainlink Data Streams)
+- Monitors pending deposits, withdrawals and orders in the DataStore
+- Executes requests by submitting oracle prices on-chain
 
 ## Structure
 
@@ -87,10 +84,6 @@ Majority of data is stored using the DataStore contract.
 EnumberableSets are used to allow order lists and position lists to be easily queried by interfaces or keepers, this is used over indexers as there may be a lag for indexers to sync the latest block. Having the lists stored directly in the contract also helps to ensure that accurate data can be retrieved and verified when needed.
 
 \*eventUtils contracts emit events using the event emitter, the events are generalized to allow new key-values to be added to events without requiring an update of ABIs.
-
-## GLV
-
-Short for GMX Liquidity Vault: a wrapper of multiple markets with the same long and short tokens. Liquidity is automatically rebalanced between underlying markets based on markets utilisation.
 
 # Technical Overview
 
@@ -118,13 +111,12 @@ The worth of the market pool is the sum of
 
 ## Deposits
 
-Deposits add long / short tokens to the market's pool and mints MarketTokens to the depositor.
+Deposits add USDC to the market's pool and mint MarketTokens to the depositor.
 
 Requests for deposits are created by calling ExchangeRouter.createDeposit, specifying:
 
 - the market to deposit into
-- amount of long tokens to deposit
-- amount of short tokens to deposit
+- amount of USDC to deposit
 
 Deposit requests are executed using DepositHandler.executeDeposit, if the deposit was created at timestamp `n`, it should be executed with the oracle prices after timestamp `n`.
 
@@ -132,39 +124,16 @@ The amount of MarketTokens to be minted, before fees and price impact, is calcul
 
 ## Withdrawals
 
-Withdrawals burn MarketTokens in exchange for the long / short tokens of a market's pool.
+Withdrawals burn MarketTokens in exchange for USDC from the market pool.
 
 Requests for withdrawals are created by calling ExchangeRouter.createWithdrawal, specifying:
 
 - the market to withdraw from
-- the number of market tokens to burn for long tokens
-- the number of market tokens to burn for short tokens
+- the number of market tokens to burn for USDC
 
 Withdrawal requests are executed using WithdrawalHandler.executeWithdrawal, if the withdrawal was created at timestamp `n`, it should be executed with the oracle prices after timestamp `n`.
 
-The amount of long or short tokens to be redeemed, before fees and price impact, is calculated as `(worth of market tokens) / (long / short token price)`.
-
-## Market Swaps
-
-Long and short tokens of a market can be swapped for each other.
-
-For example, if the ETH / USD market has WETH as the long token and USDC as the short token, WETH can be sent to the market to be swapped for USDC and USDC can be sent to the market to be swapped for WETH.
-
-Swap order requests are created by calling ExchangeRouter.createOrder, specifying:
-
-- the initial collateral token
-- the array of markets to swap through
-- the minimum expected output amount
-
-The swap output amount, before fees and price impact, `(amount of tokens in) * (token in price) / (token out price)`.
-
-Market swap order requests are executed using OrderHandler.executeOrder, if the order was created at timestamp `n`, it should be executed with the oracle prices after timestamp `n`.
-
-## Limit Swaps
-
-Passive swap orders that should be executed when the output amount matches the minimum output amount specified by the user.
-
-Limit swap order requests are executed using OrderHandler.executeOrder, if the order was created at timestamp `n`, it should be executed with oracle prices after timestamp `n`.
+The amount of USDC to be redeemed, before fees and price impact, is calculated as `(worth of market tokens) / (USDC price)`.
 
 ## Market Increase
 
@@ -172,20 +141,21 @@ Open or increase a long / short perp position.
 
 Market increase order requests are created by calling ExchangeRouter.createOrder, specifying:
 
-- the initial collateral token
-- the array of markets to swap through to get the actual collateral token
-- the amount to increase the position by
+- the USDC collateral amount
+- the position size increase in USD
 - whether it is a long or short position
 
 Market increase order requests are executed using OrderHandler.executeOrder, if the order was created at timestamp `n`, it should be executed with the oracle prices after timestamp `n`.
 
 ## Limit Increase
 
+> **Note:** Limit and stop-loss orders are currently disabled on Nivo. Only market increase and market decrease are active.
+
 Passive increase position orders that should be executed when the index token price matches the acceptable price specified by the user.
 
-Long position example: if the current index token price is $5000, a limit increase order can be created with acceptable price as $4990, the order can be executed when the index token price is <= $4990.
+Long position example: if the current BRL/USD price is $0.18, a limit increase order can be created with acceptable price as $0.175, the order can be executed when the BRL/USD price is <= $0.175.
 
-Short position example: if the current index token price is $5000, a limit increase order can be created with acceptable price as $5010, the order can be executed when the index token price is >= $5010.
+Short position example: if the current BRL/USD price is $0.18, a limit increase order can be created with acceptable price as $0.185, the order can be executed when the BRL/USD price is >= $0.185.
 
 Limit increase order requests are executed using OrderHandler.executeOrder, if the order was created at timestamp `n`, it should be executed with the oracle prices after timestamp `n`.
 
@@ -195,120 +165,64 @@ Close or decrease a long / short perp position.
 
 Market decrease order requests are created by calling ExchangeRouter.createOrder, specifying:
 
-- the initial collateral token
-- the array of markets to swap through for the actual output token
+- the USDC collateral amount
 - the amount to decrease the position by
 
 Market decrease order requests are executed using OrderHandler.executeOrder, if the order was created at timestamp `n`, it should be executed with the oracle prices after timestamp `n`.
 
 ## Limit Decrease
 
+> **Note:** Limit and stop-loss orders are currently disabled on Nivo. Only market increase and market decrease are active.
+
 Passive decrease position orders that should be executed when the index token price matches the acceptable price specified by the user.
 
-Long position example: if the current index token price is $5000, a limit decrease order can be created with acceptable price as $5010, the order can be executed when the index token price is >= $5010.
+Long position example: if the current BRL/USD price is $0.18, a limit decrease order can be created with acceptable price as $0.185, the order can be executed when the BRL/USD price is >= $0.185.
 
-Short position example: if the current index token price is $5000, a limit decrease order can be created with acceptable price as $4990, the order can be executed when the index token price is <= $4990.
+Short position example: if the current BRL/USD price is $0.18, a limit decrease order can be created with acceptable price as $0.175, the order can be executed when the BRL/USD price is <= $0.175.
 
 Limit decrease order requests are executed using OrderHandler.executeOrder, if the order was created at timestamp `n`, it should be executed with the oracle prices after timestamp `n`.
 
 ## Stop-Loss Decrease
 
+> **Note:** Limit and stop-loss orders are currently disabled on Nivo. Only market increase and market decrease are active.
+
 Passive decrease position orders that should be executed when the index token price crosses the acceptable price specified by the user.
 
-Long position example: if the current index token price is $5000, a stop-loss decrease order can be created with acceptable price as $4990, the order can be executed when the index token price is <= $4990.
+Long position example: if the current BRL/USD price is $0.18, a stop-loss decrease order can be created with acceptable price as $0.175, the order can be executed when the BRL/USD price is <= $0.175.
 
-Short position example: if the current index token price is $5000, a stop-loss decrease order can be created with acceptable price as $5010, the order can be executed when the index token price is >= $5010.
+Short position example: if the current BRL/USD price is $0.18, a stop-loss decrease order can be created with acceptable price as $0.185, the order can be executed when the BRL/USD price is >= $0.185.
 
 Stop-loss decrease order requests are executed using OrderHandler.executeOrder, if the order was created at timestamp `n`, it should be executed with the oracle prices after timestamp `n`.
 
-## Example 1
-
-The price of ETH is 5000, and ETH has 18 decimals.
-
-The price of one unit of ETH is `5000 / (10 ^ 18), 5 * (10 ^ -15)`.
-
-To handle the decimals, multiply the value by `(10 ^ 30)`.
-
-Price would be stored as `5000 / (10 ^ 18) * (10 ^ 30) => 5000 * (10 ^ 12)`.
-
-For gas optimization, these prices are sent to the oracle in the form of a uint8 decimal multiplier value and uint32 price value.
-
-If the decimal multiplier value is set to 8, the uint32 value would be `5000 * (10 ^ 12) / (10 ^ 8) => 5000 * (10 ^ 4)`.
-
-With this config, ETH prices can have a maximum value of `(2 ^ 32) / (10 ^ 4) => 4,294,967,296 / (10 ^ 4) => 429,496.7296` with 4 decimals of precision.
-
-## Example 2
-
-The price of BTC is 60,000, and BTC has 8 decimals.
-
-The price of one unit of BTC is `60,000 / (10 ^ 8), 6 * (10 ^ -4)`.
-
-Price would be stored as `60,000 / (10 ^ 8) * (10 ^ 30) => 6 * (10 ^ 26) => 60,000 * (10 ^ 22)`.
-
-BTC prices maximum value: `(2 ^ 64) / (10 ^ 2) => 4,294,967,296 / (10 ^ 2) => 42,949,672.96`.
-
-Decimals of precision: 2.
-
-## Example 3
-
-The price of USDC is 1, and USDC has 6 decimals.
-
-The price of one unit of USDC is `1 / (10 ^ 6), 1 * (10 ^ -6)`.
-
-Price would be stored as `1 / (10 ^ 6) * (10 ^ 30) => 1 * (10 ^ 24)`.
-
-USDC prices maximum value: `(2 ^ 64) / (10 ^ 6) => 4,294,967,296 / (10 ^ 6) => 4294.967296`.
-
-Decimals of precision: 6.
-
-## Example 4
-
-The price of DG is 0.00000001, and DG has 18 decimals.
-
-The price of one unit of DG is `0.00000001 / (10 ^ 18), 1 * (10 ^ -26)`.
-
-Price would be stored as `1 * (10 ^ -26) * (10 ^ 30) => 1 * (10 ^ 3)`.
-
-DG prices maximum value: `(2 ^ 64) / (10 ^ 11) => 4,294,967,296 / (10 ^ 11) => 0.04294967296`.
-
-Decimals of precision: 11.
-
-## Decimal Multiplier
-
-The formula to calculate what the decimal multiplier value should be set to:
-
-Decimals: 30 - (token decimals) - (number of decimals desired for precision)
-
-- ETH: 30 - 18 - 4 => 8
-- BTC: 30 - 8 - 2 => 20
-- USDC: 30 - 6 - 6 => 18
-- DG: 30 - 18 - 11 => 1
-
 ## For Data Stream Feeds
 
-Example calculation for WNT:
-
-- The number of data stream decimals: 8
-- The number of token decimals for WNT: 18
-- dataStreamPrice: price \* (10 ^ 8)
-- The price per unit of token: `dataStreamPrice / (10 ^ 8) / (10 ^ 18) * (10 ^ 30)`
-- e.g. `(5000 * (10 ^ 8)) / (10 ^ 8) / (10 ^ 18) * (10 ^ 30) = 5000 * (10 ^ 12)`
-- The stored oracle price is: `dataStreamPrice * multiplier / (10 ^ 30)`
-- In this case the multiplier should be (10 ^ 34)
-- e.g. `(5000 * (10 ^ 8)) * (10 ^ 34) / (10 ^ 30) = 5000 * (10 ^ 12)`
-
-Example calculation for WBTC:
-
-- The number of data stream decimals: 8
-- The number of token decimals for WBTC: 8
-- dataStreamPrice: price \* (10 ^ 8)
-- the price per unit of token: `dataStreamPrice / (10 ^ 8) / (10 ^ 8) * (10 ^ 30)`
-- e.g. `(50,000 * (10 ^ 8)) / (10 ^ 8) / (10 ^ 8) * (10 ^ 30) = 50,000 * (10 ^ 22)`
-- the stored oracle price is: `dataStreamPrice * multiplier / (10 ^ 30)`
-- in this case the multiplier should be (10 ^ 44)
-- e.g. `(50,000 * (10 ^ 8)) * (10 ^ 44) / (10 ^ 30) = 50,000 * (10 ^ 22)`
+Prices stored within the Oracle contract represent the price of one unit of the token using a value with 30 decimals of precision. The stored oracle price is: `dataStreamPrice * multiplier / (10 ^ 30)`.
 
 The formula for the multiplier is: `10 ^ (60 - dataStreamDecimals - tokenDecimals)`
+
+Example calculation for BRL (synthetic ERC-20, 18 token decimals):
+
+- The number of data stream decimals: 8
+- The number of token decimals for BRL: 18
+- dataStreamPrice: price \* (10 ^ 8)
+- The price per unit of token: `dataStreamPrice / (10 ^ 8) / (10 ^ 18) * (10 ^ 30)`
+- e.g. `(0.18 * (10 ^ 8)) / (10 ^ 8) / (10 ^ 18) * (10 ^ 30) = 0.18 * (10 ^ 12)`
+- The stored oracle price is: `dataStreamPrice * multiplier / (10 ^ 30)`
+- In this case the multiplier should be (10 ^ 34)
+- e.g. `(0.18 * (10 ^ 8)) * (10 ^ 34) / (10 ^ 30) = 0.18 * (10 ^ 12)`
+
+Example calculation for USDC (6 token decimals):
+
+- The number of data stream decimals: 8
+- The number of token decimals for USDC: 6
+- dataStreamPrice: price \* (10 ^ 8)
+- The price per unit of token: `dataStreamPrice / (10 ^ 8) / (10 ^ 6) * (10 ^ 30)`
+- e.g. `(1 * (10 ^ 8)) / (10 ^ 8) / (10 ^ 6) * (10 ^ 30) = 1 * (10 ^ 24)`
+- The stored oracle price is: `dataStreamPrice * multiplier / (10 ^ 30)`
+- In this case the multiplier should be (10 ^ 46)
+- e.g. `(1 * (10 ^ 8)) * (10 ^ 46) / (10 ^ 30) = 1 * (10 ^ 24)`
+
+> **Note:** BRL, MXN and COP feeds arrive in USD/FX convention and are inverted automatically via DATA_STREAM_INVERSION_SCALE in ChainlinkDataStreamProvider._processV8Report(). GBP is not inverted.
 
 # Funding Fees
 
@@ -326,60 +240,6 @@ It is also possible to set a fundingIncreaseFactorPerSecond value, this would re
 - If the current `longShortImbalance` is more than the `thresholdForStableFunding`, then the funding rate will increase by `longShortImbalance * fundingIncreaseFactorPerSecond`
 - If the current `longShortImbalance` is more than `thresholdForDecreaseFunding` and less than `thresholdForStableFunding` and the skew is in the same direction as the funding, then the funding rate will not change
 - If the current `longShortImbalance` is less than `thresholdForDecreaseFunding` and the skew is in the same direction as the funding, then the funding rate will decrease by `fundingDecreaseFactorPerSecond`
-
-## Examples
-
-### Example 1
-
-- thresholdForDecreaseFunding is 3%
-- thresholdForStableFunding is 5%
-- fundingIncreaseFactorPerSecond is 0.0001%
-- fundingDecreaseFactorPerSecond is 0.000002%
-- durationInSeconds is 600 seconds
-- longs are paying shorts funding
-- there are more longs than shorts
-- longShortImbalance is 6%
-
-Since longShortImbalance > thresholdForStableFunding, savedFundingFactorPerSecond should increase by `0.0001% * 6% * 600 = 0.0036%`
-
-### Example 2
-
-- thresholdForDecreaseFunding is 3%
-- thresholdForStableFunding is 5%
-- fundingIncreaseFactorPerSecond is 0.0001%
-- fundingDecreaseFactorPerSecond is 0.000002%
-- durationInSeconds is 600 seconds
-- longs are paying shorts funding
-- there are more longs than shorts
-- longShortImbalance is 4%
-
-Since longs are already paying shorts, the skew is the same, and the longShortImbalance < thresholdForStableFunding, savedFundingFactorPerSecond should not change
-
-### Example 3
-
-- thresholdForDecreaseFunding is 3%
-- thresholdForStableFunding is 5%
-- fundingIncreaseFactorPerSecond is 0.0001%
-- fundingDecreaseFactorPerSecond is 0.000002%
-- durationInSeconds is 600 seconds
-- longs are paying shorts funding
-- there are more longs than shorts
-- longShortImbalance is 2%
-
-Since longShortImbalance < thresholdForDecreaseFunding, savedFundingFactorPerSecond should decrease by `0.000002% * 600 = 0.0012%`
-
-### Example 4
-
-- thresholdForDecreaseFunding is 3%
-- thresholdForStableFunding is 5%
-- fundingIncreaseFactorPerSecond is 0.0001%
-- fundingDecreaseFactorPerSecond is 0.000002%
-- durationInSeconds is 600 seconds
-- longs are paying shorts funding
-- there are more shorts than longs
-- longShortImbalance is 1%
-
-Since the skew is in the other direction, savedFundingFactorPerSecond should decrease by `0.0001% * 1% * 600 = 0.0006%`
 
 Note that there are possible ways to game the funding fees, the funding factors should be adjusted to minimize this possibility:
 
@@ -437,23 +297,9 @@ Price impact is calculated as:
 (initial USD difference) ^ (price impact exponent) * (price impact factor) - (next USD difference) ^ (price impact exponent) * (price impact factor)
 ```
 
-For swaps, imbalance is calculated as the difference in the worth of the long tokens and short tokens.
-
-For example:
-
-- A pool has 10 long tokens, each long token is worth $5000
-- The pool also has 50,000 short tokens, each short token is worth $1
-- The `price impact exponent` is set to 2 and `price impact factor` is set to `0.01 / 50,000`
-- The pool is equally balanced with $50,000 of long tokens and $50,000 of short tokens
-- If a user deposits 10 long tokens, the pool would now have $100,000 of long tokens and $50,000 of short tokens
-- The change in imbalance would be from $0 to -$50,000
-- There would be negative price impact charged on the user's deposit, calculated as `0 ^ 2 * (0.01 / 50,000) - 50,000 ^ 2 * (0.01 / 50,000) => -$500`
-- If the user now withdraws 5 long tokens, the balance would change from -$50,000 to -$25,000, a net change of +$25,000
-- There would be a positive price impact rebated to the user in the form of additional long tokens, calculated as `50,000 ^ 2 * (0.01 / 50,000) - 25,000 ^ 2 * (0.01 / 50,000) => $375`
-
 For position actions (increase / decrease position), imbalance is calculated as the difference in the long and short open interest.
 
-`price impact exponents` and `price impact factors` are configured per market and can differ for spot and position actions.
+`price impact exponents` and `price impact factors` are configured per market.
 
 Note that this calculation is the price impact for a user's trade not the price impact on the pool. For example, a user's trade may have a 0.25% price impact, the next trade for a very small amount may have a 0.5% price impact.
 
@@ -655,7 +501,7 @@ After the initial setup:
 ## Deployment
 
 - `scripts/verifyFallback.ts` can be used to verify contracts
-- One MarketToken contract would need to be verified using `npx hardhat verify`, thereafter all MarketToken contracts should be verified as the source code would be the same
+- One MarketToken contract would need to be verified using `pnpm hardhat verify`, thereafter all MarketToken contracts should be verified as the source code would be the same
 
 ## Configuration
 
@@ -669,8 +515,6 @@ After the initial setup:
 
 - It is recommended to publish a best effort Changelog documenting important changes that integrations should be aware about, e.g. if a field is added to a struct that is passed into a callback function, this change may not be obvious to integrations
 
-- If the contracts are used to support equity synthetic markets, care should be taken to ensure that stock splits and similar changes can be handled
-
 - Contracts with the "CONTROLLER" role have access to important functions such as setting DataStore values, due to this, care should be taken to ensure that such contracts do not have generic functions or functions that can be used to change important values
 
 - Tests should be added for the different market types, e.g. spot only markets, single token markets
@@ -678,8 +522,6 @@ After the initial setup:
 - The ordering of values in the eventData for callbacks should not be modified unless strictly necessary, since callback contracts may reference the values by a fixed index
 
 - Note that if a struct that is passed into callbacks is changed, e.g. Deposit, Withdrawal, Order structs, this would cause the functions of callback contracts expecting the previous struct to stop working, due to this, the changes in structs should be highlighted to integrations
-
-- If the referral system is being used, the OrderHandler should be given access to update the referral code for traders
 
 ## Integrations
 
@@ -692,16 +534,6 @@ After the initial setup:
 - Changes in config values such as FUNDING_FACTOR, STABLE_FUNDING_FACTOR, BORROWING_FACTOR, SKIP_BORROWING_FEE_FOR_SMALLER_SIDE, BORROWING_FEE_RECEIVER_FACTOR, could lead to additional charges for users, it could also result in a change in the price of market tokens
 
 - If trader PnL is capped due to MAX_PNL_FACTOR_FOR_TRADERS, the percentage of profit paid out to traders may differ depending on the ordering of when positions are decreased / closed since the cap is re-calculated based on the current state of the pool
-
-- Event data may be passed to callback contracts, the ordering of the params in the eventData will be attempted to be unchanged, so params can be accessed by index, for safety the key of the param should still be validated before use to check if it matches the expected value
-
-- Some parameters such as order.sizeDelta and order.initialCollateralDeltaAmount may be updated during execution, the updated values may not be passed to the callback contract
-
-- When creating a callback contract, the callback contract may need to whitelist the DepositHandler, OrderHandler or WithdrawalHandler, it should be noted that new versions of these handlers may be deployed as new code is added to the handlers, it is also possible for two handlers to temporarily exist at the same time, e.g. OrderHandler(1), OrderHandler(2), due to this, the callback contract should be able to whitelist and simultaneously accept callbacks from multiple DepositHandlers, OrderHandlers and WithdrawalHandlers
-
-- For callback contracts instead of maintaining a separate whitelist for DepositHandlers, OrderHandlers, WithdrawalHandlers, a possible solution would be to validate the role of the msg.sender in the RoleStore, e.g. `RoleStore.hasRole(msg.sender, Role.CONTROLLER)`, this would check that the msg.sender is a valid handler
-
-- If the user is able to choose which ExchangeRouter to interact with, then it should not be assumed that the callback params will be of a fixed format, this is because when new ExchangeRouters and handlers are deployed there may be a transition period where both the old and new contracts can be used, so the callbacks for e.g. afterOrderCancellation could be of either the new or old format. If it is enforced that only a specific ExchangeRouter can be used to validly trigger the callback, then this would not be an issue.
 
 - If using contracts such as the ExchangeRouter, Oracle or Reader do note that their addresses will change as new logic is added
 
@@ -725,21 +557,13 @@ After the initial setup:
 
 - Positive funding fees need to be manually claimed using the ExchangeRouter.claimFundingFees function
 
-- Affiliate rewards need to be manually claimed using the ExchangeRouter.claimAffiliateRewards function
-
 - Markets or features may be disabled
 
 - Execution will still continue even if a callback reverts
 
 - Ensure callbacks have sufficient gas
 
-- Subaccounts can create, update, and cancel any order for an account
-
-- Subaccounts can spend wnt and collateral from the account
-
 - UI fees can be changed
-
-- Referral discounts can be changed
 
 - Funds for blacklisted addresses will be kept within the protocol
 
@@ -827,8 +651,6 @@ After the initial setup:
 
 - Consider the minimum collateral amount
 
-- Referrals are still paid out during liquidation
-
 - It is possible for positions to have zero collateral
 
 - Positions with zero size cannot exist
@@ -838,13 +660,13 @@ After the initial setup:
 To compile contracts:
 
 ```sh
-npx hardhat compile
+pnpm hardhat compile
 ```
 
 To run all tests:
 
 ```sh
-npx hardhat test
+pnpm hardhat test
 
 ```
 
@@ -853,29 +675,29 @@ npx hardhat test
 To print code metrics:
 
 ```sh
-npx ts-node metrics.ts
+pnpm ts-node metrics.ts
 ```
 
 To print test coverage:
 
 ```sh
-npx hardhat coverage
+pnpm hardhat coverage
 ```
 
 To check contract sizes:
 
 ```sh
-npx hardhat measure-contract-sizes
+pnpm hardhat measure-contract-sizes
 ```
 
 To check contract dependencies:
 
 ```sh
-npx hardhat dependencies <contract file path>
+pnpm hardhat dependencies <contract file path>
 ```
 
 To update contracts info table in the `/docs` folder:
 
 ```sh
-npx hardhat collect-deployments
+pnpm hardhat collect-deployments
 ```

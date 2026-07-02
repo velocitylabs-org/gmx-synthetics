@@ -25,43 +25,43 @@ ORDER_KEY
 ### Deposit:
 * **Create a deposit order** (WALLET_TESTER_PRIVATE_KEY)
     ```typescript
-    npx hardhat run scripts/nivo/createDepositOrder.ts --network baseSepolia
+    pnpm hardhat run scripts/nivo/createDepositOrder.ts --network baseSepolia
     ```
 * Log deposits: 
     ```typescript
-    npx hardhat run scripts/printDeposits.ts --network baseSepolia
+    pnpm hardhat run scripts/printDeposits.ts --network baseSepolia
     ```
 
 * **Execute the deposit** (NIVO_KEEPER_PRIVATE_KEY)
     * set the DEPOSIT_KEY you want to execute in your env var
     ```typescript
-    npx hardhat run scripts/nivo/executeDeposit.ts --network baseSepolia
+    pnpm hardhat run scripts/nivo/executeDeposit.ts --network baseSepolia
     ```
 
     * Log deposits: Your deposit should be removed from the list.
     ```typescript
-    npx hardhat run scripts/printDeposits.ts --network baseSepolia
+    pnpm hardhat run scripts/printDeposits.ts --network baseSepolia
     ```
 ### Open position:
 * **Create an open position order** (WALLET_TESTER_PRIVATE_KEY)
     ```typescript
-    npx hardhat run scripts/nivo/openPositionOrder.ts --network baseSepolia
+    pnpm hardhat run scripts/nivo/openPositionOrder.ts --network baseSepolia
     ```
 
 * **Execute the position order** (NIVO_KEEPER_PRIVATE_KEY)
     * set the ORDER_KEY you want to execute in your env var
     ```typescript
-    npx hardhat run scripts/nivo/executeOpenPosition.ts --network baseSepolia
+    pnpm hardhat run scripts/nivo/executeOpenPosition.ts --network baseSepolia
     ```
 ### Close position:
 * **Create a close position order** (WALLET_TESTER_PRIVATE_KEY)
     ```typescript
-    npx hardhat run scripts/nivo/closePositionOrder.ts --network baseSepolia
+    pnpm hardhat run scripts/nivo/closePositionOrder.ts --network baseSepolia
     ```
 
 * **Execute the position order** (NIVO_KEEPER_PRIVATE_KEY)
     * set the ORDER_KEY you want to execute in your env var
     ```typescript
-    npx hardhat run scripts/nivo/executeClosePosition.ts --network baseSepolia
+    pnpm hardhat run scripts/nivo/executeClosePosition.ts --network baseSepolia
     ```
 

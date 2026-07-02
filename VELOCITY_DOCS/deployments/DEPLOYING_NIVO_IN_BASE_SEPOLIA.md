@@ -32,12 +32,12 @@ Deployment should cost ~0.0020 ETH total to deploy the entire protocol and take 
 ⚠️ See footnote*, before running this script.
 
 ```typescript
-npx hardhat deploy --network baseSepolia
+pnpm hardhat deploy --network baseSepolia
 ```
 
 ## Run the oracle config verification script:
 ```typescript
-npx hardhat run scripts/updateOracleConfig.ts --network baseSepolia
+pnpm hardhat run scripts/updateOracleConfig.ts --network baseSepolia
 ```
 
 This should it prints the oracle configuration & all parameters should be up to date (no diffs required).
@@ -45,17 +45,17 @@ This should it prints the oracle configuration & all parameters should be up to 
 If the printed config indicates mismatches, re-run with WRITE=true to apply updates on-chain:
 
 ```typescript
-WRITE=true npx hardhat run scripts/updateOracleConfig.ts --network baseSepolia
+WRITE=true pnpm hardhat run scripts/updateOracleConfig.ts --network baseSepolia
 ```
 ## Print Protocol State (Sanity Checks)
 
 After deployment, print a few protocol items to confirm everything is wired correctly:
 
 ```typescript
-npx hardhat run scripts/printMarkets.ts --network baseSepolia
-npx hardhat run scripts/printTokens.ts --network baseSepolia
-npx hardhat run scripts/printGeneralConfig.ts --network baseSepolia
-npx hardhat run scripts/printRoles.ts --network baseSepolia
+pnpm hardhat run scripts/printMarkets.ts --network baseSepolia
+pnpm hardhat run scripts/printTokens.ts --network baseSepolia
+pnpm hardhat run scripts/printGeneralConfig.ts --network baseSepolia
+pnpm hardhat run scripts/printRoles.ts --network baseSepolia
 ```
 
 Purpose:
@@ -69,7 +69,7 @@ Purpose:
 
 After deployment, verify contracts on BaseScan (~30 minutes):
 ```typescript
-npx hardhat etherscan-verify --network baseSepolia
+pnpm hardhat etherscan-verify --network baseSepolia
 ```
 
 ## Fund the Chainlink Oracle Provider contract with Links
