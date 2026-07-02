@@ -20,7 +20,10 @@
     "config:features:fork": "FORK_ID=8453 WRITE=true IS_DISABLED=true FEATURES=default pnpm hardhat run scripts/configs/index.ts --network anvil",
     "config:features:dryrun": "doppler run -p nivo -c $DOPPLER_CONFIG -- sh -c \"WRITE=false IS_DISABLED=true FEATURES=default pnpm hardhat run scripts/configs/index.ts --network $NETWORK\"",
     "config:features:write": "doppler run -p nivo -c $DOPPLER_CONFIG -- sh -c \"WRITE=true IS_DISABLED=true FEATURES=default pnpm hardhat run scripts/configs/index.ts --network $NETWORK\"",
-    "config:features:status": "doppler run -p nivo -c $DOPPLER_CONFIG -- sh -c \"WRITE=false TARGET_DISABLED_STATE=true FAIL_ON_MISMATCH=false FEATURES=validate pnpm hardhat run scripts/configs/index.ts --network $NETWORK\""
+    "config:features:status": "doppler run -p nivo -c $DOPPLER_CONFIG -- sh -c \"WRITE=false TARGET_DISABLED_STATE=true FAIL_ON_MISMATCH=false FEATURES=validate pnpm hardhat run scripts/configs/index.ts --network $NETWORK\"",
+    "deposit:liquidity": "doppler run -p nivo -c $DOPPLER_CONFIG -- sh -c \"FX_CURRENCY=$FX_CURRENCY LG_TOKEN_AMOUNT=$LG_TOKEN_AMOUNT ST_TOKEN_AMOUNT=$ST_TOKEN_AMOUNT pnpm hardhat run scripts/nivo/depositOrder.ts --network $NETWORK\"",
+    "deposit:execute": "doppler run -p nivo -c $DOPPLER_CONFIG -- sh -c \"DEPOSIT_KEY=$DEPOSIT_KEY pnpm hardhat run scripts/nivo/executeDeposit.ts --network $NETWORK\"",
+    "deposit:cancel": "doppler run -p nivo -c $DOPPLER_CONFIG -- sh -c \"DEPOSIT_KEY=$DEPOSIT_KEY pnpm hardhat run scripts/nivo/cancelDeposit.ts --network $NETWORK\""
   },
   "author": "",
   "license": "ISC",

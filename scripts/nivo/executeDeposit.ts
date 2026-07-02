@@ -10,8 +10,8 @@ const { ethers } = hre;
  * Execute a deposit into a Nivo FX market (GBP/USDC). Uses the NIVO_KEEPER_PRIVATE_KEY.
  *
  * Run it with the DEPOSIT_KEY env var you want to execute.
- * npx hardhat run scripts/nivo/executeDeposit.ts --network baseSepolia
- * Log deposits again: npx hardhat run scripts/printDeposits.ts --network baseSepolia
+ * pnpm hardhat run scripts/nivo/executeDeposit.ts --network baseSepolia
+ * Log deposits again: pnpm hardhat run scripts/printDeposits.ts --network baseSepolia
  * Your deposit should be removed from the list.
  *
  */

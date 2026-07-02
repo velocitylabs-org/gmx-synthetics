@@ -4,22 +4,22 @@ import { getAccountDepositCount, getAccountDepositKeys } from "../../utils/depos
 const { ethers } = hre;
 
 /**
- * Cancel a deposit created with createDepositNivoMarket.ts, uses the WALLET_TESTER_PRIVATE_KEY.
+ * Cancel a deposit created with createDepositNivoMarket.ts, uses the LP_WALLET_PRIVATE_KEY.
  *
- * Cancel all deposits for the wallet: 
- * npx hardhat run scripts/nivo/cancelDeposit.ts --network baseSepolia 
+ * Cancel all deposits for the wallet:
+ * pnpm hardhat run scripts/nivo/cancelDeposit.ts --network baseSepolia
  * Cancel a specific deposit by key:
- * DEPOSIT_KEY=0x... npx hardhat run scripts/nivo/cancelDepositOrder.ts --network baseSepolia  (or set the DEPOSIT_KEY in your env var)
- * 
- * Log deposits: npx hardhat run scripts/printDeposits.ts --network baseSepolia
+ * DEPOSIT_KEY=0x... pnpm hardhat run scripts/nivo/cancelDepositOrder.ts --network baseSepolia  (or set the DEPOSIT_KEY in your env var)
+ *
+ * Log deposits: pnpm hardhat run scripts/printDeposits.ts --network baseSepolia
  * Your deposit should be removed from the list.
  */
 async function main() {
-  const walletTesterPrivateKey = process.env.WALLET_TESTER_PRIVATE_KEY;
-  if (!walletTesterPrivateKey) {
-    throw new Error("WALLET_TESTER_PRIVATE_KEY is not set");
+  const lpWalletPrivateKey = process.env.LP_WALLET_PRIVATE_KEY;
+  if (!lpWalletPrivateKey) {
+    throw new Error("LP_WALLET_PRIVATE_KEY is not set");
   }
-  const wallet = new ethers.Wallet(walletTesterPrivateKey, ethers.provider);
+  const wallet = new ethers.Wallet(lpWalletPrivateKey, ethers.provider);
 
   const dataStore = await ethers.getContract("DataStore");
   const reader = await ethers.getContract("Reader");

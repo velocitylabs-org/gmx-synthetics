@@ -12,14 +12,14 @@ import { getDepositExecutionFee, SUPPORTED_FX_CURRENCIES, SUPPORTED_NETWORKS, wi
 const { ethers } = hre;
 
 /**
- * Create a deposit into a Nivo FX market (FX/USDC). Uses the WALLET_TESTER_PRIVATE_KEY.
+ * Create a deposit into a Nivo FX market (FX/USDC). Uses the LP_WALLET_PRIVATE_KEY.
  *
- * FX_CURRENCY=BRL npx hardhat run scripts/nivo/depositOrder.ts --network baseSepolia
+ * FX_CURRENCY=BRL pnpm hardhat run scripts/nivo/depositOrder.ts --network baseSepolia
  
  * By default LG_TOKEN_AMOUNT and ST_TOKEN_AMOUNT are set to 10 USDC
- * FX_CURRENCY=BRL LG_TOKEN_AMOUNT=5 ST_TOKEN_AMOUNT=5 npx hardhat run scripts/nivo/depositOrder.ts --network baseSepolia
+ * FX_CURRENCY=BRL LG_TOKEN_AMOUNT=5 ST_TOKEN_AMOUNT=5 pnpm hardhat run scripts/nivo/depositOrder.ts --network baseSepolia
  * 
- * Log deposits: npx hardhat run scripts/printDeposits.ts --network baseSepolia
+ * Log deposits: pnpm hardhat run scripts/printDeposits.ts --network baseSepolia
  */
 async function getValues(
   fx: string,
@@ -49,7 +49,7 @@ async function getValues(
 
 async function main() {
   // Use private key from environment variable
-  const walletTesterPrivateKey = process.env.WALLET_TESTER_PRIVATE_KEY;
+  const lpWalletPrivateKey = process.env.LP_WALLET_PRIVATE_KEY;
   const lgTokenAmount = process.env.LG_TOKEN_AMOUNT ? Number(process.env.LG_TOKEN_AMOUNT) : 10;
   const stTokenAmount = Number(process.env.ST_TOKEN_AMOUNT || 10);
 
@@ -58,10 +58,10 @@ async function main() {
     throw new Error("FX_CURRENCY is not set or not supported");
   }
 
-  if (!walletTesterPrivateKey) {
-    throw new Error("WALLET_TESTER_PRIVATE_KEY is not set");
+  if (!lpWalletPrivateKey) {
+    throw new Error("LP_WALLET_PRIVATE_KEY is not set");
   }
-  const wallet = new ethers.Wallet(walletTesterPrivateKey, ethers.provider);
+  const wallet = new ethers.Wallet(lpWalletPrivateKey, ethers.provider);
 
   const dataStore = await ethers.getContract("DataStore");
   const depositVault = await ethers.getContract("DepositVault");
