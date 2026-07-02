@@ -52,7 +52,7 @@ Two terminals required.
 **Terminal — start the local node** (forks nothing; runs full deploy on startup, ~5 min):
 
 ```bash
-doppler run -- pnpm exec hardhat node
+doppler run -- pnpm hardhat node
 ```
 ---
 
@@ -84,9 +84,15 @@ pnpm deploy:base:fork
 **Base Sepolia** — deploy or run scripts:
 
 ```bash
-doppler run -c stg -- pnpm exec hardhat deploy --network baseSepolia
-doppler run -c stg -- pnpm exec hardhat run scripts/<script>.ts --network baseSepolia
+doppler run -c stg -- pnpm hardhat deploy --network baseSepolia
+doppler run -c stg -- pnpm hardhat run scripts/<script>.ts --network baseSepolia
 ```
+---
+
+## Feature Flags & Pool Config
+
+To enable/disable protocol features or apply pool risk parameters, see [scripts/configs/README.md](../../scripts/configs/README.md).
+
 ---
 
 ## Common Commands

@@ -623,3 +623,95 @@
 | 10:32 | Session end: 4 writes across 4 files (README.md, generateDeploymentDocs.sh, generateDeploymentDocs.ts, collectDeployments.ts) | 5 reads | ~16619 tok |
 | 10:33 | Session end: 4 writes across 4 files (README.md, generateDeploymentDocs.sh, generateDeploymentDocs.ts, collectDeployments.ts) | 5 reads | ~16619 tok |
 | 10:34 | Session end: 4 writes across 4 files (README.md, generateDeploymentDocs.sh, generateDeploymentDocs.ts, collectDeployments.ts) | 5 reads | ~16619 tok |
+
+## Session: 2026-06-29 10:40
+
+| Time | Action | File(s) | Outcome | ~Tokens |
+|------|--------|---------|---------|--------|
+
+## Session: 2026-06-29 10:49
+
+| Time | Action | File(s) | Outcome | ~Tokens |
+|------|--------|---------|---------|--------|
+
+## Session: 2026-06-29 10:51
+
+| Time | Action | File(s) | Outcome | ~Tokens |
+|------|--------|---------|---------|--------|
+| 13:56 | Edited scripts/configs/presets/README.md | inline fix | ~25 |
+| 13:56 | Session end: 1 writes across 1 files (README.md) | 37 reads | ~43112 tok |
+| 13:57 | Edited package.json | inline fix | ~12 |
+| 13:57 | Session end: 2 writes across 2 files (README.md, package.json) | 38 reads | ~45056 tok |
+| 14:05 | Edited scripts/configs/helpers/featureFlagSpecs.ts | inline fix | ~19 |
+| 14:05 | Session end: 3 writes across 3 files (README.md, package.json, featureFlagSpecs.ts) | 38 reads | ~45075 tok |
+
+## Session: 2026-06-29 14:39
+
+| Time | Action | File(s) | Outcome | ~Tokens |
+|------|--------|---------|---------|--------|
+
+## Session: 2026-06-29 14:39
+
+| Time | Action | File(s) | Outcome | ~Tokens |
+|------|--------|---------|---------|--------|
+
+## Session: 2026-06-29 17:26
+
+| Time | Action | File(s) | Outcome | ~Tokens |
+|------|--------|---------|---------|--------|
+| 17:27 | Edited changelogs/v2.2.md | 1→3 lines | ~83 |
+| 17:27 | Session end: 1 writes across 1 files (v2.2.md) | 1 reads | ~3073 tok |
+
+## Session: 2026-06-29 17:30
+
+| Time | Action | File(s) | Outcome | ~Tokens |
+|------|--------|---------|---------|--------|
+
+## Session: 2026-06-29 17:43
+
+| Time | Action | File(s) | Outcome | ~Tokens |
+|------|--------|---------|---------|--------|
+| 10:50 | Edited scripts/configs/README.md | Shorthand() → mainnet() | ~390 |
+| 10:50 | Edited package.json | 7→4 lines | ~216 |
+| 10:50 | Session end: 2 writes across 2 files (README.md, package.json) | 2 reads | ~14937 tok |
+| 11:01 | Edited scripts/configs/README.md | reduced (-6 lines) | ~116 |
+| 11:01 | Edited scripts/configs/README.md | inline fix | ~45 |
+| 11:01 | Session end: 4 writes across 2 files (README.md, package.json) | 2 reads | ~15109 tok |
+| 11:05 | Edited package.json | inline fix | ~22 |
+| 11:05 | Edited VELOCITY_DOCS/SETUP_GUIDE.md | inline fix | ~4 |
+| 11:05 | Edited VELOCITY_DOCS/SETUP_GUIDE.md | expanded (+6 lines) | ~51 |
+| 11:05 | Session end: 7 writes across 3 files (README.md, package.json, SETUP_GUIDE.md) | 4 reads | ~16034 tok |
+| 11:08 | Edited package.json | inline fix | ~24 |
+| 11:08 | Edited package.json | inline fix | ~67 |
+| 11:08 | Edited package.json | inline fix | ~129 |
+| 11:08 | Edited package.json | inline fix | ~94 |
+| 11:08 | Session end: 11 writes across 3 files (README.md, package.json, SETUP_GUIDE.md) | 4 reads | ~16004 tok |
+| 11:08 | Edited package.json | inline fix | ~33 |
+| 11:08 | Session end: 12 writes across 3 files (README.md, package.json, SETUP_GUIDE.md) | 4 reads | ~16037 tok |
+| 11:13 | Session end: 12 writes across 3 files (README.md, package.json, SETUP_GUIDE.md) | 6 reads | ~16037 tok |
+| 11:27 | Session end: 12 writes across 3 files (README.md, package.json, SETUP_GUIDE.md) | 8 reads | ~79647 tok |
+| 11:34 | Edited scripts/configs/README.md | modified test() | ~144 |
+| 11:34 | Session end: 13 writes across 3 files (README.md, package.json, SETUP_GUIDE.md) | 8 reads | ~79801 tok |
+| 11:36 | Edited scripts/configs/README.md | expanded (+13 lines) | ~123 |
+| 11:36 | Session end: 14 writes across 3 files (README.md, package.json, SETUP_GUIDE.md) | 8 reads | ~79932 tok |
+| 11:39 | Edited scripts/configs/README.md | expanded (+12 lines) | ~182 |
+| 11:40 | Session end: 15 writes across 3 files (README.md, package.json, SETUP_GUIDE.md) | 8 reads | ~80127 tok |
+| 11:45 | Session end: 15 writes across 3 files (README.md, package.json, SETUP_GUIDE.md) | 14 reads | ~94997 tok |
+| 14:26 | Session end: 15 writes across 3 files (README.md, package.json, SETUP_GUIDE.md) | 20 reads | ~123006 tok |
+
+## Session: 2026-06-30 14:37
+
+| Time | Action | File(s) | Outcome | ~Tokens |
+|------|--------|---------|---------|--------|
+| 14:43 | Created VELOCITY_DOCS/deployments/base-mainnet-notes.md | — | ~290 |
+| 14:44 | Session end: 1 writes across 1 files (base-mainnet-notes.md) | 2 reads | ~3941 tok |
+| 15:10 | Session end: 1 writes across 1 files (base-mainnet-notes.md) | 4 reads | ~17429 tok |
+| 15:46 | Session end: 1 writes across 1 files (base-mainnet-notes.md) | 5 reads | ~17429 tok |
+| 15:49 | Created ops/RUNBOOK-FEATURE-CONFIG.md | — | ~1488 |
+| 15:49 | Session end: 2 writes across 2 files (base-mainnet-notes.md, RUNBOOK-FEATURE-CONFIG.md) | 5 reads | ~19024 tok |
+| 16:00 | Created ops/2026-05-11-feature-redaction/validate-retroactive-2026-06-30.log | — | ~1671 |
+| 16:00 | Edited ops/2026-05-11-feature-redaction/README.md | 12→11 lines | ~143 |
+| 16:00 | Session end: 4 writes across 4 files (base-mainnet-notes.md, RUNBOOK-FEATURE-CONFIG.md, validate-retroactive-2026-06-30.log, README.md) | 5 reads | ~20967 tok |
+| 16:03 | Session end: 4 writes across 4 files (base-mainnet-notes.md, RUNBOOK-FEATURE-CONFIG.md, validate-retroactive-2026-06-30.log, README.md) | 5 reads | ~20967 tok |
+| 16:05 | Edited .gitignore | 2→3 lines | ~10 |
+| 16:05 | Session end: 5 writes across 5 files (base-mainnet-notes.md, RUNBOOK-FEATURE-CONFIG.md, validate-retroactive-2026-06-30.log, README.md, .gitignore) | 6 reads | ~21075 tok |

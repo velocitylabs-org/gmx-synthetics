@@ -1,0 +1,74 @@
+# Retroactive validation run — 2026-06-30
+# Original change executed 2026-05-11. This log was captured today to
+# close the validation coverage gap noted in README.md. On-chain state
+# is unchanged since the original write — this confirms the same state,
+# not a new change.
+
+==================================================
+# verifyFeaturesState.ts — Base mainnet
+==================================================
+TARGET_DISABLED_STATE (expected bool): true
+CANCEL_SHIFT_FEATURE_DISABLED module=ShiftHandler (0xA7D5D56a7D436380eA7F22EC2F265A1d7e2A75d7) expected=true actual=true
+CREATE_ORDER_FEATURE_DISABLED_LIMIT_DECREASE orderType=5 module=OrderHandler (0xf9Fa21efa2DA62Fed82c32A218f886bC626bD116) expected=true actual=true
+CREATE_ORDER_FEATURE_DISABLED_LIMIT_INCREASE orderType=3 module=OrderHandler (0xf9Fa21efa2DA62Fed82c32A218f886bC626bD116) expected=true actual=true
+CREATE_ORDER_FEATURE_DISABLED_LIMIT_SWAP orderType=1 module=OrderHandler (0xf9Fa21efa2DA62Fed82c32A218f886bC626bD116) expected=true actual=true
+CREATE_ORDER_FEATURE_DISABLED_MARKET_SWAP orderType=0 module=OrderHandler (0xf9Fa21efa2DA62Fed82c32A218f886bC626bD116) expected=true actual=true
+CREATE_ORDER_FEATURE_DISABLED_STOP_LOSS_DECREASE orderType=6 module=OrderHandler (0xf9Fa21efa2DA62Fed82c32A218f886bC626bD116) expected=true actual=true
+CREATE_SHIFT_FEATURE_DISABLED module=ShiftHandler (0xA7D5D56a7D436380eA7F22EC2F265A1d7e2A75d7) expected=true actual=true
+EXECUTE_ATOMIC_WITHDRAWAL_FEATURE_DISABLED module=WithdrawalHandler (0xA27F558C80b664722dffA3f7375b7E9647D5fe00) expected=true actual=true
+EXECUTE_ORDER_FEATURE_DISABLED_LIMIT_DECREASE orderType=5 module=OrderHandler (0xf9Fa21efa2DA62Fed82c32A218f886bC626bD116) expected=true actual=true
+EXECUTE_ORDER_FEATURE_DISABLED_LIMIT_INCREASE orderType=3 module=OrderHandler (0xf9Fa21efa2DA62Fed82c32A218f886bC626bD116) expected=true actual=true
+EXECUTE_ORDER_FEATURE_DISABLED_LIMIT_SWAP orderType=1 module=OrderHandler (0xf9Fa21efa2DA62Fed82c32A218f886bC626bD116) expected=true actual=true
+EXECUTE_ORDER_FEATURE_DISABLED_MARKET_SWAP orderType=0 module=OrderHandler (0xf9Fa21efa2DA62Fed82c32A218f886bC626bD116) expected=true actual=true
+EXECUTE_ORDER_FEATURE_DISABLED_STOP_LOSS_DECREASE orderType=6 module=OrderHandler (0xf9Fa21efa2DA62Fed82c32A218f886bC626bD116) expected=true actual=true
+EXECUTE_SHIFT_FEATURE_DISABLED module=ShiftHandler (0xA7D5D56a7D436380eA7F22EC2F265A1d7e2A75d7) expected=true actual=true
+GASLESS_FEATURE_DISABLED module=GelatoRelayRouter (0xDc4eabBc5cDadbe1d4956C803053787B519A3E6C) expected=true actual=true
+GASLESS_FEATURE_DISABLED module=SubaccountGelatoRelayRouter (0x202676dED4d7432825a2A2aaEe95E8b53DdD45c6) expected=true actual=true
+GASLESS_FEATURE_DISABLED module=MultichainClaimsRouter (0x787c099ACcC4789270252BC9c8ee667d9F0D125F) expected=true actual=true
+GASLESS_FEATURE_DISABLED module=MultichainTransferRouter (0x6b5bcfFC8f45C648371Ed3c363589375d8Da4147) expected=true actual=true
+GASLESS_FEATURE_DISABLED module=MultichainOrderRouter (0xA1CE56655beA534afaF0F74C70A1C73Ed845Eb7C) expected=true actual=true
+GASLESS_FEATURE_DISABLED module=MultichainGmRouter (0x385A9cd4Db69FC59fc2823831aBf08AaA98c9859) expected=true actual=true
+GASLESS_FEATURE_DISABLED module=MultichainGlvRouter (0x7517099A2a98a17C7154185a361b7F42c14DA4D4) expected=true actual=true
+GASLESS_FEATURE_DISABLED module=MultichainSubaccountRouter (0x4fc16A2b8E49d97418D334621412139389963AD6) expected=true actual=true
+JIT_FEATURE_DISABLED module=JitOrderHandler (0x9Ec4C4fDA27649b827385AE04D49A64dE193FF0f) expected=true actual=true
+SUBACCOUNT_FEATURE_DISABLED module=SubaccountRouter (0x5bb2c5497170C16D4D16F9bC32885104601c095f) expected=true actual=true
+SUBACCOUNT_FEATURE_DISABLED module=SubaccountGelatoRelayRouter (0x202676dED4d7432825a2A2aaEe95E8b53DdD45c6) expected=true actual=true
+SUBACCOUNT_FEATURE_DISABLED module=MultichainSubaccountRouter (0x4fc16A2b8E49d97418D334621412139389963AD6) expected=true actual=true
+
+Verification passed: all feature flags matched expected state.
+
+==================================================
+# verifyPoolRiskGuards.ts — Base mainnet
+==================================================
+==================================================
+Checked markets: 11
+Skipped markets (not onchain): 0
+Cap mismatches: 0
+Markets with minMarketTokensForFirstDeposit == 0: 7
+==================================================
+MIN FIRST DEPOSIT ZERO:
+- IDR [USDC-USDC] (0x8097AABdFA1d57205154Ba9923b13D192630Fc3D)
+- PHP [USDC-USDC] (0xF61fc53E860bd1F631a9f51d374083016879AE03)
+- PEN [USDC-USDC] (0x7cc5eeD605e2D0D49d39882D2177332Db4675d09)
+- NGN [USDC-USDC] (0xe393f40fd3dC0ae6219131c93396dF5FbbDF037a)
+- KES [USDC-USDC] (0x82fA10F1Fa46c3C85A50834AB360154529f23cd6)
+- ZAR [USDC-USDC] (0x875CA56e0498eb4BA4421bee2843E1185e92813F)
+- THB [USDC-USDC] (0x4F8e6412eb14834ee64826358ba9c4112F47f5ee)
+
+==================================================
+# verifySameTokenInvariants.ts — Base mainnet
+==================================================
+=== Same-token invariant check (target markets) ===
+GBP (0x577CBa4C306D02072880B8bfAe261864b97A46E6) positiveSwapImpact=0 negativeSwapImpact=0 disabled=false
+BRL (0x8B5921433B1c9449724F5485dE3C63C48b24E602) positiveSwapImpact=0 negativeSwapImpact=0 disabled=false
+MXN (0x180e086dA4fB0db9bd747DA8Acf76C7499B8Fe1e) positiveSwapImpact=0 negativeSwapImpact=0 disabled=false
+COP (0x6eF9142c73b0304087ac45f9474dda131E3D0Caf) positiveSwapImpact=0 negativeSwapImpact=0 disabled=false
+IDR (0x8097AABdFA1d57205154Ba9923b13D192630Fc3D) positiveSwapImpact=0 negativeSwapImpact=0 disabled=true
+PHP (0xF61fc53E860bd1F631a9f51d374083016879AE03) positiveSwapImpact=0 negativeSwapImpact=0 disabled=true
+PEN (0x7cc5eeD605e2D0D49d39882D2177332Db4675d09) positiveSwapImpact=0 negativeSwapImpact=0 disabled=true
+NGN (0xe393f40fd3dC0ae6219131c93396dF5FbbDF037a) positiveSwapImpact=0 negativeSwapImpact=0 disabled=true
+KES (0x82fA10F1Fa46c3C85A50834AB360154529f23cd6) positiveSwapImpact=0 negativeSwapImpact=0 disabled=true
+ZAR (0x875CA56e0498eb4BA4421bee2843E1185e92813F) positiveSwapImpact=0 negativeSwapImpact=0 disabled=true
+THB (0x4F8e6412eb14834ee64826358ba9c4112F47f5ee) positiveSwapImpact=0 negativeSwapImpact=0 disabled=true
+
+Same-token invariant check passed for 11 markets.

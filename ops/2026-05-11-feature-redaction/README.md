@@ -51,13 +51,12 @@ Applied to Base mainnet (8453) and Base Sepolia (84532) on 2026-05-11.
 
 ## Evidence files
 
+`write.log` was never captured and cannot be reconstructed. The transaction hashes above are the permanent on-chain record.
+
 | File | Contents |
 |------|----------|
-| `write.log` | Write transcript — tx sent / mined confirmation |
-| `validate.log` | Readback transcript — all flags matched expected state |
+| `validate-retroactive-2026-06-30.log` | Retroactive readback — captured 2026-06-30 to close the original validation gap; confirms on-chain state is unchanged |
 
 ## Validation coverage gap
 
-`validate.log` covers: shift features, atomic withdrawal, JIT, subaccount, gasless.
-
-It does **not** include a readback for order create/execute redaction or pool risk guards — those are confirmed by tx hash only (see table above). A follow-up readback for those keys is outstanding.
+RESOLVED — see `validate-retroactive-2026-06-30.log`. `verifyFeaturesState.ts` has since been extended to cover order create/execute, closing the original gap.

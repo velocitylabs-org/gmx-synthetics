@@ -1072,6 +1072,118 @@
       "related_bugs": [],
       "occurrences": 1,
       "last_seen": "2026-06-26T08:11:31.021Z"
+    },
+    {
+      "id": "bug-068",
+      "timestamp": "2026-06-29T11:57:45.381Z",
+      "error_message": "Wrong reference: npx should be pnpm",
+      "file": "package.json",
+      "root_cause": "Used \"npx\" instead of \"pnpm\"",
+      "fix": "Changed npx → pnpm",
+      "tags": [
+        "auto-detected",
+        "wrong-reference",
+        "json"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-29T11:57:45.381Z"
+    },
+    {
+      "id": "bug-069",
+      "timestamp": "2026-06-29T12:05:29.727Z",
+      "error_message": "Wrong reference: OrderTypeFeatureSpec should be ManagedFeatureSpec",
+      "file": "scripts/configs/helpers/featureFlagSpecs.ts",
+      "root_cause": "Used \"OrderTypeFeatureSpec\" instead of \"ManagedFeatureSpec\"",
+      "fix": "Changed OrderTypeFeatureSpec → ManagedFeatureSpec",
+      "tags": [
+        "auto-detected",
+        "wrong-reference",
+        "ts"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-29T12:05:29.727Z"
+    },
+    {
+      "id": "bug-070",
+      "timestamp": "2026-06-30T08:50:38.942Z",
+      "error_message": "Significant refactor of ",
+      "file": "package.json",
+      "root_cause": "6 lines replaced/restructured",
+      "fix": "Rewrote 7→4 lines (6 removed)",
+      "tags": [
+        "auto-detected",
+        "refactor",
+        "json"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-30T08:50:38.942Z"
+    },
+    {
+      "id": "bug-071",
+      "timestamp": "2026-06-30T09:01:44.351Z",
+      "error_message": "Wrong reference: sng should be showing",
+      "file": "scripts/configs/README.md",
+      "root_cause": "Used \"sng\" instead of \"showing\"",
+      "fix": "Changed sng → showing",
+      "tags": [
+        "auto-detected",
+        "wrong-reference",
+        "md"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-30T09:01:44.351Z"
+    },
+    {
+      "id": "bug-072",
+      "timestamp": "2026-06-30T09:05:12.233Z",
+      "error_message": "Incorrect value in code",
+      "file": "package.json",
+      "root_cause": "Had \" npx hardhat test\"",
+      "fix": "Changed to \" pnpm hardhat test\"",
+      "tags": [
+        "auto-detected",
+        "wrong-value",
+        "json"
+      ],
+      "related_bugs": [],
+      "occurrences": 5,
+      "last_seen": "2026-06-30T09:08:56.318Z"
+    },
+    {
+      "id": "bug-073",
+      "timestamp": "2026-06-30T09:05:12.357Z",
+      "error_message": "Wrong reference: exec should be hardhat",
+      "file": "VELOCITY_DOCS/SETUP_GUIDE.md",
+      "root_cause": "Used \"exec\" instead of \"hardhat\"",
+      "fix": "Changed exec → hardhat",
+      "tags": [
+        "auto-detected",
+        "wrong-reference",
+        "md"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-30T09:05:12.357Z"
+    },
+    {
+      "id": "bug-074",
+      "timestamp": "2026-06-30T14:05:22.680Z",
+      "error_message": "Wrong reference: cursorignore should be ops",
+      "file": ".gitignore",
+      "root_cause": "Used \"cursorignore\" instead of \"ops\"",
+      "fix": "Changed cursorignore → ops",
+      "tags": [
+        "auto-detected",
+        "wrong-reference",
+        "unknown"
+      ],
+      "related_bugs": [],
+      "occurrences": 1,
+      "last_seen": "2026-06-30T14:05:22.680Z"
     }
   ]
 }
